@@ -1,7 +1,7 @@
 {
- "source": "aucune",
- "modele": null,
- "texte": null,
+ "source": "llm",
+ "modele": "us.anthropic.claude-sonnet-5",
+ "texte": "Madame, Monsieur,\n\nNous vous proposons un contrat lentille sur 3 campagnes, à compter de 2026, avec un prix plancher de 1 622 €/t départ ferme. Ce prix garantit un plancher de revenu par tonne livrée ; il ne garantit pas le volume que vous produirez, ni ne couvre le risque d'une année faible comme celle à 0,48 t/ha qui survient une année sur dix. Notre fiabilité sur ce type d'engagement est de 8 années sur 10, ce qui reste, à nos yeux, un gage de sérieux plutôt qu'une promesse absolue. La coopérative vise un volume global de 5 000 t sur ce contrat et compte sur votre exploitation pour y contribuer.\n\nNous restons à votre disposition pour toute question avant signature.\n\nCordialement,\nLa Coopérative",
  "chiffres": {
   "prix plancher": "1 622 €/t départ ferme",
   "fiabilité": "8 années sur 10",

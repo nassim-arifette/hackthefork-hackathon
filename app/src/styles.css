@@ -211,7 +211,7 @@ h3 { font-family: var(--sans); font-weight: 600; font-size: 14px; line-height: 1
 .bars.imp .bar-track { height: 10px; }
 .bar-v { font-weight: 600; font-size: 13.5px; text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
 
-.letter { font-style: italic; border-left: 2px solid var(--rule-2); padding-left: var(--s4); }
+.letter { white-space: pre-line; font-style: italic; border-left: 2px solid var(--rule-2); padding-left: var(--s4); }
 
 /* tableaux */
 .list { width: 100%; border-collapse: collapse; font-family: var(--sans); font-size: 14px; }
