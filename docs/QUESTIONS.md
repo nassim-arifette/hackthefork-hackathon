@@ -1,5 +1,7 @@
 # Décisions ouvertes
 
+Rendu visuel de l'application : **validé le 30/10**.
+
 | Question | Valeur en place | Qui tranche | Avant |
 |---|---|---|---|
 | L'organisation autorise-t-elle un assistant de code externe (Claude Code) ? | — | organisation | vendredi soir |
@@ -13,6 +15,6 @@
 | Volume visé par la coopérative | 5 000 t, supposé | équipe | samedi |
 | P\* (environ 1 600 €/t) face aux prix de contrat lentille réels | à confronter à un mentor | agro | samedi matin |
 | Écart RPG (1 095 ha de lentille) et Agreste (environ 730 ha) en Île-de-France | à expliquer | données | samedi |
-| Identifiant Bedrock pour la lettre d'accompagnement | à lire avec `aws bedrock list-foundation-models` | équipe | samedi |
+| Lettre d'accompagnement Bedrock | **décidé le 30/10** : générée samedi avec le compte AWS de l'équipe (identifiant lu avec `aws bedrock list-foundation-models`), puis `make export` | équipe | samedi |
 | Langue du pitch | français | équipe | samedi |
 | Présentateur | — | équipe | vendredi soir |
