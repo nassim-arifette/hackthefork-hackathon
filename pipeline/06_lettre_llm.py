@@ -65,8 +65,13 @@ def call_bedrock(model_id: str, prompt: str) -> str:
         try:
             # Pas de `temperature` : les modèles Claude récents la refusent.
             r = client.converse(modelId=model_id, messages=[{"role": "user", "content": [{"text": prompt}]}],
-                                inferenceConfig={"maxTokens": 400})
-            return r["output"]["message"]["content"][0]["text"].strip()
+                                inferenceConfig={"maxTokens": 2000})
+            # La réponse peut commencer par un bloc de raisonnement : on garde les blocs de texte.
+            blocks = r["output"]["message"]["content"]
+            text = "\n".join(b["text"] for b in blocks if "text" in b).strip()
+            if not text:
+                raise RuntimeError(f"Réponse sans texte (arrêt : {r.get('stopReason')}, blocs : {[list(b) for b in blocks]})")
+            return text
         except ClientError as e:
             # On ne réessaie que les limites de débit ; une requête invalide échoue tout de suite.
             if e.response["Error"]["Code"] != "ThrottlingException" or attempt == 3:
