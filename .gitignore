@@ -1,0 +1,28 @@
+# Données brutes et caches
+data_raw/
+*.zip
+*.gpkg
+*.shp
+*.shx
+*.dbf
+*.prj
+*.cpg
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Node
+node_modules/
+app/dist/
+
+# Secrets
+.env
+.env.*
+*.pem
+credentials*
+
+# Système
+.DS_Store

@@ -1,0 +1,89 @@
+# Inventaire des données
+
+Ce que contiennent réellement les données, vérifié en les ouvrant. Les éléments non encore inspectés sont marqués **à inspecter**.
+
+---
+
+## 1. Agreste SAA 2010–2025 (vérifié le 30/10/2026)
+
+- **Source** : lien officiel `SAA-SeriesLongues-2010-2025_DonneesProvisoires-DepartementalesRegionales.zip` (7,1 Mo).
+- **Contenu** : deux fichiers XLSX.
+  - `SAA_2010-2025_provisoires_donnees_departementales.xlsx` (11,2 Mo) ;
+  - `SAA_2010-2025_provisoires_donnees_regionales.xlsx` (3,6 Mo).
+- **Données arrêtées au 30/03/2026**, 2025 provisoire.
+- **Unités** : surfaces en ha, productions en quintaux, rendements en q/ha (indiqué en tête de feuille).
+
+### Structure de la feuille `COP` (céréales, oléagineux, protéagineux)
+
+- En-tête à la ligne 6 (lignes 1 à 5 : titre et notes).
+- Colonnes : `LIB_REG2`, `LIB_DEP`, `LIB_SAA`, `STATUT_QUALITE`, puis `SURF_2010` … `SURF_2025`, `REND_2010` … `REND_2025`, `PROD_2010` … `PROD_2025`.
+- 4 500 lignes, 52 colonnes : 100 départements × 45 libellés de culture.
+- `STATUT_QUALITE` prend les valeurs 1, 2, 3 et `NC`. La note méthodologique d'Agreste définit ces statuts [à lire pour la définition exacte].
+
+### Cultures présentes (légumineuses)
+
+`37` légumes à cosse d'origine tropicale, `38` féveroles et fèves, `39` haricots secs, **`40` lentilles**, `41` pois protéagineux, `42` mélange de pois, `43` pois chiches, `44` lupin doux, `45` autres protéagineux, `46` total.
+
+### Lentille : ce que disent les chiffres
+
+| Indicateur | Valeur | Étiquette |
+|---|---|---|
+| Lignes par statut qualité | statut 1 : 25 ; statut 2 : 15 ; statut 3 : 60 | mesuré |
+| Départements avec ≥ 10 années à ≥ 50 ha et rendement renseigné | 44 | mesuré |
+| Surface nationale | 12 186 ha (2010) → 35 869 ha (2020) → 33 927 ha (2025) | mesuré |
+| Production nationale | 535 766 q en 2024 ; 515 576 q en 2025 (provisoire) | mesuré |
+| Coefficient de variation du rendement national 2010–2025 | lentille 0,19 ; blé tendre d'hiver 0,09 | calculé sur mesuré |
+| Coefficient de variation dans les 15 premiers départements | 0,24 à 0,38 | calculé sur mesuré |
+| Corrélation des rendements nationaux lentille / blé | −0,08 (16 années) | calculé sur mesuré |
+| Part de la surface dans les 5 premiers départements | 47 % | calculé sur mesuré |
+
+Principaux départements (surface moyenne 2010–2025) : Haute-Loire, Indre, Aube, Yonne, Gers, Marne, Cher, Vendée, Charente-Maritime, Deux-Sèvres, Charente, Côte-d'Or, Eure-et-Loir, Haute-Marne, Loiret.
+
+### Rendements nationaux (moyenne pondérée par la surface, q/ha)
+
+| Année | 2010 | 2011 | 2012 | 2013 | 2014 | 2015 | 2016 | 2017 | 2018 | 2019 | 2020 | 2021 | 2022 | 2023 | 2024 | 2025 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| Blé tendre d'hiver | 72,5 | 68,1 | 73,1 | 74,0 | 74,9 | 79,5 | **53,8** | 73,7 | 69,8 | 79,1 | 68,5 | 71,1 | 71,8 | 73,8 | 60,9 | 74,3 |
+| Lentille | 15,2 | 17,0 | 16,8 | 16,2 | 13,5 | 13,3 | 13,4 | 12,8 | 14,0 | 12,7 | **8,2** | **8,6** | 11,1 | 12,9 | 17,0 | 15,2 |
+
+Chocs utilisés pour le replay (écart à la moyenne des 5 années précédentes) :
+
+- **2016** : blé −27 %, lentille −13 % ;
+- **2020** : blé −4 %, lentille −38 %.
+
+### Île-de-France : une zone de faible culture de lentille
+
+| Département | Lentille 2025 (ha) | Statut | Observation |
+|---|---|---|---|
+| 77 Seine-et-Marne | 226 | 3 | rendements variables |
+| 78 Yvelines | 245 | 3 | 9,0 q/ha en 2013, 2016 et 2019 : valeur visiblement imputée |
+| 91 Essonne | 207 | 3 | 2,5 à 5,4 q/ha : très bas |
+| 95 Val-d'Oise | 49 | 3 | |
+
+- Le pois chiche affiche des rendements **identiques** dans les quatre départements (32, 41, 17 q/ha certaines années) : estimation régionale.
+- Le blé tendre d'hiver couvre 116 585 ha en Seine-et-Marne en 2025 (statut 1).
+
+**Conséquence** : le modèle de rendement lentille est entraîné sur le **panel national** (statuts 1 et 2), puis appliqué à l'Île-de-France avec la météo locale. Les départements voisins bien renseignés (Aube, Marne, Yonne, Eure-et-Loir, Loiret) servent d'appui. C'est une limite annoncée dans [LIMITES.md](LIMITES.md).
+
+### Séries identiques entre départements
+
+Aube et Marne présentent des rendements lentille identiques sur plusieurs années (25 ; 25 ; 22 ; 16 ; 8 ; 22 q/ha en 2015, 2016, 2019, 2020, 2021, 2024). Ces séries sont regroupées avant l'entraînement pour ne pas compter deux fois la même information.
+
+---
+
+## 2. NASA POWER (vérifié le 30/10/2026)
+
+- API `power.larc.nasa.gov/api/temporal/daily/point`, communauté `AG`, réponse JSON.
+- Requête test réussie (Seine-et-Marne, mars 2016, `T2M_MAX` et `PRECTOTCORR`).
+- Paramètres prévus : `T2M_MAX`, `T2M_MIN`, `PRECTOTCORR`, `EVPTRNS` ou évapotranspiration de référence [nom exact à vérifier].
+
+---
+
+## 3. À inspecter
+
+| Jeu | Questions à trancher |
+|---|---|
+| RPG Île-de-France 2025 | format et couches ; colonnes `CODE_CULT`, `CODE_GROUP`, surface, géométrie ; projection (Lambert-93 attendu) ; nombre de parcelles par groupe ; code du blé tendre d'hiver |
+| Douanes 0713 | lignes 0713 40 (lentilles) ; importations par pays, en masse et en valeur ; années disponibles |
+| Registre des cantines | colonnes utiles pour l'extension « débouchés » |
+| Prix du blé | série annuelle 2010–2025, source et unité |
