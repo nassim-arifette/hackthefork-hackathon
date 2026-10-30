@@ -4,8 +4,8 @@ Le LLM ne produit aucun chiffre : il reçoit les chiffres calculés et rédige a
 Chaque nombre du texte renvoyé est comparé aux chiffres fournis ; un texte qui en
 contient un autre est rejeté. La réponse est mise en cache dans app/src/data/lettre.json.
 
-Usage :
-  BEDROCK_MODEL_ID=<identifiant exact> python 06_lettre_llm.py
+Usage (voir docs/AWS.md) :
+  BEDROCK_MODEL_ID=<identifiant exact> python3 06_lettre_llm.py
 L'identifiant se lit avec `aws bedrock list-foundation-models --region us-east-1` ;
 il n'est jamais deviné. Sans identifiant ni accès AWS, le script n'écrit rien d'autre
 qu'un fichier vide, et l'application n'affiche que le contrat structuré.
@@ -14,8 +14,11 @@ import json
 import os
 import re
 import time
+from pathlib import Path
 
-from common import APP_DATA
+# Chemin calculé ici plutôt qu'importé de common.py : le script tourne seul dans
+# AWS CloudShell, avec boto3 pour toute dépendance.
+APP_DATA = Path(__file__).resolve().parents[1] / "app" / "src" / "data"
 
 PROMPT = """Tu rédiges une courte lettre d'une coopérative à un agriculteur d'Île-de-France,
 pour accompagner une proposition de contrat lentille. Utilise uniquement les chiffres
