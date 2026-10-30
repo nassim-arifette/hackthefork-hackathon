@@ -85,6 +85,15 @@ def main():
                   "elargissement_conformal": round(mL2.qhat, 3)}
     print("Challenger LightGBM :", challenger)
 
+    # Les autres façons de fixer le prix, pour la Seine-et-Marne, campagne 2026.
+    mL0 = Calibrated("M0").fit(with_rel(L, levL))
+    R0, _, _, _ = simulate(meteo, "77", mL0, mW, lev_idf, levW_all["77"], h, seed=77)
+    prix_moyen = float(prix.loc[2010:2025].mean())
+    p_moy = (prix_moyen * levW_all["77"] / 10 - h["charges_ble"] + h["charges_lentille"] - h["bonus"]) / (lev_idf / 10)
+    strategies_77 = {"moyenne": round(p_moy), "M0": round(p_star(R0, h["tau"])),
+                     "M1": deps["77"]["p_star"], "M2": challenger["p_star_77"]}
+    print("Stratégies 77 :", strategies_77)
+
     ic77 = bootstrap_p_star(df, meteo, "77", lev_idf, levW_all["77"], h)
     deps["77"]["p_star_ic80"] = [ic77[0], ic77[2]]
     print("Incertitude P* 77 (bootstrap, 10-50-90 %) :", ic77)
@@ -204,6 +213,7 @@ def main():
         "surface_lentille_par_dep_2025": surf_dep,
         "contrat_indexe": indexe,
         "challenger_lightgbm": challenger,
+        "strategies_77": strategies_77,
         "france": france,
         "n_parcelles": len(out_parc),
         "n_candidates": len(cand),

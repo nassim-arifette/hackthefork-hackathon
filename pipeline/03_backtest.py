@@ -49,7 +49,8 @@ def main():
         row["rel_q10_moyen"], row["rel_q50_moyen"], row["rel_q90_moyen"] = \
             [round(float(v), 3) for v in q1.mean(axis=0)]
 
-        tenus = {"M1": [], "M2": [], "auto": []}
+        tenus = {"moyenne": [], "M0": [], "M1": [], "M2": [], "auto": []}
+        prix_passe = float(meteo[meteo.annee < t].groupby("annee").prix_ble.first().mean())
         for i, (_, r) in enumerate(te.iterrows()):
             if r.dep not in realW.index or np.isnan(realW[r.dep]):
                 continue
@@ -62,14 +63,20 @@ def main():
                    "prix_ble_reel": round(prix_t, 1), "marge_ble": round(marge_W),
                    "ic80_rel": [round(float(q1[i, 0]), 3), round(float(q1[i, 2]), 3)],
                    "q50_rel": round(float(q1[i, 1]), 3), "rel_reel": round(float(y[i]), 3)}
-            for k in ("M1", "M2", "auto"):
+            # Pratique courante : prix d'équilibre calculé sur les moyennes des années passées.
+            p_moy = (prix_passe * levW[r.dep] / 10 - h["charges_ble"] + h["charges_lentille"] - h["bonus"]) \
+                / (levL[r.dep] / 10)
+            tenu_moy = bool(p_moy * yL - h["charges_lentille"] + h["bonus"] >= marge_W)
+            tenus["moyenne"].append(tenu_moy)
+            rec |= {"p_moyenne": round(p_moy), "tenu_moyenne": tenu_moy}
+            for k in ("M0", "M1", "M2", "auto"):
                 R, _, _ = break_even_prices(pool, models[k], mW, levL[r.dep], levW[r.dep], h,
                                             seed=t * 100 + i)
                 ps = p_star(R, h["tau"])
                 marge_L = ps * yL - h["charges_lentille"] + h["bonus"]
                 tenu = bool(marge_L >= marge_W)
                 tenus[k].append(tenu)
-                sfx = {"M1": "", "M2": "_M2", "auto": "_auto"}[k]
+                sfx = {"M0": "_M0", "M1": "", "M2": "_M2", "auto": "_auto"}[k]
                 rec |= {f"p_star{sfx}": round(ps), f"marge_lentille{sfx}": round(marge_L),
                         f"tenu{sfx}": tenu}
             detail.append(rec)
@@ -77,6 +84,8 @@ def main():
         row["taux_tenus"] = round(float(np.mean(tenus["M1"])), 3) if tenus["M1"] else None
         row["taux_tenus_auto"] = round(float(np.mean(tenus["auto"])), 3) if tenus["auto"] else None
         row["taux_tenus_M2"] = round(float(np.mean(tenus["M2"])), 3) if tenus["M2"] else None
+        row["taux_tenus_M0"] = round(float(np.mean(tenus["M0"])), 3) if tenus["M0"] else None
+        row["taux_tenus_moyenne"] = round(float(np.mean(tenus["moyenne"])), 3) if tenus["moyenne"] else None
         row["p_star_median"] = round(float(np.median([d["p_star"] for d in detail if d["annee"] == t])))
         par_annee.append(row)
         print(f"{t}: n={row['n_dep']} blé={prix_t:.0f} €/t couverture M1={row['couverture_M1']} "
@@ -89,6 +98,11 @@ def main():
     glob = {"taux_tenus": round(float(d.tenu.mean()), 3),
             "taux_tenus_auto": round(float(d.tenu_auto.mean()), 3),
             "taux_tenus_M2": round(float(d.tenu_M2.mean()), 3),
+            "taux_tenus_M0": round(float(d.tenu_M0.mean()), 3),
+            "taux_tenus_moyenne": round(float(d.tenu_moyenne.mean()), 3),
+            "p_star_median_M1": round(float(d.p_star.median())),
+            "p_star_median_M0": round(float(d.p_star_M0.median())),
+            "p_moyenne_median": round(float(d.p_moyenne.median())),
             "n_cas": int(len(d)), "n_annees": len(TEST_YEARS)}
     for k in ("M0", "M1", "M2", "auto"):
         w = pa.n_dep / pa.n_dep.sum()

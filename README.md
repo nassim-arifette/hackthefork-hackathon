@@ -16,7 +16,7 @@ Le Contrat qui Tient aide le responsable filière d'une coopérative ou d'un con
 | Variabilité du rendement, lentille contre blé | **0,20 contre 0,09** (Agreste, 2010–2025) |
 | Au prix de marché observé (650 à 779 €/t), la lentille bat le blé | **4,7 années sur 10** (modèle) |
 | Prix plancher pour 8 années sur 10, Seine-et-Marne | **1 622 €/t**, incertitude de 1 132 à 3 007 €/t (modèle) |
-| Backtest 2019–2025, années jamais vues | **86 %** de contrats tenus pour 80 % visés, sur 133 cas |
+| Backtest 2019–2025, années jamais vues | **86 %** de contrats tenus pour 80 % visés, sur 133 cas, contre **32 %** pour un prix fixé sur les moyennes |
 
 ---
 

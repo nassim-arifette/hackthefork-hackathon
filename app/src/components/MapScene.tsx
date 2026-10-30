@@ -123,7 +123,7 @@ export default function MapScene({ step, price, year, selectKm, onHover }: Props
       }),
       new TextLayer({
         id: `dep-labels-${fontsReady}`, data: DEP_LABELS, visible: step === 1,
-        getPosition: (d: any) => d.pos, getText: (d: any) => `${d.name}\n${fmt(d.pStar)} €/t`,
+        getPosition: (d: any) => d.pos, getText: (d: any) => `${d.name}\n${fmt(d.pStar).replace(/\u202f/g, ' ')} €/t`,
         getSize: 14, getColor: C.ink, fontFamily: font, fontWeight: 600, lineHeight: 1.25, getPixelOffset: [0, -22],
         outlineWidth: 6, outlineColor: [255, 255, 255, 235], fontSettings: { sdf: true, fontSize: 64, buffer: 8 },
         characterSet: 'auto',

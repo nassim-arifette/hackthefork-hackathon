@@ -100,20 +100,23 @@ export function MarginBars({ lentil, wheat }: { lentil: number; wheat: number })
   );
 }
 
-/** Prix plancher selon la fiabilité visée (Seine-et-Marne). */
+/** Prix plancher selon la fiabilité visée (Seine-et-Marne), de 5 à 9 années sur 10. */
 export function SecurityChart() {
-  const pts = thresholds.sensibilite.fiabilite;
-  const h = 176, l = 44, r = 16, t = 14, b = 26, pMin = 500, pMax = 3100;
-  const X = (x: number) => l + ((W - l - r) * (x - 0.5)) / 0.45;
+  const pts = thresholds.sensibilite.fiabilite.filter((s) => s.x <= 0.9 + 1e-6);
+  const h = 176, l = 44, r = 16, t = 14, b = 26;
+  const pMin = 500, pMax = Math.ceil((Math.max(...pts.map((s) => s.p_star)) * 1.08) / 500) * 500;
+  const X = (x: number) => l + ((W - l - r) * (x - 0.5)) / 0.4;
   const Y = (p: number) => t + (h - t - b) * (1 - (p - pMin) / (pMax - pMin));
   const path = pts.map((s, i) => `${i ? 'L' : 'M'}${X(s.x).toFixed(1)},${Y(s.p_star).toFixed(1)}`).join('');
   const p80 = pts.find((s) => Math.abs(s.x - 0.8) < 1e-6)!;
   const p50 = pts.find((s) => Math.abs(s.x - 0.5) < 1e-6)!;
+  const p90 = pts.find((s) => Math.abs(s.x - 0.9) < 1e-6)!;
+  const gridVals = [1000, 2000, 3000, 4000].filter((v) => v < pMax);
   return (
     <svg viewBox={`0 0 ${W} ${h}`} role="img" aria-label="Prix plancher selon la fiabilité visée">
       <rect x={l} width={W - l - r} y={Y(MARKET.max)} height={Y(MARKET.min) - Y(MARKET.max)} className="band-market" />
-      <text x={W - r} y={Y(MARKET.min) + 13} className="note" textAnchor="end">prix de marché {MARKET.annees[0]}–{MARKET.annees[1]}</text>
-      {[1000, 2000, 3000].map((p) => (
+      <text x={W - r} y={Y(MARKET.max) - 5} className="note" textAnchor="end">prix de marché {MARKET.annees[0]}–{MARKET.annees[1]}</text>
+      {gridVals.map((p) => (
         <g key={p}><line x1={l} x2={W - r} y1={Y(p)} y2={Y(p)} className="grid" />
           <text x={l - 6} y={Y(p) + 3.5} className="tick" textAnchor="end">{fmt(p)}</text></g>
       ))}
@@ -123,6 +126,8 @@ export function SecurityChart() {
       <text x={X(0.5) + 8} y={Y(p50.p_star) - 8} className="lbl ink">{fmt(p50.p_star)} €/t</text>
       <circle cx={X(0.8)} cy={Y(p80.p_star)} r={4.5} className="pt ink" />
       <text x={X(0.8) - 9} y={Y(p80.p_star) - 9} className="lbl ink" textAnchor="end">{fmt(p80.p_star)} €/t</text>
+      <circle cx={X(0.9)} cy={Y(p90.p_star)} r={3.5} className="pt lentil" />
+      <text x={X(0.9) - 9} y={Y(p90.p_star) + 4} className="lbl ink" textAnchor="end">{fmt(p90.p_star)} €/t</text>
     </svg>
   );
 }
@@ -138,7 +143,8 @@ export function Sensitivity() {
     { label: 'Charges de la lentille, de 230 à 340 €/ha', a: s.charges_lentille[0].p_star, b: s.charges_lentille[s.charges_lentille.length - 1].p_star },
     { label: 'Sans l’aide couplée', a: base, b: s.sans_aide },
   ];
-  const lo = 900, hi = 2200, pad = 6;
+  const all = rows.flatMap((r) => [r.a, r.b]);
+  const lo = Math.floor((Math.min(...all) - 100) / 100) * 100, hi = Math.ceil((Math.max(...all) + 100) / 100) * 100, pad = 6;
   const X = (p: number) => pad + ((W - 2 * pad) * (p - lo)) / (hi - lo);
   return (
     <div className="sens">

@@ -21,11 +21,13 @@ const FEATURES: Record<string, string> = {
   tendance: 'Tendance, par décennie',
   pluie_mj_anom: 'Pluie de mars à juillet',
   pluie_avj_anom: 'Pluie d’avril à juin',
-  j30_jj_anom: 'Jours au-dessus de 30 °C en juin et juillet',
+  j30_jj_anom: 'Jours au-dessus de 30 °C en juin et juillet',
   gel_tardif_anom: 'Gelées tardives, d’avril à mi-mai',
   pluie_recolte_anom: 'Pluie à la récolte, de mi-juillet à mi-août',
   tmax_mj_anom: 'Température maximale de mai à juillet',
 };
+
+const VOISINS: Record<string, string> = { '10': 'Aube', '51': 'Marne', '89': 'Yonne', '28': 'Eure-et-Loir', '45': 'Loiret' };
 
 function value(k: string, v: any): string {
   if (k === 'fiabilite_visee') return '8 années sur 10';
@@ -57,7 +59,7 @@ export default function Method({ onClose }: { onClose: () => void }) {
 
         <section>
           <h3>La météo</h3>
-          <p>La météo journalière NASA POWER de 2010 à 2025 est lue pour 43 départements, au centroïde de chacun. Elle est résumée en six variables agronomiques, exprimées en écart à la climatologie 2010–2018 : pluie de mars à juillet, pluie d’avril à juin, jours au-dessus de 30 °C en juin et juillet (stress à la floraison), gelées tardives d’avril à mi-mai, pluie à la récolte de mi-juillet à mi-août, et température maximale de mai à juillet. Ces variables sont les entrées des deux modèles d’apprentissage ; dans la simulation, chaque année tirée rejoue la météo d’une année réelle.</p>
+          <p>La météo journalière NASA POWER de 2010 à 2025 est lue pour 43 départements, au centroïde de chacun. Elle est résumée en six variables agronomiques, exprimées en écart à la climatologie 2010–2018 : pluie de mars à juillet, pluie d’avril à juin, jours au-dessus de 30 °C en juin et juillet (stress à la floraison), gelées tardives d’avril à mi-mai, pluie à la récolte de mi-juillet à mi-août, et température maximale de mai à juillet. Ces variables sont les entrées des deux modèles d’apprentissage ; dans la simulation, chaque année tirée rejoue la météo d’une année réelle.</p>
         </section>
 
         <section>
@@ -84,7 +86,7 @@ export default function Method({ onClose }: { onClose: () => void }) {
               <tr><td>Choix automatique sur validation interne</td><td className="num">{G.pinball_auto.toLocaleString('fr-FR')}</td><td className="num">{pct(G.couverture_auto)}</td></tr>
             </tbody>
           </table>
-          <p className="note">{backtest.protocole} Le modèle retenu a été choisi avant tout résultat. Contrats tenus : {pct(G.taux_tenus)} avec la régression quantile, {pct(G.taux_tenus_M2)} avec LightGBM, {pct(G.taux_tenus_auto)} avec le choix automatique. Les modèles les plus précis sous-estiment les mauvaises années.</p>
+          <p className="note">{backtest.protocole} Le modèle retenu a été choisi avant tout résultat. Contrats tenus : {pct(G.taux_tenus_moyenne)} avec un prix fixé sur les moyennes, {pct(G.taux_tenus_M0)} avec la tendance seule, {pct(G.taux_tenus)} avec la régression quantile météo, {pct(G.taux_tenus_M2)} avec LightGBM, {pct(G.taux_tenus_auto)} avec le choix automatique. Les modèles les plus précis sous-estiment les mauvaises années. Nous avons aussi testé une régularisation choisie en validation interne : plus précise, mais moins bien calibrée ; elle n’est pas retenue.</p>
         </section>
 
         <section>
@@ -115,7 +117,7 @@ export default function Method({ onClose }: { onClose: () => void }) {
           <h3>Limites</h3>
           <ul>
             <li>Rendements départementaux : à la parcelle, le risque réel est plus fort.</li>
-            <li>Niveau de rendement de la lentille en Île-de-France emprunté aux départements voisins ({meta.voisins_lentille.join(', ')}), soit {meta.niveau_lentille_idf_qha.toLocaleString('fr-FR')} q/ha.</li>
+            <li>Niveau de rendement de la lentille en Île-de-France emprunté aux départements producteurs voisins ({meta.voisins_lentille.map((d: string) => VOISINS[d] ?? d).join(', ')}), soit {meta.niveau_lentille_idf_qha.toLocaleString('fr-FR')} q/ha.</li>
             <li>Le prix plancher lui-même est incertain : en rééchantillonnant les années, celui de la Seine-et-Marne varie de {((thresholds as any).par_departement.find((d: any) => d.dep === '77').p_star_ic80 ?? []).map((v: number) => v.toLocaleString('fr-FR')).join(' à ')} €/t (intervalle à 80 %). Seize années ne suffisent pas à cerner les mauvaises années ; des données de coopérative le resserreraient.</li>
             <li>Agreste estime souvent le rendement de la lentille au niveau régional : {(meta as any).panel_lentille.departements_mesures} départements mesurés, mais {(meta as any).panel_lentille.series_independantes} séries indépendantes seulement.</li>
             <li>Sept années test seulement ; 2020 et 2021, absentes de l’entraînement, font céder les contrats.</li>

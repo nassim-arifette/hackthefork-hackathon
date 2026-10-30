@@ -78,8 +78,10 @@ Q_q(y[d,t]) = a_d + b · t + Σ_k β_k(q) · météo_k[d,t]
 |---|---|---|---|---|
 | Perte pinball | 0,1078 | 0,1103 | 0,1014 | 0,1024 |
 | Couverture à 80 % | 74 % | 79 % | 84 % | 74 % |
-| Contrats tenus (80 % visés) | — | **86 %** | 77 % | 80 % |
-| P\* Seine-et-Marne 2026 | — | 1 622 €/t | 1 035 €/t | — |
+| Contrats tenus (80 % visés) | 82 % | **86 %** | 77 % | 80 % |
+| P\* Seine-et-Marne 2026 | 3 062 €/t | 1 622 €/t | 1 035 €/t | — |
+
+Pour référence, un prix fixé sur les moyennes des années passées (la pratique courante, sans modèle) ne tient que 32 % des contrats, avec un P\* 2026 de 766 €/t.
 
 Le plus précis n'est pas le meilleur pour fixer un prix : LightGBM prédit mieux l'année moyenne, mais il sous-estime la queue basse du rendement de la lentille, et ses contrats tiennent moins souvent que promis. M1, choisi avant tout résultat, reste le modèle de l'application.
 

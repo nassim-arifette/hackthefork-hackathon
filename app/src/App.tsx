@@ -24,6 +24,7 @@ const VOLUME = (meta.hypotheses as any).volume_vise_t.valeur as number;
 const BT2020 = backtest.annees.find((y) => y.annee === 2020)!;
 const START_PRICE = 900;
 const IC77 = (D77 as any).p_star_ic80 as [number, number] | undefined;
+const STRAT = (meta as any).strategies_77 as { moyenne: number; M0: number; M1: number; M2: number };
 const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
 const pos = (p: number) => `${((p - MIN) / (MAX - MIN)) * 100}%`;
 
@@ -241,7 +242,7 @@ export default function App() {
                     <div className="figures">
                       <Figure value={signedPct(year.par_departement['77'].choc_ble)} label="rendement du blé en Seine-et-Marne" />
                       <Figure value={signedPct(year.choc_lentille_national)} label="rendement de la lentille en France" />
-                      <Figure value={fmt(year.prix_ble)} unit="€/t" label="prix du blé cette année-là" />
+                      <Figure value={fmt(year.prix_ble)} unit="€/t" label="prix du blé de l’année" />
                     </div>
                     <Source k="mesure">Agreste, écart à la moyenne des cinq années précédentes ; Eurostat, indice des prix du blé tendre.</Source>
                   </div>
@@ -293,16 +294,18 @@ export default function App() {
               </div>
               <p className="body">Les contrats cèdent en 2020 et 2021 : deux effondrements que le modèle n’avait jamais vus.</p>
               <div className="block">
-                <h3>Deux modèles d’apprentissage, un seul tient la promesse</h3>
+                <h3>Ce que le modèle apporte au prix</h3>
                 <table className="list models">
-                  <thead><tr><th /><th className="num">Précision</th><th className="num">Contrats tenus</th><th className="num">P*, Seine-et-Marne</th></tr></thead>
+                  <thead><tr><th>Façon de fixer le prix</th><th className="num">Contrats tenus</th><th className="num">P* 2026, 77</th></tr></thead>
                   <tbody>
-                    <tr className="hl"><td>Régression quantile calibrée<span>retenue avant tout résultat</span></td><td className="num">{signedPct(G.gain_pinball_M1_vs_M0)}</td><td className="num">{pct(G.taux_tenus)}</td><td className="num">{fmt(D77.p_star)} €/t</td></tr>
-                    <tr><td>LightGBM quantile<span>gradient boosting</span></td><td className="num">{signedPct(G.gain_pinball_M2_vs_M0)}</td><td className="num bad">{pct((G as any).taux_tenus_M2)}</td><td className="num">{fmt(CHALLENGER.p_star_77)} €/t</td></tr>
+                    <tr><td>Moyennes des années passées<span>la pratique courante</span></td><td className="num bad">{pct(G.taux_tenus_moyenne)}</td><td className="num">{fmt(STRAT.moyenne)} €/t</td></tr>
+                    <tr><td>Distribution calibrée, sans météo<span>tendance seule</span></td><td className="num">{pct(G.taux_tenus_M0)}</td><td className="num">{fmt(STRAT.M0)} €/t</td></tr>
+                    <tr className="hl"><td>Régression quantile avec météo<span>modèle d’apprentissage retenu avant tout résultat</span></td><td className="num">{pct(G.taux_tenus)}</td><td className="num">{fmt(STRAT.M1)} €/t</td></tr>
+                    <tr><td>LightGBM avec météo<span>gradient boosting</span></td><td className="num bad">{pct(G.taux_tenus_M2)}</td><td className="num">{fmt(STRAT.M2)} €/t</td></tr>
                   </tbody>
                 </table>
-                <p className="body small">LightGBM prédit mieux l’année moyenne, mais il sous-estime les mauvaises : son prix est plus bas et ses contrats tiennent moins souvent que promis. Pour fixer un prix qui protège, c’est la calibration des mauvaises années qui compte.</p>
-                <Source k="modele">Précision : écart de perte pinball face à la tendance seule. Backtest glissant 2019–2025.</Source>
+                <p className="body small">Fixer le prix sur les moyennes, comme aujourd’hui, ne tient qu’un contrat sur trois : c’est le verrou. Une distribution calibrée dépasse 8 sur 10, et la météo y ajoute quatre points. LightGBM, plus précis sur l’année moyenne, sous-estime les mauvaises années. Le prix 2026 change beaucoup d’un modèle à l’autre : c’est une incertitude que nous affichons.</p>
+                <Source k="modele">Backtest glissant 2019–2025 sur {G.n_cas} cas, 80 % visés. Précision de chaque modèle dans Méthode et sources.</Source>
               </div>
               <div className="block">
                 <h3>Ce que le modèle a appris de la météo</h3>
@@ -360,7 +363,7 @@ export default function App() {
                 <table className="list">
                   <tbody>
                     {meta.france.slice(0, 5).map((d) => (
-                      <tr key={d.dep}><td>{d.nom}<span>lentille {dec(d.rendement_lentille_qha)} q/ha, blé {dec(d.rendement_ble_qha, 0)} q/ha</span></td><td className="num">{fmt(d.p_star)} €/t</td></tr>
+                      <tr key={d.dep}><td>{d.nom}<span>lentille {dec(d.rendement_lentille_qha)} q/ha, blé {dec(d.rendement_ble_qha, 0)} q/ha{d.avec?.length ? `, estimée avec ${d.avec.join(', ')}` : ''}</span></td><td className="num">{fmt(d.p_star)} €/t</td></tr>
                     ))}
                   </tbody>
                 </table>

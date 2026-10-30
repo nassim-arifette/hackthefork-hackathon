@@ -222,7 +222,9 @@ h3 { font-family: var(--sans); font-weight: 600; font-size: 14px; line-height: 1
 .list th { font-weight: 500; font-size: 12px; color: var(--mute); padding: 0 0 6px; text-align: left; }
 .list th.num { text-align: right; }
 .list.models { font-size: 13.5px; }
+.list.models th:first-child { width: 52%; }
 .list.models tr.hl td:first-child { font-weight: 600; }
+.list.models tr.hl td:first-child span { font-weight: 400; }
 .list td.bad { color: var(--fail); }
 .years { width: 100%; margin-top: var(--s5); border-collapse: collapse; font-family: var(--sans); font-size: 12.5px; font-variant-numeric: tabular-nums; }
 .years th { font-weight: 500; color: var(--mute); padding: 0 2px 6px; text-align: right; }

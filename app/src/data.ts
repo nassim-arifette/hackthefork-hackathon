@@ -58,7 +58,7 @@ export const FEATURE_LABELS: Record<string, string> = {
   tendance: 'Tendance',
   pluie_mj_anom: 'Pluie de mars à juillet',
   pluie_avj_anom: 'Pluie d’avril à juin',
-  j30_jj_anom: 'Jours > 30 °C en juin-juillet',
+  j30_jj_anom: 'Jours > 30 °C en juin-juillet',
   gel_tardif_anom: 'Gelées tardives',
   pluie_recolte_anom: 'Pluie à la récolte',
   tmax_mj_anom: 'Température maximale',

@@ -45,6 +45,20 @@ Pour chaque année test, les modèles, les niveaux et la calibration sont estim�
 
 Erreur médiane sur le rendement relatif d'une année : ±33 %.
 
+### Ce que le modèle apporte : quatre façons de fixer le prix
+
+| Façon de fixer le prix | Contrats tenus (80 % visés) | P\* 2026, Seine-et-Marne |
+|---|---|---|
+| Moyennes des années passées (pratique courante) | **32 %** | 766 €/t |
+| Distribution calibrée, tendance seule, sans météo (M0) | 82 % | 3 062 €/t |
+| **Régression quantile avec météo (M1, retenue)** | **86 %** | 1 622 €/t |
+| LightGBM avec météo (M2) | 77 % | 1 035 €/t |
+
+- Fixer le prix sur les moyennes ne tient qu'un contrat sur trois : c'est le verrou du Track 3, mesuré.
+- Le modèle probabiliste calibré fait passer au-dessus de 80 % ; la météo ajoute quatre points en backtest.
+- Le prix 2026 change fortement d'un modèle à l'autre : c'est une incertitude de modèle, affichée à côté de l'incertitude statistique.
+- Exploration non retenue (`pipeline/explore_regularisation.py`) : une régularisation choisie en validation interne est plus précise que la tendance seule, mais l'intervalle ne couvre plus qu'environ 71 % des cas.
+
 ### Lecture
 
 - **La fiabilité visée est atteinte sur l'ensemble** (86 % pour 80 %), mais sur 7 années seulement. Les contrats cèdent en **2020 et 2021**, deux effondrements de la lentille absents de l'entraînement.

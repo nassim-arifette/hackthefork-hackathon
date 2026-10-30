@@ -10,7 +10,7 @@
 | 4 | Au prix du marché, la lentille gagne une année sur deux | 4,7 années sur 10 à 715 €/t ; 8 sur 10 à 1 622 €/t en Seine-et-Marne. | capture de l'étape « Le prix » | Modèle ; Eurostat 2012–2016 |
 | 5 | Démo | Le verrou, le prix, l'épreuve, la preuve, le contrat. | démo en direct | — |
 | 6 | Sous le capot | Météo NASA POWER → modèle d'apprentissage quantile calibré par conformal → 20 000 années rejouées avec le prix du blé → P\* = quantile 80 % du prix d'équilibre. | schéma en quatre blocs | NASA POWER ; Agreste ; Eurostat |
-| 7 | La preuve | 86 % de contrats tenus pour 80 % promis, sur 133 cas jamais vus. LightGBM, plus précis, n'en tient que 77 %. | frise du backtest et tableau des deux modèles | Backtest 2019–2025 |
+| 7 | La preuve | Prix fixé sur les moyennes : 32 % de contrats tenus. Notre modèle : 86 % pour 80 % promis, sur 133 cas jamais vus. LightGBM, plus précis, n'en tient que 77 %. | frise du backtest et tableau des quatre façons de fixer le prix | Backtest 2019–2025 |
 | 8 | Ce que nous ne savons pas encore | Prix incertain (1 132 à 3 007 €/t), rendements départementaux, 24 séries indépendantes seulement, contrats qui cèdent en 2020–2021. | liste courte | RESULTATS.md, LIMITES.md |
 | 9 | Impact | 5 000 t sur 236 parcelles proches du site = 13 % des importations. Moins d'azote sur la rotation, revenu protégé 8 années sur 10. | carte du contrat de 5 000 t | Modèle ; Comext |
 | 10 | Qui paie | Coopératives et conditionneurs, par campagne. Pilote d'une campagne, puis toutes les cultures sous contrat et les assureurs. | trois étapes | — |
