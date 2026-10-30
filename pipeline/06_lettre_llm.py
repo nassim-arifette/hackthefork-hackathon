@@ -60,13 +60,16 @@ def verify(text: str, allowed: dict) -> bool:
 def call_bedrock(model_id: str, prompt: str) -> str:
     import boto3  # importé seulement si Bedrock est utilisé
     client = boto3.client("bedrock-runtime", region_name="us-east-1")
+    from botocore.exceptions import ClientError
     for attempt in range(4):
         try:
+            # Pas de `temperature` : les modèles Claude récents la refusent.
             r = client.converse(modelId=model_id, messages=[{"role": "user", "content": [{"text": prompt}]}],
-                                inferenceConfig={"maxTokens": 400, "temperature": 0.2})
+                                inferenceConfig={"maxTokens": 400})
             return r["output"]["message"]["content"][0]["text"].strip()
-        except Exception:
-            if attempt == 3:
+        except ClientError as e:
+            # On ne réessaie que les limites de débit ; une requête invalide échoue tout de suite.
+            if e.response["Error"]["Code"] != "ThrottlingException" or attempt == 3:
                 raise
             time.sleep(2 ** (attempt + 1))  # quota d'environ 1 requête par seconde
     return ""
