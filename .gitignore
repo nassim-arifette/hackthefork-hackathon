@@ -1,6 +1,9 @@
-# Données brutes et caches
-data_raw/
-*.zip
+# Données brutes : versionnées sauf le RPG (358 Mo, retéléchargé par 04_parcels.py)
+# et les fichiers extraits des archives
+data_raw/rpg/
+data_raw/agreste/x/
+data_raw/**/*.part
+data_raw/weather.log
 *.gpkg
 *.shp
 *.shx
@@ -29,5 +32,3 @@ credentials*
 
 # Builds et intermédiaires régénérables
 app/dist-single/
-data/parcelles.json
-data/contours_idf.json
