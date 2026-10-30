@@ -24,7 +24,6 @@ const VOLUME = (meta.hypotheses as any).volume_vise_t.valeur as number;
 const BT2020 = backtest.annees.find((y) => y.annee === 2020)!;
 const START_PRICE = 900;
 const IC77 = (D77 as any).p_star_ic80 as [number, number] | undefined;
-const STRAT = (meta as any).strategies_77 as { moyenne: number; M0: number; M1: number; M2: number };
 const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
 const pos = (p: number) => `${((p - MIN) / (MAX - MIN)) * 100}%`;
 
@@ -185,7 +184,7 @@ export default function App() {
                 <label htmlFor="price">Prix garanti, rendu au site acheteur</label>
                 <div className="readout">
                   <output htmlFor="price">{fmt(price)}<span className="unit">€/t</span></output>
-                  <p><b>{dec(rel * 10, 1)} années sur 10</b> où la lentille rapporte autant que le blé, en Seine-et-Marne</p>
+                  <p><b>{dec(rel * 10, 1)} années sur 10</b> où la lentille rapporte au moins autant que le blé en Seine‑et‑Marne</p>
                 </div>
                 <div className="range">
                   <input id="price" type="range" min={MIN} max={MAX} step={5} value={price} style={{ ['--fill' as any]: pos(price) }}
@@ -200,8 +199,8 @@ export default function App() {
               </div>
               <div className="block">
                 <div className="figures two">
-                  <Figure value={fmt(haT)} unit="ha" label={`de blé basculent à ce prix, ${fmt(stats.n)} parcelles`} />
-                  <Figure value={fmt(stats.tonnes)} unit="t" label="de lentilles si toutes signaient" />
+                  <Figure value={fmt(haT)} unit="ha" label={`de blé basculent à ce prix (${fmt(stats.n)} parcelles)`} />
+                  <Figure value={fmt(stats.tonnes)} unit="t" label="de lentilles si toutes ces parcelles signaient" />
                 </div>
               </div>
               <div className="block">
@@ -296,16 +295,16 @@ export default function App() {
               <div className="block">
                 <h3>Ce que le modèle apporte au prix</h3>
                 <table className="list models">
-                  <thead><tr><th>Façon de fixer le prix</th><th className="num">Contrats tenus</th><th className="num">P* 2026, 77</th></tr></thead>
+                  <thead><tr><th>Façon de fixer le prix</th><th className="num">Contrats tenus</th></tr></thead>
                   <tbody>
-                    <tr><td>Moyennes des années passées<span>la pratique courante</span></td><td className="num bad">{pct(G.taux_tenus_moyenne)}</td><td className="num">{fmt(STRAT.moyenne)} €/t</td></tr>
-                    <tr><td>Distribution calibrée, sans météo<span>tendance seule</span></td><td className="num">{pct(G.taux_tenus_M0)}</td><td className="num">{fmt(STRAT.M0)} €/t</td></tr>
-                    <tr className="hl"><td>Régression quantile avec météo<span>modèle d’apprentissage retenu avant tout résultat</span></td><td className="num">{pct(G.taux_tenus)}</td><td className="num">{fmt(STRAT.M1)} €/t</td></tr>
-                    <tr><td>LightGBM avec météo<span>gradient boosting</span></td><td className="num bad">{pct(G.taux_tenus_M2)}</td><td className="num">{fmt(STRAT.M2)} €/t</td></tr>
+                    <tr><td>Moyennes des années passées<span>la pratique courante</span></td><td className="num bad">{pct(G.taux_tenus_moyenne)}</td></tr>
+                    <tr><td>Distribution calibrée, sans météo<span>tendance seule</span></td><td className="num">{pct(G.taux_tenus_M0)}</td></tr>
+                    <tr className="hl"><td>Régression quantile avec météo<span>modèle d’apprentissage retenu avant tout résultat</span></td><td className="num">{pct(G.taux_tenus)}</td></tr>
+                    <tr><td>LightGBM avec météo<span>gradient boosting</span></td><td className="num bad">{pct(G.taux_tenus_M2)}</td></tr>
                   </tbody>
                 </table>
-                <p className="body small">Fixer le prix sur les moyennes, comme aujourd’hui, ne tient qu’un contrat sur trois : c’est le verrou. Une distribution calibrée dépasse 8 sur 10, et la météo y ajoute quatre points. LightGBM, plus précis sur l’année moyenne, sous-estime les mauvaises années. Le prix 2026 change beaucoup d’un modèle à l’autre : c’est une incertitude que nous affichons.</p>
-                <Source k="modele">Backtest glissant 2019–2025 sur {G.n_cas} cas, 80 % visés. Précision de chaque modèle dans Méthode et sources.</Source>
+                <p className="body small">Avec un prix calculé sur les moyennes, comme aujourd’hui, un contrat sur trois seulement aurait tenu : c’est le verrou. Une distribution calibrée fait passer au-dessus de 8 sur 10, et la météo y ajoute quatre points. LightGBM, plus précis sur l’année moyenne, sous-estime les mauvaises années.</p>
+                <Source k="modele">Backtest glissant 2019–2025 sur {G.n_cas} cas, 80 % visés. Précision et prix 2026 de chaque modèle dans Méthode et sources.</Source>
               </div>
               <div className="block">
                 <h3>Ce que le modèle a appris de la météo</h3>

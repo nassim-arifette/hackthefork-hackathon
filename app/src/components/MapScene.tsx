@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import DeckGL from '@deck.gl/react';
 import { FlyToInterpolator, MapView, type MapViewState } from '@deck.gl/core';
 import { GeoJsonLayer, PolygonLayer, ScatterplotLayer, TextLayer } from '@deck.gl/layers';
-import { contours, DEP_NAMES, fmt, france, H, held, meta, parcels, thresholds, type Parcel, type ReplayYear } from '../data';
+import { contours, DEP_NAMES, france, H, held, meta, parcels, thresholds, type Parcel, type ReplayYear } from '../data';
 
 type RGB = [number, number, number];
 // Mêmes valeurs que les jetons de docs/DESIGN.md.
@@ -123,7 +123,7 @@ export default function MapScene({ step, price, year, selectKm, onHover }: Props
       }),
       new TextLayer({
         id: `dep-labels-${fontsReady}`, data: DEP_LABELS, visible: step === 1,
-        getPosition: (d: any) => d.pos, getText: (d: any) => `${d.name}\n${fmt(d.pStar).replace(/\u202f/g, ' ')} €/t`,
+        getPosition: (d: any) => d.pos, getText: (d: any) => `${d.name}\n${d.pStar} €/t`,
         getSize: 14, getColor: C.ink, fontFamily: font, fontWeight: 600, lineHeight: 1.25, getPixelOffset: [0, -22],
         outlineWidth: 6, outlineColor: [255, 255, 255, 235], fontSettings: { sdf: true, fontSize: 64, buffer: 8 },
         characterSet: 'auto',

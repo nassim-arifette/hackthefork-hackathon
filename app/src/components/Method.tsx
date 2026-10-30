@@ -38,6 +38,7 @@ function value(k: string, v: any): string {
 
 export default function Method({ onClose }: { onClose: () => void }) {
   const G = backtest.global as Record<string, number>;
+  const STRAT = (meta as any).strategies_77 as { moyenne: number; M0: number; M1: number; M2: number };
   const coefs = meta.coefficients_M1_lentille as Record<string, Record<string, number>>;
   return (
     <div className="sheet" role="dialog" aria-modal="true" aria-labelledby="method-title">
@@ -78,15 +79,16 @@ export default function Method({ onClose }: { onClose: () => void }) {
         <section>
           <h3>Comparaison des modèles sur le backtest</h3>
           <table className="tbl">
-            <thead><tr><th>Modèle</th><th className="num">Perte pinball</th><th className="num">Couverture à 80 %</th></tr></thead>
+            <thead><tr><th>Modèle</th><th className="num">Perte pinball</th><th className="num">Couverture à 80 %</th><th className="num">P* 2026, 77</th></tr></thead>
             <tbody>
-              <tr><td>Tendance seule (référence)</td><td className="num">{G.pinball_M0.toLocaleString('fr-FR')}</td><td className="num">{pct(G.couverture_M0)}</td></tr>
-              <tr className="hl"><td>Régression quantile météo, retenue</td><td className="num">{G.pinball_M1.toLocaleString('fr-FR')}</td><td className="num">{pct(G.couverture_M1)}</td></tr>
-              <tr><td>LightGBM quantile (gradient boosting)</td><td className="num">{G.pinball_M2.toLocaleString('fr-FR')}</td><td className="num">{pct(G.couverture_M2)}</td></tr>
-              <tr><td>Choix automatique sur validation interne</td><td className="num">{G.pinball_auto.toLocaleString('fr-FR')}</td><td className="num">{pct(G.couverture_auto)}</td></tr>
+              <tr><td>Moyennes des années passées (sans modèle)</td><td className="num">—</td><td className="num">—</td><td className="num">{STRAT.moyenne.toLocaleString('fr-FR')} €/t</td></tr>
+              <tr><td>Tendance seule (référence)</td><td className="num">{G.pinball_M0.toLocaleString('fr-FR')}</td><td className="num">{pct(G.couverture_M0)}</td><td className="num">{STRAT.M0.toLocaleString('fr-FR')} €/t</td></tr>
+              <tr className="hl"><td>Régression quantile météo, retenue</td><td className="num">{G.pinball_M1.toLocaleString('fr-FR')}</td><td className="num">{pct(G.couverture_M1)}</td><td className="num">{STRAT.M1.toLocaleString('fr-FR')} €/t</td></tr>
+              <tr><td>LightGBM quantile (gradient boosting)</td><td className="num">{G.pinball_M2.toLocaleString('fr-FR')}</td><td className="num">{pct(G.couverture_M2)}</td><td className="num">{STRAT.M2.toLocaleString('fr-FR')} €/t</td></tr>
+              <tr><td>Choix automatique sur validation interne</td><td className="num">{G.pinball_auto.toLocaleString('fr-FR')}</td><td className="num">{pct(G.couverture_auto)}</td><td className="num">—</td></tr>
             </tbody>
           </table>
-          <p className="note">{backtest.protocole} Le modèle retenu a été choisi avant tout résultat. Contrats tenus : {pct(G.taux_tenus_moyenne)} avec un prix fixé sur les moyennes, {pct(G.taux_tenus_M0)} avec la tendance seule, {pct(G.taux_tenus)} avec la régression quantile météo, {pct(G.taux_tenus_M2)} avec LightGBM, {pct(G.taux_tenus_auto)} avec le choix automatique. Les modèles les plus précis sous-estiment les mauvaises années. Nous avons aussi testé une régularisation choisie en validation interne : plus précise, mais moins bien calibrée ; elle n’est pas retenue.</p>
+          <p className="note">{backtest.protocole} Le modèle retenu a été choisi avant tout résultat. Contrats tenus : {pct(G.taux_tenus_moyenne)} avec un prix fixé sur les moyennes, {pct(G.taux_tenus_M0)} avec la tendance seule, {pct(G.taux_tenus)} avec la régression quantile météo, {pct(G.taux_tenus_M2)} avec LightGBM, {pct(G.taux_tenus_auto)} avec le choix automatique. Les modèles les plus précis sous-estiment les mauvaises années. Le prix 2026 varie fortement d’un modèle à l’autre (de {STRAT.M2.toLocaleString('fr-FR')} à {STRAT.M0.toLocaleString('fr-FR')} €/t) : c’est une incertitude de modèle, qui s’ajoute à l’incertitude statistique. Nous avons aussi testé une régularisation choisie en validation interne : plus précise, mais moins bien calibrée ; elle n’est pas retenue.</p>
         </section>
 
         <section>
