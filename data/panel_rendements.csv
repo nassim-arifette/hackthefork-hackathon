@@ -127,22 +127,22 @@ dep,dep_nom,region,culture,annee,statut,surface_ha,rendement_qha,production_q,ut
 92,Hauts-de-Seine,11 - Île-de-France,lentille,2023,3,0.0,,0,False,92,False
 92,Hauts-de-Seine,11 - Île-de-France,lentille,2024,3,0.0,,0,False,92,False
 92,Hauts-de-Seine,11 - Île-de-France,lentille,2025,3,0.0,,0,False,92,False
-93,Seine-Saint-Denis,11 - Île-de-France,ble,2010,1,344.0,85.0,29240,True,93,False
-93,Seine-Saint-Denis,11 - Île-de-France,ble,2011,1,414.0,74.0,30636,True,93,False
-93,Seine-Saint-Denis,11 - Île-de-France,ble,2012,1,353.0,82.0,28946,True,93,False
-93,Seine-Saint-Denis,11 - Île-de-France,ble,2013,1,381.0,85.0,32385,True,93,False
-93,Seine-Saint-Denis,11 - Île-de-France,ble,2014,1,310.0,83.0,25730,True,93,False
-93,Seine-Saint-Denis,11 - Île-de-France,ble,2015,1,320.0,91.0,29120,True,93,False
-93,Seine-Saint-Denis,11 - Île-de-France,ble,2016,1,380.0,50.0,19000,True,93,False
-93,Seine-Saint-Denis,11 - Île-de-France,ble,2017,1,335.0,82.0,27470,True,93,False
-93,Seine-Saint-Denis,11 - Île-de-France,ble,2018,1,355.0,77.0,27335,True,93,False
-93,Seine-Saint-Denis,11 - Île-de-France,ble,2019,1,395.0,88.0,34760,True,93,False
-93,Seine-Saint-Denis,11 - Île-de-France,ble,2020,1,310.0,78.0,24180,True,93,False
-93,Seine-Saint-Denis,11 - Île-de-France,ble,2021,1,330.0,83.0,27390,True,93,False
-93,Seine-Saint-Denis,11 - Île-de-France,ble,2022,1,300.0,86.0,25800,True,93,False
-93,Seine-Saint-Denis,11 - Île-de-France,ble,2023,1,303.0,84.1,25482,True,93,False
-93,Seine-Saint-Denis,11 - Île-de-France,ble,2024,1,228.0,65.87,15018,True,93,False
-93,Seine-Saint-Denis,11 - Île-de-France,ble,2025,1,260.0,83.1,21609,True,93,False
+93,Seine-Saint-Denis,11 - Île-de-France,ble,2010,1,344.0,85.0,29240,True,95,True
+93,Seine-Saint-Denis,11 - Île-de-France,ble,2011,1,414.0,74.0,30636,True,95,True
+93,Seine-Saint-Denis,11 - Île-de-France,ble,2012,1,353.0,82.0,28946,True,95,True
+93,Seine-Saint-Denis,11 - Île-de-France,ble,2013,1,381.0,85.0,32385,True,95,True
+93,Seine-Saint-Denis,11 - Île-de-France,ble,2014,1,310.0,83.0,25730,True,95,True
+93,Seine-Saint-Denis,11 - Île-de-France,ble,2015,1,320.0,91.0,29120,True,95,True
+93,Seine-Saint-Denis,11 - Île-de-France,ble,2016,1,380.0,50.0,19000,True,95,True
+93,Seine-Saint-Denis,11 - Île-de-France,ble,2017,1,335.0,82.0,27470,True,95,True
+93,Seine-Saint-Denis,11 - Île-de-France,ble,2018,1,355.0,77.0,27335,True,95,True
+93,Seine-Saint-Denis,11 - Île-de-France,ble,2019,1,395.0,88.0,34760,True,95,True
+93,Seine-Saint-Denis,11 - Île-de-France,ble,2020,1,310.0,78.0,24180,True,95,True
+93,Seine-Saint-Denis,11 - Île-de-France,ble,2021,1,330.0,83.0,27390,True,95,True
+93,Seine-Saint-Denis,11 - Île-de-France,ble,2022,1,300.0,86.0,25800,True,95,True
+93,Seine-Saint-Denis,11 - Île-de-France,ble,2023,1,303.0,84.1,25482,True,95,True
+93,Seine-Saint-Denis,11 - Île-de-France,ble,2024,1,228.0,65.87,15018,True,95,True
+93,Seine-Saint-Denis,11 - Île-de-France,ble,2025,1,260.0,83.1,21609,True,95,True
 93,Seine-Saint-Denis,11 - Île-de-France,lentille,2010,3,0.0,,0,False,93,False
 93,Seine-Saint-Denis,11 - Île-de-France,lentille,2011,3,0.0,,0,False,93,False
 93,Seine-Saint-Denis,11 - Île-de-France,lentille,2012,3,0.0,,0,False,93,False
@@ -159,22 +159,22 @@ dep,dep_nom,region,culture,annee,statut,surface_ha,rendement_qha,production_q,ut
 93,Seine-Saint-Denis,11 - Île-de-France,lentille,2023,3,0.0,,0,False,93,False
 93,Seine-Saint-Denis,11 - Île-de-France,lentille,2024,3,0.0,,0,False,93,False
 93,Seine-Saint-Denis,11 - Île-de-France,lentille,2025,3,0.0,,0,False,93,False
-94,Val-de-Marne,11 - Île-de-France,ble,2010,2,470.0,76.0,35720,True,94,False
-94,Val-de-Marne,11 - Île-de-France,ble,2011,2,497.0,67.0,33299,True,94,False
-94,Val-de-Marne,11 - Île-de-France,ble,2012,2,445.0,82.0,36490,True,94,False
-94,Val-de-Marne,11 - Île-de-France,ble,2013,2,533.0,83.0,44239,True,94,False
-94,Val-de-Marne,11 - Île-de-France,ble,2014,2,535.0,85.0,45475,True,94,False
-94,Val-de-Marne,11 - Île-de-France,ble,2015,2,480.0,83.0,39840,True,94,False
-94,Val-de-Marne,11 - Île-de-France,ble,2016,2,465.0,45.0,20925,True,94,False
-94,Val-de-Marne,11 - Île-de-France,ble,2017,2,430.0,75.0,32250,True,94,False
-94,Val-de-Marne,11 - Île-de-France,ble,2018,2,390.0,75.0,29250,True,94,False
-94,Val-de-Marne,11 - Île-de-France,ble,2019,2,460.0,87.0,40020,True,94,False
-94,Val-de-Marne,11 - Île-de-France,ble,2020,2,285.0,72.0,20520,True,94,False
-94,Val-de-Marne,11 - Île-de-France,ble,2021,2,430.0,81.0,34830,True,94,False
-94,Val-de-Marne,11 - Île-de-France,ble,2022,2,325.0,84.0,27300,True,94,False
-94,Val-de-Marne,11 - Île-de-France,ble,2023,2,302.0,79.09,23885,True,94,False
-94,Val-de-Marne,11 - Île-de-France,ble,2024,2,222.0,63.94,14195,True,94,False
-94,Val-de-Marne,11 - Île-de-France,ble,2025,2,204.0,79.5,16220,True,94,False
+94,Val-de-Marne,11 - Île-de-France,ble,2010,2,470.0,76.0,35720,True,91,True
+94,Val-de-Marne,11 - Île-de-France,ble,2011,2,497.0,67.0,33299,True,91,True
+94,Val-de-Marne,11 - Île-de-France,ble,2012,2,445.0,82.0,36490,True,91,True
+94,Val-de-Marne,11 - Île-de-France,ble,2013,2,533.0,83.0,44239,True,91,True
+94,Val-de-Marne,11 - Île-de-France,ble,2014,2,535.0,85.0,45475,True,91,True
+94,Val-de-Marne,11 - Île-de-France,ble,2015,2,480.0,83.0,39840,True,91,True
+94,Val-de-Marne,11 - Île-de-France,ble,2016,2,465.0,45.0,20925,True,91,True
+94,Val-de-Marne,11 - Île-de-France,ble,2017,2,430.0,75.0,32250,True,91,True
+94,Val-de-Marne,11 - Île-de-France,ble,2018,2,390.0,75.0,29250,True,91,True
+94,Val-de-Marne,11 - Île-de-France,ble,2019,2,460.0,87.0,40020,True,91,True
+94,Val-de-Marne,11 - Île-de-France,ble,2020,2,285.0,72.0,20520,True,91,True
+94,Val-de-Marne,11 - Île-de-France,ble,2021,2,430.0,81.0,34830,True,91,True
+94,Val-de-Marne,11 - Île-de-France,ble,2022,2,325.0,84.0,27300,True,91,True
+94,Val-de-Marne,11 - Île-de-France,ble,2023,2,302.0,79.09,23885,True,91,True
+94,Val-de-Marne,11 - Île-de-France,ble,2024,2,222.0,63.94,14195,True,91,True
+94,Val-de-Marne,11 - Île-de-France,ble,2025,2,204.0,79.5,16220,True,91,True
 94,Val-de-Marne,11 - Île-de-France,lentille,2010,3,0.0,,0,False,94,False
 94,Val-de-Marne,11 - Île-de-France,lentille,2011,3,0.0,,0,False,94,False
 94,Val-de-Marne,11 - Île-de-France,lentille,2012,3,0.0,,0,False,94,False
@@ -431,22 +431,22 @@ dep,dep_nom,region,culture,annee,statut,surface_ha,rendement_qha,production_q,ut
 21,Côte-d'Or,27 - Bourgogne-Franche-Comté,ble,2023,1,94300.0,57.0,5375100,True,21,False
 21,Côte-d'Or,27 - Bourgogne-Franche-Comté,ble,2024,1,88300.0,53.0,4679900,True,21,False
 21,Côte-d'Or,27 - Bourgogne-Franche-Comté,ble,2025,1,91500.0,63.0,5764500,True,21,False
-21,Côte-d'Or,27 - Bourgogne-Franche-Comté,lentille,2010,1,102.0,13.0,1326,True,21,False
-21,Côte-d'Or,27 - Bourgogne-Franche-Comté,lentille,2011,1,126.0,8.0,1008,True,21,False
-21,Côte-d'Or,27 - Bourgogne-Franche-Comté,lentille,2012,1,115.0,15.0,1725,True,21,False
-21,Côte-d'Or,27 - Bourgogne-Franche-Comté,lentille,2013,1,150.0,14.0,2100,True,21,False
-21,Côte-d'Or,27 - Bourgogne-Franche-Comté,lentille,2014,1,210.0,12.0,2520,True,21,False
-21,Côte-d'Or,27 - Bourgogne-Franche-Comté,lentille,2015,1,210.0,12.0,2520,True,21,False
-21,Côte-d'Or,27 - Bourgogne-Franche-Comté,lentille,2016,1,250.0,14.0,3500,True,21,False
-21,Côte-d'Or,27 - Bourgogne-Franche-Comté,lentille,2017,1,571.0,14.0,7994,True,21,False
-21,Côte-d'Or,27 - Bourgogne-Franche-Comté,lentille,2018,1,650.0,13.69,8900,True,21,False
-21,Côte-d'Or,27 - Bourgogne-Franche-Comté,lentille,2019,1,942.0,8.0,7536,True,21,False
-21,Côte-d'Or,27 - Bourgogne-Franche-Comté,lentille,2020,1,1200.0,3.5,4200,True,21,False
-21,Côte-d'Or,27 - Bourgogne-Franche-Comté,lentille,2021,1,1200.0,2.5,3000,True,21,False
-21,Côte-d'Or,27 - Bourgogne-Franche-Comté,lentille,2022,1,1035.0,6.0,6210,True,21,False
-21,Côte-d'Or,27 - Bourgogne-Franche-Comté,lentille,2023,1,1170.0,9.0,10530,True,21,False
-21,Côte-d'Or,27 - Bourgogne-Franche-Comté,lentille,2024,1,1400.0,15.0,21000,True,21,False
-21,Côte-d'Or,27 - Bourgogne-Franche-Comté,lentille,2025,1,1100.0,13.0,14300,True,21,False
+21,Côte-d'Or,27 - Bourgogne-Franche-Comté,lentille,2010,1,102.0,13.0,1326,True,89,True
+21,Côte-d'Or,27 - Bourgogne-Franche-Comté,lentille,2011,1,126.0,8.0,1008,True,89,True
+21,Côte-d'Or,27 - Bourgogne-Franche-Comté,lentille,2012,1,115.0,15.0,1725,True,89,True
+21,Côte-d'Or,27 - Bourgogne-Franche-Comté,lentille,2013,1,150.0,14.0,2100,True,89,True
+21,Côte-d'Or,27 - Bourgogne-Franche-Comté,lentille,2014,1,210.0,12.0,2520,True,89,True
+21,Côte-d'Or,27 - Bourgogne-Franche-Comté,lentille,2015,1,210.0,12.0,2520,True,89,True
+21,Côte-d'Or,27 - Bourgogne-Franche-Comté,lentille,2016,1,250.0,14.0,3500,True,89,True
+21,Côte-d'Or,27 - Bourgogne-Franche-Comté,lentille,2017,1,571.0,14.0,7994,True,89,True
+21,Côte-d'Or,27 - Bourgogne-Franche-Comté,lentille,2018,1,650.0,13.69,8900,True,89,True
+21,Côte-d'Or,27 - Bourgogne-Franche-Comté,lentille,2019,1,942.0,8.0,7536,True,89,True
+21,Côte-d'Or,27 - Bourgogne-Franche-Comté,lentille,2020,1,1200.0,3.5,4200,True,89,True
+21,Côte-d'Or,27 - Bourgogne-Franche-Comté,lentille,2021,1,1200.0,2.5,3000,True,89,True
+21,Côte-d'Or,27 - Bourgogne-Franche-Comté,lentille,2022,1,1035.0,6.0,6210,True,89,True
+21,Côte-d'Or,27 - Bourgogne-Franche-Comté,lentille,2023,1,1170.0,9.0,10530,True,89,True
+21,Côte-d'Or,27 - Bourgogne-Franche-Comté,lentille,2024,1,1400.0,15.0,21000,True,89,True
+21,Côte-d'Or,27 - Bourgogne-Franche-Comté,lentille,2025,1,1100.0,13.0,14300,True,89,True
 25,Doubs,27 - Bourgogne-Franche-Comté,ble,2010,1,8682.0,64.0,555648,True,25,False
 25,Doubs,27 - Bourgogne-Franche-Comté,ble,2011,1,7960.0,62.0,493520,True,25,False
 25,Doubs,27 - Bourgogne-Franche-Comté,ble,2012,1,8190.0,60.0,491400,True,25,False
@@ -527,22 +527,22 @@ dep,dep_nom,region,culture,annee,statut,surface_ha,rendement_qha,production_q,ut
 58,Nièvre,27 - Bourgogne-Franche-Comté,ble,2023,1,46500.0,60.0,2790000,True,58,False
 58,Nièvre,27 - Bourgogne-Franche-Comté,ble,2024,1,43100.0,46.0,1982600,True,58,False
 58,Nièvre,27 - Bourgogne-Franche-Comté,ble,2025,1,43200.0,62.1,2684600,True,58,False
-58,Nièvre,27 - Bourgogne-Franche-Comté,lentille,2010,1,24.0,13.0,312,False,58,False
-58,Nièvre,27 - Bourgogne-Franche-Comté,lentille,2011,1,67.0,8.0,536,True,58,False
-58,Nièvre,27 - Bourgogne-Franche-Comté,lentille,2012,1,110.0,15.0,1650,True,58,False
-58,Nièvre,27 - Bourgogne-Franche-Comté,lentille,2013,1,80.0,14.0,1120,True,58,False
-58,Nièvre,27 - Bourgogne-Franche-Comté,lentille,2014,1,100.0,12.0,1200,True,58,False
-58,Nièvre,27 - Bourgogne-Franche-Comté,lentille,2015,1,100.0,12.0,1200,True,58,False
-58,Nièvre,27 - Bourgogne-Franche-Comté,lentille,2016,1,220.0,14.0,3080,True,58,False
-58,Nièvre,27 - Bourgogne-Franche-Comté,lentille,2017,1,514.0,14.0,7196,True,58,False
-58,Nièvre,27 - Bourgogne-Franche-Comté,lentille,2018,1,537.0,13.04,7000,True,58,False
-58,Nièvre,27 - Bourgogne-Franche-Comté,lentille,2019,1,695.0,8.0,5560,True,58,False
-58,Nièvre,27 - Bourgogne-Franche-Comté,lentille,2020,1,550.0,3.5,1925,True,58,False
-58,Nièvre,27 - Bourgogne-Franche-Comté,lentille,2021,1,340.0,3.0,1020,True,58,False
-58,Nièvre,27 - Bourgogne-Franche-Comté,lentille,2022,1,200.0,6.0,1200,True,58,False
-58,Nièvre,27 - Bourgogne-Franche-Comté,lentille,2023,1,320.0,9.0,2880,True,58,False
-58,Nièvre,27 - Bourgogne-Franche-Comté,lentille,2024,1,400.0,15.0,6000,True,58,False
-58,Nièvre,27 - Bourgogne-Franche-Comté,lentille,2025,1,300.0,10.0,3000,True,58,False
+58,Nièvre,27 - Bourgogne-Franche-Comté,lentille,2010,1,24.0,13.0,312,False,89,True
+58,Nièvre,27 - Bourgogne-Franche-Comté,lentille,2011,1,67.0,8.0,536,True,89,True
+58,Nièvre,27 - Bourgogne-Franche-Comté,lentille,2012,1,110.0,15.0,1650,True,89,True
+58,Nièvre,27 - Bourgogne-Franche-Comté,lentille,2013,1,80.0,14.0,1120,True,89,True
+58,Nièvre,27 - Bourgogne-Franche-Comté,lentille,2014,1,100.0,12.0,1200,True,89,True
+58,Nièvre,27 - Bourgogne-Franche-Comté,lentille,2015,1,100.0,12.0,1200,True,89,True
+58,Nièvre,27 - Bourgogne-Franche-Comté,lentille,2016,1,220.0,14.0,3080,True,89,True
+58,Nièvre,27 - Bourgogne-Franche-Comté,lentille,2017,1,514.0,14.0,7196,True,89,True
+58,Nièvre,27 - Bourgogne-Franche-Comté,lentille,2018,1,537.0,13.04,7000,True,89,True
+58,Nièvre,27 - Bourgogne-Franche-Comté,lentille,2019,1,695.0,8.0,5560,True,89,True
+58,Nièvre,27 - Bourgogne-Franche-Comté,lentille,2020,1,550.0,3.5,1925,True,89,True
+58,Nièvre,27 - Bourgogne-Franche-Comté,lentille,2021,1,340.0,3.0,1020,True,89,True
+58,Nièvre,27 - Bourgogne-Franche-Comté,lentille,2022,1,200.0,6.0,1200,True,89,True
+58,Nièvre,27 - Bourgogne-Franche-Comté,lentille,2023,1,320.0,9.0,2880,True,89,True
+58,Nièvre,27 - Bourgogne-Franche-Comté,lentille,2024,1,400.0,15.0,6000,True,89,True
+58,Nièvre,27 - Bourgogne-Franche-Comté,lentille,2025,1,300.0,10.0,3000,True,89,True
 70,Haute-Saône,27 - Bourgogne-Franche-Comté,ble,2010,1,39316.0,70.0,2752120,True,70,False
 70,Haute-Saône,27 - Bourgogne-Franche-Comté,ble,2011,1,38405.0,66.0,2534730,True,70,False
 70,Haute-Saône,27 - Bourgogne-Franche-Comté,ble,2012,1,36450.0,61.0,2223450,True,70,False
@@ -591,22 +591,22 @@ dep,dep_nom,region,culture,annee,statut,surface_ha,rendement_qha,production_q,ut
 71,Saône-et-Loire,27 - Bourgogne-Franche-Comté,ble,2023,1,38950.0,68.0,2648600,True,71,False
 71,Saône-et-Loire,27 - Bourgogne-Franche-Comté,ble,2024,1,32400.0,52.0,1684800,True,71,False
 71,Saône-et-Loire,27 - Bourgogne-Franche-Comté,ble,2025,1,35700.0,71.0,2534700,True,71,False
-71,Saône-et-Loire,27 - Bourgogne-Franche-Comté,lentille,2010,1,1.0,13.0,13,False,71,False
-71,Saône-et-Loire,27 - Bourgogne-Franche-Comté,lentille,2011,1,2.0,8.0,16,False,71,False
-71,Saône-et-Loire,27 - Bourgogne-Franche-Comté,lentille,2012,1,0.0,,0,False,71,False
-71,Saône-et-Loire,27 - Bourgogne-Franche-Comté,lentille,2013,1,0.0,,0,False,71,False
-71,Saône-et-Loire,27 - Bourgogne-Franche-Comté,lentille,2014,1,0.0,,0,False,71,False
-71,Saône-et-Loire,27 - Bourgogne-Franche-Comté,lentille,2015,1,0.0,,0,False,71,False
-71,Saône-et-Loire,27 - Bourgogne-Franche-Comté,lentille,2016,1,17.0,14.0,238,False,71,False
-71,Saône-et-Loire,27 - Bourgogne-Franche-Comté,lentille,2017,1,17.0,14.0,238,False,71,False
-71,Saône-et-Loire,27 - Bourgogne-Franche-Comté,lentille,2018,1,19.0,13.0,247,False,71,False
-71,Saône-et-Loire,27 - Bourgogne-Franche-Comté,lentille,2019,1,54.0,8.0,432,True,71,False
-71,Saône-et-Loire,27 - Bourgogne-Franche-Comté,lentille,2020,1,80.0,3.5,280,True,71,False
-71,Saône-et-Loire,27 - Bourgogne-Franche-Comté,lentille,2021,1,50.0,3.0,150,True,71,False
-71,Saône-et-Loire,27 - Bourgogne-Franche-Comté,lentille,2022,1,15.0,6.0,90,False,71,False
-71,Saône-et-Loire,27 - Bourgogne-Franche-Comté,lentille,2023,1,25.0,9.0,225,False,71,False
-71,Saône-et-Loire,27 - Bourgogne-Franche-Comté,lentille,2024,1,40.0,20.0,800,False,71,False
-71,Saône-et-Loire,27 - Bourgogne-Franche-Comté,lentille,2025,1,20.0,10.0,200,False,71,False
+71,Saône-et-Loire,27 - Bourgogne-Franche-Comté,lentille,2010,1,1.0,13.0,13,False,89,True
+71,Saône-et-Loire,27 - Bourgogne-Franche-Comté,lentille,2011,1,2.0,8.0,16,False,89,True
+71,Saône-et-Loire,27 - Bourgogne-Franche-Comté,lentille,2012,1,0.0,,0,False,89,True
+71,Saône-et-Loire,27 - Bourgogne-Franche-Comté,lentille,2013,1,0.0,,0,False,89,True
+71,Saône-et-Loire,27 - Bourgogne-Franche-Comté,lentille,2014,1,0.0,,0,False,89,True
+71,Saône-et-Loire,27 - Bourgogne-Franche-Comté,lentille,2015,1,0.0,,0,False,89,True
+71,Saône-et-Loire,27 - Bourgogne-Franche-Comté,lentille,2016,1,17.0,14.0,238,False,89,True
+71,Saône-et-Loire,27 - Bourgogne-Franche-Comté,lentille,2017,1,17.0,14.0,238,False,89,True
+71,Saône-et-Loire,27 - Bourgogne-Franche-Comté,lentille,2018,1,19.0,13.0,247,False,89,True
+71,Saône-et-Loire,27 - Bourgogne-Franche-Comté,lentille,2019,1,54.0,8.0,432,True,89,True
+71,Saône-et-Loire,27 - Bourgogne-Franche-Comté,lentille,2020,1,80.0,3.5,280,True,89,True
+71,Saône-et-Loire,27 - Bourgogne-Franche-Comté,lentille,2021,1,50.0,3.0,150,True,89,True
+71,Saône-et-Loire,27 - Bourgogne-Franche-Comté,lentille,2022,1,15.0,6.0,90,False,89,True
+71,Saône-et-Loire,27 - Bourgogne-Franche-Comté,lentille,2023,1,25.0,9.0,225,False,89,True
+71,Saône-et-Loire,27 - Bourgogne-Franche-Comté,lentille,2024,1,40.0,20.0,800,False,89,True
+71,Saône-et-Loire,27 - Bourgogne-Franche-Comté,lentille,2025,1,20.0,10.0,200,False,89,True
 89,Yonne,27 - Bourgogne-Franche-Comté,ble,2010,1,131100.0,65.0,8521500,True,89,False
 89,Yonne,27 - Bourgogne-Franche-Comté,ble,2011,1,129800.0,62.0,8047600,True,89,False
 89,Yonne,27 - Bourgogne-Franche-Comté,ble,2012,1,122900.0,67.0,8234300,True,89,False
@@ -687,22 +687,22 @@ dep,dep_nom,region,culture,annee,statut,surface_ha,rendement_qha,production_q,ut
 14,Calvados,28 - Normandie,ble,2023,1,77620.0,80.0,6209600,True,14,False
 14,Calvados,28 - Normandie,ble,2024,1,70750.0,77.0,5447750,True,14,False
 14,Calvados,28 - Normandie,ble,2025,1,77915.0,83.0,6466945,True,14,False
-14,Calvados,28 - Normandie,lentille,2010,3,0.0,,0,False,14,False
-14,Calvados,28 - Normandie,lentille,2011,3,0.0,,0,False,14,False
-14,Calvados,28 - Normandie,lentille,2012,3,0.0,,0,False,14,False
-14,Calvados,28 - Normandie,lentille,2013,3,0.0,,0,False,14,False
-14,Calvados,28 - Normandie,lentille,2014,3,0.0,,0,False,14,False
-14,Calvados,28 - Normandie,lentille,2015,3,7.0,13.43,94,False,14,False
-14,Calvados,28 - Normandie,lentille,2016,3,14.0,13.57,190,False,14,False
-14,Calvados,28 - Normandie,lentille,2017,3,21.0,13.0,273,False,14,False
-14,Calvados,28 - Normandie,lentille,2018,3,28.0,14.21,398,False,14,False
-14,Calvados,28 - Normandie,lentille,2019,3,35.0,13.0,455,False,14,False
-14,Calvados,28 - Normandie,lentille,2020,3,42.0,8.0,336,False,14,False
-14,Calvados,28 - Normandie,lentille,2021,3,41.0,6.56,269,False,14,False
-14,Calvados,28 - Normandie,lentille,2022,3,34.0,9.85,335,False,14,False
-14,Calvados,28 - Normandie,lentille,2023,3,33.0,11.45,378,False,14,False
-14,Calvados,28 - Normandie,lentille,2024,3,37.0,15.27,565,False,14,False
-14,Calvados,28 - Normandie,lentille,2025,3,40.0,13.6,544,False,14,False
+14,Calvados,28 - Normandie,lentille,2010,3,0.0,,0,False,27,True
+14,Calvados,28 - Normandie,lentille,2011,3,0.0,,0,False,27,True
+14,Calvados,28 - Normandie,lentille,2012,3,0.0,,0,False,27,True
+14,Calvados,28 - Normandie,lentille,2013,3,0.0,,0,False,27,True
+14,Calvados,28 - Normandie,lentille,2014,3,0.0,,0,False,27,True
+14,Calvados,28 - Normandie,lentille,2015,3,7.0,13.43,94,False,27,True
+14,Calvados,28 - Normandie,lentille,2016,3,14.0,13.57,190,False,27,True
+14,Calvados,28 - Normandie,lentille,2017,3,21.0,13.0,273,False,27,True
+14,Calvados,28 - Normandie,lentille,2018,3,28.0,14.21,398,False,27,True
+14,Calvados,28 - Normandie,lentille,2019,3,35.0,13.0,455,False,27,True
+14,Calvados,28 - Normandie,lentille,2020,3,42.0,8.0,336,False,27,True
+14,Calvados,28 - Normandie,lentille,2021,3,41.0,6.56,269,False,27,True
+14,Calvados,28 - Normandie,lentille,2022,3,34.0,9.85,335,False,27,True
+14,Calvados,28 - Normandie,lentille,2023,3,33.0,11.45,378,False,27,True
+14,Calvados,28 - Normandie,lentille,2024,3,37.0,15.27,565,False,27,True
+14,Calvados,28 - Normandie,lentille,2025,3,40.0,13.6,544,False,27,True
 27,Eure,28 - Normandie,ble,2010,1,151040.0,84.0,12687360,True,27,False
 27,Eure,28 - Normandie,ble,2011,1,159868.0,79.0,12629539,True,27,False
 27,Eure,28 - Normandie,ble,2012,1,157951.0,87.0,13741737,True,27,False
@@ -783,22 +783,22 @@ dep,dep_nom,region,culture,annee,statut,surface_ha,rendement_qha,production_q,ut
 61,Orne,28 - Normandie,ble,2023,1,74290.0,79.0,5868910,True,61,False
 61,Orne,28 - Normandie,ble,2024,1,66320.0,61.0,4045520,True,61,False
 61,Orne,28 - Normandie,ble,2025,1,73281.0,75.0,5496075,True,61,False
-61,Orne,28 - Normandie,lentille,2010,3,0.0,,0,False,61,False
-61,Orne,28 - Normandie,lentille,2011,3,4.0,17.0,68,False,61,False
-61,Orne,28 - Normandie,lentille,2012,3,8.0,17.0,136,False,61,False
-61,Orne,28 - Normandie,lentille,2013,3,13.0,16.0,208,False,61,False
-61,Orne,28 - Normandie,lentille,2014,3,17.0,14.0,238,False,61,False
-61,Orne,28 - Normandie,lentille,2015,3,21.0,13.0,273,False,61,False
-61,Orne,28 - Normandie,lentille,2016,3,25.0,14.0,350,False,61,False
-61,Orne,28 - Normandie,lentille,2017,3,29.0,13.0,377,False,61,False
-61,Orne,28 - Normandie,lentille,2018,3,34.0,14.0,476,False,61,False
-61,Orne,28 - Normandie,lentille,2019,3,38.0,13.0,494,False,61,False
-61,Orne,28 - Normandie,lentille,2020,3,42.0,8.0,336,False,61,False
-61,Orne,28 - Normandie,lentille,2021,3,41.0,6.56,269,False,61,False
-61,Orne,28 - Normandie,lentille,2022,3,34.0,9.85,335,False,61,False
-61,Orne,28 - Normandie,lentille,2023,3,33.0,11.45,378,False,61,False
-61,Orne,28 - Normandie,lentille,2024,3,37.0,15.27,565,False,61,False
-61,Orne,28 - Normandie,lentille,2025,3,40.0,13.6,544,False,61,False
+61,Orne,28 - Normandie,lentille,2010,3,0.0,,0,False,27,True
+61,Orne,28 - Normandie,lentille,2011,3,4.0,17.0,68,False,27,True
+61,Orne,28 - Normandie,lentille,2012,3,8.0,17.0,136,False,27,True
+61,Orne,28 - Normandie,lentille,2013,3,13.0,16.0,208,False,27,True
+61,Orne,28 - Normandie,lentille,2014,3,17.0,14.0,238,False,27,True
+61,Orne,28 - Normandie,lentille,2015,3,21.0,13.0,273,False,27,True
+61,Orne,28 - Normandie,lentille,2016,3,25.0,14.0,350,False,27,True
+61,Orne,28 - Normandie,lentille,2017,3,29.0,13.0,377,False,27,True
+61,Orne,28 - Normandie,lentille,2018,3,34.0,14.0,476,False,27,True
+61,Orne,28 - Normandie,lentille,2019,3,38.0,13.0,494,False,27,True
+61,Orne,28 - Normandie,lentille,2020,3,42.0,8.0,336,False,27,True
+61,Orne,28 - Normandie,lentille,2021,3,41.0,6.56,269,False,27,True
+61,Orne,28 - Normandie,lentille,2022,3,34.0,9.85,335,False,27,True
+61,Orne,28 - Normandie,lentille,2023,3,33.0,11.45,378,False,27,True
+61,Orne,28 - Normandie,lentille,2024,3,37.0,15.27,565,False,27,True
+61,Orne,28 - Normandie,lentille,2025,3,40.0,13.6,544,False,27,True
 76,Seine-Maritime,28 - Normandie,ble,2010,1,107168.0,92.0,9859456,True,76,False
 76,Seine-Maritime,28 - Normandie,ble,2011,1,112511.0,93.0,10463523,True,76,False
 76,Seine-Maritime,28 - Normandie,ble,2012,1,113992.0,87.0,9917304,True,76,False
@@ -815,22 +815,22 @@ dep,dep_nom,region,culture,annee,statut,surface_ha,rendement_qha,production_q,ut
 76,Seine-Maritime,28 - Normandie,ble,2023,1,112030.0,89.0,9970670,True,76,False
 76,Seine-Maritime,28 - Normandie,ble,2024,1,97706.0,75.0,7327946,True,76,False
 76,Seine-Maritime,28 - Normandie,ble,2025,1,103813.0,92.0,9550796,True,76,False
-76,Seine-Maritime,28 - Normandie,lentille,2010,3,0.0,,0,False,76,False
-76,Seine-Maritime,28 - Normandie,lentille,2011,3,11.0,17.0,187,False,76,False
-76,Seine-Maritime,28 - Normandie,lentille,2012,3,21.0,17.0,357,False,76,False
-76,Seine-Maritime,28 - Normandie,lentille,2013,3,32.0,16.0,512,False,76,False
-76,Seine-Maritime,28 - Normandie,lentille,2014,3,42.0,14.0,588,False,76,False
-76,Seine-Maritime,28 - Normandie,lentille,2015,3,53.0,13.0,689,False,76,False
-76,Seine-Maritime,28 - Normandie,lentille,2016,3,64.0,14.0,896,False,76,False
-76,Seine-Maritime,28 - Normandie,lentille,2017,3,74.0,13.0,962,False,76,False
-76,Seine-Maritime,28 - Normandie,lentille,2018,3,85.0,14.0,1190,False,76,False
-76,Seine-Maritime,28 - Normandie,lentille,2019,3,95.0,13.0,1235,False,76,False
-76,Seine-Maritime,28 - Normandie,lentille,2020,3,106.0,8.0,848,False,76,False
-76,Seine-Maritime,28 - Normandie,lentille,2021,3,103.0,6.58,678,False,76,False
-76,Seine-Maritime,28 - Normandie,lentille,2022,3,86.0,9.8,843,False,76,False
-76,Seine-Maritime,28 - Normandie,lentille,2023,3,83.0,11.45,950,False,76,False
-76,Seine-Maritime,28 - Normandie,lentille,2024,3,94.0,15.12,1421,False,76,False
-76,Seine-Maritime,28 - Normandie,lentille,2025,3,101.0,13.5,1367,False,76,False
+76,Seine-Maritime,28 - Normandie,lentille,2010,3,0.0,,0,False,27,True
+76,Seine-Maritime,28 - Normandie,lentille,2011,3,11.0,17.0,187,False,27,True
+76,Seine-Maritime,28 - Normandie,lentille,2012,3,21.0,17.0,357,False,27,True
+76,Seine-Maritime,28 - Normandie,lentille,2013,3,32.0,16.0,512,False,27,True
+76,Seine-Maritime,28 - Normandie,lentille,2014,3,42.0,14.0,588,False,27,True
+76,Seine-Maritime,28 - Normandie,lentille,2015,3,53.0,13.0,689,False,27,True
+76,Seine-Maritime,28 - Normandie,lentille,2016,3,64.0,14.0,896,False,27,True
+76,Seine-Maritime,28 - Normandie,lentille,2017,3,74.0,13.0,962,False,27,True
+76,Seine-Maritime,28 - Normandie,lentille,2018,3,85.0,14.0,1190,False,27,True
+76,Seine-Maritime,28 - Normandie,lentille,2019,3,95.0,13.0,1235,False,27,True
+76,Seine-Maritime,28 - Normandie,lentille,2020,3,106.0,8.0,848,False,27,True
+76,Seine-Maritime,28 - Normandie,lentille,2021,3,103.0,6.58,678,False,27,True
+76,Seine-Maritime,28 - Normandie,lentille,2022,3,86.0,9.8,843,False,27,True
+76,Seine-Maritime,28 - Normandie,lentille,2023,3,83.0,11.45,950,False,27,True
+76,Seine-Maritime,28 - Normandie,lentille,2024,3,94.0,15.12,1421,False,27,True
+76,Seine-Maritime,28 - Normandie,lentille,2025,3,101.0,13.5,1367,False,27,True
 02,Aisne,32 - Hauts de France,ble,2010,1,176913.0,83.71,14809872,True,02,False
 02,Aisne,32 - Hauts de France,ble,2011,1,186197.0,82.0,15268154,True,02,False
 02,Aisne,32 - Hauts de France,ble,2012,1,182094.0,81.24,14794005,True,02,False
@@ -1007,22 +1007,22 @@ dep,dep_nom,region,culture,annee,statut,surface_ha,rendement_qha,production_q,ut
 08,Ardennes,44 - Grand Est,ble,2023,1,65500.0,80.4,5266200,True,08,False
 08,Ardennes,44 - Grand Est,ble,2024,1,60500.0,60.2,3642100,True,08,False
 08,Ardennes,44 - Grand Est,ble,2025,1,64700.0,82.0,5305400,True,08,False
-08,Ardennes,44 - Grand Est,lentille,2010,1,10.0,21.0,210,False,08,False
-08,Ardennes,44 - Grand Est,lentille,2011,1,12.0,24.83,298,False,08,False
-08,Ardennes,44 - Grand Est,lentille,2012,1,31.0,21.97,681,False,08,False
-08,Ardennes,44 - Grand Est,lentille,2013,1,35.0,22.0,770,False,08,False
-08,Ardennes,44 - Grand Est,lentille,2014,1,25.0,25.0,625,False,08,False
-08,Ardennes,44 - Grand Est,lentille,2015,1,50.0,25.0,1250,True,08,False
-08,Ardennes,44 - Grand Est,lentille,2016,1,50.0,25.0,1250,True,08,False
-08,Ardennes,44 - Grand Est,lentille,2017,1,130.0,25.0,3250,True,08,False
-08,Ardennes,44 - Grand Est,lentille,2018,1,150.0,30.0,4500,True,08,False
-08,Ardennes,44 - Grand Est,lentille,2019,1,170.0,22.0,3740,True,08,False
-08,Ardennes,44 - Grand Est,lentille,2020,1,110.0,16.0,1760,True,08,False
-08,Ardennes,44 - Grand Est,lentille,2021,1,191.0,8.0,1528,True,08,False
-08,Ardennes,44 - Grand Est,lentille,2022,1,160.0,16.0,2560,True,08,False
-08,Ardennes,44 - Grand Est,lentille,2023,1,160.0,16.0,2560,True,08,False
-08,Ardennes,44 - Grand Est,lentille,2024,1,200.0,22.0,4400,True,08,False
-08,Ardennes,44 - Grand Est,lentille,2025,1,250.0,22.0,5500,True,08,False
+08,Ardennes,44 - Grand Est,lentille,2010,1,10.0,21.0,210,False,10,True
+08,Ardennes,44 - Grand Est,lentille,2011,1,12.0,24.83,298,False,10,True
+08,Ardennes,44 - Grand Est,lentille,2012,1,31.0,21.97,681,False,10,True
+08,Ardennes,44 - Grand Est,lentille,2013,1,35.0,22.0,770,False,10,True
+08,Ardennes,44 - Grand Est,lentille,2014,1,25.0,25.0,625,False,10,True
+08,Ardennes,44 - Grand Est,lentille,2015,1,50.0,25.0,1250,True,10,True
+08,Ardennes,44 - Grand Est,lentille,2016,1,50.0,25.0,1250,True,10,True
+08,Ardennes,44 - Grand Est,lentille,2017,1,130.0,25.0,3250,True,10,True
+08,Ardennes,44 - Grand Est,lentille,2018,1,150.0,30.0,4500,True,10,True
+08,Ardennes,44 - Grand Est,lentille,2019,1,170.0,22.0,3740,True,10,True
+08,Ardennes,44 - Grand Est,lentille,2020,1,110.0,16.0,1760,True,10,True
+08,Ardennes,44 - Grand Est,lentille,2021,1,191.0,8.0,1528,True,10,True
+08,Ardennes,44 - Grand Est,lentille,2022,1,160.0,16.0,2560,True,10,True
+08,Ardennes,44 - Grand Est,lentille,2023,1,160.0,16.0,2560,True,10,True
+08,Ardennes,44 - Grand Est,lentille,2024,1,200.0,22.0,4400,True,10,True
+08,Ardennes,44 - Grand Est,lentille,2025,1,250.0,22.0,5500,True,10,True
 10,Aube,44 - Grand Est,ble,2010,1,113013.0,77.6,8769809,True,10,False
 10,Aube,44 - Grand Est,ble,2011,1,111145.0,74.6,8291417,True,10,False
 10,Aube,44 - Grand Est,ble,2012,1,94020.0,75.5,7098510,True,10,False
@@ -1071,22 +1071,22 @@ dep,dep_nom,region,culture,annee,statut,surface_ha,rendement_qha,production_q,ut
 51,Marne,44 - Grand Est,ble,2023,1,169300.0,85.0,14390500,True,51,False
 51,Marne,44 - Grand Est,ble,2024,1,169300.0,62.0,10496600,True,51,False
 51,Marne,44 - Grand Est,ble,2025,1,161250.0,87.0,14028750,True,51,False
-51,Marne,44 - Grand Est,lentille,2010,1,271.0,21.0,5691,True,51,False
-51,Marne,44 - Grand Est,lentille,2011,1,381.0,25.0,9525,True,51,False
-51,Marne,44 - Grand Est,lentille,2012,1,430.0,22.0,9460,True,51,False
-51,Marne,44 - Grand Est,lentille,2013,1,270.0,22.0,5940,True,51,False
-51,Marne,44 - Grand Est,lentille,2014,1,240.0,25.0,6000,True,51,False
-51,Marne,44 - Grand Est,lentille,2015,1,380.0,25.0,9500,True,51,False
-51,Marne,44 - Grand Est,lentille,2016,1,380.0,25.0,9500,True,51,False
-51,Marne,44 - Grand Est,lentille,2017,1,1450.0,25.0,36250,True,51,False
-51,Marne,44 - Grand Est,lentille,2018,1,2000.0,30.0,60000,True,51,False
-51,Marne,44 - Grand Est,lentille,2019,1,1900.0,22.0,41800,True,51,False
-51,Marne,44 - Grand Est,lentille,2020,1,1950.0,16.0,31200,True,51,False
-51,Marne,44 - Grand Est,lentille,2021,1,2643.0,8.0,21144,True,51,False
-51,Marne,44 - Grand Est,lentille,2022,1,2080.0,16.0,33280,True,51,False
-51,Marne,44 - Grand Est,lentille,2023,1,1930.0,16.0,30880,True,51,False
-51,Marne,44 - Grand Est,lentille,2024,1,2300.0,22.0,50600,True,51,False
-51,Marne,44 - Grand Est,lentille,2025,1,2600.0,22.0,57200,True,51,False
+51,Marne,44 - Grand Est,lentille,2010,1,271.0,21.0,5691,True,10,True
+51,Marne,44 - Grand Est,lentille,2011,1,381.0,25.0,9525,True,10,True
+51,Marne,44 - Grand Est,lentille,2012,1,430.0,22.0,9460,True,10,True
+51,Marne,44 - Grand Est,lentille,2013,1,270.0,22.0,5940,True,10,True
+51,Marne,44 - Grand Est,lentille,2014,1,240.0,25.0,6000,True,10,True
+51,Marne,44 - Grand Est,lentille,2015,1,380.0,25.0,9500,True,10,True
+51,Marne,44 - Grand Est,lentille,2016,1,380.0,25.0,9500,True,10,True
+51,Marne,44 - Grand Est,lentille,2017,1,1450.0,25.0,36250,True,10,True
+51,Marne,44 - Grand Est,lentille,2018,1,2000.0,30.0,60000,True,10,True
+51,Marne,44 - Grand Est,lentille,2019,1,1900.0,22.0,41800,True,10,True
+51,Marne,44 - Grand Est,lentille,2020,1,1950.0,16.0,31200,True,10,True
+51,Marne,44 - Grand Est,lentille,2021,1,2643.0,8.0,21144,True,10,True
+51,Marne,44 - Grand Est,lentille,2022,1,2080.0,16.0,33280,True,10,True
+51,Marne,44 - Grand Est,lentille,2023,1,1930.0,16.0,30880,True,10,True
+51,Marne,44 - Grand Est,lentille,2024,1,2300.0,22.0,50600,True,10,True
+51,Marne,44 - Grand Est,lentille,2025,1,2600.0,22.0,57200,True,10,True
 52,Haute-Marne,44 - Grand Est,ble,2010,1,64947.0,65.2,4234544,True,52,False
 52,Haute-Marne,44 - Grand Est,ble,2011,1,64525.0,64.2,4142505,True,52,False
 52,Haute-Marne,44 - Grand Est,ble,2012,1,44750.0,61.9,2770025,True,52,False
@@ -1103,22 +1103,22 @@ dep,dep_nom,region,culture,annee,statut,surface_ha,rendement_qha,production_q,ut
 52,Haute-Marne,44 - Grand Est,ble,2023,1,62000.0,62.0,3844000,True,52,False
 52,Haute-Marne,44 - Grand Est,ble,2024,1,63000.0,57.6,3628800,True,52,False
 52,Haute-Marne,44 - Grand Est,ble,2025,1,60500.0,67.0,4053500,True,52,False
-52,Haute-Marne,44 - Grand Est,lentille,2010,1,16.0,21.0,336,False,52,False
-52,Haute-Marne,44 - Grand Est,lentille,2011,1,19.0,25.11,477,False,52,False
-52,Haute-Marne,44 - Grand Est,lentille,2012,1,49.0,22.22,1089,False,52,False
-52,Haute-Marne,44 - Grand Est,lentille,2013,1,55.0,22.0,1210,True,52,False
-52,Haute-Marne,44 - Grand Est,lentille,2014,1,85.0,25.0,2125,True,52,False
-52,Haute-Marne,44 - Grand Est,lentille,2015,1,60.0,25.0,1500,True,52,False
-52,Haute-Marne,44 - Grand Est,lentille,2016,1,60.0,25.0,1500,True,52,False
-52,Haute-Marne,44 - Grand Est,lentille,2017,1,300.0,25.0,7500,True,52,False
-52,Haute-Marne,44 - Grand Est,lentille,2018,1,470.0,25.0,11750,True,52,False
-52,Haute-Marne,44 - Grand Est,lentille,2019,1,550.0,19.0,10450,True,52,False
-52,Haute-Marne,44 - Grand Est,lentille,2020,1,700.0,15.0,10500,True,52,False
-52,Haute-Marne,44 - Grand Est,lentille,2021,1,1000.0,8.0,8000,True,52,False
-52,Haute-Marne,44 - Grand Est,lentille,2022,1,950.0,16.0,15200,True,52,False
-52,Haute-Marne,44 - Grand Est,lentille,2023,1,1020.0,16.0,16320,True,52,False
-52,Haute-Marne,44 - Grand Est,lentille,2024,1,1200.0,22.0,26400,True,52,False
-52,Haute-Marne,44 - Grand Est,lentille,2025,1,880.0,22.0,19360,True,52,False
+52,Haute-Marne,44 - Grand Est,lentille,2010,1,16.0,21.0,336,False,10,True
+52,Haute-Marne,44 - Grand Est,lentille,2011,1,19.0,25.11,477,False,10,True
+52,Haute-Marne,44 - Grand Est,lentille,2012,1,49.0,22.22,1089,False,10,True
+52,Haute-Marne,44 - Grand Est,lentille,2013,1,55.0,22.0,1210,True,10,True
+52,Haute-Marne,44 - Grand Est,lentille,2014,1,85.0,25.0,2125,True,10,True
+52,Haute-Marne,44 - Grand Est,lentille,2015,1,60.0,25.0,1500,True,10,True
+52,Haute-Marne,44 - Grand Est,lentille,2016,1,60.0,25.0,1500,True,10,True
+52,Haute-Marne,44 - Grand Est,lentille,2017,1,300.0,25.0,7500,True,10,True
+52,Haute-Marne,44 - Grand Est,lentille,2018,1,470.0,25.0,11750,True,10,True
+52,Haute-Marne,44 - Grand Est,lentille,2019,1,550.0,19.0,10450,True,10,True
+52,Haute-Marne,44 - Grand Est,lentille,2020,1,700.0,15.0,10500,True,10,True
+52,Haute-Marne,44 - Grand Est,lentille,2021,1,1000.0,8.0,8000,True,10,True
+52,Haute-Marne,44 - Grand Est,lentille,2022,1,950.0,16.0,15200,True,10,True
+52,Haute-Marne,44 - Grand Est,lentille,2023,1,1020.0,16.0,16320,True,10,True
+52,Haute-Marne,44 - Grand Est,lentille,2024,1,1200.0,22.0,26400,True,10,True
+52,Haute-Marne,44 - Grand Est,lentille,2025,1,880.0,22.0,19360,True,10,True
 54,Meurthe-et-Moselle,44 - Grand Est,ble,2010,1,70100.0,68.0,4767000,True,54,False
 54,Meurthe-et-Moselle,44 - Grand Est,ble,2011,1,66600.0,64.0,4262400,True,54,False
 54,Meurthe-et-Moselle,44 - Grand Est,ble,2012,1,39900.0,54.71,2183000,True,54,False
@@ -1327,22 +1327,22 @@ dep,dep_nom,region,culture,annee,statut,surface_ha,rendement_qha,production_q,ut
 44,Loire-Atlantique,52 - Pays de la Loire,ble,2023,1,51936.0,71.0,3687456,True,44,False
 44,Loire-Atlantique,52 - Pays de la Loire,ble,2024,1,38382.0,49.0,1880718,True,44,False
 44,Loire-Atlantique,52 - Pays de la Loire,ble,2025,1,43096.0,68.0,2930528,True,44,False
-44,Loire-Atlantique,52 - Pays de la Loire,lentille,2010,2,25.0,32.0,800,False,44,False
-44,Loire-Atlantique,52 - Pays de la Loire,lentille,2011,2,27.0,35.37,955,False,44,False
-44,Loire-Atlantique,52 - Pays de la Loire,lentille,2012,2,28.0,34.86,976,False,44,False
-44,Loire-Atlantique,52 - Pays de la Loire,lentille,2013,2,25.0,34.08,852,False,44,False
-44,Loire-Atlantique,52 - Pays de la Loire,lentille,2014,2,28.0,26.57,744,False,44,False
-44,Loire-Atlantique,52 - Pays de la Loire,lentille,2015,2,32.0,23.72,759,False,44,False
-44,Loire-Atlantique,52 - Pays de la Loire,lentille,2016,2,34.0,24.09,819,False,44,False
-44,Loire-Atlantique,52 - Pays de la Loire,lentille,2017,2,81.0,16.93,1371,True,44,False
-44,Loire-Atlantique,52 - Pays de la Loire,lentille,2018,2,76.0,15.0,1140,True,44,False
-44,Loire-Atlantique,52 - Pays de la Loire,lentille,2019,2,117.0,18.4,2153,True,44,False
-44,Loire-Atlantique,52 - Pays de la Loire,lentille,2020,2,103.0,15.0,1545,True,44,False
-44,Loire-Atlantique,52 - Pays de la Loire,lentille,2021,2,104.0,6.1,634,True,44,False
-44,Loire-Atlantique,52 - Pays de la Loire,lentille,2022,2,90.0,14.43,1299,True,44,False
-44,Loire-Atlantique,52 - Pays de la Loire,lentille,2023,2,113.0,11.43,1292,True,44,False
-44,Loire-Atlantique,52 - Pays de la Loire,lentille,2024,2,151.0,23.0,3473,True,44,False
-44,Loire-Atlantique,52 - Pays de la Loire,lentille,2025,2,166.0,19.5,3237,True,44,False
+44,Loire-Atlantique,52 - Pays de la Loire,lentille,2010,2,25.0,32.0,800,False,49,True
+44,Loire-Atlantique,52 - Pays de la Loire,lentille,2011,2,27.0,35.37,955,False,49,True
+44,Loire-Atlantique,52 - Pays de la Loire,lentille,2012,2,28.0,34.86,976,False,49,True
+44,Loire-Atlantique,52 - Pays de la Loire,lentille,2013,2,25.0,34.08,852,False,49,True
+44,Loire-Atlantique,52 - Pays de la Loire,lentille,2014,2,28.0,26.57,744,False,49,True
+44,Loire-Atlantique,52 - Pays de la Loire,lentille,2015,2,32.0,23.72,759,False,49,True
+44,Loire-Atlantique,52 - Pays de la Loire,lentille,2016,2,34.0,24.09,819,False,49,True
+44,Loire-Atlantique,52 - Pays de la Loire,lentille,2017,2,81.0,16.93,1371,True,49,True
+44,Loire-Atlantique,52 - Pays de la Loire,lentille,2018,2,76.0,15.0,1140,True,49,True
+44,Loire-Atlantique,52 - Pays de la Loire,lentille,2019,2,117.0,18.4,2153,True,49,True
+44,Loire-Atlantique,52 - Pays de la Loire,lentille,2020,2,103.0,15.0,1545,True,49,True
+44,Loire-Atlantique,52 - Pays de la Loire,lentille,2021,2,104.0,6.1,634,True,49,True
+44,Loire-Atlantique,52 - Pays de la Loire,lentille,2022,2,90.0,14.43,1299,True,49,True
+44,Loire-Atlantique,52 - Pays de la Loire,lentille,2023,2,113.0,11.43,1292,True,49,True
+44,Loire-Atlantique,52 - Pays de la Loire,lentille,2024,2,151.0,23.0,3473,True,49,True
+44,Loire-Atlantique,52 - Pays de la Loire,lentille,2025,2,166.0,19.5,3237,True,49,True
 49,Maine-et-Loire,52 - Pays de la Loire,ble,2010,1,82408.0,65.0,5356520,True,49,False
 49,Maine-et-Loire,52 - Pays de la Loire,ble,2011,1,81500.0,63.0,5134500,True,49,False
 49,Maine-et-Loire,52 - Pays de la Loire,ble,2012,1,81960.0,75.0,6147000,True,49,False
@@ -1615,22 +1615,22 @@ dep,dep_nom,region,culture,annee,statut,surface_ha,rendement_qha,production_q,ut
 16,Charente,75 - Nouvelle Aquitaine,ble,2023,1,58255.0,63.0,3670065,True,16,False
 16,Charente,75 - Nouvelle Aquitaine,ble,2024,1,41925.0,52.0,2180100,True,16,False
 16,Charente,75 - Nouvelle Aquitaine,ble,2025,1,53370.0,67.0,3575790,True,16,False
-16,Charente,75 - Nouvelle Aquitaine,lentille,2010,2,92.0,13.0,1196,True,16,False
-16,Charente,75 - Nouvelle Aquitaine,lentille,2011,2,99.0,14.42,1428,True,16,False
-16,Charente,75 - Nouvelle Aquitaine,lentille,2012,2,260.0,14.52,3774,True,16,False
-16,Charente,75 - Nouvelle Aquitaine,lentille,2013,2,348.0,13.76,4788,True,16,False
-16,Charente,75 - Nouvelle Aquitaine,lentille,2014,2,385.0,11.34,4366,True,16,False
-16,Charente,75 - Nouvelle Aquitaine,lentille,2015,2,372.0,11.34,4220,True,16,False
-16,Charente,75 - Nouvelle Aquitaine,lentille,2016,2,1002.0,14.0,14028,True,16,False
-16,Charente,75 - Nouvelle Aquitaine,lentille,2017,2,1830.0,10.0,18300,True,16,False
-16,Charente,75 - Nouvelle Aquitaine,lentille,2018,2,1586.0,11.0,17446,True,16,False
-16,Charente,75 - Nouvelle Aquitaine,lentille,2019,2,1133.0,11.0,12463,True,16,False
-16,Charente,75 - Nouvelle Aquitaine,lentille,2020,2,589.0,9.0,5301,True,16,False
-16,Charente,75 - Nouvelle Aquitaine,lentille,2021,2,850.0,7.0,5950,True,16,False
-16,Charente,75 - Nouvelle Aquitaine,lentille,2022,2,590.0,6.0,3540,True,16,False
-16,Charente,75 - Nouvelle Aquitaine,lentille,2023,2,560.0,17.0,9520,True,16,False
-16,Charente,75 - Nouvelle Aquitaine,lentille,2024,2,690.0,21.0,14490,True,16,False
-16,Charente,75 - Nouvelle Aquitaine,lentille,2025,2,780.0,20.0,15600,True,16,False
+16,Charente,75 - Nouvelle Aquitaine,lentille,2010,2,92.0,13.0,1196,True,17,True
+16,Charente,75 - Nouvelle Aquitaine,lentille,2011,2,99.0,14.42,1428,True,17,True
+16,Charente,75 - Nouvelle Aquitaine,lentille,2012,2,260.0,14.52,3774,True,17,True
+16,Charente,75 - Nouvelle Aquitaine,lentille,2013,2,348.0,13.76,4788,True,17,True
+16,Charente,75 - Nouvelle Aquitaine,lentille,2014,2,385.0,11.34,4366,True,17,True
+16,Charente,75 - Nouvelle Aquitaine,lentille,2015,2,372.0,11.34,4220,True,17,True
+16,Charente,75 - Nouvelle Aquitaine,lentille,2016,2,1002.0,14.0,14028,True,17,True
+16,Charente,75 - Nouvelle Aquitaine,lentille,2017,2,1830.0,10.0,18300,True,17,True
+16,Charente,75 - Nouvelle Aquitaine,lentille,2018,2,1586.0,11.0,17446,True,17,True
+16,Charente,75 - Nouvelle Aquitaine,lentille,2019,2,1133.0,11.0,12463,True,17,True
+16,Charente,75 - Nouvelle Aquitaine,lentille,2020,2,589.0,9.0,5301,True,17,True
+16,Charente,75 - Nouvelle Aquitaine,lentille,2021,2,850.0,7.0,5950,True,17,True
+16,Charente,75 - Nouvelle Aquitaine,lentille,2022,2,590.0,6.0,3540,True,17,True
+16,Charente,75 - Nouvelle Aquitaine,lentille,2023,2,560.0,17.0,9520,True,17,True
+16,Charente,75 - Nouvelle Aquitaine,lentille,2024,2,690.0,21.0,14490,True,17,True
+16,Charente,75 - Nouvelle Aquitaine,lentille,2025,2,780.0,20.0,15600,True,17,True
 17,Charente-Maritime,75 - Nouvelle Aquitaine,ble,2010,1,87496.0,60.0,5249760,True,17,False
 17,Charente-Maritime,75 - Nouvelle Aquitaine,ble,2011,1,94000.0,49.0,4606000,True,17,False
 17,Charente-Maritime,75 - Nouvelle Aquitaine,ble,2012,1,96200.0,74.0,7118800,True,17,False
@@ -1743,22 +1743,22 @@ dep,dep_nom,region,culture,annee,statut,surface_ha,rendement_qha,production_q,ut
 24,Dordogne,75 - Nouvelle Aquitaine,ble,2023,1,24830.0,56.0,1390480,True,24,False
 24,Dordogne,75 - Nouvelle Aquitaine,ble,2024,1,14800.0,44.0,651200,True,24,False
 24,Dordogne,75 - Nouvelle Aquitaine,ble,2025,1,24050.0,57.0,1370850,True,24,False
-24,Dordogne,75 - Nouvelle Aquitaine,lentille,2010,3,25.0,10.0,250,False,24,False
-24,Dordogne,75 - Nouvelle Aquitaine,lentille,2011,3,21.0,15.0,315,False,24,False
-24,Dordogne,75 - Nouvelle Aquitaine,lentille,2012,3,22.0,14.64,322,False,24,False
-24,Dordogne,75 - Nouvelle Aquitaine,lentille,2013,3,34.0,15.0,510,False,24,False
-24,Dordogne,75 - Nouvelle Aquitaine,lentille,2014,3,22.0,15.0,330,False,24,False
-24,Dordogne,75 - Nouvelle Aquitaine,lentille,2015,3,55.0,15.0,825,False,24,False
-24,Dordogne,75 - Nouvelle Aquitaine,lentille,2016,3,75.0,14.0,1050,False,24,False
-24,Dordogne,75 - Nouvelle Aquitaine,lentille,2017,3,81.0,15.0,1215,False,24,False
-24,Dordogne,75 - Nouvelle Aquitaine,lentille,2018,3,54.0,15.0,810,False,24,False
-24,Dordogne,75 - Nouvelle Aquitaine,lentille,2019,3,162.0,15.0,2430,False,24,False
-24,Dordogne,75 - Nouvelle Aquitaine,lentille,2020,3,195.0,9.0,1755,False,24,False
-24,Dordogne,75 - Nouvelle Aquitaine,lentille,2021,3,145.0,9.0,1305,False,24,False
-24,Dordogne,75 - Nouvelle Aquitaine,lentille,2022,3,50.0,6.0,300,False,24,False
-24,Dordogne,75 - Nouvelle Aquitaine,lentille,2023,3,48.0,7.04,338,False,24,False
-24,Dordogne,75 - Nouvelle Aquitaine,lentille,2024,3,54.0,9.35,505,False,24,False
-24,Dordogne,75 - Nouvelle Aquitaine,lentille,2025,3,85.0,10.0,850,False,24,False
+24,Dordogne,75 - Nouvelle Aquitaine,lentille,2010,3,25.0,10.0,250,False,47,True
+24,Dordogne,75 - Nouvelle Aquitaine,lentille,2011,3,21.0,15.0,315,False,47,True
+24,Dordogne,75 - Nouvelle Aquitaine,lentille,2012,3,22.0,14.64,322,False,47,True
+24,Dordogne,75 - Nouvelle Aquitaine,lentille,2013,3,34.0,15.0,510,False,47,True
+24,Dordogne,75 - Nouvelle Aquitaine,lentille,2014,3,22.0,15.0,330,False,47,True
+24,Dordogne,75 - Nouvelle Aquitaine,lentille,2015,3,55.0,15.0,825,False,47,True
+24,Dordogne,75 - Nouvelle Aquitaine,lentille,2016,3,75.0,14.0,1050,False,47,True
+24,Dordogne,75 - Nouvelle Aquitaine,lentille,2017,3,81.0,15.0,1215,False,47,True
+24,Dordogne,75 - Nouvelle Aquitaine,lentille,2018,3,54.0,15.0,810,False,47,True
+24,Dordogne,75 - Nouvelle Aquitaine,lentille,2019,3,162.0,15.0,2430,False,47,True
+24,Dordogne,75 - Nouvelle Aquitaine,lentille,2020,3,195.0,9.0,1755,False,47,True
+24,Dordogne,75 - Nouvelle Aquitaine,lentille,2021,3,145.0,9.0,1305,False,47,True
+24,Dordogne,75 - Nouvelle Aquitaine,lentille,2022,3,50.0,6.0,300,False,47,True
+24,Dordogne,75 - Nouvelle Aquitaine,lentille,2023,3,48.0,7.04,338,False,47,True
+24,Dordogne,75 - Nouvelle Aquitaine,lentille,2024,3,54.0,9.35,505,False,47,True
+24,Dordogne,75 - Nouvelle Aquitaine,lentille,2025,3,85.0,10.0,850,False,47,True
 33,Gironde,75 - Nouvelle Aquitaine,ble,2010,1,5208.0,51.0,265608,True,33,False
 33,Gironde,75 - Nouvelle Aquitaine,ble,2011,1,5650.0,52.0,293800,True,33,False
 33,Gironde,75 - Nouvelle Aquitaine,ble,2012,1,7670.0,61.0,467870,True,33,False
@@ -1775,22 +1775,22 @@ dep,dep_nom,region,culture,annee,statut,surface_ha,rendement_qha,production_q,ut
 33,Gironde,75 - Nouvelle Aquitaine,ble,2023,1,5580.0,64.0,357120,True,33,False
 33,Gironde,75 - Nouvelle Aquitaine,ble,2024,1,2000.0,48.0,96000,True,33,False
 33,Gironde,75 - Nouvelle Aquitaine,ble,2025,1,4530.0,51.0,231030,True,33,False
-33,Gironde,75 - Nouvelle Aquitaine,lentille,2010,3,8.0,10.0,80,False,33,False
-33,Gironde,75 - Nouvelle Aquitaine,lentille,2011,3,7.0,14.43,101,False,33,False
-33,Gironde,75 - Nouvelle Aquitaine,lentille,2012,3,7.0,14.71,103,False,33,False
-33,Gironde,75 - Nouvelle Aquitaine,lentille,2013,3,11.0,14.0,154,False,33,False
-33,Gironde,75 - Nouvelle Aquitaine,lentille,2014,3,7.0,15.0,105,False,33,False
-33,Gironde,75 - Nouvelle Aquitaine,lentille,2015,3,16.0,15.0,240,False,33,False
-33,Gironde,75 - Nouvelle Aquitaine,lentille,2016,3,16.0,13.0,208,False,33,False
-33,Gironde,75 - Nouvelle Aquitaine,lentille,2017,3,59.0,15.0,885,False,33,False
-33,Gironde,75 - Nouvelle Aquitaine,lentille,2018,3,9.0,15.0,135,False,33,False
-33,Gironde,75 - Nouvelle Aquitaine,lentille,2019,3,16.0,15.0,240,False,33,False
-33,Gironde,75 - Nouvelle Aquitaine,lentille,2020,3,23.0,9.0,207,False,33,False
-33,Gironde,75 - Nouvelle Aquitaine,lentille,2021,3,15.0,9.0,135,False,33,False
-33,Gironde,75 - Nouvelle Aquitaine,lentille,2022,3,15.0,9.0,135,False,33,False
-33,Gironde,75 - Nouvelle Aquitaine,lentille,2023,3,14.0,10.86,152,False,33,False
-33,Gironde,75 - Nouvelle Aquitaine,lentille,2024,3,16.0,14.19,227,False,33,False
-33,Gironde,75 - Nouvelle Aquitaine,lentille,2025,3,155.0,14.0,2170,False,33,False
+33,Gironde,75 - Nouvelle Aquitaine,lentille,2010,3,8.0,10.0,80,False,47,True
+33,Gironde,75 - Nouvelle Aquitaine,lentille,2011,3,7.0,14.43,101,False,47,True
+33,Gironde,75 - Nouvelle Aquitaine,lentille,2012,3,7.0,14.71,103,False,47,True
+33,Gironde,75 - Nouvelle Aquitaine,lentille,2013,3,11.0,14.0,154,False,47,True
+33,Gironde,75 - Nouvelle Aquitaine,lentille,2014,3,7.0,15.0,105,False,47,True
+33,Gironde,75 - Nouvelle Aquitaine,lentille,2015,3,16.0,15.0,240,False,47,True
+33,Gironde,75 - Nouvelle Aquitaine,lentille,2016,3,16.0,13.0,208,False,47,True
+33,Gironde,75 - Nouvelle Aquitaine,lentille,2017,3,59.0,15.0,885,False,47,True
+33,Gironde,75 - Nouvelle Aquitaine,lentille,2018,3,9.0,15.0,135,False,47,True
+33,Gironde,75 - Nouvelle Aquitaine,lentille,2019,3,16.0,15.0,240,False,47,True
+33,Gironde,75 - Nouvelle Aquitaine,lentille,2020,3,23.0,9.0,207,False,47,True
+33,Gironde,75 - Nouvelle Aquitaine,lentille,2021,3,15.0,9.0,135,False,47,True
+33,Gironde,75 - Nouvelle Aquitaine,lentille,2022,3,15.0,9.0,135,False,47,True
+33,Gironde,75 - Nouvelle Aquitaine,lentille,2023,3,14.0,10.86,152,False,47,True
+33,Gironde,75 - Nouvelle Aquitaine,lentille,2024,3,16.0,14.19,227,False,47,True
+33,Gironde,75 - Nouvelle Aquitaine,lentille,2025,3,155.0,14.0,2170,False,47,True
 40,Landes,75 - Nouvelle Aquitaine,ble,2010,1,2076.0,59.0,122484,True,40,False
 40,Landes,75 - Nouvelle Aquitaine,ble,2011,1,2830.0,56.0,158480,True,40,False
 40,Landes,75 - Nouvelle Aquitaine,ble,2012,1,3150.0,59.0,185850,True,40,False
@@ -1871,22 +1871,22 @@ dep,dep_nom,region,culture,annee,statut,surface_ha,rendement_qha,production_q,ut
 64,Pyrénées-Atlantiques,75 - Nouvelle Aquitaine,ble,2023,1,4610.0,50.0,230500,True,64,False
 64,Pyrénées-Atlantiques,75 - Nouvelle Aquitaine,ble,2024,1,1685.0,45.0,75825,True,64,False
 64,Pyrénées-Atlantiques,75 - Nouvelle Aquitaine,ble,2025,1,2690.0,51.0,137190,True,64,False
-64,Pyrénées-Atlantiques,75 - Nouvelle Aquitaine,lentille,2010,3,7.0,10.0,70,False,64,False
-64,Pyrénées-Atlantiques,75 - Nouvelle Aquitaine,lentille,2011,3,6.0,14.67,88,False,64,False
-64,Pyrénées-Atlantiques,75 - Nouvelle Aquitaine,lentille,2012,3,6.0,15.0,90,False,64,False
-64,Pyrénées-Atlantiques,75 - Nouvelle Aquitaine,lentille,2013,3,9.0,15.44,139,False,64,False
-64,Pyrénées-Atlantiques,75 - Nouvelle Aquitaine,lentille,2014,3,6.0,23.67,142,False,64,False
-64,Pyrénées-Atlantiques,75 - Nouvelle Aquitaine,lentille,2015,3,6.0,17.5,105,False,64,False
-64,Pyrénées-Atlantiques,75 - Nouvelle Aquitaine,lentille,2016,3,2.0,15.0,30,False,64,False
-64,Pyrénées-Atlantiques,75 - Nouvelle Aquitaine,lentille,2017,3,17.0,15.0,255,False,64,False
-64,Pyrénées-Atlantiques,75 - Nouvelle Aquitaine,lentille,2018,3,25.0,15.0,375,False,64,False
-64,Pyrénées-Atlantiques,75 - Nouvelle Aquitaine,lentille,2019,3,15.0,15.0,225,False,64,False
-64,Pyrénées-Atlantiques,75 - Nouvelle Aquitaine,lentille,2020,3,13.0,8.46,110,False,64,False
-64,Pyrénées-Atlantiques,75 - Nouvelle Aquitaine,lentille,2021,3,26.0,7.0,182,False,64,False
-64,Pyrénées-Atlantiques,75 - Nouvelle Aquitaine,lentille,2022,3,11.0,6.0,66,False,64,False
-64,Pyrénées-Atlantiques,75 - Nouvelle Aquitaine,lentille,2023,3,11.0,6.73,74,False,64,False
-64,Pyrénées-Atlantiques,75 - Nouvelle Aquitaine,lentille,2024,3,12.0,9.25,111,False,64,False
-64,Pyrénées-Atlantiques,75 - Nouvelle Aquitaine,lentille,2025,3,9.0,10.0,90,False,64,False
+64,Pyrénées-Atlantiques,75 - Nouvelle Aquitaine,lentille,2010,3,7.0,10.0,70,False,47,True
+64,Pyrénées-Atlantiques,75 - Nouvelle Aquitaine,lentille,2011,3,6.0,14.67,88,False,47,True
+64,Pyrénées-Atlantiques,75 - Nouvelle Aquitaine,lentille,2012,3,6.0,15.0,90,False,47,True
+64,Pyrénées-Atlantiques,75 - Nouvelle Aquitaine,lentille,2013,3,9.0,15.44,139,False,47,True
+64,Pyrénées-Atlantiques,75 - Nouvelle Aquitaine,lentille,2014,3,6.0,23.67,142,False,47,True
+64,Pyrénées-Atlantiques,75 - Nouvelle Aquitaine,lentille,2015,3,6.0,17.5,105,False,47,True
+64,Pyrénées-Atlantiques,75 - Nouvelle Aquitaine,lentille,2016,3,2.0,15.0,30,False,47,True
+64,Pyrénées-Atlantiques,75 - Nouvelle Aquitaine,lentille,2017,3,17.0,15.0,255,False,47,True
+64,Pyrénées-Atlantiques,75 - Nouvelle Aquitaine,lentille,2018,3,25.0,15.0,375,False,47,True
+64,Pyrénées-Atlantiques,75 - Nouvelle Aquitaine,lentille,2019,3,15.0,15.0,225,False,47,True
+64,Pyrénées-Atlantiques,75 - Nouvelle Aquitaine,lentille,2020,3,13.0,8.46,110,False,47,True
+64,Pyrénées-Atlantiques,75 - Nouvelle Aquitaine,lentille,2021,3,26.0,7.0,182,False,47,True
+64,Pyrénées-Atlantiques,75 - Nouvelle Aquitaine,lentille,2022,3,11.0,6.0,66,False,47,True
+64,Pyrénées-Atlantiques,75 - Nouvelle Aquitaine,lentille,2023,3,11.0,6.73,74,False,47,True
+64,Pyrénées-Atlantiques,75 - Nouvelle Aquitaine,lentille,2024,3,12.0,9.25,111,False,47,True
+64,Pyrénées-Atlantiques,75 - Nouvelle Aquitaine,lentille,2025,3,9.0,10.0,90,False,47,True
 79,Deux-Sèvres,75 - Nouvelle Aquitaine,ble,2010,1,104110.0,62.0,6454820,True,79,False
 79,Deux-Sèvres,75 - Nouvelle Aquitaine,ble,2011,1,104450.0,53.0,5535850,True,79,False
 79,Deux-Sèvres,75 - Nouvelle Aquitaine,ble,2012,1,104050.0,73.0,7595650,True,79,False
@@ -1967,22 +1967,22 @@ dep,dep_nom,region,culture,annee,statut,surface_ha,rendement_qha,production_q,ut
 87,Haute-Vienne,75 - Nouvelle Aquitaine,ble,2023,1,13460.0,51.0,686460,True,87,False
 87,Haute-Vienne,75 - Nouvelle Aquitaine,ble,2024,1,9300.0,32.0,297600,True,87,False
 87,Haute-Vienne,75 - Nouvelle Aquitaine,ble,2025,1,11650.0,51.0,594150,True,87,False
-87,Haute-Vienne,75 - Nouvelle Aquitaine,lentille,2010,3,9.0,15.0,135,False,87,False
-87,Haute-Vienne,75 - Nouvelle Aquitaine,lentille,2011,3,17.0,16.0,272,False,87,False
-87,Haute-Vienne,75 - Nouvelle Aquitaine,lentille,2012,3,4.0,10.0,40,False,87,False
-87,Haute-Vienne,75 - Nouvelle Aquitaine,lentille,2013,3,5.0,12.0,60,False,87,False
-87,Haute-Vienne,75 - Nouvelle Aquitaine,lentille,2014,3,8.0,15.0,120,False,87,False
-87,Haute-Vienne,75 - Nouvelle Aquitaine,lentille,2015,3,11.0,15.0,165,False,87,False
-87,Haute-Vienne,75 - Nouvelle Aquitaine,lentille,2016,3,11.0,15.0,165,False,87,False
-87,Haute-Vienne,75 - Nouvelle Aquitaine,lentille,2017,3,18.0,15.0,270,False,87,False
-87,Haute-Vienne,75 - Nouvelle Aquitaine,lentille,2018,3,5.0,12.0,60,False,87,False
-87,Haute-Vienne,75 - Nouvelle Aquitaine,lentille,2019,3,68.0,12.0,816,False,87,False
-87,Haute-Vienne,75 - Nouvelle Aquitaine,lentille,2020,3,84.0,9.0,756,False,87,False
-87,Haute-Vienne,75 - Nouvelle Aquitaine,lentille,2021,3,27.0,9.0,243,False,87,False
-87,Haute-Vienne,75 - Nouvelle Aquitaine,lentille,2022,3,15.0,9.0,135,False,87,False
-87,Haute-Vienne,75 - Nouvelle Aquitaine,lentille,2023,3,14.0,10.86,152,False,87,False
-87,Haute-Vienne,75 - Nouvelle Aquitaine,lentille,2024,3,16.0,14.19,227,False,87,False
-87,Haute-Vienne,75 - Nouvelle Aquitaine,lentille,2025,3,20.0,8.0,160,False,87,False
+87,Haute-Vienne,75 - Nouvelle Aquitaine,lentille,2010,3,9.0,15.0,135,False,47,True
+87,Haute-Vienne,75 - Nouvelle Aquitaine,lentille,2011,3,17.0,16.0,272,False,47,True
+87,Haute-Vienne,75 - Nouvelle Aquitaine,lentille,2012,3,4.0,10.0,40,False,47,True
+87,Haute-Vienne,75 - Nouvelle Aquitaine,lentille,2013,3,5.0,12.0,60,False,47,True
+87,Haute-Vienne,75 - Nouvelle Aquitaine,lentille,2014,3,8.0,15.0,120,False,47,True
+87,Haute-Vienne,75 - Nouvelle Aquitaine,lentille,2015,3,11.0,15.0,165,False,47,True
+87,Haute-Vienne,75 - Nouvelle Aquitaine,lentille,2016,3,11.0,15.0,165,False,47,True
+87,Haute-Vienne,75 - Nouvelle Aquitaine,lentille,2017,3,18.0,15.0,270,False,47,True
+87,Haute-Vienne,75 - Nouvelle Aquitaine,lentille,2018,3,5.0,12.0,60,False,47,True
+87,Haute-Vienne,75 - Nouvelle Aquitaine,lentille,2019,3,68.0,12.0,816,False,47,True
+87,Haute-Vienne,75 - Nouvelle Aquitaine,lentille,2020,3,84.0,9.0,756,False,47,True
+87,Haute-Vienne,75 - Nouvelle Aquitaine,lentille,2021,3,27.0,9.0,243,False,47,True
+87,Haute-Vienne,75 - Nouvelle Aquitaine,lentille,2022,3,15.0,9.0,135,False,47,True
+87,Haute-Vienne,75 - Nouvelle Aquitaine,lentille,2023,3,14.0,10.86,152,False,47,True
+87,Haute-Vienne,75 - Nouvelle Aquitaine,lentille,2024,3,16.0,14.19,227,False,47,True
+87,Haute-Vienne,75 - Nouvelle Aquitaine,lentille,2025,3,20.0,8.0,160,False,47,True
 09,Ariège,76 - Occitanie,ble,2010,1,7050.0,53.0,373650,True,09,False
 09,Ariège,76 - Occitanie,ble,2011,1,7274.0,47.0,341878,True,09,False
 09,Ariège,76 - Occitanie,ble,2012,1,7669.0,57.0,437130,True,09,False
@@ -1999,22 +1999,22 @@ dep,dep_nom,region,culture,annee,statut,surface_ha,rendement_qha,production_q,ut
 09,Ariège,76 - Occitanie,ble,2023,1,7335.0,45.4,333009,True,09,False
 09,Ariège,76 - Occitanie,ble,2024,1,6800.0,53.0,360400,True,09,False
 09,Ariège,76 - Occitanie,ble,2025,1,6620.0,53.0,350860,True,09,False
-09,Ariège,76 - Occitanie,lentille,2010,1,45.0,10.0,450,False,09,False
-09,Ariège,76 - Occitanie,lentille,2011,1,40.0,10.0,400,False,09,False
-09,Ariège,76 - Occitanie,lentille,2012,1,90.0,10.0,900,True,09,False
-09,Ariège,76 - Occitanie,lentille,2013,1,60.0,10.0,600,True,09,False
-09,Ariège,76 - Occitanie,lentille,2014,1,80.0,12.0,960,True,09,False
-09,Ariège,76 - Occitanie,lentille,2015,1,120.0,12.0,1440,True,09,False
-09,Ariège,76 - Occitanie,lentille,2016,1,110.0,12.0,1320,True,09,False
-09,Ariège,76 - Occitanie,lentille,2017,1,120.0,12.0,1440,True,09,False
-09,Ariège,76 - Occitanie,lentille,2018,1,105.0,10.0,1050,True,09,False
-09,Ariège,76 - Occitanie,lentille,2019,1,130.0,13.46,1750,True,09,False
-09,Ariège,76 - Occitanie,lentille,2020,1,130.0,9.0,1170,True,09,False
-09,Ariège,76 - Occitanie,lentille,2021,1,65.0,12.0,780,True,09,False
-09,Ariège,76 - Occitanie,lentille,2022,1,85.0,5.0,425,True,09,False
-09,Ariège,76 - Occitanie,lentille,2023,1,50.0,8.0,400,True,09,False
-09,Ariège,76 - Occitanie,lentille,2024,1,75.0,9.0,675,True,09,False
-09,Ariège,76 - Occitanie,lentille,2025,1,50.0,12.0,600,True,09,False
+09,Ariège,76 - Occitanie,lentille,2010,1,45.0,10.0,450,False,32,True
+09,Ariège,76 - Occitanie,lentille,2011,1,40.0,10.0,400,False,32,True
+09,Ariège,76 - Occitanie,lentille,2012,1,90.0,10.0,900,True,32,True
+09,Ariège,76 - Occitanie,lentille,2013,1,60.0,10.0,600,True,32,True
+09,Ariège,76 - Occitanie,lentille,2014,1,80.0,12.0,960,True,32,True
+09,Ariège,76 - Occitanie,lentille,2015,1,120.0,12.0,1440,True,32,True
+09,Ariège,76 - Occitanie,lentille,2016,1,110.0,12.0,1320,True,32,True
+09,Ariège,76 - Occitanie,lentille,2017,1,120.0,12.0,1440,True,32,True
+09,Ariège,76 - Occitanie,lentille,2018,1,105.0,10.0,1050,True,32,True
+09,Ariège,76 - Occitanie,lentille,2019,1,130.0,13.46,1750,True,32,True
+09,Ariège,76 - Occitanie,lentille,2020,1,130.0,9.0,1170,True,32,True
+09,Ariège,76 - Occitanie,lentille,2021,1,65.0,12.0,780,True,32,True
+09,Ariège,76 - Occitanie,lentille,2022,1,85.0,5.0,425,True,32,True
+09,Ariège,76 - Occitanie,lentille,2023,1,50.0,8.0,400,True,32,True
+09,Ariège,76 - Occitanie,lentille,2024,1,75.0,9.0,675,True,32,True
+09,Ariège,76 - Occitanie,lentille,2025,1,50.0,12.0,600,True,32,True
 11,Aude,76 - Occitanie,ble,2010,1,2240.0,48.44,108500,True,11,False
 11,Aude,76 - Occitanie,ble,2011,1,3750.0,45.0,168750,True,11,False
 11,Aude,76 - Occitanie,ble,2012,1,3770.0,57.0,214890,True,11,False
@@ -2063,22 +2063,22 @@ dep,dep_nom,region,culture,annee,statut,surface_ha,rendement_qha,production_q,ut
 12,Aveyron,76 - Occitanie,ble,2023,1,16634.0,46.0,765164,True,12,False
 12,Aveyron,76 - Occitanie,ble,2024,1,15830.0,41.0,649030,True,12,False
 12,Aveyron,76 - Occitanie,ble,2025,1,18260.0,47.7,871002,True,12,False
-12,Aveyron,76 - Occitanie,lentille,2010,1,15.0,11.0,165,False,12,False
-12,Aveyron,76 - Occitanie,lentille,2011,1,20.0,11.0,220,False,12,False
-12,Aveyron,76 - Occitanie,lentille,2012,1,30.0,11.0,330,False,12,False
-12,Aveyron,76 - Occitanie,lentille,2013,1,50.0,11.0,550,True,12,False
-12,Aveyron,76 - Occitanie,lentille,2014,1,80.0,12.0,960,True,12,False
-12,Aveyron,76 - Occitanie,lentille,2015,1,100.0,12.0,1200,True,12,False
-12,Aveyron,76 - Occitanie,lentille,2016,1,80.0,12.0,960,True,12,False
-12,Aveyron,76 - Occitanie,lentille,2017,1,75.0,12.0,900,True,12,False
-12,Aveyron,76 - Occitanie,lentille,2018,1,95.0,10.0,950,True,12,False
-12,Aveyron,76 - Occitanie,lentille,2019,1,160.0,13.0,2080,True,12,False
-12,Aveyron,76 - Occitanie,lentille,2020,1,140.0,7.0,980,True,12,False
-12,Aveyron,76 - Occitanie,lentille,2021,1,90.0,8.0,720,True,12,False
-12,Aveyron,76 - Occitanie,lentille,2022,1,65.0,5.0,325,True,12,False
-12,Aveyron,76 - Occitanie,lentille,2023,1,60.0,6.0,360,True,12,False
-12,Aveyron,76 - Occitanie,lentille,2024,1,75.0,8.0,600,True,12,False
-12,Aveyron,76 - Occitanie,lentille,2025,1,80.0,6.0,480,True,12,False
+12,Aveyron,76 - Occitanie,lentille,2010,1,15.0,11.0,165,False,32,True
+12,Aveyron,76 - Occitanie,lentille,2011,1,20.0,11.0,220,False,32,True
+12,Aveyron,76 - Occitanie,lentille,2012,1,30.0,11.0,330,False,32,True
+12,Aveyron,76 - Occitanie,lentille,2013,1,50.0,11.0,550,True,32,True
+12,Aveyron,76 - Occitanie,lentille,2014,1,80.0,12.0,960,True,32,True
+12,Aveyron,76 - Occitanie,lentille,2015,1,100.0,12.0,1200,True,32,True
+12,Aveyron,76 - Occitanie,lentille,2016,1,80.0,12.0,960,True,32,True
+12,Aveyron,76 - Occitanie,lentille,2017,1,75.0,12.0,900,True,32,True
+12,Aveyron,76 - Occitanie,lentille,2018,1,95.0,10.0,950,True,32,True
+12,Aveyron,76 - Occitanie,lentille,2019,1,160.0,13.0,2080,True,32,True
+12,Aveyron,76 - Occitanie,lentille,2020,1,140.0,7.0,980,True,32,True
+12,Aveyron,76 - Occitanie,lentille,2021,1,90.0,8.0,720,True,32,True
+12,Aveyron,76 - Occitanie,lentille,2022,1,65.0,5.0,325,True,32,True
+12,Aveyron,76 - Occitanie,lentille,2023,1,60.0,6.0,360,True,32,True
+12,Aveyron,76 - Occitanie,lentille,2024,1,75.0,8.0,600,True,32,True
+12,Aveyron,76 - Occitanie,lentille,2025,1,80.0,6.0,480,True,32,True
 30,Gard,76 - Occitanie,ble,2010,1,1115.0,37.98,42350,True,30,False
 30,Gard,76 - Occitanie,ble,2011,1,1550.0,36.0,55800,True,30,False
 30,Gard,76 - Occitanie,ble,2012,1,2180.0,37.0,80660,True,30,False
@@ -2127,22 +2127,22 @@ dep,dep_nom,region,culture,annee,statut,surface_ha,rendement_qha,production_q,ut
 31,Haute-Garonne,76 - Occitanie,ble,2023,1,49790.0,56.0,2788240,True,31,False
 31,Haute-Garonne,76 - Occitanie,ble,2024,1,42960.0,55.0,2362800,True,31,False
 31,Haute-Garonne,76 - Occitanie,ble,2025,1,48010.0,59.0,2832590,True,31,False
-31,Haute-Garonne,76 - Occitanie,lentille,2010,1,140.0,14.0,1960,True,31,False
-31,Haute-Garonne,76 - Occitanie,lentille,2011,1,185.0,14.0,2590,True,31,False
-31,Haute-Garonne,76 - Occitanie,lentille,2012,1,260.0,14.0,3640,True,31,False
-31,Haute-Garonne,76 - Occitanie,lentille,2013,1,200.0,14.0,2800,True,31,False
-31,Haute-Garonne,76 - Occitanie,lentille,2014,1,250.0,12.0,3000,True,31,False
-31,Haute-Garonne,76 - Occitanie,lentille,2015,1,200.0,12.0,2400,True,31,False
-31,Haute-Garonne,76 - Occitanie,lentille,2016,1,360.0,12.0,4320,True,31,False
-31,Haute-Garonne,76 - Occitanie,lentille,2017,1,385.0,12.0,4620,True,31,False
-31,Haute-Garonne,76 - Occitanie,lentille,2018,1,700.0,5.0,3500,True,31,False
-31,Haute-Garonne,76 - Occitanie,lentille,2019,1,660.0,11.0,7260,True,31,False
-31,Haute-Garonne,76 - Occitanie,lentille,2020,1,685.0,6.0,4110,True,31,False
-31,Haute-Garonne,76 - Occitanie,lentille,2021,1,600.0,4.0,2400,True,31,False
-31,Haute-Garonne,76 - Occitanie,lentille,2022,1,410.0,5.0,2050,True,31,False
-31,Haute-Garonne,76 - Occitanie,lentille,2023,1,355.0,6.0,2130,True,31,False
-31,Haute-Garonne,76 - Occitanie,lentille,2024,1,400.0,8.0,3200,True,31,False
-31,Haute-Garonne,76 - Occitanie,lentille,2025,1,400.0,12.0,4800,True,31,False
+31,Haute-Garonne,76 - Occitanie,lentille,2010,1,140.0,14.0,1960,True,32,True
+31,Haute-Garonne,76 - Occitanie,lentille,2011,1,185.0,14.0,2590,True,32,True
+31,Haute-Garonne,76 - Occitanie,lentille,2012,1,260.0,14.0,3640,True,32,True
+31,Haute-Garonne,76 - Occitanie,lentille,2013,1,200.0,14.0,2800,True,32,True
+31,Haute-Garonne,76 - Occitanie,lentille,2014,1,250.0,12.0,3000,True,32,True
+31,Haute-Garonne,76 - Occitanie,lentille,2015,1,200.0,12.0,2400,True,32,True
+31,Haute-Garonne,76 - Occitanie,lentille,2016,1,360.0,12.0,4320,True,32,True
+31,Haute-Garonne,76 - Occitanie,lentille,2017,1,385.0,12.0,4620,True,32,True
+31,Haute-Garonne,76 - Occitanie,lentille,2018,1,700.0,5.0,3500,True,32,True
+31,Haute-Garonne,76 - Occitanie,lentille,2019,1,660.0,11.0,7260,True,32,True
+31,Haute-Garonne,76 - Occitanie,lentille,2020,1,685.0,6.0,4110,True,32,True
+31,Haute-Garonne,76 - Occitanie,lentille,2021,1,600.0,4.0,2400,True,32,True
+31,Haute-Garonne,76 - Occitanie,lentille,2022,1,410.0,5.0,2050,True,32,True
+31,Haute-Garonne,76 - Occitanie,lentille,2023,1,355.0,6.0,2130,True,32,True
+31,Haute-Garonne,76 - Occitanie,lentille,2024,1,400.0,8.0,3200,True,32,True
+31,Haute-Garonne,76 - Occitanie,lentille,2025,1,400.0,12.0,4800,True,32,True
 32,Gers,76 - Occitanie,ble,2010,1,85500.0,62.0,5301000,True,32,False
 32,Gers,76 - Occitanie,ble,2011,1,87718.0,47.0,4122733,True,32,False
 32,Gers,76 - Occitanie,ble,2012,1,92719.0,64.5,5980376,True,32,False
@@ -2351,22 +2351,22 @@ dep,dep_nom,region,culture,annee,statut,surface_ha,rendement_qha,production_q,ut
 81,Tarn,76 - Occitanie,ble,2023,1,42267.0,55.0,2324685,True,81,False
 81,Tarn,76 - Occitanie,ble,2024,1,38310.0,52.0,1992120,True,81,False
 81,Tarn,76 - Occitanie,ble,2025,1,42900.0,54.0,2316600,True,81,False
-81,Tarn,76 - Occitanie,lentille,2010,1,230.0,9.0,2070,True,81,False
-81,Tarn,76 - Occitanie,lentille,2011,1,146.0,9.0,1314,True,81,False
-81,Tarn,76 - Occitanie,lentille,2012,1,170.0,9.0,1530,True,81,False
-81,Tarn,76 - Occitanie,lentille,2013,1,155.0,9.0,1395,True,81,False
-81,Tarn,76 - Occitanie,lentille,2014,1,275.0,12.0,3300,True,81,False
-81,Tarn,76 - Occitanie,lentille,2015,1,270.0,12.0,3240,True,81,False
-81,Tarn,76 - Occitanie,lentille,2016,1,210.0,12.0,2520,True,81,False
-81,Tarn,76 - Occitanie,lentille,2017,1,285.0,12.0,3420,True,81,False
-81,Tarn,76 - Occitanie,lentille,2018,1,315.0,7.0,2205,True,81,False
-81,Tarn,76 - Occitanie,lentille,2019,1,415.0,11.0,4565,True,81,False
-81,Tarn,76 - Occitanie,lentille,2020,1,265.0,7.0,1855,True,81,False
-81,Tarn,76 - Occitanie,lentille,2021,1,270.0,8.0,2160,True,81,False
-81,Tarn,76 - Occitanie,lentille,2022,1,195.0,5.0,975,True,81,False
-81,Tarn,76 - Occitanie,lentille,2023,1,170.0,6.0,1020,True,81,False
-81,Tarn,76 - Occitanie,lentille,2024,1,200.0,8.0,1600,True,81,False
-81,Tarn,76 - Occitanie,lentille,2025,1,205.0,11.0,2255,True,81,False
+81,Tarn,76 - Occitanie,lentille,2010,1,230.0,9.0,2070,True,32,True
+81,Tarn,76 - Occitanie,lentille,2011,1,146.0,9.0,1314,True,32,True
+81,Tarn,76 - Occitanie,lentille,2012,1,170.0,9.0,1530,True,32,True
+81,Tarn,76 - Occitanie,lentille,2013,1,155.0,9.0,1395,True,32,True
+81,Tarn,76 - Occitanie,lentille,2014,1,275.0,12.0,3300,True,32,True
+81,Tarn,76 - Occitanie,lentille,2015,1,270.0,12.0,3240,True,32,True
+81,Tarn,76 - Occitanie,lentille,2016,1,210.0,12.0,2520,True,32,True
+81,Tarn,76 - Occitanie,lentille,2017,1,285.0,12.0,3420,True,32,True
+81,Tarn,76 - Occitanie,lentille,2018,1,315.0,7.0,2205,True,32,True
+81,Tarn,76 - Occitanie,lentille,2019,1,415.0,11.0,4565,True,32,True
+81,Tarn,76 - Occitanie,lentille,2020,1,265.0,7.0,1855,True,32,True
+81,Tarn,76 - Occitanie,lentille,2021,1,270.0,8.0,2160,True,32,True
+81,Tarn,76 - Occitanie,lentille,2022,1,195.0,5.0,975,True,32,True
+81,Tarn,76 - Occitanie,lentille,2023,1,170.0,6.0,1020,True,32,True
+81,Tarn,76 - Occitanie,lentille,2024,1,200.0,8.0,1600,True,32,True
+81,Tarn,76 - Occitanie,lentille,2025,1,205.0,11.0,2255,True,32,True
 82,Tarn-et-Garonne,76 - Occitanie,ble,2010,1,38900.0,61.0,2372900,True,82,False
 82,Tarn-et-Garonne,76 - Occitanie,ble,2011,1,37507.0,46.0,1725307,True,82,False
 82,Tarn-et-Garonne,76 - Occitanie,ble,2012,1,42305.0,61.0,2580605,True,82,False
@@ -2383,22 +2383,22 @@ dep,dep_nom,region,culture,annee,statut,surface_ha,rendement_qha,production_q,ut
 82,Tarn-et-Garonne,76 - Occitanie,ble,2023,1,37020.0,54.0,1999080,True,82,False
 82,Tarn-et-Garonne,76 - Occitanie,ble,2024,1,25090.0,45.0,1129050,True,82,False
 82,Tarn-et-Garonne,76 - Occitanie,ble,2025,1,34680.0,55.0,1907400,True,82,False
-82,Tarn-et-Garonne,76 - Occitanie,lentille,2010,1,55.0,10.0,550,True,82,False
-82,Tarn-et-Garonne,76 - Occitanie,lentille,2011,1,40.0,10.0,400,False,82,False
-82,Tarn-et-Garonne,76 - Occitanie,lentille,2012,1,60.0,10.0,600,True,82,False
-82,Tarn-et-Garonne,76 - Occitanie,lentille,2013,1,50.0,10.0,500,True,82,False
-82,Tarn-et-Garonne,76 - Occitanie,lentille,2014,1,70.0,12.0,840,True,82,False
-82,Tarn-et-Garonne,76 - Occitanie,lentille,2015,1,110.0,12.0,1320,True,82,False
-82,Tarn-et-Garonne,76 - Occitanie,lentille,2016,1,170.0,12.0,2040,True,82,False
-82,Tarn-et-Garonne,76 - Occitanie,lentille,2017,1,330.0,12.0,3960,True,82,False
-82,Tarn-et-Garonne,76 - Occitanie,lentille,2018,1,290.0,8.0,2320,True,82,False
-82,Tarn-et-Garonne,76 - Occitanie,lentille,2019,1,195.0,11.25,2193,True,82,False
-82,Tarn-et-Garonne,76 - Occitanie,lentille,2020,1,160.0,7.0,1120,True,82,False
-82,Tarn-et-Garonne,76 - Occitanie,lentille,2021,1,150.0,9.0,1350,True,82,False
-82,Tarn-et-Garonne,76 - Occitanie,lentille,2022,1,130.0,4.0,520,True,82,False
-82,Tarn-et-Garonne,76 - Occitanie,lentille,2023,1,130.0,6.0,780,True,82,False
-82,Tarn-et-Garonne,76 - Occitanie,lentille,2024,1,170.0,11.0,1870,True,82,False
-82,Tarn-et-Garonne,76 - Occitanie,lentille,2025,1,155.0,6.0,930,True,82,False
+82,Tarn-et-Garonne,76 - Occitanie,lentille,2010,1,55.0,10.0,550,True,32,True
+82,Tarn-et-Garonne,76 - Occitanie,lentille,2011,1,40.0,10.0,400,False,32,True
+82,Tarn-et-Garonne,76 - Occitanie,lentille,2012,1,60.0,10.0,600,True,32,True
+82,Tarn-et-Garonne,76 - Occitanie,lentille,2013,1,50.0,10.0,500,True,32,True
+82,Tarn-et-Garonne,76 - Occitanie,lentille,2014,1,70.0,12.0,840,True,32,True
+82,Tarn-et-Garonne,76 - Occitanie,lentille,2015,1,110.0,12.0,1320,True,32,True
+82,Tarn-et-Garonne,76 - Occitanie,lentille,2016,1,170.0,12.0,2040,True,32,True
+82,Tarn-et-Garonne,76 - Occitanie,lentille,2017,1,330.0,12.0,3960,True,32,True
+82,Tarn-et-Garonne,76 - Occitanie,lentille,2018,1,290.0,8.0,2320,True,32,True
+82,Tarn-et-Garonne,76 - Occitanie,lentille,2019,1,195.0,11.25,2193,True,32,True
+82,Tarn-et-Garonne,76 - Occitanie,lentille,2020,1,160.0,7.0,1120,True,32,True
+82,Tarn-et-Garonne,76 - Occitanie,lentille,2021,1,150.0,9.0,1350,True,32,True
+82,Tarn-et-Garonne,76 - Occitanie,lentille,2022,1,130.0,4.0,520,True,32,True
+82,Tarn-et-Garonne,76 - Occitanie,lentille,2023,1,130.0,6.0,780,True,32,True
+82,Tarn-et-Garonne,76 - Occitanie,lentille,2024,1,170.0,11.0,1870,True,32,True
+82,Tarn-et-Garonne,76 - Occitanie,lentille,2025,1,155.0,6.0,930,True,32,True
 01,Ain,84 - Auvergne-Rhône-Alpes,ble,2010,1,33237.0,72.0,2393064,True,01,False
 01,Ain,84 - Auvergne-Rhône-Alpes,ble,2011,1,32394.0,70.0,2267580,True,01,False
 01,Ain,84 - Auvergne-Rhône-Alpes,ble,2012,1,34100.0,67.0,2284700,True,01,False
@@ -2415,22 +2415,22 @@ dep,dep_nom,region,culture,annee,statut,surface_ha,rendement_qha,production_q,ut
 01,Ain,84 - Auvergne-Rhône-Alpes,ble,2023,1,36080.0,70.0,2525600,True,01,False
 01,Ain,84 - Auvergne-Rhône-Alpes,ble,2024,1,28300.0,53.0,1499900,True,01,False
 01,Ain,84 - Auvergne-Rhône-Alpes,ble,2025,1,35500.0,66.0,2343000,True,01,False
-01,Ain,84 - Auvergne-Rhône-Alpes,lentille,2010,3,0.0,,0,False,01,False
-01,Ain,84 - Auvergne-Rhône-Alpes,lentille,2011,3,12.0,10.0,120,False,01,False
-01,Ain,84 - Auvergne-Rhône-Alpes,lentille,2012,3,25.0,9.0,225,False,01,False
-01,Ain,84 - Auvergne-Rhône-Alpes,lentille,2013,3,37.0,9.0,333,False,01,False
-01,Ain,84 - Auvergne-Rhône-Alpes,lentille,2014,3,49.0,7.0,343,False,01,False
-01,Ain,84 - Auvergne-Rhône-Alpes,lentille,2015,3,62.0,6.0,372,False,01,False
-01,Ain,84 - Auvergne-Rhône-Alpes,lentille,2016,3,74.0,5.0,370,False,01,False
-01,Ain,84 - Auvergne-Rhône-Alpes,lentille,2017,3,86.0,8.0,688,False,01,False
-01,Ain,84 - Auvergne-Rhône-Alpes,lentille,2018,3,98.0,7.0,686,False,01,False
-01,Ain,84 - Auvergne-Rhône-Alpes,lentille,2019,3,111.0,8.0,888,False,01,False
-01,Ain,84 - Auvergne-Rhône-Alpes,lentille,2020,3,123.0,4.0,492,False,01,False
-01,Ain,84 - Auvergne-Rhône-Alpes,lentille,2021,3,120.0,4.0,480,False,01,False
-01,Ain,84 - Auvergne-Rhône-Alpes,lentille,2022,3,120.0,4.3,516,False,01,False
-01,Ain,84 - Auvergne-Rhône-Alpes,lentille,2023,3,115.0,5.06,582,False,01,False
-01,Ain,84 - Auvergne-Rhône-Alpes,lentille,2024,3,130.0,6.69,870,False,01,False
-01,Ain,84 - Auvergne-Rhône-Alpes,lentille,2025,3,140.0,6.0,837,False,01,False
+01,Ain,84 - Auvergne-Rhône-Alpes,lentille,2010,3,0.0,,0,False,43,True
+01,Ain,84 - Auvergne-Rhône-Alpes,lentille,2011,3,12.0,10.0,120,False,43,True
+01,Ain,84 - Auvergne-Rhône-Alpes,lentille,2012,3,25.0,9.0,225,False,43,True
+01,Ain,84 - Auvergne-Rhône-Alpes,lentille,2013,3,37.0,9.0,333,False,43,True
+01,Ain,84 - Auvergne-Rhône-Alpes,lentille,2014,3,49.0,7.0,343,False,43,True
+01,Ain,84 - Auvergne-Rhône-Alpes,lentille,2015,3,62.0,6.0,372,False,43,True
+01,Ain,84 - Auvergne-Rhône-Alpes,lentille,2016,3,74.0,5.0,370,False,43,True
+01,Ain,84 - Auvergne-Rhône-Alpes,lentille,2017,3,86.0,8.0,688,False,43,True
+01,Ain,84 - Auvergne-Rhône-Alpes,lentille,2018,3,98.0,7.0,686,False,43,True
+01,Ain,84 - Auvergne-Rhône-Alpes,lentille,2019,3,111.0,8.0,888,False,43,True
+01,Ain,84 - Auvergne-Rhône-Alpes,lentille,2020,3,123.0,4.0,492,False,43,True
+01,Ain,84 - Auvergne-Rhône-Alpes,lentille,2021,3,120.0,4.0,480,False,43,True
+01,Ain,84 - Auvergne-Rhône-Alpes,lentille,2022,3,120.0,4.3,516,False,43,True
+01,Ain,84 - Auvergne-Rhône-Alpes,lentille,2023,3,115.0,5.06,582,False,43,True
+01,Ain,84 - Auvergne-Rhône-Alpes,lentille,2024,3,130.0,6.69,870,False,43,True
+01,Ain,84 - Auvergne-Rhône-Alpes,lentille,2025,3,140.0,6.0,837,False,43,True
 03,Allier,84 - Auvergne-Rhône-Alpes,ble,2010,1,47120.0,65.0,3062800,True,03,False
 03,Allier,84 - Auvergne-Rhône-Alpes,ble,2011,1,46220.0,53.0,2449660,True,03,False
 03,Allier,84 - Auvergne-Rhône-Alpes,ble,2012,1,48090.0,65.0,3125850,True,03,False
@@ -2447,22 +2447,22 @@ dep,dep_nom,region,culture,annee,statut,surface_ha,rendement_qha,production_q,ut
 03,Allier,84 - Auvergne-Rhône-Alpes,ble,2023,1,49100.0,60.0,2946000,True,03,False
 03,Allier,84 - Auvergne-Rhône-Alpes,ble,2024,1,44330.0,49.0,2172170,True,03,False
 03,Allier,84 - Auvergne-Rhône-Alpes,ble,2025,1,45950.0,58.0,2665100,True,03,False
-03,Allier,84 - Auvergne-Rhône-Alpes,lentille,2010,1,2.0,9.0,18,False,03,False
-03,Allier,84 - Auvergne-Rhône-Alpes,lentille,2011,1,6.0,10.0,60,False,03,False
-03,Allier,84 - Auvergne-Rhône-Alpes,lentille,2012,1,13.0,9.0,117,False,03,False
-03,Allier,84 - Auvergne-Rhône-Alpes,lentille,2013,1,19.0,9.0,171,False,03,False
-03,Allier,84 - Auvergne-Rhône-Alpes,lentille,2014,1,26.0,7.0,182,False,03,False
-03,Allier,84 - Auvergne-Rhône-Alpes,lentille,2015,1,32.0,6.0,192,False,03,False
-03,Allier,84 - Auvergne-Rhône-Alpes,lentille,2016,1,41.0,5.0,205,False,03,False
-03,Allier,84 - Auvergne-Rhône-Alpes,lentille,2017,1,50.0,8.0,400,True,03,False
-03,Allier,84 - Auvergne-Rhône-Alpes,lentille,2018,1,56.0,7.0,392,True,03,False
-03,Allier,84 - Auvergne-Rhône-Alpes,lentille,2019,1,63.0,8.0,504,True,03,False
-03,Allier,84 - Auvergne-Rhône-Alpes,lentille,2020,1,74.0,5.41,400,True,03,False
-03,Allier,84 - Auvergne-Rhône-Alpes,lentille,2021,1,70.0,3.5,245,True,03,False
-03,Allier,84 - Auvergne-Rhône-Alpes,lentille,2022,1,70.0,4.3,301,True,03,False
-03,Allier,84 - Auvergne-Rhône-Alpes,lentille,2023,1,70.0,4.8,336,True,03,False
-03,Allier,84 - Auvergne-Rhône-Alpes,lentille,2024,1,50.0,13.0,650,True,03,False
-03,Allier,84 - Auvergne-Rhône-Alpes,lentille,2025,1,70.0,11.3,790,True,03,False
+03,Allier,84 - Auvergne-Rhône-Alpes,lentille,2010,1,2.0,9.0,18,False,43,True
+03,Allier,84 - Auvergne-Rhône-Alpes,lentille,2011,1,6.0,10.0,60,False,43,True
+03,Allier,84 - Auvergne-Rhône-Alpes,lentille,2012,1,13.0,9.0,117,False,43,True
+03,Allier,84 - Auvergne-Rhône-Alpes,lentille,2013,1,19.0,9.0,171,False,43,True
+03,Allier,84 - Auvergne-Rhône-Alpes,lentille,2014,1,26.0,7.0,182,False,43,True
+03,Allier,84 - Auvergne-Rhône-Alpes,lentille,2015,1,32.0,6.0,192,False,43,True
+03,Allier,84 - Auvergne-Rhône-Alpes,lentille,2016,1,41.0,5.0,205,False,43,True
+03,Allier,84 - Auvergne-Rhône-Alpes,lentille,2017,1,50.0,8.0,400,True,43,True
+03,Allier,84 - Auvergne-Rhône-Alpes,lentille,2018,1,56.0,7.0,392,True,43,True
+03,Allier,84 - Auvergne-Rhône-Alpes,lentille,2019,1,63.0,8.0,504,True,43,True
+03,Allier,84 - Auvergne-Rhône-Alpes,lentille,2020,1,74.0,5.41,400,True,43,True
+03,Allier,84 - Auvergne-Rhône-Alpes,lentille,2021,1,70.0,3.5,245,True,43,True
+03,Allier,84 - Auvergne-Rhône-Alpes,lentille,2022,1,70.0,4.3,301,True,43,True
+03,Allier,84 - Auvergne-Rhône-Alpes,lentille,2023,1,70.0,4.8,336,True,43,True
+03,Allier,84 - Auvergne-Rhône-Alpes,lentille,2024,1,50.0,13.0,650,True,43,True
+03,Allier,84 - Auvergne-Rhône-Alpes,lentille,2025,1,70.0,11.3,790,True,43,True
 07,Ardèche,84 - Auvergne-Rhône-Alpes,ble,2010,1,2849.0,40.0,113960,True,07,False
 07,Ardèche,84 - Auvergne-Rhône-Alpes,ble,2011,1,3100.0,30.0,93000,True,07,False
 07,Ardèche,84 - Auvergne-Rhône-Alpes,ble,2012,1,2830.0,36.0,101880,True,07,False
@@ -2479,22 +2479,22 @@ dep,dep_nom,region,culture,annee,statut,surface_ha,rendement_qha,production_q,ut
 07,Ardèche,84 - Auvergne-Rhône-Alpes,ble,2023,1,1900.0,45.0,85500,True,07,False
 07,Ardèche,84 - Auvergne-Rhône-Alpes,ble,2024,1,1860.0,42.0,78120,True,07,False
 07,Ardèche,84 - Auvergne-Rhône-Alpes,ble,2025,1,2030.0,45.0,91350,True,07,False
-07,Ardèche,84 - Auvergne-Rhône-Alpes,lentille,2010,3,30.0,9.0,270,False,07,False
-07,Ardèche,84 - Auvergne-Rhône-Alpes,lentille,2011,3,24.0,10.0,240,False,07,False
-07,Ardèche,84 - Auvergne-Rhône-Alpes,lentille,2012,3,16.0,9.0,144,False,07,False
-07,Ardèche,84 - Auvergne-Rhône-Alpes,lentille,2013,3,14.0,9.0,126,False,07,False
-07,Ardèche,84 - Auvergne-Rhône-Alpes,lentille,2014,3,14.0,7.0,98,False,07,False
-07,Ardèche,84 - Auvergne-Rhône-Alpes,lentille,2015,3,12.0,6.0,72,False,07,False
-07,Ardèche,84 - Auvergne-Rhône-Alpes,lentille,2016,3,12.0,5.0,60,False,07,False
-07,Ardèche,84 - Auvergne-Rhône-Alpes,lentille,2017,3,34.0,8.0,272,False,07,False
-07,Ardèche,84 - Auvergne-Rhône-Alpes,lentille,2018,3,35.0,7.0,245,False,07,False
-07,Ardèche,84 - Auvergne-Rhône-Alpes,lentille,2019,3,30.0,8.0,240,False,07,False
-07,Ardèche,84 - Auvergne-Rhône-Alpes,lentille,2020,3,25.0,5.4,135,False,07,False
-07,Ardèche,84 - Auvergne-Rhône-Alpes,lentille,2021,3,25.0,3.52,88,False,07,False
-07,Ardèche,84 - Auvergne-Rhône-Alpes,lentille,2022,3,25.0,4.32,108,False,07,False
-07,Ardèche,84 - Auvergne-Rhône-Alpes,lentille,2023,3,24.0,5.08,122,False,07,False
-07,Ardèche,84 - Auvergne-Rhône-Alpes,lentille,2024,3,27.0,6.74,182,False,07,False
-07,Ardèche,84 - Auvergne-Rhône-Alpes,lentille,2025,3,29.0,6.0,175,False,07,False
+07,Ardèche,84 - Auvergne-Rhône-Alpes,lentille,2010,3,30.0,9.0,270,False,43,True
+07,Ardèche,84 - Auvergne-Rhône-Alpes,lentille,2011,3,24.0,10.0,240,False,43,True
+07,Ardèche,84 - Auvergne-Rhône-Alpes,lentille,2012,3,16.0,9.0,144,False,43,True
+07,Ardèche,84 - Auvergne-Rhône-Alpes,lentille,2013,3,14.0,9.0,126,False,43,True
+07,Ardèche,84 - Auvergne-Rhône-Alpes,lentille,2014,3,14.0,7.0,98,False,43,True
+07,Ardèche,84 - Auvergne-Rhône-Alpes,lentille,2015,3,12.0,6.0,72,False,43,True
+07,Ardèche,84 - Auvergne-Rhône-Alpes,lentille,2016,3,12.0,5.0,60,False,43,True
+07,Ardèche,84 - Auvergne-Rhône-Alpes,lentille,2017,3,34.0,8.0,272,False,43,True
+07,Ardèche,84 - Auvergne-Rhône-Alpes,lentille,2018,3,35.0,7.0,245,False,43,True
+07,Ardèche,84 - Auvergne-Rhône-Alpes,lentille,2019,3,30.0,8.0,240,False,43,True
+07,Ardèche,84 - Auvergne-Rhône-Alpes,lentille,2020,3,25.0,5.4,135,False,43,True
+07,Ardèche,84 - Auvergne-Rhône-Alpes,lentille,2021,3,25.0,3.52,88,False,43,True
+07,Ardèche,84 - Auvergne-Rhône-Alpes,lentille,2022,3,25.0,4.32,108,False,43,True
+07,Ardèche,84 - Auvergne-Rhône-Alpes,lentille,2023,3,24.0,5.08,122,False,43,True
+07,Ardèche,84 - Auvergne-Rhône-Alpes,lentille,2024,3,27.0,6.74,182,False,43,True
+07,Ardèche,84 - Auvergne-Rhône-Alpes,lentille,2025,3,29.0,6.0,175,False,43,True
 15,Cantal,84 - Auvergne-Rhône-Alpes,ble,2010,1,4800.0,58.0,278400,True,15,False
 15,Cantal,84 - Auvergne-Rhône-Alpes,ble,2011,1,4500.0,47.0,211500,True,15,False
 15,Cantal,84 - Auvergne-Rhône-Alpes,ble,2012,1,4500.0,56.0,252000,True,15,False
@@ -2543,22 +2543,22 @@ dep,dep_nom,region,culture,annee,statut,surface_ha,rendement_qha,production_q,ut
 26,Drôme,84 - Auvergne-Rhône-Alpes,ble,2023,1,17200.0,53.0,911600,True,26,False
 26,Drôme,84 - Auvergne-Rhône-Alpes,ble,2024,1,16640.0,52.0,865280,True,26,False
 26,Drôme,84 - Auvergne-Rhône-Alpes,ble,2025,1,18500.0,57.0,1054500,True,26,False
-26,Drôme,84 - Auvergne-Rhône-Alpes,lentille,2010,3,50.0,9.0,450,False,26,False
-26,Drôme,84 - Auvergne-Rhône-Alpes,lentille,2011,3,51.0,10.0,510,False,26,False
-26,Drôme,84 - Auvergne-Rhône-Alpes,lentille,2012,3,52.0,9.0,468,False,26,False
-26,Drôme,84 - Auvergne-Rhône-Alpes,lentille,2013,3,42.0,9.0,378,False,26,False
-26,Drôme,84 - Auvergne-Rhône-Alpes,lentille,2014,3,45.0,7.0,315,False,26,False
-26,Drôme,84 - Auvergne-Rhône-Alpes,lentille,2015,3,45.0,6.0,270,False,26,False
-26,Drôme,84 - Auvergne-Rhône-Alpes,lentille,2016,3,46.0,5.0,230,False,26,False
-26,Drôme,84 - Auvergne-Rhône-Alpes,lentille,2017,3,76.0,8.0,608,False,26,False
-26,Drôme,84 - Auvergne-Rhône-Alpes,lentille,2018,3,81.0,7.0,567,False,26,False
-26,Drôme,84 - Auvergne-Rhône-Alpes,lentille,2019,3,85.0,8.0,680,False,26,False
-26,Drôme,84 - Auvergne-Rhône-Alpes,lentille,2020,3,85.0,5.4,459,False,26,False
-26,Drôme,84 - Auvergne-Rhône-Alpes,lentille,2021,3,85.0,3.51,298,False,26,False
-26,Drôme,84 - Auvergne-Rhône-Alpes,lentille,2022,3,85.0,4.31,366,False,26,False
-26,Drôme,84 - Auvergne-Rhône-Alpes,lentille,2023,3,82.0,5.04,413,False,26,False
-26,Drôme,84 - Auvergne-Rhône-Alpes,lentille,2024,3,93.0,6.65,618,False,26,False
-26,Drôme,84 - Auvergne-Rhône-Alpes,lentille,2025,3,100.0,6.0,595,False,26,False
+26,Drôme,84 - Auvergne-Rhône-Alpes,lentille,2010,3,50.0,9.0,450,False,43,True
+26,Drôme,84 - Auvergne-Rhône-Alpes,lentille,2011,3,51.0,10.0,510,False,43,True
+26,Drôme,84 - Auvergne-Rhône-Alpes,lentille,2012,3,52.0,9.0,468,False,43,True
+26,Drôme,84 - Auvergne-Rhône-Alpes,lentille,2013,3,42.0,9.0,378,False,43,True
+26,Drôme,84 - Auvergne-Rhône-Alpes,lentille,2014,3,45.0,7.0,315,False,43,True
+26,Drôme,84 - Auvergne-Rhône-Alpes,lentille,2015,3,45.0,6.0,270,False,43,True
+26,Drôme,84 - Auvergne-Rhône-Alpes,lentille,2016,3,46.0,5.0,230,False,43,True
+26,Drôme,84 - Auvergne-Rhône-Alpes,lentille,2017,3,76.0,8.0,608,False,43,True
+26,Drôme,84 - Auvergne-Rhône-Alpes,lentille,2018,3,81.0,7.0,567,False,43,True
+26,Drôme,84 - Auvergne-Rhône-Alpes,lentille,2019,3,85.0,8.0,680,False,43,True
+26,Drôme,84 - Auvergne-Rhône-Alpes,lentille,2020,3,85.0,5.4,459,False,43,True
+26,Drôme,84 - Auvergne-Rhône-Alpes,lentille,2021,3,85.0,3.51,298,False,43,True
+26,Drôme,84 - Auvergne-Rhône-Alpes,lentille,2022,3,85.0,4.31,366,False,43,True
+26,Drôme,84 - Auvergne-Rhône-Alpes,lentille,2023,3,82.0,5.04,413,False,43,True
+26,Drôme,84 - Auvergne-Rhône-Alpes,lentille,2024,3,93.0,6.65,618,False,43,True
+26,Drôme,84 - Auvergne-Rhône-Alpes,lentille,2025,3,100.0,6.0,595,False,43,True
 38,Isère,84 - Auvergne-Rhône-Alpes,ble,2010,1,30238.0,61.0,1844518,True,38,False
 38,Isère,84 - Auvergne-Rhône-Alpes,ble,2011,1,29600.0,52.0,1539200,True,38,False
 38,Isère,84 - Auvergne-Rhône-Alpes,ble,2012,1,30460.0,62.0,1888520,True,38,False
@@ -2575,22 +2575,22 @@ dep,dep_nom,region,culture,annee,statut,surface_ha,rendement_qha,production_q,ut
 38,Isère,84 - Auvergne-Rhône-Alpes,ble,2023,1,28700.0,62.0,1779400,True,38,False
 38,Isère,84 - Auvergne-Rhône-Alpes,ble,2024,1,25500.0,55.0,1402500,True,38,False
 38,Isère,84 - Auvergne-Rhône-Alpes,ble,2025,1,28850.0,63.0,1817550,True,38,False
-38,Isère,84 - Auvergne-Rhône-Alpes,lentille,2010,3,0.0,,0,False,38,False
-38,Isère,84 - Auvergne-Rhône-Alpes,lentille,2011,3,25.0,10.0,250,False,38,False
-38,Isère,84 - Auvergne-Rhône-Alpes,lentille,2012,3,51.0,9.0,459,False,38,False
-38,Isère,84 - Auvergne-Rhône-Alpes,lentille,2013,3,76.0,9.0,684,False,38,False
-38,Isère,84 - Auvergne-Rhône-Alpes,lentille,2014,3,91.0,7.0,637,False,38,False
-38,Isère,84 - Auvergne-Rhône-Alpes,lentille,2015,3,107.0,6.0,642,False,38,False
-38,Isère,84 - Auvergne-Rhône-Alpes,lentille,2016,3,142.0,5.0,710,False,38,False
-38,Isère,84 - Auvergne-Rhône-Alpes,lentille,2017,3,147.0,8.0,1176,False,38,False
-38,Isère,84 - Auvergne-Rhône-Alpes,lentille,2018,3,172.0,7.0,1204,False,38,False
-38,Isère,84 - Auvergne-Rhône-Alpes,lentille,2019,3,208.0,8.0,1664,False,38,False
-38,Isère,84 - Auvergne-Rhône-Alpes,lentille,2020,3,218.0,5.4,1177,False,38,False
-38,Isère,84 - Auvergne-Rhône-Alpes,lentille,2021,3,215.0,3.5,753,False,38,False
-38,Isère,84 - Auvergne-Rhône-Alpes,lentille,2022,3,215.0,4.3,925,False,38,False
-38,Isère,84 - Auvergne-Rhône-Alpes,lentille,2023,3,207.0,5.04,1043,False,38,False
-38,Isère,84 - Auvergne-Rhône-Alpes,lentille,2024,3,235.0,6.64,1560,False,38,False
-38,Isère,84 - Auvergne-Rhône-Alpes,lentille,2025,3,253.0,5.9,1501,False,38,False
+38,Isère,84 - Auvergne-Rhône-Alpes,lentille,2010,3,0.0,,0,False,43,True
+38,Isère,84 - Auvergne-Rhône-Alpes,lentille,2011,3,25.0,10.0,250,False,43,True
+38,Isère,84 - Auvergne-Rhône-Alpes,lentille,2012,3,51.0,9.0,459,False,43,True
+38,Isère,84 - Auvergne-Rhône-Alpes,lentille,2013,3,76.0,9.0,684,False,43,True
+38,Isère,84 - Auvergne-Rhône-Alpes,lentille,2014,3,91.0,7.0,637,False,43,True
+38,Isère,84 - Auvergne-Rhône-Alpes,lentille,2015,3,107.0,6.0,642,False,43,True
+38,Isère,84 - Auvergne-Rhône-Alpes,lentille,2016,3,142.0,5.0,710,False,43,True
+38,Isère,84 - Auvergne-Rhône-Alpes,lentille,2017,3,147.0,8.0,1176,False,43,True
+38,Isère,84 - Auvergne-Rhône-Alpes,lentille,2018,3,172.0,7.0,1204,False,43,True
+38,Isère,84 - Auvergne-Rhône-Alpes,lentille,2019,3,208.0,8.0,1664,False,43,True
+38,Isère,84 - Auvergne-Rhône-Alpes,lentille,2020,3,218.0,5.4,1177,False,43,True
+38,Isère,84 - Auvergne-Rhône-Alpes,lentille,2021,3,215.0,3.5,753,False,43,True
+38,Isère,84 - Auvergne-Rhône-Alpes,lentille,2022,3,215.0,4.3,925,False,43,True
+38,Isère,84 - Auvergne-Rhône-Alpes,lentille,2023,3,207.0,5.04,1043,False,43,True
+38,Isère,84 - Auvergne-Rhône-Alpes,lentille,2024,3,235.0,6.64,1560,False,43,True
+38,Isère,84 - Auvergne-Rhône-Alpes,lentille,2025,3,253.0,5.9,1501,False,43,True
 42,Loire,84 - Auvergne-Rhône-Alpes,ble,2010,1,10465.0,59.0,617435,True,42,False
 42,Loire,84 - Auvergne-Rhône-Alpes,ble,2011,1,9875.0,44.0,434500,True,42,False
 42,Loire,84 - Auvergne-Rhône-Alpes,ble,2012,1,9995.0,60.0,599700,True,42,False
@@ -2607,22 +2607,22 @@ dep,dep_nom,region,culture,annee,statut,surface_ha,rendement_qha,production_q,ut
 42,Loire,84 - Auvergne-Rhône-Alpes,ble,2023,1,10150.0,55.0,558250,True,42,False
 42,Loire,84 - Auvergne-Rhône-Alpes,ble,2024,1,10080.0,52.0,524160,True,42,False
 42,Loire,84 - Auvergne-Rhône-Alpes,ble,2025,1,10250.0,55.0,563750,True,42,False
-42,Loire,84 - Auvergne-Rhône-Alpes,lentille,2010,3,0.0,,0,False,42,False
-42,Loire,84 - Auvergne-Rhône-Alpes,lentille,2011,3,4.0,10.0,40,False,42,False
-42,Loire,84 - Auvergne-Rhône-Alpes,lentille,2012,3,7.0,9.0,63,False,42,False
-42,Loire,84 - Auvergne-Rhône-Alpes,lentille,2013,3,11.0,9.0,99,False,42,False
-42,Loire,84 - Auvergne-Rhône-Alpes,lentille,2014,3,15.0,7.0,105,False,42,False
-42,Loire,84 - Auvergne-Rhône-Alpes,lentille,2015,3,19.0,6.0,114,False,42,False
-42,Loire,84 - Auvergne-Rhône-Alpes,lentille,2016,3,22.0,5.0,110,False,42,False
-42,Loire,84 - Auvergne-Rhône-Alpes,lentille,2017,3,26.0,8.0,208,False,42,False
-42,Loire,84 - Auvergne-Rhône-Alpes,lentille,2018,3,30.0,7.0,210,False,42,False
-42,Loire,84 - Auvergne-Rhône-Alpes,lentille,2019,3,33.0,8.0,264,False,42,False
-42,Loire,84 - Auvergne-Rhône-Alpes,lentille,2020,3,52.0,5.29,275,False,42,False
-42,Loire,84 - Auvergne-Rhône-Alpes,lentille,2021,3,50.0,3.5,175,False,42,False
-42,Loire,84 - Auvergne-Rhône-Alpes,lentille,2022,3,50.0,4.3,215,False,42,False
-42,Loire,84 - Auvergne-Rhône-Alpes,lentille,2023,3,48.0,5.04,242,False,42,False
-42,Loire,84 - Auvergne-Rhône-Alpes,lentille,2024,3,54.0,6.7,362,False,42,False
-42,Loire,84 - Auvergne-Rhône-Alpes,lentille,2025,3,58.0,6.0,348,False,42,False
+42,Loire,84 - Auvergne-Rhône-Alpes,lentille,2010,3,0.0,,0,False,43,True
+42,Loire,84 - Auvergne-Rhône-Alpes,lentille,2011,3,4.0,10.0,40,False,43,True
+42,Loire,84 - Auvergne-Rhône-Alpes,lentille,2012,3,7.0,9.0,63,False,43,True
+42,Loire,84 - Auvergne-Rhône-Alpes,lentille,2013,3,11.0,9.0,99,False,43,True
+42,Loire,84 - Auvergne-Rhône-Alpes,lentille,2014,3,15.0,7.0,105,False,43,True
+42,Loire,84 - Auvergne-Rhône-Alpes,lentille,2015,3,19.0,6.0,114,False,43,True
+42,Loire,84 - Auvergne-Rhône-Alpes,lentille,2016,3,22.0,5.0,110,False,43,True
+42,Loire,84 - Auvergne-Rhône-Alpes,lentille,2017,3,26.0,8.0,208,False,43,True
+42,Loire,84 - Auvergne-Rhône-Alpes,lentille,2018,3,30.0,7.0,210,False,43,True
+42,Loire,84 - Auvergne-Rhône-Alpes,lentille,2019,3,33.0,8.0,264,False,43,True
+42,Loire,84 - Auvergne-Rhône-Alpes,lentille,2020,3,52.0,5.29,275,False,43,True
+42,Loire,84 - Auvergne-Rhône-Alpes,lentille,2021,3,50.0,3.5,175,False,43,True
+42,Loire,84 - Auvergne-Rhône-Alpes,lentille,2022,3,50.0,4.3,215,False,43,True
+42,Loire,84 - Auvergne-Rhône-Alpes,lentille,2023,3,48.0,5.04,242,False,43,True
+42,Loire,84 - Auvergne-Rhône-Alpes,lentille,2024,3,54.0,6.7,362,False,43,True
+42,Loire,84 - Auvergne-Rhône-Alpes,lentille,2025,3,58.0,6.0,348,False,43,True
 43,Haute-Loire,84 - Auvergne-Rhône-Alpes,ble,2010,1,13600.0,58.0,788800,True,43,False
 43,Haute-Loire,84 - Auvergne-Rhône-Alpes,ble,2011,1,13195.0,48.0,633360,True,43,False
 43,Haute-Loire,84 - Auvergne-Rhône-Alpes,ble,2012,1,13495.0,54.0,728730,True,43,False
@@ -2671,22 +2671,22 @@ dep,dep_nom,region,culture,annee,statut,surface_ha,rendement_qha,production_q,ut
 63,Puy-de-Dôme,84 - Auvergne-Rhône-Alpes,ble,2023,1,38350.0,66.0,2531100,True,63,False
 63,Puy-de-Dôme,84 - Auvergne-Rhône-Alpes,ble,2024,1,39150.0,62.0,2427300,True,63,False
 63,Puy-de-Dôme,84 - Auvergne-Rhône-Alpes,ble,2025,1,39700.0,64.0,2540800,True,63,False
-63,Puy-de-Dôme,84 - Auvergne-Rhône-Alpes,lentille,2010,2,50.0,9.0,450,True,63,False
-63,Puy-de-Dôme,84 - Auvergne-Rhône-Alpes,lentille,2011,2,76.0,10.0,760,True,63,False
-63,Puy-de-Dôme,84 - Auvergne-Rhône-Alpes,lentille,2012,2,56.0,9.0,504,True,63,False
-63,Puy-de-Dôme,84 - Auvergne-Rhône-Alpes,lentille,2013,2,72.0,9.0,648,True,63,False
-63,Puy-de-Dôme,84 - Auvergne-Rhône-Alpes,lentille,2014,2,92.0,7.0,644,True,63,False
-63,Puy-de-Dôme,84 - Auvergne-Rhône-Alpes,lentille,2015,2,101.0,6.0,606,True,63,False
-63,Puy-de-Dôme,84 - Auvergne-Rhône-Alpes,lentille,2016,2,139.0,5.0,695,True,63,False
-63,Puy-de-Dôme,84 - Auvergne-Rhône-Alpes,lentille,2017,2,184.0,8.0,1472,True,63,False
-63,Puy-de-Dôme,84 - Auvergne-Rhône-Alpes,lentille,2018,2,230.0,7.0,1610,True,63,False
-63,Puy-de-Dôme,84 - Auvergne-Rhône-Alpes,lentille,2019,2,251.0,8.0,2008,True,63,False
-63,Puy-de-Dôme,84 - Auvergne-Rhône-Alpes,lentille,2020,2,347.0,5.4,1874,True,63,False
-63,Puy-de-Dôme,84 - Auvergne-Rhône-Alpes,lentille,2021,2,342.0,3.5,1197,True,63,False
-63,Puy-de-Dôme,84 - Auvergne-Rhône-Alpes,lentille,2022,2,340.0,4.3,1462,True,63,False
-63,Puy-de-Dôme,84 - Auvergne-Rhône-Alpes,lentille,2023,2,340.0,4.8,1632,True,63,False
-63,Puy-de-Dôme,84 - Auvergne-Rhône-Alpes,lentille,2024,2,340.0,14.0,4760,True,63,False
-63,Puy-de-Dôme,84 - Auvergne-Rhône-Alpes,lentille,2025,2,300.0,7.0,2100,True,63,False
+63,Puy-de-Dôme,84 - Auvergne-Rhône-Alpes,lentille,2010,2,50.0,9.0,450,True,43,True
+63,Puy-de-Dôme,84 - Auvergne-Rhône-Alpes,lentille,2011,2,76.0,10.0,760,True,43,True
+63,Puy-de-Dôme,84 - Auvergne-Rhône-Alpes,lentille,2012,2,56.0,9.0,504,True,43,True
+63,Puy-de-Dôme,84 - Auvergne-Rhône-Alpes,lentille,2013,2,72.0,9.0,648,True,43,True
+63,Puy-de-Dôme,84 - Auvergne-Rhône-Alpes,lentille,2014,2,92.0,7.0,644,True,43,True
+63,Puy-de-Dôme,84 - Auvergne-Rhône-Alpes,lentille,2015,2,101.0,6.0,606,True,43,True
+63,Puy-de-Dôme,84 - Auvergne-Rhône-Alpes,lentille,2016,2,139.0,5.0,695,True,43,True
+63,Puy-de-Dôme,84 - Auvergne-Rhône-Alpes,lentille,2017,2,184.0,8.0,1472,True,43,True
+63,Puy-de-Dôme,84 - Auvergne-Rhône-Alpes,lentille,2018,2,230.0,7.0,1610,True,43,True
+63,Puy-de-Dôme,84 - Auvergne-Rhône-Alpes,lentille,2019,2,251.0,8.0,2008,True,43,True
+63,Puy-de-Dôme,84 - Auvergne-Rhône-Alpes,lentille,2020,2,347.0,5.4,1874,True,43,True
+63,Puy-de-Dôme,84 - Auvergne-Rhône-Alpes,lentille,2021,2,342.0,3.5,1197,True,43,True
+63,Puy-de-Dôme,84 - Auvergne-Rhône-Alpes,lentille,2022,2,340.0,4.3,1462,True,43,True
+63,Puy-de-Dôme,84 - Auvergne-Rhône-Alpes,lentille,2023,2,340.0,4.8,1632,True,43,True
+63,Puy-de-Dôme,84 - Auvergne-Rhône-Alpes,lentille,2024,2,340.0,14.0,4760,True,43,True
+63,Puy-de-Dôme,84 - Auvergne-Rhône-Alpes,lentille,2025,2,300.0,7.0,2100,True,43,True
 69,Rhône,84 - Auvergne-Rhône-Alpes,ble,2010,1,10444.0,60.0,626640,True,69,False
 69,Rhône,84 - Auvergne-Rhône-Alpes,ble,2011,1,10175.0,55.0,559625,True,69,False
 69,Rhône,84 - Auvergne-Rhône-Alpes,ble,2012,1,10850.0,61.0,661850,True,69,False
@@ -2703,22 +2703,22 @@ dep,dep_nom,region,culture,annee,statut,surface_ha,rendement_qha,production_q,ut
 69,Rhône,84 - Auvergne-Rhône-Alpes,ble,2023,1,9700.0,66.0,640200,True,69,False
 69,Rhône,84 - Auvergne-Rhône-Alpes,ble,2024,1,8950.0,58.0,519100,True,69,False
 69,Rhône,84 - Auvergne-Rhône-Alpes,ble,2025,1,9750.0,66.0,643500,True,69,False
-69,Rhône,84 - Auvergne-Rhône-Alpes,lentille,2010,3,0.0,,0,False,69,False
-69,Rhône,84 - Auvergne-Rhône-Alpes,lentille,2011,3,5.0,10.0,50,False,69,False
-69,Rhône,84 - Auvergne-Rhône-Alpes,lentille,2012,3,11.0,9.0,99,False,69,False
-69,Rhône,84 - Auvergne-Rhône-Alpes,lentille,2013,3,16.0,9.0,144,False,69,False
-69,Rhône,84 - Auvergne-Rhône-Alpes,lentille,2014,3,22.0,7.0,154,False,69,False
-69,Rhône,84 - Auvergne-Rhône-Alpes,lentille,2015,3,27.0,6.0,162,False,69,False
-69,Rhône,84 - Auvergne-Rhône-Alpes,lentille,2016,3,32.0,5.0,160,False,69,False
-69,Rhône,84 - Auvergne-Rhône-Alpes,lentille,2017,3,38.0,8.0,304,False,69,False
-69,Rhône,84 - Auvergne-Rhône-Alpes,lentille,2018,3,43.0,7.0,301,False,69,False
-69,Rhône,84 - Auvergne-Rhône-Alpes,lentille,2019,3,51.0,8.0,408,False,69,False
-69,Rhône,84 - Auvergne-Rhône-Alpes,lentille,2020,3,56.0,5.39,302,False,69,False
-69,Rhône,84 - Auvergne-Rhône-Alpes,lentille,2021,3,50.0,3.5,175,False,69,False
-69,Rhône,84 - Auvergne-Rhône-Alpes,lentille,2022,3,50.0,4.3,215,False,69,False
-69,Rhône,84 - Auvergne-Rhône-Alpes,lentille,2023,3,48.0,5.04,242,False,69,False
-69,Rhône,84 - Auvergne-Rhône-Alpes,lentille,2024,3,54.0,6.7,362,False,69,False
-69,Rhône,84 - Auvergne-Rhône-Alpes,lentille,2025,3,58.0,6.0,348,False,69,False
+69,Rhône,84 - Auvergne-Rhône-Alpes,lentille,2010,3,0.0,,0,False,43,True
+69,Rhône,84 - Auvergne-Rhône-Alpes,lentille,2011,3,5.0,10.0,50,False,43,True
+69,Rhône,84 - Auvergne-Rhône-Alpes,lentille,2012,3,11.0,9.0,99,False,43,True
+69,Rhône,84 - Auvergne-Rhône-Alpes,lentille,2013,3,16.0,9.0,144,False,43,True
+69,Rhône,84 - Auvergne-Rhône-Alpes,lentille,2014,3,22.0,7.0,154,False,43,True
+69,Rhône,84 - Auvergne-Rhône-Alpes,lentille,2015,3,27.0,6.0,162,False,43,True
+69,Rhône,84 - Auvergne-Rhône-Alpes,lentille,2016,3,32.0,5.0,160,False,43,True
+69,Rhône,84 - Auvergne-Rhône-Alpes,lentille,2017,3,38.0,8.0,304,False,43,True
+69,Rhône,84 - Auvergne-Rhône-Alpes,lentille,2018,3,43.0,7.0,301,False,43,True
+69,Rhône,84 - Auvergne-Rhône-Alpes,lentille,2019,3,51.0,8.0,408,False,43,True
+69,Rhône,84 - Auvergne-Rhône-Alpes,lentille,2020,3,56.0,5.39,302,False,43,True
+69,Rhône,84 - Auvergne-Rhône-Alpes,lentille,2021,3,50.0,3.5,175,False,43,True
+69,Rhône,84 - Auvergne-Rhône-Alpes,lentille,2022,3,50.0,4.3,215,False,43,True
+69,Rhône,84 - Auvergne-Rhône-Alpes,lentille,2023,3,48.0,5.04,242,False,43,True
+69,Rhône,84 - Auvergne-Rhône-Alpes,lentille,2024,3,54.0,6.7,362,False,43,True
+69,Rhône,84 - Auvergne-Rhône-Alpes,lentille,2025,3,58.0,6.0,348,False,43,True
 73,Savoie,84 - Auvergne-Rhône-Alpes,ble,2010,1,1154.0,60.0,69240,True,73,False
 73,Savoie,84 - Auvergne-Rhône-Alpes,ble,2011,1,950.0,55.0,52250,True,73,False
 73,Savoie,84 - Auvergne-Rhône-Alpes,ble,2012,1,1030.0,65.0,66950,True,73,False
@@ -2975,22 +2975,22 @@ dep,dep_nom,region,culture,annee,statut,surface_ha,rendement_qha,production_q,ut
 84,Vaucluse,93 - Provence-Alpes-Côte d'Azur,lentille,2023,3,35.0,16.91,592,False,84,False
 84,Vaucluse,93 - Provence-Alpes-Côte d'Azur,lentille,2024,3,40.0,22.12,885,False,84,False
 84,Vaucluse,93 - Provence-Alpes-Côte d'Azur,lentille,2025,3,43.0,19.8,852,False,84,False
-2A,Corse-du-Sud,94 - Corse,ble,2010,1,0.0,,0,False,2A,False
-2A,Corse-du-Sud,94 - Corse,ble,2011,1,0.0,,0,False,2A,False
-2A,Corse-du-Sud,94 - Corse,ble,2012,1,0.0,,0,False,2A,False
-2A,Corse-du-Sud,94 - Corse,ble,2013,1,0.0,,0,False,2A,False
-2A,Corse-du-Sud,94 - Corse,ble,2014,1,0.0,,0,False,2A,False
-2A,Corse-du-Sud,94 - Corse,ble,2015,1,0.0,,0,False,2A,False
-2A,Corse-du-Sud,94 - Corse,ble,2016,1,1.0,30.0,30,False,2A,False
-2A,Corse-du-Sud,94 - Corse,ble,2017,1,1.0,35.0,35,False,2A,False
-2A,Corse-du-Sud,94 - Corse,ble,2018,1,1.0,35.0,35,False,2A,False
-2A,Corse-du-Sud,94 - Corse,ble,2019,1,2.0,40.0,80,False,2A,False
-2A,Corse-du-Sud,94 - Corse,ble,2020,1,2.0,35.0,70,False,2A,False
-2A,Corse-du-Sud,94 - Corse,ble,2021,1,2.0,65.0,130,False,2A,False
-2A,Corse-du-Sud,94 - Corse,ble,2022,1,3.0,65.0,195,False,2A,False
-2A,Corse-du-Sud,94 - Corse,ble,2023,1,3.0,40.0,120,False,2A,False
-2A,Corse-du-Sud,94 - Corse,ble,2024,1,3.0,45.0,135,False,2A,False
-2A,Corse-du-Sud,94 - Corse,ble,2025,1,2.0,50.0,100,False,2A,False
+2A,Corse-du-Sud,94 - Corse,ble,2010,1,0.0,,0,False,2B,True
+2A,Corse-du-Sud,94 - Corse,ble,2011,1,0.0,,0,False,2B,True
+2A,Corse-du-Sud,94 - Corse,ble,2012,1,0.0,,0,False,2B,True
+2A,Corse-du-Sud,94 - Corse,ble,2013,1,0.0,,0,False,2B,True
+2A,Corse-du-Sud,94 - Corse,ble,2014,1,0.0,,0,False,2B,True
+2A,Corse-du-Sud,94 - Corse,ble,2015,1,0.0,,0,False,2B,True
+2A,Corse-du-Sud,94 - Corse,ble,2016,1,1.0,30.0,30,False,2B,True
+2A,Corse-du-Sud,94 - Corse,ble,2017,1,1.0,35.0,35,False,2B,True
+2A,Corse-du-Sud,94 - Corse,ble,2018,1,1.0,35.0,35,False,2B,True
+2A,Corse-du-Sud,94 - Corse,ble,2019,1,2.0,40.0,80,False,2B,True
+2A,Corse-du-Sud,94 - Corse,ble,2020,1,2.0,35.0,70,False,2B,True
+2A,Corse-du-Sud,94 - Corse,ble,2021,1,2.0,65.0,130,False,2B,True
+2A,Corse-du-Sud,94 - Corse,ble,2022,1,3.0,65.0,195,False,2B,True
+2A,Corse-du-Sud,94 - Corse,ble,2023,1,3.0,40.0,120,False,2B,True
+2A,Corse-du-Sud,94 - Corse,ble,2024,1,3.0,45.0,135,False,2B,True
+2A,Corse-du-Sud,94 - Corse,ble,2025,1,2.0,50.0,100,False,2B,True
 2A,Corse-du-Sud,94 - Corse,lentille,2010,3,0.0,,0,False,2A,False
 2A,Corse-du-Sud,94 - Corse,lentille,2011,3,0.0,,0,False,2A,False
 2A,Corse-du-Sud,94 - Corse,lentille,2012,3,0.0,,0,False,2A,False
@@ -3007,22 +3007,22 @@ dep,dep_nom,region,culture,annee,statut,surface_ha,rendement_qha,production_q,ut
 2A,Corse-du-Sud,94 - Corse,lentille,2023,3,0.0,,0,False,2A,False
 2A,Corse-du-Sud,94 - Corse,lentille,2024,3,0.0,,0,False,2A,False
 2A,Corse-du-Sud,94 - Corse,lentille,2025,3,0.0,,0,False,2A,False
-2B,Haute-Corse,94 - Corse,ble,2010,1,72.0,30.0,2160,True,2A,True
-2B,Haute-Corse,94 - Corse,ble,2011,1,80.0,30.0,2400,True,2A,True
-2B,Haute-Corse,94 - Corse,ble,2012,1,64.0,35.0,2240,True,2A,True
-2B,Haute-Corse,94 - Corse,ble,2013,1,117.0,35.0,4095,True,2A,True
-2B,Haute-Corse,94 - Corse,ble,2014,1,126.0,35.0,4410,True,2A,True
-2B,Haute-Corse,94 - Corse,ble,2015,1,100.0,35.0,3500,True,2A,True
-2B,Haute-Corse,94 - Corse,ble,2016,1,69.0,30.0,2070,True,2A,True
-2B,Haute-Corse,94 - Corse,ble,2017,1,64.0,35.0,2240,True,2A,True
-2B,Haute-Corse,94 - Corse,ble,2018,1,53.0,35.0,1855,True,2A,True
-2B,Haute-Corse,94 - Corse,ble,2019,1,96.0,40.0,3840,True,2A,True
-2B,Haute-Corse,94 - Corse,ble,2020,1,70.0,35.0,2450,True,2A,True
-2B,Haute-Corse,94 - Corse,ble,2021,1,97.0,65.0,6305,True,2A,True
-2B,Haute-Corse,94 - Corse,ble,2022,1,80.0,65.0,5200,True,2A,True
-2B,Haute-Corse,94 - Corse,ble,2023,1,60.0,40.0,2400,True,2A,True
-2B,Haute-Corse,94 - Corse,ble,2024,1,55.0,45.0,2475,True,2A,True
-2B,Haute-Corse,94 - Corse,ble,2025,1,75.0,50.0,3750,True,2A,True
+2B,Haute-Corse,94 - Corse,ble,2010,1,72.0,30.0,2160,True,2B,False
+2B,Haute-Corse,94 - Corse,ble,2011,1,80.0,30.0,2400,True,2B,False
+2B,Haute-Corse,94 - Corse,ble,2012,1,64.0,35.0,2240,True,2B,False
+2B,Haute-Corse,94 - Corse,ble,2013,1,117.0,35.0,4095,True,2B,False
+2B,Haute-Corse,94 - Corse,ble,2014,1,126.0,35.0,4410,True,2B,False
+2B,Haute-Corse,94 - Corse,ble,2015,1,100.0,35.0,3500,True,2B,False
+2B,Haute-Corse,94 - Corse,ble,2016,1,69.0,30.0,2070,True,2B,False
+2B,Haute-Corse,94 - Corse,ble,2017,1,64.0,35.0,2240,True,2B,False
+2B,Haute-Corse,94 - Corse,ble,2018,1,53.0,35.0,1855,True,2B,False
+2B,Haute-Corse,94 - Corse,ble,2019,1,96.0,40.0,3840,True,2B,False
+2B,Haute-Corse,94 - Corse,ble,2020,1,70.0,35.0,2450,True,2B,False
+2B,Haute-Corse,94 - Corse,ble,2021,1,97.0,65.0,6305,True,2B,False
+2B,Haute-Corse,94 - Corse,ble,2022,1,80.0,65.0,5200,True,2B,False
+2B,Haute-Corse,94 - Corse,ble,2023,1,60.0,40.0,2400,True,2B,False
+2B,Haute-Corse,94 - Corse,ble,2024,1,55.0,45.0,2475,True,2B,False
+2B,Haute-Corse,94 - Corse,ble,2025,1,75.0,50.0,3750,True,2B,False
 2B,Haute-Corse,94 - Corse,lentille,2010,3,0.0,,0,False,2B,False
 2B,Haute-Corse,94 - Corse,lentille,2011,3,0.0,,0,False,2B,False
 2B,Haute-Corse,94 - Corse,lentille,2012,3,0.0,,0,False,2B,False

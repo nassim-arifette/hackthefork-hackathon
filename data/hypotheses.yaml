@@ -1,31 +1,34 @@
-# Toutes les valeurs non mesurées du projet, au même endroit.
+# Toutes les valeurs qui ne sont pas des données mesurées du pipeline, au même endroit.
 # etiquette : mesure | source | suppose | synthetique
-# Les valeurs « provisoire » sont des ordres de grandeur de l'équipe, à remplacer
-# par des références sourcées (Arvalis, Terres Inovia, chambres d'agriculture,
-# FranceAgriMer). Elles sont affichées comme « supposé » dans l'application.
+# Le prix du blé n'est plus une hypothèse : c'est la série data/prix_ble.csv
+# (indice Eurostat mesuré, calé en niveau sur Agreste), rééchantillonnée avec l'année météo.
 
-prix_ble_eur_t:
-  valeur: 200
-  etiquette: suppose
-  source: "provisoire, à remplacer par une série FranceAgriMer ou Agreste"
-  sensibilite: [160, 200, 240, 280]
 charges_ble_eur_ha:
-  valeur: 650
-  etiquette: suppose
-  source: "provisoire : charges opérationnelles (semences, engrais, phytos), à sourcer"
+  valeur: 440
+  etiquette: source
+  source: "Arvalis, charges opérationnelles du blé tendre en 2020 (semences, engrais, phytos)"
+  url: "https://www.terre-net.fr/syndicalisme-agricole/article/223927/les-couts-de-production-ne-seront-pas-couverts-en-2023-alertent-les-cerealiers"
+  sensibilite: [440, 520, 600]
 charges_lentille_eur_ha:
-  valeur: 350
-  etiquette: suppose
-  source: "provisoire : charges opérationnelles, sans engrais azoté, à sourcer (Terres Inovia)"
+  valeur: 280
+  etiquette: source
+  source: "Triple Performance, fiche lentille : semences 120, fertilisation 30, herbicides 80, fongicides 40, insecticides 10 €/ha (valeurs indicatives)"
+  url: "https://wiki.tripleperformance.fr/wiki/Lentille"
+  sensibilite: [230, 280, 340]
+aide_couplee_eur_ha:
+  valeur: 122
+  etiquette: source
+  source: "Aide couplée aux légumineuses à graines, campagne 2025, arrêté du 24 février 2026 (éligibilité de la lentille à confirmer)"
+  url: "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000053594055"
 bonus_rotation_eur_ha:
   valeur: 0
   etiquette: suppose
-  source: "0 par prudence tant que l'effet précédent de la lentille n'est pas sourcé"
+  source: "0 par prudence tant que l'effet précédent de la lentille n'est pas sourcé (pour le pois : +7 q/ha et −33 kg N/ha sur le blé suivant)"
   sensibilite: [0, 100, 200]
 cout_transport_eur_t_km:
   valeur: 0.12
   etiquette: suppose
-  source: "provisoire, à sourcer"
+  source: "ordre de grandeur de l'équipe, à sourcer"
 facteur_detour_route:
   valeur: 1.3
   etiquette: suppose
@@ -34,6 +37,10 @@ fiabilite_visee:
   valeur: 0.8
   etiquette: suppose
   source: "choix de l'équipe : 8 années sur 10"
+volume_vise_t:
+  valeur: 5000
+  etiquette: suppose
+  source: "ambition d'un premier contrat de filière, environ 13 % des importations 2025 ; à fixer avec la coopérative"
 site_acheteur:
   valeur: [2.95, 48.55]
   etiquette: synthetique

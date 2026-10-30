@@ -52,28 +52,41 @@ def to_long(cop: pd.DataFrame) -> pd.DataFrame:
 
 
 def flag_duplicates(df: pd.DataFrame) -> pd.DataFrame:
-    """Repère les départements dont la série de rendement est identique à une autre.
+    """Repère les départements dont la série de rendement vient d'une même estimation.
 
-    Deux séries sont jugées identiques si elles coïncident sur au moins 8 années
-    renseignées. Le premier département (ordre du code) représente le groupe.
+    Agreste estime souvent le rendement de la lentille au niveau régional : plusieurs
+    départements partagent alors exactement les mêmes valeurs. Deux séries identiques à
+    0,01 q/ha près sur au moins 8 années sont regroupées (Aube et Marne : 11 années sur 16).
+    Le département le plus cultivé représente le groupe ; les autres sont marqués
+    « doublon » et écartés de l'entraînement, pour ne pas compter deux fois la même mesure.
     """
     df["serie_groupe"] = df["dep"]
     for cult in df["culture"].unique():
-        wide = (df[df.culture == cult]
-                .pivot(index="dep", columns="annee", values="rendement_qha").round(2))
+        sub = df[df.culture == cult]
+        wide = sub.pivot(index="dep", columns="annee", values="rendement_qha").round(2)
+        area = sub.groupby("dep").surface_ha.mean()
         deps = sorted(wide.index)
-        rep = {}
+        parent = {d: d for d in deps}
+
+        def find(d):
+            while parent[d] != d:
+                d = parent[d]
+            return d
+
         for i, a in enumerate(deps):
-            if a in rep:
-                continue
             for b in deps[i + 1:]:
-                if b in rep:
-                    continue
                 both = wide.loc[a].notna() & wide.loc[b].notna() & (wide.loc[a] > 0)
-                if both.sum() >= 8 and (wide.loc[a][both] == wide.loc[b][both]).all():
-                    rep[b] = a
+                if int((wide.loc[a][both] == wide.loc[b][both]).sum()) >= 8:
+                    parent[find(b)] = find(a)
+        groups = {}
+        for d in deps:
+            groups.setdefault(find(d), []).append(d)
+        rep = {}
+        for members in groups.values():
+            head = max(members, key=lambda d: area.get(d, 0))
+            rep.update({d: head for d in members})
         mask = df.culture == cult
-        df.loc[mask, "serie_groupe"] = df.loc[mask, "dep"].map(lambda d: rep.get(d, d))
+        df.loc[mask, "serie_groupe"] = df.loc[mask, "dep"].map(rep)
     return df
 
 

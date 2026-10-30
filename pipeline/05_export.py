@@ -1,7 +1,7 @@
 """Modèle final, prix plancher par département et par parcelle, exports pour l'application.
 
-Le modèle final est entraîné sur 2010-2025. P* est calculé pour la campagne 2026 en
-rejouant les années météo 2010-2025 de chaque département d'Île-de-France.
+Le modèle final (M1 calibré) est entraîné sur 2010-2025. P* est calculé pour la campagne
+2026 en rejouant les années 2010-2025 : leur météo et leur prix du blé.
 Sorties : app/src/data/*.json, lus tels quels par le front.
 """
 import json
@@ -9,12 +9,36 @@ import json
 import numpy as np
 import pandas as pd
 
-from common import APP_DATA, DATA, IDF_AGRI, VOISINS_LENTILLE, hypotheses
-from model import Calibrated, break_even_prices, hyp_values, levels, load, p_star, pool_for, \
-    with_rel
+from common import APP_DATA, DATA, IDF_AGRI, RAW, VOISINS_LENTILLE, hypotheses
+from model import FEATURES, Calibrated, break_even_prices, hyp_values, levels, levels_lookup, load, \
+    p_star, pool_for, with_rel
 
 TARGET_YEAR = 2026
+POOL_YEARS = range(2010, 2026)
 PRICE_GRID = list(range(400, 3001, 10))
+N_SIM = 20000
+
+
+def simulate(meteo, dep, mL, mW, levL, levW, h, seed):
+    pool = pool_for(meteo, dep, POOL_YEARS, TARGET_YEAR)
+    R, yL, yW = break_even_prices(pool, mL, mW, levL, levW, h, n=N_SIM, seed=seed)
+    return R, yL, yW, pool
+
+
+def bootstrap_p_star(df, meteo, dep, lev_l, lev_w, h, B=40, seed=0):
+    """Incertitude sur P* : on rééchantillonne les années d'entraînement (par blocs d'une
+    année entière), on réentraîne les deux modèles et on recalcule P*."""
+    rng = np.random.default_rng(seed)
+    years = np.array(sorted(df.annee.unique()))
+    out = []
+    for b in range(B):
+        d = pd.concat([df[df.annee == y] for y in rng.choice(years, size=len(years), replace=True)])
+        Lb, Wb = d[d.culture == "lentille"], d[d.culture == "ble"]
+        mLb = Calibrated("M1").fit(with_rel(Lb, levels(Lb)))
+        mWb = Calibrated("M1").fit(with_rel(Wb, levels(Wb)))
+        R, _, _, _ = simulate(meteo, dep, mLb, mWb, lev_l, lev_w, h, seed=1000 + b)
+        out.append(p_star(R, h["tau"]))
+    return [round(float(np.quantile(out, q))) for q in (0.1, 0.5, 0.9)]
 
 
 def main():
@@ -29,13 +53,15 @@ def main():
     levL, levW = levels(L), levels(W)
     mL = Calibrated("M1").fit(with_rel(L, levL))
     mW = Calibrated("M1").fit(with_rel(W, levW))
-    voisins = [d for d in VOISINS_LENTILLE if d in levL.index]
-    lev_idf = float(levL[voisins].mean())
+    # Pour la consultation (Île-de-France, voisins), on garde tous les départements mesurés.
+    levW_all, levL_all = levels_lookup("ble"), levels_lookup("lentille")
+    voisins = [d for d in VOISINS_LENTILLE if d in levL_all.index]
+    lev_idf = float(levL_all[voisins].mean())
+    prix = pd.read_csv(DATA / "prix_ble.csv").set_index("annee").prix_eur_t
 
     deps = {}
     for dep in IDF_AGRI:
-        pool = pool_for(meteo, dep, range(2010, 2026), TARGET_YEAR)
-        R, yL, yW = break_even_prices(pool, mL, mW, lev_idf, levW[dep], h, n=20000, seed=int(dep))
+        R, yL, yW, _ = simulate(meteo, dep, mL, mW, lev_idf, levW_all[dep], h, seed=int(dep))
         deps[dep] = {
             "dep": dep,
             "p_star": round(p_star(R, h["tau"])),
@@ -43,33 +69,72 @@ def main():
             "rendement_lentille_moyen_tha": round(float(yL.mean()), 2),
             "rendement_lentille_q10_tha": round(float(np.quantile(yL, 0.1)), 2),
             "rendement_ble_moyen_tha": round(float(yW.mean()), 2),
-            "niveau_ble_qha": round(float(levW[dep]), 1),
+            "niveau_ble_qha": round(float(levW_all[dep]), 1),
             "fiabilite_par_prix": [{"prix": p, "fiabilite": round(float(np.mean(R <= p)), 3)}
-                                   for p in range(400, 3001, 50)],
+                                   for p in range(400, 3001, 25)],
         }
         print(dep, {k: v for k, v in deps[dep].items() if k != "fiabilite_par_prix"})
 
+    # Challenger LightGBM : même calcul, autre modèle de rendement, et ce qu'il a appris.
+    mL2 = Calibrated("M2").fit(with_rel(L, levL))
+    R2, _, _, _ = simulate(meteo, "77", mL2, mW, lev_idf, levW_all["77"], h, seed=77)
+    gain = mL2.model.models[1].booster_.feature_importance(importance_type="gain")
+    importances = sorted(({"variable": f, "part": round(float(g / gain.sum()), 3)}
+                          for f, g in zip(FEATURES, gain)), key=lambda x: -x["part"])
+    challenger = {"p_star_77": round(p_star(R2, h["tau"])), "importances_q50": importances,
+                  "elargissement_conformal": round(mL2.qhat, 3)}
+    print("Challenger LightGBM :", challenger)
+
+    ic77 = bootstrap_p_star(df, meteo, "77", lev_idf, levW_all["77"], h)
+    deps["77"]["p_star_ic80"] = [ic77[0], ic77[2]]
+    print("Incertitude P* 77 (bootstrap, 10-50-90 %) :", ic77)
+
+    # Contrat indexé : plancher = m × prix du blé de la récolte. m* au quantile τ.
+    R77, yL77, yW77, pool77 = simulate(meteo, "77", mL, mW, lev_idf, levW_all["77"], h, seed=77)
+    rng = np.random.default_rng(77)
+    s = rng.integers(0, len(pool77), N_SIM)
+    pB = pool77.prix_ble.to_numpy()[s]
+    m_ratio = ((pB * yW77 - h["charges_ble"] + h["charges_lentille"] - h["bonus"]) / yL77) / pB
+    indexe = {"m_star": round(float(np.quantile(m_ratio, h["tau"])), 2),
+              "m_median": round(float(np.quantile(m_ratio, 0.5)), 2)}
+
     # Sensibilités (Seine-et-Marne).
-    pool77 = pool_for(meteo, "77", range(2010, 2026), TARGET_YEAR)
     def ps77(**kw):
         hh = h | kw
-        R, _, _ = break_even_prices(pool77, mL, mW, lev_idf, levW["77"], hh, n=20000, seed=77)
+        hh["bonus"] = hh["aide"] + hh["rotation"]
+        R, _, _, _ = simulate(meteo, "77", mL, mW, lev_idf, levW_all["77"], hh, seed=77)
         return round(p_star(R, hh["tau"]))
     sens = {
         "fiabilite": [{"x": t, "p_star": ps77(tau=t)} for t in np.round(np.arange(0.5, 0.96, 0.05), 2).tolist()],
-        "prix_ble": [{"x": p, "p_star": ps77(prix_ble=p)} for p in H["prix_ble_eur_t"]["sensibilite"]],
-        "bonus_rotation": [{"x": b, "p_star": ps77(bonus=b)} for b in H["bonus_rotation_eur_ha"]["sensibilite"]],
-        "charges_lentille": [{"x": round(h["charges_lentille"] * f), "p_star": ps77(charges_lentille=h["charges_lentille"] * f)}
-                             for f in (0.8, 1.0, 1.2)],
+        "prix_ble_fixe": [{"x": p, "p_star": ps77(prix_ble=p)} for p in (160, 200, 240, 280)],
+        "charges_ble": [{"x": c, "p_star": ps77(charges_ble=c)} for c in H["charges_ble_eur_ha"]["sensibilite"]],
+        "charges_lentille": [{"x": c, "p_star": ps77(charges_lentille=c)} for c in H["charges_lentille_eur_ha"]["sensibilite"]],
+        "bonus_rotation": [{"x": b, "p_star": ps77(rotation=b)} for b in H["bonus_rotation_eur_ha"]["sensibilite"]],
+        "sans_aide": ps77(aide=0),
     }
+
+    # Ailleurs en France : P* des départements producteurs, avec leur propre niveau.
+    # Un département représente les départements dont Agreste estime le rendement avec lui.
+    panel_all = pd.read_csv(DATA / "panel_rendements.csv", dtype={"dep": str, "serie_groupe": str})
+    grp = panel_all[panel_all.culture == "lentille"].drop_duplicates("dep").set_index("dep").serie_groupe
+    noms = panel_all.drop_duplicates("dep").set_index("dep").dep_nom
+    france = []
+    for dep in levL.index:
+        if dep not in levW_all.index or dep not in set(meteo.dep):
+            continue
+        R, yL, _, _ = simulate(meteo, dep, mL, mW, levL[dep], levW_all[dep], h, seed=int(dep[:2], 36))
+        avec = sorted(noms[d] for d in grp[grp == dep].index if d != dep)
+        france.append({"dep": dep, "nom": noms[dep], "avec": avec, "p_star": round(p_star(R, h["tau"])),
+                       "rendement_lentille_qha": round(float(levL[dep]), 1),
+                       "rendement_ble_qha": round(float(levW_all[dep]), 1)})
+    france.sort(key=lambda x: x["p_star"])
 
     # Parcelles : distance au site acheteur et prix rendu de bascule.
     parc = json.loads((DATA / "parcelles.json").read_text())
     lon = np.array([p[4] for p in parc]); lat = np.array([p[5] for p in parc])
-    r = 6371.0
     p1, p2 = np.radians(lat), np.radians(site[1])
     a = np.sin((p2 - p1) / 2) ** 2 + np.cos(p1) * np.cos(p2) * np.sin(np.radians(site[0] - lon) / 2) ** 2
-    dist = 2 * r * np.arcsin(np.sqrt(a)) * detour
+    dist = 2 * 6371.0 * np.arcsin(np.sqrt(a)) * detour
     out_parc = []
     for p, d in zip(parc, dist):
         dep = deps[p[1]]
@@ -86,7 +151,8 @@ def main():
             t_cum += cand[j][6]; ha_cum += cand[j][3]; n_cum += 1; j += 1
         supply.append({"prix": q, "tonnes": round(t_cum), "hectares": round(ha_cum), "parcelles": n_cum})
 
-    # Replay : blé départemental mesuré, lentille = choc national mesuré appliqué au niveau francilien.
+    # Replay : blé départemental et prix du blé mesurés ; lentille = choc national mesuré
+    # appliqué au rendement moyen simulé en Île-de-France.
     panel = pd.read_csv(DATA / "panel_rendements.csv", dtype={"dep": str})
     nat = pd.read_csv(DATA / "rendements_nationaux.csv").pivot(index="annee", columns="culture",
                                                                values="rendement_qha")
@@ -103,21 +169,42 @@ def main():
                 "choc_ble": round(float(b[y] / b[prev].mean() - 1), 3),
                 "rendement_lentille_tha": round(deps[dep]["rendement_lentille_moyen_tha"] * (1 + chocL), 2),
             }
-        replay.append({"annee": y, "choc_lentille_national": round(chocL, 3),
+        replay.append({"annee": y, "prix_ble": round(float(prix[y]), 1),
+                       "choc_lentille_national": round(chocL, 3),
                        "choc_ble_national": round(chocW_nat, 3), "par_departement": par_dep})
 
     bt = json.loads((DATA / "backtest.json").read_text())
-    nat_rows = [{"annee": int(a), "ble": round(float(nat.ble[a]), 1), "lentille": round(float(nat.lentille[a]), 1)}
-                for a in nat.index]
+    commerce = pd.read_csv(DATA / "commerce_lentilles.csv")
+    prix_lent = pd.read_csv(DATA / "prix_lentille_observes.csv")
+    prix_lent = prix_lent[prix_lent.retenu]
+    prod_nat = pd.read_csv(DATA / "rendements_nationaux.csv")
+    prod_lent = prod_nat[prod_nat.culture == "lentille"].set_index("annee")
+    surf_dep = (panel[(panel.culture == "lentille") & (panel.annee == 2025)]
+                .groupby("dep").surface_ha.sum().round().astype(int).to_dict())
+    c25 = commerce.set_index("annee").loc[2025]
     meta = {
         "campagne": TARGET_YEAR,
         "site_acheteur": site,
         "niveau_lentille_idf_qha": round(lev_idf, 1),
         "voisins_lentille": voisins,
-        "hypotheses": {k: {kk: vv for kk, vv in v.items()} for k, v in H.items()},
+        "panel_lentille": {"series_independantes": int(L.dep.nunique()), "cas": int(len(L)),
+                           "departements_mesures": int(levL_all.size)},
+        "hypotheses": H,
         "coefficients_M1_lentille": mL.model.coefficients(),
         "elargissement_conformal_lentille": round(mL.qhat, 3),
-        "rendements_nationaux": nat_rows,
+        "rendements_nationaux": [{"annee": int(a), "ble": round(float(nat.ble[a]), 1),
+                                  "lentille": round(float(nat.lentille[a]), 1)} for a in nat.index],
+        "prix_ble": [{"annee": int(a), "prix": float(v)} for a, v in prix.items()],
+        "prix_lentille_observes": {"min": int(prix_lent.prix_eur_t.min()), "max": int(prix_lent.prix_eur_t.max()),
+                                   "annees": [int(prix_lent.annee.min()), int(prix_lent.annee.max())]},
+        "lentille_2025": {"production_t": round(float(prod_lent.production_q[2025]) / 10),
+                          "surface_ha": round(float(prod_lent.surface_ha[2025])),
+                          "importations_t": int(c25.importations_t), "exportations_t": int(c25.exportations_t)},
+        "commerce": commerce.to_dict(orient="records"),
+        "surface_lentille_par_dep_2025": surf_dep,
+        "contrat_indexe": indexe,
+        "challenger_lightgbm": challenger,
+        "france": france,
         "n_parcelles": len(out_parc),
         "n_candidates": len(cand),
     }
@@ -132,8 +219,14 @@ def main():
     dump("backtest.json", bt)
     dump("meta.json", meta)
     dump("contours.json", json.loads((DATA / "contours_idf.json").read_text()))
+    france_geo = json.loads((RAW / "geo" / "departements.geojson").read_text())
+    for f in france_geo["features"]:
+        f["properties"] = {"code": f["properties"]["code"], "nom": f["properties"]["nom"]}
+    dump("france.json", france_geo)
+    print("Contrat indexé :", indexe)
     print("Sensibilités 77 :", sens)
-    print("Offre à 900, 1200, 1500 €/t :", [s for s in supply if s["prix"] in (900, 1200, 1500)])
+    print("France (5 moins chers) :", france[:5])
+    print("Offre :", [s for s in supply if s["prix"] in (1000, 1200, 1400, 1600, 1800)])
 
 
 if __name__ == "__main__":

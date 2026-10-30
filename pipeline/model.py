@@ -19,9 +19,11 @@ N_CALIB_YEARS = 3
 
 
 def load() -> pd.DataFrame:
-    """Panel utilisable (sans doublons) fusionné avec les anomalies météo."""
+    """Panel utilisable (sans doublons) fusionné avec les anomalies météo et le prix du blé."""
     panel = pd.read_csv(DATA / "panel_rendements.csv", dtype={"dep": str, "serie_groupe": str})
     meteo = pd.read_csv(DATA / "meteo_dept.csv", dtype={"dep": str})
+    prix = pd.read_csv(DATA / "prix_ble.csv")[["annee", "prix_eur_t"]]
+    meteo = meteo.merge(prix.rename(columns={"prix_eur_t": "prix_ble"}), on="annee", how="left")
     # Anomalies par rapport à la climatologie 2010-2018, figée avant toute année test.
     clim = meteo[meteo.annee.isin(CLIMATO_YEARS)].groupby("dep")[WEATHER].mean()
     anom = meteo.set_index("dep")[WEATHER] - clim.reindex(meteo.dep).values
@@ -31,6 +33,13 @@ def load() -> pd.DataFrame:
     meteo["tendance"] = (meteo.annee - 2010) / 10
     u = panel[panel.utilisable & ~panel.doublon]
     return u.merge(meteo, on=["dep", "annee"], how="inner"), meteo
+
+
+def levels_lookup(culture: str) -> pd.Series:
+    """Niveau moyen de rendement de chaque département, doublons compris (consultation seule)."""
+    panel = pd.read_csv(DATA / "panel_rendements.csv", dtype={"dep": str, "serie_groupe": str})
+    u = panel[panel.utilisable & (panel.culture == culture)]
+    return u.groupby("dep").rendement_qha.mean()
 
 
 def levels(train: pd.DataFrame) -> pd.Series:
@@ -104,6 +113,9 @@ class Calibrated:
     On entraîne sur les années antérieures aux N_CALIB_YEARS dernières, on mesure
     sur celles-ci l'élargissement nécessaire pour couvrir 80 %, puis on réentraîne
     sur toutes les années et on applique cet élargissement.
+
+    `kind="auto"` choisit, parmi M0, M1 et M2, celui qui a la plus faible pinball
+    loss sur ces mêmes années de calibration : le choix n'utilise jamais l'année test.
     """
 
     def __init__(self, kind: str):
@@ -113,6 +125,11 @@ class Calibrated:
         years = sorted(df.annee.unique())
         cal_years = years[-N_CALIB_YEARS:]
         proper, cal = df[~df.annee.isin(cal_years)], df[df.annee.isin(cal_years)]
+        if self.kind == "auto":
+            losses = {k: pinball(MODELS[k]().fit(proper, proper.rel.to_numpy()).predict(cal),
+                                 cal.rel.to_numpy()) for k in MODELS}
+            self.kind = min(losses, key=losses.get)
+            self.selection = {k: round(v, 4) for k, v in losses.items()}
         m = MODELS[self.kind]().fit(proper, proper.rel.to_numpy())
         q = m.predict(cal)
         scores = np.maximum(q[:, 0] - cal.rel.to_numpy(), cal.rel.to_numpy() - q[:, 2])
@@ -149,13 +166,19 @@ def sample_quantile(q: np.ndarray, u: np.ndarray) -> np.ndarray:
 
 
 def break_even_prices(X_pool, mL, mW, levL, levW, h, n=6000, seed=0):
-    """Prix d'équilibre lentille/blé (€/t) dans n scénarios d'années météo rejouées."""
+    """Prix d'équilibre lentille/blé (€/t) dans n scénarios d'années rejouées.
+
+    Chaque scénario tire une année historique : sa météo (pour les deux cultures) et
+    son prix du blé, ce qui conserve leurs liens réels. `h["prix_ble"]` remplace la
+    série si on veut tester un prix fixe (analyse de sensibilité).
+    """
     rng = np.random.default_rng(seed)
     qL, qW = mL.predict(X_pool), mW.predict(X_pool)
     s = rng.integers(0, len(X_pool), n)
     yL = sample_quantile(qL[s], rng.random(n)) * levL / 10  # t/ha
     yW = sample_quantile(qW[s], rng.random(n)) * levW / 10
-    pB, cW, cL, bonus = h["prix_ble"], h["charges_ble"], h["charges_lentille"], h["bonus"]
+    pB = np.full(n, h["prix_ble"]) if h.get("prix_ble") else X_pool["prix_ble"].to_numpy()[s]
+    cW, cL, bonus = h["charges_ble"], h["charges_lentille"], h["bonus"]
     return (pB * yW - cW + cL - bonus) / yL, yL, yW
 
 
@@ -164,10 +187,13 @@ def p_star(R: np.ndarray, tau: float) -> float:
 
 
 def hyp_values(h: dict) -> dict:
-    return {"prix_ble": h["prix_ble_eur_t"]["valeur"],
+    """Valeurs numériques des hypothèses. `bonus` = aide couplée + bonus de rotation (€/ha)."""
+    return {"prix_ble": None,
             "charges_ble": h["charges_ble_eur_ha"]["valeur"],
             "charges_lentille": h["charges_lentille_eur_ha"]["valeur"],
-            "bonus": h["bonus_rotation_eur_ha"]["valeur"],
+            "aide": h["aide_couplee_eur_ha"]["valeur"],
+            "rotation": h["bonus_rotation_eur_ha"]["valeur"],
+            "bonus": h["aide_couplee_eur_ha"]["valeur"] + h["bonus_rotation_eur_ha"]["valeur"],
             "tau": h["fiabilite_visee"]["valeur"]}
 
 
