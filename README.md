@@ -4,14 +4,14 @@
 
 Le Contrat qui Tient aide le responsable filière d'une coopérative ou d'un conditionneur de légumes secs à fixer **le prix plancher d'un contrat lentille** qui rapporte à l'agriculteur **au moins autant que le blé 8 années sur 10**. L'outil montre aussi **quelles parcelles d'Île-de-France basculent** à ce prix, et combien de tonnes la coopérative peut sécuriser.
 
-> État : projet en cours de construction pendant le hackathon (30 octobre – 1er novembre 2026). Ce README décrit la cible. Ce qui est déjà fait est suivi dans [docs/ROADMAP.md](docs/ROADMAP.md).
+> État (vendredi 30/10, soir) : pipeline de bout en bout et prototype de démo fonctionnels sur les vraies données (Agreste, RPG 2025, NASA POWER). Les charges, le prix du blé et le transport sont encore des **hypothèses provisoires**. Premiers résultats : [docs/RESULTATS.md](docs/RESULTATS.md).
 
 ---
 
 ## Le problème en 30 secondes
 
 - La France veut doubler ses surfaces de légumineuses d'ici 2030, mais importe une grande partie des lentilles qu'elle consomme.
-- Les agriculteurs en sèment peu parce que **le rendement de la lentille varie environ deux fois plus que celui du blé** : coefficient de variation national de 0,19 contre 0,09 sur 2010–2025 (**mesuré**, Agreste SAA). Une mauvaise année efface la marge.
+- Les agriculteurs en sèment peu parce que **le rendement de la lentille varie environ deux fois plus que celui du blé** : coefficient de variation national de 0,20 contre 0,09 sur 2010–2025 (**mesuré**, Agreste SAA). Une mauvaise année efface la marge.
 - Les coopératives proposent déjà des contrats à prix minimum. Mais ce prix se fixe à l'expérience ou sur des moyennes, alors que c'est **la mauvaise année** qui fait perdre l'agriculteur.
 
 ## Ce que fait l'outil
@@ -64,15 +64,11 @@ Voir [docs/ROADMAP.md](docs/ROADMAP.md).
 # 1. Pipeline de données et modèle (Python 3.11+)
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-python pipeline/01_agreste.py
-python pipeline/02_weather.py
-python pipeline/03_yield_model.py
-python pipeline/04_backtest.py
-python pipeline/05_parcels.py
-python pipeline/06_export.py
+make export        # 01_agreste → 02_weather → 03_backtest → 04_parcels → 05_export
 
 # 2. Application (Node 20+)
-cd app && npm install && npm run dev
+make dev           # serveur de développement
+make app           # build web (app/dist) et fichier unique hors ligne (app/dist-single)
 ```
 
 Tout est **précalculé** en Python et exporté en JSON. Le navigateur ne fait que lire, filtrer et animer : la démo tourne sans connexion.

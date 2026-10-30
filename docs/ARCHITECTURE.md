@@ -78,7 +78,7 @@ flowchart TB
 |---|---|---|---|
 | Agreste SAA 2010–2025, départemental | cible du modèle (blé, lentille) | XLSX, feuille `COP` | **vérifié**, voir [DATA_INVENTORY.md](DATA_INVENTORY.md) |
 | NASA POWER | variables météo | API JSON | **vérifié** (requête test OK) |
-| RPG Île-de-France 2025 | parcelles candidates, carte | GeoPackage ou Shapefile [à vérifier] | à inspecter |
+| RPG Île-de-France 2025 | parcelles candidates, carte | GeoPackage | **vérifié** |
 | Douanes NC8 0713 40 | importations (accroche, impact) | CSV | à inspecter |
 | Prix du blé 2010–2025 | marge blé | série annuelle | à trouver |
 | Charges €/ha blé et lentille | marges | références techniques | à sourcer, sinon supposé |
@@ -129,6 +129,8 @@ Aucune valeur n'est inventée : un champ vide bloque le pipeline avec un message
 ## 4. Pipeline
 
 Chaque script est indépendant, idempotent, lit ses entrées depuis le disque et écrit ses sorties. On peut relancer une étape sans relancer les autres.
+
+> Implémentation actuelle : `01_agreste`, `02_weather`, `03_backtest` (modèles et backtest, code partagé dans `model.py`), `04_parcels`, `05_export`. Les exports sont écrits dans `app/src/data/` et inclus dans le build. Le tableau ci-dessous décrit le découpage cible.
 
 | Script | Entrées | Sorties | Points d'attention |
 |---|---|---|---|

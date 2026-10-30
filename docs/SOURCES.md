@@ -8,7 +8,8 @@ Chaque source utilisée, avec son étiquette et sa licence. À tenir à jour au 
 |---|---|---|---|---|---|
 | `agreste_saa` | Agreste, Statistique agricole annuelle 2010–2025 | surfaces, rendements, productions par département | mesuré | Licence Ouverte Etalab [à vérifier sur la page] | https://agreste.agriculture.gouv.fr/agreste-web/download/publication/publie/SAA-SeriesLongues/SAA-SeriesLongues-2010-2025_DonneesProvisoires-DepartementalesRegionales.zip |
 | `nasa_power` | NASA POWER | météo journalière | mesuré (réanalyse) | données publiques NASA, citation demandée | https://power.larc.nasa.gov/ |
-| `rpg` | IGN, Registre parcellaire graphique 2025 | parcelles déclarées | mesuré | Licence Ouverte Etalab [à vérifier] | https://cartes.gouv.fr/rechercher-une-donnee/dataset/IGNF_RPG |
+| `rpg` | IGN, Registre parcellaire graphique 2025, Île-de-France | parcelles déclarées | mesuré | Licence Ouverte Etalab [à vérifier] | https://data.geopf.fr/telechargement/resource/RPG/RPG_4-0__GPKG_LAMB93_R11_2025-01-01 |
+| `contours` | gregoiredavid/france-geojson (IGN ADMIN EXPRESS) | contours des départements | mesuré | [à vérifier] | https://github.com/gregoiredavid/france-geojson |
 | `douanes` | Douanes, données NC8 | importations 0713 40 | mesuré | [à vérifier] | https://lekiosque.finances.gouv.fr/site_fr/telechargement/telechargement_SGBD.asp |
 | `cantines` | Registre national des cantines | sites de restauration collective | mesuré | [à vérifier] | https://www.data.gouv.fr/api/1/datasets/r/3f73d129-6b24-45cd-95e9-9bacc216d9d9 |
 | `ciqual` | ANSES, Ciqual | teneur en protéines | sourcé | [à vérifier] | https://ciqual.anses.fr/ |

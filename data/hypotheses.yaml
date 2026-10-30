@@ -1,0 +1,40 @@
+# Toutes les valeurs non mesurées du projet, au même endroit.
+# etiquette : mesure | source | suppose | synthetique
+# Les valeurs « provisoire » sont des ordres de grandeur de l'équipe, à remplacer
+# par des références sourcées (Arvalis, Terres Inovia, chambres d'agriculture,
+# FranceAgriMer). Elles sont affichées comme « supposé » dans l'application.
+
+prix_ble_eur_t:
+  valeur: 200
+  etiquette: suppose
+  source: "provisoire, à remplacer par une série FranceAgriMer ou Agreste"
+  sensibilite: [160, 200, 240, 280]
+charges_ble_eur_ha:
+  valeur: 650
+  etiquette: suppose
+  source: "provisoire : charges opérationnelles (semences, engrais, phytos), à sourcer"
+charges_lentille_eur_ha:
+  valeur: 350
+  etiquette: suppose
+  source: "provisoire : charges opérationnelles, sans engrais azoté, à sourcer (Terres Inovia)"
+bonus_rotation_eur_ha:
+  valeur: 0
+  etiquette: suppose
+  source: "0 par prudence tant que l'effet précédent de la lentille n'est pas sourcé"
+  sensibilite: [0, 100, 200]
+cout_transport_eur_t_km:
+  valeur: 0.12
+  etiquette: suppose
+  source: "provisoire, à sourcer"
+facteur_detour_route:
+  valeur: 1.3
+  etiquette: suppose
+  source: "rapport distance routière / vol d'oiseau, hypothèse de l'équipe"
+fiabilite_visee:
+  valeur: 0.8
+  etiquette: suppose
+  source: "choix de l'équipe : 8 années sur 10"
+site_acheteur:
+  valeur: [2.95, 48.55]
+  etiquette: synthetique
+  source: "site fictif en Seine-et-Marne, annoncé comme tel"

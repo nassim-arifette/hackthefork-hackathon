@@ -26,3 +26,8 @@ credentials*
 
 # Système
 .DS_Store
+
+# Builds et intermédiaires régénérables
+app/dist-single/
+data/parcelles.json
+data/contours_idf.json

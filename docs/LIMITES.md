@@ -14,3 +14,6 @@ Ces limites sont annoncées par l'équipe elle-même, dans le deck et pendant le
 | **La bruche** n'est pas modélisée | pertes de 10 à 20 % possibles (sourcé) | mentionnée | variable de risque qualité |
 | **Un prix plancher n'est pas une assurance** | si le rendement s'effondre, la marge baisse quand même | le modèle en tient compte ; les 20 % non couverts sont visibles | couplage avec une assurance récolte |
 | **Adoption** : tous les agriculteurs éligibles ne signeront pas | la courbe d'offre surestime les volumes réels | taux d'adoption en hypothèse | enquête auprès d'agriculteurs |
+| **Le modèle météo linéaire ne bat pas la baseline en précision** (backtest : pinball −0,7 %) | l'apport de la météo passe surtout par la calibration | on l'affiche ; LightGBM fait +3,8 % mais n'a pas été choisi a priori | variables météo plus fines, sélection de modèle sur validation interne |
+| **Météo au centroïde du département** | la météo des zones cultivées peut différer | assumé en version 1 | moyenne pondérée par les surfaces RPG |
+| **Prix du blé constant** dans la simulation | le risque de prix du blé n'est pas encore simulé | sensibilité affichée | série FranceAgriMer rééchantillonnée avec l'année météo |

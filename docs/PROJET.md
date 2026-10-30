@@ -17,7 +17,7 @@ Ce document explique le projet depuis le début : le problème, l'utilisateur, l
 Prenons un agriculteur de Seine-et-Marne qui cultive du blé.
 
 - Le blé, il le connaît. En Seine-et-Marne, il fait environ 83 q/ha les années normales (**mesuré**, Agreste).
-- La lentille varie beaucoup plus. Sur 2010–2025, son coefficient de variation national est de **0,19**, contre **0,09** pour le blé. Dans les principaux départements producteurs, il va de 0,24 à 0,38 (**mesuré**, Agreste SAA).
+- La lentille varie beaucoup plus. Sur 2010–2025, son coefficient de variation national est de **0,20**, contre **0,09** pour le blé. Dans les principaux départements producteurs, il va de 0,24 à 0,38 (**mesuré**, Agreste SAA).
 - En **2020**, le rendement national de la lentille est tombé à 8,2 q/ha, soit **−38 %** par rapport à la moyenne 2015–2019 (**mesuré**).
 
 Une seule mauvaise année peut effacer plusieurs années de marge. L'agriculteur reste donc au blé. Le Track 3 nomme ce verrou : la crainte de perdre du revenu.

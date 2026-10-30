@@ -11,12 +11,13 @@ Obligatoire au dépôt. Tout ce qui n'a pas été produit pendant l'événement 
 | RPG Île-de-France 2025 | parcelles | voir [SOURCES.md](SOURCES.md) | fourni sur le Drive de l'organisation |
 | Douanes NC8 | importations | voir [SOURCES.md](SOURCES.md) | fourni sur le Drive de l'organisation |
 | Registre national des cantines | extension | voir [SOURCES.md](SOURCES.md) | fourni sur le Drive de l'organisation |
+| Contours des départements (gregoiredavid/france-geojson, dérivé d'IGN ADMIN EXPRESS) | centroïdes météo, contours de carte | [à vérifier] | téléchargé depuis GitHub |
 
 Les archives du Drive de l'organisation ont été créées le 30/10/2026 à 17h36.
 
 ## Bibliothèques logicielles
 
-Python : pandas, numpy, openpyxl, scikit-learn, lightgbm, statsmodels, geopandas, pyogrio, shapely, pyproj, requests, pyyaml, boto3.
+Python : pandas, numpy, openpyxl, scikit-learn, scipy, lightgbm, geopandas, pyogrio, shapely, pyproj, py7zr, requests, pyyaml.
 JavaScript : Vite, React, TypeScript, deck.gl, vite-plugin-singlefile.
 Versions exactes : `requirements.txt` et `app/package.json`.
 
@@ -40,4 +41,4 @@ Autorisation de l'assistant de code externe par l'organisation : **[à confirmer
 
 ## Dépôts tiers
 
-Aucun pour l'instant.
+- https://github.com/gregoiredavid/france-geojson : contours des départements simplifiés.

@@ -32,7 +32,7 @@ Ce que contiennent réellement les données, vérifié en les ouvrant. Les élé
 | Départements avec ≥ 10 années à ≥ 50 ha et rendement renseigné | 44 | mesuré |
 | Surface nationale | 12 186 ha (2010) → 35 869 ha (2020) → 33 927 ha (2025) | mesuré |
 | Production nationale | 535 766 q en 2024 ; 515 576 q en 2025 (provisoire) | mesuré |
-| Coefficient de variation du rendement national 2010–2025 | lentille 0,19 ; blé tendre d'hiver 0,09 | calculé sur mesuré |
+| Coefficient de variation du rendement national 2010–2025 | lentille 0,20 ; blé tendre d'hiver 0,09 (écart-type d'échantillon) | calculé sur mesuré |
 | Coefficient de variation dans les 15 premiers départements | 0,24 à 0,38 | calculé sur mesuré |
 | Corrélation des rendements nationaux lentille / blé | −0,08 (16 années) | calculé sur mesuré |
 | Part de la surface dans les 5 premiers départements | 47 % | calculé sur mesuré |
@@ -79,11 +79,19 @@ Aube et Marne présentent des rendements lentille identiques sur plusieurs anné
 
 ---
 
-## 3. À inspecter
+## 3. RPG Île-de-France 2025 (vérifié le 30/10/2026)
+
+- **Source** : IGN, `RPG_4-0__GPKG_LAMB93_R11_2025-01-01.7z` (94 Mo), sur data.geopf.fr.
+- **Couches** : `RPG_Parcelles` (125 212 parcelles), `RPG_Ilots`, `RPG_SNA` (éléments non agricoles), `RPG_ZDH`. Projection Lambert-93 (EPSG:2154).
+- **Colonnes de `RPG_Parcelles`** : `id_parcel`, `surf_parc` (ha), `cat_cult_p`, `code_cultu`, `code_group`, `precision`, `gcp`, `pp`, `bio`, `iae`. Aucun identifiant d'exploitant.
+- **Blé tendre d'hiver** (`BTH`) : 22 915 parcelles, 189 636 ha.
+- **Lentille** (`LEC`, libellé à vérifier dans la nomenclature) : 178 parcelles, 1 095 ha. Agreste donne environ 730 ha pour 77, 78, 91 et 95 : écart à expliquer (périmètre, définition).
+- **Retenues pour la carte** : parcelles `BTH` et `LEC` d'au moins 1 ha dans 77, 78, 91 et 95, soit 20 922 parcelles, simplifiées à 8 m.
+
+## 4. À inspecter
 
 | Jeu | Questions à trancher |
 |---|---|
-| RPG Île-de-France 2025 | format et couches ; colonnes `CODE_CULT`, `CODE_GROUP`, surface, géométrie ; projection (Lambert-93 attendu) ; nombre de parcelles par groupe ; code du blé tendre d'hiver |
 | Douanes 0713 | lignes 0713 40 (lentilles) ; importations par pays, en masse et en valeur ; années disponibles |
 | Registre des cantines | colonnes utiles pour l'extension « débouchés » |
 | Prix du blé | série annuelle 2010–2025, source et unité |
