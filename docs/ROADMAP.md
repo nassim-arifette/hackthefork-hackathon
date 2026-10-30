@@ -15,6 +15,40 @@ flowchart LR
 
 Fait : pipeline complet sur données réelles (Agreste, RPG 2025, NASA POWER, Eurostat), deux modèles d'apprentissage comparés, backtest sans fuite, incertitude sur P\*, 15 tests, application en cinq étapes avec version hors ligne, documentation et contenu du deck. Reste : confronter les hypothèses à un mentor, brancher Bedrock, déployer sur Amplify, répéter.
 
+## La suite, par priorité (décidé le 30/10 au soir)
+
+### 1. Fiabiliser l'existant (samedi matin)
+
+- [ ] Faire valider les hypothèses par un mentor agro (`docs/QUESTIONS.md`) : charges, éligibilité de la lentille à l'aide couplée, transport, bonus de rotation. Un bonus de rotation sourcé de 100 à 200 €/ha ferait passer P\* de 1 622 à environ 1 400 €/t en Seine-et-Marne.
+- [ ] Corriger le prompt de la lettre Bedrock : préciser que « 8 années sur 10 » désigne les années où la lentille rapporte au moins autant que le blé, pas la fiabilité de la coopérative. Puis relancer `06_lettre_llm.py` dans CloudShell (`docs/AWS.md`).
+- [ ] Expliquer l'écart en Île-de-France entre le RPG (1 095 ha de lentille déclarés) et Agreste (environ 730 ha).
+
+### 2. Compléter l'impact (samedi matin)
+
+L'impact pèse 30 % de la note et ne montre aujourd'hui que les tonnes et la part des importations.
+
+- [ ] Protéines produites : teneur de la lentille sèche dans Ciqual (site indisponible le 30/10, à réessayer).
+- [ ] Azote minéral évité : dose sur blé contre zéro sur lentille, à sourcer (Agreste, pratiques culturales).
+- [ ] Émissions évitées en CO2e : facteur ADEME Base Empreinte ou HESTIA.
+
+### 3. Le contrat indexé sur le prix du blé (samedi)
+
+- [ ] Afficher à l'étape 5 une deuxième option : un plancher égal à m × le prix du blé de la récolte. Le calcul existe déjà (`meta.contrat_indexe` : multiplicateur médian 3,6 ; 7,8 pour 8 années sur 10). Il retire à l'agriculteur le risque lié au prix du blé.
+
+### 4. Améliorer le modèle (samedi après-midi, si le cœur est stable)
+
+- [ ] Météo pondérée par les surfaces cultivées (RPG) plutôt qu'au centroïde du département.
+- [ ] Variables météo par stade de la lentille (floraison, récolte).
+- [ ] Scénarios de stress pour les années d'effondrement comme 2020 et 2021, sans jamais toucher aux années test.
+- [ ] Garder l'historique des versions et de leurs résultats dans `docs/RESULTATS.md`.
+
+### 5. Extensions (après le cœur, ou en perspective dans le pitch)
+
+- [ ] Site de tri déplaçable (temps 2 ci-dessous) : environ 1 h, fort effet visuel.
+- [ ] Suivi Sentinel-2 des parcelles sous contrat (temps 3).
+- [ ] Le Maillon vu du ciel (section 5).
+- [ ] Après le hackathon : données de rendement des coopératives (passage à la parcelle, P\* moins incertain), autres cultures sous contrat (pois chiche, haricot sec), offre pour les assureurs.
+
 ## 1. Planning du hackathon
 
 | Quand | Objectif | Critère de sortie |
