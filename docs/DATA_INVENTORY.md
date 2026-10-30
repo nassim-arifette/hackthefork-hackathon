@@ -88,10 +88,20 @@ Aube et Marne présentent des rendements lentille identiques sur plusieurs anné
 - **Lentille** (`LEC`, libellé à vérifier dans la nomenclature) : 178 parcelles, 1 095 ha. Agreste donne environ 730 ha pour 77, 78, 91 et 95 : écart à expliquer (périmètre, définition).
 - **Retenues pour la carte** : parcelles `BTH` et `LEC` d'au moins 1 ha dans 77, 78, 91 et 95, soit 20 922 parcelles, simplifiées à 8 m.
 
-## 4. À inspecter
+## 4. Prix et commerce (vérifié le 30/10/2026)
+
+- **Prix du blé tendre** : l'indice Eurostat des prix à la production (France, nominal) existe pour 2010–2025 en trois bases (2010, 2015, 2020). Il est chaîné sur la base 2015 et calé sur le prix rendu Rouen d'Agreste (178,8 €/t en 2019-2020). Les prix absolus Eurostat pour la France s'arrêtent en 2016 et sont incohérents avec l'indice (+39 % de 2010 à 2015, contre +3 % pour l'indice) : écartés.
+- **Prix de la lentille** : prix de vente Eurostat de 650 à 779 €/t sur 2012–2016. Les valeurs 2010 et 2011 (140 €/t) sont incohérentes avec la suite : écartées.
+- **Commerce** : Comext, NC8 07134000, France. Importations : 29 101 t (2020), 42 188 t (2024), 39 371 t (2025). Exportations : environ 5 000 t par an.
+
+## 5. Estimations régionales dans Agreste
+
+En comparant les séries, plusieurs départements ont des rendements de lentille **strictement identiques** sur 8 années ou plus : ils sont estimés ensemble. Exemples : Ardennes, Aube, Marne et Haute-Marne ; Côte-d'Or, Nièvre, Saône-et-Loire et Yonne ; huit départements d'Auvergne-Rhône-Alpes autour de la Haute-Loire. Sur 39 départements mesurés, il reste **24 séries indépendantes**. Pour le blé, seuls les petits départements franciliens (93, 94) et la Corse sont concernés.
+
+## 6. À inspecter
 
 | Jeu | Questions à trancher |
 |---|---|
-| Douanes 0713 | lignes 0713 40 (lentilles) ; importations par pays, en masse et en valeur ; années disponibles |
+| Douanes 0713 (Drive) | recoupement avec Comext ; importations par pays, en masse et en valeur |
 | Registre des cantines | colonnes utiles pour l'extension « débouchés » |
-| Prix du blé | série annuelle 2010–2025, source et unité |
+| Ciqual | teneur en protéines de la lentille sèche (site indisponible le 30/10) |

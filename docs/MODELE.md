@@ -18,9 +18,9 @@ Notations : `d` département, `t` année, `c` culture (`B` blé tendre d'hiver, 
 - Filtres :
   - surface `SURF_t ≥ 50 ha`, pour éviter les rendements calculés sur quelques parcelles ;
   - `STATUT_QUALITE` ∈ {1, 2} : on exclut le statut 3, dont les rendements lentille sont visiblement imputés (valeurs identiques d'une année à l'autre ou entre départements, voir [DATA_INVENTORY.md](DATA_INVENTORY.md)).
-- **Doublons d'estimation** : certains départements ont des séries identiques (par exemple Aube et Marne pour la lentille). Ils sont estimés ensemble par l'administration. On les regroupe en une seule série pour ne pas compter deux fois la même information.
+- **Doublons d'estimation** : Agreste estime souvent le rendement de la lentille au niveau régional, et plusieurs départements partagent alors exactement les mêmes valeurs (par exemple l'Aube, la Marne, la Haute-Marne et les Ardennes). Deux séries identiques à 0,01 q/ha près sur au moins 8 années sont regroupées ; le département le plus cultivé représente le groupe. Les doublons sont écartés de l'entraînement mais restent consultables (niveaux de l'Île-de-France et des voisins).
 
-Panel attendu : environ 40 départements pour la lentille sur 16 ans, soit de l'ordre de 500 à 600 couples département × année exploitables.
+Panel obtenu : 39 départements mesurés pour la lentille, mais **24 séries indépendantes**, soit 294 couples département × année. Pour le blé tendre d'hiver : 1 439 couples sur 90 séries.
 
 ### Variables météo (NASA POWER, quotidien)
 
@@ -66,7 +66,22 @@ Q_q(y[d,t]) = a_d + b · t + Σ_k β_k(q) · météo_k[d,t]
 
 ### M2 · LightGBM quantile (challenger)
 
-`objective="quantile"`, `alpha` ∈ {0,1 ; 0,5 ; 0,9}, profondeur faible (`max_depth` 3, `num_leaves` ≤ 8), forte régularisation. Il ne remplace M1 que s'il gagne nettement en backtest.
+`objective="quantile"`, `alpha` ∈ {0,1 ; 0,5 ; 0,9}, profondeur faible (`max_depth` 3, `num_leaves` 7), 150 arbres, au moins 20 observations par feuille.
+
+### Choix automatique (« auto »)
+
+À chaque entraînement, M0, M1 et M2 sont comparés sur les trois dernières années d'entraînement (perte pinball) ; le meilleur est retenu. Ce choix n'utilise jamais l'année test.
+
+### Résultat de la comparaison (backtest)
+
+| | M0 tendance | M1 retenu | M2 LightGBM | auto |
+|---|---|---|---|---|
+| Perte pinball | 0,1078 | 0,1103 | 0,1014 | 0,1024 |
+| Couverture à 80 % | 74 % | 79 % | 84 % | 74 % |
+| Contrats tenus (80 % visés) | — | **86 %** | 77 % | 80 % |
+| P\* Seine-et-Marne 2026 | — | 1 622 €/t | 1 035 €/t | — |
+
+Le plus précis n'est pas le meilleur pour fixer un prix : LightGBM prédit mieux l'année moyenne, mais il sous-estime la queue basse du rendement de la lentille, et ses contrats tiennent moins souvent que promis. M1, choisi avant tout résultat, reste le modèle de l'application.
 
 ### Calibration conformal
 
@@ -91,7 +106,7 @@ Pour chaque scénario `s` (N = 10 000) :
 
 1. **Tirer une année météo historique** `t_s` parmi les années d'entraînement. On tire **la même année pour les deux cultures**, ce qui conserve leur corrélation réelle : quasi nulle au niveau national (−0,08, **mesuré**), mais variable selon les départements.
 2. **Calculer les quantiles conditionnels** des deux cultures avec la météo de `t_s`, puis tirer `y_B` et `y_L` dans leurs distributions.
-3. **Tirer un prix du blé** `p_B` dans la série historique (même année `t_s` si la série le permet, pour garder le lien entre récolte et prix).
+3. **Prendre le prix du blé de la même année** `t_s` dans la série mesurée (`data/prix_ble.csv` : indice Eurostat des prix à la production du blé tendre, chaîné et calé sur le prix rendu Rouen Agreste de la campagne 2019-2020). Le lien réel entre récolte et prix est conservé, et le risque de prix (2022 : 338 €/t) entre dans la simulation.
 4. **Calculer les marges** (en €/ha, avec `y` converti en t/ha) :
 
 ```
@@ -99,7 +114,7 @@ marge_B = p_B · y_B − charges_B
 marge_L(P) = P · y_L − charges_L + bonus_rotation
 ```
 
-`charges_B`, `charges_L` et `bonus_rotation` sont des paramètres **supposés** ou **sourcés**, exposés dans l'interface.
+`charges_B` (440 €/ha, Arvalis) et `charges_L` (280 €/ha, fiche Triple Performance) sont **sourcés** ; `bonus` = aide couplée aux légumineuses (122 €/ha, arrêté du 24 février 2026, **sourcé**) + bonus de rotation (0 €/ha par prudence, **supposé**). Tous vivent dans `data/hypotheses.yaml`.
 
 ---
 
@@ -184,11 +199,15 @@ Les années test ne servent ni à l'entraînement, ni au choix des hyperparamèt
 
 ---
 
-## 6. Sensibilités à montrer
+## 6. Incertitude sur P\*
+
+P\* est lui-même estimé sur seize années. On le mesure par **bootstrap par blocs d'années** : 40 tirages avec remise des années 2010–2025, réentraînement des deux modèles et recalcul de P\*. Pour la Seine-et-Marne : intervalle à 80 % de 1 132 à 3 007 €/t, médiane 1 801 €/t, pour une estimation centrale de 1 622 €/t. Seize années ne suffisent pas à cerner les mauvaises années : c'est la première raison de récupérer les données de rendement des coopératives.
+
+## 7. Sensibilités à montrer
 
 - P\* selon τ (de 50 % à 95 %) : « le prix de la sécurité ».
 - P\* selon le prix du blé (bas, médian, haut).
 - P\* selon les charges de la lentille (± 20 %).
 - P\* avec et sans bonus de rotation.
 
-Ces courbes sont précalculées et affichées dans l'onglet « Hypothèses ».
+Ces courbes sont précalculées (`05_export.py`) et affichées à l'étape « Le contrat ». Valeurs : voir [RESULTATS.md](RESULTATS.md).

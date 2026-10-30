@@ -1,17 +1,18 @@
 # Décisions ouvertes
 
-| Question | Valeur par défaut en attendant | Qui tranche | Avant |
+| Question | Valeur en place | Qui tranche | Avant |
 |---|---|---|---|
 | L'organisation autorise-t-elle un assistant de code externe (Claude Code) ? | — | organisation | vendredi soir |
 | Déclaration du Track 3 | Track 3 | équipe | vendredi 23h |
-| Culture cible | lentille, entraînement national | équipe | samedi 10h |
-| Site acheteur du scénario | site fictif annoncé comme tel | équipe | samedi matin |
-| Charges €/ha blé et lentille | à sourcer (Arvalis, Terres Inovia, chambres d'agriculture) | agro | samedi 13h |
-| Bonus de rotation de la lentille | à sourcer chez Terres Inovia, sinon hypothèse | agro | samedi 13h |
-| Série de prix du blé 2010–2025 | à trouver (FranceAgriMer, Agreste) | données | samedi 13h |
-| Coût de transport €/t/km | hypothèse affichée | agro | samedi 13h |
+| Culture cible | lentille, entraînement sur le panel national | équipe | samedi 10h |
+| Site acheteur du scénario | site fictif en Seine-et-Marne, annoncé comme tel | équipe | samedi matin |
+| Charges blé et lentille | 440 et 280 €/ha, sourcés ; à confronter à un mentor agro | agro | samedi 13h |
+| Bonus de rotation de la lentille | 0 €/ha par prudence ; à sourcer chez Terres Inovia | agro | samedi 13h |
+| Éligibilité de la lentille à l'aide couplée (122 €/ha) | supposée ; à vérifier dans la notice Telepac | agro | samedi 13h |
+| Coût de transport | 0,12 €/t/km, supposé | agro | samedi 13h |
+| Volume visé par la coopérative | 5 000 t, supposé | équipe | samedi |
+| P\* (environ 1 600 €/t) face aux prix de contrat lentille réels | à confronter à un mentor | agro | samedi matin |
+| Écart RPG (1 095 ha de lentille) et Agreste (environ 730 ha) en Île-de-France | à expliquer | données | samedi |
+| Identifiant Bedrock pour la lettre d'accompagnement | à lire avec `aws bedrock list-foundation-models` | équipe | samedi |
 | Langue du pitch | français | équipe | samedi |
 | Présentateur | — | équipe | vendredi soir |
-| Valeurs provisoires : prix du blé 200 €/t, charges blé 650 €/ha, charges lentille 350 €/ha, transport 0,12 €/t/km, bonus 0 | en place dans `data/hypotheses.yaml` | agro | samedi 13h |
-| Écart RPG (1 095 ha de lentille) contre Agreste (environ 730 ha) en Île-de-France | à expliquer | données | samedi |
-| P\* calculé (environ 1 300 €/t) à confronter aux prix de contrat lentille réels | à vérifier auprès d'un mentor | agro | samedi matin |

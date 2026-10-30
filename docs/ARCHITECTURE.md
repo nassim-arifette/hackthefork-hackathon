@@ -130,7 +130,7 @@ Aucune valeur n'est inventée : un champ vide bloque le pipeline avec un message
 
 Chaque script est indépendant, idempotent, lit ses entrées depuis le disque et écrit ses sorties. On peut relancer une étape sans relancer les autres.
 
-> Implémentation actuelle : `01_agreste`, `02_weather`, `03_backtest` (modèles et backtest, code partagé dans `model.py`), `04_parcels`, `05_export`. Les exports sont écrits dans `app/src/data/` et inclus dans le build. Le tableau ci-dessous décrit le découpage cible.
+> Implémentation actuelle : `00_prix_commerce` (Eurostat : prix du blé, prix de la lentille, commerce Comext), `01_agreste`, `02_weather`, `03_backtest` (modèles et backtest, code partagé dans `model.py`), `04_parcels`, `05_export` (modèle final, P\*, sensibilités, bootstrap, exports), `06_lettre_llm` (Bedrock, facultatif). Les exports sont écrits dans `app/src/data/` et inclus dans le build. `make test` lance 15 tests. Le tableau ci-dessous décrit le découpage initial.
 
 | Script | Entrées | Sorties | Points d'attention |
 |---|---|---|---|
@@ -254,7 +254,8 @@ FeatureCollection en WGS84, coordonnées arrondies à 5 décimales (environ 1 m)
 ### 6.1 Pile technique
 
 - **Vite + React + TypeScript** ;
-- **deck.gl** pour la carte : `PolygonLayer` avec extrusion 3D et transitions GPU ;
+- **deck.gl** pour la carte : `GeoJsonLayer` (France, départements) et `PolygonLayer` plan pour les 20 922 parcelles, transitions de couleur sur GPU ;
+- polices intégrées au build (Fontsource) : la version hors ligne est identique à la version en ligne ;
 - graphiques en SVG maison ou **Observable Plot** (courbe d'offre, frise du backtest) ;
 - état global minimal : prix, année de replay, étape de démo, parcelle sélectionnée ;
 - **aucun fond de carte en ligne** : contours des départements en GeoJSON local.
@@ -282,11 +283,7 @@ app/src/
 
 ### 6.3 Direction visuelle
 
-- Carte plein écran, fond sombre, vue 3D inclinée au-dessus de la Seine-et-Marne.
-- Deux couleurs sémantiques : ocre pour le blé, vert pour la lentille sous contrat, et rouge uniquement pour « contrat non tenu ».
-- Hauteur d'extrusion proportionnelle au rendement simulé : lors du replay, les cultures touchées « s'affaissent ».
-- Compteurs très grands, lisibles du fond de la salle ; transitions de 300 à 600 ms ; une seule chose bouge à la fois.
-- Maquette de référence : [docs/maquettes/maquettes-track3.html](maquettes/maquettes-track3.html).
+Règles complètes, jetons et interdits : [DESIGN.md](DESIGN.md). En résumé : un atlas agricole clair et plan, Archivo pour les titres et les chiffres, Source Serif 4 pour le texte, deux couleurs sémantiques (ocre pour le blé, vert lentille), le rouge réservé au contrat non tenu, des lignes de source comme des crédits de presse, des graphiques à étiquettes directes. Parcours guidé en cinq étapes : le verrou, le prix, l'épreuve, la preuve, le contrat.
 
 ### 6.4 Performance
 
@@ -301,7 +298,7 @@ Si la limite est dépassée : restreindre à une zone de démo (rayon autour du 
 
 ### 6.5 Raccourcis de démo
 
-Le présentateur ne doit jamais chercher un bouton : `Espace` passe à l'étape suivante, `←` et `→` déplacent le prix, `1` et `2` lancent les replays 2016 et 2020, `R` remet à zéro.
+Le présentateur ne doit jamais chercher un bouton : `Espace` passe à l'étape suivante (`Maj + Espace` pour revenir), `←` et `→` déplacent le prix, `1` et `2` choisissent l'année à l'étape « L'épreuve », `M` ouvre la méthode, `Échap` la ferme.
 
 ---
 

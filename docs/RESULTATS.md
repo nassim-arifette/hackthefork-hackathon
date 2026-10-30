@@ -1,57 +1,113 @@
-# Premiers résultats (30/10/2026, soir)
+# Résultats
 
-Calculés par le pipeline sur les vraies données. Les charges, le prix du blé, le bonus de rotation et le coût de transport sont des **hypothèses provisoires** (`data/hypotheses.yaml`) : les prix plancher en dépendent directement.
+Calculés par le pipeline (`make export`) le 30 octobre 2026. Les chiffres de l'application et du deck viennent de ces exports, jamais d'une saisie à la main.
 
-## Données
+## 1. Le constat, mesuré
 
-| | Valeur |
-|---|---|
-| Panel lentille utilisable (statuts 1–2, ≥ 50 ha, sans doublons) | 492 départements × années, 39 départements |
-| Panel blé tendre d'hiver utilisable | 1 455 départements × années, 91 départements |
-| Météo NASA POWER | 43 départements, 2010–2025 |
-| Parcelles RPG retenues | 20 922 (blé tendre d'hiver et lentille, ≥ 1 ha) |
+| Indicateur | Valeur | Source |
+|---|---|---|
+| Importations de lentilles, 2025 | 39 371 t | Eurostat Comext, NC8 0713 40 |
+| Exportations de lentilles, 2025 | 5 032 t | Eurostat Comext |
+| Production de lentilles, 2025 | 51 558 t (provisoire) | Agreste SAA |
+| Surface en lentille, 2025 | 33 927 ha | Agreste SAA |
+| Coefficient de variation du rendement national 2010–2025 | lentille 0,20 ; blé tendre d'hiver 0,09 | Agreste SAA |
+| Prix observés de la lentille, France | 650 à 779 €/t (2012–2016) | Eurostat, prix de vente absolus |
+| Prix du blé tendre | 154 €/t (2016) à 338 €/t (2022) | indice Eurostat, calé sur le prix rendu Rouen Agreste 2019-2020 |
 
-## Backtest 2019–2025 (sans fuite)
+## 2. Les données utilisées par le modèle
 
-Rendement lentille relatif, intervalle à 80 % calibré par conformal. P\* calculé avec les seules années antérieures, puis comparé à l'année réelle.
+- **Lentille** : 39 départements mesurés, mais Agreste estime souvent leurs rendements ensemble, au niveau régional. Après regroupement des séries identiques sur au moins 8 années, il reste **24 séries indépendantes**, soit 294 couples département × année.
+- **Blé tendre d'hiver** : 1 439 couples sur 90 séries.
+- **Météo** : NASA POWER pour 43 départements, 2010–2025.
+- **Parcelles** : 20 922 parcelles du RPG 2025 en Île-de-France, dont 20 762 de blé tendre d'hiver.
 
-| Année | Départements | Couverture M1 | Pinball M0 | Pinball M1 | Pinball M2 | Contrats tenus |
-|---|---|---|---|---|---|---|
-| 2019 | 29 | 100 % | 0,052 | 0,060 | 0,066 | 76 % |
-| 2020 | 32 | 66 % | 0,091 | 0,089 | 0,099 | **56 %** |
-| 2021 | 32 | 63 % | 0,104 | 0,114 | 0,099 | **63 %** |
-| 2022 | 33 | 97 % | 0,088 | 0,093 | 0,098 | 97 % |
-| 2023 | 34 | 91 % | 0,094 | 0,087 | 0,087 | 100 % |
-| 2024 | 34 | 59 % | 0,195 | 0,179 | 0,176 | 100 % |
-| 2025 | 35 | 86 % | 0,104 | 0,113 | 0,079 | 100 % |
-| **Global** | **229 cas** | **80 %** (M0 : 71 %) | **0,105** | **0,106** | **0,101** | **85 %** pour 80 % visés |
+## 3. Backtest 2019–2025, sans fuite
 
-### Lecture honnête
+Pour chaque année test, les modèles, les niveaux et la calibration sont estimés sur les seules années antérieures. Le prix plancher est fixé avec la météo et le prix du blé de ces années, puis jugé sur les rendements et le prix du blé réels.
 
-- **La fiabilité visée est atteinte globalement** (85 % pour 80 %), mais elle repose sur 7 années seulement. Les contrats cèdent en **2020 et 2021**, deux années d'effondrement de la lentille absentes de l'entraînement.
-- **La calibration fonctionne** : l'intervalle à 80 % couvre le réel dans 80 % des cas, contre 71 % pour la baseline.
-- **Le modèle météo linéaire (M1) ne bat pas la baseline en précision** (pinball −0,7 %). Le challenger LightGBM (M2) fait mieux (+3,8 %). M1 reste le modèle principal parce qu'il a été choisi **avant** de voir les résultats ; passer à M2 maintenant reviendrait à choisir sur les années test. À retester proprement : choix du modèle sur une validation interne aux années d'entraînement.
-- **Piste d'amélioration** : variables météo plus fines (stade de floraison, pluie à la récolte), météo pondérée par les surfaces RPG plutôt qu'au centroïde.
+| Année | Cas | Prix du blé | Couverture de l'intervalle à 80 % | Contrats tenus (M1) | Contrats tenus (choix automatique) |
+|---|---|---|---|---|---|
+| 2019 | 17 | 179 €/t | 94 % | 94 % | 82 % |
+| 2020 | 18 | 191 €/t | 56 % | **44 %** | 44 % |
+| 2021 | 18 | 238 €/t | 56 % | **61 %** | 61 % |
+| 2022 | 19 | 338 €/t | 89 % | 95 % | 79 % |
+| 2023 | 20 | 242 €/t | 95 % | 100 % | 100 % |
+| 2024 | 20 | 216 €/t | 70 % | 100 % | 95 % |
+| 2025 | 21 | 202 €/t | 90 % | 100 % | 95 % |
+| **Ensemble** | **133** | | **79 %** | **86 %** pour 80 % visés | 80 % |
 
-## Prix plancher, campagne 2026 (hypothèses provisoires)
+| Modèle | Perte pinball | Couverture à 80 % |
+|---|---|---|
+| M0, tendance seule | 0,1078 | 74 % |
+| **M1, régression quantile météo (retenu a priori)** | 0,1103 | 79 % |
+| M2, LightGBM quantile | 0,1014 | 84 % |
+| Choix automatique sur validation interne | 0,1024 | 74 % |
 
-| Département | P\* (80 %) | Prix d'équilibre médian | Rendement lentille moyen simulé |
-|---|---|---|---|
-| Seine-et-Marne | 1 377 €/t | 778 €/t | 1,59 t/ha |
-| Yvelines | 1 261 €/t | 730 €/t | 1,61 t/ha |
-| Essonne | 1 281 €/t | 733 €/t | 1,60 t/ha |
-| Val-d'Oise | 1 357 €/t | 777 €/t | 1,60 t/ha |
+Erreur médiane sur le rendement relatif d'une année : ±33 %.
+
+### Lecture
+
+- **La fiabilité visée est atteinte sur l'ensemble** (86 % pour 80 %), mais sur 7 années seulement. Les contrats cèdent en **2020 et 2021**, deux effondrements de la lentille absents de l'entraînement.
+- **La calibration fonctionne** : 79 % des récoltes tombent dans l'intervalle à 80 %, contre 74 % pour la tendance seule.
+- **La météo n'améliore pas la précision du modèle linéaire** (pinball −2 % face à la tendance). LightGBM fait mieux (+6 %), mais il n'a pas été choisi a priori. Le choix automatique sur validation interne est plus précis mais moins bien calibré, et tient moins de contrats.
+- **Le rendement d'une année reste difficile à prévoir** (±33 %). C'est la raison d'être d'un prix calibré sur le risque plutôt que sur une prévision.
+
+## 4. Prix plancher, campagne 2026
+
+| Département | P\* (8 années sur 10) | Prix d'équilibre médian | Rendement lentille moyen simulé | Rendement d'une année sur dix |
+|---|---|---|---|---|
+| Seine-et-Marne | 1 622 €/t | 743 €/t | 1,59 t/ha | 0,48 t/ha |
+| Yvelines | 1 502 €/t | 706 €/t | 1,61 t/ha | 0,50 t/ha |
+| Essonne | 1 506 €/t | 707 €/t | 1,60 t/ha | 0,50 t/ha |
+| Val-d'Oise | 1 585 €/t | 747 €/t | 1,61 t/ha | 0,50 t/ha |
+
+**Incertitude sur P\*** (Seine-et-Marne, rééchantillonnage des années, 40 tirages) : de 1 132 à 3 007 €/t à 80 %, médiane 1 801 €/t.
 
 ### Le prix de la sécurité (Seine-et-Marne)
 
-| Fiabilité | 50 % | 60 % | 70 % | 80 % | 90 % | 95 % |
+| Années gagnantes visées | 5 sur 10 | 6 | 7 | 8 | 9 | 9,5 |
 |---|---|---|---|---|---|---|
-| P\* | 778 | 918 | 1 103 | 1 377 | 1 878 | 2 587 €/t |
+| P\* | 743 | 907 | 1 176 | 1 622 | 2 733 | 4 588 €/t |
 
-Sensibilités : prix du blé 160 → 280 €/t fait passer P\* de 1 034 à 2 063 €/t ; un bonus de rotation de 200 €/ha le baisse à 1 154 €/t.
+Au prix de marché observé (milieu de la fourchette, 715 €/t), la lentille rapporte au moins autant que le blé **4,7 années sur 10**.
 
-### Ce que ça veut dire
+### Sensibilités (Seine-et-Marne)
 
-- Avec ces hypothèses, **sécuriser 8 années sur 10 coûte presque deux fois le prix d'équilibre médian**. C'est le cœur du message : une moyenne sous-estime fortement le prix qu'il faut garantir.
-- **Le transport différencie peu les parcelles** à l'intérieur d'un département (0,12 €/t/km × quelques dizaines de km) : la courbe d'offre est presque une marche. Le prix est décidé par le risque, pas par la distance.
-- Les valeurs absolues dépendent des hypothèses provisoires. Elles doivent être revues avec des références sourcées avant d'être présentées.
+| Hypothèse | P\* |
+|---|---|
+| Prix du blé fixé de 160 à 280 €/t | 1 180 à 2 334 €/t |
+| Bonus de rotation de 0 à 200 €/ha | 1 622 à 1 378 €/t |
+| Charges du blé de 440 à 600 €/ha | 1 622 à 1 426 €/t |
+| Charges de la lentille de 230 à 340 €/ha | 1 561 à 1 696 €/t |
+| Sans aide couplée | 1 770 €/t |
+
+### Là où la lentille tient le mieux
+
+| Département | P\* |
+|---|---|
+| Pyrénées-Orientales | 914 €/t |
+| Gard | 1 189 €/t |
+| Indre | 1 222 €/t |
+| Hérault | 1 247 €/t |
+| Aube (estimée avec les Ardennes, la Haute-Marne et la Marne) | 1 293 €/t |
+
+Le prix plancher baisse là où le blé rend moins (Pyrénées-Orientales : 33 q/ha) ou la lentille mieux (Aube : 21 q/ha).
+
+## 5. Le contrat de démonstration
+
+- Prix garanti rendu au site : 1 660 €/t.
+- Volume visé (hypothèse) : 5 000 t, soit 13 % des importations 2025.
+- Surface nécessaire : 3 147 ha, soit les 236 parcelles éligibles les plus proches du site, toutes à moins de 9,4 km.
+
+## 6. Ce que ça veut dire
+
+1. **Garantir 8 années sur 10 coûte plus du double du prix d'équilibre médian.** Une moyenne sous-estime fortement le prix qu'il faut garantir : c'est le cœur du message.
+2. **Au prix de marché, la lentille ne gagne qu'environ une année sur deux.** C'est exactement le verrou que décrit le Track 3.
+3. **Le prix plancher est très sensible au prix du blé.** Un contrat indexé sur le prix du blé (multiplicateur médian de 3,6, de 7,8 pour 8 années sur 10) déplacerait ce risque vers la coopérative ; piste à étudier.
+4. **Le prix plancher est lui-même incertain** : seize années ne suffisent pas à cerner les mauvaises années. Les données de rendement des coopératives sont la première chose à obtenir en pilote.
+
+## Historique
+
+- Version 1 (hypothèses provisoires, prix du blé fixe, 39 séries comptées comme indépendantes) : 85 % de contrats tenus, P\* de 1 377 €/t en Seine-et-Marne.
+- Version 2 (prix du blé mesuré et rééchantillonné, charges et aide sourcées) : 82 %, 1 435 €/t.
+- Version 3, actuelle (séries estimées ensemble regroupées) : 86 %, 1 622 €/t, avec un intervalle de confiance sur P\*. Ces changements viennent de la qualité des données, pas du résultat du backtest : le protocole et le modèle retenu sont restés les mêmes.

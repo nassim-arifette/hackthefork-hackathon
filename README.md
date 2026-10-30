@@ -4,7 +4,19 @@
 
 Le Contrat qui Tient aide le responsable filière d'une coopérative ou d'un conditionneur de légumes secs à fixer **le prix plancher d'un contrat lentille** qui rapporte à l'agriculteur **au moins autant que le blé 8 années sur 10**. L'outil montre aussi **quelles parcelles d'Île-de-France basculent** à ce prix, et combien de tonnes la coopérative peut sécuriser.
 
-> État (vendredi 30/10, soir) : pipeline de bout en bout et prototype de démo fonctionnels sur les vraies données (Agreste, RPG 2025, NASA POWER). Les charges, le prix du blé et le transport sont encore des **hypothèses provisoires**. Premiers résultats : [docs/RESULTATS.md](docs/RESULTATS.md).
+> État (vendredi 30/10, soir) : pipeline de bout en bout, tests et démo fonctionnels sur les vraies données (Agreste, RPG 2025, NASA POWER, Eurostat). Résultats : [docs/RESULTATS.md](docs/RESULTATS.md).
+
+![La démo, étape « Le prix »](docs/img/etape-2-prix.png)
+
+## En chiffres
+
+| | |
+|---|---|
+| Importations de lentilles, 2025 | **39 371 t** (Eurostat Comext) |
+| Variabilité du rendement, lentille contre blé | **0,20 contre 0,09** (Agreste, 2010–2025) |
+| Au prix de marché observé (650 à 779 €/t), la lentille bat le blé | **4,7 années sur 10** (modèle) |
+| Prix plancher pour 8 années sur 10, Seine-et-Marne | **1 622 €/t**, incertitude de 1 132 à 3 007 €/t (modèle) |
+| Backtest 2019–2025, années jamais vues | **86 %** de contrats tenus pour 80 % visés, sur 133 cas |
 
 ---
 
@@ -39,8 +51,8 @@ flowchart LR
   M --> BT[Backtest glissant<br/>2019–2025] --> UI
 ```
 
-1. **Un modèle probabiliste** apprend comment la météo (pluie de printemps, chaleur à la floraison, gel tardif) fait varier les rendements du blé et de la lentille, sur environ 40 départements.
-2. **Une simulation Monte-Carlo** rejoue des milliers d'années possibles, et compare dans chacune la marge en lentille sous contrat avec la marge en blé.
+1. **Un modèle d'apprentissage probabiliste** apprend comment la météo NASA POWER (pluie de printemps, chaleur à la floraison, gel tardif, pluie à la récolte) déplace la distribution des rendements du blé et de la lentille. Deux modèles sont entraînés et comparés : une régression quantile calibrée par conformal prediction (retenue) et un LightGBM quantile (challenger).
+2. **Une simulation Monte-Carlo** rejoue 20 000 années : chacune reprend la météo et le prix du blé d'une année réelle, puis compare la marge en lentille sous contrat avec la marge en blé.
 3. **Le prix plancher** est le quantile 80 % du prix d'équilibre lentille/blé : au-dessus de ce prix, la lentille gagne dans 80 % des scénarios.
 4. **Un backtest sans fuite** vérifie, année par année de 2019 à 2025, si les prix que le modèle aurait fixés auraient vraiment tenu.
 
@@ -64,7 +76,8 @@ Voir [docs/ROADMAP.md](docs/ROADMAP.md).
 # 1. Pipeline de données et modèle (Python 3.11+)
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-make export        # 01_agreste → 02_weather → 03_backtest → 04_parcels → 05_export
+make export        # 00_prix_commerce → 01_agreste → 02_weather → 03_backtest → 04_parcels → 05_export → 06_lettre_llm
+make test          # 15 tests : données, absence de fuite, propriétés du prix plancher, exports
 
 # 2. Application (Node 20+)
 make dev           # serveur de développement
@@ -83,6 +96,10 @@ data_raw/        téléchargements bruts (ignorés par git)
 app/             front Vite + React + deck.gl
 docs/
   PROJET.md          problème, utilisateur, différenciation, modèle économique
+  RESULTATS.md       résultats chiffrés du pipeline
+  DESIGN.md          règles de design de l'application
+  FICHE_PROJET.md    fiche projet à déposer
+  DECK.md            contenu du deck, slide par slide
   ARCHITECTURE.md    architecture complète : données, pipeline, front, AWS, LLM
   MODELE.md          spécification du modèle, du Monte-Carlo et du backtest
   ROADMAP.md         étapes, points de décision, extensions, Le Maillon vu du ciel
@@ -93,7 +110,6 @@ docs/
   DEMO_SCRIPT.md     script de la démo de 4 minutes
   PITCH_NOTES.md     questions attendues et réponses
   QUESTIONS.md       décisions ouvertes
-  maquettes/         maquettes visuelles (données synthétiques)
 ```
 
 ## Étiquetage des chiffres

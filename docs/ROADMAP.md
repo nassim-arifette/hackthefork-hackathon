@@ -11,6 +11,10 @@ flowchart LR
 
 ---
 
+## État au vendredi 30/10, soir
+
+Fait : pipeline complet sur données réelles (Agreste, RPG 2025, NASA POWER, Eurostat), deux modèles d'apprentissage comparés, backtest sans fuite, incertitude sur P\*, 15 tests, application en cinq étapes avec version hors ligne, documentation et contenu du deck. Reste : confronter les hypothèses à un mentor, brancher Bedrock, déployer sur Amplify, répéter.
+
 ## 1. Planning du hackathon
 
 | Quand | Objectif | Critère de sortie |

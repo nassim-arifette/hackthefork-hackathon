@@ -12,6 +12,8 @@ Obligatoire au dépôt. Tout ce qui n'a pas été produit pendant l'événement 
 | Douanes NC8 | importations | voir [SOURCES.md](SOURCES.md) | fourni sur le Drive de l'organisation |
 | Registre national des cantines | extension | voir [SOURCES.md](SOURCES.md) | fourni sur le Drive de l'organisation |
 | Contours des départements (gregoiredavid/france-geojson, dérivé d'IGN ADMIN EXPRESS) | centroïdes météo, contours de carte | [à vérifier] | téléchargé depuis GitHub |
+| RPG 2025 Île-de-France (IGN, data.geopf.fr) | parcelles de la carte | voir [SOURCES.md](SOURCES.md) | téléchargé depuis le site de l'IGN |
+| Eurostat : prix agricoles et Comext | prix du blé et de la lentille, commerce extérieur | réutilisation autorisée avec citation | via l'API Eurostat |
 
 Les archives du Drive de l'organisation ont été créées le 30/10/2026 à 17h36.
 
@@ -19,6 +21,7 @@ Les archives du Drive de l'organisation ont été créées le 30/10/2026 à 17h3
 
 Python : pandas, numpy, openpyxl, scikit-learn, scipy, lightgbm, geopandas, pyogrio, shapely, pyproj, py7zr, requests, pyyaml.
 JavaScript : Vite, React, TypeScript, deck.gl, vite-plugin-singlefile.
+Polices : Archivo et Source Serif 4 (licence SIL Open Font License), via Fontsource.
 Versions exactes : `requirements.txt` et `app/package.json`.
 
 ## Modèles pré-entraînés
@@ -30,7 +33,7 @@ Aucun modèle de prévision pré-entraîné. Le LLM utilisé pour rédiger les t
 | Outil | Usage |
 |---|---|
 | Claude Code (Anthropic) | aide à l'écriture du code et de la documentation |
-| Amazon Bedrock (Claude) | génération des textes de contrat au build |
+| Amazon Bedrock (Claude) | lettre d'accompagnement au build, facultative ; aucun chiffre produit (garde-fou testé) |
 
 Autorisation de l'assistant de code externe par l'organisation : **[à confirmer]**.
 
