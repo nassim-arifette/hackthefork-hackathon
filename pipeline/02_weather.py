@@ -71,7 +71,10 @@ def features(d: pd.DataFrame) -> pd.DataFrame:
 
 def main():
     panel = pd.read_csv(DATA / "panel_rendements.csv", dtype={"dep": str, "serie_groupe": str})
-    u = panel[panel.utilisable & ~panel.doublon]
+    # Acquisition covers every usable lentil territory. The legacy global
+    # duplicate flags must never decide which weather histories are available
+    # to a chronological fold; model.fit learns grouping on proper training only.
+    u = panel[panel.utilisable]
     lent = set(u[u.culture == "lentille"].dep)
     deps = sorted(lent | set(IDF_AGRI))
     cents = centroids()

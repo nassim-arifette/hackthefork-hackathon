@@ -1,3 +1,5 @@
+> Document de contexte antérieur à la correction de validation. Les chiffres et engagements ci-dessous ne décrivent pas le scénario courant. Références à jour : [RESULTATS](RESULTATS.md), [MODELE](MODELE.md) et [DEMO_SCRIPT](DEMO_SCRIPT.md).
+
 # Décisions ouvertes
 
 Rendu visuel de l'application : **validé le 30/10**.

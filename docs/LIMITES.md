@@ -1,21 +1,27 @@
-# Limites connues
+# Limites et portée des résultats
 
-Ces limites sont annoncées par l'équipe elle-même, dans le deck et pendant les questions. Chiffres : [RESULTATS.md](RESULTATS.md).
+Les résultats de [RESULTATS.md](RESULTATS.md) sont une reconstitution sous hypothèses. Ils ne garantissent ni le rendement d'une parcelle, ni la marge d'une exploitation, ni la livraison du volume attendu. Le protocole exact est décrit dans [MODELE.md](MODELE.md).
 
-| Limite | Conséquence | Ce qu'on fait | Étape suivante |
-|---|---|---|---|
-| **Rendements départementaux** | la variance réelle à la parcelle est plus forte : le risque est sous-estimé | on le dit ; la fiabilité affichée vaut pour un département moyen | données de rendement des coopératives |
-| **Agreste estime souvent la lentille au niveau régional** | 39 départements mesurés, mais 24 séries indépendantes seulement | séries identiques regroupées avant l'entraînement | données de coopératives, autres légumineuses |
-| **Peu de lentille en Île-de-France** (environ 730 ha, statut qualité 3) | pas d'effet propre à l'Île-de-France | rendement relatif, niveau emprunté aux départements producteurs voisins | parcelles franciliennes suivies en pilote |
-| **Le prix plancher est lui-même incertain** | de 1 132 à 3 007 €/t à 80 % en Seine-et-Marne (bootstrap) | intervalle affiché à côté du prix | plus d'années, données de coopératives |
-| **Sept années test seulement** | le taux de contrats tenus est incertain | résultats affichés année par année | autres cultures, autres régions |
-| **Années extrêmes absentes de l'entraînement** (2020–2021) | les contrats cèdent ces années-là (44 % et 61 % tenus) | montré à l'écran, pas caché | scénarios de stress, modèles de queue |
-| **La météo n'améliore pas la précision du modèle linéaire** | son apport passe par la calibration ; LightGBM est plus précis mais tient moins de contrats | les deux modèles sont comparés à l'écran | variables météo par stade, météo pondérée par les surfaces RPG |
-| **Météo au centroïde du département** | la météo des zones cultivées peut différer | assumé en version 1 | moyenne pondérée par les surfaces RPG |
-| **Prix du blé reconstitué** | indice Eurostat calé sur un prix rendu Rouen, un peu au-dessus du prix payé au producteur | choix prudent : il surestime la marge du blé, donc P\* | série FranceAgriMer de prix payés aux producteurs |
-| **Charges constantes dans le temps** | la flambée des engrais en 2022 n'est pas prise en compte | sensibilité affichée | indice Eurostat des prix des intrants |
-| **Aide couplée** | l'éligibilité de la lentille et le montant final restent à confirmer | 122 €/ha (arrêté de février 2026), sensibilité « sans aide » affichée | vérifier la notice Telepac |
-| **Le RPG enregistre ce qui est déclaré**, pas ce qui est cultivable | on ne connaît ni les sols ni l'aptitude à la lentille | la courbe d'offre est un potentiel, pas une prévision | GIS Sol, historique des rotations |
-| **Délai de retour de la lentille sur une même parcelle** | toutes les parcelles ne peuvent pas porter de la lentille chaque année | le volume visé du contrat reste modeste (5 000 t) | règle agronomique à intégrer |
-| **La bruche n'est pas modélisée** | 10 à 20 % de pertes possibles (sourcé) | mentionnée | variable de risque qualité |
-| **Un prix plancher n'est pas une assurance** | une récolte effondrée réduit la marge malgré le prix | le modèle en tient compte ; les 20 % non couverts sont visibles | couplage avec une assurance récolte |
+| Limite | Conséquence | Traitement actuel et prochaine validation utile |
+|---|---|---|
+| Peu d'années | Le premier test n'a que quatre années d'apprentissage ; deux années de sélection peuvent donner un classement instable. | Candidats et paramètres fixes, comparaison année par année ; recueillir davantage de campagnes. |
+| Étude déjà examinée rétrospectivement | Le code évite les fuites temporelles, mais l'équipe a déjà vu les résultats de 2019–2025. | Ne pas qualifier ce jeu de validation prospective intacte ; figer un protocole avant une nouvelle campagne ou cohorte. |
+| Dépendances temporelles et spatiales | Les observations département-année ne sont pas autant de répétitions indépendantes. | Bootstrap descriptif d'années entières ; ne pas annoncer de garantie conformelle théorique dans ce contexte. |
+| Regroupement heuristique | Des rendements identiques suggèrent une estimation commune, sans prouver l'origine de chaque chiffre ou l'indépendance restante. | Regroupement et choix du représentant sur l'apprentissage seulement ; conserver la traçabilité et obtenir des données de terrain. |
+| Rendements départementaux | Le risque individuel peut différer fortement de celui d'un département moyen. | Pas de garantie parcellaire ; valider sur rendements et charges d'exploitations. |
+| Transfert de la lentille vers l'Île-de-France | Le niveau vient de voisins ; la météo d'un territoire absent peut être centrée sur la moyenne globale d'apprentissage. | Hypothèse de transfert explicite ; suivi d'un pilote francilien requis. |
+| Météo à un point par département | L'exposition des parcelles et des zones réellement cultivées peut différer. | CSV couvrant 43 départements, dont tous les territoires lentille utilisables ; améliorer l'agrégation spatiale et les stades phénologiques. |
+| Diagnostics conditionnels à la météo réalisée | Une bonne précision rétrospective du rendement ne prouve pas une bonne prévision avant semis. | Séparer ce diagnostic de la décision de prix, qui rejoue seulement le passé. |
+| Trois quantiles ne définissent pas toute une distribution | Queues, plancher numérique 0,02 et dépendance résiduelle peuvent modifier sensiblement P*. | Quantiles bruts séparés des intervalles ; sensibilités aux queues et aux rangs entre cultures. Ni un stress choisi ni une bonne couverture ne prouvent la distribution complète. |
+| Incertitude du prix incomplète | La plage 10–90 % du rééchantillonnage ne comprend pas l'incertitude d'estimation du modèle ou du transfert territorial. | Modèles figés, libellé descriptif ; ne pas la vendre comme un intervalle de confiance complet. |
+| Référence blé reconstruite | L'ancrage rendu Rouen ne représente pas tous les prix départ ferme. | Libellé Eurostat/Agreste, analyse de sensibilité ; recueillir des références producteur cohérentes. |
+| Référence lentille ancienne | Les prix nominaux 2012–2016 ne décrivent pas le marché actuel. | Prix acheteur saisi comme hypothèse ; référence historique datée uniquement. |
+| Charges constantes et aide conditionnelle | Les marges calculées ne sont pas des marges comptables historiques. | Zéro aide non confirmée dans le scénario principal ; 122 €/ha seulement sous réserve d'éligibilité, sensibilités de charges affichées. |
+| Source publiée aujourd'hui | La série peut comprendre révisions et valeurs provisoires inconnues à la date historique simulée. | Décrire une reconstitution avec la version actuelle ; un vrai backtest « tel que connu à l'époque » nécessite des archives de publication. |
+| RPG et aptitude agronomique | Une parcelle déclarée en blé n'est pas automatiquement adaptée à la lentille ou disponible à la rotation. | Potentiel d'offre, pas prévision d'adoption ; intégrer sols, rotations et volonté de signature. |
+| Volume attendu | Surface multipliée par rendement moyen n'assure ni la récolte ni la livraison contractuelle. | Une seule campagne cible ; tester risque de volume, adoption et pertes qualité dans un pilote. |
+| Replays 2016/2020 | Le choc lentille national est appliqué au niveau simulé francilien actuel ; ce n'est pas un backtest local hors échantillon. | Présenter ces écrans comme scénarios de stress illustratifs. |
+| Plafond acheteur hypothétique | Prix de revente, pertes au tri, coûts et marge minimale ne sont pas des données vérifiées de coopérative. | Paramètres modifiables, unités explicites et verdict conditionnel ; valider devis, qualité, financement et débouchés. |
+| Un prix plancher n'est pas une assurance récolte | Une récolte quasi nulle peut empêcher d'atteindre la marge malgré un prix élevé. | Afficher les pertes résiduelles ; étudier séparément les mécanismes assurantiels ou de partage de risque. |
+
+Une amélioration de couverture obtenue en augmentant le prix n'est pas à elle seule une preuve de valeur de l'IA. La comparaison utile porte sur le prix et les pertes résiduelles à protection observée comparable, avec les limites d'échantillon annoncées. Le modèle sélectionné dans une fenêtre ne doit pas être présenté comme le meilleur modèle agricole possible.

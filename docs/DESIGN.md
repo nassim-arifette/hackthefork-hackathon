@@ -1,3 +1,5 @@
+> Document de contexte antérieur à la correction de validation. Les chiffres et engagements ci-dessous ne décrivent pas le scénario courant. Références à jour : [RESULTATS](RESULTATS.md), [MODELE](MODELE.md) et [DEMO_SCRIPT](DEMO_SCRIPT.md).
+
 # Design de l'application
 
 Direction : **un atlas agricole imprimé, lu à l'écran**. La carte est le sujet ; le texte l'accompagne comme dans un dossier de presse ou une notice cartographique. Rien ne doit ressembler à un tableau de bord générique.
@@ -20,7 +22,7 @@ Thème clair unique : il passe mieux au vidéoprojecteur dans une salle éclair�
 | `--lentil` | `#2F6A50` | lentille sous contrat (sémantique) |
 | `--slate` | `#5B7385` | lentille déjà déclarée |
 | `--fail` | `#B5432C` | contrat non tenu, uniquement |
-| `--market` | `#DCE3EA` | bande du prix de marché |
+| `--market` | `#DCE3EA` | bande du référence historique nominale 2012–2016 |
 
 Deux couleurs portent le sens (blé, lentille). Le rouge n'apparaît que pour un contrat qui ne tient pas.
 

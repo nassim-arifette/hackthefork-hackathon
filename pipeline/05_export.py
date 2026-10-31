@@ -1,7 +1,7 @@
 """Modèle final, prix plancher par département et par parcelle, exports pour l'application.
 
-Le modèle final (M1 calibré) est entraîné sur 2010-2025. P* est calculé pour la campagne
-2026 en rejouant les années 2010-2025 : leur météo et leur prix du blé.
+Le modèle final est sélectionné sur une fenêtre distincte de la calibration.
+P* est calculé pour la seule campagne 2026, sans aide non confirmée.
 Sorties : app/src/data/*.json, lus tels quels par le front.
 """
 import json
@@ -10,12 +10,10 @@ import numpy as np
 import pandas as pd
 
 from common import APP_DATA, DATA, IDF_AGRI, RAW, VOISINS_LENTILLE, hypotheses
-from model import FEATURES, Calibrated, break_even_prices, hyp_values, levels, levels_lookup, load, \
-    p_star, pool_for, with_rel
+from model import FEATURES, Calibrated, break_even_prices, hyp_values, load, p_star, pool_for
 
 TARGET_YEAR = 2026
 POOL_YEARS = range(2010, 2026)
-PRICE_GRID = list(range(400, 3001, 10))
 N_SIM = 20000
 
 
@@ -25,18 +23,18 @@ def simulate(meteo, dep, mL, mW, levL, levW, h, seed):
     return R, yL, yW, pool
 
 
-def bootstrap_p_star(df, meteo, dep, lev_l, lev_w, h, B=40, seed=0):
-    """Incertitude sur P* : on rééchantillonne les années d'entraînement (par blocs d'une
-    année entière), on réentraîne les deux modèles et on recalcule P*."""
+def bootstrap_p_star(meteo, dep, mL, mW, lev_l, lev_w, h, B=200, seed=0):
+    """Sensibilité descriptive aux années rejouées, CONDITIONNELLE aux modèles figés.
+
+    Aucun réentraînement aléatoire à travers les fenêtres temporelles. Cette plage
+    ne mesure ni l'erreur d'estimation des modèles ni une couverture de P* à 80 %.
+    """
     rng = np.random.default_rng(seed)
-    years = np.array(sorted(df.annee.unique()))
+    pool = pool_for(meteo, dep, POOL_YEARS, TARGET_YEAR)
     out = []
     for b in range(B):
-        d = pd.concat([df[df.annee == y] for y in rng.choice(years, size=len(years), replace=True)])
-        Lb, Wb = d[d.culture == "lentille"], d[d.culture == "ble"]
-        mLb = Calibrated("M1").fit(with_rel(Lb, levels(Lb)))
-        mWb = Calibrated("M1").fit(with_rel(Wb, levels(Wb)))
-        R, _, _, _ = simulate(meteo, dep, mLb, mWb, lev_l, lev_w, h, seed=1000 + b)
+        sampled = pool.iloc[rng.integers(0, len(pool), len(pool))]
+        R, _, _ = break_even_prices(sampled, mL, mW, lev_l, lev_w, h, n=10000, seed=1000)
         out.append(p_star(R, h["tau"]))
     return [round(float(np.quantile(out, q))) for q in (0.1, 0.5, 0.9)]
 
@@ -49,12 +47,14 @@ def main():
     site = H["site_acheteur"]["valeur"]
 
     df, meteo = load()
+    df, meteo = df[df.annee < TARGET_YEAR], meteo[meteo.annee < TARGET_YEAR]
     L, W = df[df.culture == "lentille"], df[df.culture == "ble"]
-    levL, levW = levels(L), levels(W)
-    mL = Calibrated("M1").fit(with_rel(L, levL))
-    mW = Calibrated("M1").fit(with_rel(W, levW))
+    models = {k: Calibrated(k).fit(L) for k in ("M0", "M1", "M2", "M3", "auto")}
+    mL = models["auto"]
+    mW = Calibrated("auto").fit(W)
     # Pour la consultation (Île-de-France, voisins), on garde tous les départements mesurés.
-    levW_all, levL_all = levels_lookup("ble"), levels_lookup("lentille")
+    levW_all, levL_all = mW.levels_all, mL.levels_all
+    levL = levL_all.loc[mL.retained_deps]
     voisins = [d for d in VOISINS_LENTILLE if d in levL_all.index]
     lev_idf = float(levL_all[voisins].mean())
     prix = pd.read_csv(DATA / "prix_ble.csv").set_index("annee").prix_eur_t
@@ -70,33 +70,34 @@ def main():
             "rendement_lentille_q10_tha": round(float(np.quantile(yL, 0.1)), 2),
             "rendement_ble_moyen_tha": round(float(yW.mean()), 2),
             "niveau_ble_qha": round(float(levW_all[dep]), 1),
-            "fiabilite_par_prix": [{"prix": p, "fiabilite": round(float(np.mean(R <= p)), 3)}
-                                   for p in range(400, 3001, 25)],
+            "fiabilite_par_prix": [{"prix": int(p), "fiabilite": round(float(np.mean(R <= p)), 3)}
+                                   for p in np.unique(np.r_[0, np.arange(100, max(5000, int(p_star(R, .95)) + 100), 25)])],
         }
         print(dep, {k: v for k, v in deps[dep].items() if k != "fiabilite_par_prix"})
 
     # Challenger LightGBM : même calcul, autre modèle de rendement, et ce qu'il a appris.
-    mL2 = Calibrated("M2").fit(with_rel(L, levL))
+    mL2 = models["M2"]
     R2, _, _, _ = simulate(meteo, "77", mL2, mW, lev_idf, levW_all["77"], h, seed=77)
     gain = mL2.model.models[1].booster_.feature_importance(importance_type="gain")
-    importances = sorted(({"variable": f, "part": round(float(g / gain.sum()), 3)}
+    importances = sorted(({"variable": f, "part": round(float(g / max(gain.sum(), 1)), 3)}
                           for f, g in zip(FEATURES, gain)), key=lambda x: -x["part"])
     challenger = {"p_star_77": round(p_star(R2, h["tau"])), "importances_q50": importances,
                   "elargissement_conformal": round(mL2.qhat, 3)}
     print("Challenger LightGBM :", challenger)
 
     # Les autres façons de fixer le prix, pour la Seine-et-Marne, campagne 2026.
-    mL0 = Calibrated("M0").fit(with_rel(L, levL))
-    R0, _, _, _ = simulate(meteo, "77", mL0, mW, lev_idf, levW_all["77"], h, seed=77)
     prix_moyen = float(prix.loc[2010:2025].mean())
     p_moy = (prix_moyen * levW_all["77"] / 10 - h["charges_ble"] + h["charges_lentille"] - h["bonus"]) / (lev_idf / 10)
-    strategies_77 = {"moyenne": round(p_moy), "M0": round(p_star(R0, h["tau"])),
-                     "M1": deps["77"]["p_star"], "M2": challenger["p_star_77"]}
+    strategies_77 = {"moyenne": round(p_moy)}
+    for kind, candidate in models.items():
+        Rk, _, _, _ = simulate(meteo, "77", candidate, mW, lev_idf, levW_all["77"], h, seed=77)
+        strategies_77[kind] = round(p_star(Rk, h["tau"]))
     print("Stratégies 77 :", strategies_77)
 
-    ic77 = bootstrap_p_star(df, meteo, "77", lev_idf, levW_all["77"], h)
+    ic77 = bootstrap_p_star(meteo, "77", mL, mW, lev_idf, levW_all["77"], h)
     deps["77"]["p_star_ic80"] = [ic77[0], ic77[2]]
-    print("Incertitude P* 77 (bootstrap, 10-50-90 %) :", ic77)
+    deps["77"]["incertitude_methode"] = "Rééchantillonnage des années météo/prix à modèles figés, 10–90 %, descriptif."
+    print("Sensibilité aux années P* 77 (10-50-90 %) :", ic77)
 
     # Contrat indexé : plancher = m × prix du blé de la récolte. m* au quantile τ.
     R77, yL77, yW77, pool77 = simulate(meteo, "77", mL, mW, lev_idf, levW_all["77"], h, seed=77)
@@ -120,12 +121,20 @@ def main():
         "charges_lentille": [{"x": c, "p_star": ps77(charges_lentille=c)} for c in H["charges_lentille_eur_ha"]["sensibilite"]],
         "bonus_rotation": [{"x": b, "p_star": ps77(rotation=b)} for b in H["bonus_rotation_eur_ha"]["sensibilite"]],
         "sans_aide": ps77(aide=0),
+        "avec_aide": ps77(aide=H["aide_couplee_conditionnelle_eur_ha"]["valeur"]),
     }
+    sens["distribution"] = []
+    for tail, dependence in (("linear", "independent"), ("bounded", "independent"),
+                             ("stress", "independent"), ("linear", "positive"), ("linear", "negative")):
+        R, _, _ = break_even_prices(pool77, mL, mW, lev_idf, levW_all["77"], h,
+                                   n=N_SIM, seed=77, tail=tail, dependence=dependence)
+        sens["distribution"].append({"queue": tail, "dependance": dependence,
+                                     "p_star": round(p_star(R, h["tau"]))})
 
     # Ailleurs en France : P* des départements producteurs, avec leur propre niveau.
     # Un département représente les départements dont Agreste estime le rendement avec lui.
     panel_all = pd.read_csv(DATA / "panel_rendements.csv", dtype={"dep": str, "serie_groupe": str})
-    grp = panel_all[panel_all.culture == "lentille"].drop_duplicates("dep").set_index("dep").serie_groupe
+    grp = pd.Series(mL.groups)
     noms = panel_all.drop_duplicates("dep").set_index("dep").dep_nom
     france = []
     for dep in levL.index:
@@ -139,11 +148,20 @@ def main():
     france.sort(key=lambda x: x["p_star"])
 
     # Parcelles : distance au site acheteur et prix rendu de bascule.
-    parc = json.loads((DATA / "parcelles.json").read_text())
-    lon = np.array([p[4] for p in parc]); lat = np.array([p[5] for p in parc])
-    p1, p2 = np.radians(lat), np.radians(site[1])
-    a = np.sin((p2 - p1) / 2) ** 2 + np.cos(p1) * np.cos(p2) * np.sin(np.radians(site[0] - lon) / 2) ** 2
-    dist = 2 * 6371.0 * np.arcsin(np.sqrt(a)) * detour
+    if (DATA / "parcelles.json").exists():
+        parc = json.loads((DATA / "parcelles.json").read_text())
+        lon = np.array([p[4] for p in parc]); lat = np.array([p[5] for p in parc])
+        p1, p2 = np.radians(lat), np.radians(site[1])
+        a = np.sin((p2 - p1) / 2) ** 2 + np.cos(p1) * np.cos(p2) * np.sin(np.radians(site[0] - lon) / 2) ** 2
+        dist = 2 * 6371.0 * np.arcsin(np.sqrt(a)) * detour
+    else:
+        # Géométries RPG versionnées : seuls les prix/volumes sont recalculés.
+        cache_meta = json.loads((APP_DATA / "meta.json").read_text())
+        if cache_meta["site_acheteur"] != site or cache_meta["hypotheses"]["facteur_detour_route"]["valeur"] != detour:
+            raise ValueError("Site/détour modifié : relancer 04_parcels.py avant l'export.")
+        cache = json.loads((APP_DATA / "parcels.json").read_text())
+        parc = [p[:4] + [None, None, p[7]] for p in cache]
+        dist = np.array([p[4] for p in cache])
     out_parc = []
     for p, d in zip(parc, dist):
         dep = deps[p[1]]
@@ -155,7 +173,8 @@ def main():
 
     cand = sorted((x for x in out_parc if x[2] == "ble"), key=lambda x: x[5])
     supply, j, t_cum, ha_cum, n_cum = [], 0, 0.0, 0.0, 0
-    for q in PRICE_GRID:
+    max_price = int(np.ceil(max(x[5] for x in cand) / 10) * 10) + 100
+    for q in range(0, max(5000, max_price) + 1, 10):
         while j < len(cand) and cand[j][5] <= q:
             t_cum += cand[j][6]; ha_cum += cand[j][3]; n_cum += 1; j += 1
         supply.append({"prix": q, "tonnes": round(t_cum), "hectares": round(ha_cum), "parcelles": n_cum})
@@ -196,10 +215,15 @@ def main():
         "site_acheteur": site,
         "niveau_lentille_idf_qha": round(lev_idf, 1),
         "voisins_lentille": voisins,
-        "panel_lentille": {"series_independantes": int(L.dep.nunique()), "cas": int(len(L)),
+        "panel_lentille": {"series_retenues": len(mL.retained_deps), "cas": mL.audit["n_proper"],
                            "departements_mesures": int(levL_all.size)},
         "hypotheses": H,
-        "coefficients_M1_lentille": mL.model.coefficients(),
+        "modele_principal": "auto", "modele_retenu_lentille": mL.kind, "modele_retenu_ble": mW.kind,
+        "audit_modele_lentille": mL.audit, "audit_modele_ble": mW.audit,
+        "prix_ble_libelle": "Prix de référence reconstruit à partir d'Eurostat et d'Agreste",
+        "prix_lentille_libelle": "Référence historique nominale 2012–2016 — non représentative d'une cotation actuelle",
+        "duree_campagnes": 1,
+        "coefficients_M1_lentille": models["M1"].model.coefficients(),
         "elargissement_conformal_lentille": round(mL.qhat, 3),
         "rendements_nationaux": [{"annee": int(a), "ble": round(float(nat.ble[a]), 1),
                                   "lentille": round(float(nat.lentille[a]), 1)} for a in nat.index],
@@ -228,8 +252,14 @@ def main():
     dump("replay.json", replay)
     dump("backtest.json", bt)
     dump("meta.json", meta)
-    dump("contours.json", json.loads((DATA / "contours_idf.json").read_text()))
-    france_geo = json.loads((RAW / "geo" / "departements.geojson").read_text())
+    contours_path = DATA / "contours_idf.json"
+    if not contours_path.exists():
+        contours_path = APP_DATA / "contours.json"
+    dump("contours.json", json.loads(contours_path.read_text()))
+    france_path = RAW / "geo" / "departements.geojson"
+    if not france_path.exists():
+        france_path = APP_DATA / "france.json"
+    france_geo = json.loads(france_path.read_text())
     for f in france_geo["features"]:
         f["properties"] = {"code": f["properties"]["code"], "nom": f["properties"]["nom"]}
     dump("france.json", france_geo)

@@ -1,3 +1,5 @@
+> Document de contexte antérieur à la correction de validation. Les chiffres et engagements ci-dessous ne décrivent pas le scénario courant. Références à jour : [RESULTATS](RESULTATS.md), [MODELE](MODELE.md) et [DEMO_SCRIPT](DEMO_SCRIPT.md).
+
 # Inventaire des données
 
 Ce que contiennent réellement les données, vérifié en les ouvrant. Les éléments non encore inspectés sont marqués **à inspecter**.
@@ -96,7 +98,7 @@ Aube et Marne présentent des rendements lentille identiques sur plusieurs anné
 
 ## 5. Estimations régionales dans Agreste
 
-En comparant les séries, plusieurs départements ont des rendements de lentille **strictement identiques** sur 8 années ou plus : ils sont estimés ensemble. Exemples : Ardennes, Aube, Marne et Haute-Marne ; Côte-d'Or, Nièvre, Saône-et-Loire et Yonne ; huit départements d'Auvergne-Rhône-Alpes autour de la Haute-Loire. Sur 39 départements mesurés, il reste **24 séries indépendantes**. Pour le blé, seuls les petits départements franciliens (93, 94) et la Corse sont concernés.
+En comparant les séries, plusieurs départements ont des rendements de lentille **strictement identiques** sur 8 années ou plus : ils sont estimés ensemble. Exemples : Ardennes, Aube, Marne et Haute-Marne ; Côte-d'Or, Nièvre, Saône-et-Loire et Yonne ; huit départements d'Auvergne-Rhône-Alpes autour de la Haute-Loire. Sur 39 départements mesurés, il reste **24 séries retenues après regroupement**. Pour le blé, seuls les petits départements franciliens (93, 94) et la Corse sont concernés.
 
 ## 6. À inspecter
 

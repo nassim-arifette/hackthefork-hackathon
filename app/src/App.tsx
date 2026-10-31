@@ -4,7 +4,7 @@ import Method from './components/Method';
 import { BacktestReveal, MarginBars, PriceChart, SecurityChart, Sensitivity, YieldsChart } from './components/charts';
 import { Figure, Source } from './components/ui';
 import {
-  backtest, CHALLENGER, D77, DEP_NAMES, dec, FEATURE_LABELS, fmt, H, held, lettre, MARKET, meta, parcels, pct, reliabilityAt, replay,
+  backtest, BUYER_DEFAULTS, CHALLENGER, D77, DEP_NAMES, dec, farmPrice, FEATURE_LABELS, fmt, H, held, MAIN_MODEL, MARKET, meta, parcels, pct, REFERENCE_DISTANCE, reliabilityAt, replay,
   signedPct, thresholds, type ReplayYear,
 } from './data';
 import { useTween } from './useTween';
@@ -12,16 +12,23 @@ import { useTween } from './useTween';
 const STEPS = ['Le verrou', 'Le prix', 'L’épreuve', 'La preuve', 'Le contrat'];
 const pStars = thresholds.par_departement.map((d) => d.p_star);
 const MIN = 600;
-const MAX = 2000;
-const G = backtest.global;
+const MAX = Math.ceil(Math.max(3000, ...pStars.map((p) => p + Math.max(...parcels.map((p) => p.dist)) * H.kappa)) * 1.15 / 500) * 500;
+const G = backtest.global as typeof backtest.global & { erreur_mediane_auto?: number };
 const L25 = meta.lentille_2025;
 const surf = meta.surface_lentille_par_dep_2025 as Record<string, number>;
 const IDF_LENTIL_HA = ['77', '78', '91', '95'].reduce((a, d) => a + (surf[d] ?? 0), 0);
-const MARKET_MID = (MARKET.min + MARKET.max) / 2;
-const REL_MARKET = reliabilityAt(MARKET_MID);
 const CONTRACT_PRICE = Math.ceil((Math.max(...pStars) + 30) / 10) * 10;
 const VOLUME = (meta.hypotheses as any).volume_vise_t.valeur as number;
-const BT2020 = backtest.annees.find((y) => y.annee === 2020)!;
+const ECON = (backtest as any).economie as Record<string, { taux_tenus: number; prix_median_eur_t: number; manque_moyen_eur_ha: number; cout_achat_moyen_eur_ha: number }> | undefined;
+const METHOD_NAMES: Record<string, string> = { moyenne: 'Moyennes passées', historique: 'Quantile historique apparié', M0: 'M0 · Tendance sans météo', M1: 'M1 · Régression quantile météo', M2: 'M2 · LightGBM', M3: 'M3 · Ensemble de quantiles', auto: 'Sélection temporelle automatique' };
+const PRICE_FOR_VOLUME = (() => {
+  let tonnes = 0;
+  for (const p of parcels.filter((p) => p.culture === 'ble').sort((a, b) => a.pRendu - b.pRendu)) {
+    tonnes += p.tonnes;
+    if (tonnes >= VOLUME) return p.pRendu;
+  }
+  return Infinity;
+})();
 const START_PRICE = 900;
 const IC77 = (D77 as any).p_star_ic80 as [number, number] | undefined;
 const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
@@ -34,6 +41,7 @@ export default function App() {
   const [shown, setShown] = useState(0);
   const [hover, setHover] = useState<Hover>(null);
   const [method, setMethod] = useState(false);
+  const [buyer, setBuyer] = useState(BUYER_DEFAULTS);
   const timers = useRef<number[]>([]);
 
   const stop = () => { timers.current.forEach(clearTimeout); timers.current = []; };
@@ -53,16 +61,22 @@ export default function App() {
   const target = useMemo(() => {
     const elig = parcels.filter((p) => p.culture === 'ble' && price >= p.pRendu).sort((a, b) => a.dist - b.dist);
     let t = 0, ha = 0, n = 0, km = 0;
+    const selected = new Set<string>();
     for (const p of elig) {
       if (t >= VOLUME) break;
-      t += p.tonnes; ha += p.surface; n++; km = p.dist;
+      t += p.tonnes; ha += p.surface; n++; km = p.dist; selected.add(p.id);
     }
-    return { ha, n, km, reached: t >= VOLUME };
+    return { ha, n, km, tonnes: t, selected, reached: t >= VOLUME };
   }, [price]);
+
+  const targetKept = useMemo(() => year ? parcels.filter((p) => target.selected.has(p.id) && held(p, price, year)).length : 0, [target, year, price]);
+  const buyerCeiling = buyer.resale * (1 - buyer.loss) - buyer.sorting - buyer.processing - buyer.other - buyer.margin;
+  const canAgree = buyerCeiling >= PRICE_FOR_VOLUME;
+  const offerFeasible = target.reached && price <= buyerCeiling;
 
   const animatePrice = useCallback((from: number, to: number, ms = 5600) => {
     stop();
-    const n = Math.max(1, Math.round((to - from) / 5));
+    const n = Math.max(1, Math.round(Math.abs(to - from) / 5));
     for (let i = 0; i <= n; i++) at((ms * i) / n, () => setPrice(Math.round(from + ((to - from) * i) / n)));
   }, []);
 
@@ -75,16 +89,14 @@ export default function App() {
     const next = Math.max(0, Math.min(STEPS.length - 1, s));
     stop(); setHover(null); setStep(next);
     if (next !== 2) setYear(null);
-    if (next === 1 && price < Math.min(...pStars)) at(1900, () => animatePrice(START_PRICE, CONTRACT_PRICE));
-    if (next >= 2 && price < Math.max(...pStars)) setPrice(CONTRACT_PRICE);
     if (next === 2) setYear(replay[0]);
     if (next === 3) reveal();
-  }, [price, animatePrice, reveal]);
+  }, [reveal]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       const tag = (e.target as HTMLElement).tagName;
-      if (tag === 'INPUT' && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) return;
+      if (tag === 'INPUT' || tag === 'SELECT' || tag === 'TEXTAREA' || tag === 'BUTTON') return;
       if (e.key === 'Escape') { setMethod(false); return; }
       if (method) return;
       if (e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); go(step + (e.shiftKey ? -1 : 1)); }
@@ -117,7 +129,7 @@ export default function App() {
       </header>
 
       <main className="map">
-        <MapScene step={step} price={price} year={step === 2 ? year : null} selectKm={step === 4 ? target.km : null} onHover={setHover} />
+        <MapScene step={step} price={price} year={step === 2 ? year : null} selectedIds={step === 4 || step === 2 ? target.selected : null} onHover={setHover} />
         <div className="map-caption">
           {step === 0
             ? <><b>Surface en lentille par département, 2025</b><span>Agreste, Statistique agricole annuelle</span></>
@@ -179,23 +191,22 @@ export default function App() {
           {step === 1 && (
             <>
               <h1>À quel prix la lentille bat-elle le blé 8 années sur 10 ?</h1>
-              <p className="lead">Faites varier le prix garanti. Une parcelle de blé bascule quand ce prix, transport déduit, couvre le risque de la lentille dans son département.</p>
+              <p className="lead">Faites varier l’offre hypothétique de l’acheteur. Une parcelle devient éligible quand ce prix, transport déduit, atteint le seuil simulé de son département.</p>
               <div className="block control">
-                <label htmlFor="price">Prix garanti, rendu au site acheteur</label>
+                <label htmlFor="price">Prix proposé par l’acheteur, rendu au site</label>
                 <div className="readout">
                   <output htmlFor="price">{fmt(price)}<span className="unit">€/t</span></output>
-                  <p><b>{dec(rel * 10, 1)} années sur 10</b> où la lentille rapporte au moins autant que le blé en Seine‑et‑Marne</p>
+                  <p><b>{dec(rel * 10, 1)} années sur 10</b> dans les simulations pour une parcelle de Seine‑et‑Marne à {fmt(REFERENCE_DISTANCE)} km du site</p>
                 </div>
                 <div className="range">
                   <input id="price" type="range" min={MIN} max={MAX} step={5} value={price} style={{ ['--fill' as any]: pos(price) }}
                     onChange={(e) => { stop(); setPrice(+e.target.value); }} />
                   <div className="range-marks" aria-hidden="true">
-                    <span className="mk-market" style={{ left: pos(MARKET.min), width: `calc(${pos(MARKET.max)} - ${pos(MARKET.min)})` }} />
-                    <span className="mk-label" style={{ left: pos(MARKET_MID) }}>marché</span>
-                    <span className="mk-tick" style={{ left: pos(D77.p_star) }} />
-                    <span className="mk-label" style={{ left: pos(D77.p_star) }}>8 sur 10</span>
+                    <span className="mk-tick" style={{ left: pos(D77.p_star + H.kappa * REFERENCE_DISTANCE) }} />
+                    <span className="mk-label" style={{ left: pos(D77.p_star + H.kappa * REFERENCE_DISTANCE) }}>8 sur 10</span>
                   </div>
                 </div>
+                <p className="body small">Scénario hypothétique : {fmt(farmPrice(price, REFERENCE_DISTANCE))} €/t départ ferme après {dec(H.kappa * REFERENCE_DISTANCE)} €/t de transport pour ce trajet. Aide non confirmée exclue du scénario principal.</p>
               </div>
               <div className="block">
                 <div className="figures two">
@@ -206,11 +217,11 @@ export default function App() {
               <div className="block">
                 <h3>Ce que le prix achète</h3>
                 <PriceChart price={price} min={MIN} max={MAX} />
-                <Source k="modele">20 000 années rejouées : météo et prix du blé de 2010 à 2025. Prix de marché de la lentille : Eurostat, {MARKET.annees[0]}–{MARKET.annees[1]}.</Source>
+                <Source k="modele">20 000 scénarios simulés à partir des années 2010–2025. Prix du blé de référence reconstruit à partir d’Eurostat et d’Agreste. Modèle sélectionné avant calibration : {MAIN_MODEL}.</Source>
               </div>
-              <p className="pull">Au prix de marché observé, de {fmt(MARKET.min)} à {fmt(MARKET.max)} €/t, la lentille ne gagne que {dec(REL_MARKET * 10, 1)} années sur 10. Pour 8 sur 10, il faut {fmt(D77.p_star)} €/t en Seine-et-Marne.</p>
+              <p className="pull">Référence historique nominale {MARKET.annees[0]}–{MARKET.annees[1]} : {fmt(MARKET.min)}–{fmt(MARKET.max)} €/t. Elle n’est pas représentative d’une cotation actuelle. Le prix proposé ci-dessus est une hypothèse de négociation.</p>
               <div className="block">
-                <h3>Prix plancher par département</h3>
+                <h3>Prix plancher départ ferme par département</h3>
                 <table className="list">
                   <tbody>
                     {thresholds.par_departement.map((d) => (
@@ -218,7 +229,7 @@ export default function App() {
                     ))}
                   </tbody>
                 </table>
-                <Source k="modele">Quantile 80 % du prix d’équilibre lentille / blé. Niveau de rendement de la lentille emprunté aux départements producteurs voisins.{IC77 && <> Incertitude sur le prix de la Seine-et-Marne : de {fmt(IC77[0])} à {fmt(IC77[1])} €/t, en rééchantillonnant les années.</>}</Source>
+                <Source k="modele">Quantile 80 % du prix d’équilibre lentille / blé. Niveau de rendement de la lentille emprunté aux départements producteurs voisins.{IC77 && <> Sensibilité aux années rejouées, modèles figés (10–90 %), Seine-et-Marne : {fmt(IC77[0])}–{fmt(IC77[1])} €/t. Elle exclut l’erreur de réestimation.</>}</Source>
               </div>
               <button className="link" onClick={() => animatePrice(START_PRICE, CONTRACT_PRICE)}>Rejouer la bascule</button>
             </>
@@ -227,7 +238,7 @@ export default function App() {
           {step === 2 && (
             <>
               <h1>Et si la récolte tourne mal ?</h1>
-              <p className="lead">On rejoue deux années réelles sur les parcelles sous contrat à {fmt(price)} €/t. Le contrat tient si la lentille rapporte au moins autant que le blé, avec les rendements et le prix du blé de l’année.</p>
+              <p className="lead">Deux scénarios de stress appliquent des chocs d’années passées aux {fmt(target.n)} parcelles sélectionnées pour le même contrat à {fmt(price)} €/t rendu. Le transport est déduit parcelle par parcelle. C’est une reconstitution sous les hypothèses économiques affichées.</p>
               <div className="tabs" role="tablist">
                 {replay.map((r, i) => (
                   <button key={r.annee} role="tab" aria-selected={year?.annee === r.annee} className={year?.annee === r.annee ? 'on' : ''} onClick={() => { stop(); setYear(r); }}>
@@ -241,27 +252,23 @@ export default function App() {
                     <div className="figures">
                       <Figure value={signedPct(year.par_departement['77'].choc_ble)} label="rendement du blé en Seine-et-Marne" />
                       <Figure value={signedPct(year.choc_lentille_national)} label="rendement de la lentille en France" />
-                      <Figure value={fmt(year.prix_ble)} unit="€/t" label="prix du blé de l’année" />
+                      <Figure value={fmt(year.prix_ble)} unit="€/t" label="prix du blé de référence reconstruit" />
                     </div>
                     <Source k="mesure">Agreste, écart à la moyenne des cinq années précédentes ; Eurostat, indice des prix du blé tendre.</Source>
                   </div>
                   <div className="block">
-                    <h3>Marge par hectare en Seine-et-Marne, {year.annee}</h3>
+                    <h3>Marge par hectare à {fmt(REFERENCE_DISTANCE)} km du site, Seine-et-Marne, {year.annee}</h3>
                     <MarginBars
-                      lentil={price * year.par_departement['77'].rendement_lentille_tha - H.chargesLentille + H.aide + H.rotation}
+                      lentil={farmPrice(price, REFERENCE_DISTANCE) * year.par_departement['77'].rendement_lentille_tha - H.chargesLentille + H.aide + H.rotation}
                       wheat={year.prix_ble * year.par_departement['77'].rendement_ble_tha - H.chargesBle} />
-                    <Source k="modele">Au prix garanti, transport non déduit ; charges et aide couplée sourcées ; rendement et prix du blé de l’année mesurés.</Source>
+                    <Source k="modele">Transport déduit sur le trajet de référence ; charges constantes et aide non confirmée exclue. Rendement du blé observé, prix de référence reconstruit à partir d’Eurostat et d’Agreste.</Source>
                   </div>
                   <div className="block verdict">
-                    <div className="verdict-v">{stats.n ? pct(stats.kept / stats.n) : '—'}</div>
-                    <p>des {fmt(stats.n)} parcelles sous contrat auraient rapporté au moins autant qu’en blé.</p>
+                    <div className="verdict-v">{target.n ? pct(targetKept / target.n) : '—'}</div>
+                    <p>des {fmt(target.n)} parcelles sélectionnées auraient rapporté au moins autant qu’en blé avec ces hypothèses.</p>
                   </div>
-                  <p className="body">
-                    {year.annee === 2016
-                      ? 'En 2016, la lentille sous contrat aurait protégé l’exploitation : la marge du blé s’effondre avec son rendement, alors que le prix garanti de la lentille ne bouge pas.'
-                      : `En 2020, la lentille perd plus d’un tiers de son rendement. ${stats.n && stats.kept / stats.n >= 0.8 ? 'À ce prix, le contrat encaisse le choc en Île-de-France.' : 'À ce prix, le contrat cède sur une partie des parcelles.'} Dans les départements producteurs, le backtest montre qu’il n’a tenu que dans ${pct(BT2020.taux_tenus ?? 0)} des cas cette année-là.`}
-                  </p>
-                  <Source k="modele">Rendement de la lentille en Île-de-France : choc national appliqué au rendement moyen simulé.</Source>
+                  <p className="body">{target.n ? `Sur les parcelles sélectionnées, ${fmt(target.n - targetKept)} auraient présenté un manque à gagner face au blé dans cette reconstitution.` : 'Aucune parcelle n’est éligible au prix proposé. Modifiez le prix à l’étape 2.'} Le volume attendu est {fmt(target.tonnes)} t ; la récolte réalisée reste incertaine.</p>
+                  <Source k="modele">Scénario de stress, distinct du backtest : choc national passé de la lentille appliqué au rendement moyen du modèle actuel en Île-de-France.</Source>
                 </>
               )}
             </>
@@ -270,44 +277,41 @@ export default function App() {
           {step === 3 && (
             <>
               <h1>Le modèle tient-il sur des années qu’il n’a jamais vues ?</h1>
-              <p className="lead">Le modèle d’apprentissage relie la météo de l’année au rendement. Pour chaque année de 2019 à 2025, il n’apprend que des années précédentes et fixe son prix ; on le compare ensuite à la récolte réelle.</p>
+              <p className="lead">Pour chaque année de 2019 à 2025, la procédure apprend et fixe son prix avec les années antérieures. Les marges sont ensuite reconstituées sur la récolte test. Le diagnostic conditionnel de rendement utilise séparément la météo test observée rétrospectivement.</p>
               <div className="block">
-                <h3>Rendement relatif de la lentille : intervalle prédit à 80 %, puis réel</h3>
+                <h3>Rendement normalisé par département : intervalle visé à 80 % et observation</h3>
                 <BacktestReveal shown={shown} />
                 <p className="chart-key"><i className="k-int" />intervalle prédit <i className="k-ok" />réel, dans l’intervalle <i className="k-ko" />réel, en dehors</p>
               </div>
               <div className="block">
                 <div className="figures">
-                  <Figure value={pct(G.taux_tenus)} label={`des contrats ont tenu, pour ${pct(backtest.fiabilite_visee)} visés`} />
-                  <Figure value={pct(G.couverture_M1)} label="des récoltes dans l’intervalle à 80 %" />
-                  <Figure value={`±${Math.round(G.erreur_mediane_M1 * 100)} %`} label="erreur médiane sur le rendement d’une année" />
+                  <Figure value={pct(G.taux_tenus_auto)} label={`des cas de la sélection automatique atteignent la marge du blé, pour ${pct(backtest.fiabilite_visee)} visés`} />
+                  <Figure value={pct(G.couverture_auto)} label="des récoltes dans l’intervalle automatique visé à 80 %" />
+                  <Figure value={dec(G.erreur_mediane_auto ?? G.erreur_mediane_M1, 3)} label="erreur absolue médiane sur le rendement normalisé" />
                 </div>
                 <table className="years">
                   <thead><tr><th />{backtest.annees.map((y) => <th key={y.annee}>{y.annee}</th>)}</tr></thead>
                   <tbody>
-                    <tr><td>Contrats tenus</td>{backtest.annees.map((y, i) => <td key={y.annee} className={i < shown ? ((y.taux_tenus ?? 0) >= 0.8 ? '' : 'bad') : 'hide'}>{i < shown ? pct(y.taux_tenus ?? 0) : '·'}</td>)}</tr>
+                    <tr><td>Contrats tenus</td>{backtest.annees.map((y, i) => <td key={y.annee} className={i < shown ? ((y.taux_tenus_auto ?? 0) >= 0.8 ? '' : 'bad') : 'hide'}>{i < shown ? pct(y.taux_tenus_auto ?? 0) : '·'}</td>)}</tr>
                     <tr><td>Prix du blé, €/t</td>{backtest.annees.map((y) => <td key={y.annee}>{fmt(y.prix_ble)}</td>)}</tr>
                   </tbody>
                 </table>
-                <Source k="modele">Backtest glissant sur {G.n_cas} cas département × année. Aucune année test n’a servi à l’entraînement ni au réglage.</Source>
+                <Source k="modele">Backtest glissant sur {G.n_cas} cas département × année. Les transformations, la sélection et la calibration utilisent les années antérieures. Ce résultat ne constitue pas une garantie individuelle pour une exploitation.</Source>
               </div>
-              <p className="body">Les contrats cèdent en 2020 et 2021 : deux effondrements que le modèle n’avait jamais vus.</p>
+              <p className="body">{G.taux_tenus_auto < backtest.fiabilite_visee && <b>La sélection automatique n’atteint pas l’objectif de {pct(backtest.fiabilite_visee)} sur le backtest : {pct(G.taux_tenus_auto)} des cas atteignent la marge du blé. </b>}La couverture d’un intervalle et le succès économique répondent à deux questions différentes. Une méthode peut protéger davantage simplement en demandant un prix plus élevé.</p>
               <div className="block">
-                <h3>Ce que le modèle apporte au prix</h3>
-                <table className="list models">
-                  <thead><tr><th>Façon de fixer le prix</th><th className="num">Contrats tenus</th></tr></thead>
-                  <tbody>
-                    <tr><td>Moyennes des années passées<span>la pratique courante</span></td><td className="num bad">{pct(G.taux_tenus_moyenne)}</td></tr>
-                    <tr><td>Distribution calibrée, sans météo<span>tendance seule</span></td><td className="num">{pct(G.taux_tenus_M0)}</td></tr>
-                    <tr className="hl"><td>Régression quantile avec météo<span>modèle d’apprentissage retenu avant tout résultat</span></td><td className="num">{pct(G.taux_tenus)}</td></tr>
-                    <tr><td>LightGBM avec météo<span>gradient boosting</span></td><td className="num bad">{pct(G.taux_tenus_M2)}</td></tr>
-                  </tbody>
-                </table>
-                <p className="body small">Avec un prix calculé sur les moyennes, comme aujourd’hui, un contrat sur trois seulement aurait tenu : c’est le verrou. Une distribution calibrée fait passer au-dessus de 8 sur 10, et la météo y ajoute quatre points. LightGBM, plus précis sur l’année moyenne, sous-estime les mauvaises années.</p>
-                <Source k="modele">Backtest glissant 2019–2025 sur {G.n_cas} cas, 80 % visés. Précision et prix 2026 de chaque modèle dans Méthode et sources.</Source>
+                <h3>Prix payé et pertes résiduelles</h3>
+                <div className="table-scroll"><table className="list models economics">
+                  <thead><tr><th>Méthode</th><th className="num">Succès</th><th className="num">Prix médian<br />€/t</th><th className="num">Manque moyen<br />€/ha</th><th className="num">Achat moyen<br />€/ha</th></tr></thead>
+                  <tbody>{ECON && ['moyenne', 'historique', 'M0', 'M1', 'M2', 'M3', 'auto'].filter((k) => ECON[k]).map((k) => (
+                    <tr key={k} className={k === 'auto' ? 'hl' : ''}><td>{METHOD_NAMES[k]}</td><td className="num">{pct(ECON[k].taux_tenus)}</td><td className="num">{fmt(ECON[k].prix_median_eur_t)}</td><td className="num">{fmt(ECON[k].manque_moyen_eur_ha)}</td><td className="num">{fmt(ECON[k].cout_achat_moyen_eur_ha)}</td></tr>
+                  ))}</tbody>
+                </table></div>
+                <p className="body small">Les méthodes quantiles visent une protection de {pct(backtest.fiabilite_visee)}, sans nécessairement l’atteindre hors échantillon. Le prix fondé sur les moyennes n’a pas de cible de protection. Le manque est la perte de marge face au blé, ramenée à tous les cas, y compris ceux sans perte. Le coût d’achat est le prix multiplié par le rendement réalisé. La météo doit justifier son coût face aux références simples.</p>
+                <Source k="modele">Reconstitution sous hypothèses économiques fixes sur {G.n_cas} cas. Prix départ ferme, aide non confirmée exclue. M0–M3 désignent le modèle lentille ; le modèle du blé est commun, sélectionné automatiquement. La référence historique sans météo conserve les années lentille, blé et prix appariées. Ces taux ne sont pas directement comparables à ceux des anciennes versions.</Source>
               </div>
               <div className="block">
-                <h3>Ce que le modèle a appris de la météo</h3>
+                <h3>Variables utilisées par le challenger LightGBM</h3>
                 <div className="bars imp">
                   {CHALLENGER.importances_q50.map((f) => (
                     <div key={f.variable} className="bar-row">
@@ -317,7 +321,7 @@ export default function App() {
                     </div>
                   ))}
                 </div>
-                <Source k="modele">Part de chaque variable dans l’apprentissage de LightGBM (gain, rendement médian). Météo journalière NASA POWER 2010–2025, 43 départements, en écart à la climatologie 2010–2018.</Source>
+                <Source k="modele">Part de chaque variable dans l’apprentissage de LightGBM (gain, rendement médian). Météo journalière NASA POWER. Transformations estimées sur l’apprentissage seul. Ces importances ne mesurent pas des effets causaux.</Source>
               </div>
               <button className="link" onClick={reveal}>Rejouer la révélation</button>
             </>
@@ -325,37 +329,53 @@ export default function App() {
 
           {step === 4 && (
             <>
-              <h1>La proposition faite à l’agriculteur</h1>
-              <div className="block contract">
-                <p className="contract-title">Proposition de contrat, campagne {meta.campagne}</p>
-                <dl>
-                  <dt>Objet</dt><dd>Achat de lentilles pour l’alimentation humaine, sur trois campagnes.</dd>
-                  <dt>Prix plancher</dt><dd><b>{fmt(D77.p_star)} €/t</b> départ ferme en Seine-et-Marne, ajusté du transport jusqu’au site.</dd>
-                  <dt>Ce qu’il garantit</dt><dd>Une marge au moins égale à celle du blé dans {pct(H.tau)} des années simulées.</dd>
-                  <dt>Ce qu’il ne garantit pas</dt><dd>Une récolte effondrée réduit la marge : {dec(D77.rendement_lentille_q10_tha, 2)} t/ha ou moins une année sur dix.</dd>
-                  <dt>Volume visé</dt><dd>{target.reached
-                    ? <><b>{fmt(VOLUME)} t</b>, soit {pct(VOLUME / L25.importations_t)} des importations de 2025, sur {fmt(target.ha)} ha : les {fmt(target.n)} parcelles éligibles les plus proches du site, à moins de {fmt(target.km)} km.</>
-                    : <>Le prix est trop bas pour réunir {fmt(VOLUME)} t. Remontez-le à l’étape 2.</>}</dd>
-                </dl>
-                <Source k="modele">Texte assemblé à partir des chiffres calculés, sans aucun chiffre ajouté. Volume visé : hypothèse de l’équipe.</Source>
-              </div>
-              {lettre.source === 'llm' && lettre.texte && (
-                <div className="block">
-                  <h3>Lettre d’accompagnement</h3>
-                  <p className="body letter">{lettre.texte}</p>
-                  <Source k="modele">Rédigée par un LLM ({lettre.modele}) à partir des chiffres ci-dessus. Chaque nombre du texte a été vérifié contre les chiffres fournis.</Source>
+              <h1>Un contrat soutenable pour les deux parties ?</h1>
+              <div className="block buyer">
+                <h3>Plafond économique de l’acheteur</h3>
+                <p className="body small">Hypothèses modifiables, sans valeur de cotation. La revente concerne une tonne commercialisable ; les coûts et la marge minimale sont exprimés par tonne de récolte livrée.</p>
+                <div className="buyer-inputs">
+                  {([
+                    ['resale', 'Prix de revente', '€/t commercialisable', 1],
+                    ['loss', 'Pertes au tri', '%', 0.01],
+                    ['sorting', 'Coût du tri', '€/t livrée', 1],
+                    ['processing', 'Transformation', '€/t livrée', 1],
+                    ['other', 'Autres coûts acheteur', '€/t livrée', 1],
+                    ['margin', 'Marge minimale', '€/t livrée', 1],
+                  ] as const).map(([key, label, unit, increment]) => <label key={key}>{label}<span><input type="number" min={0} max={key === 'loss' ? 100 : undefined} step={key === 'loss' ? 1 : increment} value={key === 'loss' ? Math.round(buyer[key] * 100) : buyer[key]} onChange={(e) => setBuyer((b) => ({ ...b, [key]: key === 'loss' ? Math.min(1, Math.max(0, Number(e.target.value) / 100)) : Math.max(0, Number(e.target.value)) }))} />{unit}</span></label>)}
                 </div>
-              )}
+                <div className="figures two">
+                  <Figure value={Number.isFinite(PRICE_FOR_VOLUME) ? fmt(PRICE_FOR_VOLUME) : '—'} unit="€/t" label={`prix rendu minimal pour mobiliser ${fmt(VOLUME)} t attendues`} />
+                  <Figure value={fmt(buyerCeiling)} unit="€/t" label="prix rendu maximal supportable par l’acheteur" />
+                </div>
+                <p className={`agreement ${canAgree ? 'possible' : 'impossible'}`}><b>{canAgree ? 'Accord possible dans ce scénario' : 'Accord impossible dans ce scénario'}</b><br />{canAgree ? `Une plage de négociation existe entre ${fmt(PRICE_FOR_VOLUME)} et ${fmt(buyerCeiling)} €/t rendu.` : 'Le plafond acheteur ne finance pas le prix requis pour le volume attendu.'}</p>
+                <Source k="suppose">Plafond = revente × (1 − pertes au tri) − tri − transformation − autres coûts − marge minimale. Ce calcul ne valide ni les débouchés ni les coûts réels de la coopérative.</Source>
+              </div>
+              <div className="block contract">
+                <p className="contract-title">Proposition hypothétique, campagne {meta.campagne}</p>
+                <label className="offer-control">Prix proposé, €/t rendu au site<input type="number" min={MIN} max={MAX} step={5} value={price} onChange={(e) => { stop(); setPrice(Math.min(MAX, Math.max(MIN, Number(e.target.value)))); }} /></label>
+                <dl>
+                  <dt>Objet et durée</dt><dd>Achat de lentilles pour l’alimentation humaine, une seule campagne : {meta.campagne}.</dd>
+                  <dt>Territoire</dt><dd>Parcelles de blé sélectionnées en Île-de-France, les plus proches du site acheteur fictif.</dd>
+                  <dt>Prix proposé</dt><dd><b>{fmt(price)} €/t rendu au site</b>. Le revenu départ ferme est ce prix moins {dec(H.kappa, 2)} €/t/km de transport, selon la distance de chaque parcelle.</dd>
+                  <dt>Objectif producteur</dt><dd>Atteindre la marge du blé dans {pct(H.tau)} des scénarios simulés pour chaque parcelle retenue ; aucune garantie individuelle de rendement ou de marge.</dd>
+                  <dt>Volume attendu</dt><dd>{target.reached
+                    ? <><b>{fmt(target.tonnes)} t</b> attendues pour {fmt(VOLUME)} t visées, sur {fmt(target.ha)} ha : {fmt(target.n)} parcelles, jusqu’à {fmt(target.km)} km du site. L’arrondi aux parcelles entières peut dépasser l’objectif.</>
+                    : <>{fmt(target.tonnes)} t attendues pour {fmt(VOLUME)} t visées. Le prix proposé ne mobilise pas assez de parcelles.</>}</dd>
+                  <dt>Coût d’achat attendu</dt><dd>{fmt(price * target.tonnes)} € pour le volume sélectionné, avant tri et transformation.</dd>
+                  <dt>Viabilité de cette offre</dt><dd><b>{offerFeasible ? 'Compatible avec les deux objectifs affichés' : 'Offre à réviser'}</b>. {!target.reached ? 'Volume attendu insuffisant. ' : ''}{price > buyerCeiling ? 'Le prix dépasse le plafond acheteur.' : 'Prix compatible avec la marge minimale acheteur sous ces hypothèses.'}</dd>
+                </dl>
+                <Source k="modele">Même prix, sélection, transport et campagne que les étapes précédentes. Rendements attendus simulés ; volume non garanti. Aide principale : {fmt(H.aide)} €/ha.</Source>
+              </div>
               <div className="block">
                 <h3>Le prix de la sécurité</h3>
-                <p className="body small">Prix plancher en Seine-et-Marne selon le nombre d’années gagnantes visé. Garantir 8 années sur 10 coûte {dec(D77.p_star / MARKET_MID, 1)} fois le prix de marché observé.</p>
+                <p className="body small">Prix plancher départ ferme en Seine-et-Marne selon la protection visée dans les simulations. La référence nominale 2012–2016 ne décrit pas les conditions du marché actuel.</p>
                 <SecurityChart />
                 <Source k="modele">Même simulation, quantile variable.</Source>
               </div>
               <div className="block">
                 <h3>Ce qui fait bouger le prix plancher</h3>
                 <Sensitivity />
-                <Source k="modele">Charges et aide couplée sourcées ; bonus de rotation supposé. Détail dans Méthode et sources.</Source>
+                <Source k="modele">Aide principale nulle ; scénario avec 122 €/ha sous réserve d’éligibilité. Charges de référence et bonus de rotation affichés dans Méthode et sources.</Source>
               </div>
               <div className="block">
                 <h3>Là où la lentille tient le mieux</h3>

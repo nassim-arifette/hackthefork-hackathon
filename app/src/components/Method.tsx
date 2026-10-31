@@ -1,131 +1,134 @@
-import { backtest, HYPOTHESES, meta, pct, thresholds } from '../data';
+import { useState } from 'react';
+import { backtest, dec, HYPOTHESES, MAIN_MODEL, meta, pct, thresholds } from '../data';
 import { statusText } from './ui';
 
 const NAMES: Record<string, string> = {
-  charges_ble_eur_ha: 'Charges opérationnelles du blé',
-  charges_lentille_eur_ha: 'Charges opérationnelles de la lentille',
-  aide_couplee_eur_ha: 'Aide couplée aux légumineuses',
-  bonus_rotation_eur_ha: 'Bonus de rotation',
-  cout_transport_eur_t_km: 'Coût du transport',
-  facteur_detour_route: 'Détour routier',
-  fiabilite_visee: 'Fiabilité visée',
-  volume_vise_t: 'Volume visé par la coopérative',
-  site_acheteur: 'Site acheteur',
+  charges_ble_eur_ha: 'Charges opérationnelles du blé', charges_lentille_eur_ha: 'Charges opérationnelles de la lentille',
+  aide_couplee_eur_ha: 'Aide retenue dans le scénario principal', aide_couplee_scenario_eur_ha: 'Aide conditionnelle, hors scénario principal', aide_couplee_conditionnelle_eur_ha: 'Aide conditionnelle, hors scénario principal',
+  bonus_rotation_eur_ha: 'Bonus de rotation', cout_transport_eur_t_km: 'Coût du transport', facteur_detour_route: 'Détour routier',
+  fiabilite_visee: 'Protection visée', volume_vise_t: 'Volume attendu visé', site_acheteur: 'Site acheteur fictif',
+  prix_revente_eur_t: 'Revente hypothétique', pertes_tri_fraction: 'Part perdue au tri', cout_tri_eur_t: 'Coût du tri',
+  cout_transformation_eur_t: 'Transformation', cout_acheteur_autres_eur_t: 'Autres coûts acheteur', marge_min_acheteur_eur_t: 'Marge minimale acheteur',
 };
 const UNITS: Record<string, string> = {
-  charges_ble_eur_ha: '€/ha', charges_lentille_eur_ha: '€/ha', aide_couplee_eur_ha: '€/ha',
+  charges_ble_eur_ha: '€/ha', charges_lentille_eur_ha: '€/ha', aide_couplee_eur_ha: '€/ha', aide_couplee_scenario_eur_ha: '€/ha', aide_couplee_conditionnelle_eur_ha: '€/ha',
   bonus_rotation_eur_ha: '€/ha', cout_transport_eur_t_km: '€/t/km', volume_vise_t: 't',
+  prix_revente_eur_t: '€/t commercialisable', cout_tri_eur_t: '€/t livrée', cout_transformation_eur_t: '€/t livrée',
+  cout_acheteur_autres_eur_t: '€/t livrée', marge_min_acheteur_eur_t: '€/t livrée',
 };
-
 const FEATURES: Record<string, string> = {
-  tendance: 'Tendance, par décennie',
-  pluie_mj_anom: 'Pluie de mars à juillet',
-  pluie_avj_anom: 'Pluie d’avril à juin',
-  j30_jj_anom: 'Jours au-dessus de 30 °C en juin et juillet',
-  gel_tardif_anom: 'Gelées tardives, d’avril à mi-mai',
-  pluie_recolte_anom: 'Pluie à la récolte, de mi-juillet à mi-août',
-  tmax_mj_anom: 'Température maximale de mai à juillet',
+  tendance: 'Tendance, par décennie', pluie_mj_anom: 'Pluie de mars à juillet', pluie_avj_anom: 'Pluie d’avril à juin',
+  j30_jj_anom: 'Jours au-dessus de 30 °C en juin-juillet', gel_tardif_anom: 'Gelées tardives',
+  pluie_recolte_anom: 'Pluie à la récolte', tmax_mj_anom: 'Température maximale',
 };
-
 const VOISINS: Record<string, string> = { '10': 'Aube', '51': 'Marne', '89': 'Yonne', '28': 'Eure-et-Loir', '45': 'Loiret' };
+const MODELS: Record<string, string> = { M0: 'Tendance sans météo', M1: 'Régression quantile météo', M2: 'LightGBM quantile', M3: 'Ensemble de quantiles', auto: 'Sélection temporelle automatique' };
 
-function value(k: string, v: any): string {
-  if (k === 'fiabilite_visee') return '8 années sur 10';
-  if (k === 'site_acheteur') return 'fictif, en Seine-et-Marne';
-  const n = Number(v).toLocaleString('fr-FR');
-  return UNITS[k] ? `${n} ${UNITS[k]}` : n;
+function value(k: string, v: unknown): string {
+  if (k === 'fiabilite_visee' || k === 'pertes_tri_fraction') return pct(Number(v));
+  if (k === 'site_acheteur') return 'Fictif, en Seine-et-Marne';
+  if (typeof v !== 'number') return String(v);
+  return `${v.toLocaleString('fr-FR')}${UNITS[k] ? ` ${UNITS[k]}` : ''}`;
 }
 
 export default function Method({ onClose }: { onClose: () => void }) {
+  const [target, setTarget] = useState(0.8);
+  const frontier = (backtest as any).frontiere_prix_protection as { methode: string; tau: number; taux_tenus: number; prix_median_eur_t: number; manque_moyen_eur_ha: number; manque_moyen_si_echec_eur_ha: number; cout_achat_moyen_eur_ha: number; taux_tenus_ic95_bootstrap_annees: number[] }[] | undefined;
+  const targetOptions = [...new Set(frontier?.map((row) => row.tau) ?? [])].sort((a, b) => a - b);
   const G = backtest.global as Record<string, number>;
-  const STRAT = (meta as any).strategies_77 as { moyenne: number; M0: number; M1: number; M2: number };
+  const strategies = (meta as any).strategies_77 as Record<string, number>;
+  const panel = (meta as any).panel_lentille;
+  const retained = panel.series_retenues ?? panel.series_independantes;
   const coefs = meta.coefficients_M1_lentille as Record<string, Record<string, number>>;
+  const distribution = (thresholds.sensibilite as any).distribution as { queue: string; dependance: string; p_star: number }[] | undefined;
+  const tailNames: Record<string, string> = { linear: 'Queues linéaires', bounded: 'Queues bornées', stress: 'Queue basse stressée' };
+  const dependenceNames: Record<string, string> = { independent: 'résidus indépendants', positive: 'dépendance positive', negative: 'dépendance négative' };
+  const interval = (thresholds.par_departement.find((d) => d.dep === '77') as any)?.p_star_ic80 as number[] | undefined;
   return (
     <div className="sheet" role="dialog" aria-modal="true" aria-labelledby="method-title">
-      <div className="sheet-head">
-        <h2 id="method-title">Méthode et sources</h2>
-        <button className="link" onClick={onClose}>Fermer</button>
-      </div>
+      <div className="sheet-head"><h2 id="method-title">Méthode et sources</h2><button className="link" onClick={onClose}>Fermer</button></div>
       <div className="sheet-body">
         <section>
-          <h3>Le calcul, en quatre étapes</h3>
+          <h3>Un protocole temporel, puis une décision économique</h3>
           <ol>
-            <li><b>Rendement relatif.</b> Pour chaque département, le rendement de l’année divisé par son rendement moyen. Les {(meta as any).panel_lentille.series_independantes} séries indépendantes de rendement de lentille deviennent comparables, et le modèle peut s’appliquer à l’Île-de-France, qui en cultive trop peu pour être estimée seule.</li>
-            <li><b>Régression quantile.</b> Les quantiles 10, 50 et 90 % du rendement relatif sont estimés à partir d’une tendance et de six écarts météo (NASA POWER). L’intervalle est ensuite calibré par conformal sur les trois dernières années d’entraînement, pour couvrir réellement 80 % des cas.</li>
-            <li><b>Monte-Carlo.</b> 20 000 années sont rejouées. Chacune reprend une année réelle de 2010 à 2025, avec sa météo et son prix du blé, puis tire un rendement de lentille et un rendement de blé dans leurs distributions.</li>
-            <li><b>Prix plancher.</b> Dans chaque année simulée, on calcule le prix d’équilibre où la lentille rapporte autant que le blé. Le prix plancher est le quantile 80 % de ces prix.</li>
+            <li><b>Apprentissage.</b> Les niveaux départementaux, le regroupement heuristique des séries et les transformations météo sont estimés dans le découpage d’apprentissage. Le rendement normalisé est le rendement divisé par le niveau départemental estimé.</li>
+            <li><b>Sélection.</b> Les candidats sont comparés sur des années de validation antérieures aux années réservées à la calibration. La sélection ne consulte ni la calibration ni l’année test. Modèle de prix sélectionné pour {meta.campagne} : {MAIN_MODEL}.</li>
+            <li><b>Calibration.</b> Le prédicteur est figé avant de mesurer ses erreurs sur les années de calibration. Il n’est pas réentraîné ensuite. Les bornes calibrées servent à évaluer la couverture d’un intervalle ; elles ne définissent pas les quantiles de la distribution simulée.</li>
+            <li><b>Simulation et prix.</b> La météo passée et le prix du blé de la même année sont rejoués. Le prix plancher est le quantile des prix d’équilibre pour la protection visée. Les hypothèses sur les queues et la dépendance des rendements influencent cette décision.</li>
           </ol>
-          <p className="formula">P* = quantile 80 % de (prix du blé × rendement du blé − charges du blé + charges de la lentille − aides) ÷ rendement de la lentille</p>
+          <p className="formula">P* = quantile visé de (prix du blé × rendement du blé − charges du blé + charges de la lentille − aide − bonus de rotation) ÷ rendement de la lentille</p>
+          <p>Le découpage temporel réduit les fuites de données. Il ne rend pas les départements ni les années indépendants et ne suffit pas à garantir une couverture future de 80 %.</p>
         </section>
-
         <section>
-          <h3>La météo</h3>
-          <p>La météo journalière NASA POWER de 2010 à 2025 est lue pour 43 départements, au centroïde de chacun. Elle est résumée en six variables agronomiques, exprimées en écart à la climatologie 2010–2018 : pluie de mars à juillet, pluie d’avril à juin, jours au-dessus de 30 °C en juin et juillet (stress à la floraison), gelées tardives d’avril à mi-mai, pluie à la récolte de mi-juillet à mi-août, et température maximale de mai à juillet. Ces variables sont les entrées des deux modèles d’apprentissage ; dans la simulation, chaque année tirée rejoue la météo d’une année réelle.</p>
+          <h3>Comparaison des prédicteurs</h3>
+          <div className="table-scroll"><table className="tbl">
+            <thead><tr><th>Modèle</th><th className="num">Perte quantile</th><th className="num">Couverture</th><th className="num">P* {meta.campagne}, 77</th></tr></thead>
+            <tbody>{Object.entries(MODELS).filter(([key]) => G[`pinball_${key}`] !== undefined).map(([key, label]) => <tr key={key} className={key === 'auto' ? 'hl' : ''}>
+              <td>{key} · {label}</td><td className="num">{dec(G[`pinball_${key}`], 4)}</td><td className="num">{pct(G[`couverture_${key}`])}</td><td className="num">{strategies?.[key] !== undefined ? `${Math.round(strategies[key]).toLocaleString('fr-FR')} €/t` : '—'}</td>
+            </tr>)}</tbody>
+          </table></div>
+          <p className="note">{backtest.protocole} La perte quantile mesure les quantiles bruts ; la couverture mesure les intervalles après calibration. Le modèle de rendement est évalué avec la météo de l’année test observée rétrospectivement. Le prix économique est décidé avec les années passées uniquement.</p>
+          <p>Le succès économique doit être comparé au prix payé, au manque de marge résiduel et au coût d’achat. La sélection minimise une perte prédictive en validation interne ; elle ne prouve pas une supériorité économique. Un taux plus élevé peut résulter d’un prix plus coûteux. Les résultats dépendent du périmètre de données et ne sont pas directement comparables aux versions antérieures.</p>
         </section>
-
+        {frontier && <section>
+          <h3>Comparer prix et protection observée</h3>
+          <label className="department-select">Protection visée pour cette comparaison<select value={target} onChange={(e) => setTarget(Number(e.target.value))}>{targetOptions.map((tau) => <option key={tau} value={tau}>{pct(tau)} visés dans les simulations</option>)}</select></label>
+          <div className="table-scroll"><table className="tbl"><thead><tr><th>Méthode lentille</th><th className="num">Succès observé</th><th className="num">Prix médian €/t</th><th className="num">Manque moyen €/ha</th><th className="num">Manque si échec €/ha</th><th className="num">Achat moyen €/ha</th></tr></thead><tbody>{frontier.filter((row) => Math.abs(row.tau - target) < 1e-8).map((row) => <tr key={row.methode} className={row.methode === 'auto' ? 'hl' : ''}>
+            <td>{row.methode === 'historique' ? 'Historique apparié sans météo' : `${row.methode} · ${MODELS[row.methode] ?? row.methode}`}</td>
+            <td className="num">{dec(row.taux_tenus * 100, 1)} %<br /><small>{row.taux_tenus_ic95_bootstrap_annees.map((v) => dec(v * 100, 1)).join('–')} %</small></td>
+            <td className="num">{Math.round(row.prix_median_eur_t).toLocaleString('fr-FR')}</td><td className="num">{Math.round(row.manque_moyen_eur_ha).toLocaleString('fr-FR')}</td><td className="num">{Math.round(row.manque_moyen_si_echec_eur_ha).toLocaleString('fr-FR')}</td><td className="num">{Math.round(row.cout_achat_moyen_eur_ha).toLocaleString('fr-FR')}</td>
+          </tr>)}</tbody></table></div>
+          <p>Une cible identique ne donne pas une protection observée identique. Comparez aussi les prix lorsque les succès observés sont proches. Cette grille descriptive ne sert pas à choisir le modèle ou le contrat après consultation des années test.</p>
+          <p className="note">Sous le succès : intervalle descriptif à 95 % par rééchantillonnage des années test, avec seulement {G.n_annees} années. Prix départ ferme, charges fixes et aide principale nulle. M0–M3 et auto désignent le modèle lentille ; le modèle du blé est commun, sélectionné automatiquement. La référence historique utilise les récoltes et prix passés appariés.</p>
+        </section>}
         <section>
-          <h3>Effets estimés sur le rendement de la lentille</h3>
-          <table className="tbl">
-            <thead><tr><th>Variable</th><th className="num">Effet médian</th></tr></thead>
-            <tbody>
-              {Object.entries(coefs.q50).filter(([k]) => k !== 'constante').map(([k, v]) => (
-                <tr key={k}><td>{FEATURES[k] ?? k}</td><td className="num">{v > 0 ? '+' : v < 0 ? '−' : ''}{Math.abs(v * 100).toLocaleString('fr-FR', { maximumFractionDigits: 1 })} %</td></tr>
-              ))}
-            </tbody>
-          </table>
-          <p className="note">Effet d’un écart-type de plus sur le rendement relatif, au quantile 50 %. Écarts mesurés par rapport à la climatologie 2010–2018.</p>
+          <h3>Coefficients du candidat M1</h3>
+          <table className="tbl"><thead><tr><th>Variable</th><th className="num">Coefficient médian</th></tr></thead><tbody>
+            {Object.entries(coefs.q50).filter(([k]) => k !== 'constante').map(([k, v]) => <tr key={k}><td>{FEATURES[k] ?? k}</td><td className="num">{v > 0 ? '+' : ''}{dec(v, 3)}</td></tr>)}
+          </tbody></table>
+          <p className="note">Unités de rendement normalisé par unité de variable transformée. Le modèle décrit des associations ; ces coefficients ne prouvent pas des effets causaux.</p>
         </section>
-
         <section>
-          <h3>Comparaison des modèles sur le backtest</h3>
-          <table className="tbl">
-            <thead><tr><th>Modèle</th><th className="num">Perte pinball</th><th className="num">Couverture à 80 %</th><th className="num">P* 2026, 77</th></tr></thead>
-            <tbody>
-              <tr><td>Moyennes des années passées (sans modèle)</td><td className="num">—</td><td className="num">—</td><td className="num">{STRAT.moyenne.toLocaleString('fr-FR')} €/t</td></tr>
-              <tr><td>Tendance seule (référence)</td><td className="num">{G.pinball_M0.toLocaleString('fr-FR')}</td><td className="num">{pct(G.couverture_M0)}</td><td className="num">{STRAT.M0.toLocaleString('fr-FR')} €/t</td></tr>
-              <tr className="hl"><td>Régression quantile météo, retenue</td><td className="num">{G.pinball_M1.toLocaleString('fr-FR')}</td><td className="num">{pct(G.couverture_M1)}</td><td className="num">{STRAT.M1.toLocaleString('fr-FR')} €/t</td></tr>
-              <tr><td>LightGBM quantile (gradient boosting)</td><td className="num">{G.pinball_M2.toLocaleString('fr-FR')}</td><td className="num">{pct(G.couverture_M2)}</td><td className="num">{STRAT.M2.toLocaleString('fr-FR')} €/t</td></tr>
-              <tr><td>Choix automatique sur validation interne</td><td className="num">{G.pinball_auto.toLocaleString('fr-FR')}</td><td className="num">{pct(G.couverture_auto)}</td><td className="num">—</td></tr>
-            </tbody>
-          </table>
-          <p className="note">{backtest.protocole} Le modèle retenu a été choisi avant tout résultat. Contrats tenus : {pct(G.taux_tenus_moyenne)} avec un prix fixé sur les moyennes, {pct(G.taux_tenus_M0)} avec la tendance seule, {pct(G.taux_tenus)} avec la régression quantile météo, {pct(G.taux_tenus_M2)} avec LightGBM, {pct(G.taux_tenus_auto)} avec le choix automatique. Les modèles les plus précis sous-estiment les mauvaises années. Le prix 2026 varie fortement d’un modèle à l’autre (de {STRAT.M2.toLocaleString('fr-FR')} à {STRAT.M0.toLocaleString('fr-FR')} €/t) : c’est une incertitude de modèle, qui s’ajoute à l’incertitude statistique. Nous avons aussi testé une régularisation choisie en validation interne : plus précise, mais moins bien calibrée ; elle n’est pas retenue.</p>
+          <h3>Hypothèses du scénario de référence</h3>
+          <p>L’aide dont l’éligibilité n’est pas confirmée vaut zéro dans le scénario principal. Les 122 €/ha ne sont utilisés que dans une sensibilité conditionnelle. Les hypothèses acheteur ci-dessous sont les valeurs initiales ; les champs de l’étape 5 permettent de les modifier pour la négociation affichée.</p>
+          <table className="tbl hyp"><tbody>{Object.entries(HYPOTHESES).map(([k, v]) => <tr key={k}>
+            <td><b>{NAMES[k] ?? k}</b><span>{v.url ? <a href={v.url} target="_blank" rel="noreferrer">{v.source}</a> : v.source}</span></td>
+            <td className="num">{value(k, v.valeur)}<span>{statusText(v.etiquette)}</span></td>
+          </tr>)}</tbody></table>
         </section>
-
         <section>
-          <h3>Hypothèses</h3>
-          <table className="tbl hyp">
-            <tbody>
-              {Object.entries(HYPOTHESES).map(([k, v]) => (
-                <tr key={k}>
-                  <td><b>{NAMES[k] ?? k}</b><span>{v.url ? <a href={v.url} target="_blank" rel="noreferrer">{v.source}</a> : v.source}</span></td>
-                  <td className="num">{value(k, v.valeur)}<span>{statusText(v.etiquette)}</span></td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </section>
-
-        <section>
-          <h3>Données</h3>
+          <h3>Données et statut des références</h3>
           <ul>
-            <li><b>Agreste, Statistique agricole annuelle 2010–2025.</b> Surfaces et rendements par département. Mesuré.</li>
-            <li><b>IGN, Registre parcellaire graphique 2025.</b> {meta.n_parcelles.toLocaleString('fr-FR')} parcelles de blé tendre d’hiver et de lentille en Île-de-France. Mesuré.</li>
-            <li><b>NASA POWER.</b> Météo journalière 2010–2025 pour 43 départements. Mesuré.</li>
-            <li><b>Eurostat.</b> Indice des prix du blé tendre, calé sur le prix rendu Rouen d’Agreste en 2019-2020 ; prix observés de la lentille 2012–2016 ; commerce extérieur Comext. Mesuré.</li>
+            <li><b>Agreste, Statistique agricole annuelle 2010–2025.</b> Surfaces et rendements départementaux ; 2025 provisoire.</li>
+            <li><b>IGN, Registre parcellaire graphique 2025.</b> {meta.n_parcelles.toLocaleString('fr-FR')} parcelles de blé tendre d’hiver et de lentille en Île-de-France. La sélection de parcelles ne prédit pas leur rendement individuel.</li>
+            <li><b>NASA POWER.</b> Météo journalière au centroïde départemental, résumée en six variables agronomiques.</li>
+            <li><b>Blé.</b> Prix de référence reconstruit à partir d’Eurostat et d’Agreste : indice Eurostat ancré à 178,8 €/t en 2019 sur une référence rendu Rouen de campagne 2019–2020. Ce n’est pas le prix effectivement payé à chaque exploitation.</li>
+            <li><b>Lentille.</b> Référence historique nominale 2012–2016, non représentative d’une cotation actuelle. Le prix proposé par l’acheteur est explicitement hypothétique.</li>
           </ul>
         </section>
-
+        {distribution && <section>
+          <h3>Sensibilité de la distribution simulée</h3>
+          <table className="tbl"><thead><tr><th>Hypothèse de simulation</th><th className="num">P* 77, départ ferme</th></tr></thead><tbody>{distribution.map((d) => <tr key={`${d.queue}-${d.dependance}`}><td>{tailNames[d.queue] ?? d.queue}, {dependenceNames[d.dependance] ?? d.dependance}</td><td className="num">{Math.round(d.p_star).toLocaleString('fr-FR')} €/t</td></tr>)}</tbody></table>
+          <p>Le scénario principal tire les résidus de lentille et de blé indépendamment, conditionnellement à l’année météo commune. Les autres dépendances sont des tests de sensibilité, pas des estimations. La calibration d’un intervalle ne valide ni ces queues ni ces dépendances.</p>
+        </section>}
         <section>
-          <h3>Limites</h3>
+          <h3>Références méthodologiques</h3>
           <ul>
-            <li>Rendements départementaux : à la parcelle, le risque réel est plus fort.</li>
-            <li>Niveau de rendement de la lentille en Île-de-France emprunté aux départements producteurs voisins ({meta.voisins_lentille.map((d: string) => VOISINS[d] ?? d).join(', ')}), soit {meta.niveau_lentille_idf_qha.toLocaleString('fr-FR')} q/ha.</li>
-            <li>Le prix plancher lui-même est incertain : en rééchantillonnant les années, celui de la Seine-et-Marne varie de {((thresholds as any).par_departement.find((d: any) => d.dep === '77').p_star_ic80 ?? []).map((v: number) => v.toLocaleString('fr-FR')).join(' à ')} €/t (intervalle à 80 %). Seize années ne suffisent pas à cerner les mauvaises années ; des données de coopérative le resserreraient.</li>
-            <li>Agreste estime souvent le rendement de la lentille au niveau régional : {(meta as any).panel_lentille.departements_mesures} départements mesurés, mais {(meta as any).panel_lentille.series_independantes} séries indépendantes seulement.</li>
-            <li>Sept années test seulement ; 2020 et 2021, absentes de l’entraînement, font céder les contrats.</li>
-            <li>La météo n’améliore pas la précision face à la tendance seule ; elle améliore la calibration.</li>
-            <li>Charges constantes dans le temps ; éligibilité de la lentille à l’aide couplée à confirmer.</li>
-            <li>Un prix plancher n’est pas une assurance : une récolte effondrée réduit la marge.</li>
+            <li><a href="https://arxiv.org/abs/1905.03222" target="_blank" rel="noreferrer">Romano, Patterson et Candès (2019), Conformalized Quantile Regression.</a> Séparation du prédicteur et des données de calibration.</li>
+            <li><a href="https://proceedings.mlr.press/v139/xu21h.html" target="_blank" rel="noreferrer">Xu et Xie (2021), Conformal Prediction Interval for Dynamic Time-Series.</a> Les dépendances temporelles demandent des hypothèses et une évaluation adaptées. EnbPI n’est pas revendiqué comme implémenté ici.</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Limites à garder visibles</h3>
+          <ul>
+            <li>{panel.departements_mesures} départements mesurés, {retained} séries retenues après regroupement heuristique. Ce regroupement ne démontre pas leur indépendance statistique.</li>
+            <li>Rendements départementaux : l’incertitude d’une exploitation ou d’une parcelle peut être plus forte.</li>
+            <li>Niveau lentille en Île-de-France transféré des voisins ({meta.voisins_lentille.map((d: string) => VOISINS[d] ?? d).join(', ')}), soit {dec(meta.niveau_lentille_idf_qha)} q/ha.</li>
+            {interval && <li>Sensibilité aux années rejouées, modèles figés (10–90 %), Seine-et-Marne : {interval.map((v) => Math.round(v).toLocaleString('fr-FR')).join('–')} €/t. Elle exclut l’erreur de réestimation du modèle et ne constitue pas un intervalle de confiance complet.</li>}
+            <li>{G.n_annees} années test seulement. Les observations départementales d’une même année sont liées ; le nombre de cas ne vaut pas le nombre de réplications indépendantes.</li>
+            <li>Reconstitution sous charges et hypothèses affichées, pas observation des marges historiques réelles des exploitations.</li>
+            <li>Une distribution simulée et ses queues restent des hypothèses distinctes de la couverture d’un intervalle. Une mauvaise récolte peut faire monter fortement le prix requis.</li>
+            <li>Une seule campagne cible est simulée. Ni le prix proposé ni un objectif de volume ne garantissent la récolte, la marge ou l’existence d’un débouché rentable.</li>
           </ul>
         </section>
       </div>

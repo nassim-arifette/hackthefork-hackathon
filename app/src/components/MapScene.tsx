@@ -53,12 +53,12 @@ interface Props {
   step: number;
   price: number;
   year: ReplayYear | null;
-  /** Étape « contrat » : distance maximale des parcelles retenues pour le volume visé. */
-  selectKm: number | null;
+  /** Étape « contrat » : identifiants exacts des parcelles retenues pour le volume visé. */
+  selectedIds: Set<string> | null;
   onHover: (h: Hover) => void;
 }
 
-export default function MapScene({ step, price, year, selectKm, onHover }: Props) {
+export default function MapScene({ step, price, year, selectedIds, onHover }: Props) {
   const box = useRef<HTMLDivElement>(null);
   const [width, setWidth] = useState(1000);
   const [fontsReady, setFontsReady] = useState(false);
@@ -105,9 +105,9 @@ export default function MapScene({ step, price, year, selectKm, onHover }: Props
         stroked: false, filled: true,
         getPolygon: (p) => p.polygon,
         getFillColor: (p) => {
-          if (selectKm !== null) {
+          if (selectedIds !== null) {
             if (p.culture === 'lentille') return C.slate;
-            return lentil(p) && p.dist <= selectKm ? C.lentil : C.wheatDim;
+            return selectedIds.has(p.id) ? (year && !held(p, price, year) ? C.fail : C.lentil) : C.wheatDim;
           }
           if (lentil(p)) return year ? (held(p, price, year) ? C.lentil : C.fail) : C.lentil;
           if (p.culture === 'lentille') return C.slate;
@@ -117,13 +117,13 @@ export default function MapScene({ step, price, year, selectKm, onHover }: Props
           }
           return C.wheat;
         },
-        updateTriggers: { getFillColor: [price, year?.annee, selectKm] },
+        updateTriggers: { getFillColor: [price, year?.annee, selectedIds] },
         transitions: { getFillColor: 500 },
         onHover: (info) => onHover(info.object ? { kind: 'parcel', p: info.object as Parcel } : null),
       }),
       new TextLayer({
         id: `dep-labels-${fontsReady}`, data: DEP_LABELS, visible: step === 1,
-        getPosition: (d: any) => d.pos, getText: (d: any) => `${d.name}\n${d.pStar} €/t`,
+        getPosition: (d: any) => d.pos, getText: (d: any) => `${d.name}\n${d.pStar} €/t départ ferme`,
         getSize: 14, getColor: C.ink, fontFamily: font, fontWeight: 600, lineHeight: 1.25, getPixelOffset: [0, -22],
         outlineWidth: 6, outlineColor: [255, 255, 255, 235], fontSettings: { sdf: true, fontSize: 64, buffer: 8 },
         characterSet: 'auto',
@@ -134,7 +134,7 @@ export default function MapScene({ step, price, year, selectKm, onHover }: Props
         getLineColor: [255, 255, 255], getLineWidth: 3, lineWidthUnits: 'pixels',
       }),
     ];
-  }, [step, price, year, selectKm, onHover, fontsReady]);
+  }, [step, price, year, selectedIds, onHover, fontsReady]);
 
   return (
     <div ref={box} className="map-box">

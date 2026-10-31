@@ -1,3 +1,5 @@
+> Document de contexte antérieur à la correction de validation. Les chiffres et engagements ci-dessous ne décrivent pas le scénario courant. Références à jour : [RESULTATS](RESULTATS.md), [MODELE](MODELE.md) et [DEMO_SCRIPT](DEMO_SCRIPT.md).
+
 # Fiche projet · Le Contrat qui Tient
 
 **Hack the Fork Paris 2026 · Track 3, souveraineté et filières**
@@ -15,7 +17,7 @@ Le Contrat qui Tient calcule, pour le responsable filière d'une coopérative, l
 - Un backtest sur des années que le modèle n'a jamais vues mesure la promesse : 86 % des contrats ont tenu pour 80 % visés.
 - La carte des 20 762 parcelles de blé d'Île-de-France (RPG 2025) montre la bascule et le volume mobilisable.
 
-Premier résultat : au prix de marché observé, la lentille ne bat le blé qu'environ une année sur deux ; pour 8 sur 10, il faut 1 622 €/t en Seine-et-Marne, avec une incertitude affichée.
+Premier résultat : au référence historique nominale 2012–2016, la lentille ne bat le blé qu'environ une année sur deux ; pour 8 sur 10, il faut 1 622 €/t en Seine-et-Marne, avec une incertitude affichée.
 
 ## Le modèle économique
 

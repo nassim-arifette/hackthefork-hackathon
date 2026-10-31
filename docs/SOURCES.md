@@ -11,7 +11,7 @@ Chaque source utilisée, avec son étiquette et sa licence. À tenir à jour au 
 | `rpg` | IGN, Registre parcellaire graphique 2025, Île-de-France | parcelles déclarées | mesuré | Licence Ouverte Etalab [à vérifier] | https://data.geopf.fr/telechargement/resource/RPG/RPG_4-0__GPKG_LAMB93_R11_2025-01-01 |
 | `contours` | gregoiredavid/france-geojson (IGN ADMIN EXPRESS) | contours des départements | mesuré | [à vérifier] | https://github.com/gregoiredavid/france-geojson |
 | `comext` | Eurostat Comext, DS-045409 | importations et exportations françaises de lentilles (NC8 07134000) | mesuré | réutilisation Eurostat autorisée avec citation | https://ec.europa.eu/eurostat/comext/newxtweb/ |
-| `prix_ble` | Eurostat, apri_pi_outa (AM011100, nominal), calé sur le prix rendu Rouen Agreste 2019-2020 | prix du blé tendre 2010–2025 | mesuré | réutilisation Eurostat autorisée avec citation | https://ec.europa.eu/eurostat/databrowser/view/apri_pi_outa/default/table |
+| `prix_ble` | Eurostat, apri_pi_outa (AM011100, nominal), calé sur le prix rendu Rouen Agreste 2019-2020 | prix du blé tendre 2010–2025 | reconstruit à partir d’indices Eurostat et d’un ancrage Agreste | réutilisation Eurostat autorisée avec citation | https://ec.europa.eu/eurostat/databrowser/view/apri_pi_outa/default/table |
 | `prix_lentille` | Eurostat, apri_ap_crpouta (02991000) | prix de vente de la lentille, France, 2012–2016 | mesuré | réutilisation Eurostat autorisée avec citation | https://ec.europa.eu/eurostat/databrowser/view/apri_ap_crpouta/default/table |
 | `rendu_rouen` | Agreste, note de conjoncture grandes cultures | blé tendre rendu Rouen : 178,8 €/t en 2019-2020 | sourcé | Licence Ouverte [à vérifier] | https://agreste.agriculture.gouv.fr/agreste-web/download/publication/publie/SynGcu21367/consyn367202102GdesculturesV2.pdf |
 | `douanes` | Douanes, données NC8 | importations 0713 40 (alternative à Comext) | mesuré | [à vérifier] | https://lekiosque.finances.gouv.fr/site_fr/telechargement/telechargement_SGBD.asp |
@@ -49,3 +49,7 @@ Liens :
 - Le chiffre « 20 000 t produites, 35 000 t importées » cité par Qualisol est **antérieur** aux données récentes : 51 558 t produites (Agreste 2025, provisoire) et 39 371 t importées (Comext 2025). Ne pas l'utiliser comme chiffre actuel.
 - Ciqual (teneur en protéines) était indisponible le 30/10 (erreur 503) : l'impact protéique reste à chiffrer.
 - Toute valeur sans source est marquée **supposé** et vit dans `data/hypotheses.yaml`.
+
+## Références de méthode
+
+Voir [RECHERCHE.md](RECHERCHE.md) pour les articles primaires consultés et les limites de leur application. Les prix lentille 2012–2016 sont une référence historique nominale, non représentative d’une cotation actuelle. L’aide conditionnelle de 122 €/ha ne vaut pas confirmation d’éligibilité : le scénario principal reste à zéro.

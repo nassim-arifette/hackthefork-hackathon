@@ -1,126 +1,59 @@
 # Le Contrat qui Tient
 
-**Hack the Fork Paris 2026 · Track 3 (souveraineté et filières)**
+**Hack the Fork Paris 2026 · Track 3 — scénario de contrat lentille / blé**
 
-Le Contrat qui Tient aide le responsable filière d'une coopérative ou d'un conditionneur de légumes secs à fixer **le prix plancher d'un contrat lentille** qui rapporte à l'agriculteur **au moins autant que le blé 8 années sur 10**. L'outil montre aussi **quelles parcelles d'Île-de-France basculent** à ce prix, et combien de tonnes la coopérative peut sécuriser.
+L'outil cherche un prix de contrat compatible avec l'objectif du producteur **et** le plafond économique de l'acheteur. Il conserve les cinq étapes : **Le verrou → Le prix → L'épreuve → La preuve → Le contrat**.
 
-> État (vendredi 30/10, soir) : pipeline de bout en bout, tests et démo fonctionnels sur les vraies données (Agreste, RPG 2025, NASA POWER, Eurostat). Résultats : [docs/RESULTATS.md](docs/RESULTATS.md).
+Le prix calculé vise 80 % des scénarios simulés. Il ne garantit ni le rendement, ni la marge d'une exploitation, ni huit bonnes années dans une décennie réelle. Le backtest est une **reconstitution sous hypothèses économiques**, avec charges fixes et prix du blé reconstruit à partir d'Eurostat et d'Agreste.
 
-![La démo, étape « Le prix »](docs/img/etape-2-prix.png)
+## Version corrigée
 
-## En chiffres
+- Apprentissage, sélection et calibration sur trois fenêtres temporelles disjointes ; prédicteur conservé après calibration.
+- Normalisation des rendements, regroupement des séries et transformations météo ajustés sur l'apprentissage seul.
+- Comparaison M0 (sans météo), M1 (régression quantile), M2 (LightGBM), M3 (moyenne de leurs quantiles), sélection automatique et quantile historique des prix d'équilibre appariés.
+- Évaluation de la précision, de la couverture, du prix payé, du coût d'achat et des pertes résiduelles. Aucun modèle n'est déclaré supérieur à partir du seul taux de succès.
+- Quantiles bruts pour la simulation, bornes calibrées pour les intervalles ; sensibilités explicites aux queues et à la dépendance résiduelle des cultures.
+- Aide non confirmée : **0 €/ha** dans le scénario principal ; **122 €/ha** dans une variante conditionnelle.
+- Lentille : **référence historique nominale 2012–2016, non représentative d'une cotation actuelle**. L'utilisateur saisit son offre hypothétique.
+- Une seule campagne 2026, même prix rendu, même transport, mêmes parcelles et même volume attendu du replay au contrat.
+- Plafond acheteur = revente × (1 − pertes au tri) − coûts − marge minimale. L'interface peut conclure « accord impossible ».
 
-| | |
-|---|---|
-| Importations de lentilles, 2025 | **39 371 t** (Eurostat Comext) |
-| Variabilité du rendement, lentille contre blé | **0,20 contre 0,09** (Agreste, 2010–2025) |
-| Au prix de marché observé (650 à 779 €/t), la lentille bat le blé | **4,7 années sur 10** (modèle) |
-| Prix plancher pour 8 années sur 10, Seine-et-Marne | **1 622 €/t**, incertitude de 1 132 à 3 007 €/t (modèle) |
-| Backtest 2019–2025, années jamais vues | **86 %** de contrats tenus pour 80 % visés, sur 133 cas, contre **32 %** pour un prix fixé sur les moyennes |
+Résultats recalculés : [RESULTATS](docs/RESULTATS.md). Protocole et limites : [MODELE](docs/MODELE.md), [LIMITES](docs/LIMITES.md). Articles consultés et choix : [RECHERCHE](docs/RECHERCHE.md).
 
----
+## Reproduire à partir des fichiers versionnés
 
-## Le problème en 30 secondes
-
-- La France veut doubler ses surfaces de légumineuses d'ici 2030, mais importe une grande partie des lentilles qu'elle consomme.
-- Les agriculteurs en sèment peu parce que **le rendement de la lentille varie environ deux fois plus que celui du blé** : coefficient de variation national de 0,20 contre 0,09 sur 2010–2025 (**mesuré**, Agreste SAA). Une mauvaise année efface la marge.
-- Les coopératives proposent déjà des contrats à prix minimum. Mais ce prix se fixe à l'expérience ou sur des moyennes, alors que c'est **la mauvaise année** qui fait perdre l'agriculteur.
-
-## Ce que fait l'outil
-
-| Entrée | Sortie |
-|---|---|
-| Territoire (parcelles RPG Île-de-France) | **Prix plancher P\*** calibré sur le risque, par département puis par parcelle |
-| Fiabilité visée (80 % par défaut) | **Courbe d'offre** : tonnes mobilisables selon le prix |
-| Site de l'acheteur (scénario) | **Carte** des parcelles qui basculent du blé à la lentille |
-| Hypothèses de charges et de prix du blé | **Replay** des années 2016 et 2020 |
-| | **Score de fiabilité mesuré** sur des années jamais vues par le modèle |
-| | **Proposition de contrat** en langage clair, rédigée à partir des chiffres calculés |
-
-## Comment ça marche
-
-```mermaid
-flowchart LR
-  A[Agreste SAA<br/>rendements 2010–2025] --> M
-  W[NASA POWER<br/>météo journalière] --> M
-  M[Modèle quantile<br/>météo → distribution de rendement] --> MC
-  MC[Monte-Carlo<br/>années météo rejouées] --> P[Prix plancher P*<br/>au quantile 80 %]
-  R[RPG Île-de-France<br/>parcelles] --> S
-  P --> S[P* par parcelle<br/>+ transport]
-  S --> UI[Carte, curseur,<br/>courbe d'offre]
-  M --> BT[Backtest glissant<br/>2019–2025] --> UI
-```
-
-1. **Un modèle d'apprentissage probabiliste** apprend comment la météo NASA POWER (pluie de printemps, chaleur à la floraison, gel tardif, pluie à la récolte) déplace la distribution des rendements du blé et de la lentille. Deux modèles sont entraînés et comparés : une régression quantile calibrée par conformal prediction (retenue) et un LightGBM quantile (challenger).
-2. **Une simulation Monte-Carlo** rejoue 20 000 années : chacune reprend la météo et le prix du blé d'une année réelle, puis compare la marge en lentille sous contrat avec la marge en blé.
-3. **Le prix plancher** est le quantile 80 % du prix d'équilibre lentille/blé : au-dessus de ce prix, la lentille gagne dans 80 % des scénarios.
-4. **Un backtest sans fuite** vérifie, année par année de 2019 à 2025, si les prix que le modèle aurait fixés auraient vraiment tenu.
-
-Le détail mathématique est dans [docs/MODELE.md](docs/MODELE.md), et l'architecture technique complète dans [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
-
-## La suite : de la lentille à la filière
-
-Le projet est pensé en trois temps pour le même utilisateur :
-
-| Temps | Question du responsable filière | Statut |
-|---|---|---|
-| 1. Avant les semis | « À quel prix je propose le contrat ? » | cœur du hackathon |
-| 2. Où collecter | « Où placer mon site de tri pour sécuriser le plus de tonnes ? » | extension prévue |
-| 3. Pendant la saison | « Mes parcelles sous contrat poussent-elles bien ? » (suivi Sentinel-2) | extension, puis projet « Le Maillon vu du ciel » |
-
-Voir [docs/ROADMAP.md](docs/ROADMAP.md).
-
-## Démarrage rapide (cible)
+Python 3.12+ et Node 22. Pour les seuls recalculs, les bibliothèques géographiques ne sont pas requises :
 
 ```bash
-# 1. Pipeline de données et modèle (Python 3.11+)
-python -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt
-make export        # 00_prix_commerce → 01_agreste → 02_weather → 03_backtest → 04_parcels → 05_export → 06_lettre_llm
-make test          # 15 tests : données, absence de fuite, propriétés du prix plancher, exports
-
-# 2. Application (Node 20+)
-make dev           # serveur de développement
-make app           # build web (app/dist) et fichier unique hors ligne (app/dist-single)
+python3.12 -m venv .venv
+.venv/bin/python -m pip install -r requirements-model.txt
+make recalculate PY="$PWD/.venv/bin/python"
+.venv/bin/python -m pytest -q tests
+cd app
+npm ci
+npm run build
+npm run build:single
+npm run dev
 ```
 
-Tout est **précalculé** en Python et exporté en JSON. Le navigateur ne fait que lire, filtrer et animer : la démo tourne sans connexion.
+`make recalculate` utilise les données traitées et les géométries RPG déjà versionnées. Il recalcule le backtest, les seuils, les parcelles, le volume et les métadonnées. Aucun accès AWS n'est nécessaire. Sans `BEDROCK_MODEL_ID`, la lettre facultative est vidée pour éviter de réutiliser un ancien scénario.
 
-## Arborescence
+`app/dist-single/index.html` est la démonstration autonome. `make all` reconstruit aussi les données depuis les sources publiques ; installer pour cela `requirements.txt`. Les distances RPG mises en cache ne sont réutilisées que si le site et le facteur de détour sont inchangés.
 
-```
-README.md
-pipeline/        scripts numérotés, du téléchargement à l'export JSON
-data/            données traitées légères (versionnées)
-data_raw/        téléchargements bruts (ignorés par git)
-app/             front Vite + React + deck.gl
-docs/
-  PROJET.md          problème, utilisateur, différenciation, modèle économique
-  RESULTATS.md       résultats chiffrés du pipeline
-  DESIGN.md          règles de design de l'application
-  FICHE_PROJET.md    fiche projet à déposer
-  DECK.md            contenu du deck, slide par slide
-  ARCHITECTURE.md    architecture complète : données, pipeline, front, AWS, LLM
-  MODELE.md          spécification du modèle, du Monte-Carlo et du backtest
-  ROADMAP.md         étapes, points de décision, extensions, Le Maillon vu du ciel
-  DATA_INVENTORY.md  ce que contiennent vraiment les données
-  SOURCES.md         chaque source, son statut et sa licence
-  LIMITES.md         limites connues et annoncées
-  DECLARATIONS.md    ressources préexistantes (obligatoire au dépôt)
-  DEMO_SCRIPT.md     script de la démo de 4 minutes
-  PITCH_NOTES.md     questions attendues et réponses
-  QUESTIONS.md       décisions ouvertes
-```
+## Ce que les preuves permettent d'affirmer
 
-## Étiquetage des chiffres
+Les prix évalués pour une année utilisent seulement les données antérieures. Les tests perturbent les rendements, surfaces, prix et météo de l'année test et des années suivantes, puis vérifient que ces décisions restent identiques. D'autres tests contrôlent les appels effectifs d'apprentissage, l'absence de réentraînement après calibration et la cohérence des exports.
 
-Chaque chiffre affiché, dans l'application comme dans la documentation, porte l'une de ces étiquettes :
+Les diagnostics de rendement conditionnels utilisent la météo de l'année évaluée observée rétrospectivement ; ils ne constituent pas une prévision météo avant semis. Les décisions de prix, elles, utilisent uniquement la météo passée.
 
-- **mesuré** : donnée officielle (Agreste, RPG, douanes, NASA POWER) ;
-- **sourcé** : littérature ou référence technique citée ;
-- **supposé** : hypothèse de l'équipe, exposée comme paramètre modifiable ;
-- **synthétique / modèle** : produit par une simulation ou un modèle.
+Sept années d'évaluation et des rendements départementaux ne suffisent pas à établir une garantie individuelle. Ces historiques ont déjà été examinés lors du développement : l'étude reste rétrospective et exige une future validation indépendante. Le regroupement produit des **séries retenues**, pas une preuve d'indépendance statistique.
 
-## Équipe et licences
+## Fichiers
 
-Projet réalisé pendant Hack the Fork Paris 2026. Les données utilisées et leurs licences sont listées dans [docs/SOURCES.md](docs/SOURCES.md), et les ressources préexistantes dans [docs/DECLARATIONS.md](docs/DECLARATIONS.md).
+- `pipeline/` : acquisition, modèles, évaluation et export.
+- `data/` : données traitées et hypothèses traçables.
+- `app/src/` : interface React et données JSON recalculées.
+- `tests/` : invariance temporelle, calibration, économie et cohérence.
+- `docs/` : méthode, résultats, références, limites et parcours de démonstration.
+
+Les licences et sources des données sont listées dans [SOURCES](docs/SOURCES.md).

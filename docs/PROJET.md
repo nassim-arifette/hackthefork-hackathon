@@ -1,3 +1,5 @@
+> Document de contexte antérieur à la correction de validation. Les chiffres et engagements ci-dessous ne décrivent pas le scénario courant. Références à jour : [RESULTATS](RESULTATS.md), [MODELE](MODELE.md) et [DEMO_SCRIPT](DEMO_SCRIPT.md).
+
 # Le projet dans sa globalité
 
 Ce document explique le projet depuis le début : le problème, l'utilisateur, la solution, ce qui la distingue, comment elle se vend et pourquoi elle compte. Il sert de base au deck et à la fiche projet.

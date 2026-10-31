@@ -1,3 +1,5 @@
+> Document de contexte antérieur à la correction de validation. Les chiffres et engagements ci-dessous ne décrivent pas le scénario courant. Références à jour : [RESULTATS](RESULTATS.md), [MODELE](MODELE.md) et [DEMO_SCRIPT](DEMO_SCRIPT.md).
+
 # AWS : la marche à suivre
 
 Compte de l'équipe : région **us-east-1** (Virginie du Nord) uniquement, supprimé 72 h après le début de l'événement. Ne jamais copier de clé ou de code d'accès dans le dépôt.

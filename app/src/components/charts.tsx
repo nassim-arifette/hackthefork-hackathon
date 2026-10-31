@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { backtest, D77, fmt, MARKET, meta, pct, reliabilityAt, supply, thresholds } from '../data';
 
 // Largeur logique commune : le texte du panneau fait environ 416 px.
@@ -50,13 +51,14 @@ export function PriceChart({ price, min, max }: { price: number; min: number; ma
   for (let p = min; p <= max; p += 10) rel.push([p, reliabilityAt(p)]);
   const relPath = rel.map(([p, v], i) => `${i ? 'L' : 'M'}${X(p).toFixed(1)},${Yr(v).toFixed(1)}`).join('');
   const pts = supply.filter((s) => s.prix >= min && s.prix <= max);
-  const supPath = `M${X(min)},${Yh(0)}` + pts.map((s) => `L${X(s.prix).toFixed(1)},${Yh(s.hectares).toFixed(1)}`).join('') + `L${X(max)},${Yh(0)}Z`;
+  const firstHa = supply.filter((s) => s.prix <= min).slice(-1)[0]?.hectares ?? 0;
+  const lastHa = pts[pts.length - 1]?.hectares ?? firstHa;
+  const supPath = `M${X(min)},${Yh(0)}L${X(min)},${Yh(firstHa)}` + pts.map((s) => `L${X(s.prix).toFixed(1)},${Yh(s.hectares).toFixed(1)}`).join('') + `L${X(max)},${Yh(lastHa)}L${X(max)},${Yh(0)}Z`;
   const cur = Math.max(min, Math.min(max, price));
-  const ticks = [800, 1200, 1600, 2000].filter((v) => v > min && v < max);
+  const tickStep = Math.ceil((max - min) / 4 / 100) * 100;
+  const ticks = Array.from({ length: 5 }, (_, i) => Math.ceil(min / tickStep) * tickStep + i * tickStep).filter((v) => v >= min && v <= max);
   return (
     <svg viewBox={`0 0 ${W} ${h}`} role="img" aria-label="Part des années gagnantes et hectares qui basculent selon le prix">
-      <rect x={X(MARKET.min)} width={X(MARKET.max) - X(MARKET.min)} y={top[0] - 14} height={bot[1] - top[0] + 14} className="band-market" />
-      <text x={X(MARKET.max) + 5} y={Yr(0.12)} className="note">prix de marché</text>
 
       <text x={l} y={10} className="axis-title">Années où la lentille rapporte au moins autant que le blé</text>
       {[0, 0.5, 1].map((v) => (
@@ -64,7 +66,7 @@ export function PriceChart({ price, min, max }: { price: number; min: number; ma
           <text x={l - 6} y={Yr(v) + 3.5} className="tick" textAnchor="end">{v === 0 ? '0' : v === 1 ? '10' : '5'}</text></g>
       ))}
       <line x1={l} x2={W - r} y1={Yr(0.8)} y2={Yr(0.8)} className="ref" />
-      <text x={X(MARKET.max) + 5} y={Yr(0.8) - 5} className="note">objectif 8 sur 10</text>
+      <text x={l + 5} y={Yr(0.8) - 5} className="note">objectif 8 sur 10</text>
       <path d={relPath} className="ln lentil" />
 
       <text x={l} y={bot[0] - 12} className="axis-title">Hectares de blé qui basculent</text>
@@ -104,18 +106,20 @@ export function MarginBars({ lentil, wheat }: { lentil: number; wheat: number })
 export function SecurityChart() {
   const pts = thresholds.sensibilite.fiabilite.filter((s) => s.x <= 0.9 + 1e-6);
   const h = 176, l = 44, r = 16, t = 14, b = 26;
-  const pMin = 500, pMax = Math.ceil((Math.max(...pts.map((s) => s.p_star)) * 1.08) / 500) * 500;
+  const pMin = Math.min(0, Math.floor(Math.min(MARKET.min, ...pts.map((s) => s.p_star)) / 500) * 500);
+  const pMax = Math.ceil((Math.max(MARKET.max, ...pts.map((s) => s.p_star)) * 1.15) / 500) * 500;
   const X = (x: number) => l + ((W - l - r) * (x - 0.5)) / 0.4;
   const Y = (p: number) => t + (h - t - b) * (1 - (p - pMin) / (pMax - pMin));
   const path = pts.map((s, i) => `${i ? 'L' : 'M'}${X(s.x).toFixed(1)},${Y(s.p_star).toFixed(1)}`).join('');
   const p80 = pts.find((s) => Math.abs(s.x - 0.8) < 1e-6)!;
   const p50 = pts.find((s) => Math.abs(s.x - 0.5) < 1e-6)!;
   const p90 = pts.find((s) => Math.abs(s.x - 0.9) < 1e-6)!;
-  const gridVals = [1000, 2000, 3000, 4000].filter((v) => v < pMax);
+  const tickStep = Math.max(500, Math.ceil((pMax - pMin) / 4 / 500) * 500);
+  const gridVals = Array.from({ length: 5 }, (_, i) => pMin + i * tickStep).filter((v) => v <= pMax);
   return (
     <svg viewBox={`0 0 ${W} ${h}`} role="img" aria-label="Prix plancher selon la fiabilité visée">
       <rect x={l} width={W - l - r} y={Y(MARKET.max)} height={Y(MARKET.min) - Y(MARKET.max)} className="band-market" />
-      <text x={W - r} y={Y(MARKET.max) - 5} className="note" textAnchor="end">prix de marché {MARKET.annees[0]}–{MARKET.annees[1]}</text>
+      <text x={W - r} y={Y(MARKET.max) - 5} className="note" textAnchor="end">référence nominale {MARKET.annees[0]}–{MARKET.annees[1]}</text>
       {gridVals.map((p) => (
         <g key={p}><line x1={l} x2={W - r} y1={Y(p)} y2={Y(p)} className="grid" />
           <text x={l - 6} y={Y(p) + 3.5} className="tick" textAnchor="end">{fmt(p)}</text></g>
@@ -141,7 +145,7 @@ export function Sensitivity() {
     { label: 'Bonus de rotation, de 0 à 200 €/ha', a: s.bonus_rotation[s.bonus_rotation.length - 1].p_star, b: s.bonus_rotation[0].p_star },
     { label: 'Charges du blé, de 440 à 600 €/ha', a: s.charges_ble[s.charges_ble.length - 1].p_star, b: s.charges_ble[0].p_star },
     { label: 'Charges de la lentille, de 230 à 340 €/ha', a: s.charges_lentille[0].p_star, b: s.charges_lentille[s.charges_lentille.length - 1].p_star },
-    { label: 'Sans l’aide couplée', a: base, b: s.sans_aide },
+    { label: 'Aide 0 → 122 €/ha, éligibilité à confirmer', a: base, b: (s as any).avec_aide ?? s.sans_aide },
   ];
   const all = rows.flatMap((r) => [r.a, r.b]);
   const lo = Math.floor((Math.min(...all) - 100) / 100) * 100, hi = Math.ceil((Math.max(...all) + 100) / 100) * 100, pad = 6;
@@ -167,37 +171,47 @@ export function Sensitivity() {
   );
 }
 
-/** Révélation du backtest : par année, intervalle à 80 % prédit, puis rendement réel. */
+/** Un intervalle et une observation du même département ; aucune moyenne de quantiles. */
 export function BacktestReveal({ shown }: { shown: number }) {
+  const departments = [...new Map(backtest.detail.map((d) => [d.dep, d.dep_nom])).entries()].sort((a, b) => a[1].localeCompare(b[1], 'fr'));
+  const [dep, setDep] = useState(departments[0]?.[0] ?? '');
   const years = backtest.annees;
-  const h = 214, l = 30, r = 8, t = 10, b = 28;
-  const lo = Math.min(0, ...years.map((y) => y.rel_q10_moyen));
-  const hi = Math.max(1.6, ...years.map((y) => y.rel_q90_moyen)) + 0.05;
+  const details = backtest.detail.filter((d) => d.dep === dep).map((d) => {
+    const auto = (d as any).predictions?.auto;
+    return { ...d, ic80_rel: (auto?.intervalle80_rel ?? d.ic80_rel) as number[], q50_rel: auto?.quantiles_rel?.[1] ?? d.q50_rel };
+  });
+  const h = 230, l = 38, r = 8, t = 14, b = 28;
+  const lo = Math.min(0, ...details.map((d) => Math.min(d.rel_reel, d.ic80_rel[0]))) - 0.03;
+  const hi = Math.max(1.2, ...details.map((d) => Math.max(d.rel_reel, d.ic80_rel[1]))) + 0.1;
   const X = (i: number) => l + ((W - l - r) * (i + 0.5)) / years.length;
   const Y = (v: number) => t + (h - t - b) * (1 - (v - lo) / (hi - lo));
   return (
-    <svg viewBox={`0 0 ${W} ${h}`} role="img" aria-label="Backtest, année par année">
-      {[0.5, 1.5].filter((v) => v >= lo && v <= hi).map((v) => (
-        <g key={v}><line x1={l} x2={W - r} y1={Y(v)} y2={Y(v)} className="grid" />
-          <text x={l - 6} y={Y(v) + 3.5} className="tick" textAnchor="end">{v.toLocaleString('fr-FR')}</text></g>
-      ))}
-      <line x1={l} x2={W - r} y1={Y(1)} y2={Y(1)} className="ref" />
-      <text x={l - 6} y={Y(1) + 3.5} className="tick" textAnchor="end">1</text>
-      {years.map((y, i) => {
-        const vis = i < shown;
-        const ok = y.rel_reel_moyen >= y.rel_q10_moyen && y.rel_reel_moyen <= y.rel_q90_moyen;
-        return (
-          <g key={y.annee}>
-            <text x={X(i)} y={h - 10} className={`tick ${vis ? 'on' : ''}`} textAnchor="middle">{y.annee}</text>
-            <g className={vis ? 'bt bt-on' : 'bt'}>
-              <rect x={X(i) - 13} width={26} y={Y(y.rel_q90_moyen)} height={Y(y.rel_q10_moyen) - Y(y.rel_q90_moyen)} rx={2} className="interval" />
-              <line x1={X(i) - 13} x2={X(i) + 13} y1={Y(y.rel_q50_moyen)} y2={Y(y.rel_q50_moyen)} className="median" />
-              <circle cx={X(i)} cy={Y(y.rel_reel_moyen)} r={5.5} className={ok ? 'pt ink real' : 'pt fail real'} />
+    <>
+      <label className="department-select">Département évalué<select value={dep} onChange={(e) => setDep(e.target.value)}>{departments.map(([code, name]) => <option key={code} value={code}>{name} ({code})</option>)}</select></label>
+      <svg viewBox={`0 0 ${W} ${h}`} role="img" aria-label={`Backtest de la sélection automatique par année pour ${departments.find(([code]) => code === dep)?.[1] ?? dep}`}>
+        {[0, 0.5, 1, 1.5, 2, 2.5, 3].filter((v) => v >= lo && v <= hi).map((v) => (
+          <g key={v}><line x1={l} x2={W - r} y1={Y(v)} y2={Y(v)} className={v === 1 ? 'ref' : 'grid'} />
+            <text x={l - 6} y={Y(v) + 3.5} className="tick" textAnchor="end">{v.toLocaleString('fr-FR')}</text></g>
+        ))}
+        {years.map((y, i) => {
+          const d = details.find((r) => r.annee === y.annee);
+          const vis = i < shown;
+          const ok = d && d.rel_reel >= d.ic80_rel[0] && d.rel_reel <= d.ic80_rel[1];
+          return (
+            <g key={y.annee}>
+              <text x={X(i)} y={h - 10} className={`tick ${vis ? 'on' : ''}`} textAnchor="middle">{y.annee}</text>
+              {d ? <g className={vis ? 'bt bt-on' : 'bt'}>
+                <title>{y.annee} : observé {d.rel_reel}, intervalle [{d.ic80_rel.join(', ')}]</title>
+                <rect x={X(i) - 13} width={26} y={Y(d.ic80_rel[1])} height={Math.max(0, Y(d.ic80_rel[0]) - Y(d.ic80_rel[1]))} rx={2} className="interval" />
+                <line x1={X(i) - 13} x2={X(i) + 13} y1={Y(d.q50_rel)} y2={Y(d.q50_rel)} className="median" />
+                <circle cx={X(i)} cy={Y(d.rel_reel)} r={5.5} className={ok ? 'pt ink real' : 'pt fail real'} />
+              </g> : <text x={X(i)} y={Y(1)} className="tick" textAnchor="middle">—</text>}
             </g>
-          </g>
-        );
-      })}
-    </svg>
+          );
+        })}
+      </svg>
+      <p className="body small">Sélection automatique, météo de l’année test observée rétrospectivement. Les prix du backtest sont fixés avec la météo passée uniquement. Un tiret indique une année non évaluée pour ce département.</p>
+    </>
   );
 }
 

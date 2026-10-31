@@ -50,6 +50,20 @@ export const DEP_NAMES: Record<string, string> = {
 };
 
 export const D77 = thresholds.par_departement.find((d) => d.dep === '77')!;
+const parcels77 = parcels.filter((p) => p.culture === 'ble' && p.dep === '77');
+/** Repère explicite pour la courbe départementale, pondéré par la surface. */
+export const REFERENCE_DISTANCE = parcels77.reduce((s, p) => s + p.dist * p.surface, 0)
+  / Math.max(1, parcels77.reduce((s, p) => s + p.surface, 0));
+export const farmPrice = (deliveredPrice: number, distance: number) => deliveredPrice - H.kappa * distance;
+export const MAIN_MODEL = (meta as any).modele_retenu_lentille ?? (meta as any).modele_principal ?? 'M1';
+export const BUYER_DEFAULTS = {
+  resale: Number(hyp.prix_revente_eur_t?.valeur ?? 2400),
+  loss: Number(hyp.pertes_tri_fraction?.valeur ?? 0.08),
+  sorting: Number(hyp.cout_tri_eur_t?.valeur ?? 80),
+  processing: Number(hyp.cout_transformation_eur_t?.valeur ?? 120),
+  other: Number(hyp.cout_acheteur_autres_eur_t?.valeur ?? 40),
+  margin: Number(hyp.marge_min_acheteur_eur_t?.valeur ?? 100),
+};
 export const CHALLENGER = (meta as any).challenger_lightgbm as {
   p_star_77: number; importances_q50: { variable: string; part: number }[]; elargissement_conformal: number;
 };
@@ -65,8 +79,8 @@ export const FEATURE_LABELS: Record<string, string> = {
 };
 export const MARKET = meta.prix_lentille_observes;
 
-/** Part des années simulées où la lentille bat le blé, au prix donné (Seine-et-Marne). */
-export function reliabilityAt(price: number, dep = D77): number {
+/** Part des scénarios où la lentille bat le blé, prix départ ferme. */
+export function reliabilityAtFarmPrice(price: number, dep = D77): number {
   const rows = dep.fiabilite_par_prix;
   if (price <= rows[0].prix) return rows[0].fiabilite;
   for (let i = 1; i < rows.length; i++) {
@@ -78,10 +92,15 @@ export function reliabilityAt(price: number, dep = D77): number {
   return rows[rows.length - 1].fiabilite;
 }
 
+/** Courbe de démonstration au prix rendu, transport du trajet de référence déduit. */
+export function reliabilityAt(price: number, dep = D77, distance = REFERENCE_DISTANCE): number {
+  return reliabilityAtFarmPrice(farmPrice(price, distance), dep);
+}
+
 /** Le contrat a-t-il tenu sur cette parcelle l'année rejouée ? Même règle que le backtest. */
 export function held(p: Parcel, price: number, r: ReplayYear): boolean {
   const d = r.par_departement[p.dep as keyof ReplayYear['par_departement']];
-  const farm = price - H.kappa * p.dist;
+  const farm = farmPrice(price, p.dist);
   const margeL = farm * d.rendement_lentille_tha - H.chargesLentille + H.aide + H.rotation;
   const margeB = r.prix_ble * d.rendement_ble_tha - H.chargesBle;
   return margeL >= margeB;

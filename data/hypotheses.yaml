@@ -1,7 +1,7 @@
 # Toutes les valeurs qui ne sont pas des données mesurées du pipeline, au même endroit.
 # etiquette : mesure | source | suppose | synthetique
-# Le prix du blé n'est plus une hypothèse : c'est la série data/prix_ble.csv
-# (indice Eurostat mesuré, calé en niveau sur Agreste), rééchantillonnée avec l'année météo.
+# Le prix du blé est une référence reconstruite à partir d'Eurostat et d'Agreste,
+# pas un prix payé à chaque producteur ; il est rééchantillonné avec l'année météo.
 
 charges_ble_eur_ha:
   valeur: 440
@@ -16,9 +16,13 @@ charges_lentille_eur_ha:
   url: "https://wiki.tripleperformance.fr/wiki/Lentille"
   sensibilite: [230, 280, 340]
 aide_couplee_eur_ha:
+  valeur: 0
+  etiquette: suppose
+  source: "Scénario principal sans aide : l'éligibilité de la lentille n'est pas confirmée."
+aide_couplee_conditionnelle_eur_ha:
   valeur: 122
   etiquette: source
-  source: "Aide couplée aux légumineuses à graines, campagne 2025, arrêté du 24 février 2026 (éligibilité de la lentille à confirmer)"
+  source: "Scénario alternatif uniquement : montant de référence 2025, sous réserve d'éligibilité de la lentille et d'applicabilité à la campagne simulée."
   url: "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000053594055"
 bonus_rotation_eur_ha:
   valeur: 0
@@ -36,7 +40,7 @@ facteur_detour_route:
 fiabilite_visee:
   valeur: 0.8
   etiquette: suppose
-  source: "choix de l'équipe : 8 années sur 10"
+  source: "Objectif de 80 % des scénarios simulés ; aucune garantie individuelle ou décennale."
 volume_vise_t:
   valeur: 5000
   etiquette: suppose
@@ -45,3 +49,27 @@ site_acheteur:
   valeur: [2.95, 48.55]
   etiquette: synthetique
   source: "site fictif en Seine-et-Marne, annoncé comme tel"
+prix_revente_eur_t:
+  valeur: 2400
+  etiquette: suppose
+  source: "Scénario acheteur modifiable, en €/t vendable après tri ; aucune cotation actuelle."
+pertes_tri_fraction:
+  valeur: 0.08
+  etiquette: suppose
+  source: "Fraction hypothétique de volume non vendable au tri ; à valider avec l'acheteur."
+cout_tri_eur_t:
+  valeur: 80
+  etiquette: suppose
+  source: "Coût hypothétique par tonne entrante livrée à l'acheteur."
+cout_transformation_eur_t:
+  valeur: 120
+  etiquette: suppose
+  source: "Coût hypothétique par tonne entrante livrée à l'acheteur."
+cout_acheteur_autres_eur_t:
+  valeur: 40
+  etiquette: suppose
+  source: "Autres coûts hypothétiques par tonne entrante, hors transport ferme-site déjà inclus dans le prix rendu."
+marge_min_acheteur_eur_t:
+  valeur: 100
+  etiquette: suppose
+  source: "Marge minimale cible hypothétique par tonne entrante, après les coûts saisis."

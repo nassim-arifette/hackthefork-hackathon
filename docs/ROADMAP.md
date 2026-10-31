@@ -1,3 +1,5 @@
+> Document de contexte antérieur à la correction de validation. Les chiffres et engagements ci-dessous ne décrivent pas le scénario courant. Références à jour : [RESULTATS](RESULTATS.md), [MODELE](MODELE.md) et [DEMO_SCRIPT](DEMO_SCRIPT.md).
+
 # Feuille de route
 
 Le projet est construit en couches. Le cœur doit être parfait avant toute extension. Chaque extension se branche sur le même utilisateur (le responsable filière) et sur la même carte.

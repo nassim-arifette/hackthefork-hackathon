@@ -24,7 +24,9 @@ PROMPT = """Tu rédiges une courte lettre d'une coopérative à un agriculteur d
 pour accompagner une proposition de contrat lentille. Utilise uniquement les chiffres
 fournis, écrits exactement comme ci-dessous ; n'en ajoute aucun, n'en arrondis aucun.
 Pas de formule creuse. Cinq phrases au plus, en français, ton direct et respectueux.
-Dis clairement ce que le prix garantit et ce qu'il ne garantit pas.
+Présente un scénario de simulation, jamais une garantie de revenu ou de fréquence
+future. Le prix affiché est une référence départementale départ ferme ; la
+proposition interactive utilise le prix rendu saisi par l'acheteur et le transport.
 
 Chiffres :
 {chiffres}"""
@@ -37,9 +39,9 @@ def chiffres() -> dict:
     fr = lambda x: f"{x:,}".replace(",", " ").replace(".", ",")
     return {
         "prix plancher": f"{fr(d77['p_star'])} €/t départ ferme",
-        "fiabilité": "8 années sur 10",
-        "durée": "3 campagnes",
-        "rendement faible, une année sur dix": f"{fr(d77['rendement_lentille_q10_tha'])} t/ha",
+        "objectif de simulation, sans garantie individuelle": "80 % des scénarios",
+        "durée": "1 campagne",
+        "quantile 10 % du rendement simulé": f"{fr(d77['rendement_lentille_q10_tha'])} t/ha",
         "volume visé par la coopérative": f"{fr(meta['hypotheses']['volume_vise_t']['valeur'])} t",
         "campagne": str(meta["campagne"]),
     }
