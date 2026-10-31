@@ -14,6 +14,7 @@ import pandas as pd
 from sklearn.linear_model import QuantileRegressor
 from sklearn.preprocessing import StandardScaler
 
+from benchmark_checkpoint import Checkpoints
 from benchmark_models import read_data, representatives, quantile_loss, summarize
 from common import hypotheses
 from model import hyp_values
@@ -112,6 +113,7 @@ def run(args):
     examples = make_examples(raw, weather, h)
     ref = pd.read_csv(args.reference, dtype={"dep": str}) if args.reference else None
     errors, rows, audit = [], [], []
+    checkpoints = Checkpoints(args, "contrat direct", [f"{y}-{k}" for y in range(2016, 2026) for k in args.models])
     # Earlier out-of-time predictions serve only to calibrate later decisions.
     for year in range(2016, 2026):
         pastL = raw[(raw.culture == "lentille") & (raw.annee < year)]
@@ -124,6 +126,16 @@ def run(args):
             if set(test.dep) != cohort:
                 raise ValueError(f"Direct and yield benchmarks have different cohorts in {year}")
         for kind in args.models:
+            key = f"{year}-{kind}"
+            saved = checkpoints.get(key)
+            if saved is not None:
+                errors.extend(saved["errors"])
+                rows.extend(saved["rows"])
+                audit.extend(saved["audit"])
+                checkpoints.progress(key + " repris depuis Drive/disque")
+                continue
+            checkpoints.progress(f"{year} · {kind} · entraînement")
+            start_error, start_row, start_audit = len(errors), len(rows), len(audit)
             model = DirectPrice(kind, args.device).fit(train)
             logp = model.predict_logratio(test)
             # Equal total weight per calendar year, signed one-sided correction.
@@ -149,6 +161,10 @@ def run(args):
                         "pinball": None, "coverage": None, "width": None})
             audit.append({"year": year, "model": kind, "train_max": int(train.year.max()),
                           "n_train": len(train), "n_test": len(test), "adjustment_log": adjustment})
+            checkpoints.save(key, {"errors": errors[start_error:], "rows": rows[start_row:], "audit": audit[start_audit:]})
+            del model
+            if rows:
+                pd.DataFrame(rows).to_csv(args.output / "predictions.csv", index=False)
         print(f"Direct contract: {year} complete", flush=True)
     detail = pd.DataFrame(rows)
     # Select using past years only, with a single business loss. No final-test cherry-picking.
@@ -174,6 +190,7 @@ def run(args):
                                    for n in ("panel_rendements.csv", "meteo_dept.csv", "prix_ble.csv", "hypotheses.yaml")]},
         "packages": {name: importlib.metadata.version(name) for name in ["numpy", "pandas", "scikit-learn", "lightgbm", "quantile-forest"]}}
     (args.output / "results.json").write_text(json.dumps(result, indent=2, allow_nan=False) + "\n")
+    checkpoints.progress("Terminé", "complete")
     print(pd.DataFrame(result["summary"]).to_string(index=False), flush=True)
 
 

@@ -18,6 +18,7 @@ import numpy as np
 import pandas as pd
 from sklearn.linear_model import QuantileRegressor
 
+from benchmark_checkpoint import Checkpoints
 from common import DATA, hypotheses
 from model import WEATHER, hyp_values, sample_quantile
 
@@ -236,18 +237,41 @@ def run(args):
     L, W = raw[raw.culture == "lentille"], raw[raw.culture == "ble"]
     detail, audit = [], []
     args.output.mkdir(parents=True, exist_ok=True)
+    checkpoints = Checkpoints(args, "rendements", [f"{y}-{k}" for y in args.years for k in [*args.models, "paired_history"]])
     started = time.monotonic()
     model_class = FrozenSplit if args.calibration == "split" else RollingCalibrated
     for year in args.years:
+        keys = [f"{year}-{k}" for k in [*args.models, "paired_history"]]
+        if all(checkpoints.get(key) is not None for key in keys):
+            for key in keys:
+                saved = checkpoints.get(key)
+                detail.extend(saved["rows"])
+                audit.extend(saved["audit"])
+            checkpoints.progress(f"{year} repris depuis Drive/disque")
+            continue
+        checkpoints.progress(f"{year} · préparation blé et cohorte")
         pastL, pastW = L[L.annee < year], W[W.annee < year]
         wheat = model_class("linear", args.seed).fit(pastW)
         # Common evaluation cohort, independent of model choice.
-        lens = {kind: model_class(kind, args.seed, args.device).fit(pastL) for kind in args.models}
-        eligible = set(wheat.levels.index).intersection(*(set(m.levels.index) for m in lens.values()))
+        cohort_history = pastL
+        if args.calibration == "split":
+            cohort_history = pastL[pastL.annee < sorted(pastL.annee.unique())[-3]]
+        counts = cohort_history[cohort_history.dep.isin(representatives(cohort_history))].groupby("dep").size()
+        eligible = set(wheat.levels.index) & set(counts[counts >= 3].index)
         test = L[(L.annee == year) & L.dep.isin(eligible)]
         realW = W[W.annee == year].set_index("dep")
         test = test[test.dep.isin(realW.index)].sort_values("dep")
-        for kind, m in lens.items():
+        for kind in args.models:
+            key = f"{year}-{kind}"
+            saved = checkpoints.get(key)
+            if saved is not None:
+                detail.extend(saved["rows"])
+                audit.extend(saved["audit"])
+                continue
+            checkpoints.progress(f"{year} · {kind} · calibration et entraînement")
+            start_row, start_audit = len(detail), len(audit)
+            m = model_class(kind, args.seed, args.device).fit(pastL)
+            assert set(test.dep).issubset(m.levels.index), "Model changed the evaluation cohort"
             q = m.predict(test)
             yr = test.rendement_qha.to_numpy() / m.levels.reindex(test.dep).to_numpy()
             audit.append({"year": year, "model": kind, "proper_years": [int(x) for x in m.proper_years],
@@ -267,6 +291,9 @@ def run(args):
                     "pinball": float(quantile_loss(yr[i], q[i], QS).mean()),
                     "coverage": bool(q[i, 0] <= yr[i] <= q[i, 2]), "width": float(q[i, 2] - q[i, 0])}
                 detail.append(row)
+            checkpoints.save(key, {"rows": detail[start_row:], "audit": audit[start_audit:]})
+            del m
+        start_row = len(detail)
         # Joint historical yield-price baseline: paired observations, no independent residual draws.
         for _, r in test.iterrows():
             pair = pastL[pastL.dep == r.dep].merge(pastW[pastW.dep == r.dep], on="annee", suffixes=("_L", "_W"))
@@ -278,11 +305,13 @@ def run(args):
                 "contract_loss": float(quantile_loss(real, ps, h["tau"])),
                 "shortfall_eur_ha": float(max(0, (real - ps) * r.rendement_qha / 10)),
                 "pinball": None, "coverage": None, "width": None})
+        checkpoints.save(f"{year}-paired_history", {"rows": detail[start_row:], "audit": []})
         df = pd.DataFrame(detail)
         df.to_csv(args.output / "predictions.csv", index=False)
         print(f"{year}: {len(test)} departments; " + "; ".join(
             f"{k}: held={g.held.mean():.0%}, loss={g.contract_loss.mean():.1f}"
             for k, g in df[df.year == year].groupby("model")), flush=True)
+    pd.DataFrame(detail).to_csv(args.output / "predictions.csv", index=False)
     try:
         commit = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=Path(__file__).resolve().parents[1], text=True).strip()
     except (OSError, subprocess.CalledProcessError):
@@ -309,6 +338,7 @@ def run(args):
             "Monte Carlo keeps independent crop residuals and three-quantile tail interpolation as controls.",
             "No validation of transfer to unobserved Ile-de-France lentil yields."]}
     (args.output / "results.json").write_text(json.dumps(result, indent=2, ensure_ascii=False, allow_nan=False) + "\n")
+    checkpoints.progress("Terminé", "complete")
     print(pd.DataFrame(result["summary"]).to_string(index=False), flush=True)
 
 
