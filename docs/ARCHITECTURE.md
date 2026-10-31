@@ -28,43 +28,45 @@ flowchart TB
     REF[Références techniques<br/>charges, rotation, Ciqual]
   end
 
-  subgraph Pipeline["Pipeline Python (laptop, SageMaker CPU ou CloudShell)"]
+  subgraph Pipeline["Pipeline Python (poste de l'équipe ; CloudShell pour la lettre)"]
+    P0[00_prix_commerce<br/>prix et commerce Eurostat]
     P1[01_agreste<br/>panel de rendements]
     P2[02_weather<br/>variables météo]
-    P3[03_yield_model<br/>M0, M1, M2 + conformal]
-    P4[04_backtest<br/>2019–2025 glissant]
-    P5[05_parcels<br/>parcelles + distances]
-    P6[06_export<br/>P*, courbe d'offre, replay]
-    P7[07_contract_texts<br/>LLM, cache]
+    P3[03_backtest<br/>M0, M1, M2 + conformal,<br/>backtest 2019–2025]
+    P5[04_parcels<br/>parcelles + distances]
+    P6[05_export<br/>P*, courbe d'offre, replay]
+    P8[07_contrats<br/>barèmes comparés]
+    P7[06_lettre_llm<br/>LLM, cache]
   end
 
-  subgraph Exports["app/public/data (JSON)"]
-    J1[parcels.geojson]
+  subgraph Exports["app/src/data (JSON)"]
+    J1[parcels.json]
     J2[thresholds.json]
     J3[supply_curve.json]
     J4[backtest.json]
     J5[replay.json]
-    J6[contract_texts.json]
+    J6[lettre.json]
     J7[meta.json]
+    J8[contrats.json]
   end
 
   subgraph App["Application (Vite + React + deck.gl)"]
-    UI[Carte 3D, curseur, courbe d'offre,<br/>replay, révélation du backtest, contrat]
+    UI[Carte, curseur, courbe d'offre,<br/>replay, révélation du backtest,<br/>contrats comparés, contrat]
   end
 
   AG --> P1 --> P3
   NP --> P2 --> P3
-  P3 --> P4
+  PRX --> P0 --> P3
+  REF --> P3
   P3 --> P6
-  PRX --> P6
-  REF --> P6
   RPG --> P5 --> P6
-  DOU --> P6
-  P4 --> J4
+  DOU --> P0
+  P3 --> J4
   P6 --> J2 & J3 & J5 & J7
   P5 --> J1
+  P3 --> P8 --> J8
   P6 --> P7 --> J6
-  J1 & J2 & J3 & J4 & J5 & J6 & J7 --> UI
+  J1 & J2 & J3 & J4 & J5 & J6 & J7 & J8 --> UI
   BR[(Amazon Bedrock<br/>Claude)] -.build uniquement.-> P7
 ```
 
@@ -105,24 +107,26 @@ app/public/data/          exports consommés par le front
 
 ### 3.3 Le fichier d'hypothèses
 
-Toutes les valeurs non mesurées vivent dans `data/hypotheses.yaml`, avec leur étiquette et leur source. Le pipeline et l'interface les lisent depuis ce fichier. Exemple de structure :
+Toutes les valeurs non mesurées vivent dans `data/hypotheses.yaml`, avec leur étiquette, leur source et leur plage de sensibilité. Le pipeline et l'interface les lisent depuis ce fichier. Extrait :
 
 ```yaml
 charges_ble_eur_ha:
-  valeur: null            # à remplir
-  etiquette: suppose      # mesure | source | suppose | synthetique
-  source: null
-  plage_sensibilite: [null, null]
-charges_lentille_eur_ha: { valeur: null, etiquette: suppose, source: null }
-bonus_rotation_eur_ha:   { valeur: null, etiquette: suppose, source: "Terres Inovia, à confirmer" }
-cout_transport_eur_t_km: { valeur: null, etiquette: suppose, source: null }
-facteur_detour_route:    { valeur: 1.3,  etiquette: suppose, source: null }
-taux_adoption:           { valeur: null, etiquette: suppose, source: null }
-fiabilite_visee:         { valeur: 0.8,  etiquette: suppose, source: "choix de l'équipe" }
-site_acheteur:           { lon: null, lat: null, etiquette: synthetique, source: "site fictif" }
+  valeur: 700
+  etiquette: suppose          # mesure | source | suppose | synthetique
+  source: "arrondi de 675 €/ha : projection Cerfrance Nord-Est Île-de-France citée par le guide pois Terres Inovia 2025"
+  url: "https://www.terresinovia.fr/..."
+  sensibilite: [600, 700, 800]
+part_non_valorisee:
+  valeur: 0.10
+  etiquette: suppose
+  source: "part de la récolte refusée au tri ; Agreste mesure la récolte au stade arrivée ferme, avant ce tri"
+  sensibilite: [0, 0.10, 0.20]
+scenario_historique:
+  valeur: {charges_ble: 440, charges_lentille: 280, aide: 122, rotation: 0, part_non_valorisee: 0, forfait: 0}
+  etiquette: source
 ```
 
-Aucune valeur n'est inventée : un champ vide bloque le pipeline avec un message clair, plutôt qu'un chiffre arbitraire.
+Un test vérifie que chaque hypothèse porte une étiquette et une source. Les barèmes de contrat comparés vivent à part, dans `data/pilote_300t/contrats.json`.
 
 ---
 
@@ -130,7 +134,7 @@ Aucune valeur n'est inventée : un champ vide bloque le pipeline avec un message
 
 Chaque script est indépendant, idempotent, lit ses entrées depuis le disque et écrit ses sorties. On peut relancer une étape sans relancer les autres.
 
-> Implémentation actuelle : `00_prix_commerce` (Eurostat : prix du blé, prix de la lentille, commerce Comext), `01_agreste`, `02_weather`, `03_backtest` (modèles et backtest, code partagé dans `model.py`), `04_parcels`, `05_export` (modèle final, P\*, sensibilités, bootstrap, exports), `06_lettre_llm` (Bedrock, facultatif). Les exports sont écrits dans `app/src/data/` et inclus dans le build. `make test` lance 15 tests. Le tableau ci-dessous décrit le découpage initial.
+> Implémentation actuelle : `00_prix_commerce` (Eurostat : prix du blé, prix de la lentille, commerce Comext), `01_agreste`, `02_weather`, `03_backtest` (modèles et backtest, code partagé dans `model.py`), `04_parcels`, `05_export` (modèle final, P\*, sensibilités, bootstrap, exports), `07_contrats` (barèmes publiés, proposition du dossier pilote, tranches et prime calibrées ; catalogue dans `contrats.py`, formules dans `model.py`), `06_lettre_llm` (Bedrock, facultatif). Les exports sont écrits dans `app/src/data/` et inclus dans le build. `make test` lance les tests : données, absence de fuite, prix plancher, contrats, exports. Le tableau ci-dessous décrit le découpage initial.
 
 | Script | Entrées | Sorties | Points d'attention |
 |---|---|---|---|
@@ -326,28 +330,24 @@ Ton : clair, factuel, destiné à un agriculteur.
 
 ```mermaid
 flowchart LR
+  GH[(GitHub<br/>branche main)] -->|chaque push| AMP
   subgraph AWS["Compte AWS de l'équipe · us-east-1"]
-    S3[(S3 privé<br/>données brutes et exports)]
-    SM[SageMaker CPU<br/>ou CloudShell<br/>pipeline Python]
-    BR[Bedrock<br/>Claude Sonnet 5 / Haiku 4.5]
-    AMP[Amplify Hosting<br/>application statique]
+    CS[CloudShell<br/>06_lettre_llm.py]
+    BR[Bedrock<br/>Claude Sonnet 5]
+    AMP[Amplify Hosting<br/>build Vite, Node 22]
   end
-  OD[(Données ouvertes AWS<br/>s3://nasa-power, us-west-2)] --> SM
-  S3 <--> SM
-  SM --> BR
-  SM -->|exports JSON| S3
-  S3 -->|build| AMP
+  CS --> BR
+  CS -->|lettre.json, recopiée dans le dépôt| GH
   AMP --> U[Navigateur du jury]
 ```
 
 | Service | Usage |
 |---|---|
-| S3 | stockage des données brutes et des exports ; blocage d'accès public toujours activé |
-| SageMaker (CPU) ou CloudShell | exécution du pipeline ; aucun GPU nécessaire |
-| Bedrock | génération des textes de contrat, au build |
-| Amplify Hosting | hébergement de l'application statique |
+| Amplify Hosting | build et hébergement de l'application à chaque push sur `main` (`amplify.yml` : dossier `app`, Node 22, sortie `dist`) |
+| CloudShell | exécution de la seule étape qui appelle Bedrock ; droits du compte déjà configurés |
+| Bedrock | rédaction de la lettre d'accompagnement à partir des chiffres exportés ; un nombre absent de ces chiffres fait rejeter le texte |
 
-Contraintes du compte : us-east-1 uniquement, pas de GPU, pas d'instance 6xlarge ou plus, compte supprimé 72 h après le début de l'événement. L'URL Amplify disparaît avec le compte : la démo de secours est donc locale.
+Le pipeline de données tourne sur le poste de l'équipe : il ne demande ni GPU ni service AWS. S3 et SageMaker, prévus au départ, ne sont pas nécessaires. Contraintes du compte : us-east-1 uniquement, compte supprimé 72 h après le début de l'événement. L'URL Amplify disparaît avec le compte : la démo de secours est donc locale. Marche à suivre : [AWS.md](AWS.md).
 
 ---
 
@@ -366,7 +366,6 @@ Jamais d'éditeur de code ni de terminal à l'écran pendant le pitch.
 ## 10. Sécurité et conformité
 
 - Aucune clé, aucun jeton, aucun identifiant dans le dépôt. Les identifiants AWS restent dans l'environnement local (`aws configure` ou variables d'environnement).
-- Blocage d'accès public S3 toujours activé.
 - Uniquement des données ouvertes, anonymisées ou synthétiques. Le RPG ne contient pas d'identifiant d'exploitant [à vérifier sur la version fournie].
 - Les archives téléchargées sont traitées comme non fiables : extraction dans un dossier dédié, scripts lancés avec `python -I`.
 - Toute ressource préexistante est déclarée dans [DECLARATIONS.md](DECLARATIONS.md).

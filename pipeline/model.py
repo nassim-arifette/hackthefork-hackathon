@@ -165,8 +165,8 @@ def sample_quantile(q: np.ndarray, u: np.ndarray) -> np.ndarray:
     return np.clip(out, 0.02, None)
 
 
-def break_even_prices(X_pool, mL, mW, levL, levW, h, n=6000, seed=0):
-    """Prix d'équilibre lentille/blé (€/t) dans n scénarios d'années rejouées.
+def simulate_years(X_pool, mL, mW, levL, levW, h, n=6000, seed=0):
+    """Rendements lentille et blé (t/ha) et prix du blé (€/t) de n années rejouées.
 
     Chaque scénario tire une année historique : sa météo (pour les deux cultures) et
     son prix du blé, ce qui conserve leurs liens réels. `h["prix_ble"]` remplace la
@@ -178,6 +178,12 @@ def break_even_prices(X_pool, mL, mW, levL, levW, h, n=6000, seed=0):
     yL = sample_quantile(qL[s], rng.random(n)) * levL / 10  # t/ha
     yW = sample_quantile(qW[s], rng.random(n)) * levW / 10
     pB = np.full(n, h["prix_ble"]) if h.get("prix_ble") else X_pool["prix_ble"].to_numpy()[s]
+    return yL, yW, pB
+
+
+def break_even_prices(X_pool, mL, mW, levL, levW, h, n=6000, seed=0):
+    """Prix d'équilibre lentille/blé (€/t) dans n scénarios d'années rejouées."""
+    yL, yW, pB = simulate_years(X_pool, mL, mW, levL, levW, h, n=n, seed=seed)
     cW, cL, bonus = h["charges_ble"], h["charges_lentille"], h["bonus"]
     # Le prix garanti est payé sur les tonnes acceptées au tri, pas sur la récolte brute.
     paid = yL * (1 - h.get("qualite", 0.0))
@@ -188,6 +194,52 @@ def p_star(R: np.ndarray, tau: float) -> float:
     """Plus petit prix tel que la lentille rapporte au moins autant que le blé dans une part
     tau des scénarios (égalités comprises) : quantile empirique « inverted_cdf »."""
     return float(np.quantile(R, tau, method="inverted_cdf"))
+
+
+# ---------- contrats ----------
+# Un contrat est un dict : soit `prix` (€/t, prix unique), soit `paliers` (p1, p2, p3 : prix
+# marginaux de la 1re tonne/ha, de la 2e, puis au-delà) ; options `prime_t` (€/t acceptée),
+# `prime_ha` (€/ha, versée quel que soit le rendement), `cout_producteur_t_brut` (€/t récoltée,
+# à la charge du producteur, par exemple un pré-nettoyage). Tout est payé sur les tonnes
+# acceptées au tri.
+
+def paiement(c: dict, y: np.ndarray) -> np.ndarray:
+    """Somme versée par l'acheteur (€/ha) pour y t/ha acceptées au tri."""
+    if "paliers" in c:
+        p1, p2, p3 = c["paliers"]
+        base = p1 * np.minimum(y, 1) + p2 * np.clip(y - 1, 0, 1) + p3 * np.maximum(y - 2, 0)
+    else:
+        base = c["prix"] * y
+    return base + c.get("prime_t", 0.0) * y + c.get("prime_ha", 0.0)
+
+
+def marge_lentille(c: dict, yL: np.ndarray, h: dict) -> np.ndarray:
+    """Marge de la lentille sous contrat (€/ha), aide couplée et bénéfice de rotation compris."""
+    y = yL * (1 - h["qualite"])
+    return paiement(c, y) - c.get("cout_producteur_t_brut", 0.0) * yL - h["charges_lentille"] + h["bonus"]
+
+
+def protection(c: dict, yL, yW, pB, h: dict) -> float:
+    """Part des années où la lentille sous contrat rapporte au moins autant que le blé."""
+    return float(np.mean(marge_lentille(c, yL, h) >= pB * yW - h["charges_ble"]))
+
+
+def calibrer_premier_palier(suite, yL, yW, pB, h: dict, tau: float) -> int:
+    """Plus petit prix entier de la première tonne/ha tel que le barème (p1, *suite) atteigne tau."""
+    lo, hi = 0, 20000
+    while hi - lo > 1:
+        mid = (lo + hi) // 2
+        if protection({"paliers": (mid, *suite)}, yL, yW, pB, h) >= tau:
+            hi = mid
+        else:
+            lo = mid
+    return hi
+
+
+def calibrer_prime_ha(prix_base: float, yL, yW, pB, h: dict, tau: float) -> float:
+    """Plus petite prime à l'hectare telle que « prix_base €/t + prime » atteigne tau."""
+    ecart = pB * yW - h["charges_ble"] - marge_lentille({"prix": prix_base}, yL, h)
+    return max(0.0, float(np.quantile(ecart, tau, method="inverted_cdf")))
 
 
 def hyp_values(h: dict) -> dict:

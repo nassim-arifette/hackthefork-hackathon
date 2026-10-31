@@ -225,6 +225,9 @@ h3 { font-family: var(--sans); font-weight: 600; font-size: 14px; line-height: 1
 .list.models th:first-child { width: 52%; }
 .list.models tr.hl td:first-child { font-weight: 600; }
 .list.models tr.hl td:first-child span { font-weight: 400; }
+.list.contracts th:first-child { width: auto; }
+.list.contracts th.num { white-space: nowrap; }
+.list.contracts .num { padding-left: var(--s3); }
 .list td.bad { color: var(--fail); }
 .years { width: 100%; margin-top: var(--s5); border-collapse: collapse; font-family: var(--sans); font-size: 12.5px; font-variant-numeric: tabular-nums; }
 .years th { font-weight: 500; color: var(--mute); padding: 0 2px 6px; text-align: right; }

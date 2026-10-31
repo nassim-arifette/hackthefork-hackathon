@@ -23,7 +23,33 @@
   "erreur_mediane_M1": 0.331,
   "gain_pinball_M1_vs_M0": -0.023,
   "gain_pinball_M2_vs_M0": 0.059,
-  "gain_pinball_auto_vs_M0": 0.05
+  "gain_pinball_auto_vs_M0": 0.05,
+  "contrats": {
+   "uneal_2023": {
+    "taux_tenus": 0.571,
+    "cout_moyen_t": 900
+   },
+   "natup_2023": {
+    "taux_tenus": 0.549,
+    "cout_moyen_t": 842
+   },
+   "proposition_2027": {
+    "taux_tenus": 0.647,
+    "cout_moyen_t": 958
+   },
+   "unique": {
+    "taux_tenus": 0.872,
+    "cout_moyen_t": 2438
+   },
+   "paliers": {
+    "taux_tenus": 0.872,
+    "cout_moyen_t": 1899
+   },
+   "prime_ha": {
+    "taux_tenus": 0.789,
+    "cout_moyen_t": 1243
+   }
+  }
  },
  "annees": [
   {
@@ -54,7 +80,15 @@
    "taux_tenus_M2": 0.765,
    "taux_tenus_M0": 0.824,
    "taux_tenus_moyenne": 0.176,
-   "p_star_median": 1221
+   "p_star_median": 1221,
+   "contrats": {
+    "uneal_2023": 0.588,
+    "natup_2023": 0.588,
+    "proposition_2027": 0.824,
+    "unique": 1.0,
+    "paliers": 1.0,
+    "prime_ha": 1.0
+   }
   },
   {
    "annee": 2020,
@@ -84,7 +118,15 @@
    "taux_tenus_M2": 0.389,
    "taux_tenus_M0": 0.444,
    "taux_tenus_moyenne": 0.222,
-   "p_star_median": 1107
+   "p_star_median": 1107,
+   "contrats": {
+    "uneal_2023": 0.5,
+    "natup_2023": 0.444,
+    "proposition_2027": 0.611,
+    "unique": 0.5,
+    "paliers": 0.5,
+    "prime_ha": 0.611
+   }
   },
   {
    "annee": 2021,
@@ -114,7 +156,15 @@
    "taux_tenus_M2": 0.556,
    "taux_tenus_M0": 0.611,
    "taux_tenus_moyenne": 0.056,
-   "p_star_median": 1598
+   "p_star_median": 1598,
+   "contrats": {
+    "uneal_2023": 0.5,
+    "natup_2023": 0.5,
+    "proposition_2027": 0.5,
+    "unique": 0.611,
+    "paliers": 0.611,
+    "prime_ha": 0.556
+   }
   },
   {
    "annee": 2022,
@@ -144,7 +194,15 @@
    "taux_tenus_M2": 0.684,
    "taux_tenus_M0": 0.737,
    "taux_tenus_moyenne": 0.0,
-   "p_star_median": 2950
+   "p_star_median": 2950,
+   "contrats": {
+    "uneal_2023": 0.158,
+    "natup_2023": 0.053,
+    "proposition_2027": 0.158,
+    "unique": 0.947,
+    "paliers": 0.947,
+    "prime_ha": 0.368
+   }
   },
   {
    "annee": 2023,
@@ -174,7 +232,15 @@
    "taux_tenus_M2": 1.0,
    "taux_tenus_M0": 1.0,
    "taux_tenus_moyenne": 0.1,
-   "p_star_median": 3446
+   "p_star_median": 3446,
+   "contrats": {
+    "uneal_2023": 0.5,
+    "natup_2023": 0.5,
+    "proposition_2027": 0.5,
+    "unique": 1.0,
+    "paliers": 1.0,
+    "prime_ha": 0.95
+   }
   },
   {
    "annee": 2024,
@@ -204,7 +270,15 @@
    "taux_tenus_M2": 0.95,
    "taux_tenus_M0": 1.0,
    "taux_tenus_moyenne": 0.85,
-   "p_star_median": 3122
+   "p_star_median": 3122,
+   "contrats": {
+    "uneal_2023": 0.9,
+    "natup_2023": 0.9,
+    "proposition_2027": 0.95,
+    "unique": 1.0,
+    "paliers": 1.0,
+    "prime_ha": 1.0
+   }
   },
   {
    "annee": 2025,
@@ -234,7 +308,15 @@
    "taux_tenus_M2": 0.952,
    "taux_tenus_M0": 1.0,
    "taux_tenus_moyenne": 0.571,
-   "p_star_median": 2614
+   "p_star_median": 2614,
+   "contrats": {
+    "uneal_2023": 0.81,
+    "natup_2023": 0.81,
+    "proposition_2027": 0.952,
+    "unique": 1.0,
+    "paliers": 1.0,
+    "prime_ha": 1.0
+   }
   }
  ],
  "detail": [
@@ -265,7 +347,39 @@
    "tenu_M2": true,
    "p_star_auto": 868,
    "marge_lentille_auto": 770,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1053
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1019
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 1163
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 1065
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 1050,
+     "paliers": [
+      923,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 1064,
+     "prime_ha": 11
+    }
+   }
   },
   {
    "annee": 2019,
@@ -294,7 +408,39 @@
    "tenu_M2": false,
    "p_star_auto": 1233,
    "marge_lentille_auto": 865,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": false,
+     "verse_eur_ha": 810
+    },
+    "natup_2023": {
+     "tenu": false,
+     "verse_eur_ha": 810
+    },
+    "proposition_2027": {
+     "tenu": false,
+     "verse_eur_ha": 927
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 1154
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 1197,
+     "paliers": [
+      1330,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 1152,
+     "prime_ha": 342
+    }
+   }
   },
   {
    "annee": 2019,
@@ -323,7 +469,39 @@
    "tenu_M2": true,
    "p_star_auto": 895,
    "marge_lentille_auto": 1125,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1377
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1271
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 1443
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 1429
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 1348,
+     "paliers": [
+      951,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 1409,
+     "prime_ha": 32
+    }
+   }
   },
   {
    "annee": 2019,
@@ -352,7 +530,39 @@
    "tenu_M2": false,
    "p_star_auto": 897,
    "marge_lentille_auto": 642,
-   "tenu_auto": false
+   "tenu_auto": false,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": false,
+     "verse_eur_ha": 890
+    },
+    "natup_2023": {
+     "tenu": false,
+     "verse_eur_ha": 890
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 1019
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 927
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 948,
+     "paliers": [
+      958,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 926,
+     "prime_ha": 36
+    }
+   }
   },
   {
    "annee": 2019,
@@ -381,7 +591,39 @@
    "tenu_M2": false,
    "p_star_auto": 1180,
    "marge_lentille_auto": 604,
-   "tenu_auto": false
+   "tenu_auto": false,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": false,
+     "verse_eur_ha": 647
+    },
+    "natup_2023": {
+     "tenu": false,
+     "verse_eur_ha": 647
+    },
+    "proposition_2027": {
+     "tenu": false,
+     "verse_eur_ha": 741
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 888
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 902,
+     "paliers": [
+      1254,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 900,
+     "prime_ha": 253
+    }
+   }
   },
   {
    "annee": 2019,
@@ -410,7 +652,39 @@
    "tenu_M2": false,
    "p_star_auto": 1011,
    "marge_lentille_auto": 665,
-   "tenu_auto": false
+   "tenu_auto": false,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": false,
+     "verse_eur_ha": 810
+    },
+    "natup_2023": {
+     "tenu": false,
+     "verse_eur_ha": 810
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 927
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 936
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 963,
+     "paliers": [
+      1070,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 946,
+     "prime_ha": 136
+    }
+   }
   },
   {
    "annee": 2019,
@@ -439,7 +713,39 @@
    "tenu_M2": true,
    "p_star_auto": 1243,
    "marge_lentille_auto": 650,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": false,
+     "verse_eur_ha": 648
+    },
+    "natup_2023": {
+     "tenu": false,
+     "verse_eur_ha": 648
+    },
+    "proposition_2027": {
+     "tenu": false,
+     "verse_eur_ha": 742
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 927
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 930,
+     "paliers": [
+      1291,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 904,
+     "prime_ha": 256
+    }
+   }
   },
   {
    "annee": 2019,
@@ -468,7 +774,39 @@
    "tenu_M2": true,
    "p_star_auto": 861,
    "marge_lentille_auto": 1228,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1539
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1397
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 1584
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 1548
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 1484,
+     "paliers": [
+      951,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 1545,
+     "prime_ha": 6
+    }
+   }
   },
   {
    "annee": 2019,
@@ -497,7 +835,39 @@
    "tenu_M2": true,
    "p_star_auto": 1180,
    "marge_lentille_auto": 1709,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1490
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1359
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 1542
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 2029
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 1739,
+     "paliers": [
+      1247,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 1740,
+     "prime_ha": 250
+    }
+   }
   },
   {
    "annee": 2019,
@@ -526,7 +896,39 @@
    "tenu_M2": true,
    "p_star_auto": 1167,
    "marge_lentille_auto": 910,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": false,
+     "verse_eur_ha": 891
+    },
+    "natup_2023": {
+     "tenu": false,
+     "verse_eur_ha": 891
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 1020
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 1209
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 1225,
+     "paliers": [
+      1237,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 1134,
+     "prime_ha": 243
+    }
+   }
   },
   {
    "annee": 2019,
@@ -555,7 +957,39 @@
    "tenu_M2": true,
    "p_star_auto": 967,
    "marge_lentille_auto": 712,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 891
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 891
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 1020
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 993
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 1020,
+     "paliers": [
+      1030,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 985,
+     "prime_ha": 94
+    }
+   }
   },
   {
    "annee": 2019,
@@ -584,7 +1018,39 @@
    "tenu_M2": true,
    "p_star_auto": 1200,
    "marge_lentille_auto": 943,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": false,
+     "verse_eur_ha": 891
+    },
+    "natup_2023": {
+     "tenu": false,
+     "verse_eur_ha": 891
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 1020
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 1245
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 1258,
+     "paliers": [
+      1271,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 1137,
+     "prime_ha": 246
+    }
+   }
   },
   {
    "annee": 2019,
@@ -613,7 +1079,39 @@
    "tenu_M2": true,
    "p_star_auto": 852,
    "marge_lentille_auto": 368,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 648
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 648
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 742
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 633
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 634,
+     "paliers": [
+      881,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 648,
+     "prime_ha": 0
+    }
+   }
   },
   {
    "annee": 2019,
@@ -642,7 +1140,39 @@
    "tenu_M2": true,
    "p_star_auto": 567,
    "marge_lentille_auto": 163,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 648
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 648
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 742
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 422
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 418,
+     "paliers": [
+      580,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 648,
+     "prime_ha": 0
+    }
+   }
   },
   {
    "annee": 2019,
@@ -671,7 +1201,39 @@
    "tenu_M2": true,
    "p_star_auto": 1319,
    "marge_lentille_auto": 1040,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 877
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 877
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 1004
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 1326
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 1327,
+     "paliers": [
+      1361,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 1129,
+     "prime_ha": 252
+    }
+   }
   },
   {
    "annee": 2019,
@@ -700,7 +1262,39 @@
    "tenu_M2": true,
    "p_star_auto": 1372,
    "marge_lentille_auto": 713,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 629
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 629
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 719
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 995
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 995,
+     "paliers": [
+      1424,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 891,
+     "prime_ha": 262
+    }
+   }
   },
   {
    "annee": 2019,
@@ -729,7 +1323,39 @@
    "tenu_M2": true,
    "p_star_auto": 1565,
    "marge_lentille_auto": 846,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 628
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 628
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 718
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 1140
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 1141,
+     "paliers": [
+      1636,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 937,
+     "prime_ha": 309
+    }
+   }
   },
   {
    "annee": 2020,
@@ -758,7 +1384,39 @@
    "tenu_M2": false,
    "p_star_auto": 886,
    "marge_lentille_auto": 313,
-   "tenu_auto": false
+   "tenu_auto": false,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": false,
+     "verse_eur_ha": 567
+    },
+    "natup_2023": {
+     "tenu": false,
+     "verse_eur_ha": 567
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 649
+    },
+    "unique": {
+     "tenu": false,
+     "verse_eur_ha": 566
+    },
+    "paliers": {
+     "tenu": false,
+     "verse_eur_ha": 570,
+     "paliers": [
+      905,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": false,
+     "verse_eur_ha": 567,
+     "prime_ha": 0
+    }
+   }
   },
   {
    "annee": 2020,
@@ -787,7 +1445,39 @@
    "tenu_M2": false,
    "p_star_auto": 1268,
    "marge_lentille_auto": 440,
-   "tenu_auto": false
+   "tenu_auto": false,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": false,
+     "verse_eur_ha": 486
+    },
+    "natup_2023": {
+     "tenu": false,
+     "verse_eur_ha": 486
+    },
+    "proposition_2027": {
+     "tenu": false,
+     "verse_eur_ha": 556
+    },
+    "unique": {
+     "tenu": false,
+     "verse_eur_ha": 688
+    },
+    "paliers": {
+     "tenu": false,
+     "verse_eur_ha": 696,
+     "paliers": [
+      1289,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": false,
+     "verse_eur_ha": 780,
+     "prime_ha": 294
+    }
+   }
   },
   {
    "annee": 2020,
@@ -816,7 +1506,39 @@
    "tenu_M2": false,
    "p_star_auto": 890,
    "marge_lentille_auto": 316,
-   "tenu_auto": false
+   "tenu_auto": false,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 567
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 567
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 649
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 575
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 577,
+     "paliers": [
+      916,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 577,
+     "prime_ha": 10
+    }
+   }
   },
   {
    "annee": 2020,
@@ -845,7 +1567,39 @@
    "tenu_M2": false,
    "p_star_auto": 965,
    "marge_lentille_auto": 189,
-   "tenu_auto": false
+   "tenu_auto": false,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": false,
+     "verse_eur_ha": 405
+    },
+    "natup_2023": {
+     "tenu": false,
+     "verse_eur_ha": 405
+    },
+    "proposition_2027": {
+     "tenu": false,
+     "verse_eur_ha": 464
+    },
+    "unique": {
+     "tenu": false,
+     "verse_eur_ha": 444
+    },
+    "paliers": {
+     "tenu": false,
+     "verse_eur_ha": 446,
+     "paliers": [
+      992,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": false,
+     "verse_eur_ha": 479,
+     "prime_ha": 74
+    }
+   }
   },
   {
    "annee": 2020,
@@ -874,7 +1628,39 @@
    "tenu_M2": false,
    "p_star_auto": 1217,
    "marge_lentille_auto": 303,
-   "tenu_auto": false
+   "tenu_auto": false,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": false,
+     "verse_eur_ha": 405
+    },
+    "natup_2023": {
+     "tenu": false,
+     "verse_eur_ha": 405
+    },
+    "proposition_2027": {
+     "tenu": false,
+     "verse_eur_ha": 464
+    },
+    "unique": {
+     "tenu": false,
+     "verse_eur_ha": 552
+    },
+    "paliers": {
+     "tenu": false,
+     "verse_eur_ha": 552,
+     "paliers": [
+      1227,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 633,
+     "prime_ha": 228
+    }
+   }
   },
   {
    "annee": 2020,
@@ -903,7 +1689,39 @@
    "tenu_M2": false,
    "p_star_auto": 1040,
    "marge_lentille_auto": 223,
-   "tenu_auto": false
+   "tenu_auto": false,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": false,
+     "verse_eur_ha": 405
+    },
+    "natup_2023": {
+     "tenu": false,
+     "verse_eur_ha": 405
+    },
+    "proposition_2027": {
+     "tenu": false,
+     "verse_eur_ha": 464
+    },
+    "unique": {
+     "tenu": false,
+     "verse_eur_ha": 476
+    },
+    "paliers": {
+     "tenu": false,
+     "verse_eur_ha": 478,
+     "paliers": [
+      1062,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": false,
+     "verse_eur_ha": 527,
+     "prime_ha": 122
+    }
+   }
   },
   {
    "annee": 2020,
@@ -932,7 +1750,39 @@
    "tenu_M2": false,
    "p_star_auto": 1288,
    "marge_lentille_auto": 161,
-   "tenu_auto": false
+   "tenu_auto": false,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": false,
+     "verse_eur_ha": 284
+    },
+    "natup_2023": {
+     "tenu": false,
+     "verse_eur_ha": 284
+    },
+    "proposition_2027": {
+     "tenu": false,
+     "verse_eur_ha": 324
+    },
+    "unique": {
+     "tenu": false,
+     "verse_eur_ha": 411
+    },
+    "paliers": {
+     "tenu": false,
+     "verse_eur_ha": 411,
+     "paliers": [
+      1305,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": false,
+     "verse_eur_ha": 526,
+     "prime_ha": 243
+    }
+   }
   },
   {
    "annee": 2020,
@@ -961,7 +1811,39 @@
    "tenu_M2": false,
    "p_star_auto": 875,
    "marge_lentille_auto": 936,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1215
+    },
+    "natup_2023": {
+     "tenu": false,
+     "verse_eur_ha": 1145
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 1303
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 1197
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 1172,
+     "paliers": [
+      909,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 1215,
+     "prime_ha": 0
+    }
+   }
   },
   {
    "annee": 2020,
@@ -990,7 +1872,39 @@
    "tenu_M2": true,
    "p_star_auto": 1061,
    "marge_lentille_auto": 1188,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1215
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1145
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 1303
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 1439
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 1338,
+     "paliers": [
+      1076,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 1351,
+     "prime_ha": 136
+    }
+   }
   },
   {
    "annee": 2020,
@@ -1019,7 +1933,39 @@
    "tenu_M2": true,
    "p_star_auto": 1145,
    "marge_lentille_auto": 1300,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1215
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1145
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 1303
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 1550
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 1414,
+     "paliers": [
+      1151,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 1398,
+     "prime_ha": 183
+    }
+   }
   },
   {
    "annee": 2020,
@@ -1048,7 +1994,39 @@
    "tenu_M2": true,
    "p_star_auto": 1189,
    "marge_lentille_auto": 718,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 729
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 729
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 834
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 967
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 969,
+     "paliers": [
+      1196,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 941,
+     "prime_ha": 212
+    }
+   }
   },
   {
    "annee": 2020,
@@ -1077,7 +2055,39 @@
    "tenu_M2": true,
    "p_star_auto": 1001,
    "marge_lentille_auto": 566,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 729
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 729
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 834
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 816
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 821,
+     "paliers": [
+      1013,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 817,
+     "prime_ha": 88
+    }
+   }
   },
   {
    "annee": 2020,
@@ -1106,7 +2116,39 @@
    "tenu_M2": true,
    "p_star_auto": 1265,
    "marge_lentille_auto": 779,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 729
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 729
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 834
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 1043
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 1044,
+     "paliers": [
+      1289,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 970,
+     "prime_ha": 241
+    }
+   }
   },
   {
    "annee": 2020,
@@ -1135,7 +2177,39 @@
    "tenu_M2": false,
    "p_star_auto": 838,
    "marge_lentille_auto": 207,
-   "tenu_auto": false
+   "tenu_auto": false,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": false,
+     "verse_eur_ha": 486
+    },
+    "natup_2023": {
+     "tenu": false,
+     "verse_eur_ha": 486
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 556
+    },
+    "unique": {
+     "tenu": false,
+     "verse_eur_ha": 455
+    },
+    "paliers": {
+     "tenu": false,
+     "verse_eur_ha": 455,
+     "paliers": [
+      843,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": false,
+     "verse_eur_ha": 486,
+     "prime_ha": 0
+    }
+   }
   },
   {
    "annee": 2020,
@@ -1164,7 +2238,39 @@
    "tenu_M2": true,
    "p_star_auto": 539,
    "marge_lentille_auto": 240,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 810
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 810
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 927
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 490
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 490,
+     "paliers": [
+      544,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 810,
+     "prime_ha": 0
+    }
+   }
   },
   {
    "annee": 2020,
@@ -1193,7 +2299,39 @@
    "tenu_M2": true,
    "p_star_auto": 1271,
    "marge_lentille_auto": 441,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 486
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 486
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 556
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 696
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 696,
+     "paliers": [
+      1289,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 683,
+     "prime_ha": 197
+    }
+   }
   },
   {
    "annee": 2020,
@@ -1222,7 +2360,39 @@
    "tenu_M2": false,
    "p_star_auto": 1318,
    "marge_lentille_auto": 229,
-   "tenu_auto": false
+   "tenu_auto": false,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": false,
+     "verse_eur_ha": 324
+    },
+    "natup_2023": {
+     "tenu": false,
+     "verse_eur_ha": 324
+    },
+    "proposition_2027": {
+     "tenu": false,
+     "verse_eur_ha": 371
+    },
+    "unique": {
+     "tenu": false,
+     "verse_eur_ha": 476
+    },
+    "paliers": {
+     "tenu": false,
+     "verse_eur_ha": 476,
+     "paliers": [
+      1321,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": false,
+     "verse_eur_ha": 516,
+     "prime_ha": 192
+    }
+   }
   },
   {
    "annee": 2020,
@@ -1251,7 +2421,39 @@
    "tenu_M2": false,
    "p_star_auto": 1420,
    "marge_lentille_auto": 266,
-   "tenu_auto": false
+   "tenu_auto": false,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": false,
+     "verse_eur_ha": 324
+    },
+    "natup_2023": {
+     "tenu": false,
+     "verse_eur_ha": 324
+    },
+    "proposition_2027": {
+     "tenu": false,
+     "verse_eur_ha": 371
+    },
+    "unique": {
+     "tenu": false,
+     "verse_eur_ha": 510
+    },
+    "paliers": {
+     "tenu": false,
+     "verse_eur_ha": 510,
+     "paliers": [
+      1418,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 532,
+     "prime_ha": 208
+    }
+   }
   },
   {
    "annee": 2021,
@@ -1280,7 +2482,39 @@
    "tenu_M2": true,
    "p_star_auto": 1294,
    "marge_lentille_auto": 1968,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1539
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1397
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 1584
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 2307
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 1882,
+     "paliers": [
+      1350,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 1778,
+     "prime_ha": 239
+    }
+   }
   },
   {
    "annee": 2021,
@@ -1309,7 +2543,39 @@
    "tenu_M2": true,
    "p_star_auto": 1910,
    "marge_lentille_auto": 3538,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1782
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1586
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 1794
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 3912
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 2711,
+     "paliers": [
+      1976,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 2325,
+     "prime_ha": 543
+    }
+   }
   },
   {
    "annee": 2021,
@@ -1338,7 +2604,39 @@
    "tenu_M2": true,
    "p_star_auto": 1313,
    "marge_lentille_auto": 2472,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1863
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1642
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 1858
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 2732
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 2116,
+     "paliers": [
+      1320,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 2090,
+     "prime_ha": 227
+    }
+   }
   },
   {
    "annee": 2021,
@@ -1367,7 +2665,39 @@
    "tenu_M2": true,
    "p_star_auto": 1407,
    "marge_lentille_auto": 2541,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1782
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1586
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 1794
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 2833
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 2166,
+     "paliers": [
+      1431,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 2060,
+     "prime_ha": 278
+    }
+   }
   },
   {
    "annee": 2021,
@@ -1396,7 +2726,39 @@
    "tenu_M2": true,
    "p_star_auto": 1770,
    "marge_lentille_auto": 3259,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1782
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1586
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 1794
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 3671
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 2590,
+     "paliers": [
+      1855,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 2196,
+     "prime_ha": 414
+    }
+   }
   },
   {
    "annee": 2021,
@@ -1425,7 +2787,39 @@
    "tenu_M2": true,
    "p_star_auto": 1541,
    "marge_lentille_auto": 2528,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1620
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1460
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 1654
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 2914
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 2220,
+     "paliers": [
+      1620,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 1972,
+     "prime_ha": 352
+    }
+   }
   },
   {
    "annee": 2021,
@@ -1454,7 +2848,39 @@
    "tenu_M2": false,
    "p_star_auto": 1902,
    "marge_lentille_auto": 269,
-   "tenu_auto": false
+   "tenu_auto": false,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": false,
+     "verse_eur_ha": 243
+    },
+    "natup_2023": {
+     "tenu": false,
+     "verse_eur_ha": 243
+    },
+    "proposition_2027": {
+     "tenu": false,
+     "verse_eur_ha": 278
+    },
+    "unique": {
+     "tenu": false,
+     "verse_eur_ha": 544
+    },
+    "paliers": {
+     "tenu": false,
+     "verse_eur_ha": 544,
+     "paliers": [
+      2013,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": false,
+     "verse_eur_ha": 640,
+     "prime_ha": 397
+    }
+   }
   },
   {
    "annee": 2021,
@@ -1483,7 +2909,39 @@
    "tenu_M2": false,
    "p_star_auto": 1303,
    "marge_lentille_auto": 693,
-   "tenu_auto": false
+   "tenu_auto": false,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": false,
+     "verse_eur_ha": 648
+    },
+    "natup_2023": {
+     "tenu": false,
+     "verse_eur_ha": 648
+    },
+    "proposition_2027": {
+     "tenu": false,
+     "verse_eur_ha": 742
+    },
+    "unique": {
+     "tenu": false,
+     "verse_eur_ha": 987
+    },
+    "paliers": {
+     "tenu": false,
+     "verse_eur_ha": 994,
+     "paliers": [
+      1380,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": false,
+     "verse_eur_ha": 981,
+     "prime_ha": 333
+    }
+   }
   },
   {
    "annee": 2021,
@@ -1512,7 +2970,39 @@
    "tenu_M2": false,
    "p_star_auto": 1501,
    "marge_lentille_auto": 579,
-   "tenu_auto": false
+   "tenu_auto": false,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": false,
+     "verse_eur_ha": 494
+    },
+    "natup_2023": {
+     "tenu": false,
+     "verse_eur_ha": 494
+    },
+    "proposition_2027": {
+     "tenu": false,
+     "verse_eur_ha": 565
+    },
+    "unique": {
+     "tenu": false,
+     "verse_eur_ha": 855
+    },
+    "paliers": {
+     "tenu": false,
+     "verse_eur_ha": 855,
+     "paliers": [
+      1557,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": false,
+     "verse_eur_ha": 833,
+     "prime_ha": 339
+    }
+   }
   },
   {
    "annee": 2021,
@@ -1541,7 +3031,39 @@
    "tenu_M2": false,
    "p_star_auto": 1547,
    "marge_lentille_auto": 604,
-   "tenu_auto": false
+   "tenu_auto": false,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": false,
+     "verse_eur_ha": 494
+    },
+    "natup_2023": {
+     "tenu": false,
+     "verse_eur_ha": 494
+    },
+    "proposition_2027": {
+     "tenu": false,
+     "verse_eur_ha": 565
+    },
+    "unique": {
+     "tenu": false,
+     "verse_eur_ha": 865
+    },
+    "paliers": {
+     "tenu": false,
+     "verse_eur_ha": 866,
+     "paliers": [
+      1577,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": false,
+     "verse_eur_ha": 828,
+     "prime_ha": 334
+    }
+   }
   },
   {
    "annee": 2021,
@@ -1570,7 +3092,39 @@
    "tenu_M2": false,
    "p_star_auto": 1736,
    "marge_lentille_auto": 849,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": false,
+     "verse_eur_ha": 567
+    },
+    "natup_2023": {
+     "tenu": false,
+     "verse_eur_ha": 567
+    },
+    "proposition_2027": {
+     "tenu": false,
+     "verse_eur_ha": 649
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 1087
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 1088,
+     "paliers": [
+      1727,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": false,
+     "verse_eur_ha": 940,
+     "prime_ha": 373
+    }
+   }
   },
   {
    "annee": 2021,
@@ -1599,7 +3153,39 @@
    "tenu_M2": false,
    "p_star_auto": 1423,
    "marge_lentille_auto": 523,
-   "tenu_auto": false
+   "tenu_auto": false,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": false,
+     "verse_eur_ha": 486
+    },
+    "natup_2023": {
+     "tenu": false,
+     "verse_eur_ha": 486
+    },
+    "proposition_2027": {
+     "tenu": false,
+     "verse_eur_ha": 556
+    },
+    "unique": {
+     "tenu": false,
+     "verse_eur_ha": 783
+    },
+    "paliers": {
+     "tenu": false,
+     "verse_eur_ha": 784,
+     "paliers": [
+      1451,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": false,
+     "verse_eur_ha": 771,
+     "prime_ha": 285
+    }
+   }
   },
   {
    "annee": 2021,
@@ -1628,7 +3214,39 @@
    "tenu_M2": true,
    "p_star_auto": 1814,
    "marge_lentille_auto": 1224,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": false,
+     "verse_eur_ha": 729
+    },
+    "natup_2023": {
+     "tenu": false,
+     "verse_eur_ha": 729
+    },
+    "proposition_2027": {
+     "tenu": false,
+     "verse_eur_ha": 834
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 1490
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 1490,
+     "paliers": [
+      1839,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 1115,
+     "prime_ha": 386
+    }
+   }
   },
   {
    "annee": 2021,
@@ -1657,7 +3275,39 @@
    "tenu_M2": true,
    "p_star_auto": 1223,
    "marge_lentille_auto": 745,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 729
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 729
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 834
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 980
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 980,
+     "paliers": [
+      1210,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 858,
+     "prime_ha": 129
+    }
+   }
   },
   {
    "annee": 2021,
@@ -1686,7 +3336,39 @@
    "tenu_M2": true,
    "p_star_auto": 735,
    "marge_lentille_auto": 548,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 972
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 956
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 1092
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 838
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 837,
+     "paliers": [
+      777,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 972,
+     "prime_ha": 0
+    }
+   }
   },
   {
    "annee": 2021,
@@ -1715,7 +3397,39 @@
    "tenu_M2": true,
    "p_star_auto": 1785,
    "marge_lentille_auto": 1201,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 729
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 729
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 834
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 1443
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 1444,
+     "paliers": [
+      1783,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 1029,
+     "prime_ha": 300
+    }
+   }
   },
   {
    "annee": 2021,
@@ -1744,7 +3458,39 @@
    "tenu_M2": false,
    "p_star_auto": 1926,
    "marge_lentille_auto": 362,
-   "tenu_auto": false
+   "tenu_auto": false,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": false,
+     "verse_eur_ha": 284
+    },
+    "natup_2023": {
+     "tenu": false,
+     "verse_eur_ha": 284
+    },
+    "proposition_2027": {
+     "tenu": false,
+     "verse_eur_ha": 324
+    },
+    "unique": {
+     "tenu": false,
+     "verse_eur_ha": 631
+    },
+    "paliers": {
+     "tenu": false,
+     "verse_eur_ha": 631,
+     "paliers": [
+      2002,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": false,
+     "verse_eur_ha": 596,
+     "prime_ha": 312
+    }
+   }
   },
   {
    "annee": 2021,
@@ -1773,7 +3519,39 @@
    "tenu_M2": false,
    "p_star_auto": 2068,
    "marge_lentille_auto": 406,
-   "tenu_auto": false
+   "tenu_auto": false,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": false,
+     "verse_eur_ha": 284
+    },
+    "natup_2023": {
+     "tenu": false,
+     "verse_eur_ha": 284
+    },
+    "proposition_2027": {
+     "tenu": false,
+     "verse_eur_ha": 324
+    },
+    "unique": {
+     "tenu": false,
+     "verse_eur_ha": 669
+    },
+    "paliers": {
+     "tenu": false,
+     "verse_eur_ha": 669,
+     "paliers": [
+      2123,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": false,
+     "verse_eur_ha": 596,
+     "prime_ha": 312
+    }
+   }
   },
   {
    "annee": 2022,
@@ -1802,7 +3580,39 @@
    "tenu_M2": true,
    "p_star_auto": 1840,
    "marge_lentille_auto": 2901,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1539
+    },
+    "natup_2023": {
+     "tenu": false,
+     "verse_eur_ha": 1397
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 1584
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 4254
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 3020,
+     "paliers": [
+      2488,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 1993,
+     "prime_ha": 454
+    }
+   }
   },
   {
    "annee": 2022,
@@ -1831,7 +3641,39 @@
    "tenu_M2": true,
    "p_star_auto": 2665,
    "marge_lentille_auto": 5031,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": false,
+     "verse_eur_ha": 1782
+    },
+    "natup_2023": {
+     "tenu": false,
+     "verse_eur_ha": 1586
+    },
+    "proposition_2027": {
+     "tenu": false,
+     "verse_eur_ha": 1794
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 6989
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 4266,
+     "paliers": [
+      3531,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 2506,
+     "prime_ha": 724
+    }
+   }
   },
   {
    "annee": 2022,
@@ -1860,7 +3702,39 @@
    "tenu_M2": true,
    "p_star_auto": 1791,
    "marge_lentille_auto": 3462,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1863
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1642
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 1858
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 4945
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 3186,
+     "paliers": [
+      2390,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 2305,
+     "prime_ha": 442
+    }
+   }
   },
   {
    "annee": 2022,
@@ -1889,7 +3763,39 @@
    "tenu_M2": true,
    "p_star_auto": 1910,
    "marge_lentille_auto": 3537,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1782
+    },
+    "natup_2023": {
+     "tenu": false,
+     "verse_eur_ha": 1586
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 1794
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 4881
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 3201,
+     "paliers": [
+      2466,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 2254,
+     "prime_ha": 472
+    }
+   }
   },
   {
    "annee": 2022,
@@ -1918,7 +3824,39 @@
    "tenu_M2": true,
    "p_star_auto": 2469,
    "marge_lentille_auto": 4643,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": false,
+     "verse_eur_ha": 1782
+    },
+    "natup_2023": {
+     "tenu": false,
+     "verse_eur_ha": 1586
+    },
+    "proposition_2027": {
+     "tenu": false,
+     "verse_eur_ha": 1794
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 6589
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 4063,
+     "paliers": [
+      3328,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 2369,
+     "prime_ha": 587
+    }
+   }
   },
   {
    "annee": 2022,
@@ -1947,7 +3885,39 @@
    "tenu_M2": true,
    "p_star_auto": 2101,
    "marge_lentille_auto": 3537,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": false,
+     "verse_eur_ha": 1620
+    },
+    "natup_2023": {
+     "tenu": false,
+     "verse_eur_ha": 1460
+    },
+    "proposition_2027": {
+     "tenu": false,
+     "verse_eur_ha": 1654
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 4981
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 3368,
+     "paliers": [
+      2768,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 2157,
+     "prime_ha": 537
+    }
+   }
   },
   {
    "annee": 2022,
@@ -1976,7 +3946,39 @@
    "tenu_M2": true,
    "p_star_auto": 2929,
    "marge_lentille_auto": 1337,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": false,
+     "verse_eur_ha": 486
+    },
+    "natup_2023": {
+     "tenu": false,
+     "verse_eur_ha": 486
+    },
+    "proposition_2027": {
+     "tenu": false,
+     "verse_eur_ha": 556
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 2174
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 2175,
+     "paliers": [
+      4027,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": false,
+     "verse_eur_ha": 1049,
+     "prime_ha": 563
+    }
+   }
   },
   {
    "annee": 2022,
@@ -2005,7 +4007,39 @@
    "tenu_M2": true,
    "p_star_auto": 1966,
    "marge_lentille_auto": 2585,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": false,
+     "verse_eur_ha": 1296
+    },
+    "natup_2023": {
+     "tenu": false,
+     "verse_eur_ha": 1208
+    },
+    "proposition_2027": {
+     "tenu": false,
+     "verse_eur_ha": 1373
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 3727
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 2918,
+     "paliers": [
+      2588,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": false,
+     "verse_eur_ha": 1937,
+     "prime_ha": 641
+    }
+   }
   },
   {
    "annee": 2022,
@@ -2034,7 +4068,39 @@
    "tenu_M2": true,
    "p_star_auto": 2503,
    "marge_lentille_auto": 3005,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": false,
+     "verse_eur_ha": 1169
+    },
+    "natup_2023": {
+     "tenu": false,
+     "verse_eur_ha": 1109
+    },
+    "proposition_2027": {
+     "tenu": false,
+     "verse_eur_ha": 1263
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 4442
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 3645,
+     "paliers": [
+      3421,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": false,
+     "verse_eur_ha": 1755,
+     "prime_ha": 586
+    }
+   }
   },
   {
    "annee": 2022,
@@ -2063,7 +4129,39 @@
    "tenu_M2": true,
    "p_star_auto": 2879,
    "marge_lentille_auto": 3497,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": false,
+     "verse_eur_ha": 1170
+    },
+    "natup_2023": {
+     "tenu": false,
+     "verse_eur_ha": 1110
+    },
+    "proposition_2027": {
+     "tenu": false,
+     "verse_eur_ha": 1264
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 5009
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 4080,
+     "paliers": [
+      3855,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": false,
+     "verse_eur_ha": 1839,
+     "prime_ha": 669
+    }
+   }
   },
   {
    "annee": 2022,
@@ -2092,7 +4190,39 @@
    "tenu_M2": true,
    "p_star_auto": 2215,
    "marge_lentille_auto": 2632,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": false,
+     "verse_eur_ha": 1169
+    },
+    "natup_2023": {
+     "tenu": false,
+     "verse_eur_ha": 1109
+    },
+    "proposition_2027": {
+     "tenu": false,
+     "verse_eur_ha": 1263
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 3821
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 3166,
+     "paliers": [
+      2942,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": false,
+     "verse_eur_ha": 1710,
+     "prime_ha": 541
+    }
+   }
   },
   {
    "annee": 2022,
@@ -2121,7 +4251,39 @@
    "tenu_M2": false,
    "p_star_auto": 2448,
    "marge_lentille_auto": 1077,
-   "tenu_auto": false
+   "tenu_auto": false,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": false,
+     "verse_eur_ha": 486
+    },
+    "natup_2023": {
+     "tenu": false,
+     "verse_eur_ha": 486
+    },
+    "proposition_2027": {
+     "tenu": false,
+     "verse_eur_ha": 556
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 1593
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 1594,
+     "paliers": [
+      2951,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": false,
+     "verse_eur_ha": 1031,
+     "prime_ha": 545
+    }
+   }
   },
   {
    "annee": 2022,
@@ -2150,7 +4312,39 @@
    "tenu_M2": false,
    "p_star_auto": 2021,
    "marge_lentille_auto": 846,
-   "tenu_auto": false
+   "tenu_auto": false,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": false,
+     "verse_eur_ha": 486
+    },
+    "natup_2023": {
+     "tenu": false,
+     "verse_eur_ha": 486
+    },
+    "proposition_2027": {
+     "tenu": false,
+     "verse_eur_ha": 556
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 1418
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 1418,
+     "paliers": [
+      2626,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": false,
+     "verse_eur_ha": 978,
+     "prime_ha": 492
+    }
+   }
   },
   {
    "annee": 2022,
@@ -2179,7 +4373,39 @@
    "tenu_M2": true,
    "p_star_auto": 2624,
    "marge_lentille_auto": 1880,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": false,
+     "verse_eur_ha": 729
+    },
+    "natup_2023": {
+     "tenu": false,
+     "verse_eur_ha": 729
+    },
+    "proposition_2027": {
+     "tenu": false,
+     "verse_eur_ha": 834
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 2651
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 2652,
+     "paliers": [
+      3274,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": false,
+     "verse_eur_ha": 1277,
+     "prime_ha": 548
+    }
+   }
   },
   {
    "annee": 2022,
@@ -2208,7 +4434,39 @@
    "tenu_M2": false,
    "p_star_auto": 1765,
    "marge_lentille_auto": 427,
-   "tenu_auto": false
+   "tenu_auto": false,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": false,
+     "verse_eur_ha": 343
+    },
+    "natup_2023": {
+     "tenu": false,
+     "verse_eur_ha": 343
+    },
+    "proposition_2027": {
+     "tenu": false,
+     "verse_eur_ha": 392
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 846
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 846,
+     "paliers": [
+      2223,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": false,
+     "verse_eur_ha": 642,
+     "prime_ha": 299
+    }
+   }
   },
   {
    "annee": 2022,
@@ -2237,7 +4495,39 @@
    "tenu_M2": false,
    "p_star_auto": 1021,
    "marge_lentille_auto": 53,
-   "tenu_auto": false
+   "tenu_auto": false,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": false,
+     "verse_eur_ha": 262
+    },
+    "natup_2023": {
+     "tenu": false,
+     "verse_eur_ha": 262
+    },
+    "proposition_2027": {
+     "tenu": false,
+     "verse_eur_ha": 300
+    },
+    "unique": {
+     "tenu": false,
+     "verse_eur_ha": 395
+    },
+    "paliers": {
+     "tenu": false,
+     "verse_eur_ha": 395,
+     "paliers": [
+      1356,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": false,
+     "verse_eur_ha": 361,
+     "prime_ha": 99
+    }
+   }
   },
   {
    "annee": 2022,
@@ -2266,7 +4556,39 @@
    "tenu_M2": false,
    "p_star_auto": 2428,
    "marge_lentille_auto": 848,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": false,
+     "verse_eur_ha": 405
+    },
+    "natup_2023": {
+     "tenu": false,
+     "verse_eur_ha": 405
+    },
+    "proposition_2027": {
+     "tenu": false,
+     "verse_eur_ha": 464
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 1382
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 1382,
+     "paliers": [
+      3072,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": false,
+     "verse_eur_ha": 819,
+     "prime_ha": 414
+    }
+   }
   },
   {
    "annee": 2022,
@@ -2295,7 +4617,39 @@
    "tenu_M2": false,
    "p_star_auto": 2700,
    "marge_lentille_auto": 800,
-   "tenu_auto": false
+   "tenu_auto": false,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": false,
+     "verse_eur_ha": 348
+    },
+    "natup_2023": {
+     "tenu": false,
+     "verse_eur_ha": 348
+    },
+    "proposition_2027": {
+     "tenu": false,
+     "verse_eur_ha": 399
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 1387
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 1387,
+     "paliers": [
+      3585,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": false,
+     "verse_eur_ha": 752,
+     "prime_ha": 404
+    }
+   }
   },
   {
    "annee": 2022,
@@ -2324,7 +4678,39 @@
    "tenu_M2": true,
    "p_star_auto": 2952,
    "marge_lentille_auto": 898,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": false,
+     "verse_eur_ha": 348
+    },
+    "natup_2023": {
+     "tenu": false,
+     "verse_eur_ha": 348
+    },
+    "proposition_2027": {
+     "tenu": false,
+     "verse_eur_ha": 399
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 1489
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 1489,
+     "paliers": [
+      3848,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 746,
+     "prime_ha": 398
+    }
+   }
   },
   {
    "annee": 2023,
@@ -2353,7 +4739,39 @@
    "tenu_M2": true,
    "p_star_auto": 2399,
    "marge_lentille_auto": 3857,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1539
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1397
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 1584
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 4921
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 3410,
+     "paliers": [
+      2878,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 2073,
+     "prime_ha": 534
+    }
+   }
   },
   {
    "annee": 2023,
@@ -2382,7 +4800,39 @@
    "tenu_M2": true,
    "p_star_auto": 3029,
    "marge_lentille_auto": 5752,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1782
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1586
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 1794
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 6914
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 4227,
+     "paliers": [
+      3492,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 2578,
+     "prime_ha": 796
+    }
+   }
   },
   {
    "annee": 2023,
@@ -2411,7 +4861,39 @@
    "tenu_M2": true,
    "p_star_auto": 2145,
    "marge_lentille_auto": 4195,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1863
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1642
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 1858
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 5165
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 3292,
+     "paliers": [
+      2496,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 2342,
+     "prime_ha": 479
+    }
+   }
   },
   {
    "annee": 2023,
@@ -2440,7 +4922,39 @@
    "tenu_M2": true,
    "p_star_auto": 2278,
    "marge_lentille_auto": 4266,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1782
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1586
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 1794
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 5253
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 3388,
+     "paliers": [
+      2653,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 2313,
+     "prime_ha": 531
+    }
+   }
   },
   {
    "annee": 2023,
@@ -2469,7 +4983,39 @@
    "tenu_M2": true,
    "p_star_auto": 2916,
    "marge_lentille_auto": 5529,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1782
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1586
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 1794
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 6928
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 4234,
+     "paliers": [
+      3499,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 2419,
+     "prime_ha": 637
+    }
+   }
   },
   {
    "annee": 2023,
@@ -2498,7 +5044,39 @@
    "tenu_M2": true,
    "p_star_auto": 2754,
    "marge_lentille_auto": 4711,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1620
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1460
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 1654
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 5873
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 3864,
+     "paliers": [
+      3264,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 2241,
+     "prime_ha": 621
+    }
+   }
   },
   {
    "annee": 2023,
@@ -2527,7 +5105,39 @@
    "tenu_M2": true,
    "p_star_auto": 3710,
    "marge_lentille_auto": 2760,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": false,
+     "verse_eur_ha": 729
+    },
+    "natup_2023": {
+     "tenu": false,
+     "verse_eur_ha": 729
+    },
+    "proposition_2027": {
+     "tenu": false,
+     "verse_eur_ha": 834
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 3524
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 3524,
+     "paliers": [
+      4351,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 1366,
+     "prime_ha": 637
+    }
+   }
   },
   {
    "annee": 2023,
@@ -2556,7 +5166,39 @@
    "tenu_M2": true,
    "p_star_auto": 2482,
    "marge_lentille_auto": 3329,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": false,
+     "verse_eur_ha": 1296
+    },
+    "natup_2023": {
+     "tenu": false,
+     "verse_eur_ha": 1208
+    },
+    "proposition_2027": {
+     "tenu": false,
+     "verse_eur_ha": 1373
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 4127
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 3196,
+     "paliers": [
+      2866,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 2016,
+     "prime_ha": 720
+    }
+   }
   },
   {
    "annee": 2023,
@@ -2585,7 +5227,39 @@
    "tenu_M2": true,
    "p_star_auto": 3093,
    "marge_lentille_auto": 2925,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": false,
+     "verse_eur_ha": 923
+    },
+    "natup_2023": {
+     "tenu": false,
+     "verse_eur_ha": 918
+    },
+    "proposition_2027": {
+     "tenu": false,
+     "verse_eur_ha": 1050
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 3629
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 3560,
+     "paliers": [
+      3541,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 1598,
+     "prime_ha": 675
+    }
+   }
   },
   {
    "annee": 2023,
@@ -2614,7 +5288,39 @@
    "tenu_M2": true,
    "p_star_auto": 3448,
    "marge_lentille_auto": 3284,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": false,
+     "verse_eur_ha": 921
+    },
+    "natup_2023": {
+     "tenu": false,
+     "verse_eur_ha": 916
+    },
+    "proposition_2027": {
+     "tenu": false,
+     "verse_eur_ha": 1048
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 4168
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 4090,
+     "paliers": [
+      4073,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 1674,
+     "prime_ha": 753
+    }
+   }
   },
   {
    "annee": 2023,
@@ -2643,7 +5349,39 @@
    "tenu_M2": true,
    "p_star_auto": 2698,
    "marge_lentille_auto": 2523,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": false,
+     "verse_eur_ha": 923
+    },
+    "natup_2023": {
+     "tenu": false,
+     "verse_eur_ha": 918
+    },
+    "proposition_2027": {
+     "tenu": false,
+     "verse_eur_ha": 1050
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 3121
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 3062,
+     "paliers": [
+      3042,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 1522,
+     "prime_ha": 599
+    }
+   }
   },
   {
    "annee": 2023,
@@ -2672,7 +5410,39 @@
    "tenu_M2": true,
    "p_star_auto": 3123,
    "marge_lentille_auto": 4532,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1377
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1271
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 1443
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 5200
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 3796,
+     "paliers": [
+      3399,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 1993,
+     "prime_ha": 616
+    }
+   }
   },
   {
    "annee": 2023,
@@ -2701,7 +5471,39 @@
    "tenu_M2": true,
    "p_star_auto": 2802,
    "marge_lentille_auto": 4798,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1620
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1460
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 1654
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 5836
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 3842,
+     "paliers": [
+      3242,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 2210,
+     "prime_ha": 590
+    }
+   }
   },
   {
    "annee": 2023,
@@ -2730,7 +5532,39 @@
    "tenu_M2": true,
    "p_star_auto": 3361,
    "marge_lentille_auto": 5804,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1620
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1460
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 1654
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 6977
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 4476,
+     "paliers": [
+      3876,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 2249,
+     "prime_ha": 629
+    }
+   }
   },
   {
    "annee": 2023,
@@ -2759,7 +5593,39 @@
    "tenu_M2": true,
    "p_star_auto": 2326,
    "marge_lentille_auto": 1084,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": false,
+     "verse_eur_ha": 514
+    },
+    "natup_2023": {
+     "tenu": false,
+     "verse_eur_ha": 514
+    },
+    "proposition_2027": {
+     "tenu": false,
+     "verse_eur_ha": 589
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 1441
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 1441,
+     "paliers": [
+      2522,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 873,
+     "prime_ha": 359
+    }
+   }
   },
   {
    "annee": 2023,
@@ -2788,7 +5654,39 @@
    "tenu_M2": true,
    "p_star_auto": 1554,
    "marge_lentille_auto": 841,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 629
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 629
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 719
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 1290
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 1291,
+     "paliers": [
+      1848,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 792,
+     "prime_ha": 163
+    }
+   }
   },
   {
    "annee": 2023,
@@ -2817,7 +5715,39 @@
    "tenu_M2": true,
    "p_star_auto": 3282,
    "marge_lentille_auto": 1527,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": false,
+     "verse_eur_ha": 486
+    },
+    "natup_2023": {
+     "tenu": false,
+     "verse_eur_ha": 486
+    },
+    "proposition_2027": {
+     "tenu": false,
+     "verse_eur_ha": 556
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 2077
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 2077,
+     "paliers": [
+      3847,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 965,
+     "prime_ha": 479
+    }
+   }
   },
   {
    "annee": 2023,
@@ -2846,7 +5776,39 @@
    "tenu_M2": true,
    "p_star_auto": 3035,
    "marge_lentille_auto": 1509,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": false,
+     "verse_eur_ha": 520
+    },
+    "natup_2023": {
+     "tenu": false,
+     "verse_eur_ha": 520
+    },
+    "proposition_2027": {
+     "tenu": false,
+     "verse_eur_ha": 595
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 2027
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 2028,
+     "paliers": [
+      3509,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 831,
+     "prime_ha": 311
+    }
+   }
   },
   {
    "annee": 2023,
@@ -2875,7 +5837,39 @@
    "tenu_M2": true,
    "p_star_auto": 3595,
    "marge_lentille_auto": 1308,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": false,
+     "verse_eur_ha": 389
+    },
+    "natup_2023": {
+     "tenu": false,
+     "verse_eur_ha": 389
+    },
+    "proposition_2027": {
+     "tenu": false,
+     "verse_eur_ha": 445
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 1822
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 1822,
+     "paliers": [
+      4218,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 878,
+     "prime_ha": 489
+    }
+   }
   },
   {
    "annee": 2023,
@@ -2904,7 +5898,39 @@
    "tenu_M2": true,
    "p_star_auto": 3708,
    "marge_lentille_auto": 1357,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": false,
+     "verse_eur_ha": 389
+    },
+    "natup_2023": {
+     "tenu": false,
+     "verse_eur_ha": 389
+    },
+    "proposition_2027": {
+     "tenu": false,
+     "verse_eur_ha": 445
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 1850
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 1850,
+     "paliers": [
+      4283,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": false,
+     "verse_eur_ha": 841,
+     "prime_ha": 452
+    }
+   }
   },
   {
    "annee": 2024,
@@ -2933,7 +5959,39 @@
    "tenu_M2": true,
    "p_star_auto": 1053,
    "marge_lentille_auto": 1461,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1458
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1334
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 1514
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 3771
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 2793,
+     "paliers": [
+      2328,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 1936,
+     "prime_ha": 478
+    }
+   }
   },
   {
    "annee": 2024,
@@ -2962,7 +6020,39 @@
    "tenu_M2": true,
    "p_star_auto": 1424,
    "marge_lentille_auto": 2318,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1620
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1460
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 1654
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 5704
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 3769,
+     "paliers": [
+      3169,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 2422,
+     "prime_ha": 802
+    }
+   }
   },
   {
    "annee": 2024,
@@ -2991,7 +6081,39 @@
    "tenu_M2": true,
    "p_star_auto": 986,
    "marge_lentille_auto": 1707,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1782
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1586
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 1794
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 4467
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 2991,
+     "paliers": [
+      2256,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 2247,
+     "prime_ha": 465
+    }
+   }
   },
   {
    "annee": 2024,
@@ -3020,7 +6142,39 @@
    "tenu_M2": true,
    "p_star_auto": 1103,
    "marge_lentille_auto": 1740,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1620
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1460
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 1654
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 4403
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 3046,
+     "paliers": [
+      2446,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 2158,
+     "prime_ha": 538
+    }
+   }
   },
   {
    "annee": 2024,
@@ -3049,7 +6203,39 @@
    "tenu_M2": true,
    "p_star_auto": 1361,
    "marge_lentille_auto": 2083,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1539
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1397
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 1584
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 5098
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 3514,
+     "paliers": [
+      2981,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 2169,
+     "prime_ha": 630
+    }
+   }
   },
   {
    "annee": 2024,
@@ -3078,7 +6264,39 @@
    "tenu_M2": true,
    "p_star_auto": 1275,
    "marge_lentille_auto": 2165,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1701
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1523
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 1724
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 5050
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 3340,
+     "paliers": [
+      2672,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 2320,
+     "prime_ha": 619
+    }
+   }
   },
   {
    "annee": 2024,
@@ -3107,7 +6325,39 @@
    "tenu_M2": true,
    "p_star_auto": 1788,
    "marge_lentille_auto": 2169,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1215
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1145
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 1303
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 5252
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 4152,
+     "paliers": [
+      3890,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 1860,
+     "prime_ha": 645
+    }
+   }
   },
   {
    "annee": 2024,
@@ -3136,7 +6386,39 @@
    "tenu_M2": true,
    "p_star_auto": 1225,
    "marge_lentille_auto": 2180,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1782
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1586
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 1794
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 5122
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 3323,
+     "paliers": [
+      2588,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 2488,
+     "prime_ha": 706
+    }
+   }
   },
   {
    "annee": 2024,
@@ -3165,7 +6447,39 @@
    "tenu_M2": true,
    "p_star_auto": 1526,
    "marge_lentille_auto": 2915,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1863
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1642
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 1858
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 6754
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 4058,
+     "paliers": [
+      3263,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 2544,
+     "prime_ha": 681
+    }
+   }
   },
   {
    "annee": 2024,
@@ -3194,7 +6508,39 @@
    "tenu_M2": true,
    "p_star_auto": 1723,
    "marge_lentille_auto": 3302,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1853
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1636
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 1850
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 7545
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 4453,
+     "paliers": [
+      3665,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 2621,
+     "prime_ha": 768
+    }
+   }
   },
   {
    "annee": 2024,
@@ -3223,7 +6569,39 @@
    "tenu_M2": true,
    "p_star_auto": 1386,
    "marge_lentille_auto": 2625,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1863
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1642
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 1858
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 6363
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 3870,
+     "paliers": [
+      3075,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 2479,
+     "prime_ha": 616
+    }
+   }
   },
   {
    "annee": 2024,
@@ -3252,7 +6630,39 @@
    "tenu_M2": true,
    "p_star_auto": 1495,
    "marge_lentille_auto": 2581,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1701
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1523
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 1724
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 6091
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 3892,
+     "paliers": [
+      3224,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 2328,
+     "prime_ha": 627
+    }
+   }
   },
   {
    "annee": 2024,
@@ -3281,7 +6691,39 @@
    "tenu_M2": true,
    "p_star_auto": 1250,
    "marge_lentille_auto": 2118,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1701
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1523
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 1724
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 5521
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 3590,
+     "paliers": [
+      2922,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 2276,
+     "prime_ha": 575
+    }
+   }
   },
   {
    "annee": 2024,
@@ -3310,7 +6752,39 @@
    "tenu_M2": true,
    "p_star_auto": 1447,
    "marge_lentille_auto": 2360,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1620
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1460
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 1654
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 5956
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 3910,
+     "paliers": [
+      3310,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 2232,
+     "prime_ha": 612
+    }
+   }
   },
   {
    "annee": 2024,
@@ -3339,7 +6813,39 @@
    "tenu_M2": true,
    "p_star_auto": 1136,
    "marge_lentille_auto": 675,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 729
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 729
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 834
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 1878
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 1878,
+     "paliers": [
+      2319,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 1080,
+     "prime_ha": 351
+    }
+   }
   },
   {
    "annee": 2024,
@@ -3368,7 +6874,39 @@
    "tenu_M2": false,
    "p_star_auto": 799,
    "marge_lentille_auto": 258,
-   "tenu_auto": false
+   "tenu_auto": false,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": false,
+     "verse_eur_ha": 567
+    },
+    "natup_2023": {
+     "tenu": false,
+     "verse_eur_ha": 567
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 649
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 1061
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 1061,
+     "paliers": [
+      1684,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 721,
+     "prime_ha": 154
+    }
+   }
   },
   {
    "annee": 2024,
@@ -3397,7 +6935,39 @@
    "tenu_M2": true,
    "p_star_auto": 1666,
    "marge_lentille_auto": 1255,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 810
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 810
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 927
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 3134
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 3134,
+     "paliers": [
+      3482,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 1297,
+     "prime_ha": 487
+    }
+   }
   },
   {
    "annee": 2024,
@@ -3426,7 +6996,39 @@
    "tenu_M2": true,
    "p_star_auto": 1582,
    "marge_lentille_auto": 894,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 648
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 648
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 742
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 2331
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 2331,
+     "paliers": [
+      3238,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 985,
+     "prime_ha": 337
+    }
+   }
   },
   {
    "annee": 2024,
@@ -3455,7 +7057,39 @@
    "tenu_M2": true,
    "p_star_auto": 1947,
    "marge_lentille_auto": 2033,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1053
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1019
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 1163
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 4719
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 4160,
+     "paliers": [
+      4033,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 1561,
+     "prime_ha": 508
+    }
+   }
   },
   {
    "annee": 2024,
@@ -3484,7 +7118,39 @@
    "tenu_M2": true,
    "p_star_auto": 1954,
    "marge_lentille_auto": 915,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": false,
+     "verse_eur_ha": 535
+    },
+    "natup_2023": {
+     "tenu": false,
+     "verse_eur_ha": 535
+    },
+    "proposition_2027": {
+     "tenu": false,
+     "verse_eur_ha": 612
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 2611
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 2611,
+     "paliers": [
+      4396,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 1003,
+     "prime_ha": 468
+    }
+   }
   },
   {
    "annee": 2025,
@@ -3513,7 +7179,39 @@
    "tenu_M2": true,
    "p_star_auto": 747,
    "marge_lentille_auto": 562,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 972
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 956
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 1092
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 2225
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 2121,
+     "paliers": [
+      2061,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 1393,
+     "prime_ha": 421
+    }
+   }
   },
   {
    "annee": 2025,
@@ -3542,7 +7240,39 @@
    "tenu_M2": true,
    "p_star_auto": 1059,
    "marge_lentille_auto": 1470,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1458
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1334
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 1514
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 5087
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 3605,
+     "paliers": [
+      3140,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 2203,
+     "prime_ha": 745
+    }
+   }
   },
   {
    "annee": 2025,
@@ -3571,7 +7301,39 @@
    "tenu_M2": true,
    "p_star_auto": 711,
    "marge_lentille_auto": 523,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 972
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 956
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 1092
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 2247
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 2141,
+     "paliers": [
+      2081,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 1410,
+     "prime_ha": 438
+    }
+   }
   },
   {
    "annee": 2025,
@@ -3600,7 +7362,39 @@
    "tenu_M2": true,
    "p_star_auto": 781,
    "marge_lentille_auto": 598,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 972
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 956
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 1092
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 2338
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 2225,
+     "paliers": [
+      2165,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 1451,
+     "prime_ha": 479
+    }
+   }
   },
   {
    "annee": 2025,
@@ -3629,7 +7423,39 @@
    "tenu_M2": true,
    "p_star_auto": 949,
    "marge_lentille_auto": 1292,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1458
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1334
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 1514
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 4235
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 3080,
+     "paliers": [
+      2615,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 2017,
+     "prime_ha": 559
+    }
+   }
   },
   {
    "annee": 2025,
@@ -3658,7 +7484,39 @@
    "tenu_M2": true,
    "p_star_auto": 884,
    "marge_lentille_auto": 1188,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1458
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1334
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 1514
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 4027
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 2951,
+     "paliers": [
+      2486,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 2001,
+     "prime_ha": 543
+    }
+   }
   },
   {
    "annee": 2025,
@@ -3687,7 +7545,39 @@
    "tenu_M2": true,
    "p_star_auto": 1265,
    "marge_lentille_auto": 893,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": false,
+     "verse_eur_ha": 810
+    },
+    "natup_2023": {
+     "tenu": false,
+     "verse_eur_ha": 810
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 927
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 3217
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 3217,
+     "paliers": [
+      3574,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 1368,
+     "prime_ha": 558
+    }
+   }
   },
   {
    "annee": 2025,
@@ -3716,7 +7606,39 @@
    "tenu_M2": true,
    "p_star_auto": 870,
    "marge_lentille_auto": 1478,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1782
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1586
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 1794
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 4546
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 3053,
+     "paliers": [
+      2318,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 2408,
+     "prime_ha": 626
+    }
+   }
   },
   {
    "annee": 2025,
@@ -3745,7 +7667,39 @@
    "tenu_M2": true,
    "p_star_auto": 992,
    "marge_lentille_auto": 1495,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1580
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1428
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 1619
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 4723
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 3258,
+     "paliers": [
+      2692,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 2154,
+     "prime_ha": 575
+    }
+   }
   },
   {
    "annee": 2025,
@@ -3774,7 +7728,39 @@
    "tenu_M2": true,
    "p_star_auto": 1075,
    "marge_lentille_auto": 1641,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1580
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1428
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 1619
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 5586
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 3750,
+     "paliers": [
+      3184,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 2240,
+     "prime_ha": 660
+    }
+   }
   },
   {
    "annee": 2025,
@@ -3803,7 +7789,39 @@
    "tenu_M2": true,
    "p_star_auto": 872,
    "marge_lentille_auto": 1285,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1580
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1428
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 1619
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 4319
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 3028,
+     "paliers": [
+      2462,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 2142,
+     "prime_ha": 563
+    }
+   }
   },
   {
    "annee": 2025,
@@ -3832,7 +7850,39 @@
    "tenu_M2": true,
    "p_star_auto": 929,
    "marge_lentille_auto": 1385,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1580
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1428
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 1619
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 4503
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 3132,
+     "paliers": [
+      2566,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 2108,
+     "prime_ha": 529
+    }
+   }
   },
   {
    "annee": 2025,
@@ -3861,7 +7911,39 @@
    "tenu_M2": true,
    "p_star_auto": 986,
    "marge_lentille_auto": 1530,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1620
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1460
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 1654
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 5009
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 3383,
+     "paliers": [
+      2783,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 2155,
+     "prime_ha": 535
+    }
+   }
   },
   {
    "annee": 2025,
@@ -3890,7 +7972,39 @@
    "tenu_M2": true,
    "p_star_auto": 870,
    "marge_lentille_auto": 1242,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1539
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1397
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 1584
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 4232
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 3008,
+     "paliers": [
+      2476,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 2033,
+     "prime_ha": 494
+    }
+   }
   },
   {
    "annee": 2025,
@@ -3919,7 +8033,39 @@
    "tenu_M2": true,
    "p_star_auto": 1018,
    "marge_lentille_auto": 1496,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1539
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 1397
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 1584
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 5209
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 3578,
+     "paliers": [
+      3046,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 2085,
+     "prime_ha": 546
+    }
+   }
   },
   {
    "annee": 2025,
@@ -3948,7 +8094,39 @@
    "tenu_M2": true,
    "p_star_auto": 862,
    "marge_lentille_auto": 546,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 826
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 826
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 946
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 2281
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 2281,
+     "paliers": [
+      2485,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 1157,
+     "prime_ha": 331
+    }
+   }
   },
   {
    "annee": 2025,
@@ -3977,7 +8155,39 @@
    "tenu_M2": true,
    "p_star_auto": 649,
    "marge_lentille_auto": 450,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 964
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 950
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 1085
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 1843
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 1775,
+     "paliers": [
+      1722,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 1129,
+     "prime_ha": 165
+    }
+   }
   },
   {
    "annee": 2025,
@@ -4006,7 +8216,39 @@
    "tenu_M2": false,
    "p_star_auto": 1182,
    "marge_lentille_auto": 393,
-   "tenu_auto": false
+   "tenu_auto": false,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": false,
+     "verse_eur_ha": 486
+    },
+    "natup_2023": {
+     "tenu": false,
+     "verse_eur_ha": 486
+    },
+    "proposition_2027": {
+     "tenu": false,
+     "verse_eur_ha": 556
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 1868
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 1868,
+     "paliers": [
+      3460,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 939,
+     "prime_ha": 453
+    }
+   }
   },
   {
    "annee": 2025,
@@ -4035,7 +8277,39 @@
    "tenu_M2": true,
    "p_star_auto": 1102,
    "marge_lentille_auto": 678,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": true,
+     "verse_eur_ha": 753
+    },
+    "natup_2023": {
+     "tenu": true,
+     "verse_eur_ha": 753
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 862
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 2688
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 2689,
+     "paliers": [
+      3213,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 1060,
+     "prime_ha": 307
+    }
+   }
   },
   {
    "annee": 2025,
@@ -4064,7 +8338,39 @@
    "tenu_M2": true,
    "p_star_auto": 1254,
    "marge_lentille_auto": 545,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": false,
+     "verse_eur_ha": 567
+    },
+    "natup_2023": {
+     "tenu": false,
+     "verse_eur_ha": 567
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 649
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 2242
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 2242,
+     "paliers": [
+      3558,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 996,
+     "prime_ha": 429
+    }
+   }
   },
   {
    "annee": 2025,
@@ -4093,7 +8399,39 @@
    "tenu_M2": true,
    "p_star_auto": 1442,
    "marge_lentille_auto": 417,
-   "tenu_auto": true
+   "tenu_auto": true,
+   "contrats": {
+    "uneal_2023": {
+     "tenu": false,
+     "verse_eur_ha": 413
+    },
+    "natup_2023": {
+     "tenu": false,
+     "verse_eur_ha": 413
+    },
+    "proposition_2027": {
+     "tenu": true,
+     "verse_eur_ha": 473
+    },
+    "unique": {
+     "tenu": true,
+     "verse_eur_ha": 1943
+    },
+    "paliers": {
+     "tenu": true,
+     "verse_eur_ha": 1943,
+     "paliers": [
+      4233,
+      750,
+      650
+     ]
+    },
+    "prime_ha": {
+     "tenu": true,
+     "verse_eur_ha": 844,
+     "prime_ha": 431
+    }
+   }
   }
  ]
 }

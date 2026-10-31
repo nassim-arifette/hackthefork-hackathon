@@ -20,7 +20,7 @@ Thème clair unique : il passe mieux au vidéoprojecteur dans une salle éclair�
 | `--lentil` | `#2F6A50` | lentille sous contrat (sémantique) |
 | `--slate` | `#5B7385` | lentille déjà déclarée |
 | `--fail` | `#B5432C` | contrat non tenu, uniquement |
-| `--market` | `#DCE3EA` | bande du prix de marché |
+| `--market` | `#DCE3EA` | bande de la référence historique 2012–2016 |
 
 Deux couleurs portent le sens (blé, lentille). Le rouge n'apparaît que pour un contrat qui ne tient pas.
 

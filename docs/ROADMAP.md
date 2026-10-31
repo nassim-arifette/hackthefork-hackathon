@@ -10,13 +10,13 @@
 
 ## État et décisions proposées au samedi 31/10
 
-**Déjà réalisé d'après le repo :** pipeline Agreste / RPG / NASA POWER / Eurostat, modèles comparés, backtest, incertitude sur P*, application en cinq étapes, version hors ligne et 15 tests. Les résultats du 30/10 restent la version 3 de [RESULTATS.md](RESULTATS.md).
+**Déjà réalisé :** pipeline Agreste / RPG / NASA POWER / Eurostat, modèles comparés, backtest, incertitude sur P*, application en cinq étapes, version hors ligne et tests. Le scénario du 31/10 est calculé : version 4 de [RESULTATS.md](RESULTATS.md), P* de 1 567 €/t en Seine-et-Marne, 87 % de contrats tenus, comparaison des contrats comprise.
 
 **Recherche mentor réalisée :** éligibilité de la lentille alimentaire confirmée, montant PAC remis dans sa campagne, références de charges et d'effet précédent trouvées, exemples de contrats réels, coefficients d'impact et choix d'usage RPG / SAA documentés dans [QUESTIONS.md](QUESTIONS.md).
 
-**Pack de simulation disponible :** [contrat public reconstitué et contrat synthétique](CONTRAT_SIMULATION.md), [partenaires ciblés et proposition 300 t](PILOTE_300T.md), [140 lots fictifs, sources publiques et comparateur reproductible](../data/pilote_300t/README.md). Il permet de tester les paiements et coûts des contrats ; son intégration à l'application reste à faire.
+**Pack de simulation disponible :** [contrat public reconstitué et contrat synthétique](CONTRAT_SIMULATION.md), [partenaires ciblés et proposition 300 t](PILOTE_300T.md), [140 lots fictifs, sources publiques et comparateur reproductible](../data/pilote_300t/README.md). Il permet de tester les paiements et coûts des contrats. Ses barèmes sont branchés sur le moteur : protection face au blé et coût moyen dans l'application (étapes « Le prix » et « Le contrat »).
 
-**Proposition centrale à implémenter :** charges blé 700 €/ha, lentille 500 €/ha ; aide 105 €/ha indicative pour 2026 ; bénéfice de rotation 150 €/ha ; pilote **300 t nettes alimentaires** sur un programme proposé de 220 ha et ambition de bassin 5 000 t. Ces modifications documentaires et le jeu synthétique ne recalculent pas les exports : le P* et le score de backtest de ce scénario restent à produire.
+**Proposition centrale, implémentée le 31/10 :** charges blé 700 €/ha, lentille 500 €/ha ; aide 105 €/ha indicative pour 2026 ; bénéfice de rotation 150 €/ha ; prix payé sur les tonnes acceptées au tri (10 % refusés) ; pilote **300 t nettes alimentaires** et ambition de bassin 5 000 t. Le jeu synthétique reste hors apprentissage et hors backtest.
 
 ## La suite, par priorité
 
@@ -25,37 +25,37 @@
 - [x] Répondre aux questions agro par des sources : lentille éligible, 105 €/ha indicatifs pour 2026 et 122 €/ha définitifs pour 2025 ; charges et rotation argumentées.
 - [x] Fournir un barème public NatUp 2023–2024 reconstitué, un contrat synthétique complet et des paramètres JSON. Voir [CONTRAT_SIMULATION.md](CONTRAT_SIMULATION.md).
 - [x] Fournir un historique fictif 2019–2025 et son générateur : masse brute/nette, qualité, refus, paiements et coûts par acteur. Références réelles séparées dans [data/pilote_300t](../data/pilote_300t/README.md).
-- [ ] Brancher ces contrats sur les scénarios de l'application avec un mode « données synthétiques » explicite ; garder les lots fictifs hors apprentissage et backtest Agreste.
-- [ ] Reporter le scénario central et ses sensibilités dans data/hypotheses.yaml ; conserver les paramètres historiques pour reproduire la version 3.
-- [ ] Recalculer P*, les courbes, le backtest et les exports associés, sans changer le protocole d'évaluation. Enregistrer cette version dans [RESULTATS.md](RESULTATS.md), puis synchroniser README, deck et lettre.
+- [x] Brancher ces barèmes sur les scénarios du moteur et sur le backtest ; les lots fictifs restent hors apprentissage et backtest Agreste.
+- [x] Reporter le scénario central et ses sensibilités dans data/hypotheses.yaml ; conserver les paramètres historiques pour reproduire la version 3.
+- [x] Recalculer P*, les courbes, le backtest et les exports associés, sans changer le protocole d'évaluation. Version 4 dans [RESULTATS.md](RESULTATS.md) ; README et deck synchronisés. La lettre est à régénérer dans CloudShell.
 - [ ] Présenter séparément la marge de campagne et celle intégrant le bénéfice de la culture suivante. Le bonus de rotation est compté une fois.
-- [ ] Remplacer « prix de marché » par « référence historique 2012–2016 » pour la série Eurostat. Ajouter les cas Unéal et NatUp datés documentés dans [QUESTIONS.md](QUESTIONS.md).
-- [ ] Reprendre dans l'application les conventions du pack : tonnes alimentaires acceptées pour le paiement, tonnes reçues pour le tri et la collecte. Vérifier l'assiette Agreste avant d'ajouter une perte de tri ; une sensibilité qualité 0 / 10 / 20 % ne doit pas compter une perte deux fois.
-- [ ] Faire l'audit court RPG / SAA : même campagne, même territoire, code LEC, filtre 1 ha et identifiants uniques. Garder RPG pour la carte et SAA pour les rendements pendant cet audit.
+- [x] Remplacer « prix de marché » par « référence historique 2012–2016 » pour la série Eurostat. Ajouter les cas Unéal et NatUp datés documentés dans [QUESTIONS.md](QUESTIONS.md).
+- [x] Payer les tonnes alimentaires acceptées. Assiette Agreste vérifiée : rendement « au stade arrivée ferme », avant le tri (méthodologie SAA, p. 3) ; 10 % refusés, sensibilité 0 / 10 / 20 %. Reste : facturer tri et collecte sur les tonnes reçues dans le budget acheteur.
+- [x] Faire l'audit court RPG / SAA : même campagne, 178 identifiants uniques, filtre 1 ha sans effet notable ; 70 % de l'écart en Seine-et-Marne, compatible avec le rattachement au siège. Détail dans [QUESTIONS.md](QUESTIONS.md) §5.
 
 **Critère de sortie :** toutes les vues d'un scénario utilisent le même jeu d'hypothèses et les mêmes exports. Le nouveau prix est un résultat calculé. Le dossier de prospection permet de demander un contrat complet et des données de lots à un partenaire réel.
 
 ### 2. Montrer une décision de contrat et un impact chiffré
 
-- [ ] Ajouter deux volumes : **pilote 300 t nettes alimentaires** et **ambition 5 000 t** avec son assiette explicite. Montrer les surfaces nécessaires et les tonnes potentielles ; un scénario de mobilisation à 10 % peut compléter la sélection économique.
-- [ ] Afficher le prix uniforme selon la protection visée, puis l'option indexée déjà calculée : m × prix du blé de récolte. Les valeurs actuelles 3,59 et 7,8 doivent être recalculées après changement d'hypothèses.
+- [x] Ajouter deux volumes : **pilote 300 t nettes alimentaires** et **ambition 5 000 t** avec son assiette explicite. Montrer les surfaces nécessaires et les tonnes potentielles ; un scénario de mobilisation à 10 % peut compléter la sélection économique.
+- [ ] Afficher le prix uniforme selon la protection visée, puis l'option indexée déjà calculée : m × prix du blé de récolte. Valeurs recalculées : 3,44 en médiane, 7,44 pour 8 années sur 10 ; l'option indexée reste à afficher.
 - [ ] Faire varier le prix du blé pour montrer le budget de l'acheteur. L'indexation transfère ce risque ; rendement et risque de base restent à traiter.
 - [x] Comparer sur le jeu synthétique les trois barèmes : référence publique **900 / 700 / 600**, proposition **1 000 / 750 / 650** et prix uniforme **900 €/t**. Les règles communes de qualité et de service sont des conventions de simulation ; voir [contrats.json](../data/pilote_300t/contrats.json).
-- [ ] Intégrer le barème synthétique 1 000 / 750 / 650 €/t aux scénarios du modèle ; comparer aussi **900 €/t + une prime par hectare calculée**. Formules dans [QUESTIONS.md](QUESTIONS.md).
-- [ ] Comparer les contrats avec les mêmes scénarios du modèle : fréquence de marges gagnantes, coût moyen pour l'acheteur et perte des mauvaises années. Montrer 2020 et 2021. Les résultats du jeu fictif illustrent les mécanismes sans valider leur fréquence réelle.
-- [ ] Ajouter les protéines potentielles : **25 %** de la masse de graines alimentaires ; référence Terres Inovia / Terres Univia disponible.
-- [ ] Ajouter l'azote minéral non apporté : **180 kg N par nouvel hectare de blé remplacé**, scénario régional arrondi.
-- [ ] Ajouter les émissions directes associées à cet azote : **environ 0,755 t CO₂e/ha**, avec le périmètre expliqué. Les formules et sources GIEC sont dans [QUESTIONS.md](QUESTIONS.md).
+- [x] Intégrer le barème synthétique 1 000 / 750 / 650 €/t aux scénarios du modèle ; comparer aussi **900 €/t + une prime par hectare calculée** (491 €/ha).
+- [x] Comparer les contrats avec les mêmes scénarios du modèle : fréquence de marges gagnantes, coût moyen pour l'acheteur et perte des mauvaises années ; backtest année par année dans `data/backtest.json`. Reste : afficher 2020 et 2021 par contrat. Les résultats du jeu fictif illustrent les mécanismes sans valider leur fréquence réelle.
+- [x] Ajouter les protéines potentielles : **25 %** de la masse de graines alimentaires ; référence Terres Inovia / Terres Univia disponible.
+- [x] Ajouter l'azote minéral non apporté : **180 kg N par nouvel hectare de blé remplacé**, scénario régional arrondi.
+- [x] Ajouter les émissions directes associées à cet azote : **environ 0,755 t CO₂e/ha**, avec le périmètre expliqué. Les formules et sources GIEC sont dans [QUESTIONS.md](QUESTIONS.md).
 
-**Critère de sortie :** l'utilisateur peut arbitrer entre coût, protection et volume, et voir l'impact du scénario choisi. Le récit commercial est « comparer et calibrer les contrats existants » ; les 32 % de la baseline ne sont pas attribués à toute la profession.
+**Critère de sortie :** l'utilisateur peut arbitrer entre coût, protection et volume, et voir l'impact du scénario choisi. Le récit commercial est « comparer et calibrer les contrats existants » ; les 29 % de la baseline ne sont pas attribués à toute la profession.
 
 ### 3. Livrer la démo et répéter
 
-- [ ] Corriger le prompt de la lettre : « 8 années sur 10 » signifie que la marge lentille atteint celle du blé dans le modèle ; ce chiffre ne mesure pas la fiabilité de la coopérative.
-- [ ] Dans le compte AWS de l'équipe, vérifier une invocation Bedrock puis générer la lettre au build et la mettre en cache ; procédure dans [AWS.md](AWS.md).
-- [ ] Déployer la version web et exporter la version hors ligne ; vérifier le parcours complet et préparer une vidéo courte.
-- [ ] Confirmer avec l'organisation la règle sur les assistants de code externes ; déclarer Claude Code, ChatGPT pour cette recherche et les autres outils effectivement utilisés.
-- [ ] Vérifier la déclaration du Track 3 ; choisir présentateur et opérateur de démo ; répéter en français.
+- [x] Corriger le prompt de la lettre : « 8 années sur 10 » signifie que la marge lentille atteint celle du blé dans le modèle ; ce chiffre ne mesure pas la fiabilité de la coopérative.
+- [x] Dans le compte AWS de l'équipe, vérifier une invocation Bedrock puis générer la lettre et la mettre en cache ; procédure dans [AWS.md](AWS.md). À relancer avec les chiffres de la version 4.
+- [ ] Version web déployée par Amplify à chaque push sur `main`, version hors ligne exportée. Reste : vérifier le parcours complet sur l'ordinateur de démo et préparer une vidéo courte.
+- [x] Confirmer la règle sur les assistants de code externes ; Claude Code et ChatGPT déclarés dans [DECLARATIONS.md](DECLARATIONS.md).
+- [ ] Track 3 déclaré. Reste : choisir présentateur et opérateur de démo ; répéter en français.
 - [x] Préparer la proposition commerciale, les contacts publics et le brouillon de prise de contact pour un pilote de 300 t nettes : [PILOTE_300T.md](PILOTE_300T.md).
 - [ ] Obtenir l'accord d'un candidat et un extrait de données pour comparer son contrat. Le dossier préparé ne constitue pas un engagement du partenaire.
 

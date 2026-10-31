@@ -75,7 +75,7 @@ Aube et Marne présentent des rendements lentille identiques sur plusieurs anné
 
 - API `power.larc.nasa.gov/api/temporal/daily/point`, communauté `AG`, réponse JSON.
 - Requête test réussie (Seine-et-Marne, mars 2016, `T2M_MAX` et `PRECTOTCORR`).
-- Paramètres prévus : `T2M_MAX`, `T2M_MIN`, `PRECTOTCORR`, `EVPTRNS` ou évapotranspiration de référence [nom exact à vérifier].
+- Paramètres utilisés : `T2M_MAX`, `T2M_MIN`, `PRECTOTCORR`, journaliers 2010–2025, 43 départements, un point au centroïde de chaque département. L'évapotranspiration n'est pas utilisée (variables dans [MODELE.md](MODELE.md)).
 
 ---
 
@@ -85,7 +85,7 @@ Aube et Marne présentent des rendements lentille identiques sur plusieurs anné
 - **Couches** : `RPG_Parcelles` (125 212 parcelles), `RPG_Ilots`, `RPG_SNA` (éléments non agricoles), `RPG_ZDH`. Projection Lambert-93 (EPSG:2154).
 - **Colonnes de `RPG_Parcelles`** : `id_parcel`, `surf_parc` (ha), `cat_cult_p`, `code_cultu`, `code_group`, `precision`, `gcp`, `pp`, `bio`, `iae`. Aucun identifiant d'exploitant.
 - **Blé tendre d'hiver** (`BTH`) : 22 915 parcelles, 189 636 ha.
-- **Lentille** (`LEC`, libellé à vérifier dans la nomenclature) : 178 parcelles, 1 095 ha. Agreste donne environ 730 ha pour 77, 78, 91 et 95 : écart à expliquer (périmètre, définition).
+- **Lentille** (`LEC`) : 178 parcelles, 178 identifiants uniques, 1 095,1 ha de surface déclarée. La SAA donne 727 ha pour 77, 78, 91 et 95. L'écart est audité dans [QUESTIONS.md](QUESTIONS.md) §5 : 70 % en Seine-et-Marne, compatible avec le rattachement des terres au siège de l'exploitation dans la SAA.
 - **Retenues pour la carte** : parcelles `BTH` et `LEC` d'au moins 1 ha dans 77, 78, 91 et 95, soit 20 922 parcelles, simplifiées à 8 m.
 
 ## 4. Prix et commerce (vérifié le 30/10/2026)
@@ -104,4 +104,10 @@ En comparant les séries, plusieurs départements ont des rendements de lentille
 |---|---|
 | Douanes 0713 (Drive) | recoupement avec Comext ; importations par pays, en masse et en valeur |
 | Registre des cantines | colonnes utiles pour l'extension « débouchés » |
-| Ciqual | teneur en protéines de la lentille sèche (site indisponible le 30/10) |
+| Ciqual | teneur en protéines de la lentille sèche (site indisponible le 30/10 ; remplacée par la fiche qualité Terres Inovia / Terres Univia) |
+
+## 7. Jeu synthétique du pilote (`data/pilote_300t`, ajouté le 31/10)
+
+- **Contenu** : 140 lots fictifs de la coopérative `SYN_COOP_01`, 20 fermes, 2019–2025 ; récolte brute et nette, qualité, refus, paiements et coûts par acteur ; trois barèmes paramétrés dans `contrats.json`.
+- **Statut** : **synthétique**, reproductible avec `python3 tools/generer_pilote_300t.py --verifier-reproductibilite`.
+- **Usage** : exercer les paiements et les coûts d'un contrat. Le moteur reprend les barèmes de `contrats.json` ; les lots ne servent ni à l'apprentissage ni au backtest. Détail dans le [README du jeu](../data/pilote_300t/README.md).

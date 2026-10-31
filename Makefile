@@ -10,12 +10,13 @@ data/panel_rendements.csv:
 	$(P) $(PY) 01_agreste.py
 data/meteo_dept.csv: data/panel_rendements.csv
 	$(P) $(PY) 02_weather.py
-data/backtest.json: data/meteo_dept.csv data/prix_ble.csv data/hypotheses.yaml pipeline/model.py
+data/backtest.json: data/meteo_dept.csv data/prix_ble.csv data/hypotheses.yaml pipeline/model.py pipeline/contrats.py data/pilote_300t/contrats.json
 	$(P) $(PY) 03_backtest.py
 data/parcelles.json:
 	$(P) $(PY) 04_parcels.py
 export: data/backtest.json data/parcelles.json
 	$(P) $(PY) 05_export.py
+	$(P) $(PY) 07_contrats.py
 	$(P) $(PY) 06_lettre_llm.py
 
 app:

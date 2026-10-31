@@ -150,7 +150,20 @@ Pour l'exemple A, si l'estimation à réception est exactement réalisée, l'aco
 
 Le seul barème public reconstruit donne **13 200 €** dans l'exemple A et **19 600 €** dans B, hors compléments inconnus. Le prix uniforme de 900 €/t donne **14 400 €** et **23 400 €**. Le comparateur ajoute à chacun la prime synthétique commune, soit **480 €** et **780 €** ; elle n'est pas documentée chez NatUp.
 
-## 6. Provenance par champ
+## 6. Protection face au blé, calculée par le moteur
+
+Le moteur de l'application juge ces barèmes sur ses 20 000 années simulées pour la Seine-et-Marne et sur son backtest 2019–2025 (`pipeline/07_contrats.py`, `pipeline/03_backtest.py`). Les lots synthétiques n'y entrent pas : ils servent à exercer les paiements et les coûts, pas à mesurer une fréquence.
+
+| Barème | Années où la lentille bat le blé | Coût moyen par tonne acceptée | Contrats tenus en backtest |
+|---|---:|---:|---:|
+| Public reconstitué 900 / 700 / 600 | 5,9 sur 10 | 818 €/t | 55 % |
+| Proposition 1 000 / 750 / 650 + 30 €/t | 6,4 sur 10 | 928 €/t | 65 % |
+| Uniforme 900 €/t, sans prime | 6,1 sur 10 | 900 €/t | 57 % |
+| Tranches recalibrées pour 8 sur 10 : **1 635** / 750 / 650 | 8,0 sur 10 | 1 283 €/t | 87 % |
+
+Pour atteindre 8 années sur 10 avec les deuxième et troisième tranches de la proposition, la première tonne doit être payée 1 635 €/t. Ce barème protège autant qu'un prix unique de 1 567 €/t pour un coût moyen inférieur de 18 %. Les coûts du moteur excluent collecte, tri et séchage, détaillés plus haut. Détail et lecture dans [RESULTATS.md](RESULTATS.md#7-comparer-les-contrats).
+
+## 7. Provenance par champ
 
 | Champ | Réellement publié | Choix ajouté pour simuler |
 |---|---|---|

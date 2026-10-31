@@ -11,8 +11,9 @@ import numpy as np
 import pandas as pd
 
 from common import DATA, TEST_YEARS, hypotheses
-from model import Calibrated, hyp_values, levels, load, break_even_prices, p_star, pinball, \
-    pool_for, with_rel
+from contrats import calibres, existants
+from model import Calibrated, hyp_values, levels, load, break_even_prices, marge_lentille, paiement, \
+    p_star, pinball, pool_for, simulate_years, with_rel
 
 MIN_TRAIN_YEARS = 3
 
@@ -22,6 +23,8 @@ def main():
     h = hyp_values(hypotheses())
     L, W = df[df.culture == "lentille"], df[df.culture == "ble"]
     detail, par_annee = [], []
+    # Contrats comparés : verdict et sommes versées, cas par cas (une ligne = un hectare type).
+    contrats_bt = {}
     for t in TEST_YEARS:
         trL, trW = L[L.annee < t], W[W.annee < t]
         okL = trL.groupby("dep").annee.count()
@@ -50,6 +53,7 @@ def main():
             [round(float(v), 3) for v in q1.mean(axis=0)]
 
         tenus = {"moyenne": [], "M0": [], "M1": [], "M2": [], "auto": []}
+        tenus_c = {}
         prix_passe = float(meteo[meteo.annee < t].groupby("annee").prix_ble.first().mean())
         for i, (_, r) in enumerate(te.iterrows()):
             if r.dep not in realW.index or np.isnan(realW[r.dep]):
@@ -80,6 +84,22 @@ def main():
                 sfx = {"M0": "_M0", "M1": "", "M2": "_M2", "auto": "_auto"}[k]
                 rec |= {f"p_star{sfx}": round(ps), f"marge_lentille{sfx}": round(marge_L),
                         f"tenu{sfx}": tenu}
+                if k == "M1":
+                    # Mêmes années simulées que P* : on calibre aussi les autres formes de contrat.
+                    sim = simulate_years(pool, models[k], mW, levL[r.dep], levW[r.dep], h, seed=t * 100 + i)
+                    cas = existants() + calibres(*sim, h, ps)
+            rec["contrats"] = {}
+            for c in cas:
+                ok = bool(marge_lentille(c, np.array([yL]), h)[0] >= marge_W)
+                verse = float(paiement(c, np.array([yL_paid]))[0])
+                tenus_c.setdefault(c["id"], []).append(ok)
+                agg = contrats_bt.setdefault(c["id"], {"tenus": [], "verse": 0.0, "tonnes": 0.0})
+                agg["tenus"].append(ok)
+                agg["verse"] += verse
+                agg["tonnes"] += yL_paid
+                rec["contrats"][c["id"]] = {"tenu": ok, "verse_eur_ha": round(verse)} | \
+                    ({"paliers": c["paliers"]} if c["id"] == "paliers" else {}) | \
+                    ({"prime_ha": c["prime_ha"]} if c["id"] == "prime_ha" else {})
             detail.append(rec)
         row["n_contrats"] = len(tenus["M1"])
         row["taux_tenus"] = round(float(np.mean(tenus["M1"])), 3) if tenus["M1"] else None
@@ -88,6 +108,7 @@ def main():
         row["taux_tenus_M0"] = round(float(np.mean(tenus["M0"])), 3) if tenus["M0"] else None
         row["taux_tenus_moyenne"] = round(float(np.mean(tenus["moyenne"])), 3) if tenus["moyenne"] else None
         row["p_star_median"] = round(float(np.median([d["p_star"] for d in detail if d["annee"] == t])))
+        row["contrats"] = {k: round(float(np.mean(v)), 3) for k, v in tenus_c.items()}
         par_annee.append(row)
         print(f"{t}: n={row['n_dep']} blé={prix_t:.0f} €/t couverture M1={row['couverture_M1']} "
               f"pinball M0={row['pinball_M0']} M1={row['pinball_M1']} M2={row['pinball_M2']} "
@@ -113,6 +134,10 @@ def main():
     glob["gain_pinball_M1_vs_M0"] = round(1 - glob["pinball_M1"] / glob["pinball_M0"], 3)
     glob["gain_pinball_M2_vs_M0"] = round(1 - glob["pinball_M2"] / glob["pinball_M0"], 3)
     glob["gain_pinball_auto_vs_M0"] = round(1 - glob["pinball_auto"] / glob["pinball_M0"], 3)
+    # Coût réalisé : sommes versées / tonnes acceptées, sur les mêmes cas pour chaque contrat.
+    glob["contrats"] = {k: {"taux_tenus": round(float(np.mean(v["tenus"])), 3),
+                            "cout_moyen_t": round(v["verse"] / v["tonnes"])}
+                        for k, v in contrats_bt.items()}
     out = {
         "protocole": ("Glissant : pour chaque année test t de 2019 à 2025, niveaux, modèles et "
                       "calibration conformal estimés sur les années < t uniquement ; P* calculé en "

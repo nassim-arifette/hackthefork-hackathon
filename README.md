@@ -4,7 +4,7 @@
 
 Le Contrat qui Tient aide le responsable filière d'une coopérative ou d'un conditionneur de légumes secs à fixer **le prix plancher d'un contrat lentille** qui rapporte à l'agriculteur **au moins autant que le blé 8 années sur 10**. L'outil montre aussi **quelles parcelles d'Île-de-France basculent** à ce prix, et combien de tonnes la coopérative peut sécuriser.
 
-> État (vendredi 30/10, soir) : pipeline de bout en bout, tests et démo fonctionnels sur les vraies données (Agreste, RPG 2025, NASA POWER, Eurostat). Résultats : [docs/RESULTATS.md](docs/RESULTATS.md).
+> État (samedi 31/10) : pipeline de bout en bout, tests et démo sur les vraies données (Agreste, RPG 2025, NASA POWER, Eurostat). Scénario économique de la version 4, prix payé sur les tonnes acceptées au tri, comparaison des contrats. Résultats : [docs/RESULTATS.md](docs/RESULTATS.md).
 
 ![La démo, étape « Le prix »](docs/img/etape-2-prix.png)
 
@@ -14,9 +14,10 @@ Le Contrat qui Tient aide le responsable filière d'une coopérative ou d'un con
 |---|---|
 | Importations de lentilles, 2025 | **39 371 t** (Eurostat Comext) |
 | Variabilité du rendement, lentille contre blé | **0,20 contre 0,09** (Agreste, 2010–2025) |
-| Au prix de marché observé (650 à 779 €/t), la lentille bat le blé | **4,7 années sur 10** (modèle) |
-| Prix plancher pour 8 années sur 10, Seine-et-Marne | **1 622 €/t**, incertitude de 1 132 à 3 007 €/t (modèle) |
-| Backtest 2019–2025, années jamais vues | **86 %** de contrats tenus pour 80 % visés, sur 133 cas, contre **32 %** pour un prix fixé sur les moyennes |
+| Aux prix observés de 2012 à 2016 (650 à 779 €/t), la lentille bat le blé francilien | **5 années sur 10** (modèle) |
+| Prix plancher pour 8 années sur 10, Seine-et-Marne | **1 567 €/t** départ ferme, sur les tonnes acceptées au tri ; incertitude de 1 099 à 2 877 €/t (modèle) |
+| Backtest 2019–2025, années jamais vues | **87 %** de contrats tenus pour 80 % visés, sur 133 cas, contre **29 %** pour un prix calculé sur les moyennes |
+| À protection égale, un barème par tranches plutôt qu'un prix unique | **18 % moins cher** en moyenne, 22 % en backtest, avec les mêmes 87 % de contrats tenus (modèle) |
 
 ---
 
@@ -34,8 +35,9 @@ Le Contrat qui Tient aide le responsable filière d'une coopérative ou d'un con
 | Fiabilité visée (80 % par défaut) | **Courbe d'offre** : tonnes mobilisables selon le prix |
 | Site de l'acheteur (scénario) | **Carte** des parcelles qui basculent du blé à la lentille |
 | Hypothèses de charges et de prix du blé | **Replay** des années 2016 et 2020 |
+| Barèmes de contrat (prix unique, tranches, prime à l'hectare) | **Protection et coût** de chaque barème, publiés ou calibrés |
+| Volume visé (pilote 300 t, bassin 5 000 t) | **Proposition de contrat** et **impact** : protéines, azote non apporté, émissions évitées |
 | | **Score de fiabilité mesuré** sur des années jamais vues par le modèle |
-| | **Proposition de contrat** en langage clair, rédigée à partir des chiffres calculés |
 
 ## Comment ça marche
 
@@ -70,14 +72,14 @@ Le projet est pensé en trois temps pour le même utilisateur :
 
 Voir [docs/ROADMAP.md](docs/ROADMAP.md).
 
-## Démarrage rapide (cible)
+## Démarrage rapide
 
 ```bash
 # 1. Pipeline de données et modèle (Python 3.11+)
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-make export        # 00_prix_commerce → 01_agreste → 02_weather → 03_backtest → 04_parcels → 05_export → 06_lettre_llm
-make test          # 15 tests : données, absence de fuite, propriétés du prix plancher, exports
+make export        # 00_prix_commerce → 01_agreste → 02_weather → 03_backtest → 04_parcels → 05_export → 07_contrats → 06_lettre_llm
+make test          # données, absence de fuite, propriétés du prix plancher et des contrats, exports
 
 # 2. Application (Node 20+)
 make dev           # serveur de développement
@@ -90,13 +92,16 @@ Tout est **précalculé** en Python et exporté en JSON. Le navigateur ne fait q
 
 ```
 README.md
-pipeline/        scripts numérotés, du téléchargement à l'export JSON
-data/            données traitées légères (versionnées)
-data_raw/        téléchargements bruts (ignorés par git)
+pipeline/        scripts numérotés, du téléchargement à l'export JSON ; contrats.py, catalogue des contrats comparés
+data/            données traitées légères (versionnées) ; pilote_300t/, jeu synthétique du pilote
+data_raw/        téléchargements bruts (versionnés, sauf le RPG, retéléchargé par 04_parcels.py)
+tools/           générateur reproductible du jeu synthétique du pilote
 app/             front Vite + React + deck.gl
 docs/
   PROJET.md          problème, utilisateur, différenciation, modèle économique
   RESULTATS.md       résultats chiffrés du pipeline
+  CONTRAT_SIMULATION.md  barème NatUp reconstitué, contrat synthétique complet, protection calculée
+  PILOTE_300T.md     partenaires ciblés et proposition de pilote de 300 t
   DESIGN.md          règles de design de l'application
   FICHE_PROJET.md    fiche projet à déposer
   DECK.md            contenu du deck, slide par slide
@@ -109,7 +114,8 @@ docs/
   DECLARATIONS.md    ressources préexistantes (obligatoire au dépôt)
   DEMO_SCRIPT.md     script de la démo de 4 minutes
   PITCH_NOTES.md     questions attendues et réponses
-  QUESTIONS.md       décisions ouvertes
+  QUESTIONS.md       réponses de mentor et décisions de l'équipe
+  AWS.md             Bedrock et Amplify, pas à pas
 ```
 
 ## Étiquetage des chiffres

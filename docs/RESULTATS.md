@@ -145,11 +145,41 @@ Les distances sont routières (vol d'oiseau × 1,3). Les compteurs d'impact excl
 | 2016, le blé perd 53 % | 1 757 €/ha | −84 €/ha | toutes |
 | 2020, la lentille perd 38 % | 1 181 €/ha | 771 €/ha | toutes |
 
-## 7. Ce que ça veut dire
+## 7. Comparer les contrats
+
+Calcul de `pipeline/07_contrats.py` sur les mêmes 20 000 années que le prix plancher (Seine-et-Marne), et backtest de `03_backtest.py` sur les 133 cas 2019–2025. Coût moyen : sommes versées par l'acheteur par tonne acceptée, hors collecte et tri. Année faible : 0,43 t/ha acceptées, une année sur dix.
+
+### Les contrats publiés, face au blé francilien
+
+| Contrat | Années gagnantes (simulation) | Coût moyen | Contrats tenus (backtest) |
+|---|---|---|---|
+| Unéal, 900 €/t (décembre 2023) | 6,1 sur 10 | 900 €/t | 57 % |
+| NatUp 2023–2024 reconstitué : 900 / 700 / 600 €/t par tranche d'une tonne par hectare | 5,9 sur 10 | 818 €/t | 55 % |
+| Proposition du dossier pilote : 1 000 / 750 / 650 €/t, 30 €/t pour un lot pré-nettoyé | 6,4 sur 10 | 928 €/t | 65 % |
+
+Les barèmes publiés protègent environ 6 années sur 10 face au blé francilien : ils partagent aussi le risque par les volumes, la qualité et le choix des bassins, que ce calcul ne mesure pas.
+
+### Trois façons de garantir 8 années sur 10
+
+| Contrat calibré | Coût moyen | Année faible | Perte moyenne les années perdantes | Contrats tenus (backtest) | Coût réalisé (backtest) |
+|---|---|---|---|---|---|
+| Prix unique : 1 567 €/t | 1 567 €/t | 1 567 €/t | 581 €/ha | 87 % | référence |
+| **Tranches : 1 635 €/t la première tonne par hectare, puis 750 et 650** | **1 283 €/t (−18 %)** | 1 635 €/t | 568 €/ha | **87 %** | **−22 %** |
+| Prix de base 900 €/t et prime de 491 €/ha | 1 243 €/t (−21 %) | 2 037 €/t | 426 €/ha | 79 % | −49 % |
+
+Dans le backtest, chaque forme est recalibrée chaque année sur les seules années passées, comme le prix unique. Les coûts réalisés portent sur les départements producteurs, d'où la comparaison en écart au prix unique.
+
+**Lecture :**
+
+- **Le barème par tranches protège autant que le prix unique pour nettement moins cher.** Il paie cher les premières tonnes, celles qui manquent les mauvaises années, et moins le surplus des bonnes. Même taux de contrats tenus en backtest (87 %), coût réalisé inférieur de 22 %.
+- **La prime à l'hectare est la moins chère en moyenne** et réduit la perte de l'agriculteur les années perdantes. Mais l'acheteur la paie même sans récolte (2 037 €/t l'année faible) et elle protège mal quand le prix du blé flambe : 37 % des contrats tenus en 2022, 79 % sur l'ensemble, sous la cible de 80 %.
+- **Le prix unique coûte cher parce qu'il surpaie les bonnes années.** Son avantage : un coût par tonne connu d'avance pour l'acheteur.
+
+## 8. Ce que ça veut dire
 
 1. **Garantir 8 années sur 10 coûte plus du double du prix d'équilibre médian** (1 567 contre 715 €/t). Une moyenne sous-estime fortement le prix qu'il faut garantir : c'est le cœur du message.
 2. **À la référence historique, la lentille ne gagne qu'une année sur deux.** C'est exactement le verrou que décrit le Track 3.
-3. **Les contrats récents sont plus bas** (Unéal : 900 €/t en 2023 ; NatUp : 1 000 €/t sur la première tonne par hectare en 2025). Dans notre modèle, ils protègent environ 6 années sur 10 face au blé francilien. L'outil sert à choisir ce compromis en connaissant son coût.
+3. **Les contrats publiés sont plus bas** (Unéal : 900 €/t en 2023 ; NatUp : 900 / 700 / 600 €/t par tranche en 2023–2024). Dans notre modèle, ils protègent environ 6 années sur 10 face au blé francilien. **À protection égale, un barème par tranches coûte 18 % de moins qu'un prix unique** (22 % en backtest) : c'est la forme de contrat à proposer.
 4. **Le prix plancher est très sensible au prix du blé.** Un contrat indexé sur le prix du blé (multiplicateur médian de 3,44, de 7,44 pour 8 années sur 10, soit 1 488 €/t avec un blé à 200 €/t) déplacerait ce risque vers l'acheteur sans rendre le contrat beaucoup moins cher.
 5. **Le prix plancher est lui-même incertain** : seize années ne suffisent pas à cerner les mauvaises années. Les données de rendement des coopératives sont la première chose à obtenir en pilote.
 
@@ -158,4 +188,4 @@ Les distances sont routières (vol d'oiseau × 1,3). Les compteurs d'impact excl
 - Version 1 (hypothèses provisoires, prix du blé fixe, 39 séries comptées comme indépendantes) : 85 % de contrats tenus, P\* de 1 377 €/t en Seine-et-Marne.
 - Version 2 (prix du blé mesuré et rééchantillonné, charges et aide sourcées) : 82 %, 1 435 €/t.
 - Version 3 (30/10, séries estimées ensemble regroupées) : 86 %, 1 622 €/t, avec un intervalle de confiance sur P\*.
-- Version 4, actuelle (31/10, hypothèses économiques revues, paiement sur les tonnes acceptées au tri, forfait de collecte) : 87 %, 1 567 €/t. Le modèle et le protocole sont inchangés ; les hypothèses viennent de la revue documentée de [QUESTIONS.md](QUESTIONS.md), fixées avant le recalcul. Avec les hypothèses de la version 3, le pipeline actuel redonne 1 622 €/t.
+- Version 4, actuelle (31/10, hypothèses économiques revues, paiement sur les tonnes acceptées au tri, forfait de collecte, comparaison des contrats) : 87 %, 1 567 €/t. Le modèle et le protocole sont inchangés ; les hypothèses viennent de la revue documentée de [QUESTIONS.md](QUESTIONS.md), fixées avant le recalcul. Avec les hypothèses de la version 3, le pipeline actuel redonne 1 622 €/t.

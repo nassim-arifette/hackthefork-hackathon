@@ -4,11 +4,12 @@
 
 « Le Contrat qui Tient calcule le prix plancher d'un contrat lentille qui rapporte à l'agriculteur au moins autant que le blé 8 années sur 10, et montre quelles parcelles basculent à ce prix. »
 
-## Les trois messages à faire passer
+## Les quatre messages à faire passer
 
 1. **Le verrou est mesuré.** La lentille varie deux fois plus que le blé (Agreste). Aux prix de 2012–2016, elle ne gagne qu'une année sur deux face au blé francilien : c'est la peur de la mauvaise année qui bloque.
 2. **Le prix est calibré sur le risque, et c'est prouvé.** Sur des années jamais vues, 87 % des contrats ont tenu pour 80 % promis.
-3. **Il y a un client qui paie.** La coopérative, à chaque campagne ; le même moteur s'étend à toutes les cultures sous contrat et aux assureurs.
+3. **L'outil trouve le bon contrat.** À protection égale, un barème par tranches, qui paie cher la première tonne, coûte 18 % de moins qu'un prix unique (22 % en backtest).
+4. **Il y a un client qui paie.** La coopérative, à chaque campagne ; le même moteur s'étend à toutes les cultures sous contrat et aux assureurs.
 
 ## Questions attendues
 
@@ -22,7 +23,9 @@
 | Que perdrait l'outil sans l'IA ? | Un prix calculé sur les moyennes, sans modèle, ne tient que 29 % des contrats sur des années jamais vues. Notre modèle calibré en tient 87 %. La distribution calibrée fait l'essentiel du gain ; la météo y ajoute six points. |
 | Pourquoi pas le modèle le plus précis ? | LightGBM prédit mieux l'année moyenne, mais il sous-estime les mauvaises : ses contrats ne tiennent que 77 % du temps. Pour protéger un revenu, la calibration de la queue compte plus que la précision moyenne. Et nous avions choisi le modèle avant de voir les résultats. |
 | 1 567 €/t, c'est plus du double des prix observés ! | Oui, et c'est le résultat : garantir 8 années sur 10 face au blé francilien coûte cher. L'outil montre le prix de chaque niveau de sécurité (900 €/t, le prix Unéal de 2023, protège 6 années sur 10) et les leviers : aide couplée, rotation, autres bassins (558 €/t dans les Pyrénées-Orientales, 1 115 dans l'Indre, à charges franciliennes). |
-| Les contrats existants sont moins chers, ils ont tort ? | Non : ils partagent déjà le risque autrement (prix à paliers, primes, volumes plafonnés). Notre outil mesure la protection qu'offre chaque barème et cible les parcelles. Le score de 29 % est celui d'un prix calculé sur des moyennes, pas celui des coopératives. |
+| Les contrats existants sont moins chers, ils ont tort ? | Non : ils partagent déjà le risque autrement (volumes, qualité, bassins). Face au blé francilien, le barème NatUp 2023–2024 protège 5,9 années sur 10, le prix Unéal 6,1. Le score de 29 % est celui d'un prix calculé sur des moyennes, pas celui des coopératives. |
+| Alors quel contrat proposer ? | Un barème par tranches : 1 635 €/t la première tonne par hectare, puis 750 et 650. Même protection que 1 567 €/t sur toutes les tonnes, 18 % moins cher en moyenne, et en backtest les mêmes 87 % de contrats tenus pour 22 % de moins. La première tonne est celle qui manque les mauvaises années. |
+| Et une prime à l'hectare ? | La moins chère en moyenne (900 €/t + 491 €/ha), mais l'acheteur la paie même sans récolte, et elle a cédé lors de la flambée du blé de 2022 : 79 % de contrats tenus, sous la cible. |
 | Ce prix est-il fiable ? | Il est incertain, et nous l'affichons : de 1 099 à 2 877 €/t à 80 %. Seize ans ne suffisent pas pour cerner les mauvaises années ; c'est la première chose qu'un pilote avec des données de coopérative améliore. |
 | D'où viennent les charges ? | 700 €/ha pour le blé et 500 €/ha pour la lentille, arrondis des références Cerfrance et Terres Inovia ; aide couplée de 105 €/ha (montant indicatif 2026) ; 150 €/ha de bénéfice de rotation pour le blé suivant. Tout est dans un seul fichier, avec sa source et sa sensibilité. |
 | Pourquoi l'Île-de-France, qui produit peu de lentilles ? | C'est le territoire à conquérir : 117 000 ha de blé en Seine-et-Marne. Le modèle apprend sur les départements producteurs, et le niveau de rendement vient des voisins (Aube, Marne, Yonne, Eure-et-Loir, Loiret). C'est une limite annoncée. |

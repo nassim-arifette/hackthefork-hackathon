@@ -4,7 +4,7 @@ Recherche documentaire du **31 octobre 2026**, pour avancer pendant Hack the For
 
 **Mon avis : garder la lentille, le Track 3 et le moteur de prix. Faire du résultat élevé une décision de filière : quel bassin, quelle rémunération et quel partage du risque permettent de mobiliser des hectares ?** Le hackathon doit montrer ces arbitrages avec des hypothèses explicites.
 
-L'équipe a adopté ce scénario le 31/10 ; il est calculé dans la version 4 de [RESULTATS.md](RESULTATS.md). Les chiffres cités plus bas sont ceux de cette version. Les variantes de contrat (§3) restent à calculer. Cette revue documentaire ne vaut pas validation par l'organisation.
+L'équipe a adopté ce scénario le 31/10 ; il est calculé dans la version 4 de [RESULTATS.md](RESULTATS.md). Les chiffres cités plus bas sont ceux de cette version, variantes de contrat comprises (§3, [RESULTATS.md §7](RESULTATS.md#7-comparer-les-contrats)). Cette revue documentaire ne vaut pas validation par l'organisation.
 
 **Complément disponible :** un [barème public NatUp et un contrat synthétique complet](CONTRAT_SIMULATION.md), un [dossier de pilote 300 t avec partenaires ciblés](PILOTE_300T.md) et un [historique synthétique reproductible de 140 lots](../data/pilote_300t/README.md). Le comparateur fourni avec ce jeu permet de chiffrer les paiements et les coûts ; il ne recalcule pas le P* ni le backtest Agreste de l'application.
 
@@ -21,6 +21,7 @@ L'équipe a adopté ce scénario le 31/10 ; il est calculé dans la version 4 de
 | Impact | Protéines, azote non apporté, émissions directes évitées. | Affichés pour le volume choisi (§6). |
 | Repères de prix | « Référence historique 2012–2016 » remplace « prix du marché ». Unéal et NatUp affichés pour comparer. | Fait. |
 | RPG / Agreste | Audit fait. | Résultat au §5. |
+| Contrats | Comparer le prix unique, les barèmes publiés, la proposition du dossier pilote, des tranches calibrées et une prime à l'hectare, sur les mêmes scénarios et en backtest. | Fait : à protection égale, les tranches coûtent 18 % de moins que le prix unique (22 % en backtest, mêmes 87 % de contrats tenus). |
 | Lettre Bedrock | Régénérer avec les chiffres de la version 4. | Commande dans [AWS.md](AWS.md). |
 | Présentateur | Décidé plus tard. | — |
 
@@ -138,7 +139,7 @@ recette_bareme(y) = 1 000 × min(y, 1)
 
 y est le rendement net alimentaire payé en t/ha, agrégé par producteur et campagne avant d'appliquer les tranches. Ce **contrat synthétique 2027** retient 1 000 / 750 / 650 €/t, plus 30 €/t net de prime de pré-nettoyage lorsque le service a été effectué. Le premier palier s'inspire du communiqué NatUp de 2025 ; les deux suivants et le montant de la prime sont nos choix. Le barème public distinct de 2023–2024, 900 / 700 / 600, est aussi disponible. [S10] [S19]
 
-Les clauses de qualité, la prise en charge du tri, les exemples et les limites de la reconstitution figurent dans [CONTRAT_SIMULATION.md](CONTRAT_SIMULATION.md). Les trois barèmes sont paramétrés dans [contrats.json](../data/pilote_300t/contrats.json) et comparés sur le même historique synthétique. La protection face au blé reste à calculer dans le moteur avant d'afficher un objectif atteint.
+Les clauses de qualité, la prise en charge du tri, les exemples et les limites de la reconstitution figurent dans [CONTRAT_SIMULATION.md](CONTRAT_SIMULATION.md). Les trois barèmes sont paramétrés dans [contrats.json](../data/pilote_300t/contrats.json) et comparés sur le même historique synthétique. **Protection calculée par le moteur** (Seine-et-Marne, face au blé) : 5,9 années sur 10 pour le barème NatUp 2023–2024, 6,4 pour la proposition 2027, 6,1 pour le prix uniforme de 900 €/t. Pour atteindre 8 sur 10 en gardant 750 et 650 €/t, la première tonne doit être payée 1 635 €/t : le coût moyen tombe alors à 1 283 €/t, contre 1 567 €/t pour le prix unique.
 
 **Pari commercial complémentaire : prix de base de 900 €/t + prime fixe par hectare.** Cette prime rémunère l'engagement dans la filière et soutient aussi les scénarios de faible rendement. Sa valeur peut se calculer dans le moteur :
 
@@ -149,7 +150,7 @@ a* = max(0, quantile_80%(
      ))
 ~~~
 
-Cette formule est une **proposition à implémenter**. Comparer ensuite le coût total payé par l'acheteur et le résultat du backtest au prix uniforme. Afficher séparément la protection avec bonus de rotation et celle de la trésorerie de campagne.
+**Calculé :** a\* = 491 €/ha pour 8 années sur 10, soit un coût moyen de 1 243 €/t. C'est la forme la moins chère et celle qui réduit le plus la perte des années perdantes, mais l'acheteur paie la prime même sans récolte, et elle a mal résisté à la flambée du blé de 2022 : 79 % de contrats tenus en backtest, sous la cible. Reste à afficher séparément la protection avec bonus de rotation et celle de la trésorerie de campagne.
 
 L'indexation retire une partie du décalage avec le prix du blé en transférant ce risque vers l'acheteur. Elle conserve le risque de rendement et le risque de base entre l'indice et le prix réellement payé. Avec le multiplicateur actuel de 7,44, un blé à 200 €/t donne 1 488 €/t de lentille ; **l'indexation seule ne rend donc pas le contrat beaucoup moins cher**. Les valeurs 3,44 et 7,44 sont celles de l'export de la version 4, respectivement médiane et cible 80 %.
 

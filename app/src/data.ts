@@ -8,6 +8,7 @@ import meta from './data/meta.json';
 import contours from './data/contours.json';
 import france from './data/france.json';
 import lettre from './data/lettre.json';
+import contrats from './data/contrats.json';
 
 export type Label = 'mesure' | 'source' | 'suppose' | 'synthetique' | 'modele';
 
@@ -30,7 +31,7 @@ export const parcels: Parcel[] = (parcelsRaw as unknown as RawParcel[]).map((p) 
   return { id: p[0], dep: p[1], culture: p[2], surface: p[3], dist: p[4], pRendu: p[5], tonnes: p[6], polygon: ring };
 });
 
-export { thresholds, supply, replay, backtest, meta, contours, france, lettre };
+export { thresholds, supply, replay, backtest, meta, contours, france, lettre, contrats };
 export type ReplayYear = (typeof replay)[number];
 
 const hyp = meta.hypotheses as Record<string, { valeur: any; etiquette: Label; source: string; url?: string }>;
@@ -73,6 +74,13 @@ export const FEATURE_LABELS: Record<string, string> = {
 };
 export const MARKET = meta.prix_lentille_observes;
 
+/** Contrats comparés (pipeline/07_contrats.py) : existants, puis calibrés pour 8 années sur 10. */
+export const CONTRATS = {
+  existants: contrats.existants,
+  calibres: Object.fromEntries(contrats.calibres.map((c) => [c.id, c])) as Record<'unique' | 'paliers' | 'prime_ha', (typeof contrats.calibres)[number]>,
+  yFaible: contrats.rendement_accepte_annee_faible_tha,
+};
+
 /** Part des années simulées où la lentille bat le blé, au prix donné (Seine-et-Marne). */
 export function reliabilityAt(price: number, dep = D77): number {
   const rows = dep.fiabilite_par_prix;
@@ -96,7 +104,10 @@ export function held(p: Parcel, price: number, r: ReplayYear): boolean {
   return margeL >= margeB;
 }
 
-export const fmt = (n: number) => Math.round(n).toLocaleString('fr-FR');
-export const pct = (x: number) => `${Math.round(x * 100)} %`;
-export const signedPct = (x: number) => `${x > 0 ? '+' : x < 0 ? '−' : ''}${Math.abs(Math.round(x * 100))} %`;
+// Signe moins typographique et espace insécable avant « % » : affichage homogène.
+export const fmt = (n: number) => Math.round(n).toLocaleString('fr-FR').replace('-', '\u2212');
+export const pct = (x: number) => `${Math.round(x * 100)}\u00a0%`;
+/** Pourcentage avec une décimale sous 10 % (0,8 % plutôt que 1 %). */
+export const pctFine = (x: number) => (x < 0.1 ? `${dec(x * 100, 1)}\u00a0%` : pct(x));
+export const signedPct = (x: number) => `${x > 0 ? '+' : x < 0 ? '−' : ''}${Math.abs(Math.round(x * 100))}\u00a0%`;
 export const dec = (x: number, d = 1) => x.toLocaleString('fr-FR', { minimumFractionDigits: d, maximumFractionDigits: d });

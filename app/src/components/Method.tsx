@@ -1,4 +1,4 @@
-import { backtest, HYPOTHESES, meta, pct, thresholds } from '../data';
+import { backtest, CONTRATS, HYPOTHESES, meta, pct, thresholds } from '../data';
 import { statusText } from './ui';
 
 const NAMES: Record<string, string> = {
@@ -47,7 +47,7 @@ function value(k: string, v: any): string {
 }
 
 export default function Method({ onClose }: { onClose: () => void }) {
-  const G = backtest.global as Record<string, number>;
+  const G = backtest.global as unknown as Record<string, number>;
   const STRAT = (meta as any).strategies_77 as { moyenne: number; M0: number; M1: number; M2: number };
   const coefs = meta.coefficients_M1_lentille as Record<string, Record<string, number>>;
   return (
@@ -66,7 +66,15 @@ export default function Method({ onClose }: { onClose: () => void }) {
             <li><b>Prix plancher.</b> Dans chaque année simulée, on calcule le prix d’équilibre où la lentille rapporte autant que le blé. Le prix plancher est le quantile 80 % de ces prix.</li>
           </ol>
           <p className="formula">P* = quantile 80 % de (prix du blé × rendement du blé − charges du blé + charges de la lentille − aide − bénéfice de rotation) ÷ tonnes de lentille acceptées au tri</p>
-          <p className="note">Le prix garanti est payé sur les tonnes acceptées au tri pour l’alimentation humaine, comme dans les contrats de collecte. Agreste mesure le rendement à l’arrivée à la ferme, avant ce tri : on retire donc une part refusée de {Math.round(((HYPOTHESES as any).part_non_valorisee.valeur) * 100)} %. Avec les hypothèses du 30/10, le prix plancher de la Seine-et-Marne serait de {(thresholds as any).sensibilite.scenario_historique.toLocaleString('fr-FR')} €/t.</p>
+          <p className="note">Le prix garanti est payé sur les tonnes acceptées au tri pour l’alimentation humaine, comme dans les contrats de collecte. Agreste mesure le rendement « au stade arrivée ferme » (méthodologie de la SAA), avant ce tri : on retire donc une part refusée de {Math.round(((HYPOTHESES as any).part_non_valorisee.valeur) * 100)} %. Avec les hypothèses du 30/10, le prix plancher de la Seine-et-Marne serait de {(thresholds as any).sensibilite.scenario_historique.toLocaleString('fr-FR')} €/t.</p>
+        </section>
+
+        <section>
+          <h3>Les contrats comparés</h3>
+          <p>Chaque forme de contrat est jugée sur les mêmes années simulées : la lentille gagne-t-elle face au blé, et combien l’acheteur verse-t-il par tonne acceptée ? Les contrats calibrés sont ajustés pour atteindre 8 années sur 10, puis recalibrés année par année dans le backtest, sur les seules années passées.</p>
+          <p className="formula">Barème par tranches = p₁ × min(r, 1) + p₂ × min(max(r − 1, 0), 1) + p₃ × max(r − 2, 0), r en tonnes acceptées par hectare</p>
+          <p className="formula">Prime à l’hectare = quantile 80 % de (marge du blé − marge de la lentille à {CONTRATS.calibres.prime_ha.prix} €/t)</p>
+          <p className="note">Barème NatUp 2023–2024 reconstitué depuis un entretien publié (Union Agricole, 18/09/2023) : tranches marginales, complément de marché non compté. La proposition du dossier pilote (1 000 / 750 / 650 €/t, 30 €/t pour un lot pré-nettoyé, pré-nettoyage à 12 €/t récoltée à la charge du producteur) est une hypothèse de l’équipe. Le premier palier du barème calibré est recalculé ; les deux suivants restent ceux de la proposition.</p>
         </section>
 
         <section>

@@ -4,7 +4,7 @@ import Method from './components/Method';
 import { BacktestReveal, MarginBars, PriceChart, SecurityChart, Sensitivity, YieldsChart } from './components/charts';
 import { Figure, Source } from './components/ui';
 import {
-  backtest, CHALLENGER, D77, DEP_NAMES, dec, FEATURE_LABELS, fmt, H, held, lettre, MARKET, meta, parcels, pct, reliabilityAt, replay,
+  backtest, CHALLENGER, CONTRATS, D77, DEP_NAMES, dec, FEATURE_LABELS, fmt, H, held, lettre, MARKET, meta, parcels, pct, pctFine, reliabilityAt, replay,
   signedPct, thresholds, type ReplayYear,
 } from './data';
 import { useTween } from './useTween';
@@ -24,6 +24,10 @@ const CONTRACT_PRICE = Math.ceil((Math.max(...pStars) + 30) / 10) * 10;
 const BT2020 = backtest.annees.find((y) => y.annee === 2020)!;
 const START_PRICE = 900;
 const IC77 = (D77 as any).p_star_ic80 as [number, number] | undefined;
+const { unique: C_UNIQUE, paliers: C_PALIERS, prime_ha: C_PRIME } = CONTRATS.calibres;
+const C_BT = (G as any).contrats as Record<string, { taux_tenus: number; cout_moyen_t: number }>;
+const C_2022 = (backtest.annees.find((y) => y.annee === 2022) as any).contrats as Record<string, number>;
+const saving = (a: number, b: number) => Math.round((1 - a / b) * 100);
 const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
 const pos = (p: number) => `${((p - MIN) / (MAX - MIN)) * 100}%`;
 
@@ -212,14 +216,16 @@ export default function App() {
               </div>
               <p className="pull">À la référence historique de {fmt(MARKET.min)} à {fmt(MARKET.max)} €/t, la lentille ne gagne que {dec(REL_MARKET * 10, 1)} années sur 10. Pour 8 sur 10, il faut {fmt(D77.p_star)} €/t en Seine-et-Marne.</p>
               <div className="block">
-                <h3>Les contrats récents, pour comparer</h3>
-                <table className="list">
+                <h3>Les contrats d’aujourd’hui, face au blé francilien</h3>
+                <table className="list models">
+                  <thead><tr><th>Contrat</th><th className="num">Années gagnantes</th></tr></thead>
                   <tbody>
-                    <tr><td>Unéal, avec Vivien Paille<span>lentilles valorisées, décembre 2023</span></td><td className="num">900 €/t</td></tr>
-                    <tr><td>NatUp, contrat triennal<span>première tonne par hectare, septembre 2025</span></td><td className="num">1 000 €</td></tr>
+                    {CONTRATS.existants.map((c) => (
+                      <tr key={c.id}><td>{c.nom}<span>{c.detail}</span></td><td className="num">{dec(c.simulation.protection * 10, 1)} sur 10</td></tr>
+                    ))}
                   </tbody>
                 </table>
-                <Source k="source">Communiqués Unéal (12/12/2023) et NatUp (18/09/2025). Ces contrats partagent déjà une part du risque ; l’outil mesure la protection qu’ils offrent.</Source>
+                <Source k="modele">Mêmes années simulées, Seine-et-Marne. Prix Unéal (12/12/2023) et barème NatUp 2023–2024 (Union Agricole, 18/09/2023) publiés ; proposition du dossier pilote supposée. Ces contrats partagent aussi le risque par les volumes et la qualité : seule la protection face au blé est mesurée ici.</Source>
               </div>
               <div className="block">
                 <h3>Prix plancher par département</h3>
@@ -353,7 +359,7 @@ export default function App() {
                   <dt>Ce qu’il garantit</dt><dd>Une marge au moins égale à celle du blé dans {pct(H.tau)} des années simulées.</dd>
                   <dt>Ce qu’il ne garantit pas</dt><dd>Une récolte effondrée réduit la marge : {dec(D77.rendement_lentille_q10_tha, 2)} t/ha ou moins une année sur dix. Les lots refusés au tri ne sont pas payés au prix garanti.</dd>
                   <dt>Volume visé</dt><dd>{target.reached
-                    ? <><b>{fmt(VOLUME)} t</b> acceptées, soit {pct(VOLUME / L25.importations_t)} des importations de 2025, sur {fmt(target.ha)} ha : les {fmt(target.n)} parcelles éligibles les plus proches du site, à moins de {fmt(target.km)} km.</>
+                    ? <><b>{fmt(VOLUME)} t</b> acceptées, soit {pctFine(VOLUME / L25.importations_t)} des importations de 2025, sur {fmt(target.ha)} ha : les {fmt(target.n)} parcelles éligibles les plus proches du site, à moins de {fmt(target.km)} km.</>
                     : <>Le prix est trop bas pour réunir {fmt(VOLUME)} t. Remontez-le à l’étape 2.</>}</dd>
                 </dl>
                 <Source k="modele">Texte assemblé à partir des chiffres calculés, sans aucun chiffre ajouté. Volumes : hypothèses de l’équipe.</Source>
@@ -379,6 +385,19 @@ export default function App() {
                 <p className="body small">Prix plancher en Seine-et-Marne selon le nombre d’années gagnantes visé. Garantir 8 années sur 10 coûte {dec(D77.p_star / MARKET_MID, 1)} fois la référence historique 2012–2016.</p>
                 <SecurityChart />
                 <Source k="modele">Même simulation, quantile variable.</Source>
+              </div>
+              <div className="block">
+                <h3>Trois façons de garantir 8 années sur 10</h3>
+                <table className="list models contracts">
+                  <thead><tr><th>Contrat</th><th className="num">Coût moyen</th><th className="num">Année faible</th><th className="num">Backtest</th></tr></thead>
+                  <tbody>
+                    <tr><td>Prix unique<span>{fmt(C_UNIQUE.prix!)} €/t sur toutes les tonnes</span></td><td className="num">{fmt(C_UNIQUE.simulation.cout_moyen_t)}</td><td className="num">{fmt(C_UNIQUE.simulation.cout_t_annee_faible)}</td><td className="num">{pct(C_BT.unique.taux_tenus)}</td></tr>
+                    <tr className="hl"><td>Barème par tranches<span>{fmt(C_PALIERS.paliers![0])} €/t la première tonne par hectare, puis {fmt(C_PALIERS.paliers![1])} et {fmt(C_PALIERS.paliers![2])}</span></td><td className="num">{fmt(C_PALIERS.simulation.cout_moyen_t)}</td><td className="num">{fmt(C_PALIERS.simulation.cout_t_annee_faible)}</td><td className="num">{pct(C_BT.paliers.taux_tenus)}</td></tr>
+                    <tr><td>Prix de base et prime à l’hectare<span>{fmt(C_PRIME.prix!)} €/t et {fmt(C_PRIME.prime_ha!)} €/ha, versés même sans récolte</span></td><td className="num">{fmt(C_PRIME.simulation.cout_moyen_t)}</td><td className="num">{fmt(C_PRIME.simulation.cout_t_annee_faible)}</td><td className={`num${C_BT.prime_ha.taux_tenus < H.tau ? ' bad' : ''}`}>{pct(C_BT.prime_ha.taux_tenus)}</td></tr>
+                  </tbody>
+                </table>
+                <p className="body small">Le barème par tranches paie cher les premières tonnes, celles qui manquent les mauvaises années, et moins le surplus des bonnes : même protection, {saving(C_PALIERS.simulation.cout_moyen_t, C_UNIQUE.simulation.cout_moyen_t)} % de moins en moyenne. Sur 2019–2025, il tient autant de contrats que le prix unique, pour un coût réalisé inférieur de {saving(C_BT.paliers.cout_moyen_t, C_BT.unique.cout_moyen_t)} %. La prime à l’hectare coûte encore moins, mais l’acheteur la paie même quand la récolte manque, et elle a cédé quand le blé a flambé : {pct(C_2022.prime_ha)} des contrats tenus en 2022.</p>
+                <Source k="modele">Seine-et-Marne, mêmes années simulées. Coût moyen : sommes versées par tonne acceptée, en €/t, hors collecte et tri. Année faible : {dec(CONTRATS.yFaible, 2)} t/ha acceptées, une année sur dix. Backtest : chaque forme recalibrée sur les seules années passées, {G.n_cas} cas.</Source>
               </div>
               <div className="block">
                 <h3>Ce qui fait bouger le prix plancher</h3>

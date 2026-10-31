@@ -181,6 +181,24 @@ Les parcelles éligibles sont les parcelles RPG en blé tendre d'hiver. S(Q) est
 
 Variante calculée à l'export : un plancher égal à `m × prix du blé de la récolte`. Le multiplicateur `m*` est le quantile τ de `R_s / p_B` : 7,44 pour 8 années sur 10 en Seine-et-Marne, 3,44 en médiane.
 
+### Contrats à tranches et prime à l'hectare
+
+`pipeline/contrats.py` et `07_contrats.py` jugent d'autres formes de contrat sur les mêmes scénarios. Avec `r = y_L · (1 − r_tri)` les tonnes acceptées par hectare :
+
+```
+versé(r) = p1 · min(r, 1) + p2 · min(max(r − 1, 0), 1) + p3 · max(r − 2, 0)   (tranches)
+         ou P · r                                                          (prix unique)
+         + prime_t · r + prime_ha
+marge_L  = versé(r) − coût_producteur · y_L − charges_L + aide + rotation
+```
+
+- **Protection** : part des scénarios où `marge_L ≥ marge_B`.
+- **Tranches calibrées** : `p2` et `p3` fixés (750 et 650 €/t, ceux du dossier pilote), `p1` est le plus petit prix entier qui atteint τ (recherche par dichotomie, la protection croît avec `p1`).
+- **Prime à l'hectare calibrée** : à prix de base `P0` (900 €/t), `prime_ha* = quantile_τ( marge_B − marge_L(P0) )`, borné à 0 et arrondi à l'euro supérieur.
+- **Coût moyen pour l'acheteur** : `E[versé] / E[r]`, en €/t acceptée, hors collecte et tri.
+
+Dans le backtest, ces deux formes sont recalibrées pour chaque cas avec les scénarios des années `< t`, exactement comme P\*.
+
 ---
 
 ## 5. Backtest
@@ -197,6 +215,8 @@ Pour chaque année test `t` de 2019 à 2025 :
 Les années test ne servent ni à l'entraînement, ni au choix des hyperparamètres, ni au choix du seuil. Le protocole est figé avant de regarder les résultats.
 
 La référence « moyennes » fixe le prix d'équilibre avec les rendements moyens et le prix moyen du blé des années `< t`, sans distribution : c'est la façon naïve de fixer un prix.
+
+Les contrats publiés (Unéal 900 €/t, barème NatUp 2023–2024, proposition du dossier pilote) sont jugés de la même façon, sans recalibrage : leur barème est fixe.
 
 ### Métriques
 

@@ -7,8 +7,8 @@ import pandas as pd
 import pytest
 
 from common import APP_DATA, DATA, TEST_YEARS
-from model import Calibrated, break_even_prices, hyp_values, levels, load, p_star, pool_for, \
-    sample_quantile, with_rel
+from model import Calibrated, break_even_prices, calibrer_premier_palier, calibrer_prime_ha, hyp_values, \
+    levels, load, p_star, paiement, pool_for, protection, sample_quantile, simulate_years, with_rel
 from common import hypotheses
 
 
@@ -104,7 +104,8 @@ def test_p_star_is_the_break_even_quantile(sim):
 
 
 def test_exports_exist_and_parse():
-    for name in ("parcels", "thresholds", "supply_curve", "replay", "backtest", "meta", "contours", "france"):
+    for name in ("parcels", "thresholds", "supply_curve", "replay", "backtest", "meta", "contours", "france",
+                 "contrats"):
         json.loads((APP_DATA / f"{name}.json").read_text())
 
 
@@ -134,3 +135,37 @@ def test_llm_guardrail_rejects_invented_numbers():
     assert lettre.verify("Nous garantissons 1 435 €/t, 8 années sur 10, pour 5 000 t.", allowed)
     assert not lettre.verify("Nous garantissons 1 500 €/t.", allowed)
     assert not lettre.verify("Soit 12 % de marge en plus.", allowed)
+
+
+def test_tiered_payment_matches_the_pilot_examples():
+    """Exemples A et B de docs/CONTRAT_SIMULATION.md : 10 ha, 16 puis 26 t acceptées."""
+    prop = {"paliers": (1000, 750, 650), "prime_t": 30}
+    assert 10 * paiement(prop, np.array([1.6]))[0] == pytest.approx(14980)
+    assert 10 * paiement(prop, np.array([2.6]))[0] == pytest.approx(22180)
+    assert 10 * paiement({"paliers": (900, 700, 600)}, np.array([1.6]))[0] == pytest.approx(13200)
+    assert paiement({"prix": 900, "prime_ha": 400}, np.array([0.0]))[0] == pytest.approx(400)
+
+
+def test_contracts_are_judged_like_p_star(sim):
+    """Au prix unique P*, la protection est celle du prix plancher ; les contrats calibrés
+    atteignent la cible au plus juste."""
+    pool, mL, mW, lL, lW = sim
+    h = hyp_values(hypotheses())
+    yL, yW, pB = simulate_years(pool, mL, mW, lL, lW, h, n=8000, seed=3)
+    R, _, _ = break_even_prices(pool, mL, mW, lL, lW, h, n=8000, seed=3)
+    ps = p_star(R, 0.8)
+    assert protection({"prix": ps}, yL, yW, pB, h) == pytest.approx(np.mean(R <= ps))
+    p1 = calibrer_premier_palier((750, 650), yL, yW, pB, h, 0.8)
+    assert protection({"paliers": (p1, 750, 650)}, yL, yW, pB, h) >= 0.8
+    assert protection({"paliers": (p1 - 1, 750, 650)}, yL, yW, pB, h) < 0.8
+    a = calibrer_prime_ha(900, yL, yW, pB, h, 0.8)
+    assert protection({"prix": 900, "prime_ha": a}, yL, yW, pB, h) >= 0.8
+
+
+def test_contract_backtest_is_consistent():
+    bt = json.loads((DATA / "backtest.json").read_text())["global"]
+    assert bt["contrats"]["unique"]["taux_tenus"] == pytest.approx(bt["taux_tenus"])
+    app = json.loads((APP_DATA / "contrats.json").read_text())
+    assert {c["id"] for c in app["calibres"]} == {"unique", "paliers", "prime_ha"}
+    for c in app["calibres"]:
+        assert c["simulation"]["protection"] >= 0.8 - 1e-3
