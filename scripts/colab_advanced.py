@@ -1,4 +1,4 @@
-"""Advanced benchmark with visible progress and source-keyed Drive checkpoints."""
+"""Advanced benchmark with progress and source/NumPy-profile Drive checkpoints."""
 import hashlib
 import json
 import os
@@ -16,6 +16,50 @@ from colab_multilegumes import run_visible
 # argsort can reorder tied leaf IDs across CPUs before this seeded sample.
 # Apply the evaluated execution profile before launching fresh child processes.
 NUMPY_DISABLED_FEATURES = 'AVX512F,AVX512CD,AVX512_SKX,AVX512_CLX,AVX512_CNL,AVX512_ICL'
+
+
+def numerical_profile(runtime):
+    """Keep numerical dispatcher identity separate from machine/core metadata."""
+    required = ('numpy_version', 'numpy_dispatch_override', 'numpy_cpu_features',
+                'numpy_cpu_baseline', 'numpy_cpu_dispatch')
+    if not isinstance(runtime, dict) or any(key not in runtime for key in required):
+        raise ValueError('Profil numérique NumPy incomplet : reprise impossible.')
+    override = runtime['numpy_dispatch_override']
+    flags = runtime['numpy_cpu_features']
+    if (override is not None and not isinstance(override, str)) or (
+            not isinstance(flags, dict) or not flags or
+            any(not isinstance(key, str) or type(value) is not bool for key, value in flags.items())):
+        raise ValueError('Profil numérique NumPy invalide : reprise impossible.')
+    return {'numpy_version': runtime['numpy_version'],
+            'numpy_dispatch_override': sorted(set(part.strip() for part in (override or '').split(',') if part.strip())),
+            'numpy_cpu_features': dict(sorted(flags.items())),
+            'numpy_cpu_baseline': sorted(set(runtime['numpy_cpu_baseline'])),
+            'numpy_cpu_dispatch': sorted(set(runtime['numpy_cpu_dispatch']))}
+
+
+def checkpoint_key(files, runtime):
+    digest = hashlib.sha256()
+    for path in sorted(files):
+        digest.update(str(path.relative_to(ROOT)).encode())
+        digest.update(path.read_bytes())
+    digest.update(b'\0NUMPY_EXECUTION_PROFILE\0')
+    digest.update(json.dumps(numerical_profile(runtime), sort_keys=True, separators=(',', ':')).encode())
+    return digest.hexdigest()[:16]
+
+
+def save_execution_environment(directory, metadata):
+    """Validate existing evidence before resuming; retain its original metadata."""
+    path = Path(directory) / 'execution_environment.json'
+    current = numerical_profile(metadata['runtime'])
+    if path.exists():
+        previous = json.loads(path.read_text())
+        if (numerical_profile(previous.get('runtime')) != current or
+                previous.get('NPY_DISABLE_CPU_FEATURES') != metadata['NPY_DISABLE_CPU_FEATURES']):
+            raise ValueError('Profil numérique différent des sauvegardes existantes : nouveau calcul requis.')
+        return
+    temporary = path.with_suffix('.json.tmp')
+    temporary.write_text(json.dumps(metadata, indent=2) + '\n')
+    temporary.replace(path)
 
 
 def inputs():
@@ -74,16 +118,7 @@ def main():
     drive = Path('/content/drive/MyDrive')
     if not drive.is_dir():
         raise RuntimeError('Monter Google Drive avant de lancer cette cellule.')
-    digest = hashlib.sha256()
     files = inputs()
-    for path in files:
-        digest.update(str(path.relative_to(ROOT)).encode())
-        digest.update(path.read_bytes())
-    destination = drive / 'HackTheFork' / 'advanced' / digest.hexdigest()[:16]
-    destination.mkdir(parents=True, exist_ok=True)
-    primary, rpg, combined = [destination / name for name in ('primary', 'rpg', 'combined')]
-    primary.mkdir(exist_ok=True)
-    rpg.mkdir(exist_ok=True)
     runtime = {'NPY_DISABLE_CPU_FEATURES': NUMPY_DISABLED_FEATURES,
                'reason': 'Match the evaluated QRF leaf-sampling execution profile'}
     probe = ('import json, sys; sys.path.insert(0, "scripts"); '
@@ -91,8 +126,14 @@ def main():
              'print(json.dumps(runtime_metadata()))')
     runtime['runtime'] = json.loads(subprocess.check_output(
         [sys.executable, '-c', probe], cwd=ROOT, text=True))
+    key = checkpoint_key(files, runtime['runtime'])
+    destination = drive / 'HackTheFork' / 'advanced' / key
+    destination.mkdir(parents=True, exist_ok=True)
+    primary, rpg, combined = [destination / name for name in ('primary', 'rpg', 'combined')]
+    primary.mkdir(exist_ok=True)
+    rpg.mkdir(exist_ok=True)
     for directory in (primary, rpg):
-        (directory / 'execution_environment.json').write_text(json.dumps(runtime, indent=2) + '\n')
+        save_execution_environment(directory, runtime)
     with zipfile.ZipFile(primary / 'executed-inputs.zip', 'w', zipfile.ZIP_DEFLATED) as archive:
         for path in files:
             archive.write(path, path.relative_to(ROOT))
@@ -100,7 +141,7 @@ def main():
     run_visible([sys.executable, '-u', str(ROOT / 'pipeline/benchmark_advanced.py'),
                  '--output', str(primary), '--samples', '20000', '--threads', '1'],
                 primary, total=1700)
-    alias_data = Path('/content') / ('advanced-rpg-data-' + digest.hexdigest()[:16])
+    alias_data = Path('/content') / ('advanced-rpg-data-' + key)
     prepare_rpg_alias(primary / 'executed-inputs.zip', alias_data, rpg / 'executed-inputs.zip')
     print('Météo pondérée par le RPG historique : deux expériences supplémentaires.', flush=True)
     run_visible([sys.executable, '-u', str(ROOT / 'pipeline/benchmark_advanced.py'),

@@ -6,6 +6,8 @@ Le Contrat qui Tient aide le responsable filière d'une coopérative ou d'un con
 
 > État (samedi 31/10) : pipeline de bout en bout, tests et démo sur les vraies données (Agreste, RPG 2025, NASA POWER, Eurostat). Scénario économique de la version 4, prix payé sur les tonnes acceptées au tri, comparaison des contrats. Résultats : [docs/RESULTATS.md](docs/RESULTATS.md).
 
+**Optimisation avec nouvelles données — 36 configurations terminées.** L’[audit SIM, sols, RPG et modèles](docs/AUDIT_DONNEES_MODELES.md) compare M0, QRF, LightGBM et CatBoost sur cinq cultures et les mêmes 1 384 cas. Il détaille les gains par culture, les sous-groupes et les résultats des choix automatiques sur le passé. [Tableaux complets](experiments/advanced_policies/REPORT.md) · [Notebook avec progression et reprise Drive](notebooks/advanced_colab.ipynb).
+
 **Nouvel audit : cinq légumineuses, six modèles et trois contrats.** Les [conclusions et comparaisons avec M0](docs/AUDIT_MULTILEGUMES.md) utilisent les mêmes cas pour chaque candidat, des réglages choisis sur le passé et des analyses par année, région et historique disponible. Les [résultats de localisation](experiments/sites/README.md) séparent collecte et coût rendu complet. Le [notebook Colab](notebooks/multilegumes_colab.ipynb) affiche la progression et sauvegarde après chaque culture–modèle–année sur Drive. Les exports de démonstration ci-dessous conservent le modèle M1, avec les corrections de calcul et de logistique ; les nouveaux modèles sont comparés dans l'audit.
 
 ![La démo, étape « Le prix »](docs/img/etape-2-prix.png)

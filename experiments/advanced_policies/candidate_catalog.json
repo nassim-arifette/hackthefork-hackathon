@@ -1,0 +1,802 @@
+{
+  "trend": {
+    "legacy": "trend",
+    "feature_group": "legacy",
+    "distribution": "three",
+    "ablation_parent": null
+  },
+  "qrf_seasonal": {
+    "legacy": "qrf",
+    "feature_group": "seasonal",
+    "distribution": "three",
+    "ablation_parent": "trend"
+  },
+  "trend_dense": {
+    "feature_group": "legacy",
+    "distribution": "dense",
+    "model_spec": {
+      "family": "trend",
+      "quantiles": [
+        0.01,
+        0.05,
+        0.1,
+        0.2,
+        0.3,
+        0.4,
+        0.5,
+        0.6,
+        0.7,
+        0.8,
+        0.9,
+        0.95,
+        0.99
+      ]
+    },
+    "ablation_parent": "trend"
+  },
+  "trend_joint_gaussian": {
+    "feature_group": "legacy",
+    "distribution": "dense",
+    "model_spec": {
+      "family": "trend",
+      "quantiles": [
+        0.01,
+        0.05,
+        0.1,
+        0.2,
+        0.3,
+        0.4,
+        0.5,
+        0.6,
+        0.7,
+        0.8,
+        0.9,
+        0.95,
+        0.99
+      ]
+    },
+    "ablation_parent": "trend_dense",
+    "dependence": "gaussian"
+  },
+  "trend_joint_empirical": {
+    "feature_group": "legacy",
+    "distribution": "dense",
+    "model_spec": {
+      "family": "trend",
+      "quantiles": [
+        0.01,
+        0.05,
+        0.1,
+        0.2,
+        0.3,
+        0.4,
+        0.5,
+        0.6,
+        0.7,
+        0.8,
+        0.9,
+        0.95,
+        0.99
+      ]
+    },
+    "ablation_parent": "trend_dense",
+    "dependence": "empirical_checkerboard"
+  },
+  "qrf_combined_sparse": {
+    "feature_group": "combined",
+    "distribution": "three",
+    "model_spec": {
+      "family": "qrf",
+      "quantiles": [
+        0.1,
+        0.5,
+        0.9
+      ]
+    },
+    "ablation_parent": "qrf_seasonal"
+  },
+  "qrf_nasa_sparse": {
+    "feature_group": "nasa",
+    "distribution": "three",
+    "model_spec": {
+      "family": "qrf",
+      "quantiles": [
+        0.1,
+        0.5,
+        0.9
+      ]
+    },
+    "ablation_parent": "qrf_combined_sparse"
+  },
+  "qrf_sim_sparse": {
+    "feature_group": "sim",
+    "distribution": "three",
+    "model_spec": {
+      "family": "qrf",
+      "quantiles": [
+        0.1,
+        0.5,
+        0.9
+      ]
+    },
+    "ablation_parent": "qrf_nasa_sparse"
+  },
+  "qrf_soil_sparse": {
+    "feature_group": "soil",
+    "distribution": "three",
+    "model_spec": {
+      "family": "qrf",
+      "quantiles": [
+        0.1,
+        0.5,
+        0.9
+      ]
+    },
+    "ablation_parent": "qrf_sim_sparse"
+  },
+  "qrf_combined_dense": {
+    "feature_group": "combined",
+    "distribution": "dense",
+    "model_spec": {
+      "family": "qrf",
+      "quantiles": [
+        0.01,
+        0.05,
+        0.1,
+        0.2,
+        0.3,
+        0.4,
+        0.5,
+        0.6,
+        0.7,
+        0.8,
+        0.9,
+        0.95,
+        0.99
+      ]
+    },
+    "ablation_parent": "qrf_combined_sparse"
+  },
+  "qrf_nasa_dense": {
+    "feature_group": "nasa",
+    "distribution": "dense",
+    "model_spec": {
+      "family": "qrf",
+      "quantiles": [
+        0.01,
+        0.05,
+        0.1,
+        0.2,
+        0.3,
+        0.4,
+        0.5,
+        0.6,
+        0.7,
+        0.8,
+        0.9,
+        0.95,
+        0.99
+      ]
+    },
+    "ablation_parent": "qrf_nasa_sparse"
+  },
+  "qrf_sim_dense": {
+    "feature_group": "sim",
+    "distribution": "dense",
+    "model_spec": {
+      "family": "qrf",
+      "quantiles": [
+        0.01,
+        0.05,
+        0.1,
+        0.2,
+        0.3,
+        0.4,
+        0.5,
+        0.6,
+        0.7,
+        0.8,
+        0.9,
+        0.95,
+        0.99
+      ]
+    },
+    "ablation_parent": "qrf_sim_sparse"
+  },
+  "qrf_soil_dense": {
+    "feature_group": "soil",
+    "distribution": "dense",
+    "model_spec": {
+      "family": "qrf",
+      "quantiles": [
+        0.01,
+        0.05,
+        0.1,
+        0.2,
+        0.3,
+        0.4,
+        0.5,
+        0.6,
+        0.7,
+        0.8,
+        0.9,
+        0.95,
+        0.99
+      ]
+    },
+    "ablation_parent": "qrf_soil_sparse"
+  },
+  "qrf_soil_absolute": {
+    "feature_group": "soil",
+    "distribution": "dense",
+    "model_spec": {
+      "family": "qrf",
+      "quantiles": [
+        0.01,
+        0.05,
+        0.1,
+        0.2,
+        0.3,
+        0.4,
+        0.5,
+        0.6,
+        0.7,
+        0.8,
+        0.9,
+        0.95,
+        0.99
+      ],
+      "feature_mode": "absolute_anomaly"
+    },
+    "ablation_parent": "qrf_soil_dense"
+  },
+  "qrf_soil_shrinkage": {
+    "feature_group": "soil",
+    "distribution": "dense",
+    "model_spec": {
+      "family": "qrf",
+      "quantiles": [
+        0.01,
+        0.05,
+        0.1,
+        0.2,
+        0.3,
+        0.4,
+        0.5,
+        0.6,
+        0.7,
+        0.8,
+        0.9,
+        0.95,
+        0.99
+      ],
+      "target_normalization": "shrinkage",
+      "shrinkage_strength": 5
+    },
+    "ablation_parent": "qrf_soil_dense"
+  },
+  "qrf_leaf3_depth3": {
+    "feature_group": "soil",
+    "distribution": "dense",
+    "model_spec": {
+      "family": "qrf",
+      "quantiles": [
+        0.01,
+        0.05,
+        0.1,
+        0.2,
+        0.3,
+        0.4,
+        0.5,
+        0.6,
+        0.7,
+        0.8,
+        0.9,
+        0.95,
+        0.99
+      ],
+      "params": {
+        "min_samples_leaf": 3,
+        "max_depth": 3
+      }
+    },
+    "ablation_parent": "qrf_soil_dense"
+  },
+  "qrf_leaf3_depth8": {
+    "feature_group": "soil",
+    "distribution": "dense",
+    "model_spec": {
+      "family": "qrf",
+      "quantiles": [
+        0.01,
+        0.05,
+        0.1,
+        0.2,
+        0.3,
+        0.4,
+        0.5,
+        0.6,
+        0.7,
+        0.8,
+        0.9,
+        0.95,
+        0.99
+      ],
+      "params": {
+        "min_samples_leaf": 3,
+        "max_depth": 8
+      }
+    },
+    "ablation_parent": "qrf_soil_dense"
+  },
+  "qrf_leaf5_depth8": {
+    "feature_group": "soil",
+    "distribution": "dense",
+    "model_spec": {
+      "family": "qrf",
+      "quantiles": [
+        0.01,
+        0.05,
+        0.1,
+        0.2,
+        0.3,
+        0.4,
+        0.5,
+        0.6,
+        0.7,
+        0.8,
+        0.9,
+        0.95,
+        0.99
+      ],
+      "params": {
+        "min_samples_leaf": 5,
+        "max_depth": 8
+      }
+    },
+    "ablation_parent": "qrf_soil_dense"
+  },
+  "qrf_leaf10_depth3": {
+    "feature_group": "soil",
+    "distribution": "dense",
+    "model_spec": {
+      "family": "qrf",
+      "quantiles": [
+        0.01,
+        0.05,
+        0.1,
+        0.2,
+        0.3,
+        0.4,
+        0.5,
+        0.6,
+        0.7,
+        0.8,
+        0.9,
+        0.95,
+        0.99
+      ],
+      "params": {
+        "min_samples_leaf": 10,
+        "max_depth": 3
+      }
+    },
+    "ablation_parent": "qrf_soil_dense"
+  },
+  "qrf_leaf10_depth8": {
+    "feature_group": "soil",
+    "distribution": "dense",
+    "model_spec": {
+      "family": "qrf",
+      "quantiles": [
+        0.01,
+        0.05,
+        0.1,
+        0.2,
+        0.3,
+        0.4,
+        0.5,
+        0.6,
+        0.7,
+        0.8,
+        0.9,
+        0.95,
+        0.99
+      ],
+      "params": {
+        "min_samples_leaf": 10,
+        "max_depth": 8
+      }
+    },
+    "ablation_parent": "qrf_soil_dense"
+  },
+  "qrf_features05": {
+    "feature_group": "soil",
+    "distribution": "dense",
+    "model_spec": {
+      "family": "qrf",
+      "quantiles": [
+        0.01,
+        0.05,
+        0.1,
+        0.2,
+        0.3,
+        0.4,
+        0.5,
+        0.6,
+        0.7,
+        0.8,
+        0.9,
+        0.95,
+        0.99
+      ],
+      "params": {
+        "max_features": 0.5
+      }
+    },
+    "ablation_parent": "qrf_soil_dense"
+  },
+  "lgb_sparse": {
+    "feature_group": "soil",
+    "distribution": "three",
+    "model_spec": {
+      "family": "lightgbm",
+      "quantiles": [
+        0.1,
+        0.5,
+        0.9
+      ]
+    },
+    "ablation_parent": "qrf_soil_sparse"
+  },
+  "lgb_dense": {
+    "feature_group": "soil",
+    "distribution": "dense",
+    "model_spec": {
+      "family": "lightgbm",
+      "quantiles": [
+        0.01,
+        0.05,
+        0.1,
+        0.2,
+        0.3,
+        0.4,
+        0.5,
+        0.6,
+        0.7,
+        0.8,
+        0.9,
+        0.95,
+        0.99
+      ]
+    },
+    "ablation_parent": "lgb_sparse"
+  },
+  "lgb_leaf15": {
+    "feature_group": "soil",
+    "distribution": "dense",
+    "model_spec": {
+      "family": "lightgbm",
+      "quantiles": [
+        0.01,
+        0.05,
+        0.1,
+        0.2,
+        0.3,
+        0.4,
+        0.5,
+        0.6,
+        0.7,
+        0.8,
+        0.9,
+        0.95,
+        0.99
+      ],
+      "params": {
+        "num_leaves": 15,
+        "max_depth": 4,
+        "n_estimators": 250,
+        "min_child_samples": 10
+      }
+    },
+    "ablation_parent": "lgb_dense"
+  },
+  "cat_sparse": {
+    "feature_group": "soil",
+    "distribution": "three",
+    "model_spec": {
+      "family": "catboost",
+      "quantiles": [
+        0.1,
+        0.5,
+        0.9
+      ]
+    },
+    "ablation_parent": "qrf_soil_sparse"
+  },
+  "cat_dense": {
+    "feature_group": "soil",
+    "distribution": "dense",
+    "model_spec": {
+      "family": "catboost",
+      "quantiles": [
+        0.01,
+        0.05,
+        0.1,
+        0.2,
+        0.3,
+        0.4,
+        0.5,
+        0.6,
+        0.7,
+        0.8,
+        0.9,
+        0.95,
+        0.99
+      ]
+    },
+    "ablation_parent": "cat_sparse"
+  },
+  "cat_depth6": {
+    "feature_group": "soil",
+    "distribution": "dense",
+    "model_spec": {
+      "family": "catboost",
+      "quantiles": [
+        0.01,
+        0.05,
+        0.1,
+        0.2,
+        0.3,
+        0.4,
+        0.5,
+        0.6,
+        0.7,
+        0.8,
+        0.9,
+        0.95,
+        0.99
+      ],
+      "params": {
+        "depth": 6,
+        "iterations": 500,
+        "l2_leaf_reg": 10
+      }
+    },
+    "ablation_parent": "cat_dense"
+  },
+  "qrf_lgb_mixture": {
+    "feature_group": "soil",
+    "distribution": "dense",
+    "model_spec": {
+      "family": "qrf",
+      "quantiles": [
+        0.01,
+        0.05,
+        0.1,
+        0.2,
+        0.3,
+        0.4,
+        0.5,
+        0.6,
+        0.7,
+        0.8,
+        0.9,
+        0.95,
+        0.99
+      ]
+    },
+    "ablation_parent": "qrf_soil_dense",
+    "mixture": [
+      "qrf_soil_dense",
+      "lgb_dense"
+    ]
+  },
+  "qrf_joint_gaussian": {
+    "feature_group": "soil",
+    "distribution": "dense",
+    "model_spec": {
+      "family": "qrf",
+      "quantiles": [
+        0.01,
+        0.05,
+        0.1,
+        0.2,
+        0.3,
+        0.4,
+        0.5,
+        0.6,
+        0.7,
+        0.8,
+        0.9,
+        0.95,
+        0.99
+      ]
+    },
+    "ablation_parent": "qrf_soil_dense",
+    "dependence": "gaussian"
+  },
+  "qrf_joint_empirical": {
+    "feature_group": "soil",
+    "distribution": "dense",
+    "model_spec": {
+      "family": "qrf",
+      "quantiles": [
+        0.01,
+        0.05,
+        0.1,
+        0.2,
+        0.3,
+        0.4,
+        0.5,
+        0.6,
+        0.7,
+        0.8,
+        0.9,
+        0.95,
+        0.99
+      ]
+    },
+    "ablation_parent": "qrf_soil_dense",
+    "dependence": "empirical_checkerboard"
+  },
+  "qrf_agri_sparse": {
+    "feature_group": "agri",
+    "distribution": "three",
+    "model_spec": {
+      "family": "qrf",
+      "quantiles": [
+        0.1,
+        0.5,
+        0.9
+      ]
+    },
+    "ablation_parent": "qrf_soil_sparse"
+  },
+  "qrf_agri_dense": {
+    "feature_group": "agri",
+    "distribution": "dense",
+    "model_spec": {
+      "family": "qrf",
+      "quantiles": [
+        0.01,
+        0.05,
+        0.1,
+        0.2,
+        0.3,
+        0.4,
+        0.5,
+        0.6,
+        0.7,
+        0.8,
+        0.9,
+        0.95,
+        0.99
+      ]
+    },
+    "ablation_parent": "qrf_soil_dense"
+  },
+  "qrf_cropsoil_dense": {
+    "feature_group": "cropsoil",
+    "distribution": "dense",
+    "model_spec": {
+      "family": "qrf",
+      "quantiles": [
+        0.01,
+        0.05,
+        0.1,
+        0.2,
+        0.3,
+        0.4,
+        0.5,
+        0.6,
+        0.7,
+        0.8,
+        0.9,
+        0.95,
+        0.99
+      ]
+    },
+    "ablation_parent": "qrf_soil_dense"
+  },
+  "qrf_wheat_dense": {
+    "feature_group": "soil",
+    "distribution": "dense",
+    "model_spec": {
+      "family": "qrf",
+      "quantiles": [
+        0.01,
+        0.05,
+        0.1,
+        0.2,
+        0.3,
+        0.4,
+        0.5,
+        0.6,
+        0.7,
+        0.8,
+        0.9,
+        0.95,
+        0.99
+      ]
+    },
+    "ablation_parent": "qrf_soil_dense",
+    "wheat_variant": "qrf_sim_dense"
+  },
+  "qrf_rpg_weather_sparse": {
+    "feature_group": "rpg_weather",
+    "distribution": "three",
+    "model_spec": {
+      "family": "qrf",
+      "quantiles": [
+        0.1,
+        0.5,
+        0.9
+      ]
+    },
+    "ablation_parent": "qrf_agri_sparse",
+    "original_name": "qrf_agri_sparse",
+    "feature_semantics": "RPG2015 crop-specific SIM weather weights; documented CLC fallback",
+    "executed_candidate": {
+      "feature_group": "agri",
+      "distribution": "three",
+      "model_spec": {
+        "family": "qrf",
+        "quantiles": [
+          0.1,
+          0.5,
+          0.9
+        ]
+      },
+      "ablation_parent": "qrf_soil_sparse"
+    }
+  },
+  "qrf_rpg_weather_dense": {
+    "feature_group": "rpg_weather",
+    "distribution": "dense",
+    "model_spec": {
+      "family": "qrf",
+      "quantiles": [
+        0.01,
+        0.05,
+        0.1,
+        0.2,
+        0.3,
+        0.4,
+        0.5,
+        0.6,
+        0.7,
+        0.8,
+        0.9,
+        0.95,
+        0.99
+      ]
+    },
+    "ablation_parent": "qrf_agri_dense",
+    "original_name": "qrf_agri_dense",
+    "feature_semantics": "RPG2015 crop-specific SIM weather weights; documented CLC fallback",
+    "executed_candidate": {
+      "feature_group": "agri",
+      "distribution": "dense",
+      "model_spec": {
+        "family": "qrf",
+        "quantiles": [
+          0.01,
+          0.05,
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.8,
+          0.9,
+          0.95,
+          0.99
+        ]
+      },
+      "ablation_parent": "qrf_soil_dense"
+    }
+  }
+}

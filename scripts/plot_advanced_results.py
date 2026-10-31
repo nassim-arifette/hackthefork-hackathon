@@ -10,8 +10,9 @@ four separately evaluated temporal selectors. A highlighted new candidate is
 the cheapest observed new configuration reaching 80%, a retrospective choice,
 not a deployed model or the performance of the temporal selector.
 
-Near-coincident selector markers are shifted in display points only, with a
-leader to the exact data position; the axes and reported values stay unchanged.
+Near-coincident selector markers are shifted horizontally in display points,
+with a leader to the exact data position. Their height always remains exact,
+so a marker cannot cross the 80% threshold because of graphical separation.
 Exports are headless PNG/PDF with fixed styling and no PDF creation timestamp.
 """
 from __future__ import annotations
@@ -177,10 +178,14 @@ def selector_offsets(ax, rows):
     for members in groups.values():
         if len(members) <= 1:
             continue
-        # Angles and ordering are fixed so repeated exports remain identical.
-        angles = np.linspace(np.pi / 2, np.pi / 2 + 2 * np.pi, len(members), endpoint=False)
-        for i, angle in zip(members, angles):
-            offsets[policies[i]] = (13 * np.cos(angle), 13 * np.sin(angle))
+        # Keep every coverage coordinate exact. Only the horizontal marker
+        # position may move; a leader and a dot retain its exact cost.
+        ordered = sorted(members, key=lambda i: (display[i, 0], policies[i]))
+        center_x = float(display[ordered, 0].mean())
+        spacing = 17 * ax.figure.dpi / 72
+        for rank, i in enumerate(ordered):
+            desired_x = center_x + (rank - (len(ordered) - 1) / 2) * spacing
+            offsets[policies[i]] = ((desired_x - display[i, 0]) * 72 / ax.figure.dpi, 0.)
     return offsets
 
 
@@ -312,7 +317,7 @@ def make_figure(data):
              "Le cercle noir repère un choix après comparaison ; les sélecteurs sont évalués en choisissant uniquement dans le passé.",
              fontsize=8.7, color="#4B5563")
     fig.text(.065, .022,
-             "Les marqueurs de sélecteurs superposés sont décalés pour rester lisibles ; leur trait pointe vers la valeur exacte. Aucun score n'est déplacé dans les données.",
+             "Les sélecteurs proches sont écartés horizontalement : leur hauteur reste exacte et le trait indique leur coût exact. Aucun score n'est modifié.",
              fontsize=8.2, color="#66717D")
     return fig
 

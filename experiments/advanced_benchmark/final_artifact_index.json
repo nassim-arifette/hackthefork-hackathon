@@ -1,0 +1,52 @@
+{
+  "original_archive_sha256": "a1d8669c5d77619822eda1cd674facd367014e1160623afcaab9325f8b3d2aa4",
+  "parts": [
+    {
+      "name": "advanced-analysis-final-01-of-02.zip",
+      "size": 28809982,
+      "sha256": "767d16a7e6d67d45a3bcc458a19cc26fdbe9f91f5d2f92d7970a178a2b52539a",
+      "members": [
+        "combined/COMPOSITION.md",
+        "combined/audit.json",
+        "combined/cohorts.json",
+        "combined/manifest.json",
+        "combined/predictions.csv",
+        "combined/residual_diagnostics.csv",
+        "combined/summary.csv",
+        "combined/summary.json"
+      ],
+      "drive_id": "17Lh2z4i0EPP9t78b4LsPdSoveCIF960a",
+      "drive_url": "https://drive.google.com/file/d/17Lh2z4i0EPP9t78b4LsPdSoveCIF960a/view"
+    },
+    {
+      "name": "advanced-analysis-final-02-of-02.zip",
+      "size": 80081688,
+      "sha256": "d89bf690884d8cb601be8e4a6154126379c44807abeb78a711d4fc44d4b028c8",
+      "members": [
+        "analysis.log",
+        "executed-analysis-code.zip",
+        "execution.json",
+        "merge.log",
+        "policies/REPORT.md",
+        "policies/ablation.csv",
+        "policies/candidate_catalog.json",
+        "policies/global_summary.csv",
+        "policies/manifest.json",
+        "policies/paired_baselines.csv",
+        "policies/policy_decisions.csv.gz",
+        "policies/retrospective_candidates.csv",
+        "policies/selection_candidates.csv.gz",
+        "policies/selection_decisions.csv",
+        "policies/subgroup_comparisons.csv.gz",
+        "policies/summary.csv.gz",
+        "policies/yield_diagnostics.csv",
+        "status.json",
+        "tests.log"
+      ],
+      "drive_id": "1dUEXtLPzwwuQHKBuPwFYyM9HJaSGxXxU",
+      "drive_url": "https://drive.google.com/file/d/1dUEXtLPzwwuQHKBuPwFYyM9HJaSGxXxU/view"
+    }
+  ],
+  "restore": "Extract both archives into the same directory; files preserve source bytes.",
+  "notebook_drive_id": "11xhkqdCaCUAP2ChtKTw9x1fNRAFFvYpK"
+}

@@ -52,3 +52,9 @@ experiments/advanced_*/partitions/
 experiments/advanced_*/executed-inputs.zip
 experiments/advanced_*/*.log
 experiments/advanced_*/residual_diagnostics.csv
+
+# Reconstructed lossless tables; binary parts and checksums are versioned.
+experiments/advanced_combined/predictions.csv.gz
+experiments/advanced_policies/policy_decisions.csv.gz
+experiments/advanced_policies/subgroup_comparisons.csv.gz
+experiments/advanced_policies/summary.csv.gz

@@ -1,0 +1,109 @@
+{
+  "format": "lossless-binary-parts-v1",
+  "chunk_bytes": 8388608,
+  "files": [
+    {
+      "path": "experiments/advanced_combined/predictions.csv.gz",
+      "size": 27533507,
+      "sha256": "10a65844b68e945c5818de4171ca82343735b66d893a19e3b781e0c57aa5ff11",
+      "parts": [
+        {
+          "path": "experiments/advanced_combined/predictions.csv.gz.part01",
+          "size": 8388608,
+          "sha256": "eabd2a45ccf12eb30c25586a4f24636f6ccfbafd57c2dda6f62c49199ceaeef9"
+        },
+        {
+          "path": "experiments/advanced_combined/predictions.csv.gz.part02",
+          "size": 8388608,
+          "sha256": "a9330feb2ff9551b606f9f6d3424080054706fb4a9f1f31a39713bc6130c9909"
+        },
+        {
+          "path": "experiments/advanced_combined/predictions.csv.gz.part03",
+          "size": 8388608,
+          "sha256": "6738cc0d1c7f83525100b0f29d3ccb0115fc11cdfc29b7bfa20b7bbbcde12476"
+        },
+        {
+          "path": "experiments/advanced_combined/predictions.csv.gz.part04",
+          "size": 2367683,
+          "sha256": "38878d55556e125408295b04bccfcb302d6110c175d216f3b5712fd41a62d7b3"
+        }
+      ]
+    },
+    {
+      "path": "experiments/advanced_policies/policy_decisions.csv.gz",
+      "size": 26902734,
+      "sha256": "f36d8999e43014c4139c8966173d9382de17d60e0e86db552d12b20e01e9eb16",
+      "parts": [
+        {
+          "path": "experiments/advanced_policies/policy_decisions.csv.gz.part01",
+          "size": 8388608,
+          "sha256": "c4c4e64122668e220b69719ac97e48a70c8eeae7af8c9894be703644e07725cd"
+        },
+        {
+          "path": "experiments/advanced_policies/policy_decisions.csv.gz.part02",
+          "size": 8388608,
+          "sha256": "39b7f55ebee8cfb290e3b5c19397e051af662790226cbaf7b6f7c64d9d0664b8"
+        },
+        {
+          "path": "experiments/advanced_policies/policy_decisions.csv.gz.part03",
+          "size": 8388608,
+          "sha256": "b4712b5eb98773bff9794c54d44a08d42e072ed6be8d12a1f7938764dcde85cf"
+        },
+        {
+          "path": "experiments/advanced_policies/policy_decisions.csv.gz.part04",
+          "size": 1736910,
+          "sha256": "10e3809563cba4a2337b150be8ec24d20ae4f095a46fd16306b3f21de68c6b14"
+        }
+      ]
+    },
+    {
+      "path": "experiments/advanced_policies/subgroup_comparisons.csv.gz",
+      "size": 26644270,
+      "sha256": "4ff93291636fdc7cedd80a261c2739f4d34d847395247663a8a30a8b19211e28",
+      "parts": [
+        {
+          "path": "experiments/advanced_policies/subgroup_comparisons.csv.gz.part01",
+          "size": 8388608,
+          "sha256": "609f67e4dec96ac8aadfdd07572e0715a4a801c8679f9933dde8090e4fcdc459"
+        },
+        {
+          "path": "experiments/advanced_policies/subgroup_comparisons.csv.gz.part02",
+          "size": 8388608,
+          "sha256": "f44fb7ce593ee28e6aabfb4d902018fd5a6f40287a99928e417361ddcd722ffc"
+        },
+        {
+          "path": "experiments/advanced_policies/subgroup_comparisons.csv.gz.part03",
+          "size": 8388608,
+          "sha256": "052f49895810bb73c05270e93b0bd34bed0410623440f704f0267dc9dd3a41b2"
+        },
+        {
+          "path": "experiments/advanced_policies/subgroup_comparisons.csv.gz.part04",
+          "size": 1478446,
+          "sha256": "7cf0d1dc5e0dc04ababa55812394f04497149c14ffccd870fd1cb00593eebe2b"
+        }
+      ]
+    },
+    {
+      "path": "experiments/advanced_policies/summary.csv.gz",
+      "size": 23676584,
+      "sha256": "0c3a2a6a67cba187d3b4b7cd574b1db7299a4ecdf3bd761aa8168144d112100d",
+      "parts": [
+        {
+          "path": "experiments/advanced_policies/summary.csv.gz.part01",
+          "size": 8388608,
+          "sha256": "7c44f830b3b8fde1f41ac559e64a3cede18ee3a84b6ac748c62a41b11d98edfd"
+        },
+        {
+          "path": "experiments/advanced_policies/summary.csv.gz.part02",
+          "size": 8388608,
+          "sha256": "997364b5ef62e674aada983be7f87327eeb1b330e120271887b2dcfc6f51fda2"
+        },
+        {
+          "path": "experiments/advanced_policies/summary.csv.gz.part03",
+          "size": 6899368,
+          "sha256": "dc0d05cea2278a42709389962d3b8fd71d1b15410c3e1b0c798edf2fe93a6837"
+        }
+      ]
+    }
+  ]
+}
