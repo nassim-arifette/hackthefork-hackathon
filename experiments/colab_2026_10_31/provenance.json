@@ -1,0 +1,63 @@
+{
+  "status": "complete",
+  "source_commit": "54d9f666ebc9c64a8ac45944225337ca2401e0e6",
+  "source_commit_verified_against_all_input_files": true,
+  "run_id": "60304f3585c0c885",
+  "run_date": "2026-10-31",
+  "retrieval": "Original input/output archives retrieved from the user-authorized Google Drive run folder.",
+  "archives": {
+    "input-snapshot.zip": {
+      "sha256": "60304f3585c0c8850dfeef82f81dd4edff23f988f9a3d47f63a21a8dcef999c6",
+      "bytes": 76740
+    },
+    "results-full.zip": {
+      "sha256": "f157c4aa7ddf8d5ccce49695247a00a7b41478c85b7b8bb76404121f5227ad7c",
+      "bytes": 378424
+    }
+  },
+  "verification": {
+    "colab_benchmark": {
+      "models": 8,
+      "prediction_rows": 1536,
+      "cases_per_model": 192,
+      "years": [
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "aggregates_match_csv": true,
+      "script_and_inputs_match_snapshot": true
+    },
+    "colab_contract": {
+      "models": 11,
+      "prediction_rows": 2112,
+      "cases_per_model": 192,
+      "years": [
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "aggregates_match_csv": true,
+      "script_and_inputs_match_snapshot": true
+    }
+  },
+  "same_department_year_cohort_for_all_models": true,
+  "completed_checkpoints": {
+    "colab_benchmark": 56,
+    "colab_contract": 50
+  },
+  "notes": [
+    "Original results.json and predictions.csv are preserved byte for byte.",
+    "Original source_commit is unknown because the Colab input archive has no .git. The source commit above was separately verified against every archived source/data file.",
+    "Original CSV pinball is based on expanded yield bounds; model ranking here uses contract_loss. Yield coverage is not contract success.",
+    "annual_metrics.csv is derived from the complete per-case predictions, not rounded console values."
+  ]
+}

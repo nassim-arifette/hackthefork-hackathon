@@ -1,0 +1,78 @@
+{
+  "groups_fixed_before_score_inspection": {
+    "region": "Administrative region of the department, fixed metadata.",
+    "history": "Fewer than 8 versus at least 8 usable lentil years strictly before decision.",
+    "volatility": "Historical lentil sample SD / mean. Annual tercile cutoffs use only historical department representatives with at least 3 observations.",
+    "yield_level": "Historical mean lentil yield, split by the annual median of historical department representatives with at least 3 observations.",
+    "idf_donor": "Fixed project donor departments 10, 28, 45, 89 versus other observed departments; not an Ile-de-France field validation.",
+    "original_cohort": "133 original archived cases versus 59 added cases. Retrospective audit only, not a deployable selection feature.",
+    "harvest_collapse": "Ex post: realised lentil yield below 60% of its strictly historical department mean.",
+    "extreme_weather": "Ex post: target-year March-July rain outside historical local P10-P90, or days above 30C exceeding historical local P90.",
+    "wheat_price_shock": "Ex post: realised wheat price exceeds 1.2 times the latest earlier annual price."
+  },
+  "preseason_groups": [
+    "region",
+    "history",
+    "volatility",
+    "yield_level",
+    "idf_donor"
+  ],
+  "retrospective_only_groups": [
+    "original_cohort",
+    "harvest_collapse",
+    "extreme_weather",
+    "wheat_price_shock"
+  ],
+  "baseline": "trend__past_selected",
+  "candidates": [
+    "qrf__past_selected"
+  ],
+  "bootstrap_draws": 10000,
+  "report_candidate": "qrf__past_selected",
+  "baseline_label": "M0 calibré",
+  "candidate_label": "QRF calibré",
+  "protocol_description": "M0 et QRF utilisent ici chacun une correction du prix choisie uniquement sur les années antérieures. La comparaison porte sur les politiques trend__past_selected et qrf__past_selected du run contract_policies_sensitivity. Les groupes reprennent exactement les définitions de l’analyse brute ; aucun groupe n’a été choisi sur son résultat calibré.",
+  "unavailable_target_history": false,
+  "bootstrap_unit": "whole evaluation year; paired candidate-minus-baseline differences",
+  "command_line": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "pipeline/analyze_model_groups.py",
+    "--prediction-file",
+    "experiments/contract_policies_sensitivity/predictions.csv",
+    "--baseline",
+    "trend__past_selected",
+    "--candidates",
+    "qrf__past_selected",
+    "--report-candidate",
+    "qrf__past_selected",
+    "--baseline-label",
+    "M0 calibré",
+    "--candidate-label",
+    "QRF calibré",
+    "--protocol-description",
+    "M0 et QRF utilisent ici chacun une correction du prix choisie uniquement sur les années antérieures. La comparaison porte sur les politiques trend__past_selected et qrf__past_selected du run contract_policies_sensitivity. Les groupes reprennent exactement les définitions de l’analyse brute ; aucun groupe n’a été choisi sur son résultat calibré.",
+    "--output",
+    "experiments/model_groups_calibrated"
+  ],
+  "packages": {
+    "numpy": "2.3.5",
+    "pandas": "2.2.3"
+  },
+  "script_sha256": "e8536085151875a692d9f57fcf8d5b95c2eb4bfde86323009459c9300118d794",
+  "code_dependency_sha256": {
+    "pipeline/01_agreste.py": "1a7ade006f4799d451d6ed9dcc394756f2ae212b8b0b28f7046407936a8eb196"
+  },
+  "input_sha256": {
+    "experiments/colab_2026_10_31/colab_benchmark/predictions.csv": "9253aa302cfa45b70a0afc3c2fdabb5533e81bba9584159e59410d68a8df618d",
+    "experiments/qrf_optimization/predictions.csv": "00c31affcae13991317d7ba82291bb0a03c0b6fbbddcfc65ead139643ff38610",
+    "experiments/contract_policies_sensitivity/predictions.csv": "fc59df82aec3d0b9cc1030262b1629c1fe10c1a76e621728b918821ea96d6289",
+    "data/backtest.json": "d54b154e047269202511dc121353d61b6055a4d57e3565a3fbe5e21a4ada2330",
+    "data/panel_rendements.csv": "380b2e7a418dee87b0f193d6dc969ab3e336f2aea17870c7f4c6f989dd92f8d4",
+    "data/meteo_dept.csv": "f50803cf8e5fffe5e152967fe6e85eac5509cd948c649ebbf2899e0d036d52cb",
+    "data/prix_ble.csv": "2da72c05832daf2a3db1658d293f506aaa8101e13987c03215a2f4e9ca8ac676"
+  },
+  "case_count": 192,
+  "comparison_count": 100,
+  "past_series_year_count": 192,
+  "interpretation": "Exploratory subgroup diagnostics, not model selection using future subgroup outcomes."
+}

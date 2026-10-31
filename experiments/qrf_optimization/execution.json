@@ -1,0 +1,17 @@
+{
+  "execution_environment": "Google Colab existing notebook runtime",
+  "date_utc": "2026-10-31",
+  "remote_output_directory": "/content/drive/MyDrive/HackTheFork/optimizations/2026-10-31/qrf",
+  "source_base_commit": "743971c513778fb6db368f3f397aa6ad5f4f2ebf",
+  "reference_sha256": "9253aa302cfa45b70a0afc3c2fdabb5533e81bba9584159e59410d68a8df618d",
+  "results_archive_sha256": "c9f72a7ee5759622ef7eff243d6f2d1f21a70ae7d555eca943de95aafb792db1",
+  "verification": [
+    "Executed source equals committed script",
+    "192 identical cohort rows for each of seven policies",
+    "Baseline reproduced to less than 1e-7 EUR/t",
+    "All ten training cutoffs strictly in past",
+    "All seven selections recomputed from downloaded warmup predictions",
+    "All economic metrics recomputed from downloaded CSV"
+  ],
+  "production_files_modified": false
+}

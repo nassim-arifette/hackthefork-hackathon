@@ -1,0 +1,21 @@
+Direct CatBoost: 2016 complete
+Direct CatBoost: 2017 complete
+Direct CatBoost: 2018 complete
+Direct CatBoost: 2019 complete
+Direct CatBoost: 2020 complete
+Direct CatBoost: 2021 complete
+Direct CatBoost: 2022 complete
+Direct CatBoost: 2023 complete
+Direct CatBoost: 2024 complete
+Direct CatBoost: 2025 complete
+/content/hackthefork-benchmark/pipeline/benchmark_direct_catboost.py:123: FutureWarning: The behavior of DataFrame concatenation with empty or all-NA entries is deprecated. In a future version, this will no longer exclude empty or all-NA columns when determining the result dtypes. To retain the old behavior, exclude the relevant entries before the concat operation.
+  detail = pd.concat([detail, *selected, *baselines], ignore_index=True)
+                  model  contract_loss     held  median_price
+                    qrf     209.487319 0.630208   1158.568602
+     direct_cb_price_d2     230.747143 0.677083   1324.137922
+     direct_cb_price_d3     236.590788 0.671875   1278.273034
+  direct_cb_residual_d3     243.519044 0.671875   1332.481944
+direct_cb_past_selected     247.435427 0.666667   1364.391332
+  direct_cb_residual_d2     252.592819 0.692708   1393.091131
+             direct_qrf     280.909749 0.781250   1510.607487
+         direct_qrf_cal     316.493753 0.822917   1743.551773

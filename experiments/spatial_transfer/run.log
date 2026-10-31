@@ -1,0 +1,56 @@
+Transfer 1/49: 2019 24 - Centre-Val de Loire, 6 departments
+Transfer 2/49: 2019 27 - Bourgogne-Franche-Comté, 2 departments
+Transfer 3/49: 2019 44 - Grand Est, 4 departments
+Transfer 4/49: 2019 52 - Pays de la Loire, 1 departments
+Transfer 5/49: 2019 75 - Nouvelle Aquitaine, 4 departments
+Transfer 6/49: 2019 76 - Occitanie, 8 departments
+Transfer 7/49: 2019 84 - Auvergne-Rhône-Alpes, 3 departments
+Transfer 8/49: 2020 24 - Centre-Val de Loire, 6 departments
+Transfer 9/49: 2020 27 - Bourgogne-Franche-Comté, 1 departments
+Transfer 10/49: 2020 44 - Grand Est, 4 departments
+Transfer 11/49: 2020 52 - Pays de la Loire, 3 departments
+Transfer 12/49: 2020 75 - Nouvelle Aquitaine, 4 departments
+Transfer 13/49: 2020 76 - Occitanie, 8 departments
+Transfer 14/49: 2020 84 - Auvergne-Rhône-Alpes, 4 departments
+Transfer 15/49: 2021 24 - Centre-Val de Loire, 6 departments
+Transfer 16/49: 2021 27 - Bourgogne-Franche-Comté, 1 departments
+Transfer 17/49: 2021 44 - Grand Est, 4 departments
+Transfer 18/49: 2021 52 - Pays de la Loire, 3 departments
+Transfer 19/49: 2021 75 - Nouvelle Aquitaine, 4 departments
+Transfer 20/49: 2021 76 - Occitanie, 8 departments
+Transfer 21/49: 2021 84 - Auvergne-Rhône-Alpes, 4 departments
+Transfer 22/49: 2022 24 - Centre-Val de Loire, 6 departments
+Transfer 23/49: 2022 27 - Bourgogne-Franche-Comté, 1 departments
+Transfer 24/49: 2022 44 - Grand Est, 3 departments
+Transfer 25/49: 2022 52 - Pays de la Loire, 4 departments
+Transfer 26/49: 2022 75 - Nouvelle Aquitaine, 4 departments
+Transfer 27/49: 2022 76 - Occitanie, 7 departments
+Transfer 28/49: 2022 84 - Auvergne-Rhône-Alpes, 4 departments
+Transfer 29/49: 2023 24 - Centre-Val de Loire, 6 departments
+Transfer 30/49: 2023 27 - Bourgogne-Franche-Comté, 1 departments
+Transfer 31/49: 2023 44 - Grand Est, 1 departments
+Transfer 32/49: 2023 52 - Pays de la Loire, 4 departments
+Transfer 33/49: 2023 75 - Nouvelle Aquitaine, 4 departments
+Transfer 34/49: 2023 76 - Occitanie, 8 departments
+Transfer 35/49: 2023 84 - Auvergne-Rhône-Alpes, 3 departments
+Transfer 36/49: 2024 24 - Centre-Val de Loire, 6 departments
+Transfer 37/49: 2024 27 - Bourgogne-Franche-Comté, 1 departments
+Transfer 38/49: 2024 44 - Grand Est, 1 departments
+Transfer 39/49: 2024 52 - Pays de la Loire, 4 departments
+Transfer 40/49: 2024 75 - Nouvelle Aquitaine, 3 departments
+Transfer 41/49: 2024 76 - Occitanie, 6 departments
+Transfer 42/49: 2024 84 - Auvergne-Rhône-Alpes, 3 departments
+Transfer 43/49: 2025 24 - Centre-Val de Loire, 6 departments
+Transfer 44/49: 2025 27 - Bourgogne-Franche-Comté, 1 departments
+Transfer 45/49: 2025 44 - Grand Est, 1 departments
+Transfer 46/49: 2025 52 - Pays de la Loire, 5 departments
+Transfer 47/49: 2025 75 - Nouvelle Aquitaine, 3 departments
+Transfer 48/49: 2025 76 - Occitanie, 5 departments
+Transfer 49/49: 2025 84 - Auvergne-Rhône-Alpes, 3 departments
+/content/hackthefork-benchmark/pipeline/benchmark_spatial_transfer.py:155: FutureWarning: The behavior of DataFrame concatenation with empty or all-NA entries is deprecated. In a future version, this will no longer exclude empty or all-NA columns when determining the result dtypes. To retain the old behavior, exclude the relevant entries before the concat operation.
+  detail = pd.concat([detail, baseline], ignore_index=True)
+              model   n  years     held  held_year_mean                    held_year_bootstrap_80  contract_loss  median_price  shortfall_eur_ha  pinball  coverage    width
+  local_history_qrf 192      7 0.630208        0.646245   [0.5512471655328798, 0.742687074829932]     209.487319   1158.568602        108.539408 0.100896  0.801048 1.035972
+local_history_trend 192      7 0.661458        0.681895  [0.5514869549352308, 0.8150982615268328]     243.793324   1253.951420        116.842303 0.100698  0.775880 0.956531
+       transfer_qrf 192      7 0.489583        0.506996  [0.4099284541402768, 0.6158808350926578]     285.279128   1053.776725        158.158950      NaN       NaN      NaN
+     transfer_trend 192      7 0.583333        0.602341 [0.48678747361013375, 0.7192346287173874]     291.766538   1192.909965        144.451215      NaN       NaN      NaN

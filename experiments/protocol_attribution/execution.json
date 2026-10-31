@@ -1,0 +1,19 @@
+{
+  "execution_environment": "Google Colab existing notebook runtime",
+  "date_utc": "2026-10-31",
+  "remote_output_directory": "/content/drive/MyDrive/HackTheFork/deep_audit/2026-10-31/protocol",
+  "source_base_commit": "4546f29c3df297daffb22038bb8c4391c1f535a0",
+  "script_sha256": "dd54a42524062935fbb1709119c8266390870c92629248262698d3d3d2a6d314",
+  "results_archive_sha256": "00ff95184c07039656de7888dcbcf62682a2e746272b322f7fa47c13c3ad6804",
+  "verification": [
+    "3 unit tests pass",
+    "Independent source review completed",
+    "Executed source identical to repository script",
+    "All 266 legacy prices reproduce rounded historical exports exactly; all held indicators match",
+    "All 576 modern raw prices reproduce previous Colab baselines to below 1e-7 EUR/t",
+    "All downloaded economic summary metrics recomputed",
+    "All 30 modern fit cutoffs and 90 calibration cutoffs strictly precede prediction years",
+    "3796 evaluation predictions and 4780 predictions including warmup; unique keys verified"
+  ],
+  "production_files_modified": false
+}

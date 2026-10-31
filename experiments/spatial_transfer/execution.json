@@ -1,0 +1,18 @@
+{
+  "date_utc": "2026-10-31",
+  "execution_environment": "Google Colab existing notebook runtime",
+  "remote_output_directory": "/content/drive/MyDrive/HackTheFork/deep_audit/2026-10-31/transfer",
+  "source_base_commit": "4546f29c3df297daffb22038bb8c4391c1f535a0",
+  "archive_sha256": "19e89089524e1e364398dc5ba32a1ccd017442ce28652ac7e8daffcc151ce220",
+  "verification": [
+    "Executed script matches committed source",
+    "Four models each cover the same 192 cases",
+    "49 region-year folds exclude target region and future fitting years",
+    "Four distinct donors per target all belong to fitting departments",
+    "All transfer contracts meet at least 80% in simulated scenarios",
+    "All summary metrics recomputed from downloaded CSV",
+    "Local-history comparison reproduces original CSV prices"
+  ],
+  "production_files_modified": false,
+  "postprocessing": "Level-transfer diagnostics were computed locally from downloaded predictions and masked target labels; they do not enter model inputs."
+}
