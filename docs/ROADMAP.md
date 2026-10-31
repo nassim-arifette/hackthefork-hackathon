@@ -70,8 +70,8 @@ Dès que le parcours cœur fonctionne avec des chiffres cohérents, prendre ces 
 | Priorité | Extension | Budget de travail | Critère de sortie |
 |---|---|---|---|
 | 1 | ~~Site de collecte déplaçable~~ **fait** | 1 h | Distances, coût rendu, tonnes et courbe se recalculent ; meilleur point d'une grille. |
-| 2 | ~~Suivi Sentinel de 5 à 10 parcelles~~ **fait** (8 parcelles, étape « La saison ») | 1 à 2 h | Courbes précalculées, dates et pixels valides affichés, replay clairement nommé. |
-| 3 | ~~Le Maillon vu du ciel, zone réduite~~ **fait** (étape « Vu du ciel ») | Créneau restant avant le gel | Carte de classes et métriques sur des carrés de 4 km tenus à l'écart ; transfert 2024 → 2025 testé. |
+| 2 | ~~Suivi Sentinel de 5 à 10 parcelles~~ **fait** (8 parcelles, annexe « La saison, vue par satellite ») | 1 à 2 h | Courbes précalculées, dates et pixels valides affichés, replay clairement nommé. |
+| 3 | ~~Le Maillon vu du ciel, zone réduite~~ **fait** (annexe « Vu du ciel ») | Créneau restant avant le gel | Carte de classes et métriques sur des carrés de 4 km tenus à l'écart ; transfert 2024 → 2025 testé. |
 | 4 | Météo pondérée par les surfaces ; variables par stade | Non retenu pour le dépôt : les chiffres validés en backtest strict restent la référence | Limite annoncée dans [LIMITES.md](LIMITES.md). |
 | 5 | ~~Autres cultures~~ **fait** (pois chiche, haricot, pois, féverole) ; ~~offre assureurs~~ **faite** (prime pure, écran 6) ; ~~carte de France des prix~~ **faite** ; ~~sites de collecte existants~~ **faits** (Sirene) ; données coopératives demandées aux partenaires | Selon capacité disponible | Une preuve ciblée ou une maquette clairement identifiée. |
 
