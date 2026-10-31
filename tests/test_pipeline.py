@@ -265,3 +265,37 @@ def test_maillon_export_is_consistent():
         u = d["resultats"][nom]["un_sur_cinq"]
         for k in ("precision", "rappel"):
             assert u["min"][k] <= u["moyenne"][k] <= u["max"][k]
+
+
+def test_existing_sites_export_is_consistent():
+    """Sites Sirene : actifs, dans la zone, meilleur site bien le plus proche, aucune donnée personnelle."""
+    d = json.loads((APP_DATA / "sites.json").read_text())
+    sites = d["sites"]
+    assert d["n_sites"] == len(sites) > 0
+    assert d["n_cooperatives"] == sum(s[5] for s in sites)
+    assert all(s[4] in ("46.21Z", "52.10B") for s in sites)
+    assert all(1.0 < s[0] < 4.2 and 47.8 < s[1] < 49.6 for s in sites)  # Île-de-France et 15 km autour
+    for k, col in (("pilote", 6), ("ambition", 7)):
+        best = d["meilleur"][k]
+        assert sites[best["index"]][col] == min(s[col] for s in sites) == best["km_moyen"]
+    assert 0 <= d["maillon"]["part_surface_moins_10_km"] <= 1
+    # Le cache versionné ne garde que les champs utiles : ni dirigeants ni adresses.
+    for f in (DATA.parent / "data_raw" / "sirene").glob("*.json"):
+        txt = f.read_text()
+        assert "dirigeants" not in txt and "adresse" not in txt
+        assert not any(str(r["nature_juridique"]).startswith("1") for r in json.loads(txt)["results"])
+
+
+def test_new_contract_exports_are_consistent():
+    """Contrat indexé calibré sur la même promesse, assurance croissante avec le seuil, coûts présents."""
+    c = json.loads((DATA / "contrats.json").read_text())
+    h = hyp_values(hypotheses())
+    assert c["indexe"]["simulation"]["protection"] >= h["tau"] - 1e-3
+    planchers = [p["plancher"] for p in c["indexe"]["plancher_par_prix_ble"]]
+    assert planchers == sorted(planchers)
+    niveaux = c["assurance"]["niveaux"]
+    for a, b in zip(niveaux, niveaux[1:]):
+        assert a["seuil"] < b["seuil"]
+        assert a["prime_pure_eur_ha"] <= b["prime_pure_eur_ha"] and a["frequence_sinistre"] <= b["frequence_sinistre"]
+    for k in ("tri_eur_t_brute", "collecte_fixe_eur_t_brute", "collecte_eur_t_brute_km", "sechage_eur_t_point"):
+        assert c["couts_acheteur"][k] > 0

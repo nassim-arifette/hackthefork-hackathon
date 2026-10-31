@@ -11,6 +11,7 @@ import lettre from './data/lettre.json';
 import contrats from './data/contrats.json';
 import sentinelRaw from './data/sentinel.json';
 import culturesRaw from './data/cultures.json';
+import sitesRaw from './data/sites.json';
 import maillonRaw from './data/maillon.json';
 
 export type Label = 'mesure' | 'source' | 'suppose' | 'synthetique' | 'modele';
@@ -190,6 +191,23 @@ export const CODE_LABELS: Record<string, string> = {
   LEC: 'Lentille', PCH: 'Pois chiche', PHS: 'Pois et haricot secs', PHF: 'Pois et haricot frais',
   MPC: 'Mélange à légumineuses à graines prépondérantes',
 };
+
+/** Sites existants de collecte et de stockage de grains (Sirene, pipeline/11_sites.py). */
+export interface SiteExistant { lon: number; lat: number; commune: string; entreprise: string; naf: string; coop: boolean; km: { pilote: number; ambition: number } }
+type RawSite = [number, number, string, string, string, number, number, number];
+const SR = sitesRaw as any;
+export const SITES = {
+  n: SR.n_sites as number,
+  nCoop: SR.n_cooperatives as number,
+  date: SR.date_extraction as string,
+  scenario: SR.scenario as { site: [number, number]; km_moyen: { pilote: number; ambition: number } },
+  meilleur: SR.meilleur as Record<'pilote' | 'ambition', { index: number; commune: string; entreprise: string; km_moyen: number; gain_collecte_eur_t: number }>,
+  maillon: SR.maillon as { n_parcelles: number; surface_ha: number; km_moyen_pondere_surface: number; km_max: number; part_surface_moins_10_km: number },
+  liste: (SR.sites as RawSite[]).map(([lon, lat, commune, entreprise, naf, coop, kp, ka]): SiteExistant => ({
+    lon, lat, commune, entreprise, naf, coop: coop === 1, km: { pilote: kp, ambition: ka },
+  })),
+};
+export const NAF_LABELS: Record<string, string> = { '46.21Z': 'commerce de grains', '52.10B': 'entreposage, silo' };
 
 /** Contrats comparés (pipeline/07_contrats.py) : existants, puis calibrés pour 8 années sur 10. */
 export const CONTRATS = {

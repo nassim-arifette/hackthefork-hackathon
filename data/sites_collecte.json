@@ -1,0 +1,4994 @@
+{
+ "source": "Base Sirene (Insee), API Recherche d'entreprises (recherche-entreprises.api.gouv.fr)",
+ "url": "https://recherche-entreprises.api.gouv.fr/docs/",
+ "date_extraction": "2026-10-31",
+ "etiquette": "mesure",
+ "selection": "Entreprises NAF 46.21Z actives, hors entrepreneurs individuels ; établissements actifs, diffusibles, géolocalisés, NAF 46.21Z ou 52.10B, à moins de 15 km d'une parcelle francilienne",
+ "limite": "Sirene ne distingue pas un silo d'un bureau ou d'un magasin : sites candidats, capacités inconnues",
+ "departements": [
+  "77",
+  "78",
+  "91",
+  "95",
+  "02",
+  "10",
+  "27",
+  "28",
+  "45",
+  "51",
+  "60",
+  "89"
+ ],
+ "n_sites": 352,
+ "n_cooperatives": 171,
+ "volumes_t": {
+  "pilote": 300,
+  "ambition": 5000
+ },
+ "detour": 1.3,
+ "forfait_eur_t": 5,
+ "kappa_eur_t_km": 0.12,
+ "scenario": {
+  "site": [
+   2.95,
+   48.55
+  ],
+  "km_moyen": {
+   "pilote": 2.4,
+   "ambition": 7.1
+  }
+ },
+ "meilleur": {
+  "pilote": {
+   "index": 17,
+   "commune": "Chenoise-Cucharmoy",
+   "entreprise": "VIVESCIA",
+   "km_moyen": 1.0,
+   "gain_collecte_eur_t": 0.2
+  },
+  "ambition": {
+   "index": 16,
+   "commune": "Maison-Rouge",
+   "entreprise": "VIVESCIA",
+   "km_moyen": 4.8,
+   "gain_collecte_eur_t": 0.3
+  }
+ },
+ "maillon": {
+  "n_parcelles": 152,
+  "surface_ha": 1053.0,
+  "km_moyen_pondere_surface": 6.4,
+  "km_max": 12.4,
+  "part_surface_moins_10_km": 0.913
+ },
+ "sites": [
+  {
+   "siret": "70698018200036",
+   "entreprise": "SOUFFLET AGRICULTURE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Limoges-Fourches",
+   "dep": "77",
+   "lon": 2.66279,
+   "lat": 48.63498,
+   "km_moyen": {
+    "pilote": 1.5,
+    "ambition": 5.6
+   }
+  },
+  {
+   "siret": "70698018200051",
+   "entreprise": "SOUFFLET AGRICULTURE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Sept-Sorts",
+   "dep": "77",
+   "lon": 3.1031,
+   "lat": 48.94863,
+   "km_moyen": {
+    "pilote": 1.7,
+    "ambition": 6.8
+   }
+  },
+  {
+   "siret": "70698018200069",
+   "entreprise": "SOUFFLET AGRICULTURE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Mouy-Sur-Seine",
+   "dep": "77",
+   "lon": 3.22765,
+   "lat": 48.4248,
+   "km_moyen": {
+    "pilote": 2.8,
+    "ambition": 7.1
+   }
+  },
+  {
+   "siret": "70698018200309",
+   "entreprise": "SOUFFLET AGRICULTURE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Saint-Denis-Les-Rebais",
+   "dep": "77",
+   "lon": 3.20677,
+   "lat": 48.86694,
+   "km_moyen": {
+    "pilote": 1.5,
+    "ambition": 5.5
+   }
+  },
+  {
+   "siret": "70698018200317",
+   "entreprise": "SOUFFLET AGRICULTURE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Pezarches",
+   "dep": "77",
+   "lon": 2.99625,
+   "lat": 48.73441,
+   "km_moyen": {
+    "pilote": 1.5,
+    "ambition": 6.8
+   }
+  },
+  {
+   "siret": "70698018200325",
+   "entreprise": "SOUFFLET AGRICULTURE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Montolivet",
+   "dep": "77",
+   "lon": 3.42432,
+   "lat": 48.82833,
+   "km_moyen": {
+    "pilote": 1.4,
+    "ambition": 7.0
+   }
+  },
+  {
+   "siret": "70698018200333",
+   "entreprise": "SOUFFLET AGRICULTURE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Villiers-Saint-Georges",
+   "dep": "77",
+   "lon": 3.41214,
+   "lat": 48.65083,
+   "km_moyen": {
+    "pilote": 1.2,
+    "ambition": 5.1
+   }
+  },
+  {
+   "siret": "70698018200358",
+   "entreprise": "SOUFFLET AGRICULTURE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Courchamp",
+   "dep": "77",
+   "lon": 3.29732,
+   "lat": 48.63551,
+   "km_moyen": {
+    "pilote": 1.3,
+    "ambition": 5.0
+   }
+  },
+  {
+   "siret": "70698018200697",
+   "entreprise": "SOUFFLET AGRICULTURE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Nangis",
+   "dep": "77",
+   "lon": 3.0061,
+   "lat": 48.55538,
+   "km_moyen": {
+    "pilote": 1.6,
+    "ambition": 5.5
+   }
+  },
+  {
+   "siret": "70698018200705",
+   "entreprise": "SOUFFLET AGRICULTURE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Mouy-Sur-Seine",
+   "dep": "77",
+   "lon": 3.22775,
+   "lat": 48.42619,
+   "km_moyen": {
+    "pilote": 2.9,
+    "ambition": 7.1
+   }
+  },
+  {
+   "siret": "70698018200713",
+   "entreprise": "SOUFFLET AGRICULTURE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Esmans",
+   "dep": "77",
+   "lon": 2.95747,
+   "lat": 48.36105,
+   "km_moyen": {
+    "pilote": 1.8,
+    "ambition": 7.5
+   }
+  },
+  {
+   "siret": "70698018200721",
+   "entreprise": "SOUFFLET AGRICULTURE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Egreville",
+   "dep": "77",
+   "lon": 2.86485,
+   "lat": 48.17622,
+   "km_moyen": {
+    "pilote": 1.5,
+    "ambition": 7.4
+   }
+  },
+  {
+   "siret": "70698018200739",
+   "entreprise": "SOUFFLET AGRICULTURE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Chatenoy",
+   "dep": "77",
+   "lon": 2.63436,
+   "lat": 48.23183,
+   "km_moyen": {
+    "pilote": 1.6,
+    "ambition": 6.0
+   }
+  },
+  {
+   "siret": "30271596602574",
+   "entreprise": "VIVESCIA",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Chatenay-Sur-Seine",
+   "dep": "77",
+   "lon": 3.07771,
+   "lat": 48.41501,
+   "km_moyen": {
+    "pilote": 1.2,
+    "ambition": 6.7
+   }
+  },
+  {
+   "siret": "30271596602582",
+   "entreprise": "VIVESCIA",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Lechelle",
+   "dep": "77",
+   "lon": 3.38264,
+   "lat": 48.57856,
+   "km_moyen": {
+    "pilote": 1.4,
+    "ambition": 5.0
+   }
+  },
+  {
+   "siret": "30271596602590",
+   "entreprise": "VIVESCIA",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Mouy-Sur-Seine",
+   "dep": "77",
+   "lon": 3.22258,
+   "lat": 48.42576,
+   "km_moyen": {
+    "pilote": 3.0,
+    "ambition": 7.1
+   }
+  },
+  {
+   "siret": "30271596602608",
+   "entreprise": "VIVESCIA",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Maison-Rouge",
+   "dep": "77",
+   "lon": 3.14052,
+   "lat": 48.53801,
+   "km_moyen": {
+    "pilote": 1.2,
+    "ambition": 4.8
+   }
+  },
+  {
+   "siret": "30271596602616",
+   "entreprise": "VIVESCIA",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Chenoise-Cucharmoy",
+   "dep": "77",
+   "lon": 3.17289,
+   "lat": 48.59303,
+   "km_moyen": {
+    "pilote": 1.0,
+    "ambition": 5.2
+   }
+  },
+  {
+   "siret": "38196049101175",
+   "entreprise": "CERESIA",
+   "cooperative": true,
+   "naf": "52.10B",
+   "commune": "Jouy-Le-Chatel",
+   "dep": "77",
+   "lon": 3.13411,
+   "lat": 48.67052,
+   "km_moyen": {
+    "pilote": 1.3,
+    "ambition": 5.4
+   }
+  },
+  {
+   "siret": "77556730800843",
+   "entreprise": "SOC COOPERATIVE AGRICOLE 110 BOURGOGNE",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Montereau-Fault-Yonne",
+   "dep": "77",
+   "lon": 2.96911,
+   "lat": 48.38792,
+   "km_moyen": {
+    "pilote": 2.9,
+    "ambition": 7.9
+   }
+  },
+  {
+   "siret": "77556730800868",
+   "entreprise": "SOC COOPERATIVE AGRICOLE 110 BOURGOGNE",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Villemarechal",
+   "dep": "77",
+   "lon": 2.87246,
+   "lat": 48.27373,
+   "km_moyen": {
+    "pilote": 1.7,
+    "ambition": 6.9
+   }
+  },
+  {
+   "siret": "77556730800876",
+   "entreprise": "SOC COOPERATIVE AGRICOLE 110 BOURGOGNE",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Montereau-Fault-Yonne",
+   "dep": "77",
+   "lon": 2.96276,
+   "lat": 48.38654,
+   "km_moyen": {
+    "pilote": 3.0,
+    "ambition": 7.9
+   }
+  },
+  {
+   "siret": "77556730800884",
+   "entreprise": "SOC COOPERATIVE AGRICOLE 110 BOURGOGNE",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Voulx",
+   "dep": "77",
+   "lon": 2.96023,
+   "lat": 48.28188,
+   "km_moyen": {
+    "pilote": 1.9,
+    "ambition": 7.0
+   }
+  },
+  {
+   "siret": "77556730800892",
+   "entreprise": "SOC COOPERATIVE AGRICOLE 110 BOURGOGNE",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Moret-Loing-Et-Orvanne",
+   "dep": "77",
+   "lon": 2.82341,
+   "lat": 48.35868,
+   "km_moyen": {
+    "pilote": 3.3,
+    "ambition": 9.4
+   }
+  },
+  {
+   "siret": "77556730800900",
+   "entreprise": "SOC COOPERATIVE AGRICOLE 110 BOURGOGNE",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Forges",
+   "dep": "77",
+   "lon": 2.9282,
+   "lat": 48.42025,
+   "km_moyen": {
+    "pilote": 2.7,
+    "ambition": 9.0
+   }
+  },
+  {
+   "siret": "77556730800918",
+   "entreprise": "SOC COOPERATIVE AGRICOLE 110 BOURGOGNE",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Voulx",
+   "dep": "77",
+   "lon": 2.96023,
+   "lat": 48.28188,
+   "km_moyen": {
+    "pilote": 1.9,
+    "ambition": 7.0
+   }
+  },
+  {
+   "siret": "77560695700485",
+   "entreprise": "COOP AGRICOLE PRODUCT GATINAIS MEUNIERE (CAPROGA)",
+   "cooperative": true,
+   "naf": "52.10B",
+   "commune": "Moret-Loing-Et-Orvanne",
+   "dep": "77",
+   "lon": 2.85085,
+   "lat": 48.35017,
+   "km_moyen": {
+    "pilote": 1.6,
+    "ambition": 8.3
+   }
+  },
+  {
+   "siret": "77562903300066",
+   "entreprise": "COOPERATIVE AGRICOLE VALFRANCE",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Lagny-Sur-Marne",
+   "dep": "77",
+   "lon": 2.68219,
+   "lat": 48.87666,
+   "km_moyen": {
+    "pilote": 5.1,
+    "ambition": 13.0
+   }
+  },
+  {
+   "siret": "77562903300074",
+   "entreprise": "COOPERATIVE AGRICOLE VALFRANCE",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Crecy-La-Chapelle",
+   "dep": "77",
+   "lon": 2.902,
+   "lat": 48.85947,
+   "km_moyen": {
+    "pilote": 2.2,
+    "ambition": 7.5
+   }
+  },
+  {
+   "siret": "77562903300090",
+   "entreprise": "COOPERATIVE AGRICOLE VALFRANCE",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Fublaines",
+   "dep": "77",
+   "lon": 2.92797,
+   "lat": 48.94502,
+   "km_moyen": {
+    "pilote": 3.3,
+    "ambition": 7.8
+   }
+  },
+  {
+   "siret": "77562903300108",
+   "entreprise": "COOPERATIVE AGRICOLE VALFRANCE",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Villenoy",
+   "dep": "77",
+   "lon": 2.87229,
+   "lat": 48.94693,
+   "km_moyen": {
+    "pilote": 3.0,
+    "ambition": 7.4
+   }
+  },
+  {
+   "siret": "77562903300116",
+   "entreprise": "COOPERATIVE AGRICOLE VALFRANCE",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Saint-Mard",
+   "dep": "77",
+   "lon": 2.69709,
+   "lat": 49.03086,
+   "km_moyen": {
+    "pilote": 1.4,
+    "ambition": 5.6
+   }
+  },
+  {
+   "siret": "77562903300124",
+   "entreprise": "COOPERATIVE AGRICOLE VALFRANCE",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Oissery",
+   "dep": "77",
+   "lon": 2.82003,
+   "lat": 49.07327,
+   "km_moyen": {
+    "pilote": 1.3,
+    "ambition": 7.1
+   }
+  },
+  {
+   "siret": "77562903300140",
+   "entreprise": "COOPERATIVE AGRICOLE VALFRANCE",
+   "cooperative": true,
+   "naf": "52.10B",
+   "commune": "Nangis",
+   "dep": "77",
+   "lon": 3.01143,
+   "lat": 48.56337,
+   "km_moyen": {
+    "pilote": 1.6,
+    "ambition": 5.3
+   }
+  },
+  {
+   "siret": "77562903300157",
+   "entreprise": "COOPERATIVE AGRICOLE VALFRANCE",
+   "cooperative": true,
+   "naf": "52.10B",
+   "commune": "Verneuil-L'Etang",
+   "dep": "77",
+   "lon": 2.81947,
+   "lat": 48.6462,
+   "km_moyen": {
+    "pilote": 1.7,
+    "ambition": 6.3
+   }
+  },
+  {
+   "siret": "77562903300165",
+   "entreprise": "COOPERATIVE AGRICOLE VALFRANCE",
+   "cooperative": true,
+   "naf": "52.10B",
+   "commune": "Vaux-Le-Penil",
+   "dep": "77",
+   "lon": 2.67164,
+   "lat": 48.51624,
+   "km_moyen": {
+    "pilote": 4.6,
+    "ambition": 10.1
+   }
+  },
+  {
+   "siret": "77562903300173",
+   "entreprise": "COOPERATIVE AGRICOLE VALFRANCE",
+   "cooperative": true,
+   "naf": "52.10B",
+   "commune": "Perthes",
+   "dep": "77",
+   "lon": 2.55956,
+   "lat": 48.47989,
+   "km_moyen": {
+    "pilote": 2.0,
+    "ambition": 9.0
+   }
+  },
+  {
+   "siret": "77562903300181",
+   "entreprise": "COOPERATIVE AGRICOLE VALFRANCE",
+   "cooperative": true,
+   "naf": "52.10B",
+   "commune": "Mormant",
+   "dep": "77",
+   "lon": 2.88944,
+   "lat": 48.61199,
+   "km_moyen": {
+    "pilote": 1.3,
+    "ambition": 4.9
+   }
+  },
+  {
+   "siret": "77562903300199",
+   "entreprise": "COOPERATIVE AGRICOLE VALFRANCE",
+   "cooperative": true,
+   "naf": "52.10B",
+   "commune": "Evry-Gregy-Sur-Yerre",
+   "dep": "77",
+   "lon": 2.63958,
+   "lat": 48.65018,
+   "km_moyen": {
+    "pilote": 1.6,
+    "ambition": 6.2
+   }
+  },
+  {
+   "siret": "77562903300207",
+   "entreprise": "COOPERATIVE AGRICOLE VALFRANCE",
+   "cooperative": true,
+   "naf": "52.10B",
+   "commune": "Brie-Comte-Robert",
+   "dep": "77",
+   "lon": 2.61396,
+   "lat": 48.69919,
+   "km_moyen": {
+    "pilote": 2.2,
+    "ambition": 8.0
+   }
+  },
+  {
+   "siret": "77562903300223",
+   "entreprise": "COOPERATIVE AGRICOLE VALFRANCE",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "La Houssaye-En-Brie",
+   "dep": "77",
+   "lon": 2.86607,
+   "lat": 48.7352,
+   "km_moyen": {
+    "pilote": 1.5,
+    "ambition": 7.1
+   }
+  },
+  {
+   "siret": "77562903300231",
+   "entreprise": "COOPERATIVE AGRICOLE VALFRANCE",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Chaumes-En-Brie",
+   "dep": "77",
+   "lon": 2.8163,
+   "lat": 48.646,
+   "km_moyen": {
+    "pilote": 1.9,
+    "ambition": 6.3
+   }
+  },
+  {
+   "siret": "77562903300249",
+   "entreprise": "COOPERATIVE AGRICOLE VALFRANCE",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Rebais",
+   "dep": "77",
+   "lon": 3.23718,
+   "lat": 48.85076,
+   "km_moyen": {
+    "pilote": 1.5,
+    "ambition": 5.3
+   }
+  },
+  {
+   "siret": "77562903300256",
+   "entreprise": "COOPERATIVE AGRICOLE VALFRANCE",
+   "cooperative": true,
+   "naf": "52.10B",
+   "commune": "Rozay-En-Brie",
+   "dep": "77",
+   "lon": 2.95857,
+   "lat": 48.6867,
+   "km_moyen": {
+    "pilote": 2.0,
+    "ambition": 6.3
+   }
+  },
+  {
+   "siret": "77562903300264",
+   "entreprise": "COOPERATIVE AGRICOLE VALFRANCE",
+   "cooperative": true,
+   "naf": "52.10B",
+   "commune": "Marcilly",
+   "dep": "77",
+   "lon": 2.87897,
+   "lat": 49.03468,
+   "km_moyen": {
+    "pilote": 1.3,
+    "ambition": 5.3
+   }
+  },
+  {
+   "siret": "77562903300272",
+   "entreprise": "COOPERATIVE AGRICOLE VALFRANCE",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Ussy-Sur-Marne",
+   "dep": "77",
+   "lon": 3.07305,
+   "lat": 48.95559,
+   "km_moyen": {
+    "pilote": 1.7,
+    "ambition": 6.6
+   }
+  },
+  {
+   "siret": "77562903300298",
+   "entreprise": "COOPERATIVE AGRICOLE VALFRANCE",
+   "cooperative": true,
+   "naf": "52.10B",
+   "commune": "Esbly",
+   "dep": "77",
+   "lon": 2.80836,
+   "lat": 48.8988,
+   "km_moyen": {
+    "pilote": 4.1,
+    "ambition": 9.3
+   }
+  },
+  {
+   "siret": "77562903300306",
+   "entreprise": "COOPERATIVE AGRICOLE VALFRANCE",
+   "cooperative": true,
+   "naf": "52.10B",
+   "commune": "Saint-Soupplets",
+   "dep": "77",
+   "lon": 2.8133,
+   "lat": 49.04269,
+   "km_moyen": {
+    "pilote": 1.6,
+    "ambition": 5.7
+   }
+  },
+  {
+   "siret": "77562903300314",
+   "entreprise": "COOPERATIVE AGRICOLE VALFRANCE",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Charny",
+   "dep": "77",
+   "lon": 2.75348,
+   "lat": 48.96615,
+   "km_moyen": {
+    "pilote": 1.3,
+    "ambition": 5.5
+   }
+  },
+  {
+   "siret": "77562903300322",
+   "entreprise": "COOPERATIVE AGRICOLE VALFRANCE",
+   "cooperative": true,
+   "naf": "52.10B",
+   "commune": "Beautheil-Saints",
+   "dep": "77",
+   "lon": 3.09758,
+   "lat": 48.79359,
+   "km_moyen": {
+    "pilote": 1.6,
+    "ambition": 6.6
+   }
+  },
+  {
+   "siret": "77562903300348",
+   "entreprise": "COOPERATIVE AGRICOLE VALFRANCE",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Lizy-Sur-Ourcq",
+   "dep": "77",
+   "lon": 3.01436,
+   "lat": 49.02754,
+   "km_moyen": {
+    "pilote": 1.8,
+    "ambition": 6.4
+   }
+  },
+  {
+   "siret": "37999228200291",
+   "entreprise": "AGRILEADER",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Bray-Sur-Seine",
+   "dep": "77",
+   "lon": 3.2476,
+   "lat": 48.40783,
+   "km_moyen": {
+    "pilote": 1.4,
+    "ambition": 6.6
+   }
+  },
+  {
+   "siret": "77560771600146",
+   "entreprise": "AGROPITHIVIERS",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Beaumont-Du-Gatinais",
+   "dep": "77",
+   "lon": 2.47504,
+   "lat": 48.13675,
+   "km_moyen": {
+    "pilote": 2.3,
+    "ambition": 12.9
+   }
+  },
+  {
+   "siret": "30532052500028",
+   "entreprise": "COOPERATIVE AGRICOLE ILE DE FRANCE SUD",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Tousson",
+   "dep": "77",
+   "lon": 2.4527,
+   "lat": 48.3472,
+   "km_moyen": {
+    "pilote": 1.4,
+    "ambition": 7.7
+   }
+  },
+  {
+   "siret": "39194829600176",
+   "entreprise": "ALTERNAE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Melz-Sur-Seine",
+   "dep": "77",
+   "lon": 3.39057,
+   "lat": 48.50616,
+   "km_moyen": {
+    "pilote": 1.3,
+    "ambition": 7.8
+   }
+  },
+  {
+   "siret": "78495550200017",
+   "entreprise": "SOCIETE COOPERATIVE AGRICOLE TERRES BOCAGE GATINAIS",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Lorrez-Le-Bocage-Preaux",
+   "dep": "77",
+   "lon": 2.91744,
+   "lat": 48.24556,
+   "km_moyen": {
+    "pilote": 1.0,
+    "ambition": 7.1
+   }
+  },
+  {
+   "siret": "78495550200033",
+   "entreprise": "SOCIETE COOPERATIVE AGRICOLE TERRES BOCAGE GATINAIS",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Egreville",
+   "dep": "77",
+   "lon": 2.87555,
+   "lat": 48.17834,
+   "km_moyen": {
+    "pilote": 1.8,
+    "ambition": 7.5
+   }
+  },
+  {
+   "siret": "78495550200041",
+   "entreprise": "SOCIETE COOPERATIVE AGRICOLE TERRES BOCAGE GATINAIS",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Chateau-Landon",
+   "dep": "77",
+   "lon": 2.69474,
+   "lat": 48.14962,
+   "km_moyen": {
+    "pilote": 1.7,
+    "ambition": 8.0
+   }
+  },
+  {
+   "siret": "78495550200058",
+   "entreprise": "SOCIETE COOPERATIVE AGRICOLE TERRES BOCAGE GATINAIS",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Aufferville",
+   "dep": "77",
+   "lon": 2.60483,
+   "lat": 48.21824,
+   "km_moyen": {
+    "pilote": 1.5,
+    "ambition": 5.6
+   }
+  },
+  {
+   "siret": "78495550200066",
+   "entreprise": "SOCIETE COOPERATIVE AGRICOLE TERRES BOCAGE GATINAIS",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Chaintreaux",
+   "dep": "77",
+   "lon": 2.81419,
+   "lat": 48.19646,
+   "km_moyen": {
+    "pilote": 1.5,
+    "ambition": 6.5
+   }
+  },
+  {
+   "siret": "78495550200074",
+   "entreprise": "SOCIETE COOPERATIVE AGRICOLE TERRES BOCAGE GATINAIS",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Chevrainvilliers",
+   "dep": "77",
+   "lon": 2.59972,
+   "lat": 48.24936,
+   "km_moyen": {
+    "pilote": 1.3,
+    "ambition": 5.8
+   }
+  },
+  {
+   "siret": "78495550200082",
+   "entreprise": "SOCIETE COOPERATIVE AGRICOLE TERRES BOCAGE GATINAIS",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Saint-Pierre-Les-Nemours",
+   "dep": "77",
+   "lon": 2.69619,
+   "lat": 48.2518,
+   "km_moyen": {
+    "pilote": 2.7,
+    "ambition": 8.2
+   }
+  },
+  {
+   "siret": "78495550200090",
+   "entreprise": "SOCIETE COOPERATIVE AGRICOLE TERRES BOCAGE GATINAIS",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Saint-Pierre-Les-Nemours",
+   "dep": "77",
+   "lon": 2.6927,
+   "lat": 48.27738,
+   "km_moyen": {
+    "pilote": 3.6,
+    "ambition": 9.1
+   }
+  },
+  {
+   "siret": "78495550200108",
+   "entreprise": "SOCIETE COOPERATIVE AGRICOLE TERRES BOCAGE GATINAIS",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Chateau-Landon",
+   "dep": "77",
+   "lon": 2.69189,
+   "lat": 48.14896,
+   "km_moyen": {
+    "pilote": 1.7,
+    "ambition": 8.0
+   }
+  },
+  {
+   "siret": "78495550200116",
+   "entreprise": "SOCIETE COOPERATIVE AGRICOLE TERRES BOCAGE GATINAIS",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Beaumont-Du-Gatinais",
+   "dep": "77",
+   "lon": 2.47092,
+   "lat": 48.14193,
+   "km_moyen": {
+    "pilote": 2.5,
+    "ambition": 12.8
+   }
+  },
+  {
+   "siret": "78495550200124",
+   "entreprise": "SOCIETE COOPERATIVE AGRICOLE TERRES BOCAGE GATINAIS",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Mondreville",
+   "dep": "77",
+   "lon": 2.60885,
+   "lat": 48.13698,
+   "km_moyen": {
+    "pilote": 2.2,
+    "ambition": 8.1
+   }
+  },
+  {
+   "siret": "78495550200132",
+   "entreprise": "SOCIETE COOPERATIVE AGRICOLE TERRES BOCAGE GATINAIS",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Chateau-Landon",
+   "dep": "77",
+   "lon": 2.69139,
+   "lat": 48.15191,
+   "km_moyen": {
+    "pilote": 1.6,
+    "ambition": 7.8
+   }
+  },
+  {
+   "siret": "78495550200140",
+   "entreprise": "SOCIETE COOPERATIVE AGRICOLE TERRES BOCAGE GATINAIS",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Nonville",
+   "dep": "77",
+   "lon": 2.77993,
+   "lat": 48.28494,
+   "km_moyen": {
+    "pilote": 1.9,
+    "ambition": 7.8
+   }
+  },
+  {
+   "siret": "78495550200157",
+   "entreprise": "SOCIETE COOPERATIVE AGRICOLE TERRES BOCAGE GATINAIS",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Chateau-Landon",
+   "dep": "77",
+   "lon": 2.69678,
+   "lat": 48.15012,
+   "km_moyen": {
+    "pilote": 1.8,
+    "ambition": 8.0
+   }
+  },
+  {
+   "siret": "78495550200165",
+   "entreprise": "SOCIETE COOPERATIVE AGRICOLE TERRES BOCAGE GATINAIS",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Chateau-Landon",
+   "dep": "77",
+   "lon": 2.69189,
+   "lat": 48.14896,
+   "km_moyen": {
+    "pilote": 1.7,
+    "ambition": 8.0
+   }
+  },
+  {
+   "siret": "78495550200173",
+   "entreprise": "SOCIETE COOPERATIVE AGRICOLE TERRES BOCAGE GATINAIS",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "La Chapelle-La-Reine",
+   "dep": "77",
+   "lon": 2.56539,
+   "lat": 48.32271,
+   "km_moyen": {
+    "pilote": 1.4,
+    "ambition": 7.0
+   }
+  },
+  {
+   "siret": "30906456600057",
+   "entreprise": "BARENBRUG FRANCE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Montevrain",
+   "dep": "77",
+   "lon": 2.76606,
+   "lat": 48.85355,
+   "km_moyen": {
+    "pilote": 2.4,
+    "ambition": 11.9
+   }
+  },
+  {
+   "siret": "77560784900046",
+   "entreprise": "COOPERATIVE AGRICOLE PUISEAUX",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Saint-Pierre-Les-Nemours",
+   "dep": "77",
+   "lon": 2.69269,
+   "lat": 48.27739,
+   "km_moyen": {
+    "pilote": 3.6,
+    "ambition": 9.1
+   }
+  },
+  {
+   "siret": "43200467900028",
+   "entreprise": "DLF FRANCE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Saint-Mesmes",
+   "dep": "77",
+   "lon": 2.69388,
+   "lat": 48.98614,
+   "km_moyen": {
+    "pilote": 1.6,
+    "ambition": 5.4
+   }
+  },
+  {
+   "siret": "90705046200049",
+   "entreprise": "VITERRA FRANCE S.A.S.",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Avon",
+   "dep": "77",
+   "lon": 2.72073,
+   "lat": 48.41605,
+   "km_moyen": {
+    "pilote": 7.4,
+    "ambition": 14.2
+   }
+  },
+  {
+   "siret": "40940754100013",
+   "entreprise": "PAILLE SERVICE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Champeaux",
+   "dep": "77",
+   "lon": 2.8109,
+   "lat": 48.58807,
+   "km_moyen": {
+    "pilote": 1.3,
+    "ambition": 5.3
+   }
+  },
+  {
+   "siret": "78489904900018",
+   "entreprise": "COOPERATIVE AGRICOLE CEREALES",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Beton-Bazoches",
+   "dep": "77",
+   "lon": 3.24077,
+   "lat": 48.69782,
+   "km_moyen": {
+    "pilote": 1.4,
+    "ambition": 5.1
+   }
+  },
+  {
+   "siret": "30362849900038",
+   "entreprise": "TEREOS SCA",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Moussy-Le-Vieux",
+   "dep": "77",
+   "lon": 2.62313,
+   "lat": 49.04943,
+   "km_moyen": {
+    "pilote": 1.5,
+    "ambition": 5.9
+   }
+  },
+  {
+   "siret": "82445637000017",
+   "entreprise": "LA BOUTIQUE DES PARRICHETS (LE CHALET GOUT'OEUFS) (LBDP)",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Mouroux",
+   "dep": "77",
+   "lon": 3.06393,
+   "lat": 48.80203,
+   "km_moyen": {
+    "pilote": 1.6,
+    "ambition": 7.0
+   }
+  },
+  {
+   "siret": "82144283700018",
+   "entreprise": "FERME DE FEROLLES",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Crecy-La-Chapelle",
+   "dep": "77",
+   "lon": 2.92468,
+   "lat": 48.8701,
+   "km_moyen": {
+    "pilote": 2.2,
+    "ambition": 6.6
+   }
+  },
+  {
+   "siret": "49891860600019",
+   "entreprise": "B & B DEVELOPPEMENT",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Meaux",
+   "dep": "77",
+   "lon": 2.88136,
+   "lat": 48.96909,
+   "km_moyen": {
+    "pilote": 2.6,
+    "ambition": 6.8
+   }
+  },
+  {
+   "siret": "10082512400017",
+   "entreprise": "SULTAN",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Villeneuve-Les-Bordes",
+   "dep": "77",
+   "lon": 3.04263,
+   "lat": 48.4861,
+   "km_moyen": {
+    "pilote": 3.3,
+    "ambition": 7.9
+   }
+  },
+  {
+   "siret": "10134047900019",
+   "entreprise": "SEWA NEGOCE (SEWA NEGOCE)",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Signy-Signets",
+   "dep": "77",
+   "lon": 3.08389,
+   "lat": 48.89893,
+   "km_moyen": {
+    "pilote": 1.4,
+    "ambition": 5.5
+   }
+  },
+  {
+   "siret": "32344942100011",
+   "entreprise": "LA FOURRAGERE BRIARDE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Vulaines-Sur-Seine",
+   "dep": "77",
+   "lon": 2.75948,
+   "lat": 48.43176,
+   "km_moyen": {
+    "pilote": 3.2,
+    "ambition": 12.6
+   }
+  },
+  {
+   "siret": "91171451700016",
+   "entreprise": "FERME DES TEMPLIERS",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Villuis",
+   "dep": "77",
+   "lon": 3.35554,
+   "lat": 48.41188,
+   "km_moyen": {
+    "pilote": 1.5,
+    "ambition": 6.7
+   }
+  },
+  {
+   "siret": "90190859000010",
+   "entreprise": "SAS DE GERMENOY",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Vaux-Le-Penil",
+   "dep": "77",
+   "lon": 2.69953,
+   "lat": 48.53225,
+   "km_moyen": {
+    "pilote": 1.9,
+    "ambition": 8.4
+   }
+  },
+  {
+   "siret": "47865878400010",
+   "entreprise": "NOTRE DAME - MESSIEURS PATOUX",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Sancy-Les-Provins",
+   "dep": "77",
+   "lon": 3.38005,
+   "lat": 48.73557,
+   "km_moyen": {
+    "pilote": 1.1,
+    "ambition": 5.5
+   }
+  },
+  {
+   "siret": "84022765600021",
+   "entreprise": "FOIN F",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Nanteau-Sur-Essonne",
+   "dep": "77",
+   "lon": 2.41606,
+   "lat": 48.32116,
+   "km_moyen": {
+    "pilote": 2.7,
+    "ambition": 8.2
+   }
+  },
+  {
+   "siret": "99191348400010",
+   "entreprise": "SAS FCH (LA FERME DE L'OUCHETTE)",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Oissery",
+   "dep": "77",
+   "lon": 2.82237,
+   "lat": 49.07454,
+   "km_moyen": {
+    "pilote": 1.3,
+    "ambition": 7.2
+   }
+  },
+  {
+   "siret": "50368180100505",
+   "entreprise": "SOCIETE COOPERATIVE AGRICOLE AXEREAL",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Mere",
+   "dep": "78",
+   "lon": 1.81313,
+   "lat": 48.80284,
+   "km_moyen": {
+    "pilote": 1.4,
+    "ambition": 7.0
+   }
+  },
+  {
+   "siret": "77557501200627",
+   "entreprise": "SOC COOPERATIVE AGRICOLE D'EURE-LOIR (SCAEL)",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Houdan",
+   "dep": "78",
+   "lon": 1.59979,
+   "lat": 48.79722,
+   "km_moyen": {
+    "pilote": 1.7,
+    "ambition": 9.3
+   }
+  },
+  {
+   "siret": "77557381900189",
+   "entreprise": "SOCIETE COOPERATIVE AGRICOLE SEVEPI (SEVEPI)",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Breval",
+   "dep": "78",
+   "lon": 1.54423,
+   "lat": 48.94296,
+   "km_moyen": {
+    "pilote": 1.7,
+    "ambition": 6.7
+   }
+  },
+  {
+   "siret": "77557381900205",
+   "entreprise": "SOCIETE COOPERATIVE AGRICOLE SEVEPI (SEVEPI)",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Hardricourt",
+   "dep": "78",
+   "lon": 1.89751,
+   "lat": 49.00263,
+   "km_moyen": {
+    "pilote": 2.7,
+    "ambition": 8.3
+   }
+  },
+  {
+   "siret": "77557381900213",
+   "entreprise": "SOCIETE COOPERATIVE AGRICOLE SEVEPI (SEVEPI)",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Hargeville",
+   "dep": "78",
+   "lon": 1.73499,
+   "lat": 48.89638,
+   "km_moyen": {
+    "pilote": 1.1,
+    "ambition": 5.2
+   }
+  },
+  {
+   "siret": "30532052500093",
+   "entreprise": "COOPERATIVE AGRICOLE ILE DE FRANCE SUD",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Ablis",
+   "dep": "78",
+   "lon": 1.83618,
+   "lat": 48.51549,
+   "km_moyen": {
+    "pilote": 1.9,
+    "ambition": 6.1
+   }
+  },
+  {
+   "siret": "30532052500200",
+   "entreprise": "COOPERATIVE AGRICOLE ILE DE FRANCE SUD",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Ablis",
+   "dep": "78",
+   "lon": 1.86929,
+   "lat": 48.53293,
+   "km_moyen": {
+    "pilote": 1.2,
+    "ambition": 6.0
+   }
+  },
+  {
+   "siret": "30532052500218",
+   "entreprise": "COOPERATIVE AGRICOLE ILE DE FRANCE SUD",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Orsonville",
+   "dep": "78",
+   "lon": 1.85009,
+   "lat": 48.47639,
+   "km_moyen": {
+    "pilote": 1.4,
+    "ambition": 6.1
+   }
+  },
+  {
+   "siret": "39194829600044",
+   "entreprise": "ALTERNAE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Orvilliers",
+   "dep": "78",
+   "lon": 1.64727,
+   "lat": 48.86251,
+   "km_moyen": {
+    "pilote": 1.2,
+    "ambition": 6.2
+   }
+  },
+  {
+   "siret": "39194829600234",
+   "entreprise": "ALTERNAE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Maule",
+   "dep": "78",
+   "lon": 1.84534,
+   "lat": 48.89878,
+   "km_moyen": {
+    "pilote": 1.4,
+    "ambition": 6.2
+   }
+  },
+  {
+   "siret": "58980066300025",
+   "entreprise": "DELEPLANQUE ET COMPAGNIE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Maisons-Laffitte",
+   "dep": "78",
+   "lon": 2.14155,
+   "lat": 48.94408,
+   "km_moyen": {
+    "pilote": 10.9,
+    "ambition": 19.1
+   }
+  },
+  {
+   "siret": "58980066300058",
+   "entreprise": "DELEPLANQUE ET COMPAGNIE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Maisons-Laffitte",
+   "dep": "78",
+   "lon": 2.14124,
+   "lat": 48.94379,
+   "km_moyen": {
+    "pilote": 10.9,
+    "ambition": 19.1
+   }
+  },
+  {
+   "siret": "91009268300036",
+   "entreprise": "AUX DESIRS DE LA NATURE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Prunay-En-Yvelines",
+   "dep": "78",
+   "lon": 1.78923,
+   "lat": 48.54693,
+   "km_moyen": {
+    "pilote": 2.1,
+    "ambition": 8.1
+   }
+  },
+  {
+   "siret": "77563883600186",
+   "entreprise": "PIONEER SEMENCES",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Guyancourt",
+   "dep": "78",
+   "lon": 2.05813,
+   "lat": 48.78525,
+   "km_moyen": {
+    "pilote": 4.6,
+    "ambition": 11.5
+   }
+  },
+  {
+   "siret": "31013052100027",
+   "entreprise": "SOC SYLVAL",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Saint-Germain-De-La-Grange",
+   "dep": "78",
+   "lon": 1.89988,
+   "lat": 48.83544,
+   "km_moyen": {
+    "pilote": 1.5,
+    "ambition": 6.7
+   }
+  },
+  {
+   "siret": "31013052100035",
+   "entreprise": "SOC SYLVAL",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Ablis",
+   "dep": "78",
+   "lon": 1.83222,
+   "lat": 48.51813,
+   "km_moyen": {
+    "pilote": 2.1,
+    "ambition": 6.2
+   }
+  },
+  {
+   "siret": "83823971300012",
+   "entreprise": "FRANCE CROQUETTES",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Poissy",
+   "dep": "78",
+   "lon": 2.00077,
+   "lat": 48.91302,
+   "km_moyen": {
+    "pilote": 3.4,
+    "ambition": 10.9
+   }
+  },
+  {
+   "siret": "66204346200024",
+   "entreprise": "BONNIERES SILO",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Bonnieres-Sur-Seine",
+   "dep": "78",
+   "lon": 1.56644,
+   "lat": 49.03413,
+   "km_moyen": {
+    "pilote": 3.1,
+    "ambition": 8.9
+   }
+  },
+  {
+   "siret": "34987143400040",
+   "entreprise": "VAN RIJN FRANCE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Aubergenville",
+   "dep": "78",
+   "lon": 1.8548,
+   "lat": 48.97293,
+   "km_moyen": {
+    "pilote": 3.3,
+    "ambition": 8.8
+   }
+  },
+  {
+   "siret": "42258692500014",
+   "entreprise": "SHOW DOG",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Moisson",
+   "dep": "78",
+   "lon": 1.66903,
+   "lat": 49.07329,
+   "km_moyen": {
+    "pilote": 3.3,
+    "ambition": 10.4
+   }
+  },
+  {
+   "siret": "97974962900015",
+   "entreprise": "WOLFPACK COMMODITIES",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Poissy",
+   "dep": "78",
+   "lon": 2.01377,
+   "lat": 48.9195,
+   "km_moyen": {
+    "pilote": 4.7,
+    "ambition": 11.9
+   }
+  },
+  {
+   "siret": "38766969000035",
+   "entreprise": "AGRI-SEMENCES",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Aubergenville",
+   "dep": "78",
+   "lon": 1.85528,
+   "lat": 48.97342,
+   "km_moyen": {
+    "pilote": 3.3,
+    "ambition": 8.8
+   }
+  },
+  {
+   "siret": "38939501300045",
+   "entreprise": "VEROLAC",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Verneuil-Sur-Seine",
+   "dep": "78",
+   "lon": 1.96454,
+   "lat": 48.97435,
+   "km_moyen": {
+    "pilote": 3.3,
+    "ambition": 10.7
+   }
+  },
+  {
+   "siret": "92158154200013",
+   "entreprise": "ADIPCO INTERNATIONAL (ADIPCO INTERNATIONAL)",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Aubergenville",
+   "dep": "78",
+   "lon": 1.83849,
+   "lat": 48.97525,
+   "km_moyen": {
+    "pilote": 2.9,
+    "ambition": 8.7
+   }
+  },
+  {
+   "siret": "52488671000010",
+   "entreprise": "FERME D OSMONDE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Bullion",
+   "dep": "78",
+   "lon": 2.01444,
+   "lat": 48.61336,
+   "km_moyen": {
+    "pilote": 3.8,
+    "ambition": 10.2
+   }
+  },
+  {
+   "siret": "80899548400017",
+   "entreprise": "MESHECTARES.COM",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Gambais",
+   "dep": "78",
+   "lon": 1.67867,
+   "lat": 48.77412,
+   "km_moyen": {
+    "pilote": 2.5,
+    "ambition": 9.5
+   }
+  },
+  {
+   "siret": "83491021800017",
+   "entreprise": "ETS NOEL",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Cernay-La-Ville",
+   "dep": "78",
+   "lon": 1.98149,
+   "lat": 48.67365,
+   "km_moyen": {
+    "pilote": 1.9,
+    "ambition": 9.7
+   }
+  },
+  {
+   "siret": "92499500400018",
+   "entreprise": "BELL NAT",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Saint-Lambert",
+   "dep": "78",
+   "lon": 2.00131,
+   "lat": 48.72737,
+   "km_moyen": {
+    "pilote": 1.6,
+    "ambition": 10.1
+   }
+  },
+  {
+   "siret": "40323567400047",
+   "entreprise": "SEM-PARTNERS (SEM-PARTNERS)",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Maule",
+   "dep": "78",
+   "lon": 1.81696,
+   "lat": 48.91747,
+   "km_moyen": {
+    "pilote": 1.3,
+    "ambition": 6.1
+   }
+  },
+  {
+   "siret": "85338100200015",
+   "entreprise": "FERRAND NEGOCE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Paray-Douaville",
+   "dep": "78",
+   "lon": 1.87618,
+   "lat": 48.45053,
+   "km_moyen": {
+    "pilote": 1.4,
+    "ambition": 6.8
+   }
+  },
+  {
+   "siret": "30532052500010",
+   "entreprise": "COOPERATIVE AGRICOLE ILE DE FRANCE SUD",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Morigny-Champigny",
+   "dep": "91",
+   "lon": 2.16919,
+   "lat": 48.45273,
+   "km_moyen": {
+    "pilote": 2.9,
+    "ambition": 6.8
+   }
+  },
+  {
+   "siret": "30532052500036",
+   "entreprise": "COOPERATIVE AGRICOLE ILE DE FRANCE SUD",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Corbreuse",
+   "dep": "91",
+   "lon": 1.99081,
+   "lat": 48.48604,
+   "km_moyen": {
+    "pilote": 1.1,
+    "ambition": 5.6
+   }
+  },
+  {
+   "siret": "30532052500044",
+   "entreprise": "COOPERATIVE AGRICOLE ILE DE FRANCE SUD",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Granges-Le-Roi (Les)",
+   "dep": "91",
+   "lon": 1.99395,
+   "lat": 48.49097,
+   "km_moyen": {
+    "pilote": 1.1,
+    "ambition": 5.8
+   }
+  },
+  {
+   "siret": "30532052500051",
+   "entreprise": "COOPERATIVE AGRICOLE ILE DE FRANCE SUD",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Champmotteux",
+   "dep": "91",
+   "lon": 2.32471,
+   "lat": 48.34643,
+   "km_moyen": {
+    "pilote": 1.5,
+    "ambition": 7.0
+   }
+  },
+  {
+   "siret": "30532052500077",
+   "entreprise": "COOPERATIVE AGRICOLE ILE DE FRANCE SUD",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Bois-Herpin",
+   "dep": "91",
+   "lon": 2.23199,
+   "lat": 48.3681,
+   "km_moyen": {
+    "pilote": 1.2,
+    "ambition": 5.6
+   }
+  },
+  {
+   "siret": "30532052500085",
+   "entreprise": "COOPERATIVE AGRICOLE ILE DE FRANCE SUD",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Plessis-Saint-Benoist",
+   "dep": "91",
+   "lon": 2.00488,
+   "lat": 48.4484,
+   "km_moyen": {
+    "pilote": 1.3,
+    "ambition": 5.2
+   }
+  },
+  {
+   "siret": "30532052500101",
+   "entreprise": "COOPERATIVE AGRICOLE ILE DE FRANCE SUD",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Dourdan",
+   "dep": "91",
+   "lon": 2.0037,
+   "lat": 48.53521,
+   "km_moyen": {
+    "pilote": 3.5,
+    "ambition": 8.4
+   }
+  },
+  {
+   "siret": "30532052500127",
+   "entreprise": "COOPERATIVE AGRICOLE ILE DE FRANCE SUD",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Baulne",
+   "dep": "91",
+   "lon": 2.37687,
+   "lat": 48.49363,
+   "km_moyen": {
+    "pilote": 1.9,
+    "ambition": 7.5
+   }
+  },
+  {
+   "siret": "30532052500150",
+   "entreprise": "COOPERATIVE AGRICOLE ILE DE FRANCE SUD",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Chauffour-Les-Etrechy",
+   "dep": "91",
+   "lon": 2.16444,
+   "lat": 48.51211,
+   "km_moyen": {
+    "pilote": 1.0,
+    "ambition": 7.2
+   }
+  },
+  {
+   "siret": "30532052500168",
+   "entreprise": "COOPERATIVE AGRICOLE ILE DE FRANCE SUD",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Angerville",
+   "dep": "91",
+   "lon": 2.00526,
+   "lat": 48.31715,
+   "km_moyen": {
+    "pilote": 1.7,
+    "ambition": 7.1
+   }
+  },
+  {
+   "siret": "30532052500176",
+   "entreprise": "COOPERATIVE AGRICOLE ILE DE FRANCE SUD",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Etampes",
+   "dep": "91",
+   "lon": 2.16079,
+   "lat": 48.43926,
+   "km_moyen": {
+    "pilote": 3.3,
+    "ambition": 6.8
+   }
+  },
+  {
+   "siret": "30532052500184",
+   "entreprise": "COOPERATIVE AGRICOLE ILE DE FRANCE SUD",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Maisse",
+   "dep": "91",
+   "lon": 2.39011,
+   "lat": 48.39008,
+   "km_moyen": {
+    "pilote": 3.1,
+    "ambition": 8.2
+   }
+  },
+  {
+   "siret": "30532052500192",
+   "entreprise": "COOPERATIVE AGRICOLE ILE DE FRANCE SUD",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Etampes",
+   "dep": "91",
+   "lon": 2.16488,
+   "lat": 48.45258,
+   "km_moyen": {
+    "pilote": 2.9,
+    "ambition": 6.8
+   }
+  },
+  {
+   "siret": "41955374800015",
+   "entreprise": "J.C. COISNON SARL",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Le Merevillois",
+   "dep": "91",
+   "lon": 2.05358,
+   "lat": 48.32209,
+   "km_moyen": {
+    "pilote": 1.2,
+    "ambition": 6.1
+   }
+  },
+  {
+   "siret": "30903287800014",
+   "entreprise": "L.F.P. AGRO",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Le Merevillois",
+   "dep": "91",
+   "lon": 2.07537,
+   "lat": 48.31246,
+   "km_moyen": {
+    "pilote": 1.9,
+    "ambition": 7.0
+   }
+  },
+  {
+   "siret": "30903287800022",
+   "entreprise": "L.F.P. AGRO",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "La Foret-Sainte-Croix",
+   "dep": "91",
+   "lon": 2.22865,
+   "lat": 48.38257,
+   "km_moyen": {
+    "pilote": 1.5,
+    "ambition": 5.6
+   }
+  },
+  {
+   "siret": "30903287800030",
+   "entreprise": "L.F.P. AGRO",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Le Merevillois",
+   "dep": "91",
+   "lon": 2.11196,
+   "lat": 48.30783,
+   "km_moyen": {
+    "pilote": 1.6,
+    "ambition": 8.1
+   }
+  },
+  {
+   "siret": "38838877900042",
+   "entreprise": "IAMS PET FOOD INTERNATIONAL",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Bures-Sur-Yvette",
+   "dep": "91",
+   "lon": 2.14867,
+   "lat": 48.69645,
+   "km_moyen": {
+    "pilote": 3.6,
+    "ambition": 9.1
+   }
+  },
+  {
+   "siret": "33272676900018",
+   "entreprise": "SA COMAGRAIN",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Etampes",
+   "dep": "91",
+   "lon": 2.16738,
+   "lat": 48.44483,
+   "km_moyen": {
+    "pilote": 3.4,
+    "ambition": 6.8
+   }
+  },
+  {
+   "siret": "83239032200028",
+   "entreprise": "GAB HOLDING GROUP (GUM ARABIC BRIDGE) (GAB)",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Sainte-Genevieve-Des-Bois",
+   "dep": "91",
+   "lon": 2.35192,
+   "lat": 48.63917,
+   "km_moyen": {
+    "pilote": 6.5,
+    "ambition": 14.2
+   }
+  },
+  {
+   "siret": "84092741200030",
+   "entreprise": "LALUQUE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Angerville",
+   "dep": "91",
+   "lon": 1.99727,
+   "lat": 48.31145,
+   "km_moyen": {
+    "pilote": 1.7,
+    "ambition": 7.9
+   }
+  },
+  {
+   "siret": "45134229900026",
+   "entreprise": "MICHEL RIAUD",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Boissy-La-Riviere",
+   "dep": "91",
+   "lon": 2.15216,
+   "lat": 48.37615,
+   "km_moyen": {
+    "pilote": 1.8,
+    "ambition": 6.1
+   }
+  },
+  {
+   "siret": "53391156600016",
+   "entreprise": "UNION BIO SEMENCES (U.B.S.)",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Maisse",
+   "dep": "91",
+   "lon": 2.39931,
+   "lat": 48.39919,
+   "km_moyen": {
+    "pilote": 3.4,
+    "ambition": 8.5
+   }
+  },
+  {
+   "siret": "79476200500013",
+   "entreprise": "RIAUD NEGOCE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Villiers-Le-Bacle",
+   "dep": "91",
+   "lon": 2.1223,
+   "lat": 48.72566,
+   "km_moyen": {
+    "pilote": 2.3,
+    "ambition": 9.7
+   }
+  },
+  {
+   "siret": "96520081900039",
+   "entreprise": "SOC ARPAJONNAISE PRODUITS AGRICOLES FEYS (SAPAF)",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Arpajon",
+   "dep": "91",
+   "lon": 2.24018,
+   "lat": 48.58578,
+   "km_moyen": {
+    "pilote": 3.2,
+    "ambition": 10.4
+   }
+  },
+  {
+   "siret": "39171328600022",
+   "entreprise": "SARL AGRI-DESFI",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Bouville",
+   "dep": "91",
+   "lon": 2.27602,
+   "lat": 48.43532,
+   "km_moyen": {
+    "pilote": 2.1,
+    "ambition": 6.8
+   }
+  },
+  {
+   "siret": "52363173700039",
+   "entreprise": "BC-PREST (BC-PREST)",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Etampes",
+   "dep": "91",
+   "lon": 2.16712,
+   "lat": 48.44692,
+   "km_moyen": {
+    "pilote": 3.3,
+    "ambition": 6.8
+   }
+  },
+  {
+   "siret": "41859032900011",
+   "entreprise": "SOCIMEXPORT",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Juvisy-Sur-Orge",
+   "dep": "91",
+   "lon": 2.38098,
+   "lat": 48.68589,
+   "km_moyen": {
+    "pilote": 9.8,
+    "ambition": 18.4
+   }
+  },
+  {
+   "siret": "88416514300014",
+   "entreprise": "AGRIPROD' SERVICES",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Valpuiseaux",
+   "dep": "91",
+   "lon": 2.29812,
+   "lat": 48.40563,
+   "km_moyen": {
+    "pilote": 1.8,
+    "ambition": 6.9
+   }
+  },
+  {
+   "siret": "88435425900019",
+   "entreprise": "CABINET PIANA (CABINET PIANA) (CP)",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Saint-Germain-Les-Corbeil",
+   "dep": "91",
+   "lon": 2.4921,
+   "lat": 48.61759,
+   "km_moyen": {
+    "pilote": 3.5,
+    "ambition": 12.0
+   }
+  },
+  {
+   "siret": "10059906700012",
+   "entreprise": "LES VALLEES DU MONDE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Le Coudray-Montceaux",
+   "dep": "91",
+   "lon": 2.4775,
+   "lat": 48.56772,
+   "km_moyen": {
+    "pilote": 2.7,
+    "ambition": 9.4
+   }
+  },
+  {
+   "siret": "77570109701847",
+   "entreprise": "SOCIETE COOPERATIVE AGRICOLE NATUP (SCA CAP SEINE)",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Herouville-En-Vexin",
+   "dep": "95",
+   "lon": 2.13577,
+   "lat": 49.10127,
+   "km_moyen": {
+    "pilote": 1.3,
+    "ambition": 5.7
+   }
+  },
+  {
+   "siret": "32667736600204",
+   "entreprise": "AGORA (AGORA) (OCEAL)",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Louvres",
+   "dep": "95",
+   "lon": 2.50118,
+   "lat": 49.05163,
+   "km_moyen": {
+    "pilote": 2.1,
+    "ambition": 6.1
+   }
+  },
+  {
+   "siret": "32667736600212",
+   "entreprise": "AGORA (AGORA) (OCEAL)",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Attainville",
+   "dep": "95",
+   "lon": 2.33718,
+   "lat": 49.05269,
+   "km_moyen": {
+    "pilote": 1.5,
+    "ambition": 7.5
+   }
+  },
+  {
+   "siret": "77557381900239",
+   "entreprise": "SOCIETE COOPERATIVE AGRICOLE SEVEPI (SEVEPI)",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Magny-En-Vexin",
+   "dep": "95",
+   "lon": 1.79574,
+   "lat": 49.15875,
+   "km_moyen": {
+    "pilote": 1.9,
+    "ambition": 6.5
+   }
+  },
+  {
+   "siret": "97708003500206",
+   "entreprise": "LEPICARD AGRICULTURE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Commeny",
+   "dep": "95",
+   "lon": 1.89513,
+   "lat": 49.12774,
+   "km_moyen": {
+    "pilote": 1.3,
+    "ambition": 5.0
+   }
+  },
+  {
+   "siret": "39194829600028",
+   "entreprise": "ALTERNAE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Genicourt",
+   "dep": "95",
+   "lon": 2.05577,
+   "lat": 49.10476,
+   "km_moyen": {
+    "pilote": 1.3,
+    "ambition": 5.7
+   }
+  },
+  {
+   "siret": "39194829600085",
+   "entreprise": "ALTERNAE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Magny-En-Vexin",
+   "dep": "95",
+   "lon": 1.8036,
+   "lat": 49.15328,
+   "km_moyen": {
+    "pilote": 1.8,
+    "ambition": 6.1
+   }
+  },
+  {
+   "siret": "83747038400053",
+   "entreprise": "TB FOURRAGES DISTRIBUTION (TB FOURRAGES DISTRIBUTION)",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Ennery",
+   "dep": "95",
+   "lon": 2.11987,
+   "lat": 49.06824,
+   "km_moyen": {
+    "pilote": 2.3,
+    "ambition": 7.5
+   }
+  },
+  {
+   "siret": "31762569700014",
+   "entreprise": "PUISAL",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Puiseux-Pontoise",
+   "dep": "95",
+   "lon": 2.01853,
+   "lat": 49.05715,
+   "km_moyen": {
+    "pilote": 2.9,
+    "ambition": 8.0
+   }
+  },
+  {
+   "siret": "55213527900065",
+   "entreprise": "ETABLISSEMENTS GABREAU",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Saint-Gervais",
+   "dep": "95",
+   "lon": 1.75928,
+   "lat": 49.15754,
+   "km_moyen": {
+    "pilote": 1.4,
+    "ambition": 6.5
+   }
+  },
+  {
+   "siret": "34137929500015",
+   "entreprise": "SCEA AVICOOL",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Mery-Sur-Oise",
+   "dep": "95",
+   "lon": 2.17196,
+   "lat": 49.05626,
+   "km_moyen": {
+    "pilote": 3.5,
+    "ambition": 9.1
+   }
+  },
+  {
+   "siret": "10873017700012",
+   "entreprise": "LA CEREALIERE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Osny",
+   "dep": "95",
+   "lon": 2.07452,
+   "lat": 49.05185,
+   "km_moyen": {
+    "pilote": 4.4,
+    "ambition": 8.9
+   }
+  },
+  {
+   "siret": "84907883700010",
+   "entreprise": "SIG2L",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Deuil-La-Barre",
+   "dep": "95",
+   "lon": 2.32367,
+   "lat": 48.97147,
+   "km_moyen": {
+    "pilote": 8.7,
+    "ambition": 14.5
+   }
+  },
+  {
+   "siret": "51103457100022",
+   "entreprise": "AD CONCEPT",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Gonesse",
+   "dep": "95",
+   "lon": 2.44972,
+   "lat": 48.97789,
+   "km_moyen": {
+    "pilote": 3.0,
+    "ambition": 10.7
+   }
+  },
+  {
+   "siret": "94169752600015",
+   "entreprise": "LBL PARE-BRISE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Cergy",
+   "dep": "95",
+   "lon": 2.07311,
+   "lat": 49.04425,
+   "km_moyen": {
+    "pilote": 5.1,
+    "ambition": 9.5
+   }
+  },
+  {
+   "siret": "87908447300021",
+   "entreprise": "ETHIC NUTRITION (ETHIC NUTRITION)",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Montmorency",
+   "dep": "95",
+   "lon": 2.31978,
+   "lat": 48.99245,
+   "km_moyen": {
+    "pilote": 6.7,
+    "ambition": 12.5
+   }
+  },
+  {
+   "siret": "43919926600016",
+   "entreprise": "METROPOLE DISTRIBUTION (MEDI)",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Sarcelles",
+   "dep": "95",
+   "lon": 2.37069,
+   "lat": 48.97797,
+   "km_moyen": {
+    "pilote": 5.7,
+    "ambition": 12.2
+   }
+  },
+  {
+   "siret": "32022926300027",
+   "entreprise": "GRAINETERIE DE PAUW",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Ennery",
+   "dep": "95",
+   "lon": 2.11987,
+   "lat": 49.06824,
+   "km_moyen": {
+    "pilote": 2.3,
+    "ambition": 7.5
+   }
+  },
+  {
+   "siret": "48317373800012",
+   "entreprise": "ENRUBAN' HORSE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Mareil-En-France",
+   "dep": "95",
+   "lon": 2.41667,
+   "lat": 49.07043,
+   "km_moyen": {
+    "pilote": 1.6,
+    "ambition": 5.7
+   }
+  },
+  {
+   "siret": "82505786200021",
+   "entreprise": "MS PRORENOV (CIA PARAC)",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Viarmes",
+   "dep": "95",
+   "lon": 2.37085,
+   "lat": 49.13424,
+   "km_moyen": {
+    "pilote": 2.8,
+    "ambition": 9.7
+   }
+  },
+  {
+   "siret": "92936920500018",
+   "entreprise": "LES FERMES DU VEXIN",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Nucourt",
+   "dep": "95",
+   "lon": 1.85464,
+   "lat": 49.15491,
+   "km_moyen": {
+    "pilote": 1.2,
+    "ambition": 5.7
+   }
+  },
+  {
+   "siret": "48457353000033",
+   "entreprise": "ENTHALPIE INTERNATIONAL",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Cergy",
+   "dep": "95",
+   "lon": 2.03132,
+   "lat": 49.05204,
+   "km_moyen": {
+    "pilote": 3.8,
+    "ambition": 8.5
+   }
+  },
+  {
+   "siret": "84973383700017",
+   "entreprise": "ETA DU PARISIS",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Fontenay-En-Parisis",
+   "dep": "95",
+   "lon": 2.45177,
+   "lat": 49.05478,
+   "km_moyen": {
+    "pilote": 1.4,
+    "ambition": 5.7
+   }
+  },
+  {
+   "siret": "98118596000029",
+   "entreprise": "RASD",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Cergy",
+   "dep": "95",
+   "lon": 2.03132,
+   "lat": 49.05204,
+   "km_moyen": {
+    "pilote": 3.8,
+    "ambition": 8.5
+   }
+  },
+  {
+   "siret": "70698018200374",
+   "entreprise": "SOUFFLET AGRICULTURE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Dhuys Et Morin-En-Brie",
+   "dep": "02",
+   "lon": 3.55596,
+   "lat": 48.93443,
+   "km_moyen": {
+    "pilote": 16.3,
+    "ambition": 22.2
+   }
+  },
+  {
+   "siret": "30152192800657",
+   "entreprise": "TERNOVEO",
+   "cooperative": false,
+   "naf": "52.10B",
+   "commune": "Dammard",
+   "dep": "02",
+   "lon": 3.19282,
+   "lat": 49.14434,
+   "km_moyen": {
+    "pilote": 9.7,
+    "ambition": 18.0
+   }
+  },
+  {
+   "siret": "77569020900132",
+   "entreprise": "SEMENCES DE FRANCE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Chierry",
+   "dep": "02",
+   "lon": 3.42445,
+   "lat": 49.04075,
+   "km_moyen": {
+    "pilote": 18.9,
+    "ambition": 24.0
+   }
+  },
+  {
+   "siret": "33329729900021",
+   "entreprise": "PHILIPPE LEVESQUE S.A.S.",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Essomes-Sur-Marne",
+   "dep": "02",
+   "lon": 3.30516,
+   "lat": 49.04802,
+   "km_moyen": {
+    "pilote": 12.8,
+    "ambition": 17.6
+   }
+  },
+  {
+   "siret": "43240620500018",
+   "entreprise": "SARL QUENARDEL",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Macogny",
+   "dep": "02",
+   "lon": 3.22977,
+   "lat": 49.16473,
+   "km_moyen": {
+    "pilote": 14.1,
+    "ambition": 22.3
+   }
+  },
+  {
+   "siret": "52791248900012",
+   "entreprise": "DES CAHOUZATS",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Chezy-En-Orxois",
+   "dep": "02",
+   "lon": 3.18014,
+   "lat": 49.12135,
+   "km_moyen": {
+    "pilote": 6.5,
+    "ambition": 14.8
+   }
+  },
+  {
+   "siret": "70698018200028",
+   "entreprise": "SOUFFLET AGRICULTURE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Nogent-Sur-Seine",
+   "dep": "10",
+   "lon": 3.49553,
+   "lat": 48.49111,
+   "km_moyen": {
+    "pilote": 8.8,
+    "ambition": 13.8
+   }
+  },
+  {
+   "siret": "70698018200101",
+   "entreprise": "SOUFFLET AGRICULTURE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Trainel",
+   "dep": "10",
+   "lon": 3.44396,
+   "lat": 48.41601,
+   "km_moyen": {
+    "pilote": 4.1,
+    "ambition": 12.4
+   }
+  },
+  {
+   "siret": "70698018200127",
+   "entreprise": "SOUFFLET AGRICULTURE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Nogent-Sur-Seine",
+   "dep": "10",
+   "lon": 3.49313,
+   "lat": 48.49898,
+   "km_moyen": {
+    "pilote": 7.8,
+    "ambition": 13.2
+   }
+  },
+  {
+   "siret": "70698018200143",
+   "entreprise": "SOUFFLET AGRICULTURE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Avant-Les-Marcilly",
+   "dep": "10",
+   "lon": 3.56312,
+   "lat": 48.43799,
+   "km_moyen": {
+    "pilote": 15.7,
+    "ambition": 21.0
+   }
+  },
+  {
+   "siret": "70698018200168",
+   "entreprise": "SOUFFLET AGRICULTURE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Pont Sur Seine",
+   "dep": "10",
+   "lon": 3.60437,
+   "lat": 48.51352,
+   "km_moyen": {
+    "pilote": 15.0,
+    "ambition": 19.8
+   }
+  },
+  {
+   "siret": "70698018200200",
+   "entreprise": "SOUFFLET AGRICULTURE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Trancault",
+   "dep": "10",
+   "lon": 3.53405,
+   "lat": 48.37155,
+   "km_moyen": {
+    "pilote": 13.2,
+    "ambition": 21.8
+   }
+  },
+  {
+   "siret": "70698018200218",
+   "entreprise": "SOUFFLET AGRICULTURE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Trancault",
+   "dep": "10",
+   "lon": 3.5312,
+   "lat": 48.36549,
+   "km_moyen": {
+    "pilote": 13.3,
+    "ambition": 21.9
+   }
+  },
+  {
+   "siret": "70698018200606",
+   "entreprise": "SOUFFLET AGRICULTURE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Nogent-Sur-Seine",
+   "dep": "10",
+   "lon": 3.48887,
+   "lat": 48.49104,
+   "km_moyen": {
+    "pilote": 8.4,
+    "ambition": 13.4
+   }
+  },
+  {
+   "siret": "70698018200846",
+   "entreprise": "SOUFFLET AGRICULTURE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Fontaine-Macon",
+   "dep": "10",
+   "lon": 3.51337,
+   "lat": 48.46611,
+   "km_moyen": {
+    "pilote": 11.9,
+    "ambition": 16.2
+   }
+  },
+  {
+   "siret": "80107613400064",
+   "entreprise": "SOUFFLET NEGOCE BY INVIVO",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Nogent-Sur-Seine",
+   "dep": "10",
+   "lon": 3.4953,
+   "lat": 48.49104,
+   "km_moyen": {
+    "pilote": 8.8,
+    "ambition": 13.8
+   }
+  },
+  {
+   "siret": "75370060800023",
+   "entreprise": "LE CLOS PAILLE FOURRAGE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Saint-Hilaire-Sous-Romilly",
+   "dep": "10",
+   "lon": 3.62326,
+   "lat": 48.49257,
+   "km_moyen": {
+    "pilote": 17.9,
+    "ambition": 22.6
+   }
+  },
+  {
+   "siret": "31934403200028",
+   "entreprise": "STE SOUFFLET HOLLAND BV",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Nogent Sur Seine",
+   "dep": "10",
+   "lon": 3.49468,
+   "lat": 48.49227,
+   "km_moyen": {
+    "pilote": 8.6,
+    "ambition": 13.7
+   }
+  },
+  {
+   "siret": "33505050600070",
+   "entreprise": "RECOFI (RECOFI)",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Nogent-Sur-Seine",
+   "dep": "10",
+   "lon": 3.49467,
+   "lat": 48.49138,
+   "km_moyen": {
+    "pilote": 8.7,
+    "ambition": 13.7
+   }
+  },
+  {
+   "siret": "41812895500014",
+   "entreprise": "SARL OVIPAILLE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "La Louptiere-Thenard",
+   "dep": "10",
+   "lon": 3.43494,
+   "lat": 48.37745,
+   "km_moyen": {
+    "pilote": 4.8,
+    "ambition": 13.4
+   }
+  },
+  {
+   "siret": "92064157800017",
+   "entreprise": "JPS AGRI",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Nogent-Sur-Seine",
+   "dep": "10",
+   "lon": 3.50169,
+   "lat": 48.49675,
+   "km_moyen": {
+    "pilote": 8.6,
+    "ambition": 13.8
+   }
+  },
+  {
+   "siret": "70698018200960",
+   "entreprise": "SOUFFLET AGRICULTURE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Mezieres-En-Vexin",
+   "dep": "27",
+   "lon": 1.50083,
+   "lat": 49.18452,
+   "km_moyen": {
+    "pilote": 17.0,
+    "ambition": 21.5
+   }
+  },
+  {
+   "siret": "32667736600451",
+   "entreprise": "AGORA (AGORA) (OCEAL)",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Gisors",
+   "dep": "27",
+   "lon": 1.7799,
+   "lat": 49.27186,
+   "km_moyen": {
+    "pilote": 10.8,
+    "ambition": 18.1
+   }
+  },
+  {
+   "siret": "77557381900015",
+   "entreprise": "SOCIETE COOPERATIVE AGRICOLE SEVEPI (SEVEPI)",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Etrepagny",
+   "dep": "27",
+   "lon": 1.60809,
+   "lat": 49.30272,
+   "km_moyen": {
+    "pilote": 16.3,
+    "ambition": 26.6
+   }
+  },
+  {
+   "siret": "77557381900056",
+   "entreprise": "SOCIETE COOPERATIVE AGRICOLE SEVEPI (SEVEPI)",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Vexin-Sur-Epte",
+   "dep": "27",
+   "lon": 1.5455,
+   "lat": 49.21945,
+   "km_moyen": {
+    "pilote": 14.2,
+    "ambition": 21.7
+   }
+  },
+  {
+   "siret": "77557381900080",
+   "entreprise": "SOCIETE COOPERATIVE AGRICOLE SEVEPI (SEVEPI)",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Vernon",
+   "dep": "27",
+   "lon": 1.47326,
+   "lat": 49.10017,
+   "km_moyen": {
+    "pilote": 7.5,
+    "ambition": 16.4
+   }
+  },
+  {
+   "siret": "77557381900098",
+   "entreprise": "SOCIETE COOPERATIVE AGRICOLE SEVEPI (SEVEPI)",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Sainte-Colombe-Pres-Vernon",
+   "dep": "27",
+   "lon": 1.35129,
+   "lat": 49.09287,
+   "km_moyen": {
+    "pilote": 12.9,
+    "ambition": 23.6
+   }
+  },
+  {
+   "siret": "77557381900122",
+   "entreprise": "SOCIETE COOPERATIVE AGRICOLE SEVEPI (SEVEPI)",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Villegats",
+   "dep": "27",
+   "lon": 1.45628,
+   "lat": 48.99963,
+   "km_moyen": {
+    "pilote": 3.2,
+    "ambition": 10.1
+   }
+  },
+  {
+   "siret": "77557381900130",
+   "entreprise": "SOCIETE COOPERATIVE AGRICOLE SEVEPI (SEVEPI)",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Douains",
+   "dep": "27",
+   "lon": 1.42021,
+   "lat": 49.06212,
+   "km_moyen": {
+    "pilote": 5.1,
+    "ambition": 16.0
+   }
+  },
+  {
+   "siret": "77557381900247",
+   "entreprise": "SOCIETE COOPERATIVE AGRICOLE SEVEPI (SEVEPI)",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Chateau-Sur-Epte",
+   "dep": "27",
+   "lon": 1.66825,
+   "lat": 49.209,
+   "km_moyen": {
+    "pilote": 3.4,
+    "ambition": 12.8
+   }
+  },
+  {
+   "siret": "77557381900254",
+   "entreprise": "SOCIETE COOPERATIVE AGRICOLE SEVEPI (SEVEPI)",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Vernon",
+   "dep": "27",
+   "lon": 1.49686,
+   "lat": 49.08792,
+   "km_moyen": {
+    "pilote": 5.7,
+    "ambition": 14.3
+   }
+  },
+  {
+   "siret": "77557381900262",
+   "entreprise": "SOCIETE COOPERATIVE AGRICOLE SEVEPI (SEVEPI)",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Gasny",
+   "dep": "27",
+   "lon": 1.61155,
+   "lat": 49.0954,
+   "km_moyen": {
+    "pilote": 5.6,
+    "ambition": 12.2
+   }
+  },
+  {
+   "siret": "77557381900270",
+   "entreprise": "SOCIETE COOPERATIVE AGRICOLE SEVEPI (SEVEPI)",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Douains",
+   "dep": "27",
+   "lon": 1.42543,
+   "lat": 49.06646,
+   "km_moyen": {
+    "pilote": 5.0,
+    "ambition": 16.0
+   }
+  },
+  {
+   "siret": "97708003500198",
+   "entreprise": "LEPICARD AGRICULTURE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Vexin-Sur-Epte",
+   "dep": "27",
+   "lon": 1.60014,
+   "lat": 49.1962,
+   "km_moyen": {
+    "pilote": 8.5,
+    "ambition": 16.2
+   }
+  },
+  {
+   "siret": "39194829600093",
+   "entreprise": "ALTERNAE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Gisors",
+   "dep": "27",
+   "lon": 1.76091,
+   "lat": 49.28116,
+   "km_moyen": {
+    "pilote": 11.1,
+    "ambition": 19.5
+   }
+  },
+  {
+   "siret": "41510089000037",
+   "entreprise": "AGR'IN",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Bezu-Saint-Eloi",
+   "dep": "27",
+   "lon": 1.69997,
+   "lat": 49.29697,
+   "km_moyen": {
+    "pilote": 12.4,
+    "ambition": 22.6
+   }
+  },
+  {
+   "siret": "31762569700022",
+   "entreprise": "PUISAL",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Hennezis",
+   "dep": "27",
+   "lon": 1.46226,
+   "lat": 49.19426,
+   "km_moyen": {
+    "pilote": 20.2,
+    "ambition": 24.5
+   }
+  },
+  {
+   "siret": "50743487600029",
+   "entreprise": "PRESTAGRI NEGOCE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Le Cormier",
+   "dep": "27",
+   "lon": 1.30444,
+   "lat": 48.97578,
+   "km_moyen": {
+    "pilote": 17.2,
+    "ambition": 23.1
+   }
+  },
+  {
+   "siret": "49758659400010",
+   "entreprise": "EUROTRADE EURL",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Pacy-Sur-Eure",
+   "dep": "27",
+   "lon": 1.37681,
+   "lat": 49.01657,
+   "km_moyen": {
+    "pilote": 8.9,
+    "ambition": 17.0
+   }
+  },
+  {
+   "siret": "99089381000012",
+   "entreprise": "SAVOIR FERT",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Notre-Dame-De-L'Isle",
+   "dep": "27",
+   "lon": 1.4466,
+   "lat": 49.16519,
+   "km_moyen": {
+    "pilote": 16.9,
+    "ambition": 23.1
+   }
+  },
+  {
+   "siret": "78079874000038",
+   "entreprise": "COOP AGRIC PRODUC PLANTS POMMES DE TERRE (ETREPAGNY PLANTS)",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Etrepagny",
+   "dep": "27",
+   "lon": 1.62046,
+   "lat": 49.30287,
+   "km_moyen": {
+    "pilote": 15.7,
+    "ambition": 26.1
+   }
+  },
+  {
+   "siret": "94080669800012",
+   "entreprise": "UNION DE COOPERATIVES AGRICOLES SITERA",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Douains",
+   "dep": "27",
+   "lon": 1.42605,
+   "lat": 49.0657,
+   "km_moyen": {
+    "pilote": 4.9,
+    "ambition": 15.9
+   }
+  },
+  {
+   "siret": "43963744800028",
+   "entreprise": "SARL NORMANDIE-AROMES",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Foucrainville",
+   "dep": "27",
+   "lon": 1.3231,
+   "lat": 48.93058,
+   "km_moyen": {
+    "pilote": 18.1,
+    "ambition": 22.6
+   }
+  },
+  {
+   "siret": "40921170300023",
+   "entreprise": "JMJ",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Gisors",
+   "dep": "27",
+   "lon": 1.78626,
+   "lat": 49.26779,
+   "km_moyen": {
+    "pilote": 10.7,
+    "ambition": 17.6
+   }
+  },
+  {
+   "siret": "50368180102303",
+   "entreprise": "SOCIETE COOPERATIVE AGRICOLE AXEREAL",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Auneau-Bleury-Saint-Symphorien",
+   "dep": "28",
+   "lon": 1.77588,
+   "lat": 48.45542,
+   "km_moyen": {
+    "pilote": 5.5,
+    "ambition": 11.7
+   }
+  },
+  {
+   "siret": "50368180102477",
+   "entreprise": "SOCIETE COOPERATIVE AGRICOLE AXEREAL",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Maisons",
+   "dep": "28",
+   "lon": 1.84536,
+   "lat": 48.40582,
+   "km_moyen": {
+    "pilote": 6.9,
+    "ambition": 12.1
+   }
+  },
+  {
+   "siret": "50368180102485",
+   "entreprise": "SOCIETE COOPERATIVE AGRICOLE AXEREAL",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Houville-La-Branche",
+   "dep": "28",
+   "lon": 1.64165,
+   "lat": 48.44566,
+   "km_moyen": {
+    "pilote": 16.7,
+    "ambition": 22.8
+   }
+  },
+  {
+   "siret": "77570109702084",
+   "entreprise": "SOCIETE COOPERATIVE AGRICOLE NATUP (SCA CAP SEINE)",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Boutigny-Prouais",
+   "dep": "28",
+   "lon": 1.54086,
+   "lat": 48.71376,
+   "km_moyen": {
+    "pilote": 6.6,
+    "ambition": 17.3
+   }
+  },
+  {
+   "siret": "77570109702092",
+   "entreprise": "SOCIETE COOPERATIVE AGRICOLE NATUP (SCA CAP SEINE)",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Bu",
+   "dep": "28",
+   "lon": 1.499,
+   "lat": 48.7987,
+   "km_moyen": {
+    "pilote": 9.3,
+    "ambition": 15.4
+   }
+  },
+  {
+   "siret": "77557501200072",
+   "entreprise": "SOC COOPERATIVE AGRICOLE D'EURE-LOIR (SCAEL)",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Sainville",
+   "dep": "28",
+   "lon": 1.87898,
+   "lat": 48.41334,
+   "km_moyen": {
+    "pilote": 5.2,
+    "ambition": 9.8
+   }
+  },
+  {
+   "siret": "77557501200130",
+   "entreprise": "SOC COOPERATIVE AGRICOLE D'EURE-LOIR (SCAEL)",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Ouarville",
+   "dep": "28",
+   "lon": 1.77223,
+   "lat": 48.3547,
+   "km_moyen": {
+    "pilote": 16.6,
+    "ambition": 20.7
+   }
+  },
+  {
+   "siret": "77557501200197",
+   "entreprise": "SOC COOPERATIVE AGRICOLE D'EURE-LOIR (SCAEL)",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Maintenon",
+   "dep": "28",
+   "lon": 1.57959,
+   "lat": 48.58918,
+   "km_moyen": {
+    "pilote": 10.7,
+    "ambition": 21.7
+   }
+  },
+  {
+   "siret": "77557501200254",
+   "entreprise": "SOC COOPERATIVE AGRICOLE D'EURE-LOIR (SCAEL)",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Janville-En-Beauce",
+   "dep": "28",
+   "lon": 1.88209,
+   "lat": 48.20371,
+   "km_moyen": {
+    "pilote": 17.3,
+    "ambition": 25.6
+   }
+  },
+  {
+   "siret": "77557501200304",
+   "entreprise": "SOC COOPERATIVE AGRICOLE D'EURE-LOIR (SCAEL)",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Epernon",
+   "dep": "28",
+   "lon": 1.68089,
+   "lat": 48.60564,
+   "km_moyen": {
+    "pilote": 3.8,
+    "ambition": 14.7
+   }
+  },
+  {
+   "siret": "77557501200387",
+   "entreprise": "SOC COOPERATIVE AGRICOLE D'EURE-LOIR (SCAEL)",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "La Chaussee D'Ivry",
+   "dep": "28",
+   "lon": 1.47866,
+   "lat": 48.88457,
+   "km_moyen": {
+    "pilote": 7.6,
+    "ambition": 13.0
+   }
+  },
+  {
+   "siret": "77557501200726",
+   "entreprise": "SOC COOPERATIVE AGRICOLE D'EURE-LOIR (SCAEL)",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Marchezais",
+   "dep": "28",
+   "lon": 1.51068,
+   "lat": 48.77096,
+   "km_moyen": {
+    "pilote": 8.5,
+    "ambition": 15.9
+   }
+  },
+  {
+   "siret": "77557501200734",
+   "entreprise": "SOC COOPERATIVE AGRICOLE D'EURE-LOIR (SCAEL)",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Mezieres-En-Drouais",
+   "dep": "28",
+   "lon": 1.44262,
+   "lat": 48.72601,
+   "km_moyen": {
+    "pilote": 15.6,
+    "ambition": 23.3
+   }
+  },
+  {
+   "siret": "77557501200791",
+   "entreprise": "SOC COOPERATIVE AGRICOLE D'EURE-LOIR (SCAEL)",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Bouglainval",
+   "dep": "28",
+   "lon": 1.50897,
+   "lat": 48.54513,
+   "km_moyen": {
+    "pilote": 19.6,
+    "ambition": 28.8
+   }
+  },
+  {
+   "siret": "77557501200817",
+   "entreprise": "SOC COOPERATIVE AGRICOLE D'EURE-LOIR (SCAEL)",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Baudreville",
+   "dep": "28",
+   "lon": 1.90469,
+   "lat": 48.33403,
+   "km_moyen": {
+    "pilote": 7.5,
+    "ambition": 12.9
+   }
+  },
+  {
+   "siret": "77557501200965",
+   "entreprise": "SOC COOPERATIVE AGRICOLE D'EURE-LOIR (SCAEL)",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Houville-La-Branche",
+   "dep": "28",
+   "lon": 1.65066,
+   "lat": 48.43899,
+   "km_moyen": {
+    "pilote": 16.3,
+    "ambition": 22.5
+   }
+  },
+  {
+   "siret": "80612078800195",
+   "entreprise": "ALLIANCE NEGOCE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Santeuil",
+   "dep": "28",
+   "lon": 1.73149,
+   "lat": 48.39242,
+   "km_moyen": {
+    "pilote": 14.6,
+    "ambition": 20.1
+   }
+  },
+  {
+   "siret": "80612078800229",
+   "entreprise": "ALLIANCE NEGOCE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Coltainville",
+   "dep": "28",
+   "lon": 1.58223,
+   "lat": 48.48899,
+   "km_moyen": {
+    "pilote": 19.8,
+    "ambition": 25.3
+   }
+  },
+  {
+   "siret": "77557491600208",
+   "entreprise": "SOCIETE COOPERATIVE AGRICOLE DE BONNEVAL BEAUCE ET PERCHE",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Santeuil",
+   "dep": "28",
+   "lon": 1.72984,
+   "lat": 48.39101,
+   "km_moyen": {
+    "pilote": 14.9,
+    "ambition": 20.3
+   }
+  },
+  {
+   "siret": "77557491600216",
+   "entreprise": "SOCIETE COOPERATIVE AGRICOLE DE BONNEVAL BEAUCE ET PERCHE",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Toury",
+   "dep": "28",
+   "lon": 1.93948,
+   "lat": 48.19473,
+   "km_moyen": {
+    "pilote": 16.0,
+    "ambition": 23.9
+   }
+  },
+  {
+   "siret": "30532052500135",
+   "entreprise": "COOPERATIVE AGRICOLE ILE DE FRANCE SUD",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Garancieres-En-Beauce",
+   "dep": "28",
+   "lon": 1.92694,
+   "lat": 48.45189,
+   "km_moyen": {
+    "pilote": 1.5,
+    "ambition": 5.7
+   }
+  },
+  {
+   "siret": "30532052500143",
+   "entreprise": "COOPERATIVE AGRICOLE ILE DE FRANCE SUD",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Baudreville",
+   "dep": "28",
+   "lon": 1.90317,
+   "lat": 48.33327,
+   "km_moyen": {
+    "pilote": 7.7,
+    "ambition": 13.0
+   }
+  },
+  {
+   "siret": "41955374800023",
+   "entreprise": "J.C. COISNON SARL",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Baudreville",
+   "dep": "28",
+   "lon": 1.8728,
+   "lat": 48.3233,
+   "km_moyen": {
+    "pilote": 10.3,
+    "ambition": 15.8
+   }
+  },
+  {
+   "siret": "41955374800049",
+   "entreprise": "J.C. COISNON SARL",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Janville-En-Beauce",
+   "dep": "28",
+   "lon": 1.8507,
+   "lat": 48.2062,
+   "km_moyen": {
+    "pilote": 18.9,
+    "ambition": 27.3
+   }
+  },
+  {
+   "siret": "83747038400020",
+   "entreprise": "TB FOURRAGES DISTRIBUTION (TB FOURRAGES DISTRIBUTION)",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Bouglainval",
+   "dep": "28",
+   "lon": 1.51106,
+   "lat": 48.56318,
+   "km_moyen": {
+    "pilote": 17.7,
+    "ambition": 27.8
+   }
+  },
+  {
+   "siret": "44293272900019",
+   "entreprise": "SARL LES CARREAUX",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Oysonville",
+   "dep": "28",
+   "lon": 1.95951,
+   "lat": 48.39323,
+   "km_moyen": {
+    "pilote": 2.6,
+    "ambition": 7.4
+   }
+  },
+  {
+   "siret": "30381616900039",
+   "entreprise": "MURET",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Broue",
+   "dep": "28",
+   "lon": 1.51741,
+   "lat": 48.7541,
+   "km_moyen": {
+    "pilote": 8.6,
+    "ambition": 16.4
+   }
+  },
+  {
+   "siret": "44295937500027",
+   "entreprise": "SARL DU MOULIN VERT",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Fresnay-L'Eveque",
+   "dep": "28",
+   "lon": 1.83725,
+   "lat": 48.26087,
+   "km_moyen": {
+    "pilote": 15.2,
+    "ambition": 22.9
+   }
+  },
+  {
+   "siret": "49942148500016",
+   "entreprise": "NEGOCE DU VIEUX MOULIN",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Gouillons",
+   "dep": "28",
+   "lon": 1.84087,
+   "lat": 48.34283,
+   "km_moyen": {
+    "pilote": 13.6,
+    "ambition": 17.0
+   }
+  },
+  {
+   "siret": "49808504200022",
+   "entreprise": "ETABLISSEMENTS DARNET 28",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Oulins",
+   "dep": "28",
+   "lon": 1.50793,
+   "lat": 48.86717,
+   "km_moyen": {
+    "pilote": 6.2,
+    "ambition": 11.8
+   }
+  },
+  {
+   "siret": "43848295200019",
+   "entreprise": "SARL PACK FOIN BEAUCE (PFB)",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Maintenon",
+   "dep": "28",
+   "lon": 1.5819,
+   "lat": 48.5718,
+   "km_moyen": {
+    "pilote": 12.3,
+    "ambition": 22.1
+   }
+  },
+  {
+   "siret": "98015027000018",
+   "entreprise": "SAS DE LA CHATELLERIE (SAS DE LA CHATELLERIE)",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Denonville",
+   "dep": "28",
+   "lon": 1.79998,
+   "lat": 48.40401,
+   "km_moyen": {
+    "pilote": 9.2,
+    "ambition": 14.6
+   }
+  },
+  {
+   "siret": "40053105900014",
+   "entreprise": "SARL DE SAINVILLE AGRI-NEGOCE (SAN)",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Sainville",
+   "dep": "28",
+   "lon": 1.84355,
+   "lat": 48.43112,
+   "km_moyen": {
+    "pilote": 3.8,
+    "ambition": 9.7
+   }
+  },
+  {
+   "siret": "33875688500038",
+   "entreprise": "DUGRAVOT",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Droue-Sur-Drouette",
+   "dep": "28",
+   "lon": 1.69257,
+   "lat": 48.59513,
+   "km_moyen": {
+    "pilote": 4.0,
+    "ambition": 14.0
+   }
+  },
+  {
+   "siret": "49175721700014",
+   "entreprise": "S.A.R.L PELLETIER",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "La Chapelle-D'Aunainville",
+   "dep": "28",
+   "lon": 1.81403,
+   "lat": 48.42435,
+   "km_moyen": {
+    "pilote": 6.1,
+    "ambition": 11.9
+   }
+  },
+  {
+   "siret": "79937886400018",
+   "entreprise": "SAS GRAINS PLUS",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Barmainville",
+   "dep": "28",
+   "lon": 1.94888,
+   "lat": 48.25335,
+   "km_moyen": {
+    "pilote": 7.9,
+    "ambition": 16.3
+   }
+  },
+  {
+   "siret": "93869292800014",
+   "entreprise": "BASTIEN POMPON",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Toury",
+   "dep": "28",
+   "lon": 1.93825,
+   "lat": 48.19933,
+   "km_moyen": {
+    "pilote": 15.4,
+    "ambition": 23.3
+   }
+  },
+  {
+   "siret": "40250413800015",
+   "entreprise": "S.O.D.E.M-SOCIETE DES ETABLISSEMENTS MARCHAIS",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Broue",
+   "dep": "28",
+   "lon": 1.513,
+   "lat": 48.7689,
+   "km_moyen": {
+    "pilote": 8.4,
+    "ambition": 15.9
+   }
+  },
+  {
+   "siret": "92997776700011",
+   "entreprise": "SAS SERVICES DE L'AUBEPRE (SAS)",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Aunay-Sous-Auneau",
+   "dep": "28",
+   "lon": 1.80743,
+   "lat": 48.44038,
+   "km_moyen": {
+    "pilote": 4.9,
+    "ambition": 10.8
+   }
+  },
+  {
+   "siret": "48445317000025",
+   "entreprise": "HORSEFAIR",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Saint-Piat",
+   "dep": "28",
+   "lon": 1.58635,
+   "lat": 48.53978,
+   "km_moyen": {
+    "pilote": 15.1,
+    "ambition": 22.8
+   }
+  },
+  {
+   "siret": "81937081800018",
+   "entreprise": "SAS BEL AIR (MORCHOISNE)",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Barmainville",
+   "dep": "28",
+   "lon": 1.96922,
+   "lat": 48.25882,
+   "km_moyen": {
+    "pilote": 6.4,
+    "ambition": 14.7
+   }
+  },
+  {
+   "siret": "70698018200804",
+   "entreprise": "SOUFFLET AGRICULTURE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Villevoques",
+   "dep": "45",
+   "lon": 2.63533,
+   "lat": 48.04096,
+   "km_moyen": {
+    "pilote": 14.0,
+    "ambition": 19.9
+   }
+  },
+  {
+   "siret": "70698018200903",
+   "entreprise": "SOUFFLET AGRICULTURE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Puiseaux",
+   "dep": "45",
+   "lon": 2.43245,
+   "lat": 48.22204,
+   "km_moyen": {
+    "pilote": 6.7,
+    "ambition": 11.7
+   }
+  },
+  {
+   "siret": "77560695700097",
+   "entreprise": "COOP AGRICOLE PRODUCT GATINAIS MEUNIERE (CAPROGA)",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Ladon",
+   "dep": "45",
+   "lon": 2.54528,
+   "lat": 48.00116,
+   "km_moyen": {
+    "pilote": 20.0,
+    "ambition": 26.1
+   }
+  },
+  {
+   "siret": "77560695700113",
+   "entreprise": "COOP AGRICOLE PRODUCT GATINAIS MEUNIERE (CAPROGA)",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Gondreville",
+   "dep": "45",
+   "lon": 2.64237,
+   "lat": 48.04289,
+   "km_moyen": {
+    "pilote": 13.6,
+    "ambition": 19.7
+   }
+  },
+  {
+   "siret": "77560695700154",
+   "entreprise": "COOP AGRICOLE PRODUCT GATINAIS MEUNIERE (CAPROGA)",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Corbeilles",
+   "dep": "45",
+   "lon": 2.55249,
+   "lat": 48.06708,
+   "km_moyen": {
+    "pilote": 10.9,
+    "ambition": 17.1
+   }
+  },
+  {
+   "siret": "77560695700246",
+   "entreprise": "COOP AGRICOLE PRODUCT GATINAIS MEUNIERE (CAPROGA)",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Chalette-Sur-Loing",
+   "dep": "45",
+   "lon": 2.72741,
+   "lat": 48.00641,
+   "km_moyen": {
+    "pilote": 19.0,
+    "ambition": 25.6
+   }
+  },
+  {
+   "siret": "77560695700337",
+   "entreprise": "COOP AGRICOLE PRODUCT GATINAIS MEUNIERE (CAPROGA)",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Montargis",
+   "dep": "45",
+   "lon": 2.74241,
+   "lat": 48.00374,
+   "km_moyen": {
+    "pilote": 19.7,
+    "ambition": 26.1
+   }
+  },
+  {
+   "siret": "77560695700386",
+   "entreprise": "COOP AGRICOLE PRODUCT GATINAIS MEUNIERE (CAPROGA)",
+   "cooperative": true,
+   "naf": "52.10B",
+   "commune": "Sceaux-Du-Gatinais",
+   "dep": "45",
+   "lon": 2.60149,
+   "lat": 48.10614,
+   "km_moyen": {
+    "pilote": 5.8,
+    "ambition": 11.4
+   }
+  },
+  {
+   "siret": "77560695700402",
+   "entreprise": "COOP AGRICOLE PRODUCT GATINAIS MEUNIERE (CAPROGA)",
+   "cooperative": true,
+   "naf": "52.10B",
+   "commune": "Prefontaines",
+   "dep": "45",
+   "lon": 2.67757,
+   "lat": 48.09867,
+   "km_moyen": {
+    "pilote": 5.6,
+    "ambition": 13.0
+   }
+  },
+  {
+   "siret": "77560695700436",
+   "entreprise": "COOP AGRICOLE PRODUCT GATINAIS MEUNIERE (CAPROGA)",
+   "cooperative": true,
+   "naf": "52.10B",
+   "commune": "La Selle-Sur-Le-Bied",
+   "dep": "45",
+   "lon": 2.90465,
+   "lat": 48.08167,
+   "km_moyen": {
+    "pilote": 12.0,
+    "ambition": 19.0
+   }
+  },
+  {
+   "siret": "77560695700527",
+   "entreprise": "COOP AGRICOLE PRODUCT GATINAIS MEUNIERE (CAPROGA)",
+   "cooperative": true,
+   "naf": "52.10B",
+   "commune": "Corquilleroy",
+   "dep": "45",
+   "lon": 2.66794,
+   "lat": 48.03651,
+   "km_moyen": {
+    "pilote": 14.4,
+    "ambition": 20.8
+   }
+  },
+  {
+   "siret": "77557491600315",
+   "entreprise": "SOCIETE COOPERATIVE AGRICOLE DE BONNEVAL BEAUCE ET PERCHE",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Bazoches-Les-Gallerandes",
+   "dep": "45",
+   "lon": 2.05086,
+   "lat": 48.16052,
+   "km_moyen": {
+    "pilote": 19.5,
+    "ambition": 25.9
+   }
+  },
+  {
+   "siret": "77560771600039",
+   "entreprise": "AGROPITHIVIERS",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Le Malesherbois",
+   "dep": "45",
+   "lon": 2.33802,
+   "lat": 48.23594,
+   "km_moyen": {
+    "pilote": 11.7,
+    "ambition": 16.4
+   }
+  },
+  {
+   "siret": "77560771600047",
+   "entreprise": "AGROPITHIVIERS",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Le Malesherbois",
+   "dep": "45",
+   "lon": 2.40877,
+   "lat": 48.29323,
+   "km_moyen": {
+    "pilote": 4.4,
+    "ambition": 9.6
+   }
+  },
+  {
+   "siret": "77560771600070",
+   "entreprise": "AGROPITHIVIERS",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Engenville",
+   "dep": "45",
+   "lon": 2.23849,
+   "lat": 48.23661,
+   "km_moyen": {
+    "pilote": 12.3,
+    "ambition": 17.3
+   }
+  },
+  {
+   "siret": "77560771600096",
+   "entreprise": "AGROPITHIVIERS",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Boynes",
+   "dep": "45",
+   "lon": 2.35465,
+   "lat": 48.11754,
+   "km_moyen": {
+    "pilote": 13.8,
+    "ambition": 23.2
+   }
+  },
+  {
+   "siret": "77560771600104",
+   "entreprise": "AGROPITHIVIERS",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Beaune-La-Rolande",
+   "dep": "45",
+   "lon": 2.42151,
+   "lat": 48.07078,
+   "km_moyen": {
+    "pilote": 12.2,
+    "ambition": 22.8
+   }
+  },
+  {
+   "siret": "77560771600120",
+   "entreprise": "AGROPITHIVIERS",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Auxy",
+   "dep": "45",
+   "lon": 2.48341,
+   "lat": 48.09597,
+   "km_moyen": {
+    "pilote": 6.4,
+    "ambition": 16.4
+   }
+  },
+  {
+   "siret": "77560771600161",
+   "entreprise": "AGROPITHIVIERS",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Charmont-En-Beauce",
+   "dep": "45",
+   "lon": 2.10169,
+   "lat": 48.23177,
+   "km_moyen": {
+    "pilote": 10.7,
+    "ambition": 16.3
+   }
+  },
+  {
+   "siret": "77560771600179",
+   "entreprise": "AGROPITHIVIERS",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Le Malesherbois",
+   "dep": "45",
+   "lon": 2.40197,
+   "lat": 48.283,
+   "km_moyen": {
+    "pilote": 4.8,
+    "ambition": 10.4
+   }
+  },
+  {
+   "siret": "77560771600203",
+   "entreprise": "AGROPITHIVIERS",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Beaune-La-Rolande",
+   "dep": "45",
+   "lon": 2.42341,
+   "lat": 48.06991,
+   "km_moyen": {
+    "pilote": 12.2,
+    "ambition": 22.8
+   }
+  },
+  {
+   "siret": "32242386400030",
+   "entreprise": "SAS DAVID",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Freville En Gatinais",
+   "dep": "45",
+   "lon": 2.45186,
+   "lat": 48.01969,
+   "km_moyen": {
+    "pilote": 17.7,
+    "ambition": 26.9
+   }
+  },
+  {
+   "siret": "32242386400055",
+   "entreprise": "SAS DAVID",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Montargis",
+   "dep": "45",
+   "lon": 2.74241,
+   "lat": 48.00374,
+   "km_moyen": {
+    "pilote": 19.7,
+    "ambition": 26.1
+   }
+  },
+  {
+   "siret": "77560784900012",
+   "entreprise": "COOPERATIVE AGRICOLE PUISEAUX",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Puiseaux",
+   "dep": "45",
+   "lon": 2.45975,
+   "lat": 48.20513,
+   "km_moyen": {
+    "pilote": 6.2,
+    "ambition": 10.5
+   }
+  },
+  {
+   "siret": "50493550300012",
+   "entreprise": "SARL DE BEL AIR",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Outarville",
+   "dep": "45",
+   "lon": 2.05842,
+   "lat": 48.23718,
+   "km_moyen": {
+    "pilote": 8.8,
+    "ambition": 15.4
+   }
+  },
+  {
+   "siret": "33265154600019",
+   "entreprise": "ETABLISSEMENTS BOUDET SAS",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Beaune-La-Rolande",
+   "dep": "45",
+   "lon": 2.42147,
+   "lat": 48.07265,
+   "km_moyen": {
+    "pilote": 12.0,
+    "ambition": 22.6
+   }
+  },
+  {
+   "siret": "94155255600016",
+   "entreprise": "GATIFOURRAGE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Saint-Maurice-Sur-Fessard",
+   "dep": "45",
+   "lon": 2.61234,
+   "lat": 47.99848,
+   "km_moyen": {
+    "pilote": 20.2,
+    "ambition": 25.6
+   }
+  },
+  {
+   "siret": "45195712000020",
+   "entreprise": "SAS LAROYE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Charmont-En-Beauce",
+   "dep": "45",
+   "lon": 2.12166,
+   "lat": 48.22741,
+   "km_moyen": {
+    "pilote": 11.7,
+    "ambition": 17.1
+   }
+  },
+  {
+   "siret": "51105490000028",
+   "entreprise": "FRANCE GATINAIS CEREALES UNION DE COOPERATIVES AGRICOLES",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Montargis",
+   "dep": "45",
+   "lon": 2.74241,
+   "lat": 48.00374,
+   "km_moyen": {
+    "pilote": 19.7,
+    "ambition": 26.1
+   }
+  },
+  {
+   "siret": "44910902400017",
+   "entreprise": "FERME DU GATINAIS",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Nargis",
+   "dep": "45",
+   "lon": 2.72732,
+   "lat": 48.09894,
+   "km_moyen": {
+    "pilote": 6.5,
+    "ambition": 13.8
+   }
+  },
+  {
+   "siret": "77544311200013",
+   "entreprise": "SCA DE BOISSEAUX",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Boisseaux",
+   "dep": "45",
+   "lon": 1.97277,
+   "lat": 48.25821,
+   "km_moyen": {
+    "pilote": 6.4,
+    "ambition": 14.6
+   }
+  },
+  {
+   "siret": "41479859500024",
+   "entreprise": "ALDERS LAROYE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Charmont-En-Beauce",
+   "dep": "45",
+   "lon": 2.12015,
+   "lat": 48.22671,
+   "km_moyen": {
+    "pilote": 11.8,
+    "ambition": 17.2
+   }
+  },
+  {
+   "siret": "35352725200012",
+   "entreprise": "EUROPAILLE SARL",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Guigneville",
+   "dep": "45",
+   "lon": 2.16419,
+   "lat": 48.23014,
+   "km_moyen": {
+    "pilote": 12.1,
+    "ambition": 17.4
+   }
+  },
+  {
+   "siret": "51341549700017",
+   "entreprise": "SARL DE FARONVILLE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Outarville",
+   "dep": "45",
+   "lon": 2.02045,
+   "lat": 48.21189,
+   "km_moyen": {
+    "pilote": 12.0,
+    "ambition": 19.2
+   }
+  },
+  {
+   "siret": "34538827600023",
+   "entreprise": "MOULIN NEUF",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Cepoy",
+   "dep": "45",
+   "lon": 2.73028,
+   "lat": 48.05301,
+   "km_moyen": {
+    "pilote": 12.6,
+    "ambition": 19.5
+   }
+  },
+  {
+   "siret": "81946230000016",
+   "entreprise": "LA FERME DE MONTCELARD",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Estouy",
+   "dep": "45",
+   "lon": 2.30405,
+   "lat": 48.17618,
+   "km_moyen": {
+    "pilote": 18.4,
+    "ambition": 22.7
+   }
+  },
+  {
+   "siret": "37815414000016",
+   "entreprise": "CEREBEAUCE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Outarville",
+   "dep": "45",
+   "lon": 2.01726,
+   "lat": 48.20068,
+   "km_moyen": {
+    "pilote": 13.6,
+    "ambition": 20.7
+   }
+  },
+  {
+   "siret": "49099266600019",
+   "entreprise": "SOCIETE EN PARTICIPATION SAVELORGES (SEP)",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Rouvres-Saint-Jean",
+   "dep": "45",
+   "lon": 2.22902,
+   "lat": 48.32645,
+   "km_moyen": {
+    "pilote": 2.1,
+    "ambition": 7.4
+   }
+  },
+  {
+   "siret": "30271596600974",
+   "entreprise": "VIVESCIA",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Vauchamps",
+   "dep": "51",
+   "lon": 3.61565,
+   "lat": 48.88208,
+   "km_moyen": {
+    "pilote": 15.6,
+    "ambition": 24.0
+   }
+  },
+  {
+   "siret": "79210735100076",
+   "entreprise": "NOVAGRAIN",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Barbonne-Fayel",
+   "dep": "51",
+   "lon": 3.70548,
+   "lat": 48.65783,
+   "km_moyen": {
+    "pilote": 18.8,
+    "ambition": 25.4
+   }
+  },
+  {
+   "siret": "77561197300014",
+   "entreprise": "SOCIETE COOPERATIVE AGRICOLE D'ESTERNAY",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Esternay",
+   "dep": "51",
+   "lon": 3.56073,
+   "lat": 48.72983,
+   "km_moyen": {
+    "pilote": 10.0,
+    "ambition": 15.4
+   }
+  },
+  {
+   "siret": "09625015400018",
+   "entreprise": "ETABLISSEMENTS CHARLES RITARD",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Esclavolles-Lurey",
+   "dep": "51",
+   "lon": 3.66028,
+   "lat": 48.55322,
+   "km_moyen": {
+    "pilote": 16.6,
+    "ambition": 22.4
+   }
+  },
+  {
+   "siret": "30152192800939",
+   "entreprise": "TERNOVEO",
+   "cooperative": false,
+   "naf": "52.10B",
+   "commune": "Chevreville",
+   "dep": "60",
+   "lon": 2.83911,
+   "lat": 49.10579,
+   "km_moyen": {
+    "pilote": 4.2,
+    "ambition": 10.3
+   }
+  },
+  {
+   "siret": "32667736600220",
+   "entreprise": "AGORA (AGORA) (OCEAL)",
+   "cooperative": true,
+   "naf": "52.10B",
+   "commune": "Thibivillers",
+   "dep": "60",
+   "lon": 1.9009,
+   "lat": 49.30395,
+   "km_moyen": {
+    "pilote": 19.8,
+    "ambition": 23.2
+   }
+  },
+  {
+   "siret": "32667736600279",
+   "entreprise": "AGORA (AGORA) (OCEAL)",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Precy-Sur-Oise",
+   "dep": "60",
+   "lon": 2.38235,
+   "lat": 49.20388,
+   "km_moyen": {
+    "pilote": 7.6,
+    "ambition": 17.4
+   }
+  },
+  {
+   "siret": "32667736600311",
+   "entreprise": "AGORA (AGORA) (OCEAL)",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Ivry-Le-Temple",
+   "dep": "60",
+   "lon": 2.02883,
+   "lat": 49.22683,
+   "km_moyen": {
+    "pilote": 6.6,
+    "ambition": 13.2
+   }
+  },
+  {
+   "siret": "32667736600386",
+   "entreprise": "AGORA (AGORA) (OCEAL)",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Jouy-Sous-Thelle",
+   "dep": "60",
+   "lon": 1.97216,
+   "lat": 49.31536,
+   "km_moyen": {
+    "pilote": 20.0,
+    "ambition": 24.9
+   }
+  },
+  {
+   "siret": "32667736600410",
+   "entreprise": "AGORA (AGORA) (OCEAL)",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Bouconvillers",
+   "dep": "60",
+   "lon": 1.90593,
+   "lat": 49.17397,
+   "km_moyen": {
+    "pilote": 1.9,
+    "ambition": 7.6
+   }
+  },
+  {
+   "siret": "32667736600428",
+   "entreprise": "AGORA (AGORA) (OCEAL)",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Serifontaine",
+   "dep": "60",
+   "lon": 1.77604,
+   "lat": 49.35129,
+   "km_moyen": {
+    "pilote": 21.1,
+    "ambition": 29.0
+   }
+  },
+  {
+   "siret": "32667736600469",
+   "entreprise": "AGORA (AGORA) (OCEAL)",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Le Mesnil-En-Thelle",
+   "dep": "60",
+   "lon": 2.2787,
+   "lat": 49.16607,
+   "km_moyen": {
+    "pilote": 3.7,
+    "ambition": 11.9
+   }
+  },
+  {
+   "siret": "77562903300041",
+   "entreprise": "COOPERATIVE AGRICOLE VALFRANCE",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Nanteuil-Le-Haudouin",
+   "dep": "60",
+   "lon": 2.79294,
+   "lat": 49.14138,
+   "km_moyen": {
+    "pilote": 9.1,
+    "ambition": 15.0
+   }
+  },
+  {
+   "siret": "77562903300058",
+   "entreprise": "COOPERATIVE AGRICOLE VALFRANCE",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Betz",
+   "dep": "60",
+   "lon": 2.9574,
+   "lat": 49.15274,
+   "km_moyen": {
+    "pilote": 11.4,
+    "ambition": 15.8
+   }
+  },
+  {
+   "siret": "77562903300132",
+   "entreprise": "COOPERATIVE AGRICOLE VALFRANCE",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Senlis",
+   "dep": "60",
+   "lon": 2.58796,
+   "lat": 49.22259,
+   "km_moyen": {
+    "pilote": 19.3,
+    "ambition": 23.9
+   }
+  },
+  {
+   "siret": "77562903300280",
+   "entreprise": "COOPERATIVE AGRICOLE VALFRANCE",
+   "cooperative": true,
+   "naf": "52.10B",
+   "commune": "Mareuil-Sur-Ourcq",
+   "dep": "60",
+   "lon": 3.07669,
+   "lat": 49.13922,
+   "km_moyen": {
+    "pilote": 6.3,
+    "ambition": 14.0
+   }
+  },
+  {
+   "siret": "77562903300330",
+   "entreprise": "COOPERATIVE AGRICOLE VALFRANCE",
+   "cooperative": true,
+   "naf": "52.10B",
+   "commune": "Le Plessis-Belleville",
+   "dep": "60",
+   "lon": 2.74676,
+   "lat": 49.09558,
+   "km_moyen": {
+    "pilote": 5.3,
+    "ambition": 10.0
+   }
+  },
+  {
+   "siret": "39194829600101",
+   "entreprise": "ALTERNAE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Eragny-Sur-Epte",
+   "dep": "60",
+   "lon": 1.78221,
+   "lat": 49.29502,
+   "km_moyen": {
+    "pilote": 13.8,
+    "ambition": 21.2
+   }
+  },
+  {
+   "siret": "39194829600184",
+   "entreprise": "ALTERNAE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Lierville",
+   "dep": "60",
+   "lon": 1.88099,
+   "lat": 49.19655,
+   "km_moyen": {
+    "pilote": 5.0,
+    "ambition": 9.8
+   }
+  },
+  {
+   "siret": "39194829600192",
+   "entreprise": "ALTERNAE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Ivry Le Temple",
+   "dep": "60",
+   "lon": 2.02592,
+   "lat": 49.23579,
+   "km_moyen": {
+    "pilote": 7.8,
+    "ambition": 14.3
+   }
+  },
+  {
+   "siret": "78051992200055",
+   "entreprise": "UNION COOPERATIVE ARRONDISSEMENT CLERMON (UCAC)",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Mouy",
+   "dep": "60",
+   "lon": 2.27803,
+   "lat": 49.31413,
+   "km_moyen": {
+    "pilote": 20.8,
+    "ambition": 28.0
+   }
+  },
+  {
+   "siret": "78051992200097",
+   "entreprise": "UNION COOPERATIVE ARRONDISSEMENT CLERMON (UCAC)",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Cires-Les-Mello",
+   "dep": "60",
+   "lon": 2.35562,
+   "lat": 49.27234,
+   "km_moyen": {
+    "pilote": 15.2,
+    "ambition": 25.2
+   }
+  },
+  {
+   "siret": "43171451800039",
+   "entreprise": "SYNERGIS UNION COOPERATIVES AGRICOLES",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Amblainville",
+   "dep": "60",
+   "lon": 2.10425,
+   "lat": 49.22246,
+   "km_moyen": {
+    "pilote": 5.4,
+    "ambition": 12.5
+   }
+  },
+  {
+   "siret": "43171451800088",
+   "entreprise": "SYNERGIS UNION COOPERATIVES AGRICOLES",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Le Mesnil-En-Thelle",
+   "dep": "60",
+   "lon": 2.2787,
+   "lat": 49.16607,
+   "km_moyen": {
+    "pilote": 3.7,
+    "ambition": 11.9
+   }
+  },
+  {
+   "siret": "83079267700015",
+   "entreprise": "CASDI",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Rousseloy",
+   "dep": "60",
+   "lon": 2.3969,
+   "lat": 49.2994,
+   "km_moyen": {
+    "pilote": 20.1,
+    "ambition": 29.6
+   }
+  },
+  {
+   "siret": "31304115400029",
+   "entreprise": "SOC MARCHAL",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Lamorlaye",
+   "dep": "60",
+   "lon": 2.42909,
+   "lat": 49.15477,
+   "km_moyen": {
+    "pilote": 6.0,
+    "ambition": 12.3
+   }
+  },
+  {
+   "siret": "31304115400037",
+   "entreprise": "SOC MARCHAL",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Lamorlaye",
+   "dep": "60",
+   "lon": 2.42726,
+   "lat": 49.15057,
+   "km_moyen": {
+    "pilote": 5.6,
+    "ambition": 11.8
+   }
+  },
+  {
+   "siret": "31304115400045",
+   "entreprise": "SOC MARCHAL",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Avilly-Saint-Leonard",
+   "dep": "60",
+   "lon": 2.54129,
+   "lat": 49.19045,
+   "km_moyen": {
+    "pilote": 13.7,
+    "ambition": 18.8
+   }
+  },
+  {
+   "siret": "33028649300011",
+   "entreprise": "ETABLISSEMENTS HARTEEL",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Betz",
+   "dep": "60",
+   "lon": 2.95077,
+   "lat": 49.15362,
+   "km_moyen": {
+    "pilote": 11.6,
+    "ambition": 16.0
+   }
+  },
+  {
+   "siret": "38813931300042",
+   "entreprise": "ETABLISSEMENTS ODIEVRE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Boubiers",
+   "dep": "60",
+   "lon": 1.86974,
+   "lat": 49.22005,
+   "km_moyen": {
+    "pilote": 8.2,
+    "ambition": 12.5
+   }
+  },
+  {
+   "siret": "69980593300032",
+   "entreprise": "ETABLISSEMENTS GABRIEL LEGESNE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Chantilly",
+   "dep": "60",
+   "lon": 2.4603,
+   "lat": 49.17497,
+   "km_moyen": {
+    "pilote": 9.2,
+    "ambition": 15.2
+   }
+  },
+  {
+   "siret": "74555053300038",
+   "entreprise": "GRAINS HUBIER",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Senlis",
+   "dep": "60",
+   "lon": 2.58796,
+   "lat": 49.22259,
+   "km_moyen": {
+    "pilote": 19.3,
+    "ambition": 23.9
+   }
+  },
+  {
+   "siret": "91944504900019",
+   "entreprise": "SAS FERME DU FAYEL (SAS FERME DU FAYEL)",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Boubiers",
+   "dep": "60",
+   "lon": 1.86613,
+   "lat": 49.22303,
+   "km_moyen": {
+    "pilote": 8.5,
+    "ambition": 12.8
+   }
+  },
+  {
+   "siret": "33009745200016",
+   "entreprise": "SOCIETE MANSART",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Le Mesnil-En-Thelle",
+   "dep": "60",
+   "lon": 2.28649,
+   "lat": 49.18908,
+   "km_moyen": {
+    "pilote": 4.2,
+    "ambition": 14.1
+   }
+  },
+  {
+   "siret": "75321952600021",
+   "entreprise": "SOCOPRE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Montagny-Sainte-Felicite",
+   "dep": "60",
+   "lon": 2.73918,
+   "lat": 49.12899,
+   "km_moyen": {
+    "pilote": 9.0,
+    "ambition": 13.7
+   }
+  },
+  {
+   "siret": "44936069200015",
+   "entreprise": "SARL EQUILAB",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Ivry-Le-Temple",
+   "dep": "60",
+   "lon": 2.02397,
+   "lat": 49.22961,
+   "km_moyen": {
+    "pilote": 7.2,
+    "ambition": 13.6
+   }
+  },
+  {
+   "siret": "53093611100026",
+   "entreprise": "UNION COOPS BIO CEREALES (UCBC)",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Senlis",
+   "dep": "60",
+   "lon": 2.58796,
+   "lat": 49.22259,
+   "km_moyen": {
+    "pilote": 19.3,
+    "ambition": 23.9
+   }
+  },
+  {
+   "siret": "39519909400024",
+   "entreprise": "FUTUR AGRI",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Rousseloy",
+   "dep": "60",
+   "lon": 2.39703,
+   "lat": 49.30226,
+   "km_moyen": {
+    "pilote": 20.5,
+    "ambition": 30.0
+   }
+  },
+  {
+   "siret": "81125726000018",
+   "entreprise": "CAMERONE (CAMERONE)",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Lamorlaye",
+   "dep": "60",
+   "lon": 2.42913,
+   "lat": 49.15117,
+   "km_moyen": {
+    "pilote": 5.7,
+    "ambition": 11.9
+   }
+  },
+  {
+   "siret": "70698018200408",
+   "entreprise": "SOUFFLET AGRICULTURE",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Thorigny-Sur-Oreuse",
+   "dep": "89",
+   "lon": 3.38863,
+   "lat": 48.29563,
+   "km_moyen": {
+    "pilote": 13.0,
+    "ambition": 18.8
+   }
+  },
+  {
+   "siret": "30271596602491",
+   "entreprise": "VIVESCIA",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Sergines",
+   "dep": "89",
+   "lon": 3.25615,
+   "lat": 48.34541,
+   "km_moyen": {
+    "pilote": 4.8,
+    "ambition": 10.2
+   }
+  },
+  {
+   "siret": "50368180102238",
+   "entreprise": "SOCIETE COOPERATIVE AGRICOLE AXEREAL",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "La Postolle",
+   "dep": "89",
+   "lon": 3.44282,
+   "lat": 48.28105,
+   "km_moyen": {
+    "pilote": 17.0,
+    "ambition": 23.1
+   }
+  },
+  {
+   "siret": "50368180102287",
+   "entreprise": "SOCIETE COOPERATIVE AGRICOLE AXEREAL",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Perceneige",
+   "dep": "89",
+   "lon": 3.4042,
+   "lat": 48.35074,
+   "km_moyen": {
+    "pilote": 6.7,
+    "ambition": 13.5
+   }
+  },
+  {
+   "siret": "77556730800926",
+   "entreprise": "SOC COOPERATIVE AGRICOLE 110 BOURGOGNE",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Villeneuve-La-Guyard",
+   "dep": "89",
+   "lon": 3.06949,
+   "lat": 48.33405,
+   "km_moyen": {
+    "pilote": 4.6,
+    "ambition": 9.8
+   }
+  },
+  {
+   "siret": "77556730800934",
+   "entreprise": "SOC COOPERATIVE AGRICOLE 110 BOURGOGNE",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Villethierry",
+   "dep": "89",
+   "lon": 3.08033,
+   "lat": 48.26683,
+   "km_moyen": {
+    "pilote": 5.0,
+    "ambition": 12.8
+   }
+  },
+  {
+   "siret": "77556730800942",
+   "entreprise": "SOC COOPERATIVE AGRICOLE 110 BOURGOGNE",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Vinneuf",
+   "dep": "89",
+   "lon": 3.14102,
+   "lat": 48.33938,
+   "km_moyen": {
+    "pilote": 5.4,
+    "ambition": 11.2
+   }
+  },
+  {
+   "siret": "77571846300133",
+   "entreprise": "YNOVAE",
+   "cooperative": true,
+   "naf": "52.10B",
+   "commune": "Villethierry",
+   "dep": "89",
+   "lon": 3.06917,
+   "lat": 48.2609,
+   "km_moyen": {
+    "pilote": 4.1,
+    "ambition": 12.2
+   }
+  },
+  {
+   "siret": "77571846300265",
+   "entreprise": "YNOVAE",
+   "cooperative": true,
+   "naf": "52.10B",
+   "commune": "Montacher-Villegardin",
+   "dep": "89",
+   "lon": 3.02892,
+   "lat": 48.17211,
+   "km_moyen": {
+    "pilote": 7.6,
+    "ambition": 14.8
+   }
+  },
+  {
+   "siret": "77571846300042",
+   "entreprise": "YNOVAE",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Thorigny-Sur-Oreuse",
+   "dep": "89",
+   "lon": 3.33773,
+   "lat": 48.2904,
+   "km_moyen": {
+    "pilote": 13.0,
+    "ambition": 17.8
+   }
+  },
+  {
+   "siret": "77571846300158",
+   "entreprise": "YNOVAE",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Saint-Valerien",
+   "dep": "89",
+   "lon": 3.08816,
+   "lat": 48.17873,
+   "km_moyen": {
+    "pilote": 10.5,
+    "ambition": 18.4
+   }
+  },
+  {
+   "siret": "77571846300166",
+   "entreprise": "YNOVAE",
+   "cooperative": true,
+   "naf": "46.21Z",
+   "commune": "Pont-Sur-Yonne",
+   "dep": "89",
+   "lon": 3.2053,
+   "lat": 48.29241,
+   "km_moyen": {
+    "pilote": 11.9,
+    "ambition": 16.3
+   }
+  },
+  {
+   "siret": "70648020900057",
+   "entreprise": "ERAGRAIN",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Sergines",
+   "dep": "89",
+   "lon": 3.26251,
+   "lat": 48.34637,
+   "km_moyen": {
+    "pilote": 4.8,
+    "ambition": 10.1
+   }
+  },
+  {
+   "siret": "34805245700010",
+   "entreprise": "NEGO-CEREALES",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Courgenay",
+   "dep": "89",
+   "lon": 3.55368,
+   "lat": 48.31387,
+   "km_moyen": {
+    "pilote": 19.3,
+    "ambition": 27.4
+   }
+  },
+  {
+   "siret": "99082918600016",
+   "entreprise": "LES TERRES ROUGES (LES TERRES ROUGES)",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Lixy",
+   "dep": "89",
+   "lon": 3.12866,
+   "lat": 48.25122,
+   "km_moyen": {
+    "pilote": 9.9,
+    "ambition": 16.7
+   }
+  },
+  {
+   "siret": "85340202200018",
+   "entreprise": "FOURRAGE ET PAILLE DU GATINAIS (FOURRAGE ET PAILLE DU GATINAIS)",
+   "cooperative": false,
+   "naf": "46.21Z",
+   "commune": "Brannay",
+   "dep": "89",
+   "lon": 3.11854,
+   "lat": 48.23244,
+   "km_moyen": {
+    "pilote": 9.6,
+    "ambition": 17.2
+   }
+  }
+ ]
+}
