@@ -20,6 +20,18 @@ La **vraie baseline M0** est la tendance des rendements relatifs avec quantiles 
 
 Les €/t ci-dessous sont **somme des règlements / somme des tonnes acceptées**, sur des hectares types de poids égal. Ils excluent collecte et tri. Ce sont des moyennes de benchmark, **pas un nouveau tarif départemental pour 2026**. La démonstration conserve son moteur M1 et son P* brut de **1 568 €/t acceptée départ ferme en Seine-et-Marne**.
 
+La production intègre désormais le correctif `a3a9a65` : son apprentissage regroupe lui aussi les séries sur le **passé seulement**, via `series_passees`. Son backtest M1 conserve une cohorte différente de celle de la recherche :
+
+| Culture | Cas production | M1 prix fixe | M1 indexé | Cas recherche |
+| --- | ---: | ---: | ---: | ---: |
+| Lentille | 133 | **78,2 %** | 82,0 % | 192 |
+| Pois chiche | 100 | 65,0 % | 78,0 % | 129 |
+| Haricot sec | 71 | 70,4 % | 88,7 % | 78 |
+| Pois protéagineux | 493 | 65,5 % | 82,4 % | 494 |
+| Féverole | 444 | 67,8 % | 82,2 % | 491 |
+
+Le **78,2 % sur 133 cas** de la démonstration et le **81,77 % sur 192 cas** du candidat de recherche ne constituent donc pas une comparaison appariée. Celle-ci figure plus bas : QRF et M0 sont comparés sur les mêmes 133 anciens cas, puis sur les mêmes 192 cas. Le moteur et la calibration du benchmark restent distincts du M1 de production.
+
 ## Prix fixe : répondre d'abord à la promesse initiale
 
 Les candidats de cette section sont retenus **après comparaison du benchmark**, pour orienter le prototype. Leurs coefficients annuels ont tous été calculés avant l'année évaluée ; le choix final du candidat reste exploratoire.
@@ -56,7 +68,7 @@ Les tranches donnent aussi un candidat utile en lentille : **QRF historique `cal
 
 ## Les gains ne viennent pas seulement des cas ajoutés
 
-Le regroupement Agreste est recalculé sur le passé de chaque pli. La nouvelle cohorte lentille compte 192 cas, dont les **133 anciens cas** et 59 entrants. Pour la féverole, l'intersection est **444**, avec **47 entrants et 2 sortants** : les cas Gironde 2024 et 2025 changent de représentant. Les listes exactes figurent dans [le rapprochement des cohortes](../experiments/multilegumes_policies/cohort_reconciliation.csv).
+Le regroupement Agreste est recalculé sur le passé de chaque pli. La cohorte historique de référence est celle **antérieure au correctif de production `a3a9a65`**. La nouvelle cohorte lentille compte 192 cas, dont les **133 anciens cas** et 59 entrants. Pour la féverole, l'intersection avec les 446 anciens cas est **444**, avec **47 entrants et 2 sortants** : les cas Gironde 2024 et 2025 changent de représentant. La production corrigée évalue désormais ces 444 cas. Les listes exactes figurent dans [le rapprochement des cohortes](../experiments/multilegumes_policies/cohort_reconciliation.csv).
 
 Comparaison **lentille fixe, QRF fenêtres culture `cal95` contre M0 `cal95`**, sans réentraîner ni choisir les modèles selon ces groupes :
 
@@ -119,6 +131,8 @@ Le gain global de coût de 124 €/t varie donc selon les années. Le rééchant
 
 Le premier calcul Colab comporte 300 unités culture–année–modèle. Après la PR #3, **120 unités haricot/pois ont été entièrement recalculées**, avec les nouvelles charges. Les 180 autres ont été réutilisées après vérification des hypothèses, de toutes les empreintes communes et des versions. Aucun ancien prix n'a été ajusté par une règle approximative. Le [manifeste composite](../experiments/multilegumes_benchmark/manifest.json) et la [description de l'assemblage](../experiments/multilegumes_benchmark/COMPOSITION.md) conservent la provenance par culture.
 
+L'ajout ultérieur de `series_passees` au module de production a été vérifié séparément par comparaison AST avec le fichier réellement exécuté, retrouvé dans l'archive dont chaque membre est contrôlé contre le manifeste. Tous les anciens nœuds sont identiques, notamment `hyp_values`, seul élément importé par le moteur économique de recherche ; le benchmark n'appelle pas le nouveau helper. Les empreintes exécutées restent intactes, l'empreinte courante et cette exception précise sont documentées. Une nouvelle composition a produit **exactement les mêmes cinq empreintes de résultats** : aucune réanalyse statistique n'est nécessaire.
+
 ```bash
 python pipeline/merge_multilegumes_runs.py \
   --previous experiments/multilegumes_pre_pr3 \
@@ -143,7 +157,7 @@ python pipeline/analyze_multilegumes.py \
 - [Décisions ligne par ligne](../experiments/multilegumes_policies/policy_decisions.csv.gz) : les 182 688 décisions peuvent être jointes aux prédictions brutes pour reconstruire paiements et marges. La version complète redondante reste dans la sauvegarde Drive.
 - [Optimisation des sites](../experiments/sites/README.md) : les coûts de collecte et de tri sont ajoutés au règlement producteur sur la bonne assiette brute/nette. La sélection spatiale d'un scénario à prix fixe ne devient pas automatiquement la sélection d'un contrat indexé ou à tranches.
 
-La validation automatique comprend **97 tests passés**, dont les contrôles de cohorte identique, de calibration strictement passée, d'égalité des marges, de besoins signés, de coût pondéré par les tonnes et de provenance de l'assemblage après la PR #3. Une relecture indépendante a également recalculé les paiements, déficits et verdicts des **182 688 décisions**, sans différence.
+La validation automatique comprend **101 tests passés**, dont les contrôles de cohorte identique, de calibration strictement passée, d'égalité des marges, de besoins signés, de coût pondéré par les tonnes et de provenance de l'assemblage après la PR #3. Une relecture indépendante a également recalculé les paiements, déficits et verdicts des **182 688 décisions**, sans différence.
 
 ## Sources agronomiques mobilisées
 

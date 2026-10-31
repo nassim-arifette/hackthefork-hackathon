@@ -84,8 +84,8 @@
     "perte_moyenne_ha": 581
    },
    "backtest": {
-    "taux_tenus": 0.872,
-    "cout_moyen_t": 2438
+    "taux_tenus": 0.782,
+    "cout_moyen_t": 1961
    }
   },
   {
@@ -104,8 +104,8 @@
     "perte_moyenne_ha": 568
    },
    "backtest": {
-    "taux_tenus": 0.872,
-    "cout_moyen_t": 1899
+    "taux_tenus": 0.789,
+    "cout_moyen_t": 1586
    }
   },
   {
@@ -121,8 +121,8 @@
     "perte_moyenne_ha": 426
    },
    "backtest": {
-    "taux_tenus": 0.789,
-    "cout_moyen_t": 1243
+    "taux_tenus": 0.737,
+    "cout_moyen_t": 1192
    }
   }
  ]

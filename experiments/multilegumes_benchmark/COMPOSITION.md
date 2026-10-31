@@ -12,6 +12,8 @@ Ce dossier rassemble 300 ajustements culture–année–modèle : 180 résultats
 
 Le script vérifie l'identité des versions de dépendances, modèles, données météo, rendements, prix du blé, options de simulation et variables saisonnières. Seul `data/cultures.yaml` peut différer entre les deux exécutions. Pour les cultures réutilisées, les hypothèses numériques de chaque entraînement doivent être exactement celles de la configuration courante. Il vérifie aussi les cohortes, années d'apprentissage, besoins économiques et tonnes acceptées.
 
+La version de production ajoute ensuite la fonction `series_passees` à `pipeline/model.py`. Une vérification AST contre les sources réellement exécutées prouve que tous les anciens nœuds sont identiques et que le benchmark ne référence pas ce helper. L'archive est vérifiée membre par membre contre le manifeste. Les empreintes exécutées restent intactes ; les empreintes courantes et la justification figurent dans `composition.checkout_compatibility`. Aucun résultat n'est recalculé pour cette addition.
+
 - Source initiale : `experiments/multilegumes_pre_pr3`, signature `b9460e8a28b4043f1580f52a78954ed9b5ee36c27c1044697d5f48f10f0bff1e`.
 - Recalcul : `experiments/multilegumes_pr3_recalculation`, signature `6e006243cc0b83cf9647ded3753d3bd30374886ff265d76a22735cc5f49d197e`.
 - Source effective par culture et empreintes des fichiers : `manifest.json`.

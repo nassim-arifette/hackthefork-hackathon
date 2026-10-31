@@ -10,7 +10,7 @@
 
 ## État et décisions proposées au samedi 31/10
 
-**Déjà réalisé :** pipeline Agreste / RPG / NASA POWER / Eurostat, modèles comparés, backtest, incertitude sur P*, application en cinq étapes, version hors ligne et tests. Le scénario du 31/10 est calculé : version 4 de [RESULTATS.md](RESULTATS.md), P* exporté de 1 568 €/t en Seine-et-Marne, 87,2 % de contrats tenus sur la cohorte historique, comparaison des contrats comprise. Ce backtest entraîne sur le passé mais conserve les regroupements Agreste de 2010–2025 ; il se distingue du benchmark multicultures strict.
+**Déjà réalisé :** pipeline Agreste / RPG / NASA POWER / Eurostat, modèles comparés, backtest, incertitude sur P*, application en cinq étapes, version hors ligne et tests. Le scénario du 31/10 est calculé : version 4.1 de [RESULTATS.md](RESULTATS.md), P* exporté de 1 568 €/t en Seine-et-Marne, 78,2 % de contrats tenus sur 133 cas, comparaison des contrats comprise. Les groupes de légumineuses d'entraînement sont reconstruits sur le passé ; la cohorte test historique est conservée et se distingue de celle du benchmark de recherche.
 
 **Recherche mentor réalisée :** éligibilité de la lentille alimentaire confirmée, montant PAC remis dans sa campagne, références de charges et d'effet précédent trouvées, exemples de contrats réels, coefficients d'impact et choix d'usage RPG / SAA documentés dans [QUESTIONS.md](QUESTIONS.md).
 
@@ -31,7 +31,7 @@
 - [x] Fournir un historique fictif 2019–2025 et son générateur : masse brute/nette, qualité, refus, paiements et coûts par acteur. Références réelles séparées dans [data/pilote_300t](../data/pilote_300t/README.md).
 - [x] Brancher ces barèmes sur les scénarios du moteur et sur le backtest ; les lots fictifs restent hors apprentissage et backtest Agreste.
 - [x] Reporter le scénario central et ses sensibilités dans data/hypotheses.yaml ; conserver les paramètres historiques pour reproduire la version 3.
-- [x] Recalculer P*, les courbes, le backtest et les exports associés, sans changer le protocole d'évaluation. Version 4 dans [RESULTATS.md](RESULTATS.md) ; README et deck synchronisés. La lettre est à régénérer dans CloudShell.
+- [x] Recalculer P*, les courbes, le backtest et les exports associés, puis corriger les regroupements d’entraînement pour utiliser le seul passé. Version 4.1 dans [RESULTATS.md](RESULTATS.md) ; README et deck synchronisés. La lettre est à régénérer dans CloudShell.
 - [ ] Présenter séparément la marge de campagne et celle intégrant le bénéfice de la culture suivante. Le bonus de rotation est compté une fois.
 - [x] Remplacer « prix de marché » par « référence historique 2012–2016 » pour la série Eurostat. Ajouter les cas Unéal et NatUp datés documentés dans [QUESTIONS.md](QUESTIONS.md).
 - [x] Payer les tonnes alimentaires acceptées. Assiette Agreste vérifiée : rendement « au stade arrivée ferme », avant le tri (méthodologie SAA, p. 3) ; 10 % refusés, sensibilité 0 / 10 / 20 %. Reste : facturer tri et collecte sur les tonnes reçues dans le budget acheteur.

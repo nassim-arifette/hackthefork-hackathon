@@ -1,6 +1,6 @@
 {
   "kind": "composite_exact_crop_reuse",
-  "signature": "f9040e5c5bfe8ec60a166187f37a5272f06212fce3b387717e9409d609859e71",
+  "signature": "8921bfa8a06dd4079f202355b32c10df6e9a9ab50305bc044f71689f8be3a1e6",
   "spec": {
     "options": {
       "cultures": [
@@ -220,8 +220,22 @@
         "pois": "replacement",
         "feverole": "previous"
       },
-      "merge_script_sha256": "8ffd248f2c2a962a76fe0853a8933395f4ec942df838256e7db4dd91277d220e",
-      "effective_fit_count": 300
+      "merge_script_sha256": "ef484328f6e873be34f93b62b4ee87763b035cc7e45bfb4d6ff935124973a742",
+      "effective_fit_count": 300,
+      "checkout_compatibility": [
+        {
+          "file": "pipeline/model.py",
+          "executed_sha256": "bc7f0fa5cca39b4d515f32f1ce7130a5e2e0735ce319e9f86e4fbe32c7915662",
+          "current_sha256": "4510d94fe4715083a613094eed3e903d5a1a24c26a437ed7668137a7d55f0803",
+          "allowed_change": "one unused series_passees FunctionDef; all other AST nodes identical",
+          "executed_ast_sha256": "72dcd357715ad0bbdf0db8b301f9cfd57a609437634d5df6365bcd58e58ff7f3",
+          "added_helper_ast_sha256": "d199b03c2e3aa64b6f28d7a6b183699678c9b4dc3e8c0a7cf84638e803360a2a",
+          "archive": "experiments/multilegumes_pr3_recalculation/executed-inputs.zip",
+          "archive_sha256": "f539983601a660a5318b4647f0970d257e14f80084e365246275d7bf5117e038",
+          "archive_members_verified_against_manifest": true,
+          "reason": "Production-only helper addition; benchmark imports only unchanged hyp_values; no executed research source references series_passees"
+        }
+      ]
     }
   },
   "output_sha256": {

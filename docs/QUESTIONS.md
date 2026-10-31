@@ -6,7 +6,7 @@ Recherche documentaire du **31 octobre 2026**, pour avancer pendant Hack the For
 
 L'équipe a adopté ce scénario le 31/10 ; il est calculé dans la version 4 de [RESULTATS.md](RESULTATS.md). Les chiffres cités plus bas sont ceux de cette version, variantes de contrat comprises (§3, [RESULTATS.md §7](RESULTATS.md#7-comparer-les-contrats)). Cette revue documentaire ne vaut pas validation par l'organisation.
 
-Les prix courants intègrent l'arrondi contractuel au plafond. Les taux historiques portent sur le backtest de l'application : entraînement et calibration sur le passé, mais regroupements Agreste sur 2010–2025. Le benchmark strict reconstruit aussi ces regroupements avant chaque année test.
+Les prix courants intègrent l'arrondi contractuel au plafond. Les taux de production utilisent désormais des groupes de légumineuses d'entraînement reconstruits sur le passé ; la cohorte test historique est conservée. Le benchmark multicultures de recherche utilise des règles et cohortes communes distinctes.
 
 **Complément disponible :** un [barème public NatUp et un contrat synthétique complet](CONTRAT_SIMULATION.md), un [dossier de pilote 300 t avec partenaires ciblés](PILOTE_300T.md) et un [historique synthétique reproductible de 140 lots](../data/pilote_300t/README.md). Le comparateur fourni avec ce jeu permet de chiffrer les paiements et les coûts ; il ne recalcule pas le P* ni le backtest Agreste de l'application.
 
@@ -19,13 +19,13 @@ Les prix courants intègrent l'arrondi contractuel au plafond. Les taux historiq
 | Assistant de code | Claude Code est autorisé. | Déclaré dans [DECLARATIONS.md](DECLARATIONS.md), avec ChatGPT pour cette recherche. |
 | Track | Track 3, déclaré. | — |
 | Modèle | **Garder M1** pour la démo. Le banc d'essai des modèles probabilistes en cours sera comparé sur le même protocole avant tout changement. | — |
-| Hypothèses | Scénario central de §2 adopté : charges 700 / 500 €/ha, aide 105 €/ha, rotation 150 €/ha, forfait de collecte 5 €/t brute. | Calculé : P\* de 1 568 €/t en Seine-et-Marne, 87,2 % de contrats tenus dans le backtest historique. |
+| Hypothèses | Scénario central de §2 adopté : charges 700 / 500 €/ha, aide 105 €/ha, rotation 150 €/ha, forfait de collecte 5 €/t brute. | Calculé : P\* de 1 568 €/t en Seine-et-Marne, 78,2 % de contrats tenus dans le backtest de production corrigé. |
 | Tonnes payées | **Tonnes acceptées au tri**, 10 % de refus en scénario central, 0 et 20 % en sensibilité. Raisons ci-dessous. | Appliqué au modèle, au backtest, à la carte, au contrat et à l'impact. |
 | Volumes | Pilote de 300 t, ambition de 5 000 t. | Bascule entre les deux à l'étape « Le contrat ». |
 | Impact | Protéines, azote non apporté, émissions directes évitées. | Affichés pour le volume choisi (§6). |
 | Repères de prix | « Référence historique 2012–2016 » remplace « prix du marché ». Unéal et NatUp affichés pour comparer. | Fait. |
 | RPG / Agreste | Audit fait. | Résultat au §5. |
-| Contrats | Comparer le prix unique, les barèmes publiés, la proposition du dossier pilote, des tranches calibrées et une prime à l'hectare, sur les mêmes scénarios et en backtest. | Fait : à protection égale, les tranches coûtent 18 % de moins que le prix unique (22 % en backtest, mêmes 87 % de contrats tenus). |
+| Contrats | Comparer le prix unique, les barèmes publiés, la proposition du dossier pilote, des tranches calibrées et une prime à l'hectare, sur les mêmes scénarios et en backtest. | Fait : à protection égale, les tranches coûtent 18 % de moins que le prix unique (19 % en backtest, 79 % de contrats tenus contre 78 %). |
 | Lettre Bedrock | Régénérer avec les chiffres de la version 4. | Commande dans [AWS.md](AWS.md). |
 | Présentateur | Décidé plus tard. | — |
 
@@ -251,7 +251,7 @@ La SAA inclut les types variétaux de lentille et compte une surface non récolt
 
 **Pendant le hackathon :** mettre à jour les hypothèses, comparer les contrats, ajouter les compteurs d'impact, puis rendre le site déplaçable. Ensuite, prototyper Sentinel sur 5 à 10 parcelles en replay d'une saison achevée. Le détail et les critères de sortie sont dans [ROADMAP.md](ROADMAP.md).
 
-Je conserverais M1 pour la démo : les résultats existants permettent déjà de montrer la différence entre prévision moyenne et décision sous risque. Toute nouvelle méthode sera une version distincte, comparée sur le même protocole. Avec les hypothèses de la version 4, le backtest donne 87 % de contrats tenus sur sept années ; les nouveaux barèmes de contrat doivent être évalués à leur tour.
+Je conserverais M1 pour la démo : les résultats existants permettent déjà de montrer la différence entre prévision moyenne et décision sous risque. Toute nouvelle méthode sera une version distincte, comparée sur le même protocole. Avec les hypothèses de la version 4.1 et les groupes d’entraînement corrigés, le modèle tient 78,2 % des contrats sur sept années ; les nouveaux barèmes de contrat doivent être évalués à leur tour.
 
 La question « sans IA, que perd-on ? » doit montrer la comparaison **M0 / M1 / M2** déjà présente dans le repo. La valeur démontrée vient de la distribution et de sa calibration ; la météo peut modifier le coût de la protection, même lorsqu'elle améliore peu la précision moyenne. Éviter d'assimiler tous les calculs sans IA à une simple moyenne.
 

@@ -1,8 +1,10 @@
 """Backtest glissant 2019-2025, sans fuite.
 
-Pour chaque année test t : niveaux, modèles et calibration sont estimés sur les années
-< t uniquement ; P* est calculé avec la météo des années < t ; puis on regarde
-l'année t réelle. Le protocole est figé : il n'est jamais modifié après coup.
+Pour chaque année test t : regroupement des séries en double, niveaux, modèles et calibration
+sont estimés sur les années < t uniquement ; P* est calculé avec la météo des années < t ; puis
+on regarde l'année t réelle. Le protocole est figé : il n'est jamais modifié après coup.
+Correction du 31/10 : le regroupement des séries utilisait toute la période 2010-2025 (signalé
+par l'audit de la PR 1) ; il est maintenant refait chaque année avec le seul passé.
 Sortie : data/backtest.json (copiée dans l'application par 05_export.py).
 """
 import json
@@ -12,8 +14,8 @@ import pandas as pd
 
 from common import DATA, TEST_YEARS, hypotheses
 from contrats import calibres, existants
-from model import Calibrated, hyp_values, levels, load, break_even_prices, marge_lentille, paiement, \
-    p_star, pinball, pool_for, simulate_years, with_rel
+from model import Calibrated, anomalies, hyp_values, levels, load, break_even_prices, marge_lentille, paiement, \
+    p_star, pinball, pool_for, read_meteo, series_passees, simulate_years, with_rel
 
 MIN_TRAIN_YEARS = 3
 
@@ -22,11 +24,17 @@ def main():
     df, meteo = load()
     h = hyp_values(hypotheses())
     L, W = df[df.culture == "lentille"], df[df.culture == "ble"]
+    # Apprentissage : séries regroupées avec le seul passé, météo de tous les départements
+    # producteurs à l'échelle du modèle principal. Cas testés : les 133 de toujours.
+    panel = pd.read_csv(DATA / "panel_rendements.csv", dtype={"dep": str, "serie_groupe": str})
+    _, scale = anomalies(read_meteo())
+    meteo_ext, _ = anomalies(read_meteo("meteo_dept_cultures.csv"), scale)
     detail, par_annee = [], []
     # Contrats comparés : verdict et sommes versées, cas par cas (une ligne = un hectare type).
     contrats_bt = {}
     for t in TEST_YEARS:
-        trL, trW = L[L.annee < t], W[W.annee < t]
+        trL = series_passees(panel, "lentille", t).merge(meteo_ext, on=["dep", "annee"], how="inner")
+        trW = W[W.annee < t]
         okL = trL.groupby("dep").annee.count()
         levL = levels(trL[trL.dep.isin(okL[okL >= MIN_TRAIN_YEARS].index)])
         levW = levels(trW)

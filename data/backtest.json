@@ -2,28 +2,28 @@
  "protocole": "Glissant : pour chaque année test t de 2019 à 2025, niveaux, modèles et calibration conformal estimés sur les années < t uniquement ; P* calculé en rejouant la météo et le prix du blé des années < t ; verdict avec les rendements et le prix du blé réels de l'année t.",
  "fiabilite_visee": 0.8,
  "global": {
-  "taux_tenus": 0.872,
-  "taux_tenus_auto": 0.797,
-  "taux_tenus_M2": 0.767,
-  "taux_tenus_M0": 0.812,
+  "taux_tenus": 0.782,
+  "taux_tenus_auto": 0.752,
+  "taux_tenus_M2": 0.759,
+  "taux_tenus_M0": 0.767,
   "taux_tenus_moyenne": 0.293,
-  "p_star_median_M1": 2446,
-  "p_star_median_M0": 2165,
+  "p_star_median_M1": 1858,
+  "p_star_median_M0": 1758,
   "p_moyenne_median": 625,
   "n_cas": 133,
   "n_annees": 7,
-  "pinball_M0": 0.1078,
-  "couverture_M0": 0.744,
-  "pinball_M1": 0.1103,
+  "pinball_M0": 0.1094,
+  "couverture_M0": 0.699,
+  "pinball_M1": 0.1105,
   "couverture_M1": 0.79,
-  "pinball_M2": 0.1014,
-  "couverture_M2": 0.842,
-  "pinball_auto": 0.1024,
-  "couverture_auto": 0.744,
-  "erreur_mediane_M1": 0.331,
-  "gain_pinball_M1_vs_M0": -0.023,
-  "gain_pinball_M2_vs_M0": 0.059,
-  "gain_pinball_auto_vs_M0": 0.05,
+  "pinball_M2": 0.102,
+  "couverture_M2": 0.767,
+  "pinball_auto": 0.1038,
+  "couverture_auto": 0.699,
+  "erreur_mediane_M1": 0.349,
+  "gain_pinball_M1_vs_M0": -0.01,
+  "gain_pinball_M2_vs_M0": 0.068,
+  "gain_pinball_auto_vs_M0": 0.051,
   "contrats": {
    "uneal_2023": {
     "taux_tenus": 0.571,
@@ -38,16 +38,16 @@
     "cout_moyen_t": 958
    },
    "unique": {
-    "taux_tenus": 0.872,
-    "cout_moyen_t": 2438
+    "taux_tenus": 0.782,
+    "cout_moyen_t": 1961
    },
    "paliers": {
-    "taux_tenus": 0.872,
-    "cout_moyen_t": 1899
+    "taux_tenus": 0.789,
+    "cout_moyen_t": 1586
    },
    "prime_ha": {
-    "taux_tenus": 0.789,
-    "cout_moyen_t": 1243
+    "taux_tenus": 0.737,
+    "cout_moyen_t": 1192
    }
   }
  },
@@ -57,37 +57,37 @@
    "n_dep": 17,
    "prix_ble": 178.8,
    "modele_auto": "M0",
-   "pinball_M0": 0.0507,
-   "couverture_M0": 0.941,
-   "largeur_M0": 0.59,
-   "pinball_M1": 0.0549,
-   "couverture_M1": 0.941,
-   "largeur_M1": 0.897,
-   "pinball_M2": 0.0657,
-   "couverture_M2": 1.0,
-   "largeur_M2": 0.872,
-   "pinball_auto": 0.0507,
-   "couverture_auto": 0.941,
-   "largeur_auto": 0.59,
-   "erreur_mediane_M1": 0.131,
+   "pinball_M0": 0.0541,
+   "couverture_M0": 0.882,
+   "largeur_M0": 0.573,
+   "pinball_M1": 0.0641,
+   "couverture_M1": 1.0,
+   "largeur_M1": 0.895,
+   "pinball_M2": 0.065,
+   "couverture_M2": 0.706,
+   "largeur_M2": 0.74,
+   "pinball_auto": 0.0541,
+   "couverture_auto": 0.882,
+   "largeur_auto": 0.573,
+   "erreur_mediane_M1": 0.236,
    "rel_reel_moyen": 0.753,
-   "rel_q10_moyen": 0.311,
-   "rel_q50_moyen": 0.777,
-   "rel_q90_moyen": 1.208,
+   "rel_q10_moyen": 0.362,
+   "rel_q50_moyen": 0.886,
+   "rel_q90_moyen": 1.257,
    "n_contrats": 17,
-   "taux_tenus": 1.0,
-   "taux_tenus_auto": 0.824,
-   "taux_tenus_M2": 0.765,
-   "taux_tenus_M0": 0.824,
+   "taux_tenus": 0.765,
+   "taux_tenus_auto": 0.706,
+   "taux_tenus_M2": 0.647,
+   "taux_tenus_M0": 0.706,
    "taux_tenus_moyenne": 0.176,
-   "p_star_median": 1221,
+   "p_star_median": 1093,
    "contrats": {
     "uneal_2023": 0.588,
     "natup_2023": 0.588,
     "proposition_2027": 0.824,
-    "unique": 1.0,
-    "paliers": 1.0,
-    "prime_ha": 1.0
+    "unique": 0.765,
+    "paliers": 0.824,
+    "prime_ha": 0.765
    }
   },
   {
@@ -95,37 +95,37 @@
    "n_dep": 18,
    "prix_ble": 191.0,
    "modele_auto": "M0",
-   "pinball_M0": 0.0787,
-   "couverture_M0": 0.611,
-   "largeur_M0": 0.621,
-   "pinball_M1": 0.0831,
+   "pinball_M0": 0.1021,
+   "couverture_M0": 0.444,
+   "largeur_M0": 0.568,
+   "pinball_M1": 0.1006,
    "couverture_M1": 0.556,
-   "largeur_M1": 0.791,
-   "pinball_M2": 0.0991,
-   "couverture_M2": 0.611,
-   "largeur_M2": 0.897,
-   "pinball_auto": 0.0787,
-   "couverture_auto": 0.611,
-   "largeur_auto": 0.621,
-   "erreur_mediane_M1": 0.251,
+   "largeur_M1": 0.776,
+   "pinball_M2": 0.1107,
+   "couverture_M2": 0.5,
+   "largeur_M2": 0.818,
+   "pinball_auto": 0.1021,
+   "couverture_auto": 0.444,
+   "largeur_auto": 0.568,
+   "erreur_mediane_M1": 0.372,
    "rel_reel_moyen": 0.528,
-   "rel_q10_moyen": 0.425,
-   "rel_q50_moyen": 0.73,
-   "rel_q90_moyen": 1.216,
+   "rel_q10_moyen": 0.46,
+   "rel_q50_moyen": 0.855,
+   "rel_q90_moyen": 1.236,
    "n_contrats": 18,
-   "taux_tenus": 0.5,
-   "taux_tenus_auto": 0.444,
+   "taux_tenus": 0.389,
+   "taux_tenus_auto": 0.389,
    "taux_tenus_M2": 0.389,
-   "taux_tenus_M0": 0.444,
+   "taux_tenus_M0": 0.389,
    "taux_tenus_moyenne": 0.222,
-   "p_star_median": 1107,
+   "p_star_median": 983,
    "contrats": {
     "uneal_2023": 0.5,
     "natup_2023": 0.444,
     "proposition_2027": 0.611,
-    "unique": 0.5,
-    "paliers": 0.5,
-    "prime_ha": 0.611
+    "unique": 0.389,
+    "paliers": 0.389,
+    "prime_ha": 0.5
    }
   },
   {
@@ -133,37 +133,37 @@
    "n_dep": 18,
    "prix_ble": 237.8,
    "modele_auto": "M0",
-   "pinball_M0": 0.1273,
-   "couverture_M0": 0.611,
-   "largeur_M0": 0.757,
-   "pinball_M1": 0.1312,
-   "couverture_M1": 0.556,
-   "largeur_M1": 0.813,
-   "pinball_M2": 0.1102,
-   "couverture_M2": 0.722,
-   "largeur_M2": 1.059,
-   "pinball_auto": 0.1273,
-   "couverture_auto": 0.611,
-   "largeur_auto": 0.757,
-   "erreur_mediane_M1": 0.478,
+   "pinball_M0": 0.1215,
+   "couverture_M0": 0.556,
+   "largeur_M0": 0.695,
+   "pinball_M1": 0.1203,
+   "couverture_M1": 0.611,
+   "largeur_M1": 0.897,
+   "pinball_M2": 0.1112,
+   "couverture_M2": 0.667,
+   "largeur_M2": 0.892,
+   "pinball_auto": 0.1215,
+   "couverture_auto": 0.556,
+   "largeur_auto": 0.695,
+   "erreur_mediane_M1": 0.39,
    "rel_reel_moyen": 0.808,
-   "rel_q10_moyen": 0.288,
-   "rel_q50_moyen": 0.717,
-   "rel_q90_moyen": 1.101,
+   "rel_q10_moyen": 0.306,
+   "rel_q50_moyen": 0.736,
+   "rel_q90_moyen": 1.203,
    "n_contrats": 18,
-   "taux_tenus": 0.611,
-   "taux_tenus_auto": 0.611,
+   "taux_tenus": 0.556,
+   "taux_tenus_auto": 0.556,
    "taux_tenus_M2": 0.556,
-   "taux_tenus_M0": 0.611,
+   "taux_tenus_M0": 0.556,
    "taux_tenus_moyenne": 0.056,
-   "p_star_median": 1598,
+   "p_star_median": 1244,
    "contrats": {
     "uneal_2023": 0.5,
     "natup_2023": 0.5,
     "proposition_2027": 0.5,
-    "unique": 0.611,
-    "paliers": 0.611,
-    "prime_ha": 0.556
+    "unique": 0.556,
+    "paliers": 0.556,
+    "prime_ha": 0.5
    }
   },
   {
@@ -171,36 +171,36 @@
    "n_dep": 19,
    "prix_ble": 337.5,
    "modele_auto": "M0",
-   "pinball_M0": 0.1099,
+   "pinball_M0": 0.1062,
    "couverture_M0": 0.737,
-   "largeur_M0": 1.033,
-   "pinball_M1": 0.1108,
-   "couverture_M1": 0.895,
-   "largeur_M1": 1.317,
-   "pinball_M2": 0.1042,
+   "largeur_M0": 0.994,
+   "pinball_M1": 0.1038,
+   "couverture_M1": 0.947,
+   "largeur_M1": 1.313,
+   "pinball_M2": 0.1063,
    "couverture_M2": 0.947,
-   "largeur_M2": 1.255,
-   "pinball_auto": 0.1099,
+   "largeur_M2": 1.449,
+   "pinball_auto": 0.1062,
    "couverture_auto": 0.737,
-   "largeur_auto": 1.033,
-   "erreur_mediane_M1": 0.353,
+   "largeur_auto": 0.994,
+   "erreur_mediane_M1": 0.33,
    "rel_reel_moyen": 0.845,
-   "rel_q10_moyen": 0.033,
-   "rel_q50_moyen": 0.619,
-   "rel_q90_moyen": 1.35,
+   "rel_q10_moyen": 0.131,
+   "rel_q50_moyen": 0.796,
+   "rel_q90_moyen": 1.443,
    "n_contrats": 19,
-   "taux_tenus": 0.947,
-   "taux_tenus_auto": 0.737,
-   "taux_tenus_M2": 0.684,
-   "taux_tenus_M0": 0.737,
+   "taux_tenus": 0.684,
+   "taux_tenus_auto": 0.632,
+   "taux_tenus_M2": 0.737,
+   "taux_tenus_M0": 0.632,
    "taux_tenus_moyenne": 0.0,
-   "p_star_median": 2950,
+   "p_star_median": 2320,
    "contrats": {
     "uneal_2023": 0.158,
     "natup_2023": 0.053,
     "proposition_2027": 0.158,
-    "unique": 0.947,
-    "paliers": 0.947,
+    "unique": 0.684,
+    "paliers": 0.684,
     "prime_ha": 0.368
    }
   },
@@ -209,30 +209,30 @@
    "n_dep": 20,
    "prix_ble": 242.4,
    "modele_auto": "M0",
-   "pinball_M0": 0.1145,
+   "pinball_M0": 0.1123,
    "couverture_M0": 0.65,
-   "largeur_M0": 1.181,
-   "pinball_M1": 0.1096,
-   "couverture_M1": 0.95,
-   "largeur_M1": 1.481,
-   "pinball_M2": 0.0974,
-   "couverture_M2": 0.95,
-   "largeur_M2": 1.404,
-   "pinball_auto": 0.1145,
+   "largeur_M0": 1.074,
+   "pinball_M1": 0.1076,
+   "couverture_M1": 0.9,
+   "largeur_M1": 1.356,
+   "pinball_M2": 0.0927,
+   "couverture_M2": 0.9,
+   "largeur_M2": 1.183,
+   "pinball_auto": 0.1123,
    "couverture_auto": 0.65,
-   "largeur_auto": 1.181,
-   "erreur_mediane_M1": 0.27,
+   "largeur_auto": 1.074,
+   "erreur_mediane_M1": 0.277,
    "rel_reel_moyen": 1.013,
-   "rel_q10_moyen": 0.026,
-   "rel_q50_moyen": 0.691,
-   "rel_q90_moyen": 1.507,
+   "rel_q10_moyen": 0.078,
+   "rel_q50_moyen": 0.694,
+   "rel_q90_moyen": 1.434,
    "n_contrats": 20,
    "taux_tenus": 1.0,
    "taux_tenus_auto": 1.0,
    "taux_tenus_M2": 1.0,
    "taux_tenus_M0": 1.0,
    "taux_tenus_moyenne": 0.1,
-   "p_star_median": 3446,
+   "p_star_median": 2826,
    "contrats": {
     "uneal_2023": 0.5,
     "natup_2023": 0.5,
@@ -247,30 +247,30 @@
    "n_dep": 20,
    "prix_ble": 215.6,
    "modele_auto": "M2",
-   "pinball_M0": 0.1631,
-   "couverture_M0": 0.65,
-   "largeur_M0": 1.396,
-   "pinball_M1": 0.1688,
-   "couverture_M1": 0.7,
-   "largeur_M1": 1.359,
-   "pinball_M2": 0.145,
-   "couverture_M2": 0.65,
-   "largeur_M2": 1.067,
-   "pinball_auto": 0.145,
-   "couverture_auto": 0.65,
-   "largeur_auto": 1.067,
-   "erreur_mediane_M1": 0.556,
+   "pinball_M0": 0.163,
+   "couverture_M0": 0.6,
+   "largeur_M0": 1.2,
+   "pinball_M1": 0.1679,
+   "couverture_M1": 0.6,
+   "largeur_M1": 1.078,
+   "pinball_M2": 0.1409,
+   "couverture_M2": 0.6,
+   "largeur_M2": 0.953,
+   "pinball_auto": 0.1409,
+   "couverture_auto": 0.6,
+   "largeur_auto": 0.953,
+   "erreur_mediane_M1": 0.507,
    "rel_reel_moyen": 1.281,
-   "rel_q10_moyen": 0.095,
-   "rel_q50_moyen": 0.66,
-   "rel_q90_moyen": 1.454,
+   "rel_q10_moyen": 0.255,
+   "rel_q50_moyen": 0.708,
+   "rel_q90_moyen": 1.333,
    "n_contrats": 20,
    "taux_tenus": 1.0,
    "taux_tenus_auto": 0.95,
    "taux_tenus_M2": 0.95,
    "taux_tenus_M0": 1.0,
    "taux_tenus_moyenne": 0.85,
-   "p_star_median": 3122,
+   "p_star_median": 1968,
    "contrats": {
     "uneal_2023": 0.9,
     "natup_2023": 0.9,
@@ -285,30 +285,30 @@
    "n_dep": 21,
    "prix_ble": 201.5,
    "modele_auto": "M2",
-   "pinball_M0": 0.1014,
+   "pinball_M0": 0.0989,
    "couverture_M0": 1.0,
-   "largeur_M0": 1.564,
-   "pinball_M1": 0.1052,
+   "largeur_M0": 1.521,
+   "pinball_M1": 0.102,
    "couverture_M1": 0.905,
-   "largeur_M1": 1.451,
-   "pinball_M2": 0.0845,
+   "largeur_M1": 1.435,
+   "pinball_M2": 0.0847,
    "couverture_M2": 1.0,
-   "largeur_M2": 1.342,
-   "pinball_auto": 0.0845,
+   "largeur_M2": 1.36,
+   "pinball_auto": 0.0847,
    "couverture_auto": 1.0,
-   "largeur_auto": 1.342,
-   "erreur_mediane_M1": 0.289,
+   "largeur_auto": 1.36,
+   "erreur_mediane_M1": 0.259,
    "rel_reel_moyen": 1.057,
    "rel_q10_moyen": 0.02,
-   "rel_q50_moyen": 0.722,
-   "rel_q90_moyen": 1.471,
+   "rel_q50_moyen": 0.765,
+   "rel_q90_moyen": 1.455,
    "n_contrats": 21,
    "taux_tenus": 1.0,
    "taux_tenus_auto": 0.952,
    "taux_tenus_M2": 0.952,
    "taux_tenus_M0": 1.0,
    "taux_tenus_moyenne": 0.571,
-   "p_star_median": 2614,
+   "p_star_median": 2568,
    "contrats": {
     "uneal_2023": 0.81,
     "natup_2023": 0.81,
@@ -329,24 +329,24 @@
    "prix_ble_reel": 178.8,
    "marge_ble": 498,
    "ic80_rel": [
-    0.244,
-    1.187
+    0.302,
+    1.261
    ],
-   "q50_rel": 0.761,
+   "q50_rel": 0.893,
    "rel_reel": 0.704,
    "p_moyenne": 436,
    "tenu_moyenne": false,
-   "p_star_M0": 868,
-   "marge_lentille_M0": 770,
+   "p_star_M0": 769,
+   "marge_lentille_M0": 655,
    "tenu_M0": true,
-   "p_star": 910,
-   "marge_lentille": 820,
+   "p_star": 820,
+   "marge_lentille": 715,
    "tenu": true,
-   "p_star_M2": 825,
-   "marge_lentille_M2": 720,
+   "p_star_M2": 755,
+   "marge_lentille_M2": 639,
    "tenu_M2": true,
-   "p_star_auto": 868,
-   "marge_lentille_auto": 770,
+   "p_star_auto": 769,
+   "marge_lentille_auto": 655,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -363,21 +363,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 1066
+     "verse_eur_ha": 961
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 1050,
+     "verse_eur_ha": 957,
      "paliers": [
-      923,
+      829,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 1064,
-     "prime_ha": 11
+     "verse_eur_ha": 1053,
+     "prime_ha": 0
     }
    }
   },
@@ -390,25 +390,25 @@
    "prix_ble_reel": 178.8,
    "marge_ble": 829,
    "ic80_rel": [
-    0.349,
-    1.216
+    0.396,
+    1.273
    ],
-   "q50_rel": 0.772,
+   "q50_rel": 0.881,
    "rel_reel": 0.572,
    "p_moyenne": 627,
    "tenu_moyenne": false,
-   "p_star_M0": 1233,
-   "marge_lentille_M0": 865,
-   "tenu_M0": true,
-   "p_star": 1282,
-   "marge_lentille": 909,
-   "tenu": true,
-   "p_star_M2": 1142,
-   "marge_lentille_M2": 782,
+   "p_star_M0": 1096,
+   "marge_lentille_M0": 741,
+   "tenu_M0": false,
+   "p_star": 1153,
+   "marge_lentille": 793,
+   "tenu": false,
+   "p_star_M2": 1051,
+   "marge_lentille_M2": 701,
    "tenu_M2": false,
-   "p_star_auto": 1233,
-   "marge_lentille_auto": 865,
-   "tenu_auto": true,
+   "p_star_auto": 1096,
+   "marge_lentille_auto": 741,
+   "tenu_auto": false,
    "contrats": {
     "uneal_2023": {
      "tenu": false,
@@ -423,22 +423,22 @@
      "verse_eur_ha": 927
     },
     "unique": {
-     "tenu": true,
-     "verse_eur_ha": 1154
+     "tenu": false,
+     "verse_eur_ha": 1039
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 1197,
+     "verse_eur_ha": 1099,
      "paliers": [
-      1330,
+      1221,
       750,
       650
      ]
     },
     "prime_ha": {
-     "tenu": true,
-     "verse_eur_ha": 1152,
-     "prime_ha": 342
+     "tenu": false,
+     "verse_eur_ha": 1066,
+     "prime_ha": 256
     }
    }
   },
@@ -451,24 +451,24 @@
    "prix_ble_reel": 178.8,
    "marge_ble": 561,
    "ic80_rel": [
-    0.255,
-    1.191
+    0.312,
+    1.246
    ],
-   "q50_rel": 0.77,
+   "q50_rel": 0.893,
    "rel_reel": 0.939,
    "p_moyenne": 437,
    "tenu_moyenne": false,
-   "p_star_M0": 895,
-   "marge_lentille_M0": 1125,
+   "p_star_M0": 797,
+   "marge_lentille_M0": 975,
    "tenu_M0": true,
-   "p_star": 934,
-   "marge_lentille": 1184,
+   "p_star": 839,
+   "marge_lentille": 1039,
    "tenu": true,
-   "p_star_M2": 857,
-   "marge_lentille_M2": 1066,
+   "p_star_M2": 775,
+   "marge_lentille_M2": 941,
    "tenu_M2": true,
-   "p_star_auto": 895,
-   "marge_lentille_auto": 1125,
+   "p_star_auto": 797,
+   "marge_lentille_auto": 975,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -485,21 +485,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 1429
+     "verse_eur_ha": 1284
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 1348,
+     "verse_eur_ha": 1252,
      "paliers": [
-      951,
+      855,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 1409,
-     "prime_ha": 32
+     "verse_eur_ha": 1377,
+     "prime_ha": 0
     }
    }
   },
@@ -512,24 +512,24 @@
    "prix_ble_reel": 178.8,
    "marge_ble": 650,
    "ic80_rel": [
-    0.229,
-    1.166
+    0.296,
+    1.214
    ],
-   "q50_rel": 0.732,
+   "q50_rel": 0.873,
    "rel_reel": 0.595,
    "p_moyenne": 449,
    "tenu_moyenne": false,
-   "p_star_M0": 897,
-   "marge_lentille_M0": 642,
+   "p_star_M0": 798,
+   "marge_lentille_M0": 544,
    "tenu_M0": false,
-   "p_star": 937,
-   "marge_lentille": 682,
-   "tenu": true,
-   "p_star_M2": 863,
-   "marge_lentille_M2": 608,
+   "p_star": 848,
+   "marge_lentille": 593,
+   "tenu": false,
+   "p_star_M2": 797,
+   "marge_lentille_M2": 543,
    "tenu_M2": false,
-   "p_star_auto": 897,
-   "marge_lentille_auto": 642,
+   "p_star_auto": 798,
+   "marge_lentille_auto": 544,
    "tenu_auto": false,
    "contrats": {
     "uneal_2023": {
@@ -545,22 +545,22 @@
      "verse_eur_ha": 1019
     },
     "unique": {
-     "tenu": true,
-     "verse_eur_ha": 928
+     "tenu": false,
+     "verse_eur_ha": 839
     },
     "paliers": {
-     "tenu": true,
-     "verse_eur_ha": 948,
+     "tenu": false,
+     "verse_eur_ha": 855,
      "paliers": [
-      958,
+      864,
       750,
       650
      ]
     },
     "prime_ha": {
-     "tenu": true,
-     "verse_eur_ha": 926,
-     "prime_ha": 36
+     "tenu": false,
+     "verse_eur_ha": 890,
+     "prime_ha": 0
     }
    }
   },
@@ -573,24 +573,24 @@
    "prix_ble_reel": 178.8,
    "marge_ble": 641,
    "ic80_rel": [
-    0.284,
-    1.199
+    0.335,
+    1.255
    ],
-   "q50_rel": 0.778,
+   "q50_rel": 0.896,
    "rel_reel": 0.52,
    "p_moyenne": 581,
    "tenu_moyenne": false,
-   "p_star_M0": 1180,
-   "marge_lentille_M0": 604,
+   "p_star_M0": 1049,
+   "marge_lentille_M0": 509,
    "tenu_M0": false,
-   "p_star": 1235,
-   "marge_lentille": 643,
-   "tenu": true,
-   "p_star_M2": 1152,
-   "marge_lentille_M2": 583,
+   "p_star": 1116,
+   "marge_lentille": 558,
+   "tenu": false,
+   "p_star_M2": 1021,
+   "marge_lentille_M2": 489,
    "tenu_M2": false,
-   "p_star_auto": 1180,
-   "marge_lentille_auto": 604,
+   "p_star_auto": 1049,
+   "marge_lentille_auto": 509,
    "tenu_auto": false,
    "contrats": {
     "uneal_2023": {
@@ -606,22 +606,22 @@
      "verse_eur_ha": 741
     },
     "unique": {
-     "tenu": true,
-     "verse_eur_ha": 889
+     "tenu": false,
+     "verse_eur_ha": 803
     },
     "paliers": {
-     "tenu": true,
-     "verse_eur_ha": 902,
+     "tenu": false,
+     "verse_eur_ha": 822,
      "paliers": [
-      1254,
+      1143,
       750,
       650
      ]
     },
     "prime_ha": {
-     "tenu": true,
-     "verse_eur_ha": 900,
-     "prime_ha": 253
+     "tenu": false,
+     "verse_eur_ha": 834,
+     "prime_ha": 187
     }
    }
   },
@@ -634,24 +634,24 @@
    "prix_ble_reel": 178.8,
    "marge_ble": 668,
    "ic80_rel": [
-    0.323,
-    1.206
+    0.373,
+    1.271
    ],
-   "q50_rel": 0.77,
+   "q50_rel": 0.89,
    "rel_reel": 0.565,
    "p_moyenne": 503,
    "tenu_moyenne": false,
-   "p_star_M0": 1011,
-   "marge_lentille_M0": 665,
+   "p_star_M0": 898,
+   "marge_lentille_M0": 563,
    "tenu_M0": false,
-   "p_star": 1040,
-   "marge_lentille": 691,
-   "tenu": true,
-   "p_star_M2": 933,
-   "marge_lentille_M2": 595,
+   "p_star": 935,
+   "marge_lentille": 597,
+   "tenu": false,
+   "p_star_M2": 864,
+   "marge_lentille_M2": 533,
    "tenu_M2": false,
-   "p_star_auto": 1011,
-   "marge_lentille_auto": 665,
+   "p_star_auto": 898,
+   "marge_lentille_auto": 563,
    "tenu_auto": false,
    "contrats": {
     "uneal_2023": {
@@ -667,22 +667,22 @@
      "verse_eur_ha": 927
     },
     "unique": {
-     "tenu": true,
-     "verse_eur_ha": 937
+     "tenu": false,
+     "verse_eur_ha": 842
     },
     "paliers": {
-     "tenu": true,
-     "verse_eur_ha": 963,
+     "tenu": false,
+     "verse_eur_ha": 871,
      "paliers": [
-      1070,
+      968,
       750,
       650
      ]
     },
     "prime_ha": {
-     "tenu": true,
-     "verse_eur_ha": 946,
-     "prime_ha": 136
+     "tenu": false,
+     "verse_eur_ha": 848,
+     "prime_ha": 38
     }
    }
   },
@@ -695,24 +695,24 @@
    "prix_ble_reel": 178.8,
    "marge_ble": 534,
    "ic80_rel": [
-    0.302,
-    1.199
+    0.356,
+    1.28
    ],
-   "q50_rel": 0.757,
+   "q50_rel": 0.887,
    "rel_reel": 0.626,
    "p_moyenne": 625,
    "tenu_moyenne": false,
-   "p_star_M0": 1243,
-   "marge_lentille_M0": 650,
+   "p_star_M0": 1111,
+   "marge_lentille_M0": 555,
    "tenu_M0": true,
-   "p_star": 1288,
-   "marge_lentille": 683,
+   "p_star": 1154,
+   "marge_lentille": 586,
    "tenu": true,
-   "p_star_M2": 1170,
-   "marge_lentille_M2": 597,
-   "tenu_M2": true,
-   "p_star_auto": 1243,
-   "marge_lentille_auto": 650,
+   "p_star_M2": 1065,
+   "marge_lentille_M2": 522,
+   "tenu_M2": false,
+   "p_star_auto": 1111,
+   "marge_lentille_auto": 555,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -729,21 +729,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 928
+     "verse_eur_ha": 832
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 930,
+     "verse_eur_ha": 843,
      "paliers": [
-      1291,
+      1171,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 904,
-     "prime_ha": 256
+     "verse_eur_ha": 844,
+     "prime_ha": 196
     }
    }
   },
@@ -756,24 +756,24 @@
    "prix_ble_reel": 178.8,
    "marge_ble": 766,
    "ic80_rel": [
-    0.318,
-    1.198
+    0.371,
+    1.277
    ],
-   "q50_rel": 0.756,
+   "q50_rel": 0.888,
    "rel_reel": 0.788,
    "p_moyenne": 437,
    "tenu_moyenne": false,
-   "p_star_M0": 861,
-   "marge_lentille_M0": 1228,
+   "p_star_M0": 770,
+   "marge_lentille_M0": 1072,
    "tenu_M0": true,
-   "p_star": 905,
-   "marge_lentille": 1303,
+   "p_star": 810,
+   "marge_lentille": 1141,
    "tenu": true,
-   "p_star_M2": 805,
-   "marge_lentille_M2": 1131,
+   "p_star_M2": 724,
+   "marge_lentille_M2": 994,
    "tenu_M2": true,
-   "p_star_auto": 861,
-   "marge_lentille_auto": 1228,
+   "p_star_auto": 770,
+   "marge_lentille_auto": 1072,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -790,21 +790,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 1549
+     "verse_eur_ha": 1387
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 1484,
+     "verse_eur_ha": 1370,
      "paliers": [
-      951,
+      838,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 1545,
-     "prime_ha": 6
+     "verse_eur_ha": 1539,
+     "prime_ha": 0
     }
    }
   },
@@ -817,24 +817,24 @@
    "prix_ble_reel": 178.8,
    "marge_ble": 630,
    "ic80_rel": [
-    0.36,
-    1.212
+    0.412,
+    1.25
    ],
-   "q50_rel": 0.759,
+   "q50_rel": 0.868,
    "rel_reel": 1.234,
    "p_moyenne": 592,
    "tenu_moyenne": true,
-   "p_star_M0": 1180,
-   "marge_lentille_M0": 1709,
+   "p_star_M0": 1050,
+   "marge_lentille_M0": 1493,
    "tenu_M0": true,
-   "p_star": 1225,
-   "marge_lentille": 1784,
+   "p_star": 1109,
+   "marge_lentille": 1591,
    "tenu": true,
-   "p_star_M2": 1073,
-   "marge_lentille_M2": 1532,
+   "p_star_M2": 1025,
+   "marge_lentille_M2": 1452,
    "tenu_M2": true,
-   "p_star_auto": 1180,
-   "marge_lentille_auto": 1709,
+   "p_star_auto": 1050,
+   "marge_lentille_auto": 1493,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -851,21 +851,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 2030
+     "verse_eur_ha": 1837
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 1739,
+     "verse_eur_ha": 1631,
      "paliers": [
-      1247,
+      1139,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 1740,
-     "prime_ha": 250
+     "verse_eur_ha": 1672,
+     "prime_ha": 182
     }
    }
   },
@@ -878,24 +878,24 @@
    "prix_ble_reel": 178.8,
    "marge_ble": 677,
    "ic80_rel": [
-    0.298,
-    1.194
+    0.355,
+    1.203
    ],
-   "q50_rel": 0.764,
+   "q50_rel": 0.87,
    "rel_reel": 0.751,
    "p_moyenne": 584,
    "tenu_moyenne": false,
-   "p_star_M0": 1167,
-   "marge_lentille_M0": 910,
+   "p_star_M0": 1043,
+   "marge_lentille_M0": 787,
    "tenu_M0": true,
-   "p_star": 1221,
-   "marge_lentille": 963,
+   "p_star": 1093,
+   "marge_lentille": 837,
    "tenu": true,
-   "p_star_M2": 1045,
-   "marge_lentille_M2": 790,
+   "p_star_M2": 996,
+   "marge_lentille_M2": 741,
    "tenu_M2": true,
-   "p_star_auto": 1167,
-   "marge_lentille_auto": 910,
+   "p_star_auto": 1043,
+   "marge_lentille_auto": 787,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -912,21 +912,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 1209
+     "verse_eur_ha": 1083
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 1225,
+     "verse_eur_ha": 1118,
      "paliers": [
-      1237,
+      1129,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 1134,
-     "prime_ha": 243
+     "verse_eur_ha": 1061,
+     "prime_ha": 170
     }
    }
   },
@@ -939,25 +939,25 @@
    "prix_ble_reel": 178.8,
    "marge_ble": 641,
    "ic80_rel": [
-    0.276,
-    1.181
+    0.338,
+    1.227
    ],
-   "q50_rel": 0.738,
+   "q50_rel": 0.869,
    "rel_reel": 0.633,
    "p_moyenne": 480,
    "tenu_moyenne": false,
-   "p_star_M0": 967,
-   "marge_lentille_M0": 712,
-   "tenu_M0": true,
-   "p_star": 1003,
-   "marge_lentille": 748,
+   "p_star_M0": 862,
+   "marge_lentille_M0": 608,
+   "tenu_M0": false,
+   "p_star": 912,
+   "marge_lentille": 658,
    "tenu": true,
-   "p_star_M2": 928,
-   "marge_lentille_M2": 674,
-   "tenu_M2": true,
-   "p_star_auto": 967,
-   "marge_lentille_auto": 712,
-   "tenu_auto": true,
+   "p_star_M2": 850,
+   "marge_lentille_M2": 597,
+   "tenu_M2": false,
+   "p_star_auto": 862,
+   "marge_lentille_auto": 608,
+   "tenu_auto": false,
    "contrats": {
     "uneal_2023": {
      "tenu": true,
@@ -973,21 +973,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 993
+     "verse_eur_ha": 903
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 1020,
+     "verse_eur_ha": 923,
      "paliers": [
-      1030,
+      932,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 985,
-     "prime_ha": 94
+     "verse_eur_ha": 905,
+     "prime_ha": 14
     }
    }
   },
@@ -1000,24 +1000,24 @@
    "prix_ble_reel": 178.8,
    "marge_ble": 695,
    "ic80_rel": [
-    0.229,
-    1.166
+    0.296,
+    1.208
    ],
-   "q50_rel": 0.733,
+   "q50_rel": 0.872,
    "rel_reel": 0.811,
    "p_moyenne": 595,
    "tenu_moyenne": false,
-   "p_star_M0": 1200,
-   "marge_lentille_M0": 943,
+   "p_star_M0": 1068,
+   "marge_lentille_M0": 812,
    "tenu_M0": true,
-   "p_star": 1258,
-   "marge_lentille": 1001,
+   "p_star": 1132,
+   "marge_lentille": 875,
    "tenu": true,
-   "p_star_M2": 1147,
-   "marge_lentille_M2": 891,
+   "p_star_M2": 1061,
+   "marge_lentille_M2": 805,
    "tenu_M2": true,
-   "p_star_auto": 1200,
-   "marge_lentille_auto": 943,
+   "p_star_auto": 1068,
+   "marge_lentille_auto": 812,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -1034,21 +1034,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 1246
+     "verse_eur_ha": 1121
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 1258,
+     "verse_eur_ha": 1138,
      "paliers": [
-      1271,
+      1149,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 1137,
-     "prime_ha": 246
+     "verse_eur_ha": 1069,
+     "prime_ha": 178
     }
    }
   },
@@ -1061,24 +1061,24 @@
    "prix_ble_reel": 178.8,
    "marge_ble": 283,
    "ic80_rel": [
-    0.343,
-    1.203
+    0.395,
+    1.223
    ],
-   "q50_rel": 0.758,
+   "q50_rel": 0.865,
    "rel_reel": 0.57,
    "p_moyenne": 410,
    "tenu_moyenne": false,
-   "p_star_M0": 852,
-   "marge_lentille_M0": 368,
+   "p_star_M0": 760,
+   "marge_lentille_M0": 302,
    "tenu_M0": true,
-   "p_star": 879,
-   "marge_lentille": 388,
+   "p_star": 785,
+   "marge_lentille": 320,
    "tenu": true,
-   "p_star_M2": 785,
-   "marge_lentille_M2": 321,
+   "p_star_M2": 779,
+   "marge_lentille_M2": 316,
    "tenu_M2": true,
-   "p_star_auto": 852,
-   "marge_lentille_auto": 368,
+   "p_star_auto": 760,
+   "marge_lentille_auto": 302,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -1095,13 +1095,13 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 633
+     "verse_eur_ha": 565
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 634,
+     "verse_eur_ha": 567,
      "paliers": [
-      881,
+      788,
       750,
       650
      ]
@@ -1122,24 +1122,24 @@
    "prix_ble_reel": 178.8,
    "marge_ble": 33,
    "ic80_rel": [
-    0.331,
-    1.194
+    0.384,
+    1.269
    ],
-   "q50_rel": 0.732,
+   "q50_rel": 0.867,
    "rel_reel": 0.615,
    "p_moyenne": 257,
    "tenu_moyenne": false,
-   "p_star_M0": 567,
-   "marge_lentille_M0": 163,
+   "p_star_M0": 506,
+   "marge_lentille_M0": 119,
    "tenu_M0": true,
-   "p_star": 586,
-   "marge_lentille": 177,
+   "p_star": 529,
+   "marge_lentille": 136,
    "tenu": true,
-   "p_star_M2": 514,
-   "marge_lentille_M2": 125,
+   "p_star_M2": 492,
+   "marge_lentille_M2": 109,
    "tenu_M2": true,
-   "p_star_auto": 567,
-   "marge_lentille_auto": 163,
+   "p_star_auto": 506,
+   "marge_lentille_auto": 119,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -1156,13 +1156,13 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 422
+     "verse_eur_ha": 381
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 418,
+     "verse_eur_ha": 372,
      "paliers": [
-      580,
+      517,
       750,
       650
      ]
@@ -1183,24 +1183,24 @@
    "prix_ble_reel": 178.8,
    "marge_ble": 409,
    "ic80_rel": [
-    0.267,
-    1.186
+    0.327,
+    1.199
    ],
-   "q50_rel": 0.751,
+   "q50_rel": 0.864,
    "rel_reel": 1.048,
    "p_moyenne": 636,
    "tenu_moyenne": false,
-   "p_star_M0": 1319,
-   "marge_lentille_M0": 1040,
+   "p_star_M0": 1173,
+   "marge_lentille_M0": 899,
    "tenu_M0": true,
-   "p_star": 1360,
-   "marge_lentille": 1081,
+   "p_star": 1219,
+   "marge_lentille": 943,
    "tenu": true,
-   "p_star_M2": 1184,
-   "marge_lentille_M2": 909,
+   "p_star_M2": 1160,
+   "marge_lentille_M2": 886,
    "tenu_M2": true,
-   "p_star_auto": 1319,
-   "marge_lentille_auto": 1040,
+   "p_star_auto": 1173,
+   "marge_lentille_auto": 899,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -1217,21 +1217,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 1327
+     "verse_eur_ha": 1188
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 1327,
+     "verse_eur_ha": 1189,
      "paliers": [
-      1361,
+      1220,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 1129,
-     "prime_ha": 252
+     "verse_eur_ha": 1078,
+     "prime_ha": 201
     }
    }
   },
@@ -1244,24 +1244,24 @@
    "prix_ble_reel": 178.8,
    "marge_ble": 176,
    "ic80_rel": [
-    0.415,
-    1.299
+    0.433,
+    1.344
    ],
-   "q50_rel": 0.898,
+   "q50_rel": 0.929,
    "rel_reel": 0.852,
    "p_moyenne": 665,
    "tenu_moyenne": true,
-   "p_star_M0": 1372,
-   "marge_lentille_M0": 713,
+   "p_star_M0": 1226,
+   "marge_lentille_M0": 611,
    "tenu_M0": true,
-   "p_star": 1424,
-   "marge_lentille": 749,
+   "p_star": 1283,
+   "marge_lentille": 651,
    "tenu": true,
-   "p_star_M2": 1272,
-   "marge_lentille_M2": 644,
+   "p_star_M2": 1140,
+   "marge_lentille_M2": 551,
    "tenu_M2": true,
-   "p_star_auto": 1372,
-   "marge_lentille_auto": 713,
+   "p_star_auto": 1226,
+   "marge_lentille_auto": 611,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -1278,21 +1278,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 995
+     "verse_eur_ha": 897
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 995,
+     "verse_eur_ha": 897,
      "paliers": [
-      1424,
+      1284,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 891,
-     "prime_ha": 262
+     "verse_eur_ha": 842,
+     "prime_ha": 213
     }
    }
   },
@@ -1305,24 +1305,24 @@
    "prix_ble_reel": 178.8,
    "marge_ble": 105,
    "ic80_rel": [
-    0.468,
-    1.349
+    0.464,
+    1.367
    ],
-   "q50_rel": 0.987,
+   "q50_rel": 0.959,
    "rel_reel": 0.985,
    "p_moyenne": 740,
    "tenu_moyenne": true,
-   "p_star_M0": 1565,
-   "marge_lentille_M0": 846,
+   "p_star_M0": 1395,
+   "marge_lentille_M0": 728,
    "tenu_M0": true,
-   "p_star": 1635,
-   "marge_lentille": 895,
+   "p_star": 1459,
+   "marge_lentille": 772,
    "tenu": true,
-   "p_star_M2": 1465,
-   "marge_lentille_M2": 777,
+   "p_star_M2": 1325,
+   "marge_lentille_M2": 679,
    "tenu_M2": true,
-   "p_star_auto": 1565,
-   "marge_lentille_auto": 846,
+   "p_star_auto": 1395,
+   "marge_lentille_auto": 728,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -1339,21 +1339,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 1141
+     "verse_eur_ha": 1018
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 1141,
+     "verse_eur_ha": 1018,
      "paliers": [
-      1636,
+      1459,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 937,
-     "prime_ha": 309
+     "verse_eur_ha": 894,
+     "prime_ha": 266
     }
    }
   },
@@ -1366,24 +1366,24 @@
    "prix_ble_reel": 191.0,
    "marge_ble": 331,
    "ic80_rel": [
-    0.45,
-    1.247
+    0.46,
+    1.252
    ],
-   "q50_rel": 0.774,
+   "q50_rel": 0.88,
    "rel_reel": 0.39,
    "p_moyenne": 450,
    "tenu_moyenne": false,
-   "p_star_M0": 886,
-   "marge_lentille_M0": 313,
+   "p_star_M0": 758,
+   "marge_lentille_M0": 233,
    "tenu_M0": false,
-   "p_star": 899,
-   "marge_lentille": 321,
+   "p_star": 790,
+   "marge_lentille": 253,
    "tenu": false,
-   "p_star_M2": 816,
-   "marge_lentille_M2": 269,
+   "p_star_M2": 812,
+   "marge_lentille_M2": 266,
    "tenu_M2": false,
-   "p_star_auto": 886,
-   "marge_lentille_auto": 313,
+   "p_star_auto": 758,
+   "marge_lentille_auto": 233,
    "tenu_auto": false,
    "contrats": {
     "uneal_2023": {
@@ -1400,13 +1400,13 @@
     },
     "unique": {
      "tenu": false,
-     "verse_eur_ha": 566
+     "verse_eur_ha": 498
     },
     "paliers": {
      "tenu": false,
-     "verse_eur_ha": 570,
+     "verse_eur_ha": 500,
      "paliers": [
-      905,
+      794,
       750,
       650
      ]
@@ -1427,24 +1427,24 @@
    "prix_ble_reel": 191.0,
    "marge_ble": 637,
    "ic80_rel": [
-    0.466,
-    1.25
+    0.476,
+    1.26
    ],
-   "q50_rel": 0.769,
+   "q50_rel": 0.878,
    "rel_reel": 0.358,
    "p_moyenne": 661,
    "tenu_moyenne": false,
-   "p_star_M0": 1268,
-   "marge_lentille_M0": 440,
+   "p_star_M0": 1088,
+   "marge_lentille_M0": 342,
    "tenu_M0": false,
-   "p_star": 1275,
-   "marge_lentille": 443,
+   "p_star": 1133,
+   "marge_lentille": 367,
    "tenu": false,
-   "p_star_M2": 1162,
-   "marge_lentille_M2": 382,
+   "p_star_M2": 1154,
+   "marge_lentille_M2": 378,
    "tenu_M2": false,
-   "p_star_auto": 1268,
-   "marge_lentille_auto": 440,
+   "p_star_auto": 1088,
+   "marge_lentille_auto": 342,
    "tenu_auto": false,
    "contrats": {
     "uneal_2023": {
@@ -1461,21 +1461,21 @@
     },
     "unique": {
      "tenu": false,
-     "verse_eur_ha": 688
+     "verse_eur_ha": 612
     },
     "paliers": {
      "tenu": false,
-     "verse_eur_ha": 696,
+     "verse_eur_ha": 626,
      "paliers": [
-      1289,
+      1160,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": false,
-     "verse_eur_ha": 780,
-     "prime_ha": 294
+     "verse_eur_ha": 695,
+     "prime_ha": 209
     }
    }
   },
@@ -1488,24 +1488,24 @@
    "prix_ble_reel": 191.0,
    "marge_ble": 322,
    "ic80_rel": [
-    0.416,
-    1.221
+    0.447,
+    1.233
    ],
-   "q50_rel": 0.739,
+   "q50_rel": 0.861,
    "rel_reel": 0.389,
    "p_moyenne": 446,
    "tenu_moyenne": false,
-   "p_star_M0": 890,
-   "marge_lentille_M0": 316,
+   "p_star_M0": 761,
+   "marge_lentille_M0": 235,
    "tenu_M0": false,
-   "p_star": 912,
-   "marge_lentille": 329,
-   "tenu": true,
-   "p_star_M2": 823,
-   "marge_lentille_M2": 273,
+   "p_star": 804,
+   "marge_lentille": 261,
+   "tenu": false,
+   "p_star_M2": 795,
+   "marge_lentille_M2": 256,
    "tenu_M2": false,
-   "p_star_auto": 890,
-   "marge_lentille_auto": 316,
+   "p_star_auto": 761,
+   "marge_lentille_auto": 235,
    "tenu_auto": false,
    "contrats": {
     "uneal_2023": {
@@ -1521,22 +1521,22 @@
      "verse_eur_ha": 649
     },
     "unique": {
-     "tenu": true,
-     "verse_eur_ha": 575
+     "tenu": false,
+     "verse_eur_ha": 507
     },
     "paliers": {
-     "tenu": true,
-     "verse_eur_ha": 577,
+     "tenu": false,
+     "verse_eur_ha": 509,
      "paliers": [
-      916,
+      808,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 577,
-     "prime_ha": 10
+     "verse_eur_ha": 567,
+     "prime_ha": 0
     }
    }
   },
@@ -1549,24 +1549,24 @@
    "prix_ble_reel": 191.0,
    "marge_ble": 312,
    "ic80_rel": [
-    0.394,
-    1.201
+    0.445,
+    1.224
    ],
-   "q50_rel": 0.703,
+   "q50_rel": 0.844,
    "rel_reel": 0.283,
    "p_moyenne": 480,
    "tenu_moyenne": false,
-   "p_star_M0": 965,
-   "marge_lentille_M0": 189,
+   "p_star_M0": 822,
+   "marge_lentille_M0": 125,
    "tenu_M0": false,
-   "p_star": 987,
-   "marge_lentille": 199,
+   "p_star": 867,
+   "marge_lentille": 145,
    "tenu": false,
-   "p_star_M2": 912,
-   "marge_lentille_M2": 166,
+   "p_star_M2": 859,
+   "marge_lentille_M2": 142,
    "tenu_M2": false,
-   "p_star_auto": 965,
-   "marge_lentille_auto": 189,
+   "p_star_auto": 822,
+   "marge_lentille_auto": 125,
    "tenu_auto": false,
    "contrats": {
     "uneal_2023": {
@@ -1583,21 +1583,21 @@
     },
     "unique": {
      "tenu": false,
-     "verse_eur_ha": 445
+     "verse_eur_ha": 391
     },
     "paliers": {
      "tenu": false,
-     "verse_eur_ha": 446,
+     "verse_eur_ha": 396,
      "paliers": [
-      992,
+      879,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": false,
-     "verse_eur_ha": 479,
-     "prime_ha": 74
+     "verse_eur_ha": 405,
+     "prime_ha": 0
     }
    }
   },
@@ -1610,24 +1610,24 @@
    "prix_ble_reel": 191.0,
    "marge_ble": 370,
    "ic80_rel": [
-    0.393,
-    1.204
+    0.444,
+    1.231
    ],
-   "q50_rel": 0.695,
+   "q50_rel": 0.842,
    "rel_reel": 0.342,
    "p_moyenne": 617,
    "tenu_moyenne": false,
-   "p_star_M0": 1217,
-   "marge_lentille_M0": 303,
+   "p_star_M0": 1033,
+   "marge_lentille_M0": 220,
    "tenu_M0": false,
-   "p_star": 1226,
-   "marge_lentille": 307,
+   "p_star": 1090,
+   "marge_lentille": 245,
    "tenu": false,
-   "p_star_M2": 1187,
-   "marge_lentille_M2": 289,
+   "p_star_M2": 1111,
+   "marge_lentille_M2": 255,
    "tenu_M2": false,
-   "p_star_auto": 1217,
-   "marge_lentille_auto": 303,
+   "p_star_auto": 1033,
+   "marge_lentille_auto": 220,
    "tenu_auto": false,
    "contrats": {
     "uneal_2023": {
@@ -1644,21 +1644,21 @@
     },
     "unique": {
      "tenu": false,
-     "verse_eur_ha": 552
+     "verse_eur_ha": 490
     },
     "paliers": {
      "tenu": false,
-     "verse_eur_ha": 552,
+     "verse_eur_ha": 493,
      "paliers": [
-      1227,
+      1095,
       750,
       650
      ]
     },
     "prime_ha": {
-     "tenu": true,
-     "verse_eur_ha": 633,
-     "prime_ha": 228
+     "tenu": false,
+     "verse_eur_ha": 551,
+     "prime_ha": 146
     }
    }
   },
@@ -1671,24 +1671,24 @@
    "prix_ble_reel": 191.0,
    "marge_ble": 465,
    "ic80_rel": [
-    0.455,
-    1.246
+    0.465,
+    1.253
    ],
-   "q50_rel": 0.77,
+   "q50_rel": 0.878,
    "rel_reel": 0.296,
    "p_moyenne": 533,
    "tenu_moyenne": false,
-   "p_star_M0": 1040,
-   "marge_lentille_M0": 223,
+   "p_star_M0": 890,
+   "marge_lentille_M0": 155,
    "tenu_M0": false,
-   "p_star": 1057,
-   "marge_lentille": 231,
+   "p_star": 934,
+   "marge_lentille": 175,
    "tenu": false,
-   "p_star_M2": 983,
-   "marge_lentille_M2": 197,
+   "p_star_M2": 946,
+   "marge_lentille_M2": 181,
    "tenu_M2": false,
-   "p_star_auto": 1040,
-   "marge_lentille_auto": 223,
+   "p_star_auto": 890,
+   "marge_lentille_auto": 155,
    "tenu_auto": false,
    "contrats": {
     "uneal_2023": {
@@ -1705,21 +1705,21 @@
     },
     "unique": {
      "tenu": false,
-     "verse_eur_ha": 476
+     "verse_eur_ha": 420
     },
     "paliers": {
      "tenu": false,
-     "verse_eur_ha": 478,
+     "verse_eur_ha": 424,
      "paliers": [
-      1062,
+      942,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": false,
-     "verse_eur_ha": 527,
-     "prime_ha": 122
+     "verse_eur_ha": 436,
+     "prime_ha": 31
     }
    }
   },
@@ -1732,24 +1732,24 @@
    "prix_ble_reel": 191.0,
    "marge_ble": 350,
    "ic80_rel": [
-    0.429,
-    1.222
+    0.463,
+    1.247
    ],
-   "q50_rel": 0.723,
+   "q50_rel": 0.855,
    "rel_reel": 0.285,
    "p_moyenne": 655,
    "tenu_moyenne": false,
-   "p_star_M0": 1288,
-   "marge_lentille_M0": 161,
+   "p_star_M0": 1105,
+   "marge_lentille_M0": 103,
    "tenu_M0": false,
-   "p_star": 1305,
-   "marge_lentille": 166,
+   "p_star": 1153,
+   "marge_lentille": 118,
    "tenu": false,
-   "p_star_M2": 1188,
-   "marge_lentille_M2": 129,
+   "p_star_M2": 1121,
+   "marge_lentille_M2": 108,
    "tenu_M2": false,
-   "p_star_auto": 1288,
-   "marge_lentille_auto": 161,
+   "p_star_auto": 1105,
+   "marge_lentille_auto": 103,
    "tenu_auto": false,
    "contrats": {
     "uneal_2023": {
@@ -1766,21 +1766,21 @@
     },
     "unique": {
      "tenu": false,
-     "verse_eur_ha": 411
+     "verse_eur_ha": 364
     },
     "paliers": {
      "tenu": false,
-     "verse_eur_ha": 411,
+     "verse_eur_ha": 364,
      "paliers": [
-      1305,
+      1154,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": false,
-     "verse_eur_ha": 526,
-     "prime_ha": 243
+     "verse_eur_ha": 456,
+     "prime_ha": 172
     }
    }
   },
@@ -1793,25 +1793,25 @@
    "prix_ble_reel": 191.0,
    "marge_ble": 914,
    "ic80_rel": [
-    0.438,
-    1.22
+    0.471,
+    1.246
    ],
-   "q50_rel": 0.722,
+   "q50_rel": 0.853,
    "rel_reel": 0.636,
    "p_moyenne": 450,
    "tenu_moyenne": false,
-   "p_star_M0": 875,
-   "marge_lentille_M0": 936,
-   "tenu_M0": true,
-   "p_star": 887,
-   "marge_lentille": 952,
-   "tenu": true,
-   "p_star_M2": 823,
-   "marge_lentille_M2": 866,
+   "p_star_M0": 749,
+   "marge_lentille_M0": 766,
+   "tenu_M0": false,
+   "p_star": 784,
+   "marge_lentille": 814,
+   "tenu": false,
+   "p_star_M2": 777,
+   "marge_lentille_M2": 803,
    "tenu_M2": false,
-   "p_star_auto": 875,
-   "marge_lentille_auto": 936,
-   "tenu_auto": true,
+   "p_star_auto": 749,
+   "marge_lentille_auto": 766,
+   "tenu_auto": false,
    "contrats": {
     "uneal_2023": {
      "tenu": true,
@@ -1826,14 +1826,14 @@
      "verse_eur_ha": 1303
     },
     "unique": {
-     "tenu": true,
-     "verse_eur_ha": 1197
+     "tenu": false,
+     "verse_eur_ha": 1060
     },
     "paliers": {
-     "tenu": true,
-     "verse_eur_ha": 1172,
+     "tenu": false,
+     "verse_eur_ha": 1058,
      "paliers": [
-      909,
+      795,
       750,
       650
      ]
@@ -1854,24 +1854,24 @@
    "prix_ble_reel": 191.0,
    "marge_ble": 408,
    "ic80_rel": [
-    0.424,
-    1.207
+    0.473,
+    1.239
    ],
-   "q50_rel": 0.707,
+   "q50_rel": 0.843,
    "rel_reel": 0.894,
    "p_moyenne": 541,
    "tenu_moyenne": true,
-   "p_star_M0": 1061,
-   "marge_lentille_M0": 1188,
+   "p_star_M0": 906,
+   "marge_lentille_M0": 979,
    "tenu_M0": true,
-   "p_star": 1066,
-   "marge_lentille": 1194,
+   "p_star": 948,
+   "marge_lentille": 1034,
    "tenu": true,
-   "p_star_M2": 1023,
-   "marge_lentille_M2": 1136,
+   "p_star_M2": 998,
+   "marge_lentille_M2": 1102,
    "tenu_M2": true,
-   "p_star_auto": 1061,
-   "marge_lentille_auto": 1188,
+   "p_star_auto": 906,
+   "marge_lentille_auto": 979,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -1888,21 +1888,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 1439
+     "verse_eur_ha": 1280
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 1338,
+     "verse_eur_ha": 1220,
      "paliers": [
-      1076,
+      958,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 1351,
-     "prime_ha": 136
+     "verse_eur_ha": 1259,
+     "prime_ha": 44
     }
    }
   },
@@ -1915,24 +1915,24 @@
    "prix_ble_reel": 191.0,
    "marge_ble": 236,
    "ic80_rel": [
-    0.439,
-    1.209
+    0.48,
+    1.237
    ],
-   "q50_rel": 0.73,
+   "q50_rel": 0.849,
    "rel_reel": 0.983,
    "p_moyenne": 584,
    "tenu_moyenne": true,
-   "p_star_M0": 1145,
-   "marge_lentille_M0": 1300,
+   "p_star_M0": 982,
+   "marge_lentille_M0": 1081,
    "tenu_M0": true,
-   "p_star": 1148,
-   "marge_lentille": 1305,
+   "p_star": 1018,
+   "marge_lentille": 1129,
    "tenu": true,
-   "p_star_M2": 1014,
-   "marge_lentille_M2": 1124,
+   "p_star_M2": 995,
+   "marge_lentille_M2": 1098,
    "tenu_M2": true,
-   "p_star_auto": 1145,
-   "marge_lentille_auto": 1300,
+   "p_star_auto": 982,
+   "marge_lentille_auto": 1081,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -1949,21 +1949,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 1551
+     "verse_eur_ha": 1376
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 1414,
+     "verse_eur_ha": 1290,
      "paliers": [
-      1151,
+      1027,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 1398,
-     "prime_ha": 183
+     "verse_eur_ha": 1314,
+     "prime_ha": 99
     }
    }
   },
@@ -1976,24 +1976,24 @@
    "prix_ble_reel": 191.0,
    "marge_ble": 370,
    "ic80_rel": [
-    0.419,
-    1.202
+    0.464,
+    1.223
    ],
-   "q50_rel": 0.732,
+   "q50_rel": 0.85,
    "rel_reel": 0.63,
    "p_moyenne": 611,
    "tenu_moyenne": false,
-   "p_star_M0": 1189,
-   "marge_lentille_M0": 718,
+   "p_star_M0": 1023,
+   "marge_lentille_M0": 583,
    "tenu_M0": true,
-   "p_star": 1194,
-   "marge_lentille": 722,
+   "p_star": 1054,
+   "marge_lentille": 608,
    "tenu": true,
-   "p_star_M2": 1051,
-   "marge_lentille_M2": 606,
+   "p_star_M2": 1041,
+   "marge_lentille_M2": 598,
    "tenu_M2": true,
-   "p_star_auto": 1189,
-   "marge_lentille_auto": 718,
+   "p_star_auto": 1023,
+   "marge_lentille_auto": 583,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -2010,21 +2010,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 967
+     "verse_eur_ha": 854
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 969,
+     "verse_eur_ha": 860,
      "paliers": [
-      1196,
+      1062,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 941,
-     "prime_ha": 212
+     "verse_eur_ha": 856,
+     "prime_ha": 127
     }
    }
   },
@@ -2037,24 +2037,24 @@
    "prix_ble_reel": 191.0,
    "marge_ble": 312,
    "ic80_rel": [
-    0.415,
-    1.203
+    0.46,
+    1.228
    ],
-   "q50_rel": 0.708,
+   "q50_rel": 0.844,
    "rel_reel": 0.537,
    "p_moyenne": 507,
    "tenu_moyenne": false,
-   "p_star_M0": 1001,
-   "marge_lentille_M0": 566,
+   "p_star_M0": 860,
+   "marge_lentille_M0": 451,
    "tenu_M0": true,
-   "p_star": 1008,
-   "marge_lentille": 572,
+   "p_star": 891,
+   "marge_lentille": 477,
    "tenu": true,
-   "p_star_M2": 932,
-   "marge_lentille_M2": 510,
+   "p_star_M2": 910,
+   "marge_lentille_M2": 492,
    "tenu_M2": true,
-   "p_star_auto": 1001,
-   "marge_lentille_auto": 566,
+   "p_star_auto": 860,
+   "marge_lentille_auto": 451,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -2071,21 +2071,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 817
+     "verse_eur_ha": 722
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 821,
+     "verse_eur_ha": 731,
      "paliers": [
-      1013,
+      902,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 817,
-     "prime_ha": 88
+     "verse_eur_ha": 729,
+     "prime_ha": 0
     }
    }
   },
@@ -2098,24 +2098,24 @@
    "prix_ble_reel": 191.0,
    "marge_ble": 350,
    "ic80_rel": [
-    0.422,
-    1.221
+    0.449,
+    1.229
    ],
-   "q50_rel": 0.748,
+   "q50_rel": 0.865,
    "rel_reel": 0.68,
    "p_moyenne": 628,
    "tenu_moyenne": false,
-   "p_star_M0": 1265,
-   "marge_lentille_M0": 779,
+   "p_star_M0": 1079,
+   "marge_lentille_M0": 629,
    "tenu_M0": true,
-   "p_star": 1288,
-   "marge_lentille": 798,
+   "p_star": 1138,
+   "marge_lentille": 676,
    "tenu": true,
-   "p_star_M2": 1195,
-   "marge_lentille_M2": 723,
+   "p_star_M2": 1151,
+   "marge_lentille_M2": 687,
    "tenu_M2": true,
-   "p_star_auto": 1265,
-   "marge_lentille_auto": 779,
+   "p_star_auto": 1079,
+   "marge_lentille_auto": 629,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -2132,21 +2132,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 1044
+     "verse_eur_ha": 922
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 1044,
+     "verse_eur_ha": 923,
      "paliers": [
-      1289,
+      1139,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 970,
-     "prime_ha": 241
+     "verse_eur_ha": 893,
+     "prime_ha": 164
     }
    }
   },
@@ -2159,24 +2159,24 @@
    "prix_ble_reel": 191.0,
    "marge_ble": 255,
    "ic80_rel": [
-    0.468,
-    1.201
+    0.499,
+    1.228
    ],
-   "q50_rel": 0.763,
+   "q50_rel": 0.852,
    "rel_reel": 0.447,
    "p_moyenne": 429,
    "tenu_moyenne": false,
-   "p_star_M0": 838,
-   "marge_lentille_M0": 207,
+   "p_star_M0": 727,
+   "marge_lentille_M0": 147,
    "tenu_M0": false,
-   "p_star": 843,
-   "marge_lentille": 210,
+   "p_star": 745,
+   "marge_lentille": 157,
    "tenu": false,
    "p_star_M2": 795,
    "marge_lentille_M2": 185,
    "tenu_M2": false,
-   "p_star_auto": 838,
-   "marge_lentille_auto": 207,
+   "p_star_auto": 727,
+   "marge_lentille_auto": 147,
    "tenu_auto": false,
    "contrats": {
     "uneal_2023": {
@@ -2193,13 +2193,13 @@
     },
     "unique": {
      "tenu": false,
-     "verse_eur_ha": 455
+     "verse_eur_ha": 403
     },
     "paliers": {
      "tenu": false,
-     "verse_eur_ha": 455,
+     "verse_eur_ha": 403,
      "paliers": [
-      843,
+      746,
       750,
       650
      ]
@@ -2220,24 +2220,24 @@
    "prix_ble_reel": 191.0,
    "marge_ble": -51,
    "ic80_rel": [
-    0.389,
-    1.205
+    0.439,
+    1.233
    ],
-   "q50_rel": 0.697,
+   "q50_rel": 0.844,
    "rel_reel": 0.822,
    "p_moyenne": 272,
    "tenu_moyenne": true,
-   "p_star_M0": 539,
-   "marge_lentille_M0": 240,
+   "p_star_M0": 469,
+   "marge_lentille_M0": 177,
    "tenu_M0": true,
-   "p_star": 544,
-   "marge_lentille": 245,
+   "p_star": 487,
+   "marge_lentille": 193,
    "tenu": true,
-   "p_star_M2": 510,
-   "marge_lentille_M2": 214,
+   "p_star_M2": 500,
+   "marge_lentille_M2": 205,
    "tenu_M2": true,
-   "p_star_auto": 539,
-   "marge_lentille_auto": 240,
+   "p_star_auto": 469,
+   "marge_lentille_auto": 177,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -2254,13 +2254,13 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 490
+     "verse_eur_ha": 438
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 490,
+     "verse_eur_ha": 436,
      "paliers": [
-      544,
+      484,
       750,
       650
      ]
@@ -2281,24 +2281,24 @@
    "prix_ble_reel": 191.0,
    "marge_ble": 91,
    "ic80_rel": [
-    0.41,
-    1.203
+    0.45,
+    1.222
    ],
-   "q50_rel": 0.726,
+   "q50_rel": 0.849,
    "rel_reel": 0.578,
    "p_moyenne": 640,
    "tenu_moyenne": true,
-   "p_star_M0": 1271,
-   "marge_lentille_M0": 441,
+   "p_star_M0": 1100,
+   "marge_lentille_M0": 349,
    "tenu_M0": true,
-   "p_star": 1288,
-   "marge_lentille": 451,
+   "p_star": 1136,
+   "marge_lentille": 368,
    "tenu": true,
-   "p_star_M2": 1171,
-   "marge_lentille_M2": 388,
+   "p_star_M2": 1139,
+   "marge_lentille_M2": 370,
    "tenu_M2": true,
-   "p_star_auto": 1271,
-   "marge_lentille_auto": 441,
+   "p_star_auto": 1100,
+   "marge_lentille_auto": 349,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -2315,21 +2315,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 696
+     "verse_eur_ha": 613
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 696,
+     "verse_eur_ha": 613,
      "paliers": [
-      1289,
+      1136,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 683,
-     "prime_ha": 197
+     "verse_eur_ha": 626,
+     "prime_ha": 140
     }
    }
   },
@@ -2342,24 +2342,24 @@
    "prix_ble_reel": 191.0,
    "marge_ble": 293,
    "ic80_rel": [
-    0.386,
-    1.189
+    0.444,
+    1.226
    ],
-   "q50_rel": 0.68,
+   "q50_rel": 0.831,
    "rel_reel": 0.446,
    "p_moyenne": 660,
    "tenu_moyenne": false,
-   "p_star_M0": 1318,
-   "marge_lentille_M0": 229,
+   "p_star_M0": 1138,
+   "marge_lentille_M0": 165,
    "tenu_M0": false,
-   "p_star": 1321,
-   "marge_lentille": 230,
+   "p_star": 1171,
+   "marge_lentille": 177,
    "tenu": false,
-   "p_star_M2": 1166,
-   "marge_lentille_M2": 175,
+   "p_star_M2": 1161,
+   "marge_lentille_M2": 173,
    "tenu_M2": false,
-   "p_star_auto": 1318,
-   "marge_lentille_auto": 229,
+   "p_star_auto": 1138,
+   "marge_lentille_auto": 165,
    "tenu_auto": false,
    "contrats": {
     "uneal_2023": {
@@ -2376,21 +2376,21 @@
     },
     "unique": {
      "tenu": false,
-     "verse_eur_ha": 476
+     "verse_eur_ha": 422
     },
     "paliers": {
      "tenu": false,
-     "verse_eur_ha": 476,
+     "verse_eur_ha": 422,
      "paliers": [
-      1321,
+      1172,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": false,
-     "verse_eur_ha": 516,
-     "prime_ha": 192
+     "verse_eur_ha": 462,
+     "prime_ha": 138
     }
    }
   },
@@ -2403,24 +2403,24 @@
    "prix_ble_reel": 191.0,
    "marge_ble": 274,
    "ic80_rel": [
-    0.435,
-    1.229
+    0.456,
+    1.243
    ],
-   "q50_rel": 0.759,
+   "q50_rel": 0.868,
    "rel_reel": 0.509,
    "p_moyenne": 716,
    "tenu_moyenne": false,
-   "p_star_M0": 1420,
-   "marge_lentille_M0": 266,
+   "p_star_M0": 1223,
+   "marge_lentille_M0": 195,
    "tenu_M0": false,
-   "p_star": 1417,
-   "marge_lentille": 265,
+   "p_star": 1258,
+   "marge_lentille": 208,
    "tenu": false,
-   "p_star_M2": 1321,
-   "marge_lentille_M2": 231,
+   "p_star_M2": 1285,
+   "marge_lentille_M2": 217,
    "tenu_M2": false,
-   "p_star_auto": 1420,
-   "marge_lentille_auto": 266,
+   "p_star_auto": 1223,
+   "marge_lentille_auto": 195,
    "tenu_auto": false,
    "contrats": {
     "uneal_2023": {
@@ -2437,21 +2437,21 @@
     },
     "unique": {
      "tenu": false,
-     "verse_eur_ha": 510
+     "verse_eur_ha": 453
     },
     "paliers": {
      "tenu": false,
-     "verse_eur_ha": 510,
+     "verse_eur_ha": 453,
      "paliers": [
-      1418,
+      1259,
       750,
       650
      ]
     },
     "prime_ha": {
-     "tenu": true,
-     "verse_eur_ha": 532,
-     "prime_ha": 208
+     "tenu": false,
+     "verse_eur_ha": 488,
+     "prime_ha": 164
     }
    }
   },
@@ -2464,24 +2464,24 @@
    "prix_ble_reel": 237.8,
    "marge_ble": 774,
    "ic80_rel": [
-    0.283,
-    1.097
+    0.27,
+    1.206
    ],
-   "q50_rel": 0.766,
+   "q50_rel": 0.742,
    "rel_reel": 1.122,
    "p_moyenne": 468,
    "tenu_moyenne": false,
-   "p_star_M0": 1294,
-   "marge_lentille_M0": 1968,
+   "p_star_M0": 1004,
+   "marge_lentille_M0": 1472,
    "tenu_M0": true,
-   "p_star": 1349,
-   "marge_lentille": 2062,
+   "p_star": 1046,
+   "marge_lentille": 1544,
    "tenu": true,
-   "p_star_M2": 1124,
-   "marge_lentille_M2": 1676,
+   "p_star_M2": 1220,
+   "marge_lentille_M2": 1841,
    "tenu_M2": true,
-   "p_star_auto": 1294,
-   "marge_lentille_auto": 1968,
+   "p_star_auto": 1004,
+   "marge_lentille_auto": 1472,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -2498,21 +2498,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 2308
+     "verse_eur_ha": 1790
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 1882,
+     "verse_eur_ha": 1580,
      "paliers": [
-      1350,
+      1047,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 1778,
-     "prime_ha": 239
+     "verse_eur_ha": 1640,
+     "prime_ha": 101
     }
    }
   },
@@ -2525,24 +2525,24 @@
    "prix_ble_reel": 237.8,
    "marge_ble": 1274,
    "ic80_rel": [
-    0.35,
-    1.153
+    0.376,
+    1.213
    ],
-   "q50_rel": 0.814,
+   "q50_rel": 0.795,
    "rel_reel": 1.396,
    "p_moyenne": 695,
    "tenu_moyenne": false,
-   "p_star_M0": 1910,
-   "marge_lentille_M0": 3538,
+   "p_star_M0": 1464,
+   "marge_lentille_M0": 2653,
    "tenu_M0": true,
-   "p_star": 1976,
-   "marge_lentille": 3667,
+   "p_star": 1551,
+   "marge_lentille": 2827,
    "tenu": true,
-   "p_star_M2": 1691,
-   "marge_lentille_M2": 3103,
+   "p_star_M2": 1688,
+   "marge_lentille_M2": 3098,
    "tenu_M2": true,
-   "p_star_auto": 1910,
-   "marge_lentille_auto": 3538,
+   "p_star_auto": 1464,
+   "marge_lentille_auto": 2653,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -2559,21 +2559,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 3912
+     "verse_eur_ha": 3073
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 2711,
+     "verse_eur_ha": 2287,
      "paliers": [
-      1976,
+      1552,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 2325,
-     "prime_ha": 543
+     "verse_eur_ha": 2211,
+     "prime_ha": 429
     }
    }
   },
@@ -2586,24 +2586,24 @@
    "prix_ble_reel": 237.8,
    "marge_ble": 893,
    "ic80_rel": [
-    0.249,
-    1.083
+    0.281,
+    1.191
    ],
-   "q50_rel": 0.656,
+   "q50_rel": 0.707,
    "rel_reel": 1.353,
    "p_moyenne": 463,
    "tenu_moyenne": false,
-   "p_star_M0": 1313,
-   "marge_lentille_M0": 2472,
+   "p_star_M0": 1003,
+   "marge_lentille_M0": 1830,
    "tenu_M0": true,
-   "p_star": 1320,
-   "marge_lentille": 2487,
+   "p_star": 1034,
+   "marge_lentille": 1895,
    "tenu": true,
-   "p_star_M2": 1133,
-   "marge_lentille_M2": 2101,
+   "p_star_M2": 1169,
+   "marge_lentille_M2": 2176,
    "tenu_M2": true,
-   "p_star_auto": 1313,
-   "marge_lentille_auto": 2472,
+   "p_star_auto": 1003,
+   "marge_lentille_auto": 1830,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -2620,21 +2620,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 2732
+     "verse_eur_ha": 2140
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 2116,
+     "verse_eur_ha": 1832,
      "paliers": [
-      1320,
+      1036,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 2090,
-     "prime_ha": 227
+     "verse_eur_ha": 1954,
+     "prime_ha": 91
     }
    }
   },
@@ -2647,24 +2647,24 @@
    "prix_ble_reel": 237.8,
    "marge_ble": 917,
    "ic80_rel": [
-    0.26,
-    1.077
+    0.29,
+    1.194
    ],
-   "q50_rel": 0.655,
+   "q50_rel": 0.711,
    "rel_reel": 1.343,
    "p_moyenne": 505,
    "tenu_moyenne": false,
-   "p_star_M0": 1407,
-   "marge_lentille_M0": 2541,
+   "p_star_M0": 1074,
+   "marge_lentille_M0": 1881,
    "tenu_M0": true,
-   "p_star": 1431,
-   "marge_lentille": 2588,
+   "p_star": 1096,
+   "marge_lentille": 1926,
    "tenu": true,
-   "p_star_M2": 1232,
-   "marge_lentille_M2": 2194,
+   "p_star_M2": 1193,
+   "marge_lentille_M2": 2118,
    "tenu_M2": true,
-   "p_star_auto": 1407,
-   "marge_lentille_auto": 2541,
+   "p_star_auto": 1074,
+   "marge_lentille_auto": 1881,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -2681,21 +2681,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 2833
+     "verse_eur_ha": 2172
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 2166,
+     "verse_eur_ha": 1832,
      "paliers": [
-      1431,
+      1097,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 2060,
-     "prime_ha": 278
+     "verse_eur_ha": 1918,
+     "prime_ha": 136
     }
    }
   },
@@ -2708,24 +2708,24 @@
    "prix_ble_reel": 237.8,
    "marge_ble": 1012,
    "ic80_rel": [
-    0.272,
-    1.093
+    0.31,
+    1.192
    ],
-   "q50_rel": 0.671,
+   "q50_rel": 0.722,
    "rel_reel": 1.599,
    "p_moyenne": 642,
    "tenu_moyenne": true,
-   "p_star_M0": 1770,
-   "marge_lentille_M0": 3259,
+   "p_star_M0": 1349,
+   "marge_lentille_M0": 2426,
    "tenu_M0": true,
-   "p_star": 1854,
-   "marge_lentille": 3427,
+   "p_star": 1436,
+   "marge_lentille": 2597,
    "tenu": true,
-   "p_star_M2": 1628,
-   "marge_lentille_M2": 2978,
+   "p_star_M2": 1577,
+   "marge_lentille_M2": 2877,
    "tenu_M2": true,
-   "p_star_auto": 1770,
-   "marge_lentille_auto": 3259,
+   "p_star_auto": 1349,
+   "marge_lentille_auto": 2426,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -2742,21 +2742,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 3673
+     "verse_eur_ha": 2843
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 2590,
+     "verse_eur_ha": 2171,
      "paliers": [
-      1855,
+      1436,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 2196,
-     "prime_ha": 414
+     "verse_eur_ha": 2083,
+     "prime_ha": 301
     }
    }
   },
@@ -2769,24 +2769,24 @@
    "prix_ble_reel": 237.8,
    "marge_ble": 1036,
    "ic80_rel": [
-    0.299,
-    1.112
+    0.301,
+    1.208
    ],
-   "q50_rel": 0.776,
+   "q50_rel": 0.766,
    "rel_reel": 1.263,
    "p_moyenne": 564,
    "tenu_moyenne": false,
-   "p_star_M0": 1541,
-   "marge_lentille_M0": 2528,
+   "p_star_M0": 1182,
+   "marge_lentille_M0": 1883,
    "tenu_M0": true,
-   "p_star": 1619,
-   "marge_lentille": 2670,
+   "p_star": 1268,
+   "marge_lentille": 2038,
    "tenu": true,
-   "p_star_M2": 1393,
-   "marge_lentille_M2": 2263,
+   "p_star_M2": 1423,
+   "marge_lentille_M2": 2317,
    "tenu_M2": true,
-   "p_star_auto": 1541,
-   "marge_lentille_auto": 2528,
+   "p_star_auto": 1182,
+   "marge_lentille_auto": 1883,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -2803,21 +2803,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 2916
+     "verse_eur_ha": 2284
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 2220,
+     "verse_eur_ha": 1869,
      "paliers": [
-      1620,
+      1269,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 1972,
-     "prime_ha": 352
+     "verse_eur_ha": 1850,
+     "prime_ha": 230
     }
    }
   },
@@ -2830,24 +2830,24 @@
    "prix_ble_reel": 237.8,
    "marge_ble": 869,
    "ic80_rel": [
-    0.399,
-    1.179
+    0.387,
+    1.23
    ],
-   "q50_rel": 0.927,
+   "q50_rel": 0.863,
    "rel_reel": 0.261,
    "p_moyenne": 690,
    "tenu_moyenne": false,
-   "p_star_M0": 1902,
-   "marge_lentille_M0": 269,
+   "p_star_M0": 1455,
+   "marge_lentille_M0": 148,
    "tenu_M0": false,
-   "p_star": 2013,
-   "marge_lentille": 298,
+   "p_star": 1555,
+   "marge_lentille": 175,
    "tenu": false,
-   "p_star_M2": 1648,
-   "marge_lentille_M2": 200,
+   "p_star_M2": 1700,
+   "marge_lentille_M2": 214,
    "tenu_M2": false,
-   "p_star_auto": 1902,
-   "marge_lentille_auto": 269,
+   "p_star_auto": 1455,
+   "marge_lentille_auto": 148,
    "tenu_auto": false,
    "contrats": {
     "uneal_2023": {
@@ -2864,21 +2864,21 @@
     },
     "unique": {
      "tenu": false,
-     "verse_eur_ha": 544
+     "verse_eur_ha": 420
     },
     "paliers": {
      "tenu": false,
-     "verse_eur_ha": 544,
+     "verse_eur_ha": 420,
      "paliers": [
-      2013,
+      1556,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": false,
-     "verse_eur_ha": 640,
-     "prime_ha": 397
+     "verse_eur_ha": 551,
+     "prime_ha": 308
     }
    }
   },
@@ -2891,24 +2891,24 @@
    "prix_ble_reel": 237.8,
    "marge_ble": 1179,
    "ic80_rel": [
-    0.422,
-    1.206
+    0.424,
+    1.233
    ],
-   "q50_rel": 0.944,
+   "q50_rel": 0.888,
    "rel_reel": 0.351,
    "p_moyenne": 474,
    "tenu_moyenne": false,
-   "p_star_M0": 1303,
-   "marge_lentille_M0": 693,
+   "p_star_M0": 991,
+   "marge_lentille_M0": 468,
    "tenu_M0": false,
-   "p_star": 1371,
-   "marge_lentille": 742,
+   "p_star": 1067,
+   "marge_lentille": 524,
    "tenu": false,
-   "p_star_M2": 1134,
-   "marge_lentille_M2": 571,
+   "p_star_M2": 1128,
+   "marge_lentille_M2": 567,
    "tenu_M2": false,
-   "p_star_auto": 1303,
-   "marge_lentille_auto": 693,
+   "p_star_auto": 991,
+   "marge_lentille_auto": 468,
    "tenu_auto": false,
    "contrats": {
     "uneal_2023": {
@@ -2925,21 +2925,21 @@
     },
     "unique": {
      "tenu": false,
-     "verse_eur_ha": 988
+     "verse_eur_ha": 769
     },
     "paliers": {
      "tenu": false,
-     "verse_eur_ha": 994,
+     "verse_eur_ha": 784,
      "paliers": [
-      1380,
+      1089,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": false,
-     "verse_eur_ha": 981,
-     "prime_ha": 333
+     "verse_eur_ha": 798,
+     "prime_ha": 150
     }
    }
   },
@@ -2952,24 +2952,24 @@
    "prix_ble_reel": 237.8,
    "marge_ble": 965,
    "ic80_rel": [
-    0.276,
-    1.094
+    0.342,
+    1.192
    ],
-   "q50_rel": 0.619,
+   "q50_rel": 0.703,
    "rel_reel": 0.373,
    "p_moyenne": 546,
    "tenu_moyenne": false,
-   "p_star_M0": 1501,
-   "marge_lentille_M0": 579,
+   "p_star_M0": 1149,
+   "marge_lentille_M0": 386,
    "tenu_M0": false,
-   "p_star": 1557,
-   "marge_lentille": 610,
+   "p_star": 1203,
+   "marge_lentille": 416,
    "tenu": false,
-   "p_star_M2": 1366,
-   "marge_lentille_M2": 505,
+   "p_star_M2": 1330,
+   "marge_lentille_M2": 485,
    "tenu_M2": false,
-   "p_star_auto": 1501,
-   "marge_lentille_auto": 579,
+   "p_star_auto": 1149,
+   "marge_lentille_auto": 386,
    "tenu_auto": false,
    "contrats": {
     "uneal_2023": {
@@ -2986,21 +2986,21 @@
     },
     "unique": {
      "tenu": false,
-     "verse_eur_ha": 855
+     "verse_eur_ha": 661
     },
     "paliers": {
      "tenu": false,
-     "verse_eur_ha": 855,
+     "verse_eur_ha": 663,
      "paliers": [
-      1557,
+      1207,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": false,
-     "verse_eur_ha": 833,
-     "prime_ha": 339
+     "verse_eur_ha": 697,
+     "prime_ha": 203
     }
    }
   },
@@ -3013,24 +3013,24 @@
    "prix_ble_reel": 237.8,
    "marge_ble": 893,
    "ic80_rel": [
-    0.25,
-    1.082
+    0.326,
+    1.187
    ],
-   "q50_rel": 0.567,
+   "q50_rel": 0.668,
    "rel_reel": 0.4,
    "p_moyenne": 565,
    "tenu_moyenne": false,
-   "p_star_M0": 1547,
-   "marge_lentille_M0": 604,
+   "p_star_M0": 1181,
+   "marge_lentille_M0": 403,
    "tenu_M0": false,
-   "p_star": 1576,
-   "marge_lentille": 620,
+   "p_star": 1220,
+   "marge_lentille": 425,
    "tenu": false,
-   "p_star_M2": 1346,
-   "marge_lentille_M2": 494,
+   "p_star_M2": 1334,
+   "marge_lentille_M2": 487,
    "tenu_M2": false,
-   "p_star_auto": 1547,
-   "marge_lentille_auto": 604,
+   "p_star_auto": 1181,
+   "marge_lentille_auto": 403,
    "tenu_auto": false,
    "contrats": {
     "uneal_2023": {
@@ -3047,21 +3047,21 @@
     },
     "unique": {
      "tenu": false,
-     "verse_eur_ha": 866
+     "verse_eur_ha": 670
     },
     "paliers": {
      "tenu": false,
-     "verse_eur_ha": 866,
+     "verse_eur_ha": 671,
      "paliers": [
-      1577,
+      1222,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": false,
-     "verse_eur_ha": 828,
-     "prime_ha": 334
+     "verse_eur_ha": 704,
+     "prime_ha": 210
     }
    }
   },
@@ -3074,25 +3074,25 @@
    "prix_ble_reel": 237.8,
    "marge_ble": 751,
    "ic80_rel": [
-    0.253,
-    1.079
+    0.326,
+    1.182
    ],
-   "q50_rel": 0.566,
+   "q50_rel": 0.666,
    "rel_reel": 0.507,
    "p_moyenne": 620,
    "tenu_moyenne": false,
-   "p_star_M0": 1736,
-   "marge_lentille_M0": 849,
-   "tenu_M0": true,
-   "p_star": 1726,
-   "marge_lentille": 842,
-   "tenu": true,
-   "p_star_M2": 1475,
-   "marge_lentille_M2": 684,
+   "p_star_M0": 1330,
+   "marge_lentille_M0": 593,
+   "tenu_M0": false,
+   "p_star": 1326,
+   "marge_lentille": 590,
+   "tenu": false,
+   "p_star_M2": 1453,
+   "marge_lentille_M2": 671,
    "tenu_M2": false,
-   "p_star_auto": 1736,
-   "marge_lentille_auto": 849,
-   "tenu_auto": true,
+   "p_star_auto": 1330,
+   "marge_lentille_auto": 593,
+   "tenu_auto": false,
    "contrats": {
     "uneal_2023": {
      "tenu": false,
@@ -3107,22 +3107,22 @@
      "verse_eur_ha": 649
     },
     "unique": {
-     "tenu": true,
-     "verse_eur_ha": 1088
+     "tenu": false,
+     "verse_eur_ha": 836
     },
     "paliers": {
-     "tenu": true,
-     "verse_eur_ha": 1088,
+     "tenu": false,
+     "verse_eur_ha": 836,
      "paliers": [
-      1727,
+      1327,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": false,
-     "verse_eur_ha": 940,
-     "prime_ha": 373
+     "verse_eur_ha": 820,
+     "prime_ha": 253
     }
    }
   },
@@ -3135,24 +3135,24 @@
    "prix_ble_reel": 237.8,
    "marge_ble": 798,
    "ic80_rel": [
-    0.27,
-    1.074
+    0.299,
+    1.196
    ],
-   "q50_rel": 0.649,
+   "q50_rel": 0.71,
    "rel_reel": 0.374,
    "p_moyenne": 517,
    "tenu_moyenne": false,
-   "p_star_M0": 1423,
-   "marge_lentille_M0": 523,
+   "p_star_M0": 1082,
+   "marge_lentille_M0": 339,
    "tenu_M0": false,
-   "p_star": 1450,
-   "marge_lentille": 538,
+   "p_star": 1116,
+   "marge_lentille": 358,
    "tenu": false,
-   "p_star_M2": 1260,
-   "marge_lentille_M2": 435,
+   "p_star_M2": 1187,
+   "marge_lentille_M2": 396,
    "tenu_M2": false,
-   "p_star_auto": 1423,
-   "marge_lentille_auto": 523,
+   "p_star_auto": 1082,
+   "marge_lentille_auto": 339,
    "tenu_auto": false,
    "contrats": {
     "uneal_2023": {
@@ -3169,21 +3169,21 @@
     },
     "unique": {
      "tenu": false,
-     "verse_eur_ha": 784
+     "verse_eur_ha": 603
     },
     "paliers": {
      "tenu": false,
-     "verse_eur_ha": 784,
+     "verse_eur_ha": 603,
      "paliers": [
-      1451,
+      1117,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": false,
-     "verse_eur_ha": 771,
-     "prime_ha": 285
+     "verse_eur_ha": 634,
+     "prime_ha": 148
     }
    }
   },
@@ -3196,24 +3196,24 @@
    "prix_ble_reel": 237.8,
    "marge_ble": 846,
    "ic80_rel": [
-    0.278,
-    1.076
+    0.283,
+    1.2
    ],
-   "q50_rel": 0.704,
+   "q50_rel": 0.734,
    "rel_reel": 0.705,
    "p_moyenne": 640,
    "tenu_moyenne": false,
-   "p_star_M0": 1814,
-   "marge_lentille_M0": 1224,
+   "p_star_M0": 1384,
+   "marge_lentille_M0": 876,
    "tenu_M0": true,
-   "p_star": 1839,
-   "marge_lentille": 1244,
+   "p_star": 1413,
+   "marge_lentille": 899,
    "tenu": true,
-   "p_star_M2": 1577,
-   "marge_lentille_M2": 1032,
+   "p_star_M2": 1513,
+   "marge_lentille_M2": 980,
    "tenu_M2": true,
-   "p_star_auto": 1814,
-   "marge_lentille_auto": 1224,
+   "p_star_auto": 1384,
+   "marge_lentille_auto": 876,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -3230,21 +3230,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 1490
+     "verse_eur_ha": 1145
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 1490,
+     "verse_eur_ha": 1145,
      "paliers": [
-      1839,
+      1413,
       750,
       650
      ]
     },
     "prime_ha": {
-     "tenu": true,
-     "verse_eur_ha": 1115,
-     "prime_ha": 386
+     "tenu": false,
+     "verse_eur_ha": 1011,
+     "prime_ha": 282
     }
    }
   },
@@ -3257,24 +3257,24 @@
    "prix_ble_reel": 237.8,
    "marge_ble": 418,
    "ic80_rel": [
-    0.183,
-    1.044
+    0.235,
+    1.184
    ],
-   "q50_rel": 0.531,
+   "q50_rel": 0.625,
    "rel_reel": 0.706,
    "p_moyenne": 450,
    "tenu_moyenne": false,
-   "p_star_M0": 1223,
-   "marge_lentille_M0": 745,
+   "p_star_M0": 935,
+   "marge_lentille_M0": 512,
    "tenu_M0": true,
-   "p_star": 1210,
-   "marge_lentille": 735,
+   "p_star": 941,
+   "marge_lentille": 517,
    "tenu": true,
-   "p_star_M2": 1042,
-   "marge_lentille_M2": 599,
+   "p_star_M2": 1109,
+   "marge_lentille_M2": 653,
    "tenu_M2": true,
-   "p_star_auto": 1223,
-   "marge_lentille_auto": 745,
+   "p_star_auto": 935,
+   "marge_lentille_auto": 512,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -3291,21 +3291,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 980
+     "verse_eur_ha": 762
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 980,
+     "verse_eur_ha": 762,
      "paliers": [
-      1210,
+      941,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 858,
-     "prime_ha": 129
+     "verse_eur_ha": 753,
+     "prime_ha": 24
     }
    }
   },
@@ -3318,24 +3318,24 @@
    "prix_ble_reel": 237.8,
    "marge_ble": 275,
    "ic80_rel": [
-    0.199,
-    1.057
+    0.259,
+    1.187
    ],
-   "q50_rel": 0.543,
+   "q50_rel": 0.636,
    "rel_reel": 1.012,
    "p_moyenne": 271,
    "tenu_moyenne": false,
-   "p_star_M0": 735,
-   "marge_lentille_M0": 548,
+   "p_star_M0": 568,
+   "marge_lentille_M0": 369,
    "tenu_M0": true,
-   "p_star": 776,
-   "marge_lentille": 593,
+   "p_star": 608,
+   "marge_lentille": 412,
    "tenu": true,
-   "p_star_M2": 646,
-   "marge_lentille_M2": 453,
+   "p_star_M2": 653,
+   "marge_lentille_M2": 460,
    "tenu_M2": true,
-   "p_star_auto": 735,
-   "marge_lentille_auto": 548,
+   "p_star_auto": 568,
+   "marge_lentille_auto": 369,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -3352,13 +3352,13 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 839
+     "verse_eur_ha": 658
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 837,
+     "verse_eur_ha": 669,
      "paliers": [
-      777,
+      609,
       750,
       650
      ]
@@ -3379,24 +3379,24 @@
    "prix_ble_reel": 237.8,
    "marge_ble": 418,
    "ic80_rel": [
-    0.168,
-    1.022
+    0.207,
+    1.181
    ],
-   "q50_rel": 0.51,
+   "q50_rel": 0.621,
    "rel_reel": 0.901,
    "p_moyenne": 640,
    "tenu_moyenne": false,
-   "p_star_M0": 1785,
-   "marge_lentille_M0": 1201,
+   "p_star_M0": 1366,
+   "marge_lentille_M0": 862,
    "tenu_M0": true,
-   "p_star": 1782,
-   "marge_lentille": 1199,
+   "p_star": 1389,
+   "marge_lentille": 880,
    "tenu": true,
-   "p_star_M2": 1540,
-   "marge_lentille_M2": 1003,
+   "p_star_M2": 1556,
+   "marge_lentille_M2": 1016,
    "tenu_M2": true,
-   "p_star_auto": 1785,
-   "marge_lentille_auto": 1201,
+   "p_star_auto": 1366,
+   "marge_lentille_auto": 862,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -3413,21 +3413,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 1444
+     "verse_eur_ha": 1126
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 1444,
+     "verse_eur_ha": 1126,
      "paliers": [
-      1783,
+      1390,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 1029,
-     "prime_ha": 300
+     "verse_eur_ha": 944,
+     "prime_ha": 215
     }
    }
   },
@@ -3440,24 +3440,24 @@
    "prix_ble_reel": 237.8,
    "marge_ble": 513,
    "ic80_rel": [
-    0.387,
-    1.134
+    0.3,
+    1.236
    ],
-   "q50_rel": 0.976,
+   "q50_rel": 0.834,
    "rel_reel": 0.411,
    "p_moyenne": 695,
    "tenu_moyenne": false,
-   "p_star_M0": 1926,
-   "marge_lentille_M0": 362,
+   "p_star_M0": 1482,
+   "marge_lentille_M0": 222,
    "tenu_M0": false,
-   "p_star": 2002,
-   "marge_lentille": 385,
+   "p_star": 1571,
+   "marge_lentille": 250,
    "tenu": false,
-   "p_star_M2": 1593,
-   "marge_lentille_M2": 257,
+   "p_star_M2": 1687,
+   "marge_lentille_M2": 286,
    "tenu_M2": false,
-   "p_star_auto": 1926,
-   "marge_lentille_auto": 362,
+   "p_star_auto": 1482,
+   "marge_lentille_auto": 222,
    "tenu_auto": false,
    "contrats": {
     "uneal_2023": {
@@ -3474,21 +3474,21 @@
     },
     "unique": {
      "tenu": false,
-     "verse_eur_ha": 631
+     "verse_eur_ha": 495
     },
     "paliers": {
      "tenu": false,
-     "verse_eur_ha": 631,
+     "verse_eur_ha": 495,
      "paliers": [
-      2002,
+      1572,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": false,
-     "verse_eur_ha": 596,
-     "prime_ha": 312
+     "verse_eur_ha": 528,
+     "prime_ha": 244
     }
    }
   },
@@ -3501,24 +3501,24 @@
    "prix_ble_reel": 237.8,
    "marge_ble": 537,
    "ic80_rel": [
-    0.393,
-    1.16
+    0.299,
+    1.245
    ],
-   "q50_rel": 1.029,
+   "q50_rel": 0.866,
    "rel_reel": 0.466,
    "p_moyenne": 751,
    "tenu_moyenne": false,
-   "p_star_M0": 2068,
-   "marge_lentille_M0": 406,
+   "p_star_M0": 1592,
+   "marge_lentille_M0": 256,
    "tenu_M0": false,
-   "p_star": 2123,
-   "marge_lentille": 424,
+   "p_star": 1661,
+   "marge_lentille": 278,
    "tenu": false,
-   "p_star_M2": 1829,
-   "marge_lentille_M2": 331,
+   "p_star_M2": 1885,
+   "marge_lentille_M2": 349,
    "tenu_M2": false,
-   "p_star_auto": 2068,
-   "marge_lentille_auto": 406,
+   "p_star_auto": 1592,
+   "marge_lentille_auto": 256,
    "tenu_auto": false,
    "contrats": {
     "uneal_2023": {
@@ -3535,21 +3535,21 @@
     },
     "unique": {
      "tenu": false,
-     "verse_eur_ha": 669
+     "verse_eur_ha": 523
     },
     "paliers": {
      "tenu": false,
-     "verse_eur_ha": 669,
+     "verse_eur_ha": 523,
      "paliers": [
-      2123,
+      1661,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": false,
-     "verse_eur_ha": 596,
-     "prime_ha": 312
+     "verse_eur_ha": 532,
+     "prime_ha": 249
     }
    }
   },
@@ -3562,24 +3562,24 @@
    "prix_ble_reel": 337.5,
    "marge_ble": 1207,
    "ic80_rel": [
-    0.02,
-    1.39
+    0.108,
+    1.445
    ],
-   "q50_rel": 0.6,
+   "q50_rel": 0.782,
    "rel_reel": 1.111,
    "p_moyenne": 480,
    "tenu_moyenne": false,
-   "p_star_M0": 1840,
-   "marge_lentille_M0": 2901,
+   "p_star_M0": 1528,
+   "marge_lentille_M0": 2368,
    "tenu_M0": true,
-   "p_star": 2488,
-   "marge_lentille": 4009,
+   "p_star": 1879,
+   "marge_lentille": 2968,
    "tenu": true,
-   "p_star_M2": 1775,
-   "marge_lentille_M2": 2791,
+   "p_star_M2": 2050,
+   "marge_lentille_M2": 3261,
    "tenu_M2": true,
-   "p_star_auto": 1840,
-   "marge_lentille_auto": 2901,
+   "p_star_auto": 1528,
+   "marge_lentille_auto": 2368,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -3596,21 +3596,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 4254
+     "verse_eur_ha": 3213
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 3020,
+     "verse_eur_ha": 2412,
      "paliers": [
-      2488,
+      1879,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 1993,
-     "prime_ha": 454
+     "verse_eur_ha": 1919,
+     "prime_ha": 380
     }
    }
   },
@@ -3623,24 +3623,24 @@
    "prix_ble_reel": 337.5,
    "marge_ble": 2101,
    "ic80_rel": [
-    0.02,
-    1.405
+    0.114,
+    1.446
    ],
-   "q50_rel": 0.622,
+   "q50_rel": 0.764,
    "rel_reel": 1.351,
    "p_moyenne": 702,
    "tenu_moyenne": false,
-   "p_star_M0": 2665,
-   "marge_lentille_M0": 5031,
+   "p_star_M0": 2220,
+   "marge_lentille_M0": 4151,
    "tenu_M0": true,
-   "p_star": 3530,
-   "marge_lentille": 6745,
+   "p_star": 2765,
+   "marge_lentille": 5230,
    "tenu": true,
-   "p_star_M2": 2524,
-   "marge_lentille_M2": 4752,
+   "p_star_M2": 2773,
+   "marge_lentille_M2": 5246,
    "tenu_M2": true,
-   "p_star_auto": 2665,
-   "marge_lentille_auto": 5031,
+   "p_star_auto": 2220,
+   "marge_lentille_auto": 4151,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -3657,21 +3657,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 6991
+     "verse_eur_ha": 5475
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 4266,
+     "verse_eur_ha": 3500,
      "paliers": [
-      3531,
+      2765,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 2506,
-     "prime_ha": 724
+     "verse_eur_ha": 2451,
+     "prime_ha": 669
     }
    }
   },
@@ -3684,24 +3684,24 @@
    "prix_ble_reel": 337.5,
    "marge_ble": 1258,
    "ic80_rel": [
-    0.032,
-    1.314
+    0.159,
+    1.443
    ],
-   "q50_rel": 0.582,
+   "q50_rel": 0.822,
    "rel_reel": 1.314,
    "p_moyenne": 471,
    "tenu_moyenne": false,
-   "p_star_M0": 1791,
-   "marge_lentille_M0": 3462,
+   "p_star_M0": 1497,
+   "marge_lentille_M0": 2854,
    "tenu_M0": true,
-   "p_star": 2389,
-   "marge_lentille": 4701,
+   "p_star": 1767,
+   "marge_lentille": 3412,
    "tenu": true,
-   "p_star_M2": 1690,
-   "marge_lentille_M2": 3252,
+   "p_star_M2": 1796,
+   "marge_lentille_M2": 3472,
    "tenu_M2": true,
-   "p_star_auto": 1791,
-   "marge_lentille_auto": 3462,
+   "p_star_auto": 1497,
+   "marge_lentille_auto": 2854,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -3718,21 +3718,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 4947
+     "verse_eur_ha": 3658
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 3186,
+     "verse_eur_ha": 2562,
      "paliers": [
-      2390,
+      1767,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 2305,
-     "prime_ha": 442
+     "verse_eur_ha": 2223,
+     "prime_ha": 360
     }
    }
   },
@@ -3745,24 +3745,24 @@
    "prix_ble_reel": 337.5,
    "marge_ble": 1426,
    "ic80_rel": [
-    0.03,
-    1.302
+    0.165,
+    1.442
    ],
-   "q50_rel": 0.587,
+   "q50_rel": 0.833,
    "rel_reel": 1.302,
    "p_moyenne": 511,
    "tenu_moyenne": false,
-   "p_star_M0": 1910,
-   "marge_lentille_M0": 3537,
+   "p_star_M0": 1601,
+   "marge_lentille_M0": 2925,
    "tenu_M0": true,
-   "p_star": 2465,
-   "marge_lentille": 4636,
+   "p_star": 1881,
+   "marge_lentille": 3478,
    "tenu": true,
-   "p_star_M2": 1790,
-   "marge_lentille_M2": 3299,
+   "p_star_M2": 1919,
+   "marge_lentille_M2": 3554,
    "tenu_M2": true,
-   "p_star_auto": 1910,
-   "marge_lentille_auto": 3537,
+   "p_star_auto": 1601,
+   "marge_lentille_auto": 2925,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -3779,21 +3779,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 4883
+     "verse_eur_ha": 3724
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 3201,
+     "verse_eur_ha": 2616,
      "paliers": [
-      2466,
+      1881,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 2254,
-     "prime_ha": 472
+     "verse_eur_ha": 2176,
+     "prime_ha": 394
     }
    }
   },
@@ -3806,24 +3806,24 @@
    "prix_ble_reel": 337.5,
    "marge_ble": 1612,
    "ic80_rel": [
-    0.02,
-    1.351
+    0.129,
+    1.445
    ],
-   "q50_rel": 0.578,
+   "q50_rel": 0.808,
    "rel_reel": 1.523,
    "p_moyenne": 640,
    "tenu_moyenne": false,
-   "p_star_M0": 2469,
-   "marge_lentille_M0": 4643,
+   "p_star_M0": 2072,
+   "marge_lentille_M0": 3857,
    "tenu_M0": true,
-   "p_star": 3328,
-   "marge_lentille": 6344,
+   "p_star": 2491,
+   "marge_lentille": 4688,
    "tenu": true,
-   "p_star_M2": 2490,
-   "marge_lentille_M2": 4686,
+   "p_star_M2": 2685,
+   "marge_lentille_M2": 5070,
    "tenu_M2": true,
-   "p_star_auto": 2469,
-   "marge_lentille_auto": 4643,
+   "p_star_auto": 2072,
+   "marge_lentille_auto": 3857,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -3840,21 +3840,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 6589
+     "verse_eur_ha": 4934
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 4063,
+     "verse_eur_ha": 3227,
      "paliers": [
-      3328,
+      2492,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 2369,
-     "prime_ha": 587
+     "verse_eur_ha": 2311,
+     "prime_ha": 529
     }
    }
   },
@@ -3867,24 +3867,24 @@
    "prix_ble_reel": 337.5,
    "marge_ble": 1679,
    "ic80_rel": [
-    0.02,
-    1.408
+    0.091,
+    1.446
    ],
-   "q50_rel": 0.608,
+   "q50_rel": 0.753,
    "rel_reel": 1.236,
    "p_moyenne": 577,
    "tenu_moyenne": false,
-   "p_star_M0": 2101,
-   "marge_lentille_M0": 3537,
+   "p_star_M0": 1758,
+   "marge_lentille_M0": 2920,
    "tenu_M0": true,
-   "p_star": 2767,
-   "marge_lentille": 4736,
+   "p_star": 2174,
+   "marge_lentille": 3668,
    "tenu": true,
-   "p_star_M2": 2009,
-   "marge_lentille_M2": 3371,
+   "p_star_M2": 2212,
+   "marge_lentille_M2": 3736,
    "tenu_M2": true,
-   "p_star_auto": 2101,
-   "marge_lentille_auto": 3537,
+   "p_star_auto": 1758,
+   "marge_lentille_auto": 2920,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -3901,21 +3901,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 4982
+     "verse_eur_ha": 3913
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 3368,
+     "verse_eur_ha": 2774,
      "paliers": [
-      2768,
+      2174,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 2157,
-     "prime_ha": 537
+     "verse_eur_ha": 2104,
+     "prime_ha": 484
     }
    }
   },
@@ -3928,25 +3928,25 @@
    "prix_ble_reel": 337.5,
    "marge_ble": 1258,
    "ic80_rel": [
-    0.02,
-    1.396
+    0.084,
+    1.446
    ],
-   "q50_rel": 0.604,
+   "q50_rel": 0.758,
    "rel_reel": 0.556,
    "p_moyenne": 768,
    "tenu_moyenne": false,
-   "p_star_M0": 2929,
-   "marge_lentille_M0": 1337,
-   "tenu_M0": true,
-   "p_star": 4026,
-   "marge_lentille": 1929,
+   "p_star_M0": 2461,
+   "marge_lentille_M0": 1084,
+   "tenu_M0": false,
+   "p_star": 3030,
+   "marge_lentille": 1391,
    "tenu": true,
-   "p_star_M2": 2829,
-   "marge_lentille_M2": 1283,
+   "p_star_M2": 3589,
+   "marge_lentille_M2": 1693,
    "tenu_M2": true,
-   "p_star_auto": 2929,
-   "marge_lentille_auto": 1337,
-   "tenu_auto": true,
+   "p_star_auto": 2461,
+   "marge_lentille_auto": 1084,
+   "tenu_auto": false,
    "contrats": {
     "uneal_2023": {
      "tenu": false,
@@ -3962,21 +3962,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 2175
+     "verse_eur_ha": 1636
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 2175,
+     "verse_eur_ha": 1636,
      "paliers": [
-      4027,
+      3030,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": false,
-     "verse_eur_ha": 1049,
-     "prime_ha": 563
+     "verse_eur_ha": 1011,
+     "prime_ha": 525
     }
    }
   },
@@ -3989,24 +3989,24 @@
    "prix_ble_reel": 337.5,
    "marge_ble": 2034,
    "ic80_rel": [
-    0.02,
-    1.404
+    0.075,
+    1.446
    ],
-   "q50_rel": 0.595,
+   "q50_rel": 0.744,
    "rel_reel": 0.741,
    "p_moyenne": 520,
    "tenu_moyenne": false,
-   "p_star_M0": 1966,
-   "marge_lentille_M0": 2585,
+   "p_star_M0": 1640,
+   "marge_lentille_M0": 2117,
    "tenu_M0": true,
-   "p_star": 2588,
-   "marge_lentille": 3481,
+   "p_star": 2027,
+   "marge_lentille": 2674,
    "tenu": true,
-   "p_star_M2": 1844,
-   "marge_lentille_M2": 2410,
+   "p_star_M2": 2283,
+   "marge_lentille_M2": 3042,
    "tenu_M2": true,
-   "p_star_auto": 1966,
-   "marge_lentille_auto": 2585,
+   "p_star_auto": 1640,
+   "marge_lentille_auto": 2117,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -4023,21 +4023,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 3727
+     "verse_eur_ha": 2920
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 2918,
+     "verse_eur_ha": 2358,
      "paliers": [
-      2588,
+      2028,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": false,
-     "verse_eur_ha": 1937,
-     "prime_ha": 641
+     "verse_eur_ha": 1849,
+     "prime_ha": 553
     }
    }
   },
@@ -4050,24 +4050,24 @@
    "prix_ble_reel": 337.5,
    "marge_ble": 1534,
    "ic80_rel": [
-    0.042,
-    1.319
+    0.15,
+    1.443
    ],
-   "q50_rel": 0.597,
+   "q50_rel": 0.791,
    "rel_reel": 1.01,
    "p_moyenne": 650,
    "tenu_moyenne": false,
-   "p_star_M0": 2503,
-   "marge_lentille_M0": 3005,
+   "p_star_M0": 2080,
+   "marge_lentille_M0": 2456,
    "tenu_M0": true,
-   "p_star": 3420,
-   "marge_lentille": 4197,
+   "p_star": 2509,
+   "marge_lentille": 3013,
    "tenu": true,
-   "p_star_M2": 2428,
-   "marge_lentille_M2": 2909,
+   "p_star_M2": 2661,
+   "marge_lentille_M2": 3211,
    "tenu_M2": true,
-   "p_star_auto": 2503,
-   "marge_lentille_auto": 3005,
+   "p_star_auto": 2080,
+   "marge_lentille_auto": 2456,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -4084,21 +4084,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 4443
+     "verse_eur_ha": 3258
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 3645,
+     "verse_eur_ha": 2733,
      "paliers": [
-      3421,
+      2509,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": false,
-     "verse_eur_ha": 1755,
-     "prime_ha": 586
+     "verse_eur_ha": 1696,
+     "prime_ha": 527
     }
    }
   },
@@ -4111,24 +4111,24 @@
    "prix_ble_reel": 337.5,
    "marge_ble": 1831,
    "ic80_rel": [
-    0.02,
-    1.4
+    0.097,
+    1.446
    ],
-   "q50_rel": 0.615,
+   "q50_rel": 0.766,
    "rel_reel": 1.096,
    "p_moyenne": 763,
    "tenu_moyenne": false,
-   "p_star_M0": 2879,
-   "marge_lentille_M0": 3497,
+   "p_star_M0": 2409,
+   "marge_lentille_M0": 2886,
    "tenu_M0": true,
-   "p_star": 3854,
-   "marge_lentille": 4764,
+   "p_star": 2860,
+   "marge_lentille": 3472,
    "tenu": true,
-   "p_star_M2": 2752,
-   "marge_lentille_M2": 3332,
+   "p_star_M2": 3123,
+   "marge_lentille_M2": 3813,
    "tenu_M2": true,
-   "p_star_auto": 2879,
-   "marge_lentille_auto": 3497,
+   "p_star_auto": 2409,
+   "marge_lentille_auto": 2886,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -4145,21 +4145,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 5010
+     "verse_eur_ha": 3718
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 4080,
+     "verse_eur_ha": 3086,
      "paliers": [
-      3855,
+      2861,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": false,
-     "verse_eur_ha": 1839,
-     "prime_ha": 669
+     "verse_eur_ha": 1777,
+     "prime_ha": 607
     }
    }
   },
@@ -4172,24 +4172,24 @@
    "prix_ble_reel": 337.5,
    "marge_ble": 1554,
    "ic80_rel": [
-    0.02,
-    1.342
+    0.142,
+    1.444
    ],
-   "q50_rel": 0.587,
+   "q50_rel": 0.807,
    "rel_reel": 0.997,
    "p_moyenne": 617,
    "tenu_moyenne": false,
-   "p_star_M0": 2215,
-   "marge_lentille_M0": 2632,
+   "p_star_M0": 1873,
+   "marge_lentille_M0": 2187,
    "tenu_M0": true,
-   "p_star": 2942,
-   "marge_lentille": 3575,
+   "p_star": 2178,
+   "marge_lentille": 2584,
    "tenu": true,
-   "p_star_M2": 1931,
-   "marge_lentille_M2": 2262,
+   "p_star_M2": 2192,
+   "marge_lentille_M2": 2601,
    "tenu_M2": true,
-   "p_star_auto": 2215,
-   "marge_lentille_auto": 2632,
+   "p_star_auto": 1873,
+   "marge_lentille_auto": 2187,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -4206,21 +4206,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 3821
+     "verse_eur_ha": 2830
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 3166,
+     "verse_eur_ha": 2403,
      "paliers": [
-      2942,
+      2179,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": false,
-     "verse_eur_ha": 1710,
-     "prime_ha": 541
+     "verse_eur_ha": 1637,
+     "prime_ha": 468
     }
    }
   },
@@ -4233,24 +4233,24 @@
    "prix_ble_reel": 337.5,
    "marge_ble": 1089,
    "ic80_rel": [
-    0.057,
-    1.301
+    0.167,
+    1.44
    ],
-   "q50_rel": 0.629,
+   "q50_rel": 0.83,
    "rel_reel": 0.453,
    "p_moyenne": 664,
    "tenu_moyenne": false,
-   "p_star_M0": 2448,
-   "marge_lentille_M0": 1077,
+   "p_star_M0": 2049,
+   "marge_lentille_M0": 862,
    "tenu_M0": false,
-   "p_star": 2950,
-   "marge_lentille": 1348,
-   "tenu": true,
-   "p_star_M2": 2040,
-   "marge_lentille_M2": 856,
+   "p_star": 2320,
+   "marge_lentille": 1008,
+   "tenu": false,
+   "p_star_M2": 2340,
+   "marge_lentille_M2": 1019,
    "tenu_M2": false,
-   "p_star_auto": 2448,
-   "marge_lentille_auto": 1077,
+   "p_star_auto": 2049,
+   "marge_lentille_auto": 862,
    "tenu_auto": false,
    "contrats": {
     "uneal_2023": {
@@ -4266,22 +4266,22 @@
      "verse_eur_ha": 556
     },
     "unique": {
-     "tenu": true,
-     "verse_eur_ha": 1594
+     "tenu": false,
+     "verse_eur_ha": 1253
     },
     "paliers": {
-     "tenu": true,
-     "verse_eur_ha": 1594,
+     "tenu": false,
+     "verse_eur_ha": 1253,
      "paliers": [
-      2951,
+      2321,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": false,
-     "verse_eur_ha": 1031,
-     "prime_ha": 545
+     "verse_eur_ha": 967,
+     "prime_ha": 481
     }
    }
   },
@@ -4294,24 +4294,24 @@
    "prix_ble_reel": 337.5,
    "marge_ble": 1089,
    "ic80_rel": [
-    0.043,
-    1.319
+    0.162,
+    1.441
    ],
-   "q50_rel": 0.642,
+   "q50_rel": 0.821,
    "rel_reel": 0.395,
    "p_moyenne": 564,
    "tenu_moyenne": false,
-   "p_star_M0": 2021,
-   "marge_lentille_M0": 846,
+   "p_star_M0": 1708,
+   "marge_lentille_M0": 677,
    "tenu_M0": false,
-   "p_star": 2626,
-   "marge_lentille": 1173,
-   "tenu": true,
-   "p_star_M2": 1876,
-   "marge_lentille_M2": 768,
+   "p_star": 2007,
+   "marge_lentille": 839,
+   "tenu": false,
+   "p_star_M2": 2049,
+   "marge_lentille_M2": 861,
    "tenu_M2": false,
-   "p_star_auto": 2021,
-   "marge_lentille_auto": 846,
+   "p_star_auto": 1708,
+   "marge_lentille_auto": 677,
    "tenu_auto": false,
    "contrats": {
     "uneal_2023": {
@@ -4327,22 +4327,22 @@
      "verse_eur_ha": 556
     },
     "unique": {
-     "tenu": true,
-     "verse_eur_ha": 1418
+     "tenu": false,
+     "verse_eur_ha": 1084
     },
     "paliers": {
-     "tenu": true,
-     "verse_eur_ha": 1418,
+     "tenu": false,
+     "verse_eur_ha": 1084,
      "paliers": [
-      2626,
+      2007,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": false,
-     "verse_eur_ha": 978,
-     "prime_ha": 492
+     "verse_eur_ha": 903,
+     "prime_ha": 417
     }
    }
   },
@@ -4355,24 +4355,24 @@
    "prix_ble_reel": 337.5,
    "marge_ble": 1190,
    "ic80_rel": [
-    0.026,
-    1.333
+    0.15,
+    1.442
    ],
-   "q50_rel": 0.641,
+   "q50_rel": 0.823,
    "rel_reel": 0.726,
    "p_moyenne": 685,
    "tenu_moyenne": false,
-   "p_star_M0": 2624,
-   "marge_lentille_M0": 1880,
+   "p_star_M0": 2185,
+   "marge_lentille_M0": 1525,
    "tenu_M0": true,
-   "p_star": 3273,
-   "marge_lentille": 2406,
+   "p_star": 2531,
+   "marge_lentille": 1805,
    "tenu": true,
-   "p_star_M2": 2466,
-   "marge_lentille_M2": 1752,
+   "p_star_M2": 2463,
+   "marge_lentille_M2": 1750,
    "tenu_M2": true,
-   "p_star_auto": 2624,
-   "marge_lentille_auto": 1880,
+   "p_star_auto": 2185,
+   "marge_lentille_auto": 1525,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -4389,21 +4389,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 2652
+     "verse_eur_ha": 2051
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 2652,
+     "verse_eur_ha": 2051,
      "paliers": [
-      3274,
+      2532,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": false,
-     "verse_eur_ha": 1277,
-     "prime_ha": 548
+     "verse_eur_ha": 1225,
+     "prime_ha": 496
     }
    }
   },
@@ -4416,24 +4416,24 @@
    "prix_ble_reel": 337.5,
    "marge_ble": 582,
    "ic80_rel": [
-    0.116,
-    1.307
+    0.223,
+    1.44
    ],
-   "q50_rel": 0.693,
+   "q50_rel": 0.818,
    "rel_reel": 0.34,
    "p_moyenne": 474,
    "tenu_moyenne": false,
-   "p_star_M0": 1765,
-   "marge_lentille_M0": 427,
+   "p_star_M0": 1480,
+   "marge_lentille_M0": 318,
    "tenu_M0": false,
-   "p_star": 2222,
-   "marge_lentille": 601,
-   "tenu": true,
-   "p_star_M2": 1592,
-   "marge_lentille_M2": 361,
+   "p_star": 1676,
+   "marge_lentille": 393,
+   "tenu": false,
+   "p_star_M2": 1942,
+   "marge_lentille_M2": 494,
    "tenu_M2": false,
-   "p_star_auto": 1765,
-   "marge_lentille_auto": 427,
+   "p_star_auto": 1480,
+   "marge_lentille_auto": 318,
    "tenu_auto": false,
    "contrats": {
     "uneal_2023": {
@@ -4449,22 +4449,22 @@
      "verse_eur_ha": 392
     },
     "unique": {
-     "tenu": true,
-     "verse_eur_ha": 846
+     "tenu": false,
+     "verse_eur_ha": 638
     },
     "paliers": {
-     "tenu": true,
-     "verse_eur_ha": 846,
+     "tenu": false,
+     "verse_eur_ha": 638,
      "paliers": [
-      2223,
+      1677,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": false,
-     "verse_eur_ha": 642,
-     "prime_ha": 299
+     "verse_eur_ha": 577,
+     "prime_ha": 234
     }
    }
   },
@@ -4477,24 +4477,24 @@
    "prix_ble_reel": 337.5,
    "marge_ble": 718,
    "ic80_rel": [
-    0.039,
-    1.29
+    0.18,
+    1.442
    ],
-   "q50_rel": 0.587,
+   "q50_rel": 0.825,
    "rel_reel": 0.273,
    "p_moyenne": 288,
    "tenu_moyenne": false,
-   "p_star_M0": 1021,
-   "marge_lentille_M0": 53,
+   "p_star_M0": 867,
+   "marge_lentille_M0": 8,
    "tenu_M0": false,
-   "p_star": 1356,
-   "marge_lentille": 150,
+   "p_star": 1005,
+   "marge_lentille": 48,
    "tenu": false,
-   "p_star_M2": 944,
-   "marge_lentille_M2": 30,
+   "p_star_M2": 1051,
+   "marge_lentille_M2": 61,
    "tenu_M2": false,
-   "p_star_auto": 1021,
-   "marge_lentille_auto": 53,
+   "p_star_auto": 867,
+   "marge_lentille_auto": 8,
    "tenu_auto": false,
    "contrats": {
     "uneal_2023": {
@@ -4511,21 +4511,21 @@
     },
     "unique": {
      "tenu": false,
-     "verse_eur_ha": 395
+     "verse_eur_ha": 293
     },
     "paliers": {
      "tenu": false,
-     "verse_eur_ha": 395,
+     "verse_eur_ha": 293,
      "paliers": [
-      1356,
+      1005,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": false,
-     "verse_eur_ha": 361,
-     "prime_ha": 99
+     "verse_eur_ha": 293,
+     "prime_ha": 31
     }
    }
   },
@@ -4538,25 +4538,25 @@
    "prix_ble_reel": 337.5,
    "marge_ble": 819,
    "ic80_rel": [
-    0.039,
-    1.246
+    0.133,
+    1.438
    ],
-   "q50_rel": 0.621,
+   "q50_rel": 0.827,
    "rel_reel": 0.505,
    "p_moyenne": 657,
    "tenu_moyenne": false,
-   "p_star_M0": 2428,
-   "marge_lentille_M0": 848,
-   "tenu_M0": true,
-   "p_star": 3072,
-   "marge_lentille": 1137,
-   "tenu": true,
-   "p_star_M2": 2229,
-   "marge_lentille_M2": 758,
-   "tenu_M2": false,
-   "p_star_auto": 2428,
-   "marge_lentille_auto": 848,
-   "tenu_auto": true,
+   "p_star_M0": 2030,
+   "marge_lentille_M0": 668,
+   "tenu_M0": false,
+   "p_star": 2332,
+   "marge_lentille": 804,
+   "tenu": false,
+   "p_star_M2": 2435,
+   "marge_lentille_M2": 851,
+   "tenu_M2": true,
+   "p_star_auto": 2030,
+   "marge_lentille_auto": 668,
+   "tenu_auto": false,
    "contrats": {
     "uneal_2023": {
      "tenu": false,
@@ -4571,22 +4571,22 @@
      "verse_eur_ha": 464
     },
     "unique": {
-     "tenu": true,
-     "verse_eur_ha": 1382
+     "tenu": false,
+     "verse_eur_ha": 1049
     },
     "paliers": {
-     "tenu": true,
-     "verse_eur_ha": 1382,
+     "tenu": false,
+     "verse_eur_ha": 1049,
      "paliers": [
-      3072,
+      2332,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": false,
-     "verse_eur_ha": 819,
-     "prime_ha": 414
+     "verse_eur_ha": 764,
+     "prime_ha": 359
     }
    }
   },
@@ -4599,24 +4599,24 @@
    "prix_ble_reel": 337.5,
    "marge_ble": 988,
    "ic80_rel": [
-    0.02,
-    1.406
+    0.072,
+    1.443
    ],
-   "q50_rel": 0.698,
+   "q50_rel": 0.773,
    "rel_reel": 0.531,
    "p_moyenne": 758,
    "tenu_moyenne": false,
-   "p_star_M0": 2700,
-   "marge_lentille_M0": 800,
+   "p_star_M0": 2274,
+   "marge_lentille_M0": 635,
    "tenu_M0": false,
-   "p_star": 3585,
-   "marge_lentille": 1142,
-   "tenu": true,
-   "p_star_M2": 2376,
-   "marge_lentille_M2": 674,
+   "p_star": 2870,
+   "marge_lentille": 866,
+   "tenu": false,
+   "p_star_M2": 2807,
+   "marge_lentille_M2": 841,
    "tenu_M2": false,
-   "p_star_auto": 2700,
-   "marge_lentille_auto": 800,
+   "p_star_auto": 2274,
+   "marge_lentille_auto": 635,
    "tenu_auto": false,
    "contrats": {
     "uneal_2023": {
@@ -4632,22 +4632,22 @@
      "verse_eur_ha": 399
     },
     "unique": {
-     "tenu": true,
-     "verse_eur_ha": 1387
+     "tenu": false,
+     "verse_eur_ha": 1111
     },
     "paliers": {
-     "tenu": true,
-     "verse_eur_ha": 1387,
+     "tenu": false,
+     "verse_eur_ha": 1111,
      "paliers": [
-      3585,
+      2870,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": false,
-     "verse_eur_ha": 752,
-     "prime_ha": 404
+     "verse_eur_ha": 735,
+     "prime_ha": 387
     }
    }
   },
@@ -4660,24 +4660,24 @@
    "prix_ble_reel": 337.5,
    "marge_ble": 414,
    "ic80_rel": [
-    0.02,
-    1.411
+    0.081,
+    1.445
    ],
-   "q50_rel": 0.668,
+   "q50_rel": 0.78,
    "rel_reel": 0.599,
    "p_moyenne": 821,
    "tenu_moyenne": false,
-   "p_star_M0": 2952,
-   "marge_lentille_M0": 898,
+   "p_star_M0": 2471,
+   "marge_lentille_M0": 711,
    "tenu_M0": true,
-   "p_star": 3848,
-   "marge_lentille": 1244,
+   "p_star": 3111,
+   "marge_lentille": 959,
    "tenu": true,
-   "p_star_M2": 2713,
-   "marge_lentille_M2": 805,
+   "p_star_M2": 2952,
+   "marge_lentille_M2": 897,
    "tenu_M2": true,
-   "p_star_auto": 2952,
-   "marge_lentille_auto": 898,
+   "p_star_auto": 2471,
+   "marge_lentille_auto": 711,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -4694,21 +4694,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 1489
+     "verse_eur_ha": 1204
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 1489,
+     "verse_eur_ha": 1204,
      "paliers": [
-      3848,
+      3111,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 746,
-     "prime_ha": 398
+     "verse_eur_ha": 731,
+     "prime_ha": 383
     }
    }
   },
@@ -4721,24 +4721,24 @@
    "prix_ble_reel": 242.4,
    "marge_ble": 876,
    "ic80_rel": [
-    0.02,
-    1.533
+    0.056,
+    1.445
    ],
-   "q50_rel": 0.683,
+   "q50_rel": 0.649,
    "rel_reel": 1.101,
    "p_moyenne": 516,
    "tenu_moyenne": false,
-   "p_star_M0": 2399,
-   "marge_lentille_M0": 3857,
+   "p_star_M0": 1870,
+   "marge_lentille_M0": 2953,
    "tenu_M0": true,
-   "p_star": 2878,
-   "marge_lentille": 4676,
+   "p_star": 2399,
+   "marge_lentille": 3857,
    "tenu": true,
-   "p_star_M2": 1798,
-   "marge_lentille_M2": 2829,
+   "p_star_M2": 1461,
+   "marge_lentille_M2": 2254,
    "tenu_M2": true,
-   "p_star_auto": 2399,
-   "marge_lentille_auto": 3857,
+   "p_star_auto": 1870,
+   "marge_lentille_auto": 2953,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -4755,21 +4755,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 4921
+     "verse_eur_ha": 4102
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 3410,
+     "verse_eur_ha": 2932,
      "paliers": [
-      2878,
+      2399,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 2073,
-     "prime_ha": 534
+     "verse_eur_ha": 2043,
+     "prime_ha": 504
     }
    }
   },
@@ -4782,24 +4782,24 @@
    "prix_ble_reel": 242.4,
    "marge_ble": 1263,
    "ic80_rel": [
-    0.033,
-    1.539
+    0.114,
+    1.44
    ],
-   "q50_rel": 0.762,
+   "q50_rel": 0.731,
    "rel_reel": 1.316,
    "p_moyenne": 747,
    "tenu_moyenne": false,
-   "p_star_M0": 3029,
-   "marge_lentille_M0": 5752,
+   "p_star_M0": 2416,
+   "marge_lentille_M0": 4538,
    "tenu_M0": true,
-   "p_star": 3492,
-   "marge_lentille": 6668,
+   "p_star": 2987,
+   "marge_lentille": 5670,
    "tenu": true,
-   "p_star_M2": 2295,
-   "marge_lentille_M2": 4299,
+   "p_star_M2": 1970,
+   "marge_lentille_M2": 3655,
    "tenu_M2": true,
-   "p_star_auto": 3029,
-   "marge_lentille_auto": 5752,
+   "p_star_auto": 2416,
+   "marge_lentille_auto": 4538,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -4816,21 +4816,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 6914
+     "verse_eur_ha": 5916
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 4227,
+     "verse_eur_ha": 3723,
      "paliers": [
-      3492,
+      2988,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 2578,
-     "prime_ha": 796
+     "verse_eur_ha": 2557,
+     "prime_ha": 775
     }
    }
   },
@@ -4843,24 +4843,24 @@
    "prix_ble_reel": 242.4,
    "marge_ble": 948,
    "ic80_rel": [
-    0.02,
-    1.505
+    0.059,
+    1.43
    ],
-   "q50_rel": 0.68,
+   "q50_rel": 0.691,
    "rel_reel": 1.283,
    "p_moyenne": 500,
    "tenu_moyenne": false,
-   "p_star_M0": 2145,
-   "marge_lentille_M0": 4195,
+   "p_star_M0": 1678,
+   "marge_lentille_M0": 3228,
    "tenu_M0": true,
-   "p_star": 2495,
-   "marge_lentille": 4920,
+   "p_star": 2048,
+   "marge_lentille": 3994,
    "tenu": true,
-   "p_star_M2": 1534,
-   "marge_lentille_M2": 2930,
+   "p_star_M2": 1273,
+   "marge_lentille_M2": 2389,
    "tenu_M2": true,
-   "p_star_auto": 2145,
-   "marge_lentille_auto": 4195,
+   "p_star_auto": 1678,
+   "marge_lentille_auto": 3228,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -4877,21 +4877,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 5167
+     "verse_eur_ha": 4241
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 3292,
+     "verse_eur_ha": 2844,
      "paliers": [
-      2496,
+      2049,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 2342,
-     "prime_ha": 479
+     "verse_eur_ha": 2292,
+     "prime_ha": 429
     }
    }
   },
@@ -4904,24 +4904,24 @@
    "prix_ble_reel": 242.4,
    "marge_ble": 1021,
    "ic80_rel": [
-    0.02,
-    1.503
+    0.059,
+    1.43
    ],
-   "q50_rel": 0.68,
+   "q50_rel": 0.691,
    "rel_reel": 1.27,
    "p_moyenne": 544,
    "tenu_moyenne": false,
-   "p_star_M0": 2278,
-   "marge_lentille_M0": 4266,
+   "p_star_M0": 1824,
+   "marge_lentille_M0": 3366,
    "tenu_M0": true,
-   "p_star": 2653,
-   "marge_lentille": 5007,
+   "p_star": 2182,
+   "marge_lentille": 4076,
    "tenu": true,
-   "p_star_M2": 1624,
-   "marge_lentille_M2": 2970,
+   "p_star_M2": 1379,
+   "marge_lentille_M2": 2485,
    "tenu_M2": true,
-   "p_star_auto": 2278,
-   "marge_lentille_auto": 4266,
+   "p_star_auto": 1824,
+   "marge_lentille_auto": 3366,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -4938,21 +4938,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 5253
+     "verse_eur_ha": 4322
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 3388,
+     "verse_eur_ha": 2918,
      "paliers": [
-      2653,
+      2183,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 2313,
-     "prime_ha": 531
+     "verse_eur_ha": 2264,
+     "prime_ha": 482
     }
    }
   },
@@ -4965,24 +4965,24 @@
    "prix_ble_reel": 242.4,
    "marge_ble": 1045,
    "ic80_rel": [
-    0.02,
-    1.478
+    0.084,
+    1.426
    ],
-   "q50_rel": 0.677,
+   "q50_rel": 0.703,
    "rel_reel": 1.464,
    "p_moyenne": 672,
    "tenu_moyenne": true,
-   "p_star_M0": 2916,
-   "marge_lentille_M0": 5529,
+   "p_star_M0": 2336,
+   "marge_lentille_M0": 4381,
    "tenu_M0": true,
-   "p_star": 3499,
-   "marge_lentille": 6682,
+   "p_star": 2836,
+   "marge_lentille": 5370,
    "tenu": true,
-   "p_star_M2": 2229,
-   "marge_lentille_M2": 4168,
+   "p_star_M2": 1870,
+   "marge_lentille_M2": 3457,
    "tenu_M2": true,
-   "p_star_auto": 2916,
-   "marge_lentille_auto": 5529,
+   "p_star_auto": 2336,
+   "marge_lentille_auto": 4381,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -4999,21 +4999,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 6928
+     "verse_eur_ha": 5617
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 4234,
+     "verse_eur_ha": 3572,
      "paliers": [
-      3499,
+      2837,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 2419,
-     "prime_ha": 637
+     "verse_eur_ha": 2378,
+     "prime_ha": 596
     }
    }
   },
@@ -5026,24 +5026,24 @@
    "prix_ble_reel": 242.4,
    "marge_ble": 973,
    "ic80_rel": [
-    0.029,
-    1.518
+    0.112,
+    1.432
    ],
-   "q50_rel": 0.744,
+   "q50_rel": 0.743,
    "rel_reel": 1.214,
    "p_moyenne": 622,
    "tenu_moyenne": false,
-   "p_star_M0": 2754,
-   "marge_lentille_M0": 4711,
+   "p_star_M0": 2178,
+   "marge_lentille_M0": 3675,
    "tenu_M0": true,
-   "p_star": 3263,
-   "marge_lentille": 5629,
+   "p_star": 2764,
+   "marge_lentille": 4731,
    "tenu": true,
-   "p_star_M2": 2240,
-   "marge_lentille_M2": 3787,
+   "p_star_M2": 1735,
+   "marge_lentille_M2": 2877,
    "tenu_M2": true,
-   "p_star_auto": 2754,
-   "marge_lentille_auto": 4711,
+   "p_star_auto": 2178,
+   "marge_lentille_auto": 3675,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -5060,21 +5060,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 5875
+     "verse_eur_ha": 4977
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 3864,
+     "verse_eur_ha": 3365,
      "paliers": [
-      3264,
+      2765,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 2241,
-     "prime_ha": 621
+     "verse_eur_ha": 2213,
+     "prime_ha": 593
     }
    }
   },
@@ -5087,24 +5087,24 @@
    "prix_ble_reel": 242.4,
    "marge_ble": 827,
    "ic80_rel": [
-    0.026,
-    1.527
+    0.105,
+    1.439
    ],
-   "q50_rel": 0.744,
+   "q50_rel": 0.721,
    "rel_reel": 0.863,
    "p_moyenne": 863,
    "tenu_moyenne": false,
-   "p_star_M0": 3710,
-   "marge_lentille_M0": 2760,
+   "p_star_M0": 2969,
+   "marge_lentille_M0": 2160,
    "tenu_M0": true,
-   "p_star": 4351,
-   "marge_lentille": 3279,
+   "p_star": 3762,
+   "marge_lentille": 2802,
    "tenu": true,
-   "p_star_M2": 3005,
-   "marge_lentille_M2": 2189,
+   "p_star_M2": 2481,
+   "marge_lentille_M2": 1765,
    "tenu_M2": true,
-   "p_star_auto": 3710,
-   "marge_lentille_auto": 2760,
+   "p_star_auto": 2969,
+   "marge_lentille_auto": 2160,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -5121,21 +5121,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 3524
+     "verse_eur_ha": 3047
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 3524,
+     "verse_eur_ha": 3047,
      "paliers": [
-      4351,
+      3762,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 1366,
-     "prime_ha": 637
+     "verse_eur_ha": 1355,
+     "prime_ha": 626
     }
    }
   },
@@ -5148,24 +5148,24 @@
    "prix_ble_reel": 242.4,
    "marge_ble": 1215,
    "ic80_rel": [
-    0.026,
-    1.539
+    0.111,
+    1.441
    ],
-   "q50_rel": 0.765,
+   "q50_rel": 0.734,
    "rel_reel": 0.756,
    "p_moyenne": 579,
    "tenu_moyenne": false,
-   "p_star_M0": 2482,
-   "marge_lentille_M0": 3329,
+   "p_star_M0": 1986,
+   "marge_lentille_M0": 2615,
    "tenu_M0": true,
-   "p_star": 2866,
-   "marge_lentille": 3882,
+   "p_star": 2470,
+   "marge_lentille": 3313,
    "tenu": true,
-   "p_star_M2": 1946,
-   "marge_lentille_M2": 2558,
+   "p_star_M2": 1691,
+   "marge_lentille_M2": 2190,
    "tenu_M2": true,
-   "p_star_auto": 2482,
-   "marge_lentille_auto": 3329,
+   "p_star_auto": 1986,
+   "marge_lentille_auto": 2615,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -5182,21 +5182,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 4127
+     "verse_eur_ha": 3558
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 3196,
+     "verse_eur_ha": 2805,
      "paliers": [
-      2866,
+      2475,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 2016,
-     "prime_ha": 720
+     "verse_eur_ha": 1976,
+     "prime_ha": 680
     }
    }
   },
@@ -5209,24 +5209,24 @@
    "prix_ble_reel": 242.4,
    "marge_ble": 1118,
    "ic80_rel": [
-    0.02,
-    1.509
+    0.085,
+    1.431
    ],
-   "q50_rel": 0.708,
+   "q50_rel": 0.713,
    "rel_reel": 0.796,
    "p_moyenne": 707,
    "tenu_moyenne": false,
-   "p_star_M0": 3093,
-   "marge_lentille_M0": 2925,
+   "p_star_M0": 2443,
+   "marge_lentille_M0": 2260,
    "tenu_M0": true,
-   "p_star": 3540,
-   "marge_lentille": 3384,
+   "p_star": 2900,
+   "marge_lentille": 2728,
    "tenu": true,
-   "p_star_M2": 2483,
-   "marge_lentille_M2": 2300,
+   "p_star_M2": 2065,
+   "marge_lentille_M2": 1872,
    "tenu_M2": true,
-   "p_star_auto": 3093,
-   "marge_lentille_auto": 2925,
+   "p_star_auto": 2443,
+   "marge_lentille_auto": 2260,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -5243,21 +5243,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 3630
+     "verse_eur_ha": 2973
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 3560,
+     "verse_eur_ha": 2919,
      "paliers": [
-      3541,
+      2900,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 1598,
-     "prime_ha": 675
+     "verse_eur_ha": 1566,
+     "prime_ha": 643
     }
    }
   },
@@ -5270,24 +5270,24 @@
    "prix_ble_reel": 242.4,
    "marge_ble": 1191,
    "ic80_rel": [
-    0.02,
-    1.546
+    0.074,
+    1.438
    ],
-   "q50_rel": 0.742,
+   "q50_rel": 0.718,
    "rel_reel": 0.843,
    "p_moyenne": 816,
    "tenu_moyenne": false,
-   "p_star_M0": 3448,
-   "marge_lentille_M0": 3284,
+   "p_star_M0": 2762,
+   "marge_lentille_M0": 2582,
    "tenu_M0": true,
-   "p_star": 4073,
-   "marge_lentille": 3923,
+   "p_star": 3371,
+   "marge_lentille": 3204,
    "tenu": true,
-   "p_star_M2": 2659,
-   "marge_lentille_M2": 2476,
+   "p_star_M2": 2319,
+   "marge_lentille_M2": 2128,
    "tenu_M2": true,
-   "p_star_auto": 3448,
-   "marge_lentille_auto": 3284,
+   "p_star_auto": 2762,
+   "marge_lentille_auto": 2582,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -5304,21 +5304,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 4168
+     "verse_eur_ha": 3450
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 4090,
+     "verse_eur_ha": 3388,
      "paliers": [
-      4073,
+      3371,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 1674,
-     "prime_ha": 753
+     "verse_eur_ha": 1649,
+     "prime_ha": 728
     }
    }
   },
@@ -5331,24 +5331,24 @@
    "prix_ble_reel": 242.4,
    "marge_ble": 948,
    "ic80_rel": [
-    0.02,
-    1.544
+    0.069,
+    1.438
    ],
-   "q50_rel": 0.721,
+   "q50_rel": 0.703,
    "rel_reel": 0.788,
    "p_moyenne": 676,
    "tenu_moyenne": false,
-   "p_star_M0": 2698,
-   "marge_lentille_M0": 2523,
+   "p_star_M0": 2179,
+   "marge_lentille_M0": 1991,
    "tenu_M0": true,
-   "p_star": 3042,
-   "marge_lentille": 2876,
+   "p_star": 2500,
+   "marge_lentille": 2320,
    "tenu": true,
-   "p_star_M2": 2021,
-   "marge_lentille_M2": 1829,
+   "p_star_M2": 1662,
+   "marge_lentille_M2": 1460,
    "tenu_M2": true,
-   "p_star_auto": 2698,
-   "marge_lentille_auto": 2523,
+   "p_star_auto": 2179,
+   "marge_lentille_auto": 1991,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -5365,21 +5365,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 3121
+     "verse_eur_ha": 2565
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 3062,
+     "verse_eur_ha": 2520,
      "paliers": [
-      3042,
+      2500,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 1522,
-     "prime_ha": 599
+     "verse_eur_ha": 1477,
+     "prime_ha": 554
     }
    }
   },
@@ -5392,24 +5392,24 @@
    "prix_ble_reel": 242.4,
    "marge_ble": 924,
    "ic80_rel": [
-    0.02,
-    1.513
+    0.069,
+    1.435
    ],
-   "q50_rel": 0.683,
+   "q50_rel": 0.686,
    "rel_reel": 1.341,
    "p_moyenne": 741,
    "tenu_moyenne": false,
-   "p_star_M0": 3123,
-   "marge_lentille_M0": 4532,
+   "p_star_M0": 2496,
+   "marge_lentille_M0": 3574,
    "tenu_M0": true,
-   "p_star": 3399,
-   "marge_lentille": 4955,
+   "p_star": 2815,
+   "marge_lentille": 4062,
    "tenu": true,
-   "p_star_M2": 2186,
-   "marge_lentille_M2": 3100,
+   "p_star_M2": 1918,
+   "marge_lentille_M2": 2690,
    "tenu_M2": true,
-   "p_star_auto": 3123,
-   "marge_lentille_auto": 4532,
+   "p_star_auto": 2496,
+   "marge_lentille_auto": 3574,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -5426,21 +5426,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 5200
+     "verse_eur_ha": 4307
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 3796,
+     "verse_eur_ha": 3212,
      "paliers": [
-      3399,
+      2815,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 1993,
-     "prime_ha": 616
+     "verse_eur_ha": 1958,
+     "prime_ha": 581
     }
    }
   },
@@ -5453,24 +5453,24 @@
    "prix_ble_reel": 242.4,
    "marge_ble": 900,
    "ic80_rel": [
-    0.02,
-    1.51
+    0.068,
+    1.431
    ],
-   "q50_rel": 0.688,
+   "q50_rel": 0.696,
    "rel_reel": 1.379,
    "p_moyenne": 634,
    "tenu_moyenne": false,
-   "p_star_M0": 2802,
-   "marge_lentille_M0": 4798,
+   "p_star_M0": 2249,
+   "marge_lentille_M0": 3803,
    "tenu_M0": true,
-   "p_star": 3242,
-   "marge_lentille": 5590,
+   "p_star": 2677,
+   "marge_lentille": 4573,
    "tenu": true,
-   "p_star_M2": 2124,
-   "marge_lentille_M2": 3578,
+   "p_star_M2": 1850,
+   "marge_lentille_M2": 3086,
    "tenu_M2": true,
-   "p_star_auto": 2802,
-   "marge_lentille_auto": 4798,
+   "p_star_auto": 2249,
+   "marge_lentille_auto": 3803,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -5487,21 +5487,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 5836
+     "verse_eur_ha": 4819
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 3842,
+     "verse_eur_ha": 3277,
      "paliers": [
-      3242,
+      2677,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 2210,
-     "prime_ha": 590
+     "verse_eur_ha": 2177,
+     "prime_ha": 557
     }
    }
   },
@@ -5514,24 +5514,24 @@
    "prix_ble_reel": 242.4,
    "marge_ble": 924,
    "ic80_rel": [
-    0.02,
-    1.503
+    0.057,
+    1.43
    ],
-   "q50_rel": 0.674,
+   "q50_rel": 0.686,
    "rel_reel": 1.656,
    "p_moyenne": 758,
    "tenu_moyenne": true,
-   "p_star_M0": 3361,
-   "marge_lentille_M0": 5804,
+   "p_star_M0": 2649,
+   "marge_lentille_M0": 4523,
    "tenu_M0": true,
-   "p_star": 3876,
-   "marge_lentille": 6732,
+   "p_star": 3233,
+   "marge_lentille": 5574,
    "tenu": true,
-   "p_star_M2": 2466,
-   "marge_lentille_M2": 4194,
+   "p_star_M2": 2036,
+   "marge_lentille_M2": 3419,
    "tenu_M2": true,
-   "p_star_auto": 3361,
-   "marge_lentille_auto": 5804,
+   "p_star_auto": 2649,
+   "marge_lentille_auto": 4523,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -5548,21 +5548,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 6977
+     "verse_eur_ha": 5819
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 4476,
+     "verse_eur_ha": 3833,
      "paliers": [
-      3876,
+      3233,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 2249,
-     "prime_ha": 629
+     "verse_eur_ha": 2219,
+     "prime_ha": 599
     }
    }
   },
@@ -5575,24 +5575,24 @@
    "prix_ble_reel": 242.4,
    "marge_ble": 439,
    "ic80_rel": [
-    0.06,
-    1.471
+    0.115,
+    1.43
    ],
-   "q50_rel": 0.679,
+   "q50_rel": 0.708,
    "rel_reel": 0.538,
    "p_moyenne": 535,
    "tenu_moyenne": false,
-   "p_star_M0": 2326,
-   "marge_lentille_M0": 1084,
+   "p_star_M0": 1871,
+   "marge_lentille_M0": 825,
    "tenu_M0": true,
-   "p_star": 2522,
-   "marge_lentille": 1196,
+   "p_star": 2081,
+   "marge_lentille": 945,
    "tenu": true,
-   "p_star_M2": 1854,
-   "marge_lentille_M2": 814,
+   "p_star_M2": 1604,
+   "marge_lentille_M2": 671,
    "tenu_M2": true,
-   "p_star_auto": 2326,
-   "marge_lentille_auto": 1084,
+   "p_star_auto": 1871,
+   "marge_lentille_auto": 825,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -5609,21 +5609,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 1441
+     "verse_eur_ha": 1190
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 1441,
+     "verse_eur_ha": 1190,
      "paliers": [
-      2522,
+      2082,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 873,
-     "prime_ha": 359
+     "verse_eur_ha": 836,
+     "prime_ha": 322
     }
    }
   },
@@ -5636,24 +5636,24 @@
    "prix_ble_reel": 242.4,
    "marge_ble": 173,
    "ic80_rel": [
-    0.02,
-    1.428
+    0.066,
+    1.422
    ],
-   "q50_rel": 0.601,
+   "q50_rel": 0.657,
    "rel_reel": 0.711,
    "p_moyenne": 362,
    "tenu_moyenne": false,
-   "p_star_M0": 1554,
-   "marge_lentille_M0": 841,
+   "p_star_M0": 1234,
+   "marge_lentille_M0": 617,
    "tenu_M0": true,
-   "p_star": 1847,
-   "marge_lentille": 1045,
+   "p_star": 1481,
+   "marge_lentille": 789,
    "tenu": true,
-   "p_star_M2": 1160,
-   "marge_lentille_M2": 565,
+   "p_star_M2": 982,
+   "marge_lentille_M2": 440,
    "tenu_M2": true,
-   "p_star_auto": 1554,
-   "marge_lentille_auto": 841,
+   "p_star_auto": 1234,
+   "marge_lentille_auto": 617,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -5670,21 +5670,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 1291
+     "verse_eur_ha": 1034
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 1291,
+     "verse_eur_ha": 1034,
      "paliers": [
-      1848,
+      1481,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 792,
-     "prime_ha": 163
+     "verse_eur_ha": 762,
+     "prime_ha": 133
     }
    }
   },
@@ -5697,24 +5697,24 @@
    "prix_ble_reel": 242.4,
    "marge_ble": 609,
    "ic80_rel": [
-    0.043,
-    1.474
+    0.088,
+    1.43
    ],
-   "q50_rel": 0.647,
+   "q50_rel": 0.682,
    "rel_reel": 0.63,
    "p_moyenne": 738,
    "tenu_moyenne": false,
-   "p_star_M0": 3282,
-   "marge_lentille_M0": 1527,
+   "p_star_M0": 2574,
+   "marge_lentille_M0": 1145,
    "tenu_M0": true,
-   "p_star": 3846,
-   "marge_lentille": 1832,
+   "p_star": 3074,
+   "marge_lentille": 1415,
    "tenu": true,
-   "p_star_M2": 2490,
-   "marge_lentille_M2": 1099,
+   "p_star_M2": 2132,
+   "marge_lentille_M2": 906,
    "tenu_M2": true,
-   "p_star_auto": 3282,
-   "marge_lentille_auto": 1527,
+   "p_star_auto": 2574,
+   "marge_lentille_auto": 1145,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -5731,21 +5731,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 2077
+     "verse_eur_ha": 1660
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 2077,
+     "verse_eur_ha": 1660,
      "paliers": [
-      3847,
+      3075,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 965,
-     "prime_ha": 479
+     "verse_eur_ha": 942,
+     "prime_ha": 456
     }
    }
   },
@@ -5758,24 +5758,24 @@
    "prix_ble_reel": 242.4,
    "marge_ble": 439,
    "ic80_rel": [
-    0.02,
-    1.485
+    0.042,
+    1.435
    ],
-   "q50_rel": 0.616,
+   "q50_rel": 0.631,
    "rel_reel": 1.016,
    "p_moyenne": 735,
    "tenu_moyenne": false,
-   "p_star_M0": 3035,
-   "marge_lentille_M0": 1509,
+   "p_star_M0": 2444,
+   "marge_lentille_M0": 1167,
    "tenu_M0": true,
-   "p_star": 3508,
-   "marge_lentille": 1782,
+   "p_star": 3066,
+   "marge_lentille": 1526,
    "tenu": true,
-   "p_star_M2": 2142,
-   "marge_lentille_M2": 993,
+   "p_star_M2": 1856,
+   "marge_lentille_M2": 827,
    "tenu_M2": true,
-   "p_star_auto": 3035,
-   "marge_lentille_auto": 1509,
+   "p_star_auto": 2444,
+   "marge_lentille_auto": 1167,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -5792,21 +5792,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 2028
+     "verse_eur_ha": 1772
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 2028,
+     "verse_eur_ha": 1772,
      "paliers": [
-      3509,
+      3066,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 831,
-     "prime_ha": 311
+     "verse_eur_ha": 822,
+     "prime_ha": 302
     }
    }
   },
@@ -5819,24 +5819,24 @@
    "prix_ble_reel": 242.4,
    "marge_ble": 609,
    "ic80_rel": [
-    0.035,
-    1.516
+    0.078,
+    1.438
    ],
-   "q50_rel": 0.676,
+   "q50_rel": 0.678,
    "rel_reel": 0.615,
    "p_moyenne": 865,
    "tenu_moyenne": false,
-   "p_star_M0": 3595,
-   "marge_lentille_M0": 1308,
+   "p_star_M0": 2913,
+   "marge_lentille_M0": 1013,
    "tenu_M0": true,
-   "p_star": 4217,
-   "marge_lentille": 1577,
+   "p_star": 3722,
+   "marge_lentille": 1363,
    "tenu": true,
-   "p_star_M2": 2825,
-   "marge_lentille_M2": 975,
+   "p_star_M2": 2339,
+   "marge_lentille_M2": 766,
    "tenu_M2": true,
-   "p_star_auto": 3595,
-   "marge_lentille_auto": 1308,
+   "p_star_auto": 2913,
+   "marge_lentille_auto": 1013,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -5853,21 +5853,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 1822
+     "verse_eur_ha": 1608
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 1822,
+     "verse_eur_ha": 1608,
      "paliers": [
-      4218,
+      3723,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 878,
-     "prime_ha": 489
+     "verse_eur_ha": 873,
+     "prime_ha": 484
     }
    }
   },
@@ -5880,24 +5880,24 @@
    "prix_ble_reel": 242.4,
    "marge_ble": 609,
    "ic80_rel": [
-    0.02,
-    1.5
+    0.054,
+    1.435
    ],
-   "q50_rel": 0.641,
+   "q50_rel": 0.657,
    "rel_reel": 0.69,
    "p_moyenne": 894,
    "tenu_moyenne": false,
-   "p_star_M0": 3708,
-   "marge_lentille_M0": 1357,
+   "p_star_M0": 2957,
+   "marge_lentille_M0": 1033,
    "tenu_M0": true,
-   "p_star": 4283,
-   "marge_lentille": 1605,
+   "p_star": 3867,
+   "marge_lentille": 1426,
    "tenu": true,
-   "p_star_M2": 2850,
-   "marge_lentille_M2": 986,
+   "p_star_M2": 2457,
+   "marge_lentille_M2": 816,
    "tenu_M2": true,
-   "p_star_auto": 3708,
-   "marge_lentille_auto": 1357,
+   "p_star_auto": 2957,
+   "marge_lentille_auto": 1033,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -5914,21 +5914,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 1850
+     "verse_eur_ha": 1671
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 1850,
+     "verse_eur_ha": 1671,
      "paliers": [
-      4283,
+      3868,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": false,
-     "verse_eur_ha": 841,
-     "prime_ha": 452
+     "verse_eur_ha": 835,
+     "prime_ha": 446
     }
    }
   },
@@ -5941,24 +5941,24 @@
    "prix_ble_reel": 215.6,
    "marge_ble": 507,
    "ic80_rel": [
-    0.148,
-    1.455
+    0.312,
+    1.331
    ],
-   "q50_rel": 0.693,
+   "q50_rel": 0.735,
    "rel_reel": 1.036,
    "p_moyenne": 526,
    "tenu_moyenne": true,
-   "p_star_M0": 2547,
-   "marge_lentille_M0": 3882,
+   "p_star_M0": 1739,
+   "marge_lentille_M0": 2573,
    "tenu_M0": true,
-   "p_star": 2328,
-   "marge_lentille": 3526,
+   "p_star": 1467,
+   "marge_lentille": 2132,
    "tenu": true,
-   "p_star_M2": 1053,
-   "marge_lentille_M2": 1461,
+   "p_star_M2": 965,
+   "marge_lentille_M2": 1319,
    "tenu_M2": true,
-   "p_star_auto": 1053,
-   "marge_lentille_auto": 1461,
+   "p_star_auto": 965,
+   "marge_lentille_auto": 1319,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -5975,21 +5975,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 3771
+     "verse_eur_ha": 2378
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 2793,
+     "verse_eur_ha": 1946,
      "paliers": [
-      2328,
+      1481,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 1936,
-     "prime_ha": 478
+     "verse_eur_ha": 1779,
+     "prime_ha": 321
     }
    }
   },
@@ -6002,24 +6002,24 @@
    "prix_ble_reel": 215.6,
    "marge_ble": 766,
    "ic80_rel": [
-    0.129,
-    1.452
+    0.293,
+    1.339
    ],
-   "q50_rel": 0.686,
+   "q50_rel": 0.746,
    "rel_reel": 1.17,
    "p_moyenne": 748,
    "tenu_moyenne": true,
-   "p_star_M0": 3666,
-   "marge_lentille_M0": 6354,
+   "p_star_M0": 2478,
+   "marge_lentille_M0": 4216,
    "tenu_M0": true,
-   "p_star": 3169,
-   "marge_lentille": 5459,
+   "p_star": 2059,
+   "marge_lentille": 3462,
    "tenu": true,
-   "p_star_M2": 1424,
-   "marge_lentille_M2": 2318,
+   "p_star_M2": 1319,
+   "marge_lentille_M2": 2129,
    "tenu_M2": true,
-   "p_star_auto": 1424,
-   "marge_lentille_auto": 2318,
+   "p_star_auto": 1319,
+   "marge_lentille_auto": 2129,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -6036,21 +6036,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 5704
+     "verse_eur_ha": 3708
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 3769,
+     "verse_eur_ha": 2699,
      "paliers": [
-      3169,
+      2099,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 2422,
-     "prime_ha": 802
+     "verse_eur_ha": 2285,
+     "prime_ha": 665
     }
    }
   },
@@ -6063,24 +6063,24 @@
    "prix_ble_reel": 215.6,
    "marge_ble": 486,
    "ic80_rel": [
-    0.079,
-    1.464
+    0.236,
+    1.337
    ],
-   "q50_rel": 0.662,
+   "q50_rel": 0.711,
    "rel_reel": 1.203,
    "p_moyenne": 506,
    "tenu_moyenne": true,
-   "p_star_M0": 2450,
-   "marge_lentille_M0": 4607,
+   "p_star_M0": 1642,
+   "marge_lentille_M0": 3006,
    "tenu_M0": true,
-   "p_star": 2256,
-   "marge_lentille": 4221,
+   "p_star": 1374,
+   "marge_lentille": 2476,
    "tenu": true,
-   "p_star_M2": 986,
-   "marge_lentille_M2": 1707,
+   "p_star_M2": 886,
+   "marge_lentille_M2": 1510,
    "tenu_M2": true,
-   "p_star_auto": 986,
-   "marge_lentille_auto": 1707,
+   "p_star_auto": 886,
+   "marge_lentille_auto": 1510,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -6097,21 +6097,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 4467
+     "verse_eur_ha": 2723
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 2991,
+     "verse_eur_ha": 2132,
      "paliers": [
-      2256,
+      1397,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 2247,
-     "prime_ha": 465
+     "verse_eur_ha": 2065,
+     "prime_ha": 283
     }
    }
   },
@@ -6124,24 +6124,24 @@
    "prix_ble_reel": 215.6,
    "marge_ble": 529,
    "ic80_rel": [
-    0.046,
-    1.47
+    0.203,
+    1.345
    ],
-   "q50_rel": 0.663,
+   "q50_rel": 0.711,
    "rel_reel": 1.131,
    "p_moyenne": 550,
    "tenu_moyenne": true,
-   "p_star_M0": 2741,
-   "marge_lentille_M0": 4688,
+   "p_star_M0": 1819,
+   "marge_lentille_M0": 3029,
    "tenu_M0": true,
-   "p_star": 2446,
-   "marge_lentille": 4158,
+   "p_star": 1533,
+   "marge_lentille": 2514,
    "tenu": true,
-   "p_star_M2": 1103,
-   "marge_lentille_M2": 1740,
+   "p_star_M2": 988,
+   "marge_lentille_M2": 1533,
    "tenu_M2": true,
-   "p_star_auto": 1103,
-   "marge_lentille_auto": 1740,
+   "p_star_auto": 988,
+   "marge_lentille_auto": 1533,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -6158,21 +6158,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 4403
+     "verse_eur_ha": 2759
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 3046,
+     "verse_eur_ha": 2167,
      "paliers": [
-      2446,
+      1567,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 2158,
-     "prime_ha": 538
+     "verse_eur_ha": 1994,
+     "prime_ha": 374
     }
    }
   },
@@ -6185,24 +6185,24 @@
    "prix_ble_reel": 215.6,
    "marge_ble": 615,
    "ic80_rel": [
-    0.109,
-    1.463
+    0.266,
+    1.334
    ],
-   "q50_rel": 0.672,
+   "q50_rel": 0.715,
    "rel_reel": 1.224,
    "p_moyenne": 669,
    "tenu_moyenne": true,
-   "p_star_M0": 3287,
-   "marge_lentille_M0": 5376,
+   "p_star_M0": 2237,
+   "marge_lentille_M0": 3579,
    "tenu_M0": true,
-   "p_star": 2981,
-   "marge_lentille": 4852,
+   "p_star": 1858,
+   "marge_lentille": 2932,
    "tenu": true,
-   "p_star_M2": 1361,
-   "marge_lentille_M2": 2083,
+   "p_star_M2": 1191,
+   "marge_lentille_M2": 1791,
    "tenu_M2": true,
-   "p_star_auto": 1361,
-   "marge_lentille_auto": 2083,
+   "p_star_auto": 1191,
+   "marge_lentille_auto": 1791,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -6219,21 +6219,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 5098
+     "verse_eur_ha": 3177
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 3514,
+     "verse_eur_ha": 2414,
      "paliers": [
-      2981,
+      1882,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 2169,
-     "prime_ha": 630
+     "verse_eur_ha": 2032,
+     "prime_ha": 493
     }
    }
   },
@@ -6246,24 +6246,24 @@
    "prix_ble_reel": 215.6,
    "marge_ble": 658,
    "ic80_rel": [
-    0.165,
-    1.45
+    0.33,
+    1.329
    ],
-   "q50_rel": 0.695,
+   "q50_rel": 0.744,
    "rel_reel": 1.255,
    "p_moyenne": 626,
    "tenu_moyenne": true,
-   "p_star_M0": 2979,
-   "marge_lentille_M0": 5385,
+   "p_star_M0": 2068,
+   "marge_lentille_M0": 3664,
    "tenu_M0": true,
-   "p_star": 2672,
-   "marge_lentille": 4805,
+   "p_star": 1758,
+   "marge_lentille": 3078,
    "tenu": true,
-   "p_star_M2": 1275,
-   "marge_lentille_M2": 2165,
+   "p_star_M2": 1131,
+   "marge_lentille_M2": 1893,
    "tenu_M2": true,
-   "p_star_auto": 1275,
-   "marge_lentille_auto": 2165,
+   "p_star_auto": 1131,
+   "marge_lentille_auto": 1893,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -6280,21 +6280,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 5050
+     "verse_eur_ha": 3323
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 3340,
+     "verse_eur_ha": 2448,
      "paliers": [
-      2672,
+      1781,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 2320,
-     "prime_ha": 619
+     "verse_eur_ha": 2180,
+     "prime_ha": 479
     }
    }
   },
@@ -6307,24 +6307,24 @@
    "prix_ble_reel": 215.6,
    "marge_ble": 443,
    "ic80_rel": [
-    0.126,
-    1.46
+    0.29,
+    1.34
    ],
-   "q50_rel": 0.698,
+   "q50_rel": 0.748,
    "rel_reel": 1.453,
    "p_moyenne": 891,
    "tenu_moyenne": true,
-   "p_star_M0": 4373,
-   "marge_lentille_M0": 5658,
+   "p_star_M0": 2941,
+   "marge_lentille_M0": 3725,
    "tenu_M0": true,
-   "p_star": 3890,
-   "marge_lentille": 5006,
+   "p_star": 2538,
+   "marge_lentille": 3182,
    "tenu": true,
-   "p_star_M2": 1788,
-   "marge_lentille_M2": 2169,
+   "p_star_M2": 1664,
+   "marge_lentille_M2": 2002,
    "tenu_M2": true,
-   "p_star_auto": 1788,
-   "marge_lentille_auto": 2169,
+   "p_star_auto": 1664,
+   "marge_lentille_auto": 2002,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -6341,21 +6341,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 5252
+     "verse_eur_ha": 3428
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 4152,
+     "verse_eur_ha": 2802,
      "paliers": [
-      3890,
+      2539,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 1860,
-     "prime_ha": 645
+     "verse_eur_ha": 1786,
+     "prime_ha": 571
     }
    }
   },
@@ -6368,24 +6368,24 @@
    "prix_ble_reel": 215.6,
    "marge_ble": 658,
    "ic80_rel": [
-    0.162,
-    1.468
+    0.326,
+    1.34
    ],
-   "q50_rel": 0.729,
+   "q50_rel": 0.765,
    "rel_reel": 1.058,
    "p_moyenne": 603,
    "tenu_moyenne": true,
-   "p_star_M0": 2814,
-   "marge_lentille_M0": 5328,
+   "p_star_M0": 1971,
+   "marge_lentille_M0": 3658,
    "tenu_M0": true,
-   "p_star": 2587,
-   "marge_lentille": 4878,
+   "p_star": 1714,
+   "marge_lentille": 3149,
    "tenu": true,
-   "p_star_M2": 1225,
-   "marge_lentille_M2": 2180,
+   "p_star_M2": 1100,
+   "marge_lentille_M2": 1933,
    "tenu_M2": true,
-   "p_star_auto": 1225,
-   "marge_lentille_auto": 2180,
+   "p_star_auto": 1100,
+   "marge_lentille_auto": 1933,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -6402,21 +6402,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 5124
+     "verse_eur_ha": 3396
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 3323,
+     "verse_eur_ha": 2479,
      "paliers": [
-      2588,
+      1744,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 2488,
-     "prime_ha": 706
+     "verse_eur_ha": 2312,
+     "prime_ha": 530
     }
    }
   },
@@ -6429,24 +6429,24 @@
    "prix_ble_reel": 215.6,
    "marge_ble": 507,
    "ic80_rel": [
-    0.077,
-    1.452
+    0.238,
+    1.335
    ],
-   "q50_rel": 0.65,
+   "q50_rel": 0.711,
    "rel_reel": 1.656,
    "p_moyenne": 752,
    "tenu_moyenne": true,
-   "p_star_M0": 3624,
-   "marge_lentille_M0": 7257,
+   "p_star_M0": 2495,
+   "marge_lentille_M0": 4920,
    "tenu_M0": true,
-   "p_star": 3263,
-   "marge_lentille": 6509,
+   "p_star": 2062,
+   "marge_lentille": 4024,
    "tenu": true,
-   "p_star_M2": 1526,
-   "marge_lentille_M2": 2915,
+   "p_star_M2": 1389,
+   "marge_lentille_M2": 2629,
    "tenu_M2": true,
-   "p_star_auto": 1526,
-   "marge_lentille_auto": 2915,
+   "p_star_auto": 1389,
+   "marge_lentille_auto": 2629,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -6463,21 +6463,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 6754
+     "verse_eur_ha": 4270
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 4058,
+     "verse_eur_ha": 2878,
      "paliers": [
-      3263,
+      2082,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 2544,
-     "prime_ha": 681
+     "verse_eur_ha": 2432,
+     "prime_ha": 569
     }
    }
   },
@@ -6490,24 +6490,24 @@
    "prix_ble_reel": 215.6,
    "marge_ble": 594,
    "ic80_rel": [
-    0.081,
-    1.454
+    0.242,
+    1.335
    ],
-   "q50_rel": 0.658,
+   "q50_rel": 0.714,
    "rel_reel": 1.751,
    "p_moyenne": 868,
    "tenu_moyenne": true,
-   "p_star_M0": 4046,
-   "marge_lentille_M0": 8086,
+   "p_star_M0": 2831,
+   "marge_lentille_M0": 5584,
    "tenu_M0": true,
-   "p_star": 3664,
-   "marge_lentille": 7300,
+   "p_star": 2391,
+   "marge_lentille": 4678,
    "tenu": true,
-   "p_star_M2": 1723,
-   "marge_lentille_M2": 3302,
+   "p_star_M2": 1592,
+   "marge_lentille_M2": 3034,
    "tenu_M2": true,
-   "p_star_auto": 1723,
-   "marge_lentille_auto": 3302,
+   "p_star_auto": 1592,
+   "marge_lentille_auto": 3034,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -6524,21 +6524,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 7547
+     "verse_eur_ha": 4924
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 4453,
+     "verse_eur_ha": 3181,
      "paliers": [
-      3665,
+      2393,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 2621,
-     "prime_ha": 768
+     "verse_eur_ha": 2512,
+     "prime_ha": 659
     }
    }
   },
@@ -6551,24 +6551,24 @@
    "prix_ble_reel": 215.6,
    "marge_ble": 335,
    "ic80_rel": [
-    0.096,
-    1.45
+    0.257,
+    1.328
    ],
-   "q50_rel": 0.653,
+   "q50_rel": 0.701,
    "rel_reel": 1.613,
    "p_moyenne": 703,
    "tenu_moyenne": true,
-   "p_star_M0": 3627,
-   "marge_lentille_M0": 7263,
+   "p_star_M0": 2424,
+   "marge_lentille_M0": 4773,
    "tenu_M0": true,
-   "p_star": 3074,
-   "marge_lentille": 6119,
+   "p_star": 1893,
+   "marge_lentille": 3673,
    "tenu": true,
-   "p_star_M2": 1386,
-   "marge_lentille_M2": 2625,
+   "p_star_M2": 1248,
+   "marge_lentille_M2": 2339,
    "tenu_M2": true,
-   "p_star_auto": 1386,
-   "marge_lentille_auto": 2625,
+   "p_star_auto": 1248,
+   "marge_lentille_auto": 2339,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -6585,21 +6585,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 6365
+     "verse_eur_ha": 3919
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 3870,
+     "verse_eur_ha": 2698,
      "paliers": [
-      3075,
+      1903,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 2479,
-     "prime_ha": 616
+     "verse_eur_ha": 2347,
+     "prime_ha": 484
     }
    }
   },
@@ -6612,24 +6612,24 @@
    "prix_ble_reel": 215.6,
    "marge_ble": 572,
    "ic80_rel": [
-    0.08,
-    1.458
+    0.236,
+    1.332
    ],
-   "q50_rel": 0.649,
+   "q50_rel": 0.696,
    "rel_reel": 1.617,
    "p_moyenne": 743,
    "tenu_moyenne": true,
-   "p_star_M0": 3721,
-   "marge_lentille_M0": 6787,
+   "p_star_M0": 2533,
+   "marge_lentille_M0": 4542,
    "tenu_M0": true,
-   "p_star": 3223,
-   "marge_lentille": 5847,
+   "p_star": 2044,
+   "marge_lentille": 3618,
    "tenu": true,
-   "p_star_M2": 1495,
-   "marge_lentille_M2": 2581,
+   "p_star_M2": 1398,
+   "marge_lentille_M2": 2398,
    "tenu_M2": true,
-   "p_star_auto": 1495,
-   "marge_lentille_auto": 2581,
+   "p_star_auto": 1398,
+   "marge_lentille_auto": 2398,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -6646,21 +6646,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 6093
+     "verse_eur_ha": 3863
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 3892,
+     "verse_eur_ha": 2714,
      "paliers": [
-      3224,
+      2047,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 2328,
-     "prime_ha": 627
+     "verse_eur_ha": 2213,
+     "prime_ha": 512
     }
    }
   },
@@ -6673,24 +6673,24 @@
    "prix_ble_reel": 215.6,
    "marge_ble": 486,
    "ic80_rel": [
-    0.057,
-    1.457
+    0.214,
+    1.336
    ],
-   "q50_rel": 0.64,
+   "q50_rel": 0.698,
    "rel_reel": 1.41,
    "p_moyenne": 633,
    "tenu_moyenne": true,
-   "p_star_M0": 3300,
-   "marge_lentille_M0": 5991,
+   "p_star_M0": 2164,
+   "marge_lentille_M0": 3844,
    "tenu_M0": true,
-   "p_star": 2921,
-   "marge_lentille": 5276,
+   "p_star": 1789,
+   "marge_lentille": 3136,
    "tenu": true,
-   "p_star_M2": 1250,
-   "marge_lentille_M2": 2118,
+   "p_star_M2": 1161,
+   "marge_lentille_M2": 1949,
    "tenu_M2": true,
-   "p_star_auto": 1250,
-   "marge_lentille_auto": 2118,
+   "p_star_auto": 1161,
+   "marge_lentille_auto": 1949,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -6707,21 +6707,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 5523
+     "verse_eur_ha": 3381
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 3590,
+     "verse_eur_ha": 2470,
      "paliers": [
-      2922,
+      1803,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 2276,
-     "prime_ha": 575
+     "verse_eur_ha": 2139,
+     "prime_ha": 438
     }
    }
   },
@@ -6734,24 +6734,24 @@
    "prix_ble_reel": 215.6,
    "marge_ble": 507,
    "ic80_rel": [
-    0.039,
-    1.46
+    0.194,
+    1.338
    ],
-   "q50_rel": 0.633,
+   "q50_rel": 0.692,
    "rel_reel": 1.57,
    "p_moyenne": 739,
    "tenu_moyenne": true,
-   "p_star_M0": 3597,
-   "marge_lentille_M0": 6229,
+   "p_star_M0": 2415,
+   "marge_lentille_M0": 4101,
    "tenu_M0": true,
-   "p_star": 3309,
-   "marge_lentille": 5712,
+   "p_star": 2059,
+   "marge_lentille": 3461,
    "tenu": true,
-   "p_star_M2": 1447,
-   "marge_lentille_M2": 2360,
+   "p_star_M2": 1345,
+   "marge_lentille_M2": 2175,
    "tenu_M2": true,
-   "p_star_auto": 1447,
-   "marge_lentille_auto": 2360,
+   "p_star_auto": 1345,
+   "marge_lentille_auto": 2175,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -6768,21 +6768,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 5958
+     "verse_eur_ha": 3706
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 3910,
+     "verse_eur_ha": 2661,
      "paliers": [
-      3310,
+      2061,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 2232,
-     "prime_ha": 612
+     "verse_eur_ha": 2122,
+     "prime_ha": 502
     }
    }
   },
@@ -6795,24 +6795,24 @@
    "prix_ble_reel": 215.6,
    "marge_ble": 335,
    "ic80_rel": [
-    0.106,
-    1.434
+    0.274,
+    1.325
    ],
-   "q50_rel": 0.648,
+   "q50_rel": 0.712,
    "rel_reel": 0.788,
    "p_moyenne": 562,
    "tenu_moyenne": false,
-   "p_star_M0": 2687,
-   "marge_lentille_M0": 1932,
+   "p_star_M0": 1850,
+   "marge_lentille_M0": 1253,
    "tenu_M0": true,
-   "p_star": 2319,
-   "marge_lentille": 1633,
+   "p_star": 1480,
+   "marge_lentille": 954,
    "tenu": true,
-   "p_star_M2": 1136,
-   "marge_lentille_M2": 675,
+   "p_star_M2": 1035,
+   "marge_lentille_M2": 593,
    "tenu_M2": true,
-   "p_star_auto": 1136,
-   "marge_lentille_auto": 675,
+   "p_star_auto": 1035,
+   "marge_lentille_auto": 593,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -6829,21 +6829,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 1878
+     "verse_eur_ha": 1200
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 1878,
+     "verse_eur_ha": 1201,
      "paliers": [
-      2319,
+      1483,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 1080,
-     "prime_ha": 351
+     "verse_eur_ha": 970,
+     "prime_ha": 241
     }
    }
   },
@@ -6856,24 +6856,24 @@
    "prix_ble_reel": 215.6,
    "marge_ble": 356,
    "ic80_rel": [
-    0.035,
-    1.459
+    0.199,
+    1.347
    ],
-   "q50_rel": 0.666,
+   "q50_rel": 0.718,
    "rel_reel": 0.66,
    "p_moyenne": 379,
    "tenu_moyenne": false,
-   "p_star_M0": 1743,
-   "marge_lentille_M0": 853,
+   "p_star_M0": 1217,
+   "marge_lentille_M0": 522,
    "tenu_M0": true,
-   "p_star": 1684,
-   "marge_lentille": 816,
+   "p_star": 1037,
+   "marge_lentille": 408,
    "tenu": true,
-   "p_star_M2": 799,
-   "marge_lentille_M2": 258,
+   "p_star_M2": 731,
+   "marge_lentille_M2": 216,
    "tenu_M2": false,
-   "p_star_auto": 799,
-   "marge_lentille_auto": 258,
+   "p_star_auto": 731,
+   "marge_lentille_auto": 216,
    "tenu_auto": false,
    "contrats": {
     "uneal_2023": {
@@ -6890,21 +6890,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 1061
+     "verse_eur_ha": 654
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 1061,
+     "verse_eur_ha": 654,
      "paliers": [
-      1684,
+      1038,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 721,
-     "prime_ha": 154
+     "verse_eur_ha": 616,
+     "prime_ha": 49
     }
    }
   },
@@ -6917,24 +6917,24 @@
    "prix_ble_reel": 215.6,
    "marge_ble": 313,
    "ic80_rel": [
-    0.02,
-    1.433
+    0.174,
+    1.333
    ],
-   "q50_rel": 0.588,
+   "q50_rel": 0.679,
    "rel_reel": 1.078,
    "p_moyenne": 777,
    "tenu_moyenne": true,
-   "p_star_M0": 3848,
-   "marge_lentille_M0": 3218,
+   "p_star_M0": 2600,
+   "marge_lentille_M0": 2095,
    "tenu_M0": true,
-   "p_star": 3482,
-   "marge_lentille": 2888,
+   "p_star": 2171,
+   "marge_lentille": 1709,
    "tenu": true,
-   "p_star_M2": 1666,
-   "marge_lentille_M2": 1255,
+   "p_star_M2": 1520,
+   "marge_lentille_M2": 1123,
    "tenu_M2": true,
-   "p_star_auto": 1666,
-   "marge_lentille_auto": 1255,
+   "p_star_auto": 1520,
+   "marge_lentille_auto": 1123,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -6951,21 +6951,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 3134
+     "verse_eur_ha": 1954
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 3134,
+     "verse_eur_ha": 1954,
      "paliers": [
-      3482,
+      2171,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 1297,
-     "prime_ha": 487
+     "verse_eur_ha": 1210,
+     "prime_ha": 400
     }
    }
   },
@@ -6978,24 +6978,24 @@
    "prix_ble_reel": 215.6,
    "marge_ble": 119,
    "ic80_rel": [
-    0.101,
-    1.448
+    0.269,
+    1.339
    ],
-   "q50_rel": 0.675,
+   "q50_rel": 0.755,
    "rel_reel": 1.261,
    "p_moyenne": 764,
    "tenu_moyenne": true,
-   "p_star_M0": 3454,
-   "marge_lentille_M0": 2242,
+   "p_star_M0": 2464,
+   "marge_lentille_M0": 1529,
    "tenu_M0": true,
-   "p_star": 3237,
-   "marge_lentille": 2086,
+   "p_star": 2228,
+   "marge_lentille": 1359,
    "tenu": true,
-   "p_star_M2": 1582,
-   "marge_lentille_M2": 894,
+   "p_star_M2": 1415,
+   "marge_lentille_M2": 774,
    "tenu_M2": true,
-   "p_star_auto": 1582,
-   "marge_lentille_auto": 894,
+   "p_star_auto": 1415,
+   "marge_lentille_auto": 774,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -7012,21 +7012,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 2331
+     "verse_eur_ha": 1605
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 2331,
+     "verse_eur_ha": 1605,
      "paliers": [
-      3238,
+      2229,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 985,
-     "prime_ha": 337
+     "verse_eur_ha": 946,
+     "prime_ha": 298
     }
    }
   },
@@ -7039,24 +7039,24 @@
    "prix_ble_reel": 215.6,
    "marge_ble": 249,
    "ic80_rel": [
-    0.115,
-    1.444
+    0.259,
+    1.301
    ],
-   "q50_rel": 0.611,
+   "q50_rel": 0.577,
    "rel_reel": 1.712,
    "p_moyenne": 915,
    "tenu_moyenne": true,
-   "p_star_M0": 4397,
-   "marge_lentille_M0": 4900,
+   "p_star_M0": 2972,
+   "marge_lentille_M0": 3232,
    "tenu_M0": true,
-   "p_star": 4033,
-   "marge_lentille": 4473,
+   "p_star": 2700,
+   "marge_lentille": 2914,
    "tenu": true,
-   "p_star_M2": 1947,
-   "marge_lentille_M2": 2033,
+   "p_star_M2": 1772,
+   "marge_lentille_M2": 1829,
    "tenu_M2": true,
-   "p_star_auto": 1947,
-   "marge_lentille_auto": 2033,
+   "p_star_auto": 1772,
+   "marge_lentille_auto": 1829,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -7073,21 +7073,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 4719
+     "verse_eur_ha": 3160
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 4160,
+     "verse_eur_ha": 2828,
      "paliers": [
-      4033,
+      2701,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 1561,
-     "prime_ha": 508
+     "verse_eur_ha": 1517,
+     "prime_ha": 464
     }
    }
   },
@@ -7100,24 +7100,24 @@
    "prix_ble_reel": 215.6,
    "marge_ble": 378,
    "ic80_rel": [
-    0.128,
-    1.443
+    0.28,
+    1.312
    ],
-   "q50_rel": 0.64,
+   "q50_rel": 0.635,
    "rel_reel": 0.971,
    "p_moyenne": 947,
    "tenu_moyenne": false,
-   "p_star_M0": 4849,
-   "marge_lentille_M0": 2635,
+   "p_star_M0": 3214,
+   "marge_lentille_M0": 1664,
    "tenu_M0": true,
-   "p_star": 4395,
-   "marge_lentille": 2366,
+   "p_star": 2848,
+   "marge_lentille": 1447,
    "tenu": true,
-   "p_star_M2": 1954,
-   "marge_lentille_M2": 915,
+   "p_star_M2": 1809,
+   "marge_lentille_M2": 829,
    "tenu_M2": true,
-   "p_star_auto": 1954,
-   "marge_lentille_auto": 915,
+   "p_star_auto": 1809,
+   "marge_lentille_auto": 829,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -7134,21 +7134,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 2611
+     "verse_eur_ha": 1692
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 2611,
+     "verse_eur_ha": 1692,
      "paliers": [
-      4396,
+      2848,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 1003,
-     "prime_ha": 468
+     "verse_eur_ha": 964,
+     "prime_ha": 429
     }
    }
   },
@@ -7162,23 +7162,23 @@
    "marge_ble": 529,
    "ic80_rel": [
     0.02,
-    1.467
+    1.443
    ],
-   "q50_rel": 0.703,
+   "q50_rel": 0.748,
    "rel_reel": 0.689,
    "p_moyenne": 522,
    "tenu_moyenne": false,
-   "p_star_M0": 2165,
-   "marge_lentille_M0": 2093,
+   "p_star_M0": 2025,
+   "marge_lentille_M0": 1942,
    "tenu_M0": true,
-   "p_star": 2060,
-   "marge_lentille": 1980,
+   "p_star": 2068,
+   "marge_lentille": 1989,
    "tenu": true,
-   "p_star_M2": 747,
-   "marge_lentille_M2": 562,
+   "p_star_M2": 800,
+   "marge_lentille_M2": 619,
    "tenu_M2": true,
-   "p_star_auto": 747,
-   "marge_lentille_auto": 562,
+   "p_star_auto": 800,
+   "marge_lentille_auto": 619,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -7195,21 +7195,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 2226
+     "verse_eur_ha": 2235
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 2121,
+     "verse_eur_ha": 2129,
      "paliers": [
-      2061,
+      2069,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 1393,
-     "prime_ha": 421
+     "verse_eur_ha": 1396,
+     "prime_ha": 424
     }
    }
   },
@@ -7223,23 +7223,23 @@
    "marge_ble": 872,
    "ic80_rel": [
     0.02,
-    1.556
+    1.508
    ],
-   "q50_rel": 0.827,
+   "q50_rel": 0.833,
    "rel_reel": 1.041,
    "p_moyenne": 734,
    "tenu_moyenne": true,
-   "p_star_M0": 3493,
-   "marge_lentille_M0": 5413,
+   "p_star_M0": 3193,
+   "marge_lentille_M0": 4928,
    "tenu_M0": true,
-   "p_star": 3140,
-   "marge_lentille": 4842,
+   "p_star": 3013,
+   "marge_lentille": 4636,
    "tenu": true,
-   "p_star_M2": 1059,
-   "marge_lentille_M2": 1470,
+   "p_star_M2": 1142,
+   "marge_lentille_M2": 1606,
    "tenu_M2": true,
-   "p_star_auto": 1059,
-   "marge_lentille_auto": 1470,
+   "p_star_auto": 1142,
+   "marge_lentille_auto": 1606,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -7256,21 +7256,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 5087
+     "verse_eur_ha": 4883
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 3605,
+     "verse_eur_ha": 3479,
      "paliers": [
-      3140,
+      3014,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 2203,
-     "prime_ha": 745
+     "verse_eur_ha": 2210,
+     "prime_ha": 752
     }
    }
   },
@@ -7284,23 +7284,23 @@
    "marge_ble": 469,
    "ic80_rel": [
     0.02,
-    1.407
+    1.416
    ],
-   "q50_rel": 0.657,
+   "q50_rel": 0.724,
    "rel_reel": 0.648,
    "p_moyenne": 495,
    "tenu_moyenne": false,
-   "p_star_M0": 2123,
-   "marge_lentille_M0": 2048,
+   "p_star_M0": 1976,
+   "marge_lentille_M0": 1889,
    "tenu_M0": true,
-   "p_star": 2081,
-   "marge_lentille": 2002,
+   "p_star": 2058,
+   "marge_lentille": 1978,
    "tenu": true,
-   "p_star_M2": 711,
-   "marge_lentille_M2": 523,
+   "p_star_M2": 758,
+   "marge_lentille_M2": 574,
    "tenu_M2": true,
-   "p_star_auto": 711,
-   "marge_lentille_auto": 523,
+   "p_star_auto": 758,
+   "marge_lentille_auto": 574,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -7317,21 +7317,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 2247
+     "verse_eur_ha": 2224
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 2141,
+     "verse_eur_ha": 2119,
      "paliers": [
-      2081,
+      2059,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 1410,
-     "prime_ha": 438
+     "verse_eur_ha": 1404,
+     "prime_ha": 432
     }
    }
   },
@@ -7345,23 +7345,23 @@
    "marge_ble": 569,
    "ic80_rel": [
     0.02,
-    1.406
+    1.418
    ],
-   "q50_rel": 0.664,
+   "q50_rel": 0.728,
    "rel_reel": 0.672,
    "p_moyenne": 541,
    "tenu_moyenne": false,
-   "p_star_M0": 2223,
-   "marge_lentille_M0": 2156,
+   "p_star_M0": 2068,
+   "marge_lentille_M0": 1988,
    "tenu_M0": true,
-   "p_star": 2165,
-   "marge_lentille": 2093,
+   "p_star": 2124,
+   "marge_lentille": 2049,
    "tenu": true,
-   "p_star_M2": 781,
-   "marge_lentille_M2": 598,
+   "p_star_M2": 807,
+   "marge_lentille_M2": 626,
    "tenu_M2": true,
-   "p_star_auto": 781,
-   "marge_lentille_auto": 598,
+   "p_star_auto": 807,
+   "marge_lentille_auto": 626,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -7378,21 +7378,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 2338
+     "verse_eur_ha": 2295
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 2225,
+     "verse_eur_ha": 2187,
      "paliers": [
-      2165,
+      2127,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 1451,
-     "prime_ha": 479
+     "verse_eur_ha": 1449,
+     "prime_ha": 477
     }
    }
   },
@@ -7406,23 +7406,23 @@
    "marge_ble": 680,
    "ic80_rel": [
     0.02,
-    1.437
+    1.435
    ],
-   "q50_rel": 0.693,
+   "q50_rel": 0.745,
    "rel_reel": 1.142,
    "p_moyenne": 656,
    "tenu_moyenne": true,
-   "p_star_M0": 2813,
-   "marge_lentille_M0": 4312,
+   "p_star_M0": 2597,
+   "marge_lentille_M0": 3962,
    "tenu_M0": true,
-   "p_star": 2614,
-   "marge_lentille": 3990,
+   "p_star": 2568,
+   "marge_lentille": 3915,
    "tenu": true,
-   "p_star_M2": 949,
-   "marge_lentille_M2": 1292,
+   "p_star_M2": 978,
+   "marge_lentille_M2": 1339,
    "tenu_M2": true,
-   "p_star_auto": 949,
-   "marge_lentille_auto": 1292,
+   "p_star_auto": 978,
+   "marge_lentille_auto": 1339,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -7439,13 +7439,13 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 4236
+     "verse_eur_ha": 4162
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 3080,
+     "verse_eur_ha": 3034,
      "paliers": [
-      2615,
+      2569,
       750,
       650
      ]
@@ -7467,23 +7467,23 @@
    "marge_ble": 660,
    "ic80_rel": [
     0.02,
-    1.506
+    1.471
    ],
-   "q50_rel": 0.773,
+   "q50_rel": 0.804,
    "rel_reel": 1.058,
    "p_moyenne": 614,
    "tenu_moyenne": true,
-   "p_star_M0": 2669,
-   "marge_lentille_M0": 4079,
+   "p_star_M0": 2469,
+   "marge_lentille_M0": 3754,
    "tenu_M0": true,
-   "p_star": 2486,
-   "marge_lentille": 3782,
+   "p_star": 2450,
+   "marge_lentille": 3724,
    "tenu": true,
-   "p_star_M2": 884,
-   "marge_lentille_M2": 1188,
+   "p_star_M2": 928,
+   "marge_lentille_M2": 1258,
    "tenu_M2": true,
-   "p_star_auto": 884,
-   "marge_lentille_auto": 1188,
+   "p_star_auto": 928,
+   "marge_lentille_auto": 1258,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -7500,13 +7500,13 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 4027
+     "verse_eur_ha": 3969
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 2951,
+     "verse_eur_ha": 2915,
      "paliers": [
-      2486,
+      2450,
       750,
       650
      ]
@@ -7528,23 +7528,23 @@
    "marge_ble": 650,
    "ic80_rel": [
     0.02,
-    1.484
+    1.464
    ],
-   "q50_rel": 0.738,
+   "q50_rel": 0.779,
    "rel_reel": 0.94,
    "p_moyenne": 856,
    "tenu_moyenne": false,
-   "p_star_M0": 3867,
-   "marge_lentille_M0": 3235,
+   "p_star_M0": 3586,
+   "marge_lentille_M0": 2982,
    "tenu_M0": true,
-   "p_star": 3574,
-   "marge_lentille": 2971,
+   "p_star": 3453,
+   "marge_lentille": 2863,
    "tenu": true,
-   "p_star_M2": 1265,
-   "marge_lentille_M2": 893,
+   "p_star_M2": 1339,
+   "marge_lentille_M2": 960,
    "tenu_M2": true,
-   "p_star_auto": 1265,
-   "marge_lentille_auto": 893,
+   "p_star_auto": 1339,
+   "marge_lentille_auto": 960,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -7561,21 +7561,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 3217
+     "verse_eur_ha": 3109
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 3217,
+     "verse_eur_ha": 3109,
      "paliers": [
-      3574,
+      3454,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 1368,
-     "prime_ha": 558
+     "verse_eur_ha": 1375,
+     "prime_ha": 565
     }
    }
   },
@@ -7589,23 +7589,23 @@
    "marge_ble": 932,
    "ic80_rel": [
     0.02,
-    1.51
+    1.489
    ],
-   "q50_rel": 0.766,
+   "q50_rel": 0.795,
    "rel_reel": 1.054,
    "p_moyenne": 593,
    "tenu_moyenne": false,
-   "p_star_M0": 2536,
-   "marge_lentille_M0": 4776,
+   "p_star_M0": 2362,
+   "marge_lentille_M0": 4431,
    "tenu_M0": true,
-   "p_star": 2296,
-   "marge_lentille": 4301,
+   "p_star": 2299,
+   "marge_lentille": 4307,
    "tenu": true,
-   "p_star_M2": 870,
-   "marge_lentille_M2": 1478,
+   "p_star_M2": 928,
+   "marge_lentille_M2": 1592,
    "tenu_M2": true,
-   "p_star_auto": 870,
-   "marge_lentille_auto": 1478,
+   "p_star_auto": 928,
+   "marge_lentille_auto": 1592,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -7622,21 +7622,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 4548
+     "verse_eur_ha": 4552
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 3053,
+     "verse_eur_ha": 3060,
      "paliers": [
-      2318,
+      2325,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 2408,
-     "prime_ha": 626
+     "verse_eur_ha": 2414,
+     "prime_ha": 632
     }
    }
   },
@@ -7650,23 +7650,23 @@
    "marge_ble": 610,
    "ic80_rel": [
     0.02,
-    1.515
+    1.483
    ],
-   "q50_rel": 0.785,
+   "q50_rel": 0.803,
    "rel_reel": 1.297,
    "p_moyenne": 686,
    "tenu_moyenne": true,
-   "p_star_M0": 2860,
-   "marge_lentille_M0": 4775,
+   "p_star_M0": 2683,
+   "marge_lentille_M0": 4463,
    "tenu_M0": true,
-   "p_star": 2691,
-   "marge_lentille": 4478,
+   "p_star": 2587,
+   "marge_lentille": 4295,
    "tenu": true,
-   "p_star_M2": 992,
-   "marge_lentille_M2": 1495,
+   "p_star_M2": 1025,
+   "marge_lentille_M2": 1553,
    "tenu_M2": true,
-   "p_star_auto": 992,
-   "marge_lentille_auto": 1495,
+   "p_star_auto": 1025,
+   "marge_lentille_auto": 1553,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -7683,13 +7683,13 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 4724
+     "verse_eur_ha": 4540
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 3258,
+     "verse_eur_ha": 3153,
      "paliers": [
-      2692,
+      2587,
       750,
       650
      ]
@@ -7697,7 +7697,7 @@
     "prime_ha": {
      "tenu": true,
      "verse_eur_ha": 2154,
-     "prime_ha": 575
+     "prime_ha": 574
     }
    }
   },
@@ -7711,23 +7711,23 @@
    "marge_ble": 710,
    "ic80_rel": [
     0.02,
-    1.519
+    1.485
    ],
-   "q50_rel": 0.789,
+   "q50_rel": 0.807,
    "rel_reel": 1.327,
    "p_moyenne": 763,
    "tenu_moyenne": true,
-   "p_star_M0": 3473,
-   "marge_lentille_M0": 5851,
+   "p_star_M0": 3217,
+   "marge_lentille_M0": 5401,
    "tenu_M0": true,
-   "p_star": 3183,
-   "marge_lentille": 5342,
+   "p_star": 3088,
+   "marge_lentille": 5174,
    "tenu": true,
-   "p_star_M2": 1075,
-   "marge_lentille_M2": 1641,
+   "p_star_M2": 1122,
+   "marge_lentille_M2": 1724,
    "tenu_M2": true,
-   "p_star_auto": 1075,
-   "marge_lentille_auto": 1641,
+   "p_star_auto": 1122,
+   "marge_lentille_auto": 1724,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -7744,13 +7744,13 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 5588
+     "verse_eur_ha": 5419
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 3750,
+     "verse_eur_ha": 3654,
      "paliers": [
-      3184,
+      3088,
       750,
       650
      ]
@@ -7758,7 +7758,7 @@
     "prime_ha": {
      "tenu": true,
      "verse_eur_ha": 2240,
-     "prime_ha": 660
+     "prime_ha": 661
     }
    }
   },
@@ -7772,23 +7772,23 @@
    "marge_ble": 630,
    "ic80_rel": [
     0.02,
-    1.51
+    1.477
    ],
-   "q50_rel": 0.768,
+   "q50_rel": 0.79,
    "rel_reel": 1.139,
    "p_moyenne": 623,
    "tenu_moyenne": true,
-   "p_star_M0": 2616,
-   "marge_lentille_M0": 4346,
+   "p_star_M0": 2440,
+   "marge_lentille_M0": 4038,
    "tenu_M0": true,
-   "p_star": 2461,
-   "marge_lentille": 4074,
+   "p_star": 2449,
+   "marge_lentille": 4054,
    "tenu": true,
-   "p_star_M2": 872,
-   "marge_lentille_M2": 1285,
+   "p_star_M2": 934,
+   "marge_lentille_M2": 1395,
    "tenu_M2": true,
-   "p_star_auto": 872,
-   "marge_lentille_auto": 1285,
+   "p_star_auto": 934,
+   "marge_lentille_auto": 1395,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -7805,21 +7805,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 4321
+     "verse_eur_ha": 4300
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 3028,
+     "verse_eur_ha": 3016,
      "paliers": [
-      2462,
+      2450,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 2142,
-     "prime_ha": 563
+     "verse_eur_ha": 2140,
+     "prime_ha": 561
     }
    }
   },
@@ -7833,23 +7833,23 @@
    "marge_ble": 710,
    "ic80_rel": [
     0.02,
-    1.521
+    1.486
    ],
-   "q50_rel": 0.777,
+   "q50_rel": 0.788,
    "rel_reel": 1.314,
    "p_moyenne": 660,
    "tenu_moyenne": true,
-   "p_star_M0": 2802,
-   "marge_lentille_M0": 4673,
+   "p_star_M0": 2622,
+   "marge_lentille_M0": 4356,
    "tenu_M0": true,
-   "p_star": 2566,
-   "marge_lentille": 4258,
+   "p_star": 2545,
+   "marge_lentille": 4221,
    "tenu": true,
-   "p_star_M2": 929,
-   "marge_lentille_M2": 1385,
+   "p_star_M2": 1035,
+   "marge_lentille_M2": 1572,
    "tenu_M2": true,
-   "p_star_auto": 929,
-   "marge_lentille_auto": 1385,
+   "p_star_auto": 1035,
+   "marge_lentille_auto": 1572,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -7866,21 +7866,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 4503
+     "verse_eur_ha": 4466
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 3132,
+     "verse_eur_ha": 3111,
      "paliers": [
-      2566,
+      2545,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 2108,
-     "prime_ha": 529
+     "verse_eur_ha": 2110,
+     "prime_ha": 530
     }
    }
   },
@@ -7894,23 +7894,23 @@
    "marge_ble": 791,
    "ic80_rel": [
     0.02,
-    1.457
+    1.444
    ],
-   "q50_rel": 0.687,
+   "q50_rel": 0.725,
    "rel_reel": 1.479,
    "p_moyenne": 711,
    "tenu_moyenne": true,
-   "p_star_M0": 2884,
-   "marge_lentille_M0": 4947,
+   "p_star_M0": 2662,
+   "marge_lentille_M0": 4547,
    "tenu_M0": true,
-   "p_star": 2783,
-   "marge_lentille": 4764,
+   "p_star": 2691,
+   "marge_lentille": 4598,
    "tenu": true,
-   "p_star_M2": 986,
-   "marge_lentille_M2": 1530,
+   "p_star_M2": 1090,
+   "marge_lentille_M2": 1717,
    "tenu_M2": true,
-   "p_star_auto": 986,
-   "marge_lentille_auto": 1530,
+   "p_star_auto": 1090,
+   "marge_lentille_auto": 1717,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -7927,21 +7927,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 5009
+     "verse_eur_ha": 4844
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 3383,
+     "verse_eur_ha": 3291,
      "paliers": [
-      2783,
+      2691,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 2155,
-     "prime_ha": 535
+     "verse_eur_ha": 2150,
+     "prime_ha": 530
     }
    }
   },
@@ -7955,23 +7955,23 @@
    "marge_ble": 670,
    "ic80_rel": [
     0.02,
-    1.439
+    1.436
    ],
-   "q50_rel": 0.699,
+   "q50_rel": 0.751,
    "rel_reel": 1.242,
    "p_moyenne": 611,
    "tenu_moyenne": true,
-   "p_star_M0": 2577,
-   "marge_lentille_M0": 4162,
+   "p_star_M0": 2408,
+   "marge_lentille_M0": 3872,
    "tenu_M0": true,
-   "p_star": 2475,
-   "marge_lentille": 3987,
+   "p_star": 2469,
+   "marge_lentille": 3977,
    "tenu": true,
-   "p_star_M2": 870,
-   "marge_lentille_M2": 1242,
+   "p_star_M2": 904,
+   "marge_lentille_M2": 1301,
    "tenu_M2": true,
-   "p_star_auto": 870,
-   "marge_lentille_auto": 1242,
+   "p_star_auto": 904,
+   "marge_lentille_auto": 1301,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -7988,21 +7988,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 4234
+     "verse_eur_ha": 4222
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 3008,
+     "verse_eur_ha": 3002,
      "paliers": [
-      2476,
+      2469,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 2033,
-     "prime_ha": 494
+     "verse_eur_ha": 2037,
+     "prime_ha": 498
     }
    }
   },
@@ -8016,23 +8016,23 @@
    "marge_ble": 630,
    "ic80_rel": [
     0.02,
-    1.417
+    1.415
    ],
-   "q50_rel": 0.652,
+   "q50_rel": 0.712,
    "rel_reel": 1.429,
    "p_moyenne": 703,
    "tenu_moyenne": true,
-   "p_star_M0": 3075,
-   "marge_lentille_M0": 5013,
+   "p_star_M0": 2848,
+   "marge_lentille_M0": 4625,
    "tenu_M0": true,
-   "p_star": 3046,
-   "marge_lentille": 4963,
+   "p_star": 3013,
+   "marge_lentille": 4908,
    "tenu": true,
-   "p_star_M2": 1018,
-   "marge_lentille_M2": 1496,
+   "p_star_M2": 1075,
+   "marge_lentille_M2": 1594,
    "tenu_M2": true,
-   "p_star_auto": 1018,
-   "marge_lentille_auto": 1496,
+   "p_star_auto": 1075,
+   "marge_lentille_auto": 1594,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -8049,21 +8049,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 5209
+     "verse_eur_ha": 5154
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 3578,
+     "verse_eur_ha": 3546,
      "paliers": [
-      3046,
+      3014,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 2085,
-     "prime_ha": 546
+     "verse_eur_ha": 2083,
+     "prime_ha": 544
     }
    }
   },
@@ -8077,23 +8077,23 @@
    "marge_ble": 308,
    "ic80_rel": [
     0.02,
-    1.473
+    1.487
    ],
-   "q50_rel": 0.758,
+   "q50_rel": 0.786,
    "rel_reel": 0.906,
    "p_moyenne": 570,
    "tenu_moyenne": false,
-   "p_star_M0": 2547,
-   "marge_lentille_M0": 2093,
+   "p_star_M0": 2349,
+   "marge_lentille_M0": 1911,
    "tenu_M0": true,
-   "p_star": 2485,
-   "marge_lentille": 2036,
+   "p_star": 2433,
+   "marge_lentille": 1988,
    "tenu": true,
-   "p_star_M2": 862,
-   "marge_lentille_M2": 546,
+   "p_star_M2": 969,
+   "marge_lentille_M2": 645,
    "tenu_M2": true,
-   "p_star_auto": 862,
-   "marge_lentille_auto": 546,
+   "p_star_auto": 969,
+   "marge_lentille_auto": 645,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -8110,21 +8110,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 2281
+     "verse_eur_ha": 2233
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 2281,
+     "verse_eur_ha": 2233,
      "paliers": [
-      2485,
+      2433,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 1157,
-     "prime_ha": 331
+     "verse_eur_ha": 1152,
+     "prime_ha": 326
     }
    }
   },
@@ -8138,23 +8138,23 @@
    "marge_ble": 126,
    "ic80_rel": [
     0.02,
-    1.425
+    1.428
    ],
-   "q50_rel": 0.67,
+   "q50_rel": 0.721,
    "rel_reel": 1.158,
    "p_moyenne": 408,
    "tenu_moyenne": true,
-   "p_star_M0": 1793,
-   "marge_lentille_M0": 1676,
+   "p_star_M0": 1682,
+   "marge_lentille_M0": 1557,
    "tenu_M0": true,
-   "p_star": 1721,
-   "marge_lentille": 1598,
+   "p_star": 1677,
+   "marge_lentille": 1551,
    "tenu": true,
-   "p_star_M2": 649,
-   "marge_lentille_M2": 450,
+   "p_star_M2": 707,
+   "marge_lentille_M2": 512,
    "tenu_M2": true,
-   "p_star_auto": 649,
-   "marge_lentille_auto": 450,
+   "p_star_auto": 707,
+   "marge_lentille_auto": 512,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -8171,21 +8171,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 1844
+     "verse_eur_ha": 1796
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 1775,
+     "verse_eur_ha": 1730,
      "paliers": [
-      1722,
+      1677,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 1129,
-     "prime_ha": 165
+     "verse_eur_ha": 1126,
+     "prime_ha": 162
     }
    }
   },
@@ -8199,23 +8199,23 @@
    "marge_ble": 449,
    "ic80_rel": [
     0.02,
-    1.421
+    1.408
    ],
-   "q50_rel": 0.626,
+   "q50_rel": 0.679,
    "rel_reel": 0.644,
    "p_moyenne": 766,
    "tenu_moyenne": false,
-   "p_star_M0": 3414,
-   "marge_lentille_M0": 1599,
+   "p_star_M0": 3157,
+   "marge_lentille_M0": 1460,
    "tenu_M0": true,
-   "p_star": 3460,
-   "marge_lentille": 1623,
+   "p_star": 3451,
+   "marge_lentille": 1619,
    "tenu": true,
-   "p_star_M2": 1182,
-   "marge_lentille_M2": 393,
+   "p_star_M2": 1277,
+   "marge_lentille_M2": 445,
    "tenu_M2": false,
-   "p_star_auto": 1182,
-   "marge_lentille_auto": 393,
+   "p_star_auto": 1277,
+   "marge_lentille_auto": 445,
    "tenu_auto": false,
    "contrats": {
     "uneal_2023": {
@@ -8232,21 +8232,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 1868
+     "verse_eur_ha": 1864
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 1868,
+     "verse_eur_ha": 1864,
      "paliers": [
-      3460,
+      3452,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 939,
-     "prime_ha": 453
+     "verse_eur_ha": 941,
+     "prime_ha": 455
     }
    }
   },
@@ -8260,23 +8260,23 @@
    "marge_ble": 5,
    "ic80_rel": [
     0.02,
-    1.443
+    1.435
    ],
-   "q50_rel": 0.687,
+   "q50_rel": 0.757,
    "rel_reel": 1.393,
    "p_moyenne": 719,
    "tenu_moyenne": true,
-   "p_star_M0": 3225,
-   "marge_lentille_M0": 2454,
+   "p_star_M0": 3024,
+   "marge_lentille_M0": 2286,
    "tenu_M0": true,
-   "p_star": 3212,
-   "marge_lentille": 2443,
+   "p_star": 3203,
+   "marge_lentille": 2436,
    "tenu": true,
-   "p_star_M2": 1102,
-   "marge_lentille_M2": 678,
+   "p_star_M2": 1173,
+   "marge_lentille_M2": 737,
    "tenu_M2": true,
-   "p_star_auto": 1102,
-   "marge_lentille_auto": 678,
+   "p_star_auto": 1173,
+   "marge_lentille_auto": 737,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -8293,21 +8293,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 2689
+     "verse_eur_ha": 2681
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 2689,
+     "verse_eur_ha": 2681,
      "paliers": [
-      3213,
+      3203,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 1060,
-     "prime_ha": 307
+     "verse_eur_ha": 1062,
+     "prime_ha": 309
     }
    }
   },
@@ -8321,23 +8321,23 @@
    "marge_ble": 328,
    "ic80_rel": [
     0.02,
-    1.466
+    1.444
    ],
-   "q50_rel": 0.693,
+   "q50_rel": 0.769,
    "rel_reel": 0.88,
    "p_moyenne": 862,
    "tenu_moyenne": false,
-   "p_star_M0": 3516,
-   "marge_lentille_M0": 1970,
+   "p_star_M0": 3264,
+   "marge_lentille_M0": 1811,
    "tenu_M0": true,
-   "p_star": 3558,
-   "marge_lentille": 1996,
+   "p_star": 3615,
+   "marge_lentille": 2032,
    "tenu": true,
-   "p_star_M2": 1254,
-   "marge_lentille_M2": 545,
+   "p_star_M2": 1353,
+   "marge_lentille_M2": 607,
    "tenu_M2": true,
-   "p_star_auto": 1254,
-   "marge_lentille_auto": 545,
+   "p_star_auto": 1353,
+   "marge_lentille_auto": 607,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -8354,21 +8354,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 2242
+     "verse_eur_ha": 2277
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 2242,
+     "verse_eur_ha": 2277,
      "paliers": [
-      3558,
+      3615,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 996,
-     "prime_ha": 429
+     "verse_eur_ha": 1006,
+     "prime_ha": 439
     }
    }
   },
@@ -8382,23 +8382,23 @@
    "marge_ble": 207,
    "ic80_rel": [
     0.02,
-    1.512
+    1.488
    ],
-   "q50_rel": 0.758,
+   "q50_rel": 0.816,
    "rel_reel": 0.752,
    "p_moyenne": 954,
    "tenu_moyenne": false,
-   "p_star_M0": 4303,
-   "marge_lentille_M0": 1730,
+   "p_star_M0": 3949,
+   "marge_lentille_M0": 1567,
    "tenu_M0": true,
-   "p_star": 4233,
-   "marge_lentille": 1698,
+   "p_star": 4400,
+   "marge_lentille": 1774,
    "tenu": true,
-   "p_star_M2": 1442,
-   "marge_lentille_M2": 417,
+   "p_star_M2": 1574,
+   "marge_lentille_M2": 477,
    "tenu_M2": true,
-   "p_star_auto": 1442,
-   "marge_lentille_auto": 417,
+   "p_star_auto": 1574,
+   "marge_lentille_auto": 477,
    "tenu_auto": true,
    "contrats": {
     "uneal_2023": {
@@ -8415,21 +8415,21 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 1943
+     "verse_eur_ha": 2020
     },
     "paliers": {
      "tenu": true,
-     "verse_eur_ha": 1943,
+     "verse_eur_ha": 2020,
      "paliers": [
-      4233,
+      4400,
       750,
       650
      ]
     },
     "prime_ha": {
      "tenu": true,
-     "verse_eur_ha": 844,
-     "prime_ha": 431
+     "verse_eur_ha": 853,
+     "prime_ha": 440
     }
    }
   }

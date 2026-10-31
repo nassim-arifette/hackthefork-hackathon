@@ -2,6 +2,7 @@ import copy
 import gzip
 import hashlib
 import json
+from zipfile import ZipFile
 
 import pandas as pd
 import pytest
@@ -158,3 +159,68 @@ def test_gzip_sources_preserve_original_csv_provenance(tmp_path):
     compressed = merge_runs(old, new, root / "compressed_composite", ["haricot"], root, lambda crop: h[crop])
     assert compressed["signature"] == original["signature"]
     assert compressed["output_sha256"] == original["output_sha256"]
+
+
+HELPER = ("\ndef series_passees(panel: pd.DataFrame, culture: str, avant: int, "
+          "min_identiques: int = 8) -> pd.DataFrame:\n    return panel\n")
+
+
+def compatibility_fixture(tmp_path):
+    root, old, new, h, old_manifest, new_manifest = fixtures(tmp_path)
+    for name in new_manifest["spec"]["files"]:
+        if name.startswith("pipeline/"):
+            content = "VALUE = 1\n"
+            if name == "pipeline/model.py":
+                content = "import pandas as pd\n\ndef hyp_values(h):\n    return h\n"
+            elif name == "pipeline/contract_economics.py":
+                content = "from model import hyp_values\n"
+            (root / name).write_text(content)
+            for manifest in (old_manifest, new_manifest):
+                manifest["spec"]["files"][name] = sha256(root / name)
+    for directory, manifest in ((old, old_manifest), (new, new_manifest)):
+        (directory / "manifest.json").write_text(json.dumps(resign(manifest)))
+    with ZipFile(new / "executed-inputs.zip", "w") as archive:
+        for name in new_manifest["spec"]["files"]:
+            archive.write(root / name, name)
+    return root, old, new, h, new_manifest
+
+
+def test_unused_production_helper_preserves_executed_hashes_and_results(tmp_path):
+    root, old, new, h, executed = compatibility_fixture(tmp_path)
+    before = merge_runs(old, new, root / "before", ["haricot"], root, lambda crop: h[crop])
+    model = root / "pipeline/model.py"
+    model.write_text(model.read_text() + HELPER)
+    after = merge_runs(old, new, root / "after", ["haricot"], root, lambda crop: h[crop])
+    exception = after["spec"]["composition"]["checkout_compatibility"][0]
+    assert after["spec"]["files"]["pipeline/model.py"] == executed["spec"]["files"]["pipeline/model.py"]
+    assert exception["executed_sha256"] == executed["spec"]["files"]["pipeline/model.py"]
+    assert exception["current_sha256"] == sha256(model) != exception["executed_sha256"]
+    assert exception["archive_sha256"] == sha256(new / "executed-inputs.zip")
+    assert exception["archive_members_verified_against_manifest"]
+    assert after["output_sha256"] == before["output_sha256"]
+
+
+def test_changed_hyp_values_is_rejected_even_with_new_helper(tmp_path):
+    root, old, new, h, _ = compatibility_fixture(tmp_path)
+    model = root / "pipeline/model.py"
+    model.write_text(model.read_text().replace("return h", "return {}") + HELPER)
+    with pytest.raises(ValueError, match="Existing model.py AST changed"):
+        merge_runs(old, new, root / "after", ["haricot"], root, lambda crop: h[crop])
+
+
+def test_changed_archive_or_helper_import_side_effect_is_rejected(tmp_path):
+    root, old, new, h, _ = compatibility_fixture(tmp_path)
+    model = root / "pipeline/model.py"
+    model.write_text(model.read_text() + HELPER.replace("min_identiques: int = 8", "min_identiques: int = print('bad')"))
+    with pytest.raises(ValueError, match="inert production helper signature"):
+        merge_runs(old, new, root / "bad_default", ["haricot"], root, lambda crop: h[crop])
+    model.write_text("import pandas as pd\n\ndef hyp_values(h):\n    return h\n" + HELPER)
+    archive_path = new / "executed-inputs.zip"
+    with ZipFile(archive_path) as archive:
+        entries = {name: archive.read(name) for name in archive.namelist()}
+    entries["pipeline/model.py"] = b"changed archive payload"
+    with ZipFile(archive_path, "w") as archive:
+        for name, data in entries.items():
+            archive.writestr(name, data)
+    with pytest.raises(ValueError, match="archive member differs"):
+        merge_runs(old, new, root / "bad_archive", ["haricot"], root, lambda crop: h[crop])

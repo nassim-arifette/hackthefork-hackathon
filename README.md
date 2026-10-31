@@ -18,9 +18,9 @@ Le Contrat qui Tient aide le responsable filière d'une coopérative ou d'un con
 | Variabilité du rendement, lentille contre blé | **0,20 contre 0,09** (Agreste, 2010–2025) |
 | Aux prix observés de 2012 à 2016 (650 à 779 €/t), la lentille bat le blé francilien | **5 années sur 10** (modèle) |
 | Prix plancher pour 8 années sur 10, Seine-et-Marne | **1 568 €/t** départ ferme, sur les tonnes acceptées au tri ; incertitude de 1 099 à 2 877 €/t (modèle) |
-| Backtest historique 2019–2025 | **87 %** de contrats tenus pour 80 % visés, sur 133 cas, contre **29 %** pour un prix calculé sur les moyennes ; regroupements Agreste sur 2010–2025, distincts du nouvel audit |
-| À protection égale, un barème par tranches plutôt qu'un prix unique | **18 % moins cher** en moyenne, 22 % en backtest, avec les mêmes 87 % de contrats tenus (modèle) |
-| Pois chiche, haricot, pois, féverole : même moteur | prix fixe tenu dans 66 à 72 % des cas ; **indexé sur le blé, 82 à 87 %** (backtest, après [revue des budgets](docs/REVUE_FILIERE_CULTURES.md)) |
+| Backtest de démonstration 2019–2025 | **78 %** de contrats tenus pour 80 % visés, sur la cohorte historique de 133 cas, contre **29 %** pour un prix calculé sur les moyennes ; regroupements d'entraînement recalculés sur le passé |
+| Un barème par tranches plutôt qu'un prix unique | **18 % moins cher** en simulation, 19 % en backtest, où il tient 79 % des contrats contre 78 % (modèle) |
+| Pois chiche, haricot, pois, féverole : même moteur | prix fixe tenu dans 65 à 70 % des cas ; **indexé sur le blé, 78 à 89 %** (backtest de démonstration, après [revue des budgets](docs/REVUE_FILIERE_CULTURES.md)) |
 
 ---
 
@@ -59,7 +59,7 @@ flowchart LR
 1. **Un modèle d'apprentissage probabiliste** apprend comment la météo NASA POWER (pluie de printemps, chaleur à la floraison, gel tardif, pluie à la récolte) déplace la distribution des rendements du blé et de la lentille. Deux modèles sont entraînés et comparés : une régression quantile calibrée par conformal prediction (retenue) et un LightGBM quantile (challenger).
 2. **Une simulation Monte-Carlo** rejoue 20 000 années : chacune reprend la météo et le prix du blé d'une année réelle, puis compare la marge en lentille sous contrat avec la marge en blé.
 3. **Le prix plancher** est le quantile 80 % du prix d'équilibre lentille/blé : au-dessus de ce prix, la lentille gagne dans 80 % des scénarios.
-4. **Un backtest glissant** vérifie, année par année de 2019 à 2025, si les prix que le modèle aurait fixés auraient tenu sous les hypothèses économiques retenues. L'audit multicultures reconstruit aussi les regroupements Agreste sur le passé de chaque pli, contrairement au regroupement historique utilisé dans les exports de démonstration.
+4. **Un backtest glissant** vérifie, année par année de 2019 à 2025, si les prix que le modèle aurait fixés auraient tenu sous les hypothèses économiques retenues. Les regroupements d'entraînement Agreste sont reconstruits sur le passé. La démonstration conserve sa cohorte historique de 133 cas ; l'audit multicultures évalue 192 cas lentille avec une préparation commune à tous les candidats.
 
 Le détail mathématique est dans [docs/MODELE.md](docs/MODELE.md), et l'architecture technique complète dans [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 

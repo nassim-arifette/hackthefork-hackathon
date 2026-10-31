@@ -1,16 +1,16 @@
 # Limites connues
 
-Ces limites sont annoncées par l'équipe elle-même, dans le deck et pendant les questions. Chiffres : [RESULTATS.md](RESULTATS.md), version 4.
+Ces limites sont annoncées par l'équipe elle-même, dans le deck et pendant les questions. Chiffres : [RESULTATS.md](RESULTATS.md), version 4.1.
 
 | Limite | Conséquence | Ce qu'on fait | Étape suivante |
 |---|---|---|---|
 | **Rendements départementaux** | la variance réelle à la parcelle est plus forte : le risque est sous-estimé | on le dit ; la fiabilité affichée vaut pour un département moyen | données de rendement des coopératives |
 | **Agreste estime souvent la lentille au niveau régional** | 39 départements mesurés, mais 24 séries indépendantes seulement | séries identiques regroupées avant l'entraînement | données de coopératives, autres légumineuses |
-| **Regroupements historiques établis sur 2010–2025** | la sélection des séries du backtest legacy utilise de l'information postérieure à certaines années test | résultats historiques identifiés comme tels, sans revendication de validation strictement sans fuite | benchmark multicultures avec groupes reconstruits sur le passé et cohortes communes |
+| **Cohorte de production historique conservée** | les représentants test viennent du panel regroupé sur 2010–2025 ; le chemin du blé est conservé | les groupes de légumineuses d'entraînement sont désormais reconstruits sur le passé ; 78,2 % sur 133 cas remplace l'ancien 87,2 % | comparer séparément le benchmark de recherche à règles et cohortes communes |
 | **Peu de lentille en Île-de-France** (727 ha selon la SAA 2025, statut qualité 3 ; 1 095 ha déclarés au RPG) | pas d'effet propre à l'Île-de-France | rendement relatif, niveau emprunté aux départements producteurs voisins ; écart RPG / SAA audité | parcelles franciliennes suivies en pilote |
 | **Le prix plancher est lui-même incertain** | de 1 099 à 2 877 €/t à 80 % en Seine-et-Marne (bootstrap) | intervalle affiché à côté du prix | plus d'années, données de coopératives |
 | **Sept années test seulement** | le taux de contrats tenus est incertain | résultats affichés année par année | autres cultures, autres régions |
-| **Années extrêmes absentes de l'entraînement** (2020–2021) | les contrats cèdent ces années-là (50 % et 61 % tenus) | montré à l'écran, pas caché | scénarios de stress, modèles de queue |
+| **Années extrêmes absentes de l'entraînement** (2020–2022) | les contrats cèdent ces années-là (39 %, 56 % et 68 % tenus) | montré à l'écran, pas caché | scénarios de stress, modèles de queue |
 | **La météo n'améliore pas la précision du modèle linéaire** | son apport passe par la calibration ; LightGBM est plus précis mais tient moins de contrats | les modèles sont comparés à l'écran | variables météo par stade, météo pondérée par les surfaces RPG |
 | **Météo au centroïde du département** | la météo des zones cultivées peut différer | assumé en version 1 | moyenne pondérée par les surfaces RPG |
 | **Prix du blé reconstitué** | indice Eurostat calé sur un prix rendu Rouen, un peu au-dessus du prix payé au producteur | choix prudent : il surestime la marge du blé, donc P\* | série FranceAgriMer de prix payés aux producteurs |
@@ -21,7 +21,7 @@ Ces limites sont annoncées par l'équipe elle-même, dans le deck et pendant le
 | **Part refusée au tri fixe** (10 %) | en réalité, elle varie avec la pluie à la récolte et la bruche ; la SAA parle d'une production « récoltée et commercialisable », qui peut déjà exclure une partie des impuretés | sensibilité 0 / 10 / 20 % (1 411 à 1 764 €/t) ; les lots refusés gardent une valeur que le modèle ignore | refus modélisé selon la météo, données de tri du pilote |
 | **Aide couplée** | 105 €/ha est un montant indicatif 2026, ajusté selon les surfaces éligibles | sensibilité 0 / 105 / 122 €/ha | montant définitif de la campagne |
 | **Barèmes de contrat comparés** | le barème NatUp 2023–2024 est reconstitué depuis un entretien publié ; la proposition 2027 est une hypothèse ; les coûts excluent collecte, tri et séchage | statuts affichés ; coûts du backtest comparés en écart au prix unique | contrat et décomptes réels d'un partenaire |
-| **Prime à l'hectare** | versée même sans récolte ; fragile si le prix du blé flambe (79 % de contrats tenus en backtest) | montrée comme option, pas recommandée | clause d'engagement technique, indexation partielle |
+| **Prime à l'hectare** | versée même sans récolte ; fragile si le prix du blé flambe (74 % de contrats tenus en backtest) | montrée comme option, pas recommandée | clause d'engagement technique, indexation partielle |
 | **Le RPG enregistre ce qui est déclaré**, pas ce qui est cultivable | on ne connaît ni les sols ni l'aptitude à la lentille | la courbe d'offre est un potentiel, pas une prévision | GIS Sol, historique des rotations |
 | **Délai de retour de la lentille sur une même parcelle** | toutes les parcelles ne peuvent pas porter de la lentille chaque année | volumes modestes : pilote de 300 t, ambition de 5 000 t | règle agronomique à intégrer |
 | **Suivi Sentinel-2 : prototype** | 8 parcelles, une saison ; le NDVI dit si la culture pousse comme le groupe, pas ce qu'elle va rendre ; seuils de statut supposés | présenté comme replay de 2025, avec dates et pixels valides | caler les seuils sur des rendements de parcelles du pilote |

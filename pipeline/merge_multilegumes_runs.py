@@ -6,11 +6,13 @@ reused only when their audited economic inputs still equal the current inputs,
 and model code, statistical inputs, package versions and run settings agree.
 """
 import argparse
+import ast
 import copy
 import gzip
 import hashlib
 import json
 from pathlib import Path
+from zipfile import ZipFile
 
 import numpy as np
 import pandas as pd
@@ -82,13 +84,86 @@ def validate_specs(old_manifest, new_manifest, replacement_cultures):
     return different_files
 
 
-def validate_current_files(spec, current_root=ROOT):
+def verify_unused_series_helper(spec, current_root, replacement_directory):
+    """Accept exactly one inert helper addition, proven against executed sources.
+
+    Executed file hashes stay unchanged. The archive payload is checked against
+    every manifest entry; the current model's AST, with the single added helper
+    removed, must equal the executed AST. No decorator, changed signature or
+    import-time default expression is permitted on the new function.
+    """
+    root = Path(current_root).resolve()
+    archive = Path(replacement_directory) / "executed-inputs.zip"
+    if not archive.is_file():
+        raise ValueError("Current source differs; executed source archive required for the series_passees compatibility check")
+    with ZipFile(archive) as bundle:
+        payload = {}
+        for name, digest in spec["files"].items():
+            if bundle.namelist().count(name) != 1:
+                raise ValueError(f"Missing or duplicate executed archive member: {name}")
+            payload[name] = bundle.read(name)
+            if hashlib.sha256(payload[name]).hexdigest() != digest:
+                raise ValueError(f"Executed archive member differs from its manifest: {name}")
+    original = ast.parse(payload["pipeline/model.py"].decode("utf-8"))
+    current = ast.parse((root / "pipeline/model.py").read_text())
+    additions = [node for node in current.body if isinstance(node, ast.FunctionDef) and node.name == "series_passees"]
+    if len(additions) != 1 or any(isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and
+                                 node.name == "series_passees" for node in original.body):
+        raise ValueError("Only one newly added series_passees function is permitted")
+    helper = additions[0]
+    signature = ast.parse("def series_passees(panel: pd.DataFrame, culture: str, avant: int, "
+                          "min_identiques: int = 8) -> pd.DataFrame: pass").body[0]
+    if (helper.decorator_list or getattr(helper, "type_params", []) or
+            ast.dump(helper.args) != ast.dump(signature.args) or
+            ast.dump(helper.returns) != ast.dump(signature.returns)):
+        raise ValueError("series_passees must have the exact inert production helper signature")
+    stripped = copy.deepcopy(current)
+    stripped.body = [node for node in stripped.body if not (isinstance(node, ast.FunctionDef) and
+                                                           node.name == "series_passees")]
+    executed_ast = ast.dump(original, include_attributes=False)
+    if ast.dump(stripped, include_attributes=False) != executed_ast:
+        raise ValueError("Existing model.py AST changed beyond the added series_passees helper")
+    for name, code in payload.items():
+        if not name.startswith("pipeline/") or not name.endswith(".py"):
+            continue
+        tree = ast.parse(code.decode("utf-8"))
+        if any((isinstance(node, ast.Name) and node.id == "series_passees") or
+               (isinstance(node, ast.Attribute) and node.attr == "series_passees") or
+               (isinstance(node, ast.Constant) and node.value == "series_passees") for node in ast.walk(tree)):
+            raise ValueError("The executed benchmark references the new helper")
+        for node in ast.walk(tree):
+            if isinstance(node, ast.ImportFrom) and node.module == "model":
+                if name != "pipeline/contract_economics.py" or [x.name for x in node.names] != ["hyp_values"]:
+                    raise ValueError("Benchmark model import is not limited to unchanged hyp_values")
+            if isinstance(node, ast.Import) and any(x.name == "model" for x in node.names):
+                raise ValueError("Benchmark imports the model module dynamically as a whole")
+    archive_resolved = archive.resolve()
+    return {"file": "pipeline/model.py", "executed_sha256": spec["files"]["pipeline/model.py"],
+        "current_sha256": sha256(root / "pipeline/model.py"),
+        "allowed_change": "one unused series_passees FunctionDef; all other AST nodes identical",
+        "executed_ast_sha256": hashlib.sha256(executed_ast.encode()).hexdigest(),
+        "added_helper_ast_sha256": hashlib.sha256(ast.dump(helper, include_attributes=False).encode()).hexdigest(),
+        "archive": str(archive_resolved.relative_to(root)) if archive_resolved.is_relative_to(root) else archive.name,
+        "archive_sha256": sha256(archive), "archive_members_verified_against_manifest": True,
+        "reason": "Production-only helper addition; benchmark imports only unchanged hyp_values; "
+                  "no executed research source references series_passees"}
+
+
+def validate_current_files(spec, current_root=ROOT, replacement_directory=None):
     """The replacement run must correspond exactly to the checked-out inputs."""
     root = Path(current_root).resolve()
+    compatibility = []
     for name, digest in spec["files"].items():
         path = (root / name).resolve()
-        if not path.is_relative_to(root) or not path.is_file() or sha256(path) != digest:
+        if not path.is_relative_to(root) or not path.is_file():
             raise ValueError(f"Current source differs from the replacement run: {name}")
+        if sha256(path) == digest:
+            continue
+        if name == "pipeline/model.py" and replacement_directory is not None:
+            compatibility.append(verify_unused_series_helper(spec, root, replacement_directory))
+        else:
+            raise ValueError(f"Current source differs from the replacement run: {name}")
+    return compatibility
 
 
 def validate_audits(audits, cultures, years, models, hypotheses_by_crop):
@@ -160,7 +235,7 @@ def merge_runs(old_directory, replacement_directory, output, replacement_culture
     old, new = load_source(old_directory), load_source(replacement_directory)
     old_manifest, new_manifest = old["manifest.json"], new["manifest.json"]
     changed = validate_specs(old_manifest, new_manifest, replacement_cultures)
-    validate_current_files(new_manifest["spec"], current_root)
+    compatibility = validate_current_files(new_manifest["spec"], current_root, replacement_directory)
     old_spec, new_spec = old_manifest["spec"], new_manifest["spec"]
     cultures = old_spec["options"]["cultures"]
     replaced = set(replacement_cultures)
@@ -201,7 +276,8 @@ def merge_runs(old_directory, replacement_directory, output, replacement_culture
     spec["composition"] = {"method": "exact crop rows; no repricing or model modification",
         "sources": source_details, "changed_files": changed, "hypotheses": hypotheses_by_crop,
         "crop_source": {culture: "replacement" if culture in replaced else "previous" for culture in cultures},
-        "merge_script_sha256": sha256(Path(__file__)), "effective_fit_count": len(audit)}
+        "merge_script_sha256": sha256(Path(__file__)), "effective_fit_count": len(audit),
+        "checkout_compatibility": compatibility}
     manifest = {"kind": "composite_exact_crop_reuse", "signature": spec_signature(spec), "spec": spec}
     manifest_path = output / "manifest.json"
     if manifest_path.exists() and json.loads(manifest_path.read_text()).get("signature") != manifest["signature"]:
@@ -223,6 +299,13 @@ def merge_runs(old_directory, replacement_directory, output, replacement_culture
         "reused_fits": len(previous_audits), "rerun_fits": len(replacement_audits)})
     charges = "\n".join(f"| {culture} | {hypotheses_by_crop[culture]['charges_culture']} | "
         f"{'recalcul complet' if culture in replaced else 'résultats identiques réutilisés'} |" for culture in cultures)
+    compatibility_note = ("La version de production ajoute ensuite la fonction `series_passees` à "
+        "`pipeline/model.py`. Une vérification AST contre les sources réellement exécutées prouve "
+        "que tous les anciens nœuds sont identiques et que le benchmark ne référence pas ce helper. "
+        "L'archive est vérifiée membre par membre contre le manifeste. Les empreintes exécutées "
+        "restent intactes ; les empreintes courantes et la justification figurent dans "
+        "`composition.checkout_compatibility`. Aucun résultat n'est recalculé pour cette addition.\n\n"
+        if compatibility else "")
     (output / "COMPOSITION.md").write_text(
         "# Composition exacte après mise à jour économique\n\n"
         f"Ce dossier rassemble {len(audit)} ajustements culture–année–modèle : "
@@ -235,6 +318,7 @@ def merge_runs(old_directory, replacement_directory, output, replacement_culture
         "différer entre les deux exécutions. Pour les cultures réutilisées, les hypothèses numériques "
         "de chaque entraînement doivent être exactement celles de la configuration courante. "
         "Il vérifie aussi les cohortes, années d'apprentissage, besoins économiques et tonnes acceptées.\n\n"
+        + compatibility_note +
         f"- Source initiale : `{source_label(old_directory)}`, signature `{old_manifest['signature']}`.\n"
         f"- Recalcul : `{source_label(replacement_directory)}`, signature `{new_manifest['signature']}`.\n"
         f"- Source effective par culture et empreintes des fichiers : `manifest.json`.\n\n"

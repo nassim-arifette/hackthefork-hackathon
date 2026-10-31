@@ -50,7 +50,7 @@ L'outil répond à une question précise : **quel prix minimum garantir pour que
 1. **Il apprend** comment la météo fait varier les rendements de la lentille et du blé, à partir de 16 ans de données Agreste et de la météo NASA POWER.
 2. **Il simule** des milliers d'années possibles en rejouant des années météo historiques. Dans chacune, il compare la marge lentille sous contrat à la marge blé.
 3. **Il en déduit le prix** qui fait gagner la lentille dans 80 % des scénarios, puis l'affine par parcelle avec le coût de transport jusqu'à l'acheteur.
-4. **Il l'évalue** par entraînement glissant sur 2019–2025. Le backtest historique conserve des regroupements Agreste calculés sur toute la période ; le benchmark strict reconstruit aussi ces groupes avant chaque année test.
+4. **Il l'évalue** par entraînement glissant sur 2019–2025. Les groupes de légumineuses d'entraînement sont reconstruits avant chaque année test ; la cohorte historique reste distincte de celle du benchmark de recherche.
 
 Le responsable filière obtient un prix, une carte des parcelles qui acceptent ce prix, une courbe d'offre en tonnes, et une proposition de contrat rédigée en langage clair.
 
@@ -63,7 +63,7 @@ Le responsable filière obtient un prix, une carte des parcelles qui acceptent c
 | Base du prix | expérience, moyennes | distribution du risque, conditionnée à la météo |
 | Promesse à l'agriculteur | « en moyenne, ça rapporte » | « 8 années sur 10, au moins autant que le blé » |
 | Ciblage | prospection au cas par cas | carte des parcelles qui basculent à ce prix |
-| Évaluation | aucune | backtest glissant historique, limite de regroupement explicite ; benchmark strict séparé |
+| Évaluation | aucune | backtest glissant avec groupes d’entraînement corrigés ; cohorte de recherche séparée |
 
 - **Nous ne créons pas le contrat** : il existe déjà. Nous calculons le prix et le ciblage qui le rendent tenable.
 - **Nous n'avons pas trouvé** d'outil qui calcule ce prix parcelle par parcelle et le calibre sur le risque. Formulation volontairement prudente.
@@ -87,7 +87,7 @@ Le LLM n'intervient qu'à la fin, pour rédiger la proposition de contrat **à p
 - **hectares et tonnes** de lentilles pour l'alimentation humaine, comparés aux importations (douanes 0713 40) ;
 - **protéines produites**, avec la teneur en protéines de la lentille sèche (Ciqual) ;
 - **azote minéral évité** sur la culture suivante, et émissions évitées en CO2e (ADEME Base Empreinte ou HESTIA) ;
-- **revenu sécurisé** : une marge au moins égale au blé 8 années sur 10, mesurée en backtest.
+- **revenu sécurisé** : une marge au moins égale au blé dans 80 % des simulations ; le backtest de production observe 78,2 % sur 133 cas.
 
 Pour le pois, l'effet précédent est sourcé : +7 q/ha sur le blé suivant et −33 kg N/ha (Intercéréales et Terres Univia). Pour la lentille, la valeur reste **à sourcer** chez Terres Inovia ; à défaut, elle est affichée comme hypothèse.
 
@@ -138,7 +138,7 @@ La lentille seule est un petit marché : environ 34 000 ha en 2025 (**mesuré**)
 | Critère | Poids | Ce que le projet apporte |
 |---|---|---|
 | Impact et durabilité | 30 % | lève le verrou du Track 3 ; impact en hectares, tonnes, azote et importations |
-| Rigueur scientifique | 20 % | entraînement glissant, référence naïve, couverture mesurée, limite des regroupements historiques annoncée et benchmark strict séparé |
+| Rigueur scientifique | 20 % | entraînement glissant, référence naïve, couverture mesurée, groupes d’entraînement reconstruits sur le passé et cohorte de recherche séparée |
 | Usage pertinent de l'IA | 20 % | sans distribution de rendement, pas de prix calibré sur le risque |
 | Viabilité économique | 20 % | client identifié qui paie chaque campagne, extension aux assureurs |
 | Exécution et pitch | 10 % | démo hors ligne, un parcours unique, chiffres étiquetés |

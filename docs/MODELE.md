@@ -2,7 +2,7 @@
 
 Ce document décrit le modèle de rendement, la simulation Monte-Carlo, le calcul du prix plancher et le protocole de backtest, tels qu'ils sont codés dans `pipeline/model.py`, `03_backtest.py` et `05_export.py`. Chaque membre de l'équipe doit pouvoir l'expliquer au jury.
 
-Il s'agit du moteur historique de l'application. Son backtest glisse dans le temps pour l'entraînement et la calibration, mais conserve des regroupements Agreste établis sur 2010–2025. Le nouveau benchmark multicultures reconstruit aussi les regroupements sur le passé ; ses cohortes et résultats doivent être distingués de ceux décrits ici.
+Il s'agit du moteur de production de l'application, version 4.1. Les groupes de légumineuses d'entraînement sont reconstruits sur les seules années antérieures à chaque test. Les représentants de la cohorte test restent ceux du panel historique, soit 133 cas pour la lentille ; le chemin de préparation du blé est conservé. Le benchmark multicultures de recherche dispose de ses propres règles communes, de 192 cas pour la lentille et de résultats distincts.
 
 Notations : `d` département, `t` année, `c` culture (`B` blé tendre d'hiver, `L` lentille), `y` rendement, `τ` fiabilité visée (0,8 par défaut), `r` part de la récolte refusée au tri (0,10).
 
@@ -77,13 +77,13 @@ Q_q(rel[d,t]) = a(q) + b(q) · tendance + Σ_k β_k(q) · anomalie_k[d,t]
 
 À chaque entraînement, M0, M1 et M2 sont comparés sur les trois dernières années d'entraînement (perte pinball) ; le meilleur est retenu. Ce choix n'utilise jamais l'année test.
 
-### Résultat de la comparaison (backtest, scénario de la version 4)
+### Résultat de la comparaison (backtest de production corrigé, version 4.1)
 
 | | M0 tendance | M1 retenu | M2 LightGBM | auto |
 |---|---|---|---|---|
-| Perte pinball | 0,1078 | 0,1103 | 0,1014 | 0,1024 |
-| Couverture à 80 % | 74 % | 79 % | 84 % | 74 % |
-| Contrats tenus (80 % visés) | 81,2 % | **87,2 %** | 76,7 % | 79,7 % |
+| Perte pinball | 0,1094 | 0,1105 | 0,1020 | 0,1038 |
+| Couverture à 80 % | 70 % | 79 % | 77 % | 70 % |
+| Contrats tenus (80 % visés) | 76,7 % | **78,2 %** | 75,9 % | 75,2 % |
 | P\* Seine-et-Marne 2026 | 2 932 €/t | 1 568 €/t | 1 001 €/t | — |
 
 Pour référence, un prix fixé sur les moyennes des années passées, sans modèle, ne tient que 29 % des contrats, avec un P\* 2026 de 742 €/t.
@@ -210,16 +210,16 @@ Dans le backtest, ces deux formes sont recalibrées pour chaque cas avec les sc�
 
 ## 5. Backtest
 
-### Protocole historique : entraînement glissant, regroupements sur période complète
+### Protocole de production : groupes d'entraînement reconstruits sur le passé
 
 Pour chaque année test `t` de 2019 à 2025 :
 
-1. entraîner M0, M1 et M2 sur les années `< t` uniquement, niveaux et calibration conformal compris ;
+1. regrouper les séries de légumineuses Agreste en double avec les seules années `< t`, puis entraîner M0, M1 et M2 sur ces années uniquement, niveaux et calibration conformal compris ;
 2. calculer `P*[d, t]` pour chaque département, en rejouant la météo et le prix du blé des années `< t` ;
 3. observer l'année `t` réelle : rendements Agreste, prix du blé réalisé ;
 4. le contrat **a tenu** si `P*[d,t] · y_L_réel · (1 − r) − charges_L + aide + rotation ≥ p_B_réel · y_B_réel − charges_B`.
 
-Les années test ne servent pas à entraîner les modèles de rendement ni à calibrer leur prix. En revanche, le fichier historique `panel_rendements.csv` apporte des regroupements de séries estimés sur toute la période 2010–2025. Ce prétraitement utilise donc de l'information postérieure à certaines années test : le backtest historique de 133 cas n'est pas qualifié de strictement sans fuite. Le benchmark multicultures reconstruit les groupes, niveaux et transformations avant chaque année test et compare tous les candidats sur les mêmes cas.
+Les années test ne servent pas à entraîner les modèles de rendement ni à calibrer leur prix. Depuis la correction du 31 octobre, `series_passees` reconstruit les groupes de légumineuses avant chaque entraînement, avec au moins huit années identiques et un représentant choisi selon les surfaces historiques. La cohorte test conserve les représentants du panel regroupé sur 2010–2025, et le chemin historique du blé reste inchangé. L'ancien score de 87,2 % devient 78,2 % sur les mêmes 133 cas. Le benchmark multicultures de recherche reconstruit séparément groupes, niveaux et transformations, avec une cohorte commune à ses candidats : les deux tableaux ne sont pas interchangeables.
 
 La référence « moyennes » fixe le prix d'équilibre avec les rendements moyens et le prix moyen du blé des années `< t`, sans distribution : c'est la façon naïve de fixer un prix.
 
@@ -229,7 +229,7 @@ Les contrats publiés (Unéal 900 €/t, barème NatUp 2023–2024, proposition 
 
 | Métrique | Ce qu'elle mesure | Cible |
 |---|---|---|
-| Taux de contrats tenus | fiabilité réelle du prix | proche de τ = 80 % |
+| Taux de contrats tenus | fréquence observée de marge au moins égale au blé | au moins τ = 80 %, à confronter à l’incertitude et au coût |
 | Couverture de l'intervalle 80 % | calibration du modèle de rendement | proche de 80 % |
 | Pinball loss moyenne | précision des quantiles | inférieure à la baseline M0 |
 | Largeur moyenne de l'intervalle | utilité (un intervalle trop large ne sert à rien) | la plus faible à couverture égale |
@@ -237,7 +237,7 @@ Les contrats publiés (Unéal 900 €/t, barème NatUp 2023–2024, proposition 
 ### Ce qu'il faut dire au jury
 
 - **L'unité indépendante est l'année.** Les départements d'une même année partagent la même météo. Avec 7 années test, l'incertitude sur le taux de contrats tenus reste grande. On montre les résultats **année par année**.
-- **2020 et 2021 sont dans la fenêtre de test.** Un modèle entraîné jusqu'en 2019 n'a jamais vu un effondrement de la lentille de cette ampleur. Les contrats cèdent ces années-là (50 % et 61 % tenus). On le montre et on l'explique.
+- **2020 et 2021 sont dans la fenêtre de test.** Un modèle entraîné jusqu'en 2019 n'a jamais vu un effondrement de la lentille de cette ampleur. Les contrats cèdent ces années-là (39 % et 56 % tenus), puis en 2022 avec la flambée du prix du blé (68 %). On le montre et on l'explique.
 - Si les résultats sont mauvais, ils sont affichés quand même. Le protocole n'est jamais modifié après coup pour améliorer le chiffre.
 
 ---
