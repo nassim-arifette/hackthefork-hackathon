@@ -57,7 +57,7 @@
 
 - [x] Corriger le prompt de la lettre : « 8 années sur 10 » signifie que la marge lentille atteint celle du blé dans le modèle ; ce chiffre ne mesure pas la fiabilité de la coopérative.
 - [x] Dans le compte AWS de l'équipe, vérifier une invocation Bedrock puis générer la lettre et la mettre en cache ; procédure dans [AWS.md](AWS.md). Lettre régénérée avec les chiffres de la version 4 (barème par tranches).
-- [ ] Version web déployée par Amplify à chaque push sur `main`, version hors ligne exportée. Vidéo de secours de 4 minutes rendue image par image (branche `video-demo`). Reste : vérifier le parcours complet sur l'ordinateur de démo.
+- [ ] Version web déployée par Amplify à chaque push sur `main`, version hors ligne exportée. Vidéo de secours de 4 minutes rendue image par image, même minutage que le script : `docs/video/demo-4min.mp4` (PR nassim-arifette/hackthefork-hackathon#6 ; `make video COMMIT=<sha>` pour la refaire). Reste : vérifier le parcours complet sur l'ordinateur de démo.
 - [x] Confirmer la règle sur les assistants de code externes ; Claude Code et ChatGPT déclarés dans [DECLARATIONS.md](DECLARATIONS.md).
 - [ ] Track 3 déclaré. Reste : choisir présentateur et opérateur de démo ; répéter en français.
 - [x] Préparer la proposition commerciale, les contacts publics et le brouillon de prise de contact pour un pilote de 300 t nettes : [PILOTE_300T.md](PILOTE_300T.md).

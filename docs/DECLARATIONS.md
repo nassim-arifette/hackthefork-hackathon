@@ -27,7 +27,8 @@ Les références documentaires des hypothèses (guides Terres Inovia, notice Tel
 ## Bibliothèques logicielles
 
 Python : pandas, numpy, openpyxl, scikit-learn, scipy, lightgbm, geopandas, pyogrio, shapely, pyproj, py7zr, requests, pyyaml, rasterio, pystac-client.
-JavaScript : Vite, React, TypeScript, deck.gl, vite-plugin-singlefile.
+JavaScript : Vite, React, TypeScript, deck.gl, vite-plugin-singlefile ; Playwright (Chromium) pour la recette et la vidéo de secours.
+Vidéo : ffmpeg ; rendu image par image sur Modal (calcul en nuage, CPU), scripts dans `video/`.
 Polices : Archivo et Source Serif 4 (licence SIL Open Font License), via Fontsource.
 Versions exactes : `requirements.txt` et `app/package.json`.
 
