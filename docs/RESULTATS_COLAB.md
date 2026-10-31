@@ -1,5 +1,7 @@
 # Résultats Colab du 31 octobre 2026
 
+**Suite de l'étude :** voir l'[audit complet face à M0](AUDIT_OBJECTIF80.md), avec explication des 133/192 cas, résultats régionaux et départementaux, calibration du prix visant 80 % et tests de transfert. Les tableaux ci-dessous conservent le premier benchmark à l'identique.
+
 **QRF est la meilleure base Monte-Carlo du benchmark : perte contrat de 209,5 €/t, contre 285,3 €/t pour TabPFN.** Son taux historique de 63,0 % indique le travail restant pour retrouver les 80 % visés hors échantillon : améliorer la distribution des rendements et leur dépendance. Le modèle direct QRF calibré atteint 82,3 % au total ; son résultat 2025 explique pourquoi il reste un concurrent à améliorer plutôt que le choix retenu.
 
 ## Expérience et fichiers

@@ -1,0 +1,37 @@
+{
+  "environment": "Google Colab existing notebook runtime",
+  "date": "2026-10-31",
+  "command": [
+    "/usr/bin/python3",
+    "-u",
+    "/content/hackthefork-benchmark/pipeline/benchmark_contract_policies.py",
+    "--input",
+    "/content/drive/MyDrive/HackTheFork/deep_audit/2026-10-31/protocol/predictions_with_warmup.csv",
+    "--panel",
+    "/content/hackthefork-benchmark/data/panel_rendements.csv",
+    "--output",
+    "/content/drive/MyDrive/HackTheFork/deep_audit/2026-10-31/policies_sensitivity",
+    "--calibration-quantiles",
+    ".8",
+    ".9",
+    ".95",
+    "--base-protocol",
+    "modern_raw_raw"
+  ],
+  "pid": 19246,
+  "device": "CPU",
+  "thread_count": 1,
+  "design": "Follow-up sensitivity after the original Q80 policy run; Q90 and Q95 levels fixed before these runs.",
+  "product_target": 0.8,
+  "parent_experiment": "/content/drive/MyDrive/HackTheFork/deep_audit/2026-10-31/policies",
+  "completed": true,
+  "verified": [
+    "Colab/local metrics agree",
+    "Executed script hash agrees",
+    "All 100 selections recomputed from downloaded out-of-time predictions",
+    "Every calibration and selection cutoff lies before decision year",
+    "All 50 policies use the same 192 evaluation cases",
+    "7 unit tests passed"
+  ],
+  "archive_sha256": "760a4313360821bcbc327c9d403384755207da0852dc929de30c4e3434e86a3d"
+}

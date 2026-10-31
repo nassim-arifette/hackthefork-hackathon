@@ -1,0 +1,12 @@
+                                  contract_loss      held  held_year_mean   mean_price  shortfall_eur_ha
+model
+trend__raw                           243.793324  0.661458        0.681895  1340.661717        116.842303
+qrf__raw                             209.487319  0.630208        0.646245  1240.658267        108.539408
+trend__log_expanding_signed          263.194079  0.671875        0.691931  1537.829380        108.369523
+qrf__log_expanding_signed            209.334698  0.677083        0.696335  1439.494976         87.011112
+trend__regional_expanding_signed     274.071803  0.635417        0.657577  1528.852363        116.750193
+qrf__regional_expanding_signed       228.076581  0.682292        0.700235  1442.520608         97.705933
+trend__past_selected                 288.025928  0.812500        0.825194  2207.530852         40.149615
+qrf__past_selected                   233.044092  0.822917        0.834536  1984.070588         35.273123
+hybrid__global_selected              240.715611  0.807292        0.820250  1939.259001         43.926467
+hybrid__regional_selected            245.662228  0.729167        0.743426  1811.713991         62.707167

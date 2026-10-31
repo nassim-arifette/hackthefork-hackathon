@@ -1,0 +1,33 @@
+{
+  "signature": "c862bcda673df133798e8f331374ce982f9a9b9e3fccff60b224f8aa98699d96",
+  "spec": {
+    "year_start": 2019,
+    "year_end": 2025,
+    "models": [
+      "trend",
+      "qrf"
+    ],
+    "samples": 20000,
+    "seed": 42,
+    "analogue_count": 4,
+    "distribution": "raw_3_quantiles",
+    "files": {
+      "benchmark_spatial_transfer.py": "c4d6776cf080780890c776d8acc6feca4470037907007a5ca65f82cb6f25bc16",
+      "benchmark_models.py": "7cd8a8e5cab32baff6f07e916e9d91fb7a8f05f5be5a25983e6fa373d0d78979",
+      "model.py": "6b25013b53e3d82586d9bcf6ca9959b7f1324222e954dd32544dd135afe1050d",
+      "01_agreste.py": "1a7ade006f4799d451d6ed9dcc394756f2ae212b8b0b28f7046407936a8eb196",
+      "common.py": "9a4849d0b5e2e49b2749c12e7e717f033c4cd3a734a40f40c10eed56579da4d5",
+      "predictions.csv": "9253aa302cfa45b70a0afc3c2fdabb5533e81bba9584159e59410d68a8df618d",
+      "panel_rendements.csv": "380b2e7a418dee87b0f193d6dc969ab3e336f2aea17870c7f4c6f989dd92f8d4",
+      "meteo_dept.csv": "f50803cf8e5fffe5e152967fe6e85eac5509cd948c649ebbf2899e0d036d52cb",
+      "prix_ble.csv": "2da72c05832daf2a3db1658d293f506aaa8101e13987c03215a2f4e9ca8ac676",
+      "hypotheses.yaml": "4cab9a6f616cf7a19fa160e3cbcda81142a42d1773a0ea2b2b7cfac5a277b23b"
+    },
+    "packages": {
+      "numpy": "2.3.5",
+      "pandas": "2.2.3",
+      "scikit-learn": "1.8.0",
+      "quantile-forest": "1.4.2"
+    }
+  }
+}

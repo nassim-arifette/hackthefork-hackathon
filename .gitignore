@@ -40,3 +40,15 @@ app/dist-single/
 experiments/**/checkpoints/
 experiments/**/progress.json
 pytest-of-root/
+
+# Tables volumineuses conservées à l'identique dans results-colab.zip.
+# Restaurer avec python scripts/restore_audit_artifacts.py.
+experiments/contract_policies/predictions.csv
+experiments/contract_policies/predictions_with_warmup.csv
+experiments/contract_policies/results.json
+experiments/contract_policies_sensitivity/predictions.csv
+experiments/contract_policies_sensitivity/predictions_with_warmup.csv
+experiments/contract_policies_sensitivity/results.json
+experiments/contract_policies_expanded/predictions.csv
+experiments/contract_policies_expanded/predictions_with_warmup.csv
+experiments/contract_policies_expanded/results.json

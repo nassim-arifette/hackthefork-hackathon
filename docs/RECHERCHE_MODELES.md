@@ -1,6 +1,8 @@
 # Modèle de contrat : recherche et expériences du 31 octobre 2026
 
-## Décision
+**Nouvelle étude :** l'[audit centré sur l'objectif de 80 %](AUDIT_OBJECTIF80.md) compare la vraie baseline M0, explique les écarts de protocole et teste les sous-groupes, la calibration du prix et le transfert. QRF avec sélection passée de sa correction atteint 82,3 % de contrats tenus contre 81,3 % pour M0, avec un prix moyen inférieur de 10,1 %. Ce résultat précise et prolonge le benchmark initial ci-dessous.
+
+## Décision du benchmark initial
 
 **Le benchmark Colab terminé confirme la forêt quantile comme référence Monte-Carlo à quantiles bruts : perte contrat de 209,5 €/t, contre 285,3 €/t pour TabPFN 3.5.** Elle tient toutefois seulement 63,0 % des contrats historiques : gagner le classement ne valide pas encore la protection recherchée à 80 %. CatBoost et TabPFN ont désormais été évalués ; aucun ne justifie un remplacement. Le modèle direct QRF calibré atteint 82,3 % au total mais tombe à 54,2 % en 2025 : il reste un concurrent de recherche.
 
