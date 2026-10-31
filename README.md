@@ -15,7 +15,7 @@ Le Contrat qui Tient aide le responsable filière d'une coopérative ou d'un con
 | ![Écran 1, le constat](docs/img/ecran-1-constat.png) | ![Écran 5, la preuve](docs/img/ecran-5-preuve.png) |
 | ![Écran 6, l'impact du bassin](docs/img/ecran-6-impact.png) | ![Écran 6, la carte de France des prix](docs/img/ecran-6-france.png) |
 
-Vidéo de la démo, 4 minutes : [docs/video/demo-4min.mp4](docs/video/demo-4min.mp4).
+Vidéo de la démo, 4 minutes : [docs/video/demo-4min.mp4](docs/video/demo-4min.mp4) ([lien direct](https://github.com/nassim-arifette/hackthefork-hackathon/raw/c4d9aed0fbab8d5895809fcd11e9b52ffdca6ff7/docs/video/demo-4min.mp4)).
 
 ## En chiffres
 

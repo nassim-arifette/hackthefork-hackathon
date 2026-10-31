@@ -38,4 +38,4 @@ Ouvertes et traçables : Agreste, IGN (registre parcellaire), NASA POWER, Eurost
 
 - Démo en ligne : https://main.d1lkeu0ybo1cz4.amplifyapp.com/
 - Code et données : https://github.com/nassim-arifette/hackthefork-hackathon
-- Vidéo de la démo, 4 minutes : `docs/video/demo-4min.mp4` dans le dépôt
+- Vidéo de la démo, 4 minutes : https://github.com/nassim-arifette/hackthefork-hackathon/raw/c4d9aed0fbab8d5895809fcd11e9b52ffdca6ff7/docs/video/demo-4min.mp4
