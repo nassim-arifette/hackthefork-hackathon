@@ -34,6 +34,8 @@
 | Et 2020, le contrat a cédé ? | En Île-de-France il tient, mais sur les départements producteurs il n'a tenu que dans la moitié des cas. C'est pour ça qu'on vise 80 % et pas 100 % : un prix plancher n'est pas une assurance récolte. Les deux se complètent. |
 | Et si le prix du blé flambe ? | Le prix du blé réel de chaque année est rejoué dans la simulation, 2022 compris (338 €/t). En prix fixe, de 160 à 280 €/t, P\* va de 1 070 à 2 348 €/t. Un contrat indexé (7,44 fois le prix du blé) déplace ce risque vers l'acheteur sans rendre le contrat moins cher. |
 | Quel impact ? | Le pilote de 300 t mobilise 210 ha ; l'ambition de 5 000 t, 3 506 ha : 13 % des importations, 1 250 t de protéines, 631 t d'azote minéral non apporté et 2 647 t CO₂e d'émissions directes évitées. |
+| Et pendant la saison ? | Prototype : on rejoue 2025 sur les 8 parcelles de lentille les plus proches du site, avec 148 images Sentinel-2. Six suivent le groupe, deux sont sous le groupe en mai : on sait où aller voir. Le NDVI ne prédit pas encore le rendement ; les données du pilote serviront à le caler. |
+| Où placer le site de collecte ? | On le déplace d'un clic : distances, parcelles et coût se recalculent. Le meilleur point gagne quelques dixièmes d'euro par tonne : avec ces coûts, le site se choisit pour la logistique, pas pour le prix. |
 | Ça existe déjà ? | Les contrats à prix minimum, oui. Un outil qui calcule ce prix sur le risque et cible les parcelles, nous ne l'avons pas trouvé. |
 | Qui paie, combien ? | Les coopératives et les conditionneurs, par campagne. Hypothèses à tester : étude pilote à 3 000 €, puis 10 000 € par campagne et par bassin. |
 

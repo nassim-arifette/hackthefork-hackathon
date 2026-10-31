@@ -106,7 +106,14 @@ En comparant les séries, plusieurs départements ont des rendements de lentille
 | Registre des cantines | colonnes utiles pour l'extension « débouchés » |
 | Ciqual | teneur en protéines de la lentille sèche (site indisponible le 30/10 ; remplacée par la fiche qualité Terres Inovia / Terres Univia) |
 
-## 7. Jeu synthétique du pilote (`data/pilote_300t`, ajouté le 31/10)
+## 7. Sentinel-2 L2A, saison 2025 (vérifié le 31/10/2026)
+
+- **Accès** : catalogue STAC Earth Search (Element 84), collection `sentinel-2-l2a`, fichiers COG lus par fenêtres (bandes `red`, `nir`, `scl`).
+- **Saison 2025, 1er mars – 15 août** : 148 images à moins de 85 % de nuages sur l'emprise des 8 parcelles, tuile 31UDP pour l'essentiel.
+- **Réflectances** : les métadonnées annoncent un décalage de +1 000 (base de traitement 05.11). Sur toutes les images vérifiées, y compris celles marquées `earthsearch:boa_offset_applied = false`, le rouge descend sous 1 000 sur la végétation : les valeurs sont déjà sans décalage. Appliquer le décalage donnait des NDVI de 1,3 à 1,5.
+- **Sortie** : `data/sentinel_lentilles_2025.json`, de 19 à 25 dates utiles par parcelle.
+
+## 8. Jeu synthétique du pilote (`data/pilote_300t`, ajouté le 31/10)
 
 - **Contenu** : 140 lots fictifs de la coopérative `SYN_COOP_01`, 20 fermes, 2019–2025 ; récolte brute et nette, qualité, refus, paiements et coûts par acteur ; trois barèmes paramétrés dans `contrats.json`.
 - **Statut** : **synthétique**, reproductible avec `python3 tools/generer_pilote_300t.py --verifier-reproductibilite`.

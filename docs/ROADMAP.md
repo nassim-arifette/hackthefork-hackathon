@@ -65,8 +65,8 @@ Dès que le parcours cœur fonctionne avec des chiffres cohérents, prendre ces 
 
 | Priorité | Extension | Budget de travail | Critère de sortie |
 |---|---|---|---|
-| 1 | Site de collecte déplaçable | 1 h | Distances, coût rendu, tonnes et courbe se recalculent. |
-| 2 | Suivi Sentinel de 5 à 10 parcelles | 1 à 2 h | Courbes précalculées, dates et pixels valides affichés, replay clairement nommé. |
+| 1 | ~~Site de collecte déplaçable~~ **fait** | 1 h | Distances, coût rendu, tonnes et courbe se recalculent ; meilleur point d'une grille. |
+| 2 | ~~Suivi Sentinel de 5 à 10 parcelles~~ **fait** (8 parcelles, étape « La saison ») | 1 à 2 h | Courbes précalculées, dates et pixels valides affichés, replay clairement nommé. |
 | 3 | Le Maillon vu du ciel, zone réduite | Créneau restant avant le gel | Carte de classes et métriques sur un bloc géographique tenu à l'écart. |
 | 4 | Météo pondérée par les surfaces ; variables par stade | Seulement si le cœur et la démo sont prêts | Nouvelle version comparée à M1 avec le même protocole. |
 | 5 | Autres cultures, données coopératives, offre assureurs | Selon capacité disponible | Une preuve ciblée ou une maquette clairement identifiée. |

@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import DeckGL from '@deck.gl/react';
 import { FlyToInterpolator, MapView, type MapViewState } from '@deck.gl/core';
 import { GeoJsonLayer, PolygonLayer, ScatterplotLayer, TextLayer } from '@deck.gl/layers';
-import { contours, DEP_NAMES, france, H, held, meta, parcels, thresholds, type Parcel, type ReplayYear } from '../data';
+import { contours, DEP_NAMES, france, held, meta, ndviAt, parcels, SUIVI, SUIVI_INDEX, thresholds, type Parcel, type ReplayYear, type SiteGeo } from '../data';
 
 type RGB = [number, number, number];
 // Mêmes valeurs que les jetons de docs/DESIGN.md.
@@ -39,15 +39,24 @@ const DEP_LABELS = (contours as any).features.map((f: any) => {
   return { pos: centroid(f.geometry), name: DEP_NAMES[f.properties.code], pStar: d.p_star };
 });
 
-function views(width: number): { france: MapViewState; idf: MapViewState } {
+const SUIVI_CENTER = [SUIVI.reduce((a, p) => a + p.lon, 0) / SUIVI.length, SUIVI.reduce((a, p) => a + p.lat, 0) / SUIVI.length];
+// Deux parcelles voisines : la lettre de la seconde passe à gauche du point.
+const SUIVI_LEFT = new Set(SUIVI.filter((p, k) => SUIVI.slice(0, k).some((q) => Math.abs(q.lon - p.lon) < 0.01 && Math.abs(q.lat - p.lat) < 0.006)).map((p) => p.id));
+
+function views(width: number): { france: MapViewState; idf: MapViewState; suivi: MapViewState } {
   const z = Math.log2(Math.max(360, width) / 1000);
   return {
     france: { longitude: 2.45, latitude: 46.6, zoom: 4.95 + z, pitch: 0, bearing: 0 },
     idf: { longitude: 2.48, latitude: 48.64, zoom: 8.05 + z, pitch: 0, bearing: 0 },
+    suivi: { longitude: SUIVI_CENTER[0], latitude: SUIVI_CENTER[1], zoom: 10.3 + z, pitch: 0, bearing: 0 },
   };
 }
 
-export type Hover = { kind: 'parcel'; p: Parcel } | { kind: 'dep'; name: string; surface: number } | null;
+// Rampe de NDVI : sol nu (0,15) vers végétation dense (0,9).
+const NDVI_LO: RGB = [226, 214, 182], NDVI_HI: RGB = [33, 92, 63];
+const ndviColor = (v: number): RGB => mix(NDVI_LO, NDVI_HI, Math.max(0, Math.min(1, (v - 0.15) / 0.75)));
+
+export type Hover = { kind: 'parcel'; p: Parcel; i: number } | { kind: 'dep'; name: string; surface: number } | null;
 
 interface Props {
   step: number;
@@ -56,13 +65,20 @@ interface Props {
   /** Étape « contrat » : distance maximale des parcelles retenues pour le volume visé. */
   selectKm: number | null;
   onHover: (h: Hover) => void;
+  /** Distances et prix rendu de chaque parcelle pour le site de collecte courant. */
+  geo: SiteGeo;
+  /** Si fourni, un clic sur la carte déplace le site de collecte. */
+  onPickSite?: (site: [number, number]) => void;
+  /** Étape « La saison » : jour du replay, et parcelle mise en avant. */
+  season: number | null;
+  focus: string | null;
 }
 
-export default function MapScene({ step, price, year, selectKm, onHover }: Props) {
+export default function MapScene({ step, price, year, selectKm, onHover, geo, onPickSite, season, focus }: Props) {
   const box = useRef<HTMLDivElement>(null);
   const [width, setWidth] = useState(1000);
   const [fontsReady, setFontsReady] = useState(false);
-  const target = step === 0 ? 'france' : 'idf';
+  const target = step === 0 ? 'france' : step === 5 ? 'suivi' : 'idf';
   const [viewState, setViewState] = useState<MapViewState>(views(1000).france);
   // Seul un changement d'étape anime la caméra. Une largeur mesurée tardivement s'applique sans
   // transition : sinon la dernière image de cette transition peut écraser la suivante.
@@ -86,7 +102,7 @@ export default function MapScene({ step, price, year, selectKm, onHover }: Props
   }, [target, width]);
 
   const layers = useMemo(() => {
-    const lentil = (p: Parcel) => price >= p.pRendu;
+    const lentil = (i: number) => price >= geo.pRendu[i];
     const showParcels = step > 0;
     const font = '"Archivo Variable", Archivo, system-ui, sans-serif';
     return [
@@ -111,12 +127,16 @@ export default function MapScene({ step, price, year, selectKm, onHover }: Props
         id: 'parcelles', data: parcels, pickable: showParcels, visible: showParcels,
         stroked: false, filled: true,
         getPolygon: (p) => p.polygon,
-        getFillColor: (p) => {
+        getFillColor: (p, { index: i }) => {
+          if (season !== null) {
+            const s = SUIVI_INDEX.has(i) ? SUIVI.find((q) => q.id === p.id) : undefined;
+            return s ? ndviColor(ndviAt(s.serie, season)) : C.wheatDim;
+          }
           if (selectKm !== null) {
             if (p.culture === 'lentille') return C.slate;
-            return lentil(p) && p.dist <= selectKm ? C.lentil : C.wheatDim;
+            return lentil(i) && geo.dist[i] <= selectKm ? C.lentil : C.wheatDim;
           }
-          if (lentil(p)) return year ? (held(p, price, year) ? C.lentil : C.fail) : C.lentil;
+          if (p.culture === 'ble' && lentil(i)) return year ? (held(p, geo.dist[i], price, year) ? C.lentil : C.fail) : C.lentil;
           if (p.culture === 'lentille') return C.slate;
           if (year) {
             const d = year.par_departement[p.dep as keyof ReplayYear['par_departement']];
@@ -124,9 +144,9 @@ export default function MapScene({ step, price, year, selectKm, onHover }: Props
           }
           return C.wheat;
         },
-        updateTriggers: { getFillColor: [price, year?.annee, selectKm] },
+        updateTriggers: { getFillColor: [price, year?.annee, selectKm, geo, season] },
         transitions: { getFillColor: 500 },
-        onHover: (info) => onHover(info.object ? { kind: 'parcel', p: info.object as Parcel } : null),
+        onHover: (info) => onHover(info.object ? { kind: 'parcel', p: info.object as Parcel, i: info.index } : null),
       }),
       new TextLayer({
         id: `dep-labels-${fontsReady}`, data: DEP_LABELS, visible: step === 1,
@@ -136,12 +156,29 @@ export default function MapScene({ step, price, year, selectKm, onHover }: Props
         characterSet: 'auto',
       }),
       new ScatterplotLayer({
-        id: 'site', data: [H.site], visible: showParcels, getPosition: (d: [number, number]) => d,
+        id: 'suivi-points', data: SUIVI, visible: season !== null, pickable: false,
+        getPosition: (d: (typeof SUIVI)[number]) => [d.lon, d.lat],
+        getRadius: (d: (typeof SUIVI)[number]) => (focus === d.id ? 13 : 10), radiusUnits: 'pixels',
+        getFillColor: (d: (typeof SUIVI)[number]) => ndviColor(ndviAt(d.serie, season ?? 0)),
+        stroked: true, getLineColor: (d: (typeof SUIVI)[number]) => (focus === d.id ? C.ink : [255, 255, 255]),
+        getLineWidth: 2.5, lineWidthUnits: 'pixels',
+        updateTriggers: { getFillColor: [season], getRadius: [focus], getLineColor: [focus] },
+      }),
+      new TextLayer({
+        id: `suivi-lettres-${fontsReady}`, data: SUIVI, visible: season !== null,
+        getPosition: (d: (typeof SUIVI)[number]) => [d.lon, d.lat], getText: (d: (typeof SUIVI)[number]) => d.lettre,
+        getSize: 13, getColor: C.ink, fontFamily: font, fontWeight: 700,
+        getPixelOffset: (d: (typeof SUIVI)[number]) => (SUIVI_LEFT.has(d.id) ? [-17, 0] : [17, 0]),
+        getTextAnchor: (d: (typeof SUIVI)[number]) => (SUIVI_LEFT.has(d.id) ? 'end' : 'start'),
+        outlineWidth: 6, outlineColor: [255, 255, 255, 235], fontSettings: { sdf: true, fontSize: 64, buffer: 8 },
+      }),
+      new ScatterplotLayer({
+        id: 'site', data: [geo.site], visible: showParcels, getPosition: (d: [number, number]) => d,
         getRadius: 6, radiusUnits: 'pixels', getFillColor: C.ink, stroked: true,
         getLineColor: [255, 255, 255], getLineWidth: 3, lineWidthUnits: 'pixels',
       }),
     ];
-  }, [step, price, year, selectKm, onHover, fontsReady]);
+  }, [step, price, year, selectKm, onHover, fontsReady, geo, season, focus]);
 
   return (
     <div ref={box} className="map-box">
@@ -151,7 +188,8 @@ export default function MapScene({ step, price, year, selectKm, onHover }: Props
         onViewStateChange={({ viewState: v }) => setViewState({ ...(v as MapViewState), pitch: 0, bearing: 0 })}
         controller={{ dragRotate: false, touchRotate: false, doubleClickZoom: true }}
         layers={layers}
-        getCursor={({ isHovering }) => (isHovering ? 'crosshair' : 'grab')}
+        onClick={(info) => { if (onPickSite && info.coordinate) onPickSite([info.coordinate[0], info.coordinate[1]]); }}
+        getCursor={({ isHovering, isDragging }) => (isDragging ? 'grabbing' : onPickSite || isHovering ? 'crosshair' : 'grab')}
       />
     </div>
   );

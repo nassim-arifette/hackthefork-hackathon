@@ -19,6 +19,10 @@ export: data/backtest.json data/parcelles.json
 	$(P) $(PY) 07_contrats.py
 	$(P) $(PY) 06_lettre_llm.py
 
+# Suivi en saison (prototype) : lit environ 150 images Sentinel-2 en ligne, quelques minutes.
+sentinel:
+	$(P) $(PY) 08_sentinel.py
+
 app:
 	cd app && npm install && npm run build && npm run build:single
 
@@ -28,4 +32,4 @@ dev:
 test:
 	$(PY) -m pytest -q tests
 
-.PHONY: all export app dev test
+.PHONY: all export sentinel app dev test

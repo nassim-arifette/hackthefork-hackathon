@@ -21,14 +21,16 @@ from pathlib import Path
 APP_DATA = Path(__file__).resolve().parents[1] / "app" / "src" / "data"
 
 PROMPT = """Tu rédiges une courte lettre d'une coopérative à un agriculteur d'Île-de-France,
-pour accompagner une proposition de contrat lentille. Utilise uniquement les chiffres
-fournis, écrits exactement comme ci-dessous ; n'en ajoute aucun, n'en arrondis aucun.
-Pas de formule creuse. Cinq phrases au plus, en français, ton direct et respectueux.
-Dis clairement ce que le prix garantit et ce qu'il ne garantit pas.
+pour accompagner une proposition de contrat lentille payé selon un barème par tranches.
+Utilise uniquement les chiffres fournis, écrits exactement comme ci-dessous ; n'en ajoute
+aucun, n'en arrondis aucun. Pas de formule creuse. Cinq phrases au plus, en français, ton
+direct et respectueux. Dis clairement ce que le barème garantit et ce qu'il ne garantit pas.
 
 Sens des chiffres, à respecter :
-- « 8 années sur 10 » veut dire : dans 8 années simulées sur 10, la lentille payée au prix
-  plancher rapporte au moins autant par hectare que le blé. Ce n'est ni une mesure de la
+- Le barème paie plus cher la première tonne acceptée par hectare : c'est celle qui manque
+  les mauvaises années. Les tonnes suivantes sont payées moins cher.
+- « 8 années sur 10 » veut dire : dans 8 années simulées sur 10, la lentille payée selon ce
+  barème rapporte au moins autant par hectare que le blé. Ce n'est ni une mesure de la
   fiabilité de la coopérative, ni une garantie de revenu.
 - Le prix est payé sur les tonnes acceptées au tri pour l'alimentation humaine.
 - Les deux autres années sur dix, et en cas de récolte faible, la lentille peut rapporter
@@ -41,10 +43,13 @@ Chiffres :
 def chiffres() -> dict:
     t = json.loads((APP_DATA / "thresholds.json").read_text())
     meta = json.loads((APP_DATA / "meta.json").read_text())
+    contrats = json.loads((APP_DATA / "contrats.json").read_text())
     d77 = next(d for d in t["par_departement"] if d["dep"] == "77")
+    p1, p2, p3 = next(c for c in contrats["calibres"] if c["id"] == "paliers")["paliers"]
     fr = lambda x: f"{x:,}".replace(",", " ").replace(".", ",")
     return {
-        "prix plancher": f"{fr(d77['p_star'])} €/t départ ferme",
+        "barème garanti": (f"{fr(p1)} €/t jusqu'à 1 t/ha acceptée, {fr(p2)} €/t de 1 à 2 t/ha, "
+                           f"{fr(p3)} €/t au-delà de 2 t/ha, départ ferme"),
         "fiabilité": "8 années sur 10",
         "durée": "3 campagnes",
         "rendement faible, une année sur dix": f"{fr(d77['rendement_lentille_q10_tha'])} t/ha",

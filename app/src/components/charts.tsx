@@ -1,4 +1,4 @@
-import { backtest, D77, fmt, MARKET, meta, pct, reliabilityAt, supply, thresholds } from '../data';
+import { backtest, D77, dateOf, fmt, MARKET, meta, ndviAt, pct, reliabilityAt, SAISON, SUIVI, thresholds, type Statut } from '../data';
 
 // Largeur logique commune : le texte du panneau fait environ 416 px.
 const W = 416;
@@ -38,7 +38,7 @@ export function YieldsChart() {
 }
 
 /** Prix proposé → part des années où la lentille gagne (haut) et hectares qui basculent (bas). */
-export function PriceChart({ price, min, max }: { price: number; min: number; max: number }) {
+export function PriceChart({ price, min, max, supply }: { price: number; min: number; max: number; supply: { prix: number; hectares: number }[] }) {
   const h = 276, l = 40, r = 14;
   const top = [26, 118] as const;
   const bot = [170, 236] as const;
@@ -203,3 +203,53 @@ export function BacktestReveal({ shown }: { shown: number }) {
 }
 
 export { pct };
+
+
+const STATUT_CLASS: Record<Statut, string> = { conforme: 'lentil', a_surveiller: 'wheat', en_retard: 'fail' };
+const MOIS = ['janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juil.', 'août', 'sept.', 'oct.', 'nov.', 'déc.'];
+
+/** Courbes NDVI de la saison, dessinées jusqu'au jour du replay. */
+export function SeasonChart({ day, focus }: { day: number; focus: string | null }) {
+  const h = 232, l = 34, r = 14, t = 16, b = 28;
+  const X = (d: number) => l + ((W - l - r) * d) / SAISON.jours;
+  const Y = (v: number) => t + (h - t - b) * (1 - v);
+  const upTo = (serie: { day: number; ndvi: number }[]) => {
+    const pts = serie.filter((q) => q.day <= day);
+    if (day > serie[0].day && day < serie[serie.length - 1].day) pts.push({ day, ndvi: ndviAt(serie, day) });
+    return pts;
+  };
+  const path = (pts: { day: number; ndvi: number }[]) => pts.map((q, i) => `${i ? 'L' : 'M'}${X(q.day).toFixed(1)},${Y(q.ndvi).toFixed(1)}`).join('');
+  const months: { day: number; label: string }[] = [];
+  for (let m = 2; m <= 7; m++) {
+    const d = Math.round((Date.UTC(SAISON.annee, m, 1) - dateOf(0).getTime()) / 864e5);
+    if (d >= 0 && d <= SAISON.jours) months.push({ day: d, label: MOIS[m] });
+  }
+  const ref = upTo(SAISON.reference);
+  const date = dateOf(day);
+  return (
+    <svg viewBox={`0 0 ${W} ${h}`} role="img" aria-label="NDVI des parcelles suivies pendant la saison">
+      <rect x={X(SAISON.fenetre[0])} width={X(SAISON.fenetre[1]) - X(SAISON.fenetre[0])} y={t} height={h - t - b} className="band-market" />
+      <text x={X(SAISON.fenetre[0]) + 5} y={t + 11} className="note">floraison, remplissage</text>
+      {[0, 0.5, 1].map((v) => (
+        <g key={v}><line x1={l} x2={W - r} y1={Y(v)} y2={Y(v)} className="grid" />
+          <text x={l - 6} y={Y(v) + 3.5} className="tick" textAnchor="end">{v.toLocaleString('fr-FR')}</text></g>
+      ))}
+      {months.map((m) => <text key={m.day} x={X(m.day)} y={h - 10} className="tick" textAnchor="start">{m.label}</text>)}
+      {SUIVI.map((p) => {
+        const pts = upTo(p.serie);
+        const on = focus === null || focus === p.id;
+        return (
+          <g key={p.id} opacity={on ? 1 : 0.22}>
+            <path d={path(pts)} className={`ln thin ${STATUT_CLASS[p.statut]}`} />
+            {pts.length > 0 && (p.statut !== 'conforme' || focus === p.id) && (
+              <text x={X(pts[pts.length - 1].day) + 4} y={Y(pts[pts.length - 1].ndvi) + 3.5} className={`lbl small ${STATUT_CLASS[p.statut]}`}>{p.lettre}</text>
+            )}
+          </g>
+        );
+      })}
+      <path d={path(ref)} className="ln ref-line" />
+      <line x1={X(day)} x2={X(day)} y1={t} y2={h - b} className="cursor" />
+      <text x={Math.min(X(day) + 5, W - r - 60)} y={h - b - 6} className="tick on">{date.getUTCDate()} {MOIS[date.getUTCMonth()]}</text>
+    </svg>
+  );
+}

@@ -1,15 +1,15 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import MapScene, { type Hover } from './components/MapScene';
 import Method from './components/Method';
-import { BacktestReveal, MarginBars, PriceChart, SecurityChart, Sensitivity, YieldsChart } from './components/charts';
+import { BacktestReveal, MarginBars, PriceChart, SeasonChart, SecurityChart, Sensitivity, YieldsChart } from './components/charts';
 import { Figure, Source } from './components/ui';
 import {
-  backtest, CHALLENGER, CONTRATS, D77, DEP_NAMES, dec, FEATURE_LABELS, fmt, H, held, lettre, MARKET, meta, parcels, pct, pctFine, reliabilityAt, replay,
-  signedPct, thresholds, type ReplayYear,
+  backtest, bestSite, CHALLENGER, CONTRATS, D77, DEP_NAMES, dec, FEATURE_LABELS, fmt, H, held, lettre, MARKET, meta, parcels, pct, pctFine,
+  reliabilityAt, replay, SAISON, signedPct, siteGeo, SITE_SCENARIO, SUIVI, supplyCurve, thresholds, type ReplayYear, type Statut,
 } from './data';
 import { useTween } from './useTween';
 
-const STEPS = ['Le verrou', 'Le prix', 'L’épreuve', 'La preuve', 'Le contrat'];
+const STEPS = ['Le verrou', 'Le prix', 'L’épreuve', 'La preuve', 'Le contrat', 'La saison'];
 const pStars = thresholds.par_departement.map((d) => d.p_star);
 const MIN = 600;
 const MAX = 2000;
@@ -29,6 +29,27 @@ const C_BT = (G as any).contrats as Record<string, { taux_tenus: number; cout_mo
 const C_2022 = (backtest.annees.find((y) => y.annee === 2022) as any).contrats as Record<string, number>;
 const saving = (a: number, b: number) => Math.round((1 - a / b) * 100);
 const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+
+const STATUT_LABEL: Record<Statut, string> = { conforme: 'Conforme', a_surveiller: 'À surveiller', en_retard: 'En retard' };
+function seasonSummary(): string {
+  const n = (st: Statut) => SUIVI.filter((p) => p.statut === st).length;
+  const parts = [`${n('conforme')} parcelles suivent le groupe`];
+  if (n('a_surveiller')) parts.push(`${n('a_surveiller')} restent sous le groupe en mai-juin et sont à surveiller`);
+  if (n('en_retard')) parts.push(`${n('en_retard')} sont en retard`);
+  return parts.join(', ') + '.';
+}
+
+/** Volume visé : les parcelles de blé éligibles les plus proches du site, jusqu'au volume. */
+function selectTarget(geo: ReturnType<typeof siteGeo>, price: number, volume: number) {
+  const elig = parcels.map((_, i) => i).filter((i) => parcels[i].culture === 'ble' && price >= geo.pRendu[i])
+    .sort((a, b) => geo.dist[a] - geo.dist[b]);
+  let t = 0, ha = 0, n = 0, km = 0, tkm = 0;
+  for (const i of elig) {
+    if (t >= volume) break;
+    t += parcels[i].tonnes; ha += parcels[i].surface; n++; km = geo.dist[i]; tkm += parcels[i].tonnes * geo.dist[i];
+  }
+  return { ha, n, km, meanKm: t ? tkm / t : 0, reached: t >= volume };
+}
 const pos = (p: number) => `${((p - MIN) / (MAX - MIN)) * 100}%`;
 
 export default function App() {
@@ -36,10 +57,17 @@ export default function App() {
   const [price, setPrice] = useState(START_PRICE);
   const [year, setYear] = useState<ReplayYear | null>(null);
   const [shown, setShown] = useState(0);
+  const [seasonDay, setSeasonDay] = useState(SAISON.jours);
+  const [focus, setFocus] = useState<string | null>(null);
   const [hover, setHover] = useState<Hover>(null);
   const [method, setMethod] = useState(false);
   const [volumeKey, setVolumeKey] = useState<'pilote' | 'ambition'>('pilote');
   const VOLUME = H.volumes[volumeKey];
+  // Site de collecte : déplaçable d'un clic sur la carte aux étapes « Le prix » et « Le contrat ».
+  const [geo, setGeo] = useState(SITE_SCENARIO);
+  const [best, setBest] = useState<{ volume: number; site: [number, number] } | null>(null);
+  const moveSite = useCallback((site: [number, number]) => setGeo(siteGeo(site)), []);
+  const supply = useMemo(() => supplyCurve(geo), [geo]);
   const timers = useRef<number[]>([]);
 
   const stop = () => { timers.current.forEach(clearTimeout); timers.current = []; };
@@ -47,24 +75,22 @@ export default function App() {
 
   const stats = useMemo(() => {
     let tonnes = 0, ha = 0, n = 0, kept = 0;
-    for (const p of parcels) {
-      if (p.culture !== 'ble' || price < p.pRendu) continue;
+    parcels.forEach((p, i) => {
+      if (p.culture !== 'ble' || price < geo.pRendu[i]) return;
       tonnes += p.tonnes; ha += p.surface; n++;
-      if (year && held(p, price, year)) kept++;
-    }
+      if (year && held(p, geo.dist[i], price, year)) kept++;
+    });
     return { tonnes, ha, n, kept };
-  }, [price, year]);
+  }, [price, year, geo]);
 
-  // Volume visé : on retient les parcelles éligibles les plus proches du site acheteur.
-  const target = useMemo(() => {
-    const elig = parcels.filter((p) => p.culture === 'ble' && price >= p.pRendu).sort((a, b) => a.dist - b.dist);
-    let t = 0, ha = 0, n = 0, km = 0;
-    for (const p of elig) {
-      if (t >= VOLUME) break;
-      t += p.tonnes; ha += p.surface; n++; km = p.dist;
-    }
-    return { ha, n, km, reached: t >= VOLUME };
-  }, [price, VOLUME]);
+  const target = useMemo(() => selectTarget(geo, price, VOLUME), [price, VOLUME, geo]);
+  const targetScenario = useMemo(() => selectTarget(SITE_SCENARIO, price, VOLUME), [price, VOLUME]);
+  const [busy, setBusy] = useState(false);
+  const findBest = () => {
+    setBusy(true);
+    // Laisse le navigateur afficher « Calcul… » avant la recherche sur la grille.
+    window.setTimeout(() => { const b = bestSite(VOLUME); moveSite(b.site); setBest({ volume: VOLUME, site: b.site }); setBusy(false); }, 30);
+  };
 
   const animatePrice = useCallback((from: number, to: number, ms = 5600) => {
     stop();
@@ -77,6 +103,11 @@ export default function App() {
     backtest.annees.forEach((_, i) => at(400 + i * 650, () => setShown(i + 1)));
   }, []);
 
+  const replaySeason = useCallback(() => {
+    stop(); setSeasonDay(0);
+    const n = 84;
+    for (let i = 1; i <= n; i++) at(600 + i * 75, () => setSeasonDay(Math.round((SAISON.jours * i) / n)));
+  }, []);
   const go = useCallback((s: number) => {
     const next = Math.max(0, Math.min(STEPS.length - 1, s));
     stop(); setHover(null); setStep(next);
@@ -85,7 +116,8 @@ export default function App() {
     if (next >= 2 && price < Math.max(...pStars)) setPrice(CONTRACT_PRICE);
     if (next === 2) setYear(replay[0]);
     if (next === 3) reveal();
-  }, [price, animatePrice, reveal]);
+    if (next === 5) replaySeason();
+  }, [price, animatePrice, reveal, replaySeason]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -123,26 +155,33 @@ export default function App() {
       </header>
 
       <main className="map">
-        <MapScene step={step} price={price} year={step === 2 ? year : null} selectKm={step === 4 ? target.km : null} onHover={setHover} />
+        <MapScene step={step} price={price} year={step === 2 ? year : null} selectKm={step === 4 ? target.km : null} onHover={setHover}
+          geo={geo} onPickSite={step === 1 || step === 4 ? (s) => { moveSite(s); setBest(null); } : undefined}
+          season={step === 5 ? seasonDay : null} focus={focus} />
         <div className="map-caption">
           {step === 0
             ? <><b>Surface en lentille par département, 2025</b><span>Agreste, Statistique agricole annuelle</span></>
-            : <><b>{fmt(meta.n_candidates)} parcelles de blé tendre d’hiver en Île-de-France</b><span>Registre parcellaire graphique 2025, IGN</span></>}
+            : step === 5
+              ? <><b>{SUIVI.length} parcelles de lentille déclarées en {SAISON.annee}, près du site</b><span>NDVI Sentinel-2 L2A (Copernicus), replay de la saison {SAISON.annee}</span></>
+              : <><b>{fmt(meta.n_candidates)} parcelles de blé tendre d’hiver en Île-de-France</b><span>Registre parcellaire graphique 2025, IGN</span></>}
         </div>
         {step === 2 && year && <div className="map-year" key={year.annee}>{year.annee}</div>}
         <div className="map-legend">
           {step === 0 ? (
             <div className="ramp"><span>0 ha</span><i /><span>{fmt(Math.max(...Object.values(surf)))} ha</span></div>
+          ) : step === 5 ? (
+            <div className="ramp ndvi"><span>sol nu</span><i /><span>végétation dense</span><span className="ramp-site"><span className="sw site" />Site de collecte</span></div>
           ) : (
             <ul>
               <li><i className={step === 4 ? 'sw wheat-dim' : 'sw wheat'} />Blé tendre d’hiver</li>
               <li><i className="sw lentil" />{step === 4 ? `Parcelles du contrat de ${fmt(VOLUME)} t` : 'Bascule en lentille'}</li>
               {step === 2 && <li><i className="sw fail" />Contrat non tenu</li>}
               <li><i className="sw slate" />Lentille déjà cultivée</li>
-              <li><i className="sw site" />Site acheteur fictif</li>
+              <li><i className="sw site" />{geo === SITE_SCENARIO ? 'Site de collecte fictif' : 'Site de collecte déplacé'}</li>
             </ul>
           )}
         </div>
+        {(step === 1 || step === 4) && <p className="map-hint">Cliquez sur la carte pour déplacer le site de collecte</p>}
         {hover && (
           <div className="map-tip">
             {hover.kind === 'dep' ? (
@@ -150,7 +189,7 @@ export default function App() {
             ) : (
               <>
                 <b>{hover.p.culture === 'ble' ? 'Blé tendre d’hiver' : 'Lentille déjà cultivée'}, {DEP_NAMES[hover.p.dep]}</b>
-                {dec(hover.p.surface)} ha, à {fmt(hover.p.dist)} km du site. Bascule à {fmt(hover.p.pRendu)} €/t rendu.
+                {dec(hover.p.surface)} ha, à {fmt(geo.dist[hover.i])} km du site. Bascule à {fmt(geo.pRendu[hover.i])} €/t rendu.
               </>
             )}
           </div>
@@ -211,7 +250,7 @@ export default function App() {
               </div>
               <div className="block">
                 <h3>Ce que le prix achète</h3>
-                <PriceChart price={price} min={MIN} max={MAX} />
+                <PriceChart price={price} min={MIN} max={MAX} supply={supply} />
                 <Source k="modele">20 000 années rejouées : météo et prix du blé de 2010 à 2025. Référence historique du prix de la lentille : Eurostat, {MARKET.annees[0]}–{MARKET.annees[1]}.</Source>
               </div>
               <p className="pull">À la référence historique de {fmt(MARKET.min)} à {fmt(MARKET.max)} €/t, la lentille ne gagne que {dec(REL_MARKET * 10, 1)} années sur 10. Pour 8 sur 10, il faut {fmt(D77.p_star)} €/t en Seine-et-Marne.</p>
@@ -355,14 +394,30 @@ export default function App() {
                 <p className="contract-title">Proposition de contrat, campagne {meta.campagne}</p>
                 <dl>
                   <dt>Objet</dt><dd>Achat de lentilles pour l’alimentation humaine, sur trois campagnes.</dd>
-                  <dt>Prix plancher</dt><dd><b>{fmt(D77.p_star)} €/t</b> départ ferme en Seine-et-Marne, payé sur les tonnes acceptées au tri pour l’alimentation humaine.</dd>
-                  <dt>Ce qu’il garantit</dt><dd>Une marge au moins égale à celle du blé dans {pct(H.tau)} des années simulées.</dd>
+                  <dt>Prix garanti</dt><dd><b>{fmt(C_PALIERS.paliers![0])} €/t</b> pour la première tonne acceptée par hectare, <b>{fmt(C_PALIERS.paliers![1])} €/t</b> pour la deuxième, <b>{fmt(C_PALIERS.paliers![2])} €/t</b> au-delà. Départ ferme en Seine-et-Marne, sur les tonnes acceptées au tri pour l’alimentation humaine.</dd>
+                  <dt>Ce qu’il garantit</dt><dd>Une marge au moins égale à celle du blé dans {pct(H.tau)} des années simulées : la protection d’un prix unique de {fmt(D77.p_star)} €/t, pour {saving(C_PALIERS.simulation.cout_moyen_t, C_UNIQUE.simulation.cout_moyen_t)} % de moins en moyenne.</dd>
                   <dt>Ce qu’il ne garantit pas</dt><dd>Une récolte effondrée réduit la marge : {dec(D77.rendement_lentille_q10_tha, 2)} t/ha ou moins une année sur dix. Les lots refusés au tri ne sont pas payés au prix garanti.</dd>
                   <dt>Volume visé</dt><dd>{target.reached
                     ? <><b>{fmt(VOLUME)} t</b> acceptées, soit {pctFine(VOLUME / L25.importations_t)} des importations de 2025, sur {fmt(target.ha)} ha : les {fmt(target.n)} parcelles éligibles les plus proches du site, à moins de {fmt(target.km)} km.</>
                     : <>Le prix est trop bas pour réunir {fmt(VOLUME)} t. Remontez-le à l’étape 2.</>}</dd>
                 </dl>
-                <Source k="modele">Texte assemblé à partir des chiffres calculés, sans aucun chiffre ajouté. Volumes : hypothèses de l’équipe.</Source>
+                <Source k="modele">Barème calibré sur les mêmes années simulées que le prix plancher : la première tonne est recalculée, les deux suivantes reprennent la proposition du dossier pilote. Texte assemblé à partir des chiffres calculés ; volumes : hypothèses de l’équipe.</Source>
+              </div>
+              <div className="block">
+                <h3>Où placer le site de collecte ?</h3>
+                <p className="body small">Cliquez sur la carte pour déplacer le site : les parcelles retenues, leurs distances et le coût de collecte se recalculent.</p>
+                <div className="figures two">
+                  <Figure value={dec(target.meanKm, 1)} unit="km" label={`distance moyenne des parcelles du contrat de ${fmt(VOLUME)}\u00a0t`} />
+                  <Figure value={dec(H.forfait + H.kappa * target.meanKm, 1)} unit="€/t" label="coût moyen de collecte par tonne acceptée" />
+                </div>
+                <div className="actions">
+                  <button className="link" onClick={findBest} disabled={busy}>{busy ? 'Calcul…' : `Meilleur emplacement pour ${fmt(VOLUME)}\u00a0t`}</button>
+                  {geo !== SITE_SCENARIO && <button className="link" onClick={() => { setGeo(SITE_SCENARIO); setBest(null); }}>Revenir au site du scénario</button>}
+                </div>
+                {best && best.volume === VOLUME && geo.site === best.site && (
+                  <p className="body small">Point de la grille qui minimise la distance moyenne pour {fmt(VOLUME)}&nbsp;t : {dec(H.kappa * (targetScenario.meanKm - target.meanKm), 1)} €/t de collecte en moins qu’au site du scénario. Le gain reste faible face à un prix garanti de plus de 1 000 €/t : le site se choisit d’abord pour la logistique.</p>
+                )}
+                <Source k="suppose">Forfait de {fmt(H.forfait)} €/t et {dec(H.kappa, 2)} €/t/km ; distance routière approchée par la distance à vol d’oiseau × {dec(H.detour, 1)}. Emplacements candidats sur une grille, à confronter aux sites existants (silos, zones d’activité).</Source>
               </div>
               <div className="block">
                 <h3>Impact du contrat</h3>
@@ -415,6 +470,41 @@ export default function App() {
                 </table>
                 <Source k="modele">Même calcul, avec les rendements propres à chaque département producteur et les charges franciliennes partout : un classement des rendements, pas des économies locales. Le prix plancher baisse là où le blé rend moins.</Source>
               </div>
+            </>
+          )}
+
+          {step === 5 && (
+            <>
+              <h1>Les parcelles sous contrat poussent-elles bien ?</h1>
+              <p className="lead">Prototype de suivi en saison, rejoué sur {SAISON.annee} : les {SUIVI.length} parcelles de lentille déclarées cette année-là les plus proches du site, vues par Sentinel-2 tous les quelques jours.</p>
+              <div className="block">
+                <h3>Indice de végétation (NDVI), mars à mi-août {SAISON.annee}</h3>
+                <SeasonChart day={seasonDay} focus={focus} />
+                <div className="range season">
+                  <input type="range" min={0} max={SAISON.jours} step={1} value={seasonDay} aria-label="Jour de la saison"
+                    style={{ ['--fill' as any]: `${(seasonDay / SAISON.jours) * 100}%` }} onChange={(e) => { stop(); setSeasonDay(+e.target.value); }} />
+                </div>
+                <p className="chart-key"><i className="k-med" />médiane du groupe <i className="k-conf" />conforme <i className="k-warn" />à surveiller <i className="k-late" />en retard</p>
+                <Source k="mesure">Sentinel-2 L2A (Copernicus), catalogue Earth Search : {fmt(SAISON.nImages)} images. NDVI médian des pixels de 10 m classés végétation ou sol nu, parcelle réduite de 10 m ; une date compte si {pct(SAISON.partValide)} des pixels sont valides.</Source>
+              </div>
+              <div className="block">
+                <h3>Le point au moment de la floraison</h3>
+                <table className="list models suivi">
+                  <thead><tr><th>Parcelle</th><th className="num">Écart au groupe</th><th className="num">Images utiles</th></tr></thead>
+                  <tbody>
+                    {[...SUIVI].sort((a, b) => a.ecart - b.ecart).map((p) => (
+                      <tr key={p.id} onMouseEnter={() => setFocus(p.id)} onMouseLeave={() => setFocus(null)} className={focus === p.id ? 'hl' : ''}>
+                        <td><b className={`tag ${p.statut}`}>{p.lettre}</b>{STATUT_LABEL[p.statut]}<span>{dec(p.surface)} ha, à {fmt(p.distKm)} km du site</span></td>
+                        <td className={`num${p.statut === 'en_retard' ? ' bad' : ''}`}>{Math.abs(p.ecart) < 0.005 ? '0,00' : `${p.ecart > 0 ? '+' : '−'}${dec(Math.abs(p.ecart), 2)}`}</td>
+                        <td className="num">{p.datesValides} sur {p.datesVues}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+                <p className="body small">{seasonSummary()} Le suivi ne remplace pas la visite : il dit où aller voir, et à quel moment.</p>
+                <Source k="suppose">Écart moyen de NDVI à la médiane du groupe, du 1er mai au 30 juin. À surveiller sous {dec(SAISON.seuils.surveiller, 2)}, en retard sous {dec(SAISON.seuils.retard, 2)} : seuils de l’équipe, à caler sur des rendements de parcelles.</Source>
+              </div>
+              <button className="link" onClick={replaySeason}>Rejouer la saison</button>
             </>
           )}
         </div>

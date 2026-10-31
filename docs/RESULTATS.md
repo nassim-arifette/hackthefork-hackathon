@@ -124,7 +124,9 @@ Le prix plancher baisse là où le blé rend peu (Pyrénées-Orientales : 33 q/h
 
 ## 6. Le contrat de démonstration
 
-Prix garanti rendu au site de collecte du scénario : **1 600 €/t**, le P\* de la Seine-et-Marne arrondi au-dessus. L'agriculteur reçoit ce prix moins le forfait de collecte et le transport, sur ses tonnes acceptées au tri.
+**Contrat proposé : barème par tranches, 1 635 €/t pour la première tonne acceptée par hectare, 750 €/t pour la deuxième, 650 €/t au-delà**, départ ferme, sur trois campagnes. Il protège autant qu'un prix unique de 1 567 €/t pour 18 % de moins en moyenne (§7). La lettre d'accompagnement reprend ce barème.
+
+Pour la carte et les volumes, l'application raisonne en prix rendu au site de collecte : **1 600 €/t**, le P\* de la Seine-et-Marne arrondi au-dessus. Une parcelle bascule si ce prix, moins le forfait de collecte et le transport, couvre le P\* de son département.
 
 | | Pilote | Ambition de bassin |
 |---|---|---|
@@ -144,6 +146,17 @@ Les distances sont routières (vol d'oiseau × 1,3). Les compteurs d'impact excl
 |---|---|---|---|
 | 2016, le blé perd 53 % | 1 757 €/ha | −84 €/ha | toutes |
 | 2020, la lentille perd 38 % | 1 181 €/ha | 771 €/ha | toutes |
+
+### Déplacer le site de collecte
+
+Un clic sur la carte déplace le site ; distances, parcelles retenues et coût de collecte se recalculent dans le navigateur, avec les formules du pipeline. La recherche du meilleur emplacement parcourt une grille de points, affinée deux fois.
+
+| Volume | Site du scénario | Meilleur point de la grille |
+|---|---|---|
+| Pilote, 300 t | 2,4 km en moyenne, 5,3 €/t de collecte | 0,7 km, 5,1 €/t |
+| Ambition, 5 000 t | 7,1 km, 5,9 €/t | 4,7 km, 5,6 €/t |
+
+Le gain reste de quelques dixièmes d'euro par tonne, face à un prix garanti de plus de 1 000 €/t : avec ces coûts, le site se choisit pour la logistique (silo, accès), pas pour le prix.
 
 ## 7. Comparer les contrats
 
@@ -175,7 +188,23 @@ Dans le backtest, chaque forme est recalibrée chaque année sur les seules ann�
 - **La prime à l'hectare est la moins chère en moyenne** et réduit la perte de l'agriculteur les années perdantes. Mais l'acheteur la paie même sans récolte (2 037 €/t l'année faible) et elle protège mal quand le prix du blé flambe : 37 % des contrats tenus en 2022, 79 % sur l'ensemble, sous la cible de 80 %.
 - **Le prix unique coûte cher parce qu'il surpaie les bonnes années.** Son avantage : un coût par tonne connu d'avance pour l'acheteur.
 
-## 8. Ce que ça veut dire
+## 8. Suivi en saison, prototype Sentinel-2
+
+`pipeline/08_sentinel.py` rejoue la saison 2025 sur les 8 parcelles de lentille déclarées au RPG 2025 (au moins 4 ha) les plus proches du site : 148 images Sentinel-2 L2A du 1er mars au 15 août 2025, NDVI médian des pixels valides (couche SCL), parcelle réduite de 10 m. Entre 19 et 25 dates utiles par parcelle, sur 37 à 43 images.
+
+| Indicateur | Valeur |
+|---|---|
+| NDVI au sol nu, début avril | 0,14 à 0,17 |
+| Pic de végétation | 0,85 à 0,93, du 13 au 18 juin |
+| Récolte visible | chute sous 0,3 fin juillet |
+| Parcelles conformes au groupe en mai-juin | 6 sur 8 |
+| Parcelles à surveiller (écart de −0,07 et −0,08) | 2 sur 8, sous le groupe en mai, au niveau mi-juin |
+
+Les seuils de statut (−0,05 et −0,10 d'écart à la médiane du groupe) sont des choix de l'équipe : sans rendement à la parcelle, on ne sait pas encore quel écart de NDVI coûte combien de quintaux. Le prototype dit où aller voir, pas ce que la parcelle va produire.
+
+**Réflectances vérifiées.** Les métadonnées Earth Search annoncent un décalage de +1 000 sur les valeurs, et certaines images sont marquées « non corrigées ». Pourtant, sur toutes les images vérifiées, le rouge descend sous 1 000 sur la végétation (292 en médiane sur une lentille en juin), ce qui serait impossible avec ce décalage. Le NDVI est donc calculé sur les valeurs brutes. Appliquer le décalage donnait des NDVI de 1,3 à 1,5, physiquement impossibles.
+
+## 9. Ce que ça veut dire
 
 1. **Garantir 8 années sur 10 coûte plus du double du prix d'équilibre médian** (1 567 contre 715 €/t). Une moyenne sous-estime fortement le prix qu'il faut garantir : c'est le cœur du message.
 2. **À la référence historique, la lentille ne gagne qu'une année sur deux.** C'est exactement le verrou que décrit le Track 3.

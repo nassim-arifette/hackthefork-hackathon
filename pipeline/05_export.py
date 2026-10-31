@@ -157,9 +157,10 @@ def main():
         # Tonnes acceptées au tri : ce sont elles que le contrat paie et que l'acheteur reçoit.
         tonnes = p[3] * dep["rendement_lentille_moyen_tha"] * (1 - h["qualite"])
         p_rendu = dep["p_star"] + h["forfait"] + kappa * d
-        # [id, dep, culture actuelle, surface ha, distance km, prix rendu de bascule, tonnes, anneau]
+        # [id, dep, culture actuelle, surface ha, distance km, prix rendu de bascule, tonnes, anneau,
+        #  longitude, latitude] : le point représentatif permet de déplacer le site dans l'application.
         out_parc.append([p[0], p[1], p[2], p[3], round(float(d), 1), round(float(p_rendu)),
-                         round(float(tonnes), 1), p[6]])
+                         round(float(tonnes), 1), p[6], p[4], p[5]])
 
     cand = sorted((x for x in out_parc if x[2] == "ble"), key=lambda x: x[5])
     supply, j, t_cum, ha_cum, n_cum = [], 0, 0.0, 0.0, 0

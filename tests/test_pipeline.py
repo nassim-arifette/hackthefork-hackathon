@@ -169,3 +169,16 @@ def test_contract_backtest_is_consistent():
     assert {c["id"] for c in app["calibres"]} == {"unique", "paliers", "prime_ha"}
     for c in app["calibres"]:
         assert c["simulation"]["protection"] >= 0.8 - 1e-3
+
+
+def test_sentinel_series_are_physical():
+    """NDVI dans [−1, 1], dates de la saison, statuts cohérents avec les seuils."""
+    d = json.loads((APP_DATA / "sentinel.json").read_text())
+    lo, hi = d["periode"]
+    for p in d["parcelles"]:
+        assert p["dates_valides"] <= p["dates_vues"]
+        for date, v in p["serie"]:
+            assert lo <= date <= hi and -1 <= v <= 1
+        e, s = p["ecart_floraison"], d["seuils_statut"]
+        attendu = "en_retard" if e < s["retard"] else "a_surveiller" if e < s["surveiller"] else "conforme"
+        assert p["statut"] == attendu

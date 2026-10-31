@@ -11,6 +11,7 @@ Obligatoire au dépôt. Tout ce qui n'a pas été produit pendant l'événement 
 | RPG Île-de-France 2025 | parcelles | voir [SOURCES.md](SOURCES.md) | fourni sur le Drive de l'organisation |
 | Douanes NC8 | importations | voir [SOURCES.md](SOURCES.md) | fourni sur le Drive de l'organisation |
 | Registre national des cantines | extension | voir [SOURCES.md](SOURCES.md) | fourni sur le Drive de l'organisation |
+| Sentinel-2 L2A (Copernicus), via le catalogue Earth Search d'Element 84 | suivi en saison, prototype | données Copernicus en accès libre, citation demandée | lues en ligne par `08_sentinel.py` |
 | Contours des départements (gregoiredavid/france-geojson, dérivé d'IGN Admin Express COG 2018) | centroïdes météo, contours de carte | Licence Ouverte (Etalab), selon le dépôt | téléchargé depuis GitHub |
 | RPG 2025 Île-de-France (IGN, data.geopf.fr) | parcelles de la carte | voir [SOURCES.md](SOURCES.md) | téléchargé depuis le site de l'IGN |
 | Eurostat : prix agricoles et Comext | prix du blé et de la lentille, commerce extérieur | réutilisation autorisée avec citation | via l'API Eurostat |
@@ -21,7 +22,7 @@ Les références documentaires des hypothèses (guides Terres Inovia, notice Tel
 
 ## Bibliothèques logicielles
 
-Python : pandas, numpy, openpyxl, scikit-learn, scipy, lightgbm, geopandas, pyogrio, shapely, pyproj, py7zr, requests, pyyaml.
+Python : pandas, numpy, openpyxl, scikit-learn, scipy, lightgbm, geopandas, pyogrio, shapely, pyproj, py7zr, requests, pyyaml, rasterio, pystac-client.
 JavaScript : Vite, React, TypeScript, deck.gl, vite-plugin-singlefile.
 Polices : Archivo et Source Serif 4 (licence SIL Open Font License), via Fontsource.
 Versions exactes : `requirements.txt` et `app/package.json`.
