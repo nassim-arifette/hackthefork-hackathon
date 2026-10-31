@@ -321,7 +321,7 @@ def run(args):
             for k, g in df[df.year == year].groupby("model")), flush=True)
     pd.DataFrame(detail).to_csv(args.output / "predictions.csv", index=False)
     try:
-        commit = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=Path(__file__).resolve().parents[1], text=True).strip()
+        commit = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=Path(__file__).resolve().parents[1], text=True, stderr=subprocess.DEVNULL).strip()
     except (OSError, subprocess.CalledProcessError):
         commit = "unknown"
     packages = {}

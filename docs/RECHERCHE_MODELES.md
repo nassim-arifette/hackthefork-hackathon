@@ -2,7 +2,9 @@
 
 ## Décision
 
-**La forêt quantile est le premier candidat CPU du nouveau protocole à quantiles bruts ; LightGBM gagnait le contrôle historique à quantiles élargis.** Ce changement de classement résulte de la séparation entre distribution simulée et intervalle conformel, reprise de la branche Youssef. Le concurrent GPU à exécuter est **TabPFN 3.5**, en prévision de rendements et en prévision directe du prix d'équilibre. L'objectif suivant est d'améliorer la calibration de la distribution/prix, puis de comparer le contrat au même protocole.
+**Le benchmark Colab terminé confirme la forêt quantile comme référence Monte-Carlo à quantiles bruts : perte contrat de 209,5 €/t, contre 285,3 €/t pour TabPFN 3.5.** Elle tient toutefois seulement 63,0 % des contrats historiques : gagner le classement ne valide pas encore la protection recherchée à 80 %. CatBoost et TabPFN ont désormais été évalués ; aucun ne justifie un remplacement. Le modèle direct QRF calibré atteint 82,3 % au total mais tombe à 54,2 % en 2025 : il reste un concurrent de recherche.
+
+Les [résultats Colab complets](RESULTATS_COLAB.md) présentent les 19 configurations, les métriques recalculées par année et les fichiers originaux. Les contrôles CPU antérieurs restent ci-dessous, en distinguant les quantiles bruts des quantiles élargis. L'objectif suivant est d'améliorer la distribution simulée et sa dépendance entre cultures, puis de comparer le contrat au même protocole.
 
 Le classement porte sur le contrat, pas seulement sur la précision du rendement. La version actuelle de l'application conserve ses résultats ; cette branche fournit les modèles, comparaisons, tests et commandes nécessaires pour choisir son successeur.
 
@@ -40,14 +42,30 @@ Les nouveaux modèles sont comparés sur **192 cas communs de 2019 à 2025**. Ce
 2. **Calibration des quantiles** — [Romano, Patterson et Candès, NeurIPS 2019](https://papers.neurips.cc/paper_files/paper/2019/hash/5103c3584b063c431bd1268e9b5e76fb-Abstract.html) fonde CQR. Dans le code actuel, la normalisation inclut les années de calibration et le modèle est réajusté après leur utilisation : ce n'est pas ce protocole standard.
 3. **Dépendance et dérive temporelle** — [Barber et al., 2023](https://arxiv.org/abs/2202.13415) explique pourquoi la couverture conformal standard ne se transpose pas automatiquement à des données dépendantes ou dont la distribution change. Le choix ici est une calibration glissante évaluée sur la décision économique ; ce n'est pas une implémentation du théorème de cet article.
 4. **TabPFN** — [Hollmann et al., Nature 2025](https://www.nature.com/articles/s41586-024-08328-6) montre l'intérêt d'un modèle préentraîné pour les petits jeux tabulaires. [TabPFN 3.5, rapport du 15 septembre 2026](https://priorlabs.ai/technical-reports/tabpfn-3-5) et sa [documentation de régression](https://docs.priorlabs.ai/capabilities/regression) motivent le challenger actuel : quantiles issus d'une distribution prédictive, sans entraîner un grand réseau de zéro. Ses résultats publiés sont une raison de le tester, pas un score acquis sur la lentille.
-5. **CatBoost MultiQuantile** — [documentation officielle](https://catboost.ai/docs/en/concepts/loss-functions-regression). Adaptateur prêt, mais exécution locale bloquée par l'absence d'accès à `/proc/self/statm` ; il sera évalué sur Colab.
+5. **CatBoost MultiQuantile** — [documentation officielle](https://catboost.ai/docs/en/concepts/loss-functions-regression). L'exécution locale était bloquée par l'absence d'accès à `/proc/self/statm` ; le run Colab est terminé. CatBoost obtient la plus faible valeur de la colonne `pinball` (calculée sur les bornes élargies de rendement), mais une perte contrat de 256,3 €/t, supérieure à celle du QRF.
 6. **Agronomie** — [bilan lentille 2025, Terres Inovia](https://www.terresinovia.fr/fr/actualites/lentille-bilan-de-campagne-national-2025) : différences régionales et effet des chaleurs sur les semis tardifs. Prochaine amélioration des entrées : fenêtres phénologiques, séquences sèches et excès d'eau, plutôt qu'un seul cumul mars–juillet. Le code actuel utilise de la pluie avril–juin, pas un vrai bilan pluie–évapotranspiration malgré la description de `MODELE.md`.
 
 ## Résultats et choix pratique
 
-Les tableaux ci-dessous sont générés à partir des fichiers de résultats, pas saisis à la main.
+Les tableaux ci-dessous proviennent des fichiers de résultats. Les prix médians sont ceux des contrats historiques, sauf dans la section explicitement consacrée aux prévisions 2026.
 
-### Nouveau contrôle après séparation distribution / intervalle
+### Run Colab terminé : quantiles bruts, mêmes 192 cas
+
+Le run `experiments/colab_2026_10_31` comprend les deux benchmarks terminés, leurs prédictions et les archives d'entrée et de sortie. La comparaison complète et les définitions des métriques figurent dans [RESULTATS_COLAB.md](RESULTATS_COLAB.md).
+
+| Configuration | Score contrat ↓ €/t | Contrats tenus | Prix médian €/t | Manque moyen €/ha |
+|---|---:|---:|---:|---:|
+| QRF Monte-Carlo | 209,5 | 63,0 % | 1 159 | 108,5 |
+| CatBoost Monte-Carlo | 256,3 | 55,7 % | 1 020 | 160,3 |
+| TabPFN Monte-Carlo | 285,3 | 49,5 % | 975 | 189,6 |
+| QRF direct | 280,9 | 78,1 % | 1 511 | 58,7 |
+| TabPFN direct | 281,0 | 71,4 % | 1 477 | 75,0 |
+| QRF direct calibré | 316,5 | 82,3 % | 1 744 | 39,1 |
+| TabPFN direct calibré | 335,0 | 79,7 % | 1 719 | 45,5 |
+
+Les 80 % des scénarios sont atteints par construction dans le Monte-Carlo. Le taux historique est une vérification distincte. La colonne `coverage` des JSON mesure l'intervalle de rendement : ses 80,1 % pour QRF ne sont pas les 63,0 % de contrats tenus. QRF reste la référence de recherche, sans promotion automatique vers l'application.
+
+### Contrôle CPU antérieur après séparation distribution / intervalle
 
 Run `experiments/model_benchmark_raw`, calibration glissante, apprentissage final sur tout le passé, 20 000 scénarios, mêmes 192 cas et mêmes hypothèses économiques que le contrôle historique :
 
@@ -57,7 +75,7 @@ Run `experiments/model_benchmark_raw`, calibration glissante, apprentissage fina
 | LightGBM | 235,4 | 58,3 % | 1 048 | 142,6 |
 | Linéaire | 264,8 | 67,7 % | 1 370 | 113,2 |
 
-La forêt quantile gagne sur la perte du prix d'équilibre ; la régression linéaire protège davantage en proposant un prix plus élevé. Cette expérience confirme que corriger un intervalle de rendement ne suffit pas à calibrer la distribution du prix. Le run GPU utilisera cette formulation pour tous les candidats. Les colonnes `pinball`, `coverage` et `width` des JSON de recherche conservent leur définition historique sur les bornes élargies ; le classement ci-dessus utilise uniquement les métriques économiques.
+La forêt quantile gagne sur la perte du prix d'équilibre ; la régression linéaire protège davantage en proposant un prix plus élevé. Cette expérience confirme que corriger un intervalle de rendement ne suffit pas à calibrer la distribution du prix. Le run Colab a repris cette formulation pour tous les candidats. Ce tableau conserve les chiffres du contrôle CPU ; le tableau Colab utilise ses propres sorties. Les colonnes `pinball`, `coverage` et `width` des JSON de recherche conservent leur définition historique sur les bornes élargies ; le classement ci-dessus utilise uniquement les métriques économiques.
 
 ### Contrôle historique : rendements avec quantiles élargis
 
@@ -70,7 +88,7 @@ La forêt quantile gagne sur la perte du prix d'équilibre ; la régression lin�
 
 LightGBM réduit le score contrat de **30.3%** face à la régression linéaire de ce même protocole. La forêt quantile est proche en score, tient davantage de contrats et réduit davantage le manque à gagner moyen. Les trois modèles atteignent 80 % dans leurs simulations par construction ; le taux historique réalisé est un contrôle distinct.
 
-### Modèle direct du prix d’équilibre
+### Contrôle CPU antérieur : modèle direct du prix d’équilibre
 
 | Modèle | Score contrat ↓ (€/t) | Contrats tenus | Prix médian (€/t) |
 |---|---:|---:|---:|
@@ -78,7 +96,7 @@ LightGBM réduit le score contrat de **30.3%** face à la régression linéaire 
 | direct_qrf | 280.9 | 78.1% | 1511 |
 | direct_qrf_cal | 316.5 | 82.3% | 1744 |
 
-**Résultat de sélection : ne pas promouvoir la calibration directe sur le seul 82,3 %.** Elle ne tient plus que 54,2 % des contrats en 2025 ; en projection 2026 elle multiplie le prix brut par environ 0,54 après les dernières bonnes années. Ce mécanisme fait tomber le prix Seine-et-Marne à environ 608 €/t. Le modèle direct reste un concurrent, pas le remplacement retenu. La calibration supplémentaire du prix Monte-Carlo détériore également le score ; elle est écartée.
+**Résultat de sélection : ne pas promouvoir la calibration directe sur le seul 82,3 %.** Le CSV Colab confirme qu'elle ne tient plus que 54,2 % des contrats en 2025, contre 100 % pour le QRF direct brut, tout en réduisant la perte de cette année : le score et la contrainte de protection doivent être examinés ensemble. Dans le contrôle de projection 2026 déjà effectué, elle multiplie le prix brut par environ 0,54 après les dernières bonnes années. Ce mécanisme fait tomber le prix Seine-et-Marne à environ 608 €/t. Le modèle direct reste un concurrent, pas le remplacement retenu. La calibration supplémentaire du prix Monte-Carlo détériore également le score dans l'expérience CPU ; elle est écartée.
 
 ### Prévisions 2026, départ ferme, 20 000 scénarios
 
@@ -90,7 +108,7 @@ LightGBM réduit le score contrat de **30.3%** face à la régression linéaire 
 
 Ces prix ne sont pas les prix médians historiques du tableau précédent. Ils sont calculés pour la campagne 2026 avec les données 2010–2025. Les rendements lentille franciliens sont transférés depuis les départements 10, 89, 28 et 45 ; le département 51, doublon de série, n’est plus compté une seconde fois. Le changement par rapport aux 1 622 €/t combine le modèle, sa calibration, le centrage météo local et cette correction du transfert.
 
-**Vérification :** 29 tests passent, dont perturbation des données futures, séparation calibration/ajustement, normalisation sans fuite, quantile empirique minimal et égalité de marge. CatBoost et TabPFN restent à exécuter sur Colab.
+**Vérification actuelle :** 35 tests passent, dont perturbation des données futures, séparation calibration/ajustement, normalisation sans fuite, quantile empirique minimal, égalité de marge et reprise des benchmarks. L'exécution Colab de CatBoost et TabPFN est désormais terminée ; ses résultats sont archivés séparément et n'ont pas modifié ces prévisions 2026.
 
 ## Exécution CPU
 
@@ -106,7 +124,7 @@ OMP_NUM_THREADS=1 python pipeline/forecast_research.py
 
 `experiments/model_benchmark` conserve aussi le protocole split. `price_calibration_warmup` contient les décisions 2016–2018 pour initialiser une calibration du prix ; `price_calibration` contient cette expérience supplémentaire. Les CSV contiennent toutes les décisions, les JSON les agrégats, versions, paramètres et traces des découpages pour les benchmarks principaux.
 
-## Colab : expériences GPU prêtes
+## Colab : expériences terminées et procédure de reprise
 
 [Google Colab CLI officiel](https://github.com/googlecolab/google-colab-cli), annoncé par [Google en juin 2026](https://developers.googleblog.com/introducing-the-google-colab-cli/).
 
@@ -129,15 +147,14 @@ colab download -s hackthefork /content/benchmark-results.zip ./benchmark-results
 colab stop -s hackthefork
 ```
 
-Le script lance les mêmes modèles CPU, CatBoost, puis TabPFN 3.5 sur les rendements et le prix direct, avec les mêmes années et métriques. Après revue de la branche Youssef, le run Colab passe `--simulation-quantiles raw` : les scénarios utilisent les quantiles de distribution, séparés des bornes conformelles. Les runs CPU publiés ci-dessus restent le contrôle historique `expanded` ; les nouveaux scores seront recalculés pour tous les candidats sur `raw`, sans mélanger les classements. Le paquet `tabpfn==9.0.0` et la famille `ModelVersion.V3_5` sont explicitement sélectionnés. La [configuration officielle des poids](https://docs.priorlabs.ai/models/accessing-model-weights) demande l'acceptation de la licence et un secret `TABPFN_TOKEN`. L'authentification Google s'effectue dans le flux du CLI ; aucun mot de passe n'est nécessaire dans le code. Les poids et données restent sur le runtime ; l'API de prédiction hébergée n'est pas utilisée.
+Le script lance les mêmes modèles CPU, CatBoost sur les rendements lentille, puis TabPFN 3.5 sur les rendements lentille et le prix direct, avec les mêmes années et métriques. Après revue de la branche Youssef, le run Colab a utilisé `--simulation-quantiles raw` : les scénarios utilisent les quantiles de distribution, séparés des bornes conformelles. Les contrôles CPU `raw` et `expanded` restent identifiés séparément ci-dessus ; les nouveaux scores Colab utilisent tous `raw`, sans mélanger les classements. Le paquet `tabpfn==9.0.0` et la famille `ModelVersion.V3_5` sont explicitement sélectionnés. La [configuration officielle des poids](https://docs.priorlabs.ai/models/accessing-model-weights) demande l'acceptation de la licence et un secret `TABPFN_TOKEN`. L'authentification Google s'effectue dans le flux du CLI ; aucun mot de passe n'est nécessaire dans le code. Les poids et données restent sur le runtime ; l'API de prédiction hébergée n'est pas utilisée.
 
-L'authentification Google a été validée et un runtime T4 a été créé. L'entraînement complet attend la clé Prior Labs et le montage de Drive depuis le notebook. Aucun résultat TabPFN n'est encore annoncé.
+Le run est terminé : **56/56 étapes rendement/témoin et 50/50 étapes directes**, avec sauvegarde après chaque modèle–année. Les résultats originaux, les sources exécutées et les contrôles annuels sont disponibles dans [le rapport Colab](RESULTATS_COLAB.md). TabPFN ne remporte ni le classement Monte-Carlo ni celui du contrat direct.
 
 ## Suite ciblée
 
-1. Exécuter TabPFN sur les deux formulations et choisir sur les résultats du contrat, année par année.
-2. Comparer davantage de quantiles et une dépendance résiduelle blé/lentille. Le Monte-Carlo actuel et ce contrôle CPU conservent trois quantiles et deux tirages résiduels indépendants ; partager l'année météo ne conserve pas toute la dépendance entre cultures.
-3. Tester le transfert géographique en laissant de côté des groupes régionaux entiers, puis remplacer les rendements voisins par des rendements coopérative quand ils sont disponibles.
+1. Comparer une grille de quantiles QRF plus dense à la reconstruction actuelle Q10/Q50/Q90 et queues linéaires, avec les mêmes 20 000 scénarios et cas de validation.
+2. À distributions marginales inchangées, comparer les résidus indépendants à des rangs de résidus blé/lentille appariés, estimés hors échantillon. Partager l'année météo ne conserve pas toute la dépendance entre cultures. Évaluer ces deux changements séparément sur le contrat et les taux annuels.
 
 La prévision 2026 est calculée avec les données arrêtées à 2025 pour reproduire une décision avant campagne. Elle ne présente pas la récolte 2026 comme un futur inconnu à la date d'exécution du 31 octobre 2026.
 
