@@ -81,6 +81,8 @@ L'intervalle bootstrap à 80 %, obtenu en rééchantillonnant les années, est d
 
 ## Décision et deux expériences suivantes
 
+**Mise à jour :** l'essai de quantiles denses et quatre configurations CatBoost direct ont depuis été exécutés dans Colab. Les [résultats d'optimisation](OPTIMISATION_MODELES.md) montrent un gain QRF dense de 0,5 %, sans progrès de la politique de réglage automatique. Les tableaux ci-dessus restent ceux du premier run.
+
 **Conserver QRF comme référence Monte-Carlo à améliorer.** Ne promouvoir ni TabPFN ni la calibration directe sur ce run. L'objectif reste le prix minimal satisfaisant les 80 % simulés, avec une distribution suffisamment calibrée pour retrouver cette protection hors échantillon.
 
 1. Comparer QRF avec une grille de quantiles plus dense à la reconstruction actuelle Q10/Q50/Q90 et queues linéaires, en gardant les mêmes années, hypothèses et 20 000 scénarios.

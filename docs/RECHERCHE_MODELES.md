@@ -153,7 +153,7 @@ Le run est terminé : **56/56 étapes rendement/témoin et 50/50 étapes directe
 
 ## Suite ciblée
 
-1. Comparer une grille de quantiles QRF plus dense à la reconstruction actuelle Q10/Q50/Q90 et queues linéaires, avec les mêmes 20 000 scénarios et cas de validation.
+1. **Exécuté dans Colab :** grille QRF dense, paramètres de forêt et CatBoost direct. Voir [OPTIMISATION_MODELES.md](OPTIMISATION_MODELES.md) : gain descriptif de 0,5 % pour les 101 quantiles, aucun gain pour la sélection automatique QRF ; CatBoost direct progresse face à QRF direct sans battre QRF Monte-Carlo. Les 41 tests passent.
 2. À distributions marginales inchangées, comparer les résidus indépendants à des rangs de résidus blé/lentille appariés, estimés hors échantillon. Partager l'année météo ne conserve pas toute la dépendance entre cultures. Évaluer ces deux changements séparément sur le contrat et les taux annuels.
 
 La prévision 2026 est calculée avec les données arrêtées à 2025 pour reproduire une décision avant campagne. Elle ne présente pas la récolte 2026 comme un futur inconnu à la date d'exécution du 31 octobre 2026.

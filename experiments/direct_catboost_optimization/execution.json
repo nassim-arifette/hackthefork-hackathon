@@ -1,0 +1,16 @@
+{
+  "execution_environment": "Google Colab existing notebook runtime",
+  "session": "hackthefork-notebook",
+  "training_device": "CPU",
+  "thread_count": 1,
+  "date_utc": "2026-10-31",
+  "remote_output_directory": "/content/drive/MyDrive/HackTheFork/optimizations/2026-10-31/direct_catboost",
+  "verification": [
+    "3 local unit tests passed",
+    "script SHA256 matches executed copy",
+    "192 matching rows for each of 8 reported models",
+    "40 fits have train_max < decision_year",
+    "7 selections recomputed from downloaded OOF predictions; all validation years strictly earlier"
+  ],
+  "production_files_modified": false
+}
