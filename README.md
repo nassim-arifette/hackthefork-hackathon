@@ -4,9 +4,16 @@
 
 Le Contrat qui Tient aide le responsable filière d'une coopérative ou d'un conditionneur de légumes secs à fixer **le prix plancher d'un contrat lentille** qui rapporte à l'agriculteur **au moins autant que le blé 8 années sur 10**. L'outil montre aussi **quelles parcelles d'Île-de-France basculent** à ce prix, et combien de tonnes la coopérative peut sécuriser.
 
-> État (samedi 31/10) : pipeline de bout en bout, tests et démo sur les vraies données (Agreste, RPG 2025, NASA POWER, Eurostat). Scénario économique de la version 4, prix payé sur les tonnes acceptées au tri, comparaison des contrats. La démo suit le pitch de 4 minutes en six écrans animés (le constat, le pari, le contrat, le prix, la preuve, l'impact) ; les écrans détaillés restent en annexes pour les questions. Résultats : [docs/RESULTATS.md](docs/RESULTATS.md).
+> État (samedi 31/10, soir) : pipeline de bout en bout, tests et démo sur les vraies données (Agreste, RPG 2025, NASA POWER, Eurostat). Scénario économique de la version 4, prix payé sur les tonnes acceptées au tri, comparaison des contrats. La démo suit le pitch de 4 minutes en six écrans animés (le constat, le pari, le contrat, le prix, la preuve, l'impact) ; les écrans détaillés restent en annexes pour les questions. Résultats : [docs/RESULTATS.md](docs/RESULTATS.md).
 
 ![La démo, écran « Le prix » : les parcelles les plus proches du silo basculent et les camions livrent 300 t](docs/img/ecran-4-prix.png)
+
+| | |
+|---|---|
+| ![Écran 1, le constat](docs/img/ecran-1-constat.png) | ![Écran 5, la preuve](docs/img/ecran-5-preuve.png) |
+| ![Écran 6, l'impact du bassin](docs/img/ecran-6-impact.png) | ![Écran 6, la carte de France des prix](docs/img/ecran-6-france.png) |
+
+Vidéo de la démo, 4 minutes : [docs/video/demo-4min.mp4](docs/video/demo-4min.mp4).
 
 ## En chiffres
 
@@ -19,6 +26,8 @@ Le Contrat qui Tient aide le responsable filière d'une coopérative ou d'un con
 | Backtest 2019–2025, années jamais vues | **78 %** de contrats tenus pour 80 % visés, sur 133 cas, contre **29 %** pour un prix calculé sur les moyennes (protocole strict : rien des années testées n'entre dans le calcul) |
 | À protection égale, un barème par tranches plutôt qu'un prix unique | **18 % moins cher** en moyenne, 19 % en backtest, où il tient 79 % des contrats contre 78 % (modèle) |
 | Pois chiche, haricot, pois, féverole : même moteur | prix fixe tenu dans 65 à 70 % des cas ; **indexé sur le blé, 78 à 89 %** (backtest, après [revue des budgets](docs/REVUE_FILIERE_CULTURES.md)) |
+| Ailleurs en France, même calcul | prix nécessaire de **558 à 2 238 €/t** selon les 24 départements producteurs (modèle) |
+| Collecte et clients | **352** établissements du commerce de grains à moins de 15 km des parcelles franciliennes ; **142** coopératives agricoles et **28** unions en France (Sirene, mesuré) |
 
 ---
 
