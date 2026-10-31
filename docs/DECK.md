@@ -19,7 +19,7 @@
 | 13 | Passage à l'échelle | Le même calcul pour 24 départements producteurs : 558 à 2 238 €/t. Cinq légumineuses. Une offre pour les assureurs : 231 €/ha de prime pure pour 70 % du rendement. Une collecte qui existe déjà : 352 sites du commerce de grains autour de l'Île-de-France. | `ecran-6-france.png` | Modèle ; Sirene (Insee) |
 | 14 | Qui paie | Coopératives et conditionneurs, par campagne : 142 coopératives agricoles et 28 unions font le commerce des grains en France ; le secteur coopératif agricole pèse 2 100 entreprises et 118 Md€. Étude pilote (3 000 €), puis abonnement par campagne et par bassin (10 000 €), montants à valider. | trois étapes | Sirene (Insee) ; Coop FR, chiffres 2024 |
 | 15 | Architecture | Pipeline Python, modèles précalculés ; Bedrock pour la lettre (aucun chiffre produit) ; Amplify déployé depuis GitHub ; démo hors ligne en fichier unique. | schéma | ARCHITECTURE.md |
-| 16 | Merci | Lien vers le code et la démo. | — | — |
+| 16 | Merci | Code : github.com/nassim-arifette/hackthefork-hackathon ; démo en ligne : https://main.d1lkeu0ybo1cz4.amplifyapp.com/ ; vidéo : docs/video/demo-4min.mp4. | — | — |
 
 ## Règles
 

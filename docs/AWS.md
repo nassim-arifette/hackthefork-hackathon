@@ -44,7 +44,7 @@ Choix retenu : **déploiement depuis GitHub**, pour que chaque push sur `main` r
 
 1. Console : rechercher **Amplify**, puis **Create new app > GitHub**, choisir le dépôt et la branche `main`.
 2. Le fichier `amplify.yml` du dépôt indique le dossier `app`, Node 22 et la sortie `dist` : garder les réglages détectés, puis **Save and deploy**.
-3. Copier l'URL `https://….amplifyapp.com` et l'ajouter en favori pour dimanche.
+3. Copier l'URL et l'ajouter en favori pour dimanche. Déployée le 31/10 : https://main.d1lkeu0ybo1cz4.amplifyapp.com/
 
 Secours sans GitHub : **Create new app > Deploy without Git**, puis glisser une archive du contenu de `app/dist` (avec `index.html` à la racine).
 

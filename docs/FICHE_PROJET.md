@@ -33,3 +33,9 @@ Pour un pilote de 300 t : 216 ha de lentilles sur les 28 parcelles les plus proc
 ## Données
 
 Ouvertes et traçables : Agreste, IGN (registre parcellaire), NASA POWER, Eurostat, Copernicus Sentinel-2. Chaque chiffre affiché porte son statut : mesuré, sourcé, supposé ou issu du modèle.
+
+## Liens
+
+- Démo en ligne : https://main.d1lkeu0ybo1cz4.amplifyapp.com/
+- Code et données : https://github.com/nassim-arifette/hackthefork-hackathon
+- Vidéo de la démo, 4 minutes : `docs/video/demo-4min.mp4` dans le dépôt

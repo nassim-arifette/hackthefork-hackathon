@@ -27,6 +27,6 @@ Pilotage : `Espace` pour l'écran suivant (`Maj` + `Espace` pour revenir), `←`
 - À l'écran 4, laisser le prix monter seul : les camions partent quand il atteint 1 600 €/t livré au silo.
 - Si un chiffre n'est pas à jour, la phrase est retirée, jamais remplacée par une estimation.
 - Jamais d'éditeur ni de terminal à l'écran.
-- La version hors ligne (`app/dist-single/index.html`) est sur la clé USB ; elle est identique à la version en ligne, polices comprises.
+- Version en ligne : https://main.d1lkeu0ybo1cz4.amplifyapp.com/ (déployée par Amplify à chaque push sur `main`). La version hors ligne (`app/dist-single/index.html`) est sur la clé USB ; elle est identique à la version en ligne, polices comprises.
 - Sur l'ordinateur partagé : navigateur en plein écran (`F11`). Le panneau de droite réduit seul son texte pour tenir sans défiler, jusqu'à 72 % ; sous 720 px de haut, dézoomer d'un cran (`Ctrl` + `−`).
 - Vidéo de secours : `docs/video/demo-4min.mp4`, même minutage que ce script ; si la démo en direct ne répond pas, la lancer et continuer à parler.
