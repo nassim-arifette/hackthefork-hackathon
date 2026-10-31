@@ -56,7 +56,7 @@ export function PriceChart({ price, min, max }: { price: number; min: number; ma
   return (
     <svg viewBox={`0 0 ${W} ${h}`} role="img" aria-label="Part des années gagnantes et hectares qui basculent selon le prix">
       <rect x={X(MARKET.min)} width={X(MARKET.max) - X(MARKET.min)} y={top[0] - 14} height={bot[1] - top[0] + 14} className="band-market" />
-      <text x={X(MARKET.max) + 5} y={Yr(0.12)} className="note">prix de marché</text>
+      <text x={X(MARKET.max) + 5} y={Yr(0.12)} className="note">référence 2012–2016</text>
 
       <text x={l} y={10} className="axis-title">Années où la lentille rapporte au moins autant que le blé</text>
       {[0, 0.5, 1].map((v) => (
@@ -115,7 +115,7 @@ export function SecurityChart() {
   return (
     <svg viewBox={`0 0 ${W} ${h}`} role="img" aria-label="Prix plancher selon la fiabilité visée">
       <rect x={l} width={W - l - r} y={Y(MARKET.max)} height={Y(MARKET.min) - Y(MARKET.max)} className="band-market" />
-      <text x={W - r} y={Y(MARKET.max) - 5} className="note" textAnchor="end">prix de marché {MARKET.annees[0]}–{MARKET.annees[1]}</text>
+      <text x={W - r} y={Y(MARKET.max) - 5} className="note" textAnchor="end">référence historique {MARKET.annees[0]}–{MARKET.annees[1]}</text>
       {gridVals.map((p) => (
         <g key={p}><line x1={l} x2={W - r} y1={Y(p)} y2={Y(p)} className="grid" />
           <text x={l - 6} y={Y(p) + 3.5} className="tick" textAnchor="end">{fmt(p)}</text></g>
@@ -138,10 +138,11 @@ export function Sensitivity() {
   const base = D77.p_star;
   const rows = [
     { label: 'Prix du blé, de 160 à 280 €/t', a: s.prix_ble_fixe[0].p_star, b: s.prix_ble_fixe[s.prix_ble_fixe.length - 1].p_star },
-    { label: 'Bonus de rotation, de 0 à 200 €/ha', a: s.bonus_rotation[s.bonus_rotation.length - 1].p_star, b: s.bonus_rotation[0].p_star },
-    { label: 'Charges du blé, de 440 à 600 €/ha', a: s.charges_ble[s.charges_ble.length - 1].p_star, b: s.charges_ble[0].p_star },
-    { label: 'Charges de la lentille, de 230 à 340 €/ha', a: s.charges_lentille[0].p_star, b: s.charges_lentille[s.charges_lentille.length - 1].p_star },
-    { label: 'Sans l’aide couplée', a: base, b: s.sans_aide },
+    { label: 'Part refusée au tri, de 0 à 20 %', a: s.qualite[0].p_star, b: s.qualite[s.qualite.length - 1].p_star },
+    { label: 'Bénéfice de rotation, de 0 à 200 €/ha', a: s.bonus_rotation[s.bonus_rotation.length - 1].p_star, b: s.bonus_rotation[0].p_star },
+    { label: 'Charges du blé, de 600 à 800 €/ha', a: s.charges_ble[s.charges_ble.length - 1].p_star, b: s.charges_ble[0].p_star },
+    { label: 'Charges de la lentille, de 400 à 600 €/ha', a: s.charges_lentille[0].p_star, b: s.charges_lentille[s.charges_lentille.length - 1].p_star },
+    { label: 'Aide couplée, de 0 à 122 €/ha', a: s.aide[s.aide.length - 1].p_star, b: s.aide[0].p_star },
   ];
   const all = rows.flatMap((r) => [r.a, r.b]);
   const lo = Math.floor((Math.min(...all) - 100) / 100) * 100, hi = Math.ceil((Math.max(...all) + 100) / 100) * 100, pad = 6;

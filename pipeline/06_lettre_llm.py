@@ -26,6 +26,14 @@ fournis, écrits exactement comme ci-dessous ; n'en ajoute aucun, n'en arrondis 
 Pas de formule creuse. Cinq phrases au plus, en français, ton direct et respectueux.
 Dis clairement ce que le prix garantit et ce qu'il ne garantit pas.
 
+Sens des chiffres, à respecter :
+- « 8 années sur 10 » veut dire : dans 8 années simulées sur 10, la lentille payée au prix
+  plancher rapporte au moins autant par hectare que le blé. Ce n'est ni une mesure de la
+  fiabilité de la coopérative, ni une garantie de revenu.
+- Le prix est payé sur les tonnes acceptées au tri pour l'alimentation humaine.
+- Les deux autres années sur dix, et en cas de récolte faible, la lentille peut rapporter
+  moins que le blé.
+
 Chiffres :
 {chiffres}"""
 
@@ -40,7 +48,8 @@ def chiffres() -> dict:
         "fiabilité": "8 années sur 10",
         "durée": "3 campagnes",
         "rendement faible, une année sur dix": f"{fr(d77['rendement_lentille_q10_tha'])} t/ha",
-        "volume visé par la coopérative": f"{fr(meta['hypotheses']['volume_vise_t']['valeur'])} t",
+        "volume du pilote": f"{fr(meta['hypotheses']['volume_pilote_t']['valeur'])} t",
+        "tonnes payées": "tonnes acceptées au tri pour l'alimentation humaine",
         "campagne": str(meta["campagne"]),
     }
 

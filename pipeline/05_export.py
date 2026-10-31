@@ -67,6 +67,7 @@ def main():
             "p_star": round(p_star(R, h["tau"])),
             "p_equilibre_median": round(p_star(R, 0.5)),
             "rendement_lentille_moyen_tha": round(float(yL.mean()), 2),
+            "rendement_lentille_accepte_tha": round(float(yL.mean() * (1 - h["qualite"])), 2),
             "rendement_lentille_q10_tha": round(float(np.quantile(yL, 0.1)), 2),
             "rendement_ble_moyen_tha": round(float(yW.mean()), 2),
             "niveau_ble_qha": round(float(levW_all[dep]), 1),
@@ -89,7 +90,8 @@ def main():
     mL0 = Calibrated("M0").fit(with_rel(L, levL))
     R0, _, _, _ = simulate(meteo, "77", mL0, mW, lev_idf, levW_all["77"], h, seed=77)
     prix_moyen = float(prix.loc[2010:2025].mean())
-    p_moy = (prix_moyen * levW_all["77"] / 10 - h["charges_ble"] + h["charges_lentille"] - h["bonus"]) / (lev_idf / 10)
+    p_moy = (prix_moyen * levW_all["77"] / 10 - h["charges_ble"] + h["charges_lentille"] - h["bonus"]) \
+        / (lev_idf / 10 * (1 - h["qualite"]))
     strategies_77 = {"moyenne": round(p_moy), "M0": round(p_star(R0, h["tau"])),
                      "M1": deps["77"]["p_star"], "M2": challenger["p_star_77"]}
     print("Stratégies 77 :", strategies_77)
@@ -103,7 +105,7 @@ def main():
     rng = np.random.default_rng(77)
     s = rng.integers(0, len(pool77), N_SIM)
     pB = pool77.prix_ble.to_numpy()[s]
-    m_ratio = ((pB * yW77 - h["charges_ble"] + h["charges_lentille"] - h["bonus"]) / yL77) / pB
+    m_ratio = ((pB * yW77 - h["charges_ble"] + h["charges_lentille"] - h["bonus"]) / (yL77 * (1 - h["qualite"]))) / pB
     indexe = {"m_star": round(float(np.quantile(m_ratio, h["tau"])), 2),
               "m_median": round(float(np.quantile(m_ratio, 0.5)), 2)}
 
@@ -120,7 +122,12 @@ def main():
         "charges_lentille": [{"x": c, "p_star": ps77(charges_lentille=c)} for c in H["charges_lentille_eur_ha"]["sensibilite"]],
         "bonus_rotation": [{"x": b, "p_star": ps77(rotation=b)} for b in H["bonus_rotation_eur_ha"]["sensibilite"]],
         "sans_aide": ps77(aide=0),
+        "aide": [{"x": a, "p_star": ps77(aide=a)} for a in H["aide_couplee_eur_ha"]["sensibilite"]],
+        "qualite": [{"x": q, "p_star": ps77(qualite=q)} for q in H["part_non_valorisee"]["sensibilite"]],
     }
+    v3 = H["scenario_historique"]["valeur"]
+    sens["scenario_historique"] = ps77(charges_ble=v3["charges_ble"], charges_lentille=v3["charges_lentille"],
+                                       aide=v3["aide"], rotation=v3["rotation"], qualite=v3["part_non_valorisee"])
 
     # Ailleurs en France : P* des départements producteurs, avec leur propre niveau.
     # Un département représente les départements dont Agreste estime le rendement avec lui.
@@ -147,8 +154,9 @@ def main():
     out_parc = []
     for p, d in zip(parc, dist):
         dep = deps[p[1]]
-        tonnes = p[3] * dep["rendement_lentille_moyen_tha"]
-        p_rendu = dep["p_star"] + kappa * d
+        # Tonnes acceptées au tri : ce sont elles que le contrat paie et que l'acheteur reçoit.
+        tonnes = p[3] * dep["rendement_lentille_moyen_tha"] * (1 - h["qualite"])
+        p_rendu = dep["p_star"] + h["forfait"] + kappa * d
         # [id, dep, culture actuelle, surface ha, distance km, prix rendu de bascule, tonnes, anneau]
         out_parc.append([p[0], p[1], p[2], p[3], round(float(d), 1), round(float(p_rendu)),
                          round(float(tonnes), 1), p[6]])

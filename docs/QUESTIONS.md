@@ -4,7 +4,31 @@ Recherche documentaire du **31 octobre 2026**, pour avancer pendant Hack the For
 
 **Mon avis : garder la lentille, le Track 3 et le moteur de prix. Faire du résultat élevé une décision de filière : quel bassin, quelle rémunération et quel partage du risque permettent de mobiliser des hectares ?** Le hackathon doit montrer ces arbitrages avec des hypothèses explicites.
 
-Les propositions ci-dessous constituent un scénario de travail. Les valeurs déjà calculées restent celles de la version 3 dans [RESULTATS.md](RESULTATS.md) ; les nouveaux paramètres et contrats devront passer dans le pipeline avant de recevoir leurs propres résultats. Cette revue documentaire ne vaut pas validation par l'organisation.
+L'équipe a adopté ce scénario le 31/10 ; il est calculé dans la version 4 de [RESULTATS.md](RESULTATS.md). Les chiffres cités plus bas sont ceux de cette version. Les variantes de contrat (§3) restent à calculer. Cette revue documentaire ne vaut pas validation par l'organisation.
+
+## 0. Décisions de l'équipe, 31 octobre
+
+| Sujet | Décision | État |
+|---|---|---|
+| Assistant de code | Claude Code est autorisé. | Déclaré dans [DECLARATIONS.md](DECLARATIONS.md), avec ChatGPT pour cette recherche. |
+| Track | Track 3, déclaré. | — |
+| Modèle | **Garder M1** pour la démo. Le banc d'essai des modèles probabilistes en cours sera comparé sur le même protocole avant tout changement. | — |
+| Hypothèses | Scénario central de §2 adopté : charges 700 / 500 €/ha, aide 105 €/ha, rotation 150 €/ha, forfait de collecte 5 €/t. | Calculé : P\* de 1 567 €/t en Seine-et-Marne, 87 % de contrats tenus en backtest. |
+| Tonnes payées | **Tonnes acceptées au tri**, 10 % de refus en scénario central, 0 et 20 % en sensibilité. Raisons ci-dessous. | Appliqué au modèle, au backtest, à la carte, au contrat et à l'impact. |
+| Volumes | Pilote de 300 t, ambition de 5 000 t. | Bascule entre les deux à l'étape « Le contrat ». |
+| Impact | Protéines, azote non apporté, émissions directes évitées. | Affichés pour le volume choisi (§6). |
+| Repères de prix | « Référence historique 2012–2016 » remplace « prix du marché ». Unéal et NatUp affichés pour comparer. | Fait. |
+| RPG / Agreste | Audit fait. | Résultat au §5. |
+| Lettre Bedrock | Régénérer avec les chiffres de la version 4. | Commande dans [AWS.md](AWS.md). |
+| Présentateur | Décidé plus tard. | — |
+
+### Pourquoi payer les tonnes acceptées au tri
+
+C'est la règle des contrats de collecte : le prix convenu s'applique à la marchandise conforme, après réfactions (humidité, impuretés) ; un lot hors normes est déclassé ou refusé et ne touche pas le prix garanti. Payer la récolte brute reviendrait à faire porter tout le risque qualité à l'acheteur, ce qu'aucun conditionneur n'accepte pour des lentilles destinées à l'alimentation humaine.
+
+Agreste mesure le rendement à l'arrivée à la ferme, avant le tri de la coopérative. Le modèle applique donc la part refusée **une seule fois**, au rendement Agreste : 10 % en scénario central, cohérent avec les 10 à 20 % de pertes possibles liées à la bruche. Les lots refusés gardent une valeur (alimentation animale) que le modèle ne compte pas : c'est un choix prudent pour l'agriculteur.
+
+Effet sur le prix plancher de la Seine-et-Marne : 1 411 €/t sans refus, **1 567 €/t avec 10 %**, 1 763 €/t avec 20 %. Le contrat doit l'écrire noir sur blanc : normes de réception, barème de réfaction, et prix de repli pour les lots déclassés.
 
 ## 1. Réponse à chaque question ouverte
 
@@ -76,7 +100,7 @@ Proposé :  −700 + 500 − 105 − 150 = −455 €/ha
 R_nouveau,s = R_actuel,s − 173 / y_lentille,s
 ~~~
 
-Avec y en t/ha, la baisse vaut 231 €/t pour un scénario à 0,75 t/ha et 115 €/t à 1,5 t/ha. **Recalculer le quantile sur les mêmes scénarios donnera le nouveau P*.** La valeur de 1 400 €/t est une piste à explorer, pas un résultat déjà obtenu.
+Avec y en t/ha, la baisse vaut 231 €/t pour un scénario à 0,75 t/ha et 115 €/t à 1,5 t/ha. **Recalcul fait** : 1 411 €/t avec ces seuls paramètres, puis 1 567 €/t une fois les 10 % de refus au tri appliqués (scénario retenu, §0).
 
 ## 3. Un P* élevé : quelle proposition commerciale ?
 
@@ -89,9 +113,9 @@ Avec y en t/ha, la baisse vaut 231 €/t pour un scénario à 0,75 t/ha et 115 �
 | AFP, 23 février 2026, témoignage d'une productrice Unéal | 900 €/t en 2024, 800 en 2025, 650 annoncés pour 2026. [S9] | Exemple récent daté, avec son contexte. |
 | NatUp, 18 septembre 2025 | Contrat triennal conventionnel rémunérant la première tonne par hectare 1 000 €. [S10] | Précédent concret pour une rémunération à paliers. |
 
-**Ma réponse au jury :** le prix de 1 622 €/t chiffre le coût d'une protection forte face au blé francilien dans le modèle actuel. L'outil doit permettre de négocier cette protection, de modifier la rémunération et de choisir les hectares les plus intéressants.
+**Ma réponse au jury :** le prix de 1 567 €/t chiffre le coût d'une protection forte face au blé francilien dans le modèle actuel. L'outil doit permettre de négocier cette protection, de modifier la rémunération et de choisir les hectares les plus intéressants. Dans le même modèle, 900 €/t protège 6,1 années sur 10 et 1 000 €/t, 6,5.
 
-Les contrats existants intègrent déjà le risque. Notre valeur ajoutée est de **comparer leurs barèmes, mesurer leur protection et cibler les parcelles**. Le score de 32 % dans le repo est celui de la baseline calculée sur les moyennes ; il ne mesure pas la performance de l'ensemble des contrats des coopératives.
+Les contrats existants intègrent déjà le risque. Notre valeur ajoutée est de **comparer leurs barèmes, mesurer leur protection et cibler les parcelles**. Le score de 29 % dans le repo est celui de la baseline calculée sur les moyennes ; il ne mesure pas la performance de l'ensemble des contrats des coopératives.
 
 ### Trois formes de contrat à comparer
 
@@ -120,13 +144,13 @@ a* = max(0, quantile_80%(
 
 Cette formule est une **proposition à implémenter**. Comparer ensuite le coût total payé par l'acheteur et le résultat du backtest au prix uniforme. Afficher séparément la protection avec bonus de rotation et celle de la trésorerie de campagne.
 
-L'indexation retire une partie du décalage avec le prix du blé en transférant ce risque vers l'acheteur. Elle conserve le risque de rendement et le risque de base entre l'indice et le prix réellement payé. Avec le multiplicateur actuel de 7,8, un blé à 200 €/t donne 1 560 €/t de lentille ; **l'indexation seule ne rend donc pas le contrat beaucoup moins cher**. Les valeurs 3,59 et 7,8 sont celles de l'export actuel, respectivement médiane et cible 80 %.
+L'indexation retire une partie du décalage avec le prix du blé en transférant ce risque vers l'acheteur. Elle conserve le risque de rendement et le risque de base entre l'indice et le prix réellement payé. Avec le multiplicateur actuel de 7,44, un blé à 200 €/t donne 1 488 €/t de lentille ; **l'indexation seule ne rend donc pas le contrat beaucoup moins cher**. Les valeurs 3,44 et 7,44 sont celles de l'export de la version 4, respectivement médiane et cible 80 %.
 
 ### Où chercher la viabilité ?
 
-Je ciblerais **un industriel ou une marque qui valorise une origine française traçable**, avec un collecteur partenaire, un besoin de volume défini et un contrat sur plusieurs campagnes. Montrer ensuite le coût matière à l'échelle d'un produit : entre 900 et 1 622 €/t, l'écart est de **3,6 centimes pour 50 g de lentilles sèches**, avant tri, transformation, distribution et taxes. C'est un argument d'achat à tester.
+Je ciblerais **un industriel ou une marque qui valorise une origine française traçable**, avec un collecteur partenaire, un besoin de volume défini et un contrat sur plusieurs campagnes. Montrer ensuite le coût matière à l'échelle d'un produit : entre 900 et 1 567 €/t, l'écart est de **3,3 centimes pour 50 g de lentilles sèches**, avant tri, transformation, distribution et taxes. C'est un argument d'achat à tester.
 
-Ajouter au calcul acheteur le tri, le stockage, les pertes de qualité et le conditionnement. Pour la qualité alimentaire, tester une sensibilité **0 / 10 / 20 % de volume non valorisé**, en vérifiant ce que le rendement de départ contient déjà. La bruche et les refus qualité sont réels ; un taux unique de perte doit rester une hypothèse du scénario. [S3]
+Ajouter au calcul acheteur le tri, le stockage, les pertes de qualité et le conditionnement. Pour la qualité alimentaire, tester une sensibilité **0 / 10 / 20 % de volume non valorisé**, en vérifiant ce que le rendement de départ contient déjà. La bruche et les refus qualité sont réels ; un taux unique de perte doit rester une hypothèse du scénario. [S3] *Fait : paiement sur les tonnes acceptées, 10 % en central (§0) ; le rendement Agreste est mesuré avant tri.*
 
 Pour le modèle économique de l'outil, je proposerais une **étude pilote payante à 3 000 €**, puis un **abonnement à 10 000 € par campagne et par bassin**. Ce sont des prix à tester, choisis pour obtenir une première vente et mesurer la valeur. À titre de calcul, une décision améliorant de 20 €/t un programme de 5 000 t représente 100 000 € ; il faudra démontrer le gain chez le client.
 
@@ -134,9 +158,9 @@ Pour le modèle économique de l'outil, je proposerais une **étude pilote payan
 
 ### Un pilote à 300 t, une ambition à 5 000 t
 
-À 1,59 t/ha, rendement moyen simulé actuel en Seine-et-Marne, **300 t correspondent à environ 189 ha**. NatUp a publié une collecte de 558 t en 2025 : cet ordre de grandeur rend le pilote de 300 t concret. [S10]
+À 1,43 t/ha acceptées au tri (1,59 t/ha récoltées, rendement moyen simulé en Seine-et-Marne), **300 t correspondent à 210 ha**, soit les 27 parcelles éligibles les plus proches du site. NatUp a publié une collecte de 558 t en 2025 : cet ordre de grandeur rend le pilote de 300 t concret. [S10]
 
-Conserver le scénario de 5 000 t pour montrer l'ambition de bassin. Le calcul actuel du repo mobilise 3 147 ha. Le ratio 5 000 / 39 371 vaut 12,7 % : afficher **« volume équivalent à 13 % des importations 2025 »**. Le remplacement effectif d'importations dépendra des débouchés.
+Conserver le scénario de 5 000 t pour montrer l'ambition de bassin. Le calcul de la version 4 mobilise 3 506 ha sur 260 parcelles. Le ratio 5 000 / 39 371 vaut 12,7 % : afficher **« volume équivalent à 13 % des importations 2025 »**. Le remplacement effectif d'importations dépendra des débouchés.
 
 Séparer les tonnes économiquement candidates, les tonnes d'un scénario de mobilisation et les engagements signés. Pour tester la prospection, prendre **10 % de mobilisation**, sensibilité 5 / 10 / 20 %, explicitement supposés. Appliquer cette proportion aux surfaces candidates après les filtres disponibles, puis recalculer les hectares et distances nécessaires pour atteindre la cible.
 
@@ -160,15 +184,30 @@ Les quatre surfaces Agreste du repo donnent précisément **727 ha** : 226 + 245
 
 La méthodologie SAA rattache les terres au **département du siège de l'exploitation**. Le RPG permet de compter les parcelles à leur localisation et couvre les déclarants PAC. En outre, les valeurs SAA franciliennes du repo sont de statut 3 et l'année 2025 est provisoire. Ces différences rendent l'écart possible ; leur contribution exacte n'est pas encore mesurée. [S12] [S13]
 
-**Décision : garder les usages distincts des deux sources.** Faire un audit de trente minutes, dans cet ordre :
+**Décision : garder les usages distincts des deux sources.**
 
-1. Vérifier le millésime de campagne dans les métadonnées des deux jeux.
-2. Aligner le périmètre régional ou les quatre départements.
-3. Comparer les 178 parcelles LEC brutes avec les 160 retenues sur la carte, le filtre de surface et les identifiants uniques.
-4. Vérifier le libellé LEC, le champ SAA et la surface déclarée, avant toute aire recalculée sur géométries simplifiées.
-5. Documenter le solde et poser ensuite une question précise au SRISE.
+### Audit fait le 31/10
+
+1. **Millésime** : RPG version 4.0 au 1er janvier 2025 pour la région 11, soit les déclarations de la campagne 2025 ; SAA 2025 provisoire. Même campagne.
+2. **Parcelles** : 178 parcelles LEC, 178 identifiants uniques, **1 095,1 ha de surface déclarée** (`surf_parc`, pas une aire recalculée). 16 parcelles de moins d'1 ha (9,4 ha) et 2 parcelles hors des quatre départements après simplification ne sont pas sur la carte : 160 y figurent. Le filtre n'explique donc pas l'écart.
+3. **Par département**, à la localisation de la parcelle pour le RPG, au siège de l'exploitation pour la SAA :
+
+| Département | RPG 2025 | SAA 2025 | Écart |
+|---|---:|---:|---:|
+| Seine-et-Marne | 481,9 ha | 226 ha | +256 ha |
+| Yvelines | 299,6 ha | 245 ha | +55 ha |
+| Essonne | 280,9 ha | 207 ha | +74 ha |
+| Val-d'Oise | 23,0 ha | 49 ha | −26 ha |
+| Hors des quatre départements | 9,7 ha | — | — |
+| **Total** | **1 095,1 ha** | **727 ha** | **+368 ha** |
+
+**Lecture** : 70 % de l'écart vient de la Seine-et-Marne, qui touche l'Aube, la Marne, l'Yonne et le Loiret, de gros producteurs de lentilles. Des exploitations dont le siège est dans ces départements et qui cultivent des parcelles en Seine-et-Marne sont comptées chez elles par la SAA, mais en Seine-et-Marne par le RPG. C'est l'explication la plus probable, compatible avec le statut 3 et le caractère provisoire des chiffres SAA ; elle n'est pas démontrée.
 
 La SAA inclut les types variétaux de lentille et compte une surface non récoltée avec rendement nul : ces deux éléments ne justifient pas à eux seuls l'écart. [S12]
+
+**Question précise pour le SRISE** : quelle part des surfaces en lentille localisées en Seine-et-Marne relève d'exploitations dont le siège est hors d'Île-de-France ?
+
+**Conséquence pour l'outil** : aucune. La carte utilise le RPG (où sont les parcelles), le modèle utilise les rendements SAA (combien elles produisent). Aucune surface n'est mise à l'échelle.
 
 ## 6. Impact : trois compteurs prêts à spécifier
 
@@ -188,11 +227,13 @@ La SAA inclut les types variétaux de lentille et compte une surface non récolt
 
 **Exemple de scénario pour la démo :** 100 nouveaux hectares à 1,6 t/ha, avant pertes de tri, donnent **160 t de lentilles, 40 t de protéines potentielles, 18 t d'azote minéral non apporté et environ 76 t CO₂e d'émissions directes associées**. Afficher « scénario » et donner le périmètre en une infobulle suffit.
 
+*Fait, sur les tonnes acceptées au tri : le pilote de 300 t mobilise 210 ha et donne 75 t de protéines, 38 t d'azote non apporté et 159 t CO₂e évitées ; l'ambition de 5 000 t, 3 506 ha, 1 250 t, 631 t N et 2 647 t CO₂e.*
+
 ## 7. Mon arbitrage sur la roadmap et le pitch
 
 **Pendant le hackathon :** mettre à jour les hypothèses, comparer les contrats, ajouter les compteurs d'impact, puis rendre le site déplaçable. Ensuite, prototyper Sentinel sur 5 à 10 parcelles en replay d'une saison achevée. Le détail et les critères de sortie sont dans [ROADMAP.md](ROADMAP.md).
 
-Je conserverais M1 pour la démo : les résultats existants permettent déjà de montrer la différence entre prévision moyenne et décision sous risque. Toute nouvelle méthode sera une version distincte, comparée sur le même protocole. Les 86 % de contrats tenus sont le résultat du backtest actuel sur sept années ; les nouvelles hypothèses et les nouveaux barèmes doivent être évalués à leur tour.
+Je conserverais M1 pour la démo : les résultats existants permettent déjà de montrer la différence entre prévision moyenne et décision sous risque. Toute nouvelle méthode sera une version distincte, comparée sur le même protocole. Avec les hypothèses de la version 4, le backtest donne 87 % de contrats tenus sur sept années ; les nouveaux barèmes de contrat doivent être évalués à leur tour.
 
 La question « sans IA, que perd-on ? » doit montrer la comparaison **M0 / M1 / M2** déjà présente dans le repo. La valeur démontrée vient de la distribution et de sa calibration ; la météo peut modifier le coût de la protection, même lorsqu'elle améliore peu la précision moyenne. Éviter d'assimiler tous les calculs sans IA à une simple moyenne.
 

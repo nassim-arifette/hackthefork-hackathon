@@ -1,34 +1,51 @@
 # Toutes les valeurs qui ne sont pas des données mesurées du pipeline, au même endroit.
 # etiquette : mesure | source | suppose | synthetique
-# Le prix du blé n'est plus une hypothèse : c'est la série data/prix_ble.csv
+# Le prix du blé n'est pas une hypothèse : c'est la série data/prix_ble.csv
 # (indice Eurostat mesuré, calé en niveau sur Agreste), rééchantillonnée avec l'année météo.
+#
+# Scénario central du 31/10 (version 4), issu de la revue documentée de docs/QUESTIONS.md.
+# Le scénario du 30/10 (version 3) reste reproductible : scenario_historique ci-dessous.
 
 charges_ble_eur_ha:
-  valeur: 440
-  etiquette: source
-  source: "Arvalis, charges opérationnelles du blé tendre en 2020 (semences, engrais, phytos)"
-  url: "https://www.terre-net.fr/syndicalisme-agricole/article/223927/les-couts-de-production-ne-seront-pas-couverts-en-2023-alertent-les-cerealiers"
-  sensibilite: [440, 520, 600]
-charges_lentille_eur_ha:
-  valeur: 280
-  etiquette: source
-  source: "Triple Performance, fiche lentille : semences 120, fertilisation 30, herbicides 80, fongicides 40, insecticides 10 €/ha (valeurs indicatives)"
-  url: "https://wiki.tripleperformance.fr/wiki/Lentille"
-  sensibilite: [230, 280, 340]
-aide_couplee_eur_ha:
-  valeur: 122
-  etiquette: source
-  source: "Aide couplée aux légumineuses à graines, campagne 2025, arrêté du 24 février 2026 (éligibilité de la lentille à confirmer)"
-  url: "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000053594055"
-bonus_rotation_eur_ha:
-  valeur: 0
+  valeur: 700
   etiquette: suppose
-  source: "0 par prudence tant que l'effet précédent de la lentille n'est pas sourcé (pour le pois : +7 q/ha et −33 kg N/ha sur le blé suivant)"
-  sensibilite: [0, 100, 200]
+  source: "arrondi de 675 €/ha : projection Cerfrance Nord-Est Île-de-France citée par le guide pois Terres Inovia 2025 (8,5 t/ha × 200 €/t − 1 025 €/ha de marge brute)"
+  url: "https://www.terresinovia.fr/sites/default/files/2025-05/guide-de-culture-pois-conventionnel-2025.pdf"
+  sensibilite: [600, 700, 800]
+charges_lentille_eur_ha:
+  valeur: 500
+  etiquette: suppose
+  source: "arrondi de 518 €/ha de charges opérationnelles, guide de culture lentille Terres Inovia 2023"
+  url: "https://www.terresinovia.fr/sites/default/files/2025-06/guide-de-culture-lentille-2023.pdf"
+  sensibilite: [400, 500, 600]
+aide_couplee_eur_ha:
+  valeur: 105
+  etiquette: source
+  source: "aide couplée aux légumineuses à graines, montant indicatif de la campagne 2026, lentilles éligibles quelle que soit leur destination (notice Telepac 2026, p. 4) ; 122 €/ha était le montant définitif de 2025"
+  url: "https://www3.telepac.agriculture.gouv.fr/telepac/pdf/tas/2026/Dossier-PAC-2026_notice_aides-couplees.pdf"
+  sensibilite: [0, 105, 122]
+bonus_rotation_eur_ha:
+  valeur: 150
+  etiquette: suppose
+  source: "bénéfice pour le blé suivant : 0,6 t/ha × 200 €/t + 25 kg N/ha × 1,2 €/kg ; effet précédent de la lentille documenté par FiloLeg / Agro-Transfert 2024 (+7 q/ha, −55 kg N/ha), montant choisi par l'équipe"
+  url: "https://filoleg.fr/wp-content/uploads/2024/12/Synthese-technico-economique-insertion-LAG.pdf"
+  sensibilite: [0, 100, 150, 200]
+part_non_valorisee:
+  valeur: 0.10
+  etiquette: suppose
+  source: "part de la récolte refusée au tri pour l'alimentation humaine (bruche, impuretés, calibre). Le prix garanti est payé sur les tonnes acceptées ; Agreste mesure la récolte à l'arrivée à la ferme, avant ce tri. La bruche peut coûter 10 à 20 % du rendement (Réussir)"
+  url: "https://www.reussir.fr/legumineuses-des-leviers-de-developpement-existent"
+  sensibilite: [0, 0.10, 0.20]
 cout_transport_eur_t_km:
   valeur: 0.12
   etiquette: suppose
-  source: "ordre de grandeur de l'équipe, à sourcer"
+  source: "ordre de grandeur de l'équipe, distance aller simple, retours compris dans le coefficient"
+  sensibilite: [0.06, 0.12, 0.20]
+forfait_collecte_eur_t:
+  valeur: 5
+  etiquette: suppose
+  source: "enlèvement d'un lot agrégé de 25 t, soit 125 € par lot ; structure de coût du CNR (kilomètres, temps, immobilisation)"
+  sensibilite: [0, 5, 10]
 facteur_detour_route:
   valeur: 1.3
   etiquette: suppose
@@ -37,11 +54,36 @@ fiabilite_visee:
   valeur: 0.8
   etiquette: suppose
   source: "choix de l'équipe : 8 années sur 10"
+volume_pilote_t:
+  valeur: 300
+  etiquette: suppose
+  source: "pilote d'une campagne ; ordre de grandeur de la collecte NatUp (558 t en 2025)"
+  url: "https://natup.coop/download/5775/"
 volume_vise_t:
   valeur: 5000
   etiquette: suppose
-  source: "ambition d'un premier contrat de filière, environ 13 % des importations 2025 ; à fixer avec la coopérative"
+  source: "ambition de bassin, environ 13 % des importations 2025 ; à fixer avec la coopérative"
+proteines_part:
+  valeur: 0.25
+  etiquette: source
+  source: "teneur en protéines de la lentille : 28,4 % de la matière sèche pour 12,6 % d'eau (fiche qualité Terres Inovia / Terres Univia, récolte 2024), soit 24,8 %, arrondi à 25 %"
+  url: "https://www.terresinovia.fr/documents/20126/162983/fiche_Terres_Inovia_Terres_Univia_qual_graines_lentille-2024.pdf"
+azote_ble_kg_ha:
+  valeur: 180
+  etiquette: source
+  source: "apport moyen d'azote minéral sur blé tendre en Île-de-France, environ 177 kg N/ha (Agreste, pratiques culturales 2021, Mémento DRIAAF 2025, p. 26), arrondi"
+  url: "https://driaaf.ile-de-france.agriculture.gouv.fr/IMG/pdf/memento_agricole_idf_2025_v2.pdf"
+  sensibilite: [150, 180, 210]
+co2e_t_par_ha:
+  valeur: 0.755
+  etiquette: source
+  source: "émissions directes de N₂O de l'azote évité : 180 kg N × 0,010 (GIEC 2019) × 44/28 × 267 (PRG100, errata AR6 du 7/10/2025). Hors fabrication des engrais et émissions indirectes"
+  url: "https://www.ipcc.ch/report/ar6/wg1/downloads/report/IPCC_AR6_WGI_Errata.pdf"
 site_acheteur:
   valeur: [2.95, 48.55]
   etiquette: synthetique
-  source: "site fictif en Seine-et-Marne, annoncé comme tel"
+  source: "site de collecte fictif en Seine-et-Marne, annoncé comme tel"
+scenario_historique:
+  valeur: {charges_ble: 440, charges_lentille: 280, aide: 122, rotation: 0, part_non_valorisee: 0, forfait: 0}
+  etiquette: source
+  source: "hypothèses de la version 3 du 30/10 (Arvalis 2020, Triple Performance, aide 2025), conservées pour comparaison"

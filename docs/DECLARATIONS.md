@@ -11,11 +11,13 @@ Obligatoire au dépôt. Tout ce qui n'a pas été produit pendant l'événement 
 | RPG Île-de-France 2025 | parcelles | voir [SOURCES.md](SOURCES.md) | fourni sur le Drive de l'organisation |
 | Douanes NC8 | importations | voir [SOURCES.md](SOURCES.md) | fourni sur le Drive de l'organisation |
 | Registre national des cantines | extension | voir [SOURCES.md](SOURCES.md) | fourni sur le Drive de l'organisation |
-| Contours des départements (gregoiredavid/france-geojson, dérivé d'IGN ADMIN EXPRESS) | centroïdes météo, contours de carte | [à vérifier] | téléchargé depuis GitHub |
+| Contours des départements (gregoiredavid/france-geojson, dérivé d'IGN Admin Express COG 2018) | centroïdes météo, contours de carte | Licence Ouverte (Etalab), selon le dépôt | téléchargé depuis GitHub |
 | RPG 2025 Île-de-France (IGN, data.geopf.fr) | parcelles de la carte | voir [SOURCES.md](SOURCES.md) | téléchargé depuis le site de l'IGN |
 | Eurostat : prix agricoles et Comext | prix du blé et de la lentille, commerce extérieur | réutilisation autorisée avec citation | via l'API Eurostat |
 
 Les archives du Drive de l'organisation ont été créées le 30/10/2026 à 17h36.
+
+Les références documentaires des hypothèses (guides Terres Inovia, notice Telepac, synthèse FiloLeg, Mémento DRIAAF, GIEC) sont listées dans [SOURCES.md](SOURCES.md) et [QUESTIONS.md](QUESTIONS.md).
 
 ## Bibliothèques logicielles
 
@@ -33,9 +35,10 @@ Aucun modèle de prévision pré-entraîné. Le LLM utilisé pour rédiger les t
 | Outil | Usage |
 |---|---|
 | Claude Code (Anthropic) | aide à l'écriture du code et de la documentation |
+| ChatGPT (OpenAI) | recherche documentaire des réponses de mentor ([QUESTIONS.md](QUESTIONS.md)) ; sources relues et chiffres recalculés par le pipeline |
 | Amazon Bedrock (Claude) | lettre d'accompagnement au build, facultative ; aucun chiffre produit (garde-fou testé) |
 
-Autorisation de l'assistant de code externe par l'organisation : **[à confirmer]**.
+Autorisation de l'assistant de code externe par l'organisation : **confirmée** (équipe, 31/10/2026).
 
 ## Travaux préparatoires
 

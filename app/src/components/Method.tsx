@@ -5,16 +5,25 @@ const NAMES: Record<string, string> = {
   charges_ble_eur_ha: 'Charges opérationnelles du blé',
   charges_lentille_eur_ha: 'Charges opérationnelles de la lentille',
   aide_couplee_eur_ha: 'Aide couplée aux légumineuses',
-  bonus_rotation_eur_ha: 'Bonus de rotation',
+  bonus_rotation_eur_ha: 'Bénéfice de rotation pour le blé suivant',
+  part_non_valorisee: 'Part de la récolte refusée au tri',
   cout_transport_eur_t_km: 'Coût du transport',
+  forfait_collecte_eur_t: 'Forfait de collecte',
   facteur_detour_route: 'Détour routier',
   fiabilite_visee: 'Fiabilité visée',
-  volume_vise_t: 'Volume visé par la coopérative',
-  site_acheteur: 'Site acheteur',
+  volume_pilote_t: 'Volume du pilote',
+  volume_vise_t: 'Volume de l’ambition de bassin',
+  proteines_part: 'Protéines dans le grain',
+  azote_ble_kg_ha: 'Azote minéral apporté au blé',
+  co2e_t_par_ha: 'Émissions directes de l’azote évité',
+  site_acheteur: 'Site de collecte',
 };
+const HIDDEN = new Set(['scenario_historique']);
+const PERCENT = new Set(['part_non_valorisee', 'proteines_part']);
 const UNITS: Record<string, string> = {
   charges_ble_eur_ha: '€/ha', charges_lentille_eur_ha: '€/ha', aide_couplee_eur_ha: '€/ha',
-  bonus_rotation_eur_ha: '€/ha', cout_transport_eur_t_km: '€/t/km', volume_vise_t: 't',
+  bonus_rotation_eur_ha: '€/ha', cout_transport_eur_t_km: '€/t/km', volume_vise_t: 't', volume_pilote_t: 't',
+  forfait_collecte_eur_t: '€/t', azote_ble_kg_ha: 'kg N/ha', co2e_t_par_ha: 't CO₂e/ha',
 };
 
 const FEATURES: Record<string, string> = {
@@ -32,6 +41,7 @@ const VOISINS: Record<string, string> = { '10': 'Aube', '51': 'Marne', '89': 'Yo
 function value(k: string, v: any): string {
   if (k === 'fiabilite_visee') return '8 années sur 10';
   if (k === 'site_acheteur') return 'fictif, en Seine-et-Marne';
+  if (PERCENT.has(k)) return `${Math.round(Number(v) * 100)} %`;
   const n = Number(v).toLocaleString('fr-FR');
   return UNITS[k] ? `${n} ${UNITS[k]}` : n;
 }
@@ -55,7 +65,8 @@ export default function Method({ onClose }: { onClose: () => void }) {
             <li><b>Monte-Carlo.</b> 20 000 années sont rejouées. Chacune reprend une année réelle de 2010 à 2025, avec sa météo et son prix du blé, puis tire un rendement de lentille et un rendement de blé dans leurs distributions.</li>
             <li><b>Prix plancher.</b> Dans chaque année simulée, on calcule le prix d’équilibre où la lentille rapporte autant que le blé. Le prix plancher est le quantile 80 % de ces prix.</li>
           </ol>
-          <p className="formula">P* = quantile 80 % de (prix du blé × rendement du blé − charges du blé + charges de la lentille − aides) ÷ rendement de la lentille</p>
+          <p className="formula">P* = quantile 80 % de (prix du blé × rendement du blé − charges du blé + charges de la lentille − aide − bénéfice de rotation) ÷ tonnes de lentille acceptées au tri</p>
+          <p className="note">Le prix garanti est payé sur les tonnes acceptées au tri pour l’alimentation humaine, comme dans les contrats de collecte. Agreste mesure le rendement à l’arrivée à la ferme, avant ce tri : on retire donc une part refusée de {Math.round(((HYPOTHESES as any).part_non_valorisee.valeur) * 100)} %. Avec les hypothèses du 30/10, le prix plancher de la Seine-et-Marne serait de {(thresholds as any).sensibilite.scenario_historique.toLocaleString('fr-FR')} €/t.</p>
         </section>
 
         <section>
@@ -95,7 +106,7 @@ export default function Method({ onClose }: { onClose: () => void }) {
           <h3>Hypothèses</h3>
           <table className="tbl hyp">
             <tbody>
-              {Object.entries(HYPOTHESES).map(([k, v]) => (
+              {Object.entries(HYPOTHESES).filter(([k]) => !HIDDEN.has(k)).map(([k, v]) => (
                 <tr key={k}>
                   <td><b>{NAMES[k] ?? k}</b><span>{v.url ? <a href={v.url} target="_blank" rel="noreferrer">{v.source}</a> : v.source}</span></td>
                   <td className="num">{value(k, v.valeur)}<span>{statusText(v.etiquette)}</span></td>
@@ -124,7 +135,8 @@ export default function Method({ onClose }: { onClose: () => void }) {
             <li>Agreste estime souvent le rendement de la lentille au niveau régional : {(meta as any).panel_lentille.departements_mesures} départements mesurés, mais {(meta as any).panel_lentille.series_independantes} séries indépendantes seulement.</li>
             <li>Sept années test seulement ; 2020 et 2021, absentes de l’entraînement, font céder les contrats.</li>
             <li>La météo n’améliore pas la précision face à la tendance seule ; elle améliore la calibration.</li>
-            <li>Charges constantes dans le temps ; éligibilité de la lentille à l’aide couplée à confirmer.</li>
+            <li>Charges constantes dans le temps ; aide couplée de 2026 encore indicative, ajustée en fin de campagne selon les surfaces.</li>
+            <li>Part refusée au tri et bénéfice de rotation : hypothèses de l’équipe, testées en sensibilité.</li>
             <li>Un prix plancher n’est pas une assurance : une récolte effondrée réduit la marge.</li>
           </ul>
         </section>

@@ -179,16 +179,23 @@ def break_even_prices(X_pool, mL, mW, levL, levW, h, n=6000, seed=0):
     yW = sample_quantile(qW[s], rng.random(n)) * levW / 10
     pB = np.full(n, h["prix_ble"]) if h.get("prix_ble") else X_pool["prix_ble"].to_numpy()[s]
     cW, cL, bonus = h["charges_ble"], h["charges_lentille"], h["bonus"]
-    return (pB * yW - cW + cL - bonus) / yL, yL, yW
+    # Le prix garanti est payé sur les tonnes acceptées au tri, pas sur la récolte brute.
+    paid = yL * (1 - h.get("qualite", 0.0))
+    return (pB * yW - cW + cL - bonus) / paid, yL, yW
 
 
 def p_star(R: np.ndarray, tau: float) -> float:
-    return float(np.quantile(R, tau))
+    """Plus petit prix tel que la lentille rapporte au moins autant que le blé dans une part
+    tau des scénarios (égalités comprises) : quantile empirique « inverted_cdf »."""
+    return float(np.quantile(R, tau, method="inverted_cdf"))
 
 
 def hyp_values(h: dict) -> dict:
-    """Valeurs numériques des hypothèses. `bonus` = aide couplée + bonus de rotation (€/ha)."""
+    """Valeurs numériques des hypothèses. `bonus` = aide couplée + bonus de rotation (€/ha) ;
+    `qualite` = part de la récolte non acceptée au tri ; `forfait` = collecte en €/t."""
     return {"prix_ble": None,
+            "qualite": h["part_non_valorisee"]["valeur"],
+            "forfait": h["forfait_collecte_eur_t"]["valeur"],
             "charges_ble": h["charges_ble_eur_ha"]["valeur"],
             "charges_lentille": h["charges_lentille_eur_ha"]["valeur"],
             "aide": h["aide_couplee_eur_ha"]["valeur"],

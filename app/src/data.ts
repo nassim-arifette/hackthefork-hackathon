@@ -40,8 +40,16 @@ export const H = {
   aide: hyp.aide_couplee_eur_ha.valeur as number,
   rotation: hyp.bonus_rotation_eur_ha.valeur as number,
   kappa: hyp.cout_transport_eur_t_km.valeur as number,
+  forfait: hyp.forfait_collecte_eur_t.valeur as number,
+  qualite: hyp.part_non_valorisee.valeur as number,
   tau: hyp.fiabilite_visee.valeur as number,
   site: hyp.site_acheteur.valeur as [number, number],
+  volumes: { pilote: hyp.volume_pilote_t.valeur as number, ambition: hyp.volume_vise_t.valeur as number },
+  impact: {
+    proteines: hyp.proteines_part.valeur as number,
+    azote: hyp.azote_ble_kg_ha.valeur as number,
+    co2e: hyp.co2e_t_par_ha.valeur as number,
+  },
 };
 export const HYPOTHESES = hyp;
 
@@ -81,8 +89,9 @@ export function reliabilityAt(price: number, dep = D77): number {
 /** Le contrat a-t-il tenu sur cette parcelle l'année rejouée ? Même règle que le backtest. */
 export function held(p: Parcel, price: number, r: ReplayYear): boolean {
   const d = r.par_departement[p.dep as keyof ReplayYear['par_departement']];
-  const farm = price - H.kappa * p.dist;
-  const margeL = farm * d.rendement_lentille_tha - H.chargesLentille + H.aide + H.rotation;
+  const farm = price - H.forfait - H.kappa * p.dist;
+  // Le prix garanti est payé sur les tonnes acceptées au tri.
+  const margeL = farm * d.rendement_lentille_tha * (1 - H.qualite) - H.chargesLentille + H.aide + H.rotation;
   const margeB = r.prix_ble * d.rendement_ble_tha - H.chargesBle;
   return margeL >= margeB;
 }

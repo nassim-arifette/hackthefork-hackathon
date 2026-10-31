@@ -56,6 +56,7 @@ def main():
                 continue
             pool = pool_for(meteo, r.dep, range(2010, t), t)
             yL, yW = r.rendement_qha / 10, realW[r.dep] / 10
+            yL_paid = yL * (1 - h["qualite"])  # tonnes acceptées au tri
             marge_W = prix_t * yW - h["charges_ble"]
             rec = {"annee": t, "dep": r.dep, "dep_nom": r.dep_nom,
                    "rendement_lentille_reel": round(r.rendement_qha, 1),
@@ -63,17 +64,17 @@ def main():
                    "prix_ble_reel": round(prix_t, 1), "marge_ble": round(marge_W),
                    "ic80_rel": [round(float(q1[i, 0]), 3), round(float(q1[i, 2]), 3)],
                    "q50_rel": round(float(q1[i, 1]), 3), "rel_reel": round(float(y[i]), 3)}
-            # Pratique courante : prix d'équilibre calculé sur les moyennes des années passées.
+            # Référence naïve, sans modèle : prix d'équilibre calculé sur les moyennes des années passées.
             p_moy = (prix_passe * levW[r.dep] / 10 - h["charges_ble"] + h["charges_lentille"] - h["bonus"]) \
-                / (levL[r.dep] / 10)
-            tenu_moy = bool(p_moy * yL - h["charges_lentille"] + h["bonus"] >= marge_W)
+                / (levL[r.dep] / 10 * (1 - h["qualite"]))
+            tenu_moy = bool(p_moy * yL_paid - h["charges_lentille"] + h["bonus"] >= marge_W)
             tenus["moyenne"].append(tenu_moy)
             rec |= {"p_moyenne": round(p_moy), "tenu_moyenne": tenu_moy}
             for k in ("M0", "M1", "M2", "auto"):
                 R, _, _ = break_even_prices(pool, models[k], mW, levL[r.dep], levW[r.dep], h,
                                             seed=t * 100 + i)
                 ps = p_star(R, h["tau"])
-                marge_L = ps * yL - h["charges_lentille"] + h["bonus"]
+                marge_L = ps * yL_paid - h["charges_lentille"] + h["bonus"]
                 tenu = bool(marge_L >= marge_W)
                 tenus[k].append(tenu)
                 sfx = {"M0": "_M0", "M1": "", "M2": "_M2", "auto": "_auto"}[k]

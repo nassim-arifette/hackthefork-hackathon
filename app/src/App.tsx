@@ -20,7 +20,7 @@ const IDF_LENTIL_HA = ['77', '78', '91', '95'].reduce((a, d) => a + (surf[d] ?? 
 const MARKET_MID = (MARKET.min + MARKET.max) / 2;
 const REL_MARKET = reliabilityAt(MARKET_MID);
 const CONTRACT_PRICE = Math.ceil((Math.max(...pStars) + 30) / 10) * 10;
-const VOLUME = (meta.hypotheses as any).volume_vise_t.valeur as number;
+
 const BT2020 = backtest.annees.find((y) => y.annee === 2020)!;
 const START_PRICE = 900;
 const IC77 = (D77 as any).p_star_ic80 as [number, number] | undefined;
@@ -34,6 +34,8 @@ export default function App() {
   const [shown, setShown] = useState(0);
   const [hover, setHover] = useState<Hover>(null);
   const [method, setMethod] = useState(false);
+  const [volumeKey, setVolumeKey] = useState<'pilote' | 'ambition'>('pilote');
+  const VOLUME = H.volumes[volumeKey];
   const timers = useRef<number[]>([]);
 
   const stop = () => { timers.current.forEach(clearTimeout); timers.current = []; };
@@ -58,7 +60,7 @@ export default function App() {
       t += p.tonnes; ha += p.surface; n++; km = p.dist;
     }
     return { ha, n, km, reached: t >= VOLUME };
-  }, [price]);
+  }, [price, VOLUME]);
 
   const animatePrice = useCallback((from: number, to: number, ms = 5600) => {
     stop();
@@ -191,7 +193,7 @@ export default function App() {
                     onChange={(e) => { stop(); setPrice(+e.target.value); }} />
                   <div className="range-marks" aria-hidden="true">
                     <span className="mk-market" style={{ left: pos(MARKET.min), width: `calc(${pos(MARKET.max)} - ${pos(MARKET.min)})` }} />
-                    <span className="mk-label" style={{ left: pos(MARKET_MID) }}>marché</span>
+                    <span className="mk-label" style={{ left: pos(MARKET_MID) }}>réf. 2012–2016</span>
                     <span className="mk-tick" style={{ left: pos(D77.p_star) }} />
                     <span className="mk-label" style={{ left: pos(D77.p_star) }}>8 sur 10</span>
                   </div>
@@ -206,9 +208,19 @@ export default function App() {
               <div className="block">
                 <h3>Ce que le prix achète</h3>
                 <PriceChart price={price} min={MIN} max={MAX} />
-                <Source k="modele">20 000 années rejouées : météo et prix du blé de 2010 à 2025. Prix de marché de la lentille : Eurostat, {MARKET.annees[0]}–{MARKET.annees[1]}.</Source>
+                <Source k="modele">20 000 années rejouées : météo et prix du blé de 2010 à 2025. Référence historique du prix de la lentille : Eurostat, {MARKET.annees[0]}–{MARKET.annees[1]}.</Source>
               </div>
-              <p className="pull">Au prix de marché observé, de {fmt(MARKET.min)} à {fmt(MARKET.max)} €/t, la lentille ne gagne que {dec(REL_MARKET * 10, 1)} années sur 10. Pour 8 sur 10, il faut {fmt(D77.p_star)} €/t en Seine-et-Marne.</p>
+              <p className="pull">À la référence historique de {fmt(MARKET.min)} à {fmt(MARKET.max)} €/t, la lentille ne gagne que {dec(REL_MARKET * 10, 1)} années sur 10. Pour 8 sur 10, il faut {fmt(D77.p_star)} €/t en Seine-et-Marne.</p>
+              <div className="block">
+                <h3>Les contrats récents, pour comparer</h3>
+                <table className="list">
+                  <tbody>
+                    <tr><td>Unéal, avec Vivien Paille<span>lentilles valorisées, décembre 2023</span></td><td className="num">900 €/t</td></tr>
+                    <tr><td>NatUp, contrat triennal<span>première tonne par hectare, septembre 2025</span></td><td className="num">1 000 €</td></tr>
+                  </tbody>
+                </table>
+                <Source k="source">Communiqués Unéal (12/12/2023) et NatUp (18/09/2025). Ces contrats partagent déjà une part du risque ; l’outil mesure la protection qu’ils offrent.</Source>
+              </div>
               <div className="block">
                 <h3>Prix plancher par département</h3>
                 <table className="list">
@@ -248,9 +260,9 @@ export default function App() {
                   <div className="block">
                     <h3>Marge par hectare en Seine-et-Marne, {year.annee}</h3>
                     <MarginBars
-                      lentil={price * year.par_departement['77'].rendement_lentille_tha - H.chargesLentille + H.aide + H.rotation}
+                      lentil={price * year.par_departement['77'].rendement_lentille_tha * (1 - H.qualite) - H.chargesLentille + H.aide + H.rotation}
                       wheat={year.prix_ble * year.par_departement['77'].rendement_ble_tha - H.chargesBle} />
-                    <Source k="modele">Au prix garanti, transport non déduit ; charges et aide couplée sourcées ; rendement et prix du blé de l’année mesurés.</Source>
+                    <Source k="modele">Au prix garanti, transport non déduit, sur les tonnes acceptées au tri ({pct(1 - H.qualite)} de la récolte) ; bénéfice de rotation de {fmt(H.rotation)} €/ha compris ; rendement et prix du blé de l’année mesurés.</Source>
                   </div>
                   <div className="block verdict">
                     <div className="verdict-v">{stats.n ? pct(stats.kept / stats.n) : '—'}</div>
@@ -297,13 +309,13 @@ export default function App() {
                 <table className="list models">
                   <thead><tr><th>Façon de fixer le prix</th><th className="num">Contrats tenus</th></tr></thead>
                   <tbody>
-                    <tr><td>Moyennes des années passées<span>la pratique courante</span></td><td className="num bad">{pct(G.taux_tenus_moyenne)}</td></tr>
+                    <tr><td>Prix calculé sur les moyennes<span>référence naïve, sans modèle</span></td><td className="num bad">{pct(G.taux_tenus_moyenne)}</td></tr>
                     <tr><td>Distribution calibrée, sans météo<span>tendance seule</span></td><td className="num">{pct(G.taux_tenus_M0)}</td></tr>
                     <tr className="hl"><td>Régression quantile avec météo<span>modèle d’apprentissage retenu avant tout résultat</span></td><td className="num">{pct(G.taux_tenus)}</td></tr>
                     <tr><td>LightGBM avec météo<span>gradient boosting</span></td><td className="num bad">{pct(G.taux_tenus_M2)}</td></tr>
                   </tbody>
                 </table>
-                <p className="body small">Avec un prix calculé sur les moyennes, comme aujourd’hui, un contrat sur trois seulement aurait tenu : c’est le verrou. Une distribution calibrée fait passer au-dessus de 8 sur 10, et la météo y ajoute quatre points. LightGBM, plus précis sur l’année moyenne, sous-estime les mauvaises années.</p>
+                <p className="body small">Un prix calculé sur les rendements et les prix moyens n’aurait tenu que {pct(G.taux_tenus_moyenne)} des contrats : la moyenne ignore la mauvaise année. Une distribution calibrée dépasse 8 sur 10, et la météo y ajoute encore des points. LightGBM, plus précis sur l’année moyenne, sous-estime les mauvaises années.</p>
                 <Source k="modele">Backtest glissant 2019–2025 sur {G.n_cas} cas, 80 % visés. Précision et prix 2026 de chaque modèle dans Méthode et sources.</Source>
               </div>
               <div className="block">
@@ -326,18 +338,34 @@ export default function App() {
           {step === 4 && (
             <>
               <h1>La proposition faite à l’agriculteur</h1>
+              <div className="tabs" role="tablist" aria-label="Volume du contrat">
+                {(['pilote', 'ambition'] as const).map((k) => (
+                  <button key={k} role="tab" aria-selected={volumeKey === k} className={volumeKey === k ? 'on' : ''} onClick={() => setVolumeKey(k)}>
+                    <b>{fmt(H.volumes[k])} t</b>{k === 'pilote' ? 'Pilote, une campagne' : 'Ambition de bassin'}
+                  </button>
+                ))}
+              </div>
               <div className="block contract">
                 <p className="contract-title">Proposition de contrat, campagne {meta.campagne}</p>
                 <dl>
                   <dt>Objet</dt><dd>Achat de lentilles pour l’alimentation humaine, sur trois campagnes.</dd>
-                  <dt>Prix plancher</dt><dd><b>{fmt(D77.p_star)} €/t</b> départ ferme en Seine-et-Marne, ajusté du transport jusqu’au site.</dd>
+                  <dt>Prix plancher</dt><dd><b>{fmt(D77.p_star)} €/t</b> départ ferme en Seine-et-Marne, payé sur les tonnes acceptées au tri pour l’alimentation humaine.</dd>
                   <dt>Ce qu’il garantit</dt><dd>Une marge au moins égale à celle du blé dans {pct(H.tau)} des années simulées.</dd>
-                  <dt>Ce qu’il ne garantit pas</dt><dd>Une récolte effondrée réduit la marge : {dec(D77.rendement_lentille_q10_tha, 2)} t/ha ou moins une année sur dix.</dd>
+                  <dt>Ce qu’il ne garantit pas</dt><dd>Une récolte effondrée réduit la marge : {dec(D77.rendement_lentille_q10_tha, 2)} t/ha ou moins une année sur dix. Les lots refusés au tri ne sont pas payés au prix garanti.</dd>
                   <dt>Volume visé</dt><dd>{target.reached
-                    ? <><b>{fmt(VOLUME)} t</b>, soit {pct(VOLUME / L25.importations_t)} des importations de 2025, sur {fmt(target.ha)} ha : les {fmt(target.n)} parcelles éligibles les plus proches du site, à moins de {fmt(target.km)} km.</>
+                    ? <><b>{fmt(VOLUME)} t</b> acceptées, soit {pct(VOLUME / L25.importations_t)} des importations de 2025, sur {fmt(target.ha)} ha : les {fmt(target.n)} parcelles éligibles les plus proches du site, à moins de {fmt(target.km)} km.</>
                     : <>Le prix est trop bas pour réunir {fmt(VOLUME)} t. Remontez-le à l’étape 2.</>}</dd>
                 </dl>
-                <Source k="modele">Texte assemblé à partir des chiffres calculés, sans aucun chiffre ajouté. Volume visé : hypothèse de l’équipe.</Source>
+                <Source k="modele">Texte assemblé à partir des chiffres calculés, sans aucun chiffre ajouté. Volumes : hypothèses de l’équipe.</Source>
+              </div>
+              <div className="block">
+                <h3>Impact du contrat</h3>
+                <div className="figures">
+                  <Figure value={fmt(VOLUME * H.impact.proteines)} unit="t" label="de protéines végétales" />
+                  <Figure value={fmt((target.ha * H.impact.azote) / 1000)} unit="t" label="d’azote minéral non apporté" />
+                  <Figure value={fmt(target.ha * H.impact.co2e)} unit="t CO₂e" label="d’émissions directes évitées" />
+                </div>
+                <Source k="source">Par campagne, sur les {fmt(target.ha)} ha de blé remplacés. Protéines : 25 % du grain (Terres Inovia / Terres Univia, récolte 2024). Azote : 180 kg N/ha sur blé en Île-de-France (Agreste 2021). N₂O direct : GIEC 2019 et PRG100 de l’AR6 ; hors fabrication des engrais.</Source>
               </div>
               {lettre.source === 'llm' && lettre.texte && (
                 <div className="block">
@@ -348,14 +376,14 @@ export default function App() {
               )}
               <div className="block">
                 <h3>Le prix de la sécurité</h3>
-                <p className="body small">Prix plancher en Seine-et-Marne selon le nombre d’années gagnantes visé. Garantir 8 années sur 10 coûte {dec(D77.p_star / MARKET_MID, 1)} fois le prix de marché observé.</p>
+                <p className="body small">Prix plancher en Seine-et-Marne selon le nombre d’années gagnantes visé. Garantir 8 années sur 10 coûte {dec(D77.p_star / MARKET_MID, 1)} fois la référence historique 2012–2016.</p>
                 <SecurityChart />
                 <Source k="modele">Même simulation, quantile variable.</Source>
               </div>
               <div className="block">
                 <h3>Ce qui fait bouger le prix plancher</h3>
                 <Sensitivity />
-                <Source k="modele">Charges et aide couplée sourcées ; bonus de rotation supposé. Détail dans Méthode et sources.</Source>
+                <Source k="modele">Aide couplée sourcée ; charges arrondies depuis les guides Terres Inovia ; bonus de rotation et part refusée supposés. Détail dans Méthode et sources.</Source>
               </div>
               <div className="block">
                 <h3>Là où la lentille tient le mieux</h3>
@@ -366,7 +394,7 @@ export default function App() {
                     ))}
                   </tbody>
                 </table>
-                <Source k="modele">Même calcul, avec les rendements propres à chaque département producteur. Le prix plancher baisse là où le blé rend moins.</Source>
+                <Source k="modele">Même calcul, avec les rendements propres à chaque département producteur et les charges franciliennes partout : un classement des rendements, pas des économies locales. Le prix plancher baisse là où le blé rend moins.</Source>
               </div>
             </>
           )}
