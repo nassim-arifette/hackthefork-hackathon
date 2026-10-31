@@ -16,9 +16,9 @@ Le Contrat qui Tient aide le responsable filière d'une coopérative ou d'un con
 | Variabilité du rendement, lentille contre blé | **0,20 contre 0,09** (Agreste, 2010–2025) |
 | Aux prix observés de 2012 à 2016 (650 à 779 €/t), la lentille bat le blé francilien | **5 années sur 10** (modèle) |
 | Prix plancher pour 8 années sur 10, Seine-et-Marne | **1 567 €/t** départ ferme, sur les tonnes acceptées au tri ; incertitude de 1 099 à 2 877 €/t (modèle) |
-| Backtest 2019–2025, années jamais vues | **87 %** de contrats tenus pour 80 % visés, sur 133 cas, contre **29 %** pour un prix calculé sur les moyennes |
-| À protection égale, un barème par tranches plutôt qu'un prix unique | **18 % moins cher** en moyenne, 22 % en backtest, avec les mêmes 87 % de contrats tenus (modèle) |
-| Pois chiche, haricot, pois, féverole : même moteur | prix fixe tenu dans 66 à 72 % des cas ; **indexé sur le blé, 82 à 87 %** (backtest, après [revue des budgets](docs/REVUE_FILIERE_CULTURES.md)) |
+| Backtest 2019–2025, années jamais vues | **78 %** de contrats tenus pour 80 % visés, sur 133 cas, contre **29 %** pour un prix calculé sur les moyennes (protocole strict : rien des années testées n'entre dans le calcul) |
+| À protection égale, un barème par tranches plutôt qu'un prix unique | **18 % moins cher** en moyenne, 19 % en backtest, où il tient 79 % des contrats contre 78 % (modèle) |
+| Pois chiche, haricot, pois, féverole : même moteur | prix fixe tenu dans 65 à 70 % des cas ; **indexé sur le blé, 78 à 89 %** (backtest, après [revue des budgets](docs/REVUE_FILIERE_CULTURES.md)) |
 
 ---
 

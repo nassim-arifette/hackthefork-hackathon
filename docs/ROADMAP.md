@@ -10,7 +10,7 @@
 
 ## État et décisions proposées au samedi 31/10
 
-**Déjà réalisé :** pipeline Agreste / RPG / NASA POWER / Eurostat, modèles comparés, backtest, incertitude sur P*, application en cinq étapes, version hors ligne et tests. Le scénario du 31/10 est calculé : version 4 de [RESULTATS.md](RESULTATS.md), P* de 1 567 €/t en Seine-et-Marne, 87 % de contrats tenus, comparaison des contrats comprise.
+**Déjà réalisé :** pipeline Agreste / RPG / NASA POWER / Eurostat, modèles comparés, backtest, incertitude sur P*, application en cinq étapes, version hors ligne et tests. Le scénario du 31/10 est calculé : version 4 de [RESULTATS.md](RESULTATS.md), P* de 1 567 €/t en Seine-et-Marne, 78 % de contrats tenus en backtest strict, comparaison des contrats comprise.
 
 **Recherche mentor réalisée :** éligibilité de la lentille alimentaire confirmée, montant PAC remis dans sa campagne, références de charges et d'effet précédent trouvées, exemples de contrats réels, coefficients d'impact et choix d'usage RPG / SAA documentés dans [QUESTIONS.md](QUESTIONS.md).
 

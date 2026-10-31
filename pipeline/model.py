@@ -47,6 +47,37 @@ def load() -> pd.DataFrame:
     return u.merge(meteo, on=["dep", "annee"], how="inner"), meteo
 
 
+def series_passees(panel: pd.DataFrame, culture: str, avant: int, min_identiques: int = 8) -> pd.DataFrame:
+    """Lignes utilisables d'une culture antérieures à `avant`, sans les séries en double détectées
+    sur ces seules années : ce qu'on savait au moment de fixer le prix.
+
+    Même règle que 01_agreste.py (au moins 8 années identiques à 0,01 q/ha près ; le département
+    le plus cultivé représente le groupe), mais appliquée au passé seulement. Regrouper avec toute
+    la période 2010-2025 ferait entrer dans le backtest une information des années testées.
+    """
+    p = panel[(panel.culture == culture) & panel.utilisable & (panel.annee < avant)]
+    wide = p.pivot(index="dep", columns="annee", values="rendement_qha").round(2)
+    area = p.groupby("dep").surface_ha.mean()
+    deps = sorted(wide.index)
+    parent = {d: d for d in deps}
+
+    def find(d):
+        while parent[d] != d:
+            d = parent[d]
+        return d
+
+    for i, a in enumerate(deps):
+        for b in deps[i + 1:]:
+            both = wide.loc[a].notna() & wide.loc[b].notna() & (wide.loc[a] > 0)
+            if int((wide.loc[a][both] == wide.loc[b][both]).sum()) >= min_identiques:
+                parent[find(b)] = find(a)
+    groups = {}
+    for d in deps:
+        groups.setdefault(find(d), []).append(d)
+    keep = {max(m, key=lambda d: area.get(d, 0)) for m in groups.values()}
+    return p[p.dep.isin(keep)]
+
+
 def levels_lookup(culture: str) -> pd.Series:
     """Niveau moyen de rendement de chaque département, doublons compris (consultation seule)."""
     panel = pd.read_csv(DATA / "panel_rendements.csv", dtype={"dep": str, "serie_groupe": str})

@@ -8,7 +8,7 @@ import pytest
 
 from common import APP_DATA, DATA, TEST_YEARS
 from model import Calibrated, break_even_prices, calibrer_premier_palier, calibrer_prime_ha, hyp_values, \
-    levels, load, p_star, paiement, pool_for, protection, sample_quantile, simulate_years, with_rel
+    levels, load, p_star, paiement, pool_for, protection, sample_quantile, series_passees, simulate_years, with_rel
 from common import hypotheses
 
 
@@ -43,6 +43,23 @@ def test_backtest_has_no_leakage():
         train = L[L.annee < t]
         assert train.annee.max() < t
         assert t not in set(train.annee)
+
+
+def test_duplicate_series_are_grouped_with_past_years_only(panel):
+    """Le regroupement des séries en double d'une année test ne dépend pas des années qui suivent."""
+    rng = np.random.default_rng(0)
+    for t in TEST_YEARS:
+        kept = series_passees(panel, "lentille", t)
+        assert kept.annee.max() < t
+        brouille = panel.copy()
+        futur = brouille.annee >= t
+        brouille.loc[futur, "rendement_qha"] = rng.uniform(1, 40, futur.sum())
+        pd.testing.assert_frame_equal(kept, series_passees(brouille, "lentille", t))
+        wide = kept.pivot(index="dep", columns="annee", values="rendement_qha").round(2)
+        deps = list(wide.index)
+        for i, a in enumerate(deps):
+            for b in deps[i + 1:]:
+                assert int((wide.loc[a] == wide.loc[b]).sum()) < 8, (t, a, b)
 
 
 def test_calibration_uses_only_training_years():

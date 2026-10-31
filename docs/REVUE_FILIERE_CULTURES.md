@@ -104,7 +104,7 @@ Les exports [data/cultures.json](../data/cultures.json) et [app/src/data/culture
 
 P\* est le prix qui permet de battre la marge du blé dans 80 % des simulations, avec aide, rotation et fraction non valorisée. Il n'est pas un prix payé observé. Ajouter une référence de prix ne modifie pas P\* : cela permet de calculer la fréquence de réussite à cette référence. Les hausses de P\* du haricot et du pois proviennent des charges révisées.
 
-Les contrats indexés sur le blé tiennent désormais dans **82 à 87 % des cas du backtest 2019–2025**, contre **66 à 72 % pour le prix fixe**, sur les quatre cultures. Le détail par culture et les barèmes recalibrés sont dans [RESULTATS.md](RESULTATS.md) et les exports. Les valeurs de sensibilité du YAML sont des variantes disponibles ; ce recalcul porte sur le scénario central.
+Les contrats indexés sur le blé tiennent dans **78 à 89 % des cas du backtest 2019–2025**, contre **65 à 70 % pour le prix fixe**, sur les quatre cultures. Ces taux suivent le protocole strict du 31/10 : pour chaque année test, les séries départementales en double sont regroupées avec les seules années antérieures. Le détail par culture et les barèmes recalibrés sont dans [RESULTATS.md](RESULTATS.md) et les exports. Les valeurs de sensibilité du YAML sont des variantes disponibles ; ce recalcul porte sur le scénario central.
 
 **Conséquence pour le pitch :** le haricot est un cas de contrat à forte valeur, dont l'accès à l'eau compte dans le budget. Le pois et la féverole demandent surtout de construire un débouché et une rémunération suffisants face au blé francilien. Un coût mieux documenté ne suffit pas, à lui seul, à rendre la substitution attractive au prix de référence.
 

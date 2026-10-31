@@ -12,10 +12,10 @@ Le Contrat qui Tient calcule, pour le responsable filière d'une coopérative, l
 
 - Un modèle d'apprentissage probabiliste relie la météo (NASA POWER) à la distribution du rendement du blé et de la lentille, sur seize ans de données Agreste.
 - Une simulation rejoue 20 000 années de météo et de prix du blé, et en déduit le prix plancher, payé sur les tonnes acceptées au tri.
-- Un backtest sur des années que le modèle n'a jamais vues mesure la promesse : 87 % des contrats ont tenu pour 80 % visés, contre 29 % pour un prix calculé sur les moyennes.
+- Un backtest strict, sur des années que le modèle n'a jamais vues, mesure la promesse : 78 % des contrats ont tenu pour 80 % visés, contre 29 % pour un prix calculé sur les moyennes.
 - La carte des 20 762 parcelles de blé d'Île-de-France (RPG 2025) montre la bascule et le volume mobilisable.
 
-Premier résultat : aux prix observés de 2012 à 2016, la lentille ne bat le blé francilien qu'une année sur deux ; pour 8 sur 10, il faut 1 567 €/t départ ferme en Seine-et-Marne, avec une incertitude affichée (1 099 à 2 877 €/t). Le prix contractuel d'Unéal en 2023, 900 €/t, protège 6 années sur 10 dans le même modèle. À protection égale, un barème par tranches (1 635 €/t la première tonne par hectare, puis 750 et 650) coûte 18 % de moins qu'un prix unique, et tient autant de contrats en backtest pour 22 % de moins.
+Premier résultat : aux prix observés de 2012 à 2016, la lentille ne bat le blé francilien qu'une année sur deux ; pour 8 sur 10, il faut 1 567 €/t départ ferme en Seine-et-Marne, avec une incertitude affichée (1 099 à 2 877 €/t). Le prix contractuel d'Unéal en 2023, 900 €/t, protège 6 années sur 10 dans le même modèle. À protection égale, un barème par tranches (1 635 €/t la première tonne par hectare, puis 750 et 650) coûte 18 % de moins qu'un prix unique, et tient autant de contrats en backtest pour 19 % de moins.
 
 ## Le modèle économique
 

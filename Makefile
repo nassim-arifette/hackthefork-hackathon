@@ -10,7 +10,7 @@ data/panel_rendements.csv:
 	$(P) $(PY) 01_agreste.py
 data/meteo_dept.csv: data/panel_rendements.csv
 	$(P) $(PY) 02_weather.py
-data/backtest.json: data/meteo_dept.csv data/prix_ble.csv data/hypotheses.yaml pipeline/model.py pipeline/contrats.py data/pilote_300t/contrats.json
+data/backtest.json: data/meteo_dept.csv data/meteo_dept_cultures.csv data/prix_ble.csv data/hypotheses.yaml pipeline/model.py pipeline/contrats.py data/pilote_300t/contrats.json
 	$(P) $(PY) 03_backtest.py
 data/parcelles.json:
 	$(P) $(PY) 04_parcels.py

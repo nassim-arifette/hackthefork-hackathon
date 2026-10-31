@@ -75,13 +75,13 @@ Q_q(rel[d,t]) = a(q) + b(q) · tendance + Σ_k β_k(q) · anomalie_k[d,t]
 
 À chaque entraînement, M0, M1 et M2 sont comparés sur les trois dernières années d'entraînement (perte pinball) ; le meilleur est retenu. Ce choix n'utilise jamais l'année test.
 
-### Résultat de la comparaison (backtest, scénario de la version 4)
+### Résultat de la comparaison (backtest strict, scénario de la version 4)
 
 | | M0 tendance | M1 retenu | M2 LightGBM | auto |
 |---|---|---|---|---|
-| Perte pinball | 0,1078 | 0,1103 | 0,1014 | 0,1024 |
-| Couverture à 80 % | 74 % | 79 % | 84 % | 74 % |
-| Contrats tenus (80 % visés) | 81 % | **87 %** | 77 % | 80 % |
+| Perte pinball | 0,1094 | 0,1105 | 0,1020 | 0,1038 |
+| Couverture à 80 % | 70 % | 79 % | 77 % | 70 % |
+| Contrats tenus (80 % visés) | 77 % | **78 %** | 76 % | 75 % |
 | P\* Seine-et-Marne 2026 | 2 932 €/t | 1 567 €/t | 1 000 €/t | — |
 
 Pour référence, un prix fixé sur les moyennes des années passées, sans modèle, ne tient que 29 % des contrats, avec un P\* 2026 de 742 €/t.
@@ -211,7 +211,7 @@ Dans le backtest, ces deux formes sont recalibrées pour chaque cas avec les sc�
 
 Pour chaque année test `t` de 2019 à 2025 :
 
-1. entraîner M0, M1 et M2 sur les années `< t` uniquement, niveaux et calibration conformal compris ;
+1. regrouper les séries Agreste en double avec les seules années `< t`, puis entraîner M0, M1 et M2 sur ces années uniquement, niveaux et calibration conformal compris ;
 2. calculer `P*[d, t]` pour chaque département, en rejouant la météo et le prix du blé des années `< t` ;
 3. observer l'année `t` réelle : rendements Agreste, prix du blé réalisé ;
 4. le contrat **a tenu** si `P*[d,t] · y_L_réel · (1 − r) − charges_L + aide + rotation ≥ p_B_réel · y_B_réel − charges_B`.
@@ -234,7 +234,7 @@ Les contrats publiés (Unéal 900 €/t, barème NatUp 2023–2024, proposition 
 ### Ce qu'il faut dire au jury
 
 - **L'unité indépendante est l'année.** Les départements d'une même année partagent la même météo. Avec 7 années test, l'incertitude sur le taux de contrats tenus reste grande. On montre les résultats **année par année**.
-- **2020 et 2021 sont dans la fenêtre de test.** Un modèle entraîné jusqu'en 2019 n'a jamais vu un effondrement de la lentille de cette ampleur. Les contrats cèdent ces années-là (50 % et 61 % tenus). On le montre et on l'explique.
+- **2020 et 2021 sont dans la fenêtre de test.** Un modèle entraîné jusqu'en 2019 n'a jamais vu un effondrement de la lentille de cette ampleur. Les contrats cèdent ces années-là (39 % et 56 % tenus), puis en 2022 avec la flambée du prix du blé (68 %). On le montre et on l'explique.
 - Si les résultats sont mauvais, ils sont affichés quand même. Le protocole n'est jamais modifié après coup pour améliorer le chiffre.
 
 ---

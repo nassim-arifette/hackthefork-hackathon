@@ -346,9 +346,9 @@ export default function App() {
                     <tr><td>Prix du blé, €/t</td>{backtest.annees.map((y) => <td key={y.annee}>{fmt(y.prix_ble)}</td>)}</tr>
                   </tbody>
                 </table>
-                <Source k="modele">Backtest glissant sur {G.n_cas} cas département × année. Aucune année test n’a servi à l’entraînement ni au réglage.</Source>
+                <Source k="modele">Backtest glissant sur {G.n_cas} cas département × année. Aucune année test n’a servi à l’entraînement, au réglage ni au regroupement des séries.</Source>
               </div>
-              <p className="body">Les contrats cèdent en 2020 et 2021 : deux effondrements que le modèle n’avait jamais vus.</p>
+              <p className="body">L’objectif est d’être proche de {pct(backtest.fiabilite_visee)}, pas de 100 % : au-dessus, l’acheteur paie une protection inutile ; en dessous, la promesse faite à l’agriculteur est rompue. Les contrats cèdent surtout en 2020 et 2021, deux effondrements de la lentille, puis en 2022, quand le prix du blé flambe.</p>
               <div className="block">
                 <h3>Ce que le modèle apporte au prix</h3>
                 <table className="list models">
@@ -357,10 +357,10 @@ export default function App() {
                     <tr><td>Prix calculé sur les moyennes<span>référence naïve, sans modèle</span></td><td className="num bad">{pct(G.taux_tenus_moyenne)}</td></tr>
                     <tr><td>Distribution calibrée, sans météo<span>tendance seule</span></td><td className="num">{pct(G.taux_tenus_M0)}</td></tr>
                     <tr className="hl"><td>Régression quantile avec météo<span>modèle d’apprentissage retenu avant tout résultat</span></td><td className="num">{pct(G.taux_tenus)}</td></tr>
-                    <tr><td>LightGBM avec météo<span>gradient boosting</span></td><td className="num bad">{pct(G.taux_tenus_M2)}</td></tr>
+                    <tr><td>LightGBM avec météo<span>gradient boosting</span></td><td className="num">{pct(G.taux_tenus_M2)}</td></tr>
                   </tbody>
                 </table>
-                <p className="body small">Un prix calculé sur les rendements et les prix moyens n’aurait tenu que {pct(G.taux_tenus_moyenne)} des contrats : la moyenne ignore la mauvaise année. Une distribution calibrée dépasse 8 sur 10, et la météo y ajoute encore des points. LightGBM, plus précis sur l’année moyenne, sous-estime les mauvaises années.</p>
+                <p className="body small">Un prix calculé sur les rendements et les prix moyens n’aurait tenu que {pct(G.taux_tenus_moyenne)} des contrats : la moyenne ignore la mauvaise année. Une distribution calibrée approche la promesse de 8 sur 10, et la météo y ajoute un peu. LightGBM, plus précis sur l’année moyenne, sous-estime les mauvaises années.</p>
                 <Source k="modele">Backtest glissant 2019–2025 sur {G.n_cas} cas, 80 % visés. Précision et prix 2026 de chaque modèle dans Méthode et sources.</Source>
               </div>
               <div className="block">
@@ -485,7 +485,7 @@ export default function App() {
                     ))}
                   </tbody>
                 </table>
-                <p className="body small">Pour la lentille, un prix fixe tient {pct(CULTURES[0].backtest.taux_tenus ?? 0)} des contrats et l’indexation apporte peu. Pour les quatre autres, le plancher indexé sur le blé tient {pct(Math.min(...CULTURES.slice(1).map((c) => c.backtest.taux_tenus_indexe ?? 0)))} à {pct(Math.max(...CULTURES.slice(1).map((c) => c.backtest.taux_tenus_indexe ?? 0)))} des contrats dans ce backtest, davantage que le prix fixe. Cela motive une forme de contrat propre à chaque culture. Le pois et la féverole demandent {fmt(CULTURES.find((c) => c.id === 'pois')!.p_star['77'])} et {fmt(CULTURES.find((c) => c.id === 'feverole')!.p_star['77'])} €/t pour rivaliser avec le blé 8 années sur 10, contre 200 à 260 €/t dans le référentiel de plan d’entreprise CRIT 2025.</p>
+                <p className="body small">Pour la lentille, un prix fixe tient {pct(CULTURES[0].backtest.taux_tenus ?? 0)} des contrats et l’indexation l’améliore un peu. Pour les quatre autres, le plancher indexé sur le blé tient {pct(Math.min(...CULTURES.slice(1).map((c) => c.backtest.taux_tenus_indexe ?? 0)))} à {pct(Math.max(...CULTURES.slice(1).map((c) => c.backtest.taux_tenus_indexe ?? 0)))} des contrats dans ce backtest, davantage que le prix fixe. Cela motive une forme de contrat propre à chaque culture. Le pois et la féverole demandent {fmt(CULTURES.find((c) => c.id === 'pois')!.p_star['77'])} et {fmt(CULTURES.find((c) => c.id === 'feverole')!.p_star['77'])} €/t pour rivaliser avec le blé 8 années sur 10, contre 200 à 260 €/t dans le référentiel de plan d’entreprise CRIT 2025.</p>
                 <p className="body small">Repères de prix : pois chiche standard payé 600 à 620 €/t à un producteur Cavac pour la récolte 2025 ; haricot à 1 200 €/t au centre du scénario 900 à 1 500. Le repère haricot de 1 188 €/t vient d’un barème d’indemnisation, pas d’une offre d’achat.</p>
                 <Source k="modele">Prix plancher pour 8 années sur 10 en Seine-et-Marne, en €/t ; contrats tenus en backtest 2019–2025 sur les départements producteurs, recalibrés sur les seules années passées. Même modèle du blé ; séries Agreste et météo NASA POWER propres à chaque culture. Charges calées sur les guides Terres Inovia pois chiche 2026, pois 2025 et féverole 2024 ; haricot : budget reconstruit incluant l’eau et l’énergie, hors mécanisation et récolte. Aide indicative Telepac 2026. Prix : témoignage Réussir du 27 juin 2026, CRIT Grand Est 2025 et scénario haricot documenté dans la revue filière.</Source>
               </div>

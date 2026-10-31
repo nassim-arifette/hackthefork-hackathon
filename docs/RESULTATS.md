@@ -36,48 +36,52 @@ Calculés par le pipeline (`make export`) le 31 octobre 2026, avec le scénario 
 
 ## 4. Backtest 2019–2025, sans fuite
 
-Pour chaque année test, les modèles, les niveaux et la calibration sont estimés sur les seules années antérieures. Le prix plancher est fixé avec la météo et le prix du blé de ces années, puis jugé sur les rendements et le prix du blé réels.
+Pour chaque année test, le regroupement des séries en double, les modèles, les niveaux et la calibration sont estimés sur les seules années antérieures. Le prix plancher est fixé avec la météo et le prix du blé de ces années, puis jugé sur les rendements et le prix du blé réels.
+
+**Correction du 31/10 (audit de la PR 1).** Le regroupement des séries Agreste identiques utilisait toute la période 2010–2025, donc une information des années testées. Il est maintenant refait chaque année avec le seul passé : en 2019, le modèle apprend sur 32 séries au lieu de 19, car neuf années ne suffisent pas toujours à repérer deux séries copiées. Le taux de contrats tenus passe de 87 % à 78 %. Les cas évalués restent les 133 mêmes ; les prix 2026, qui utilisent légitimement toutes les années jusqu'en 2025, ne changent pas.
 
 | Année | Cas | Prix du blé | Couverture de l'intervalle à 80 % | Contrats tenus (M1) | Contrats tenus (choix automatique) |
 |---|---|---|---|---|---|
-| 2019 | 17 | 179 €/t | 94 % | 100 % | 82 % |
-| 2020 | 18 | 191 €/t | 56 % | **50 %** | 44 % |
-| 2021 | 18 | 238 €/t | 56 % | **61 %** | 61 % |
-| 2022 | 19 | 338 €/t | 89 % | 95 % | 74 % |
-| 2023 | 20 | 242 €/t | 95 % | 100 % | 100 % |
-| 2024 | 20 | 216 €/t | 70 % | 100 % | 95 % |
+| 2019 | 17 | 179 €/t | 100 % | 76 % | 71 % |
+| 2020 | 18 | 191 €/t | 56 % | **39 %** | 39 % |
+| 2021 | 18 | 238 €/t | 61 % | **56 %** | 56 % |
+| 2022 | 19 | 338 €/t | 95 % | **68 %** | 63 % |
+| 2023 | 20 | 242 €/t | 90 % | 100 % | 100 % |
+| 2024 | 20 | 216 €/t | 60 % | 100 % | 95 % |
 | 2025 | 21 | 202 €/t | 90 % | 100 % | 95 % |
-| **Ensemble** | **133** | | **79 %** | **87 %** pour 80 % visés | 80 % |
+| **Ensemble** | **133** | | **79 %** | **78 %** pour 80 % visés | 75 % |
 
 | Modèle | Perte pinball | Couverture à 80 % |
 |---|---|---|
-| M0, tendance seule | 0,1078 | 74 % |
-| **M1, régression quantile météo (retenu a priori)** | 0,1103 | 79 % |
-| M2, LightGBM quantile | 0,1014 | 84 % |
-| Choix automatique sur validation interne | 0,1024 | 74 % |
+| M0, tendance seule | 0,1094 | 70 % |
+| **M1, régression quantile météo (retenu a priori)** | 0,1105 | 79 % |
+| M2, LightGBM quantile | 0,1020 | 77 % |
+| Choix automatique sur validation interne | 0,1038 | 70 % |
 
-Erreur médiane sur le rendement relatif d'une année : ±33 %.
+Erreur médiane sur le rendement relatif d'une année : ±35 %.
 
 ### Ce que le modèle apporte : quatre façons de fixer le prix
 
 | Façon de fixer le prix | Contrats tenus (80 % visés) | P\* 2026, Seine-et-Marne |
 |---|---|---|
 | Moyennes des années passées (référence naïve, sans modèle) | **29 %** | 742 €/t |
-| Distribution calibrée, tendance seule, sans météo (M0) | 81 % | 2 932 €/t |
-| **Régression quantile avec météo (M1, retenue)** | **87 %** | 1 567 €/t |
-| LightGBM avec météo (M2) | 77 % | 1 000 €/t |
+| Distribution calibrée, tendance seule, sans météo (M0) | 77 % | 2 932 €/t |
+| **Régression quantile avec météo (M1, retenue)** | **78 %** | 1 567 €/t |
+| LightGBM avec météo (M2) | 76 % | 1 000 €/t |
 
 - Fixer le prix sur les moyennes ne tient que trois contrats sur dix : un prix moyen protège l'année moyenne, pas la mauvaise.
-- Le modèle probabiliste calibré fait passer au-dessus de 80 %. La météo ajoute six points en backtest, soit 8 cas sur 133 : un écart modeste au regard de sept années test.
+- Le modèle probabiliste calibré approche la promesse de 80 % : 78 %, soit 104 contrats tenus sur 133. Il fait mieux que la tendance seule (77 %) pour un prix 2026 presque deux fois plus bas (1 567 contre 2 932 €/t) : c'est là qu'est l'apport de la météo, plus que dans le taux.
 - Le prix 2026 change fortement d'un modèle à l'autre : c'est une incertitude de modèle, affichée à côté de l'incertitude statistique.
 - Exploration non retenue (`pipeline/explore_regularisation.py`) : une régularisation choisie en validation interne est plus précise que la tendance seule, mais l'intervalle ne couvre plus qu'environ 71 % des cas.
 
 ### Lecture
 
-- **La fiabilité visée est atteinte sur l'ensemble** (87 % pour 80 %), mais sur 7 années seulement. Les contrats cèdent en **2020 et 2021**, deux effondrements de la lentille absents de l'entraînement.
-- **La calibration fonctionne** : 79 % des récoltes tombent dans l'intervalle à 80 %, contre 74 % pour la tendance seule.
-- **La météo n'améliore pas la précision du modèle linéaire** (pinball −2 % face à la tendance). LightGBM fait mieux (+6 %), mais il n'a pas été choisi a priori. Le choix automatique sur validation interne est plus précis mais moins bien calibré, et tient moins de contrats.
-- **Le rendement d'une année reste difficile à prévoir** (±33 %). C'est la raison d'être d'un prix calibré sur le risque plutôt que sur une prévision.
+- **La promesse est presque tenue** : 78 % pour 80 % visés, sur 7 années seulement ; l'écart de deux points représente deux à trois contrats. L'objectif est d'être proche de 80 %, pas de 100 % : au-dessus, l'acheteur paie trop ; en dessous, l'agriculteur est trompé.
+- Les contrats cèdent surtout en **2020 et 2021**, deux effondrements de la lentille absents de l'entraînement, puis en **2022**, quand le prix du blé atteint 338 €/t.
+- **La calibration fonctionne** : 79 % des récoltes tombent dans l'intervalle à 80 %, contre 70 % pour la tendance seule.
+- **La météo n'améliore pas la précision du modèle linéaire** (pinball −1 % face à la tendance). LightGBM fait mieux (+7 %), mais il tient moins de contrats et n'a pas été choisi a priori.
+- **Le rendement d'une année reste difficile à prévoir** (±35 %). C'est la raison d'être d'un prix calibré sur le risque plutôt que sur une prévision.
+- La PR 1 montre aussi qu'une forêt aléatoire quantile (QRF), avec une correction du prix calibrée sur le passé, baisse le prix d'environ 10 % à protection égale dans les bassins producteurs ; elle ne fait pas mieux sur les départements qui servent de référence à l'Île-de-France. Le modèle de l'application reste M1.
 
 ## 5. Prix plancher, campagne 2026
 
@@ -176,16 +180,16 @@ Les barèmes publiés protègent environ 6 années sur 10 face au blé francilie
 
 | Contrat calibré | Coût moyen | Année faible | Perte moyenne les années perdantes | Contrats tenus (backtest) | Coût réalisé (backtest) |
 |---|---|---|---|---|---|
-| Prix unique : 1 567 €/t | 1 567 €/t | 1 567 €/t | 581 €/ha | 87 % | référence |
-| **Tranches : 1 635 €/t la première tonne par hectare, puis 750 et 650** | **1 283 €/t (−18 %)** | 1 635 €/t | 568 €/ha | **87 %** | **−22 %** |
-| Prix de base 900 €/t et prime de 491 €/ha | 1 243 €/t (−21 %) | 2 037 €/t | 426 €/ha | 79 % | −49 % |
+| Prix unique : 1 567 €/t | 1 567 €/t | 1 567 €/t | 581 €/ha | 78 % | référence |
+| **Tranches : 1 635 €/t la première tonne par hectare, puis 750 et 650** | **1 283 €/t (−18 %)** | 1 635 €/t | 568 €/ha | **79 %** | **−19 %** |
+| Prix de base 900 €/t et prime de 491 €/ha | 1 243 €/t (−21 %) | 2 037 €/t | 426 €/ha | 74 % | −39 % |
 
 Dans le backtest, chaque forme est recalibrée chaque année sur les seules années passées, comme le prix unique. Les coûts réalisés portent sur les départements producteurs, d'où la comparaison en écart au prix unique.
 
 **Lecture :**
 
-- **Le barème par tranches protège autant que le prix unique pour nettement moins cher.** Il paie cher les premières tonnes, celles qui manquent les mauvaises années, et moins le surplus des bonnes. Même taux de contrats tenus en backtest (87 %), coût réalisé inférieur de 22 %.
-- **La prime à l'hectare est la moins chère en moyenne** et réduit la perte de l'agriculteur les années perdantes. Mais l'acheteur la paie même sans récolte (2 037 €/t l'année faible) et elle protège mal quand le prix du blé flambe : 37 % des contrats tenus en 2022, 79 % sur l'ensemble, sous la cible de 80 %.
+- **Le barème par tranches protège autant que le prix unique pour nettement moins cher.** Il paie cher les premières tonnes, celles qui manquent les mauvaises années, et moins le surplus des bonnes. En backtest, il tient même un peu plus de contrats (79 % contre 78 %), pour un coût réalisé inférieur de 19 %.
+- **La prime à l'hectare est la moins chère en moyenne** et réduit la perte de l'agriculteur les années perdantes. Mais l'acheteur la paie même sans récolte (2 037 €/t l'année faible) et elle protège mal quand le prix du blé flambe : 37 % des contrats tenus en 2022, 74 % sur l'ensemble, sous la cible de 80 %.
 - **Le prix unique coûte cher parce qu'il surpaie les bonnes années.** Son avantage : un coût par tonne connu d'avance pour l'acheteur.
 
 ## 8. Suivi en saison, prototype Sentinel-2
@@ -206,13 +210,13 @@ Les seuils de statut (−0,05 et −0,10 d'écart à la médiane du groupe) sont
 
 ## 9. Le même moteur sur d'autres légumineuses
 
-`pipeline/09_cultures.py` applique le même calcul au pois chiche, au haricot sec, au pois protéagineux et à la féverole : modèle quantile M1 appris sur les séries Agreste de chaque culture et la météo de ses départements, même modèle du blé que la lentille, mêmes 20 000 années. La lentille passe par le même chemin et retrouve exactement ses chiffres (1 567 €/t, tranches 1 635 / 750 / 650, 87 % en backtest). Hypothèses propres à chaque culture : `data/cultures.yaml`, actualisées après la [revue filière du 31/10](REVUE_FILIERE_CULTURES.md), puis exports recalculés. Charges centrales : pois chiche 500, haricot sec irrigué 1 000, pois 450 et féverole 400 €/ha.
+`pipeline/09_cultures.py` applique le même calcul au pois chiche, au haricot sec, au pois protéagineux et à la féverole : modèle quantile M1 appris sur les séries Agreste de chaque culture et la météo de ses départements, même modèle du blé que la lentille, mêmes 20 000 années. La lentille passe par le même chemin et retrouve exactement ses chiffres (1 567 €/t, tranches 1 635 / 750 / 650, 78 % en backtest). Le backtest regroupe les séries avec le seul passé, comme celui de la lentille (§4). Hypothèses propres à chaque culture : `data/cultures.yaml`, actualisées après la [revue filière du 31/10](REVUE_FILIERE_CULTURES.md), puis exports recalculés. Charges centrales : pois chiche 500, haricot sec irrigué 1 000, pois 450 et féverole 400 €/ha.
 
 | Culture | Séries (couples) | Variabilité nationale | Rendement en Île-de-France | P\* Seine-et-Marne | Contrats tenus, prix fixe | Contrats tenus, indexé sur le blé |
 |---|---|---|---|---|---|---|
-| Lentille | 24 (294) | 0,20 | 17,5 q/ha, voisins | 1 567 €/t | 87 % | 87 % |
-| Pois chiche | 18 (200) | 0,11 | 16,6 q/ha, voisins | 1 064 €/t | 70 % | 83 % |
-| Haricot sec | 13 (156) | 0,10 | 19,1 q/ha, voisins | 2 185 €/t | 72 % | 87 % |
+| Lentille | 24 (294) | 0,20 | 17,5 q/ha, voisins | 1 567 €/t | 78 % | 82 % |
+| Pois chiche | 18 (200) | 0,11 | 16,6 q/ha, voisins | 1 064 €/t | 65 % | 78 % |
+| Haricot sec | 13 (156) | 0,10 | 19,1 q/ha, voisins | 2 185 €/t | 70 % | 89 % |
 | Pois protéagineux | 83 (1 161) | 0,15 | 38,7 q/ha, mesuré | 427 €/t | 66 % | 82 % |
 | Féverole | 69 (1 006) | 0,23 | 33,6 q/ha, mesuré | 462 €/t | 68 % | 82 % |
 
@@ -220,7 +224,7 @@ Backtest 2019–2025 sur les départements producteurs : 133, 100, 71, 493 et 44
 
 **Lecture :**
 
-- **L'indexation améliore le backtest des quatre autres cultures.** Le prix fixe tient 66–72 % des contrats, contre 82–87 % pour le plancher indexé. Pour la lentille, les deux taux s'arrondissent à 87 %. Les échecs du prix fixe se concentrent notamment en 2021–2022 (pois : 18 % puis 7 % de contrats tenus ; féverole : 37 % puis 2 %), ce qui motive le transfert du risque de prix du blé à l'acheteur. Ce constat ne classe pas toutes les cultures comme moins variables que la lentille : le coefficient national de la féverole est plus élevé.
+- **L'indexation améliore le backtest de toutes les cultures, nettement pour les quatre autres.** Le prix fixe y tient 65–70 % des contrats, contre 78–89 % pour le plancher indexé ; pour la lentille, l'indexation fait passer de 78 à 82 %. Les échecs du prix fixe se concentrent en 2021–2022 (pois : 18 % puis 7 % de contrats tenus ; féverole : 37 % puis 2 % ; pois chiche : 8 % puis 13 %), ce qui motive le transfert du risque de prix du blé à l'acheteur. Ce constat ne classe pas toutes les cultures comme moins variables que la lentille : le coefficient national de la féverole est plus élevé.
 - **Le pois chiche demande un plancher d'un tiers plus bas que la lentille** (1 064 contre 1 567 €/t), avec un rendement francilien emprunté comparable et une variabilité nationale plus faible. À 610 €/t, milieu du prix payé rapporté pour la filière Cavac standard 2025, il bat le blé dans 27,2 % des scénarios franciliens.
 - **Le pois et la féverole restent loin du blé francilien** : 427 et 462 €/t pour 8 années sur 10, contre 200 à 260 €/t dans le référentiel de plan d'entreprise CRIT 2025. Au milieu de cette plage, 230 €/t, ils battent le blé dans 24,0 % et 23,4 % des scénarios. Ces fréquences sont des sorties du modèle, pas des statistiques nationales de rentabilité.
 - **Le haricot sec irrigué** atteint 2 185 €/t avec 1 000 €/ha de charges, contre 1 779 €/t avec 700 €/ha. Le budget inclut 300 €/ha d'eau et d'énergie ; les rendements restent ceux des séries Agreste, sans distinguer l'irrigation. Au prix de scénario de 1 200 €/t, il bat le blé dans 58,9 % des simulations. Le repère administratif à 1 188 €/t qui étaye ce choix n'est pas une offre d'achat.
@@ -230,15 +234,17 @@ Backtest 2019–2025 sur les départements producteurs : 133, 100, 71, 493 et 44
 
 1. **Garantir 8 années sur 10 coûte plus du double du prix d'équilibre médian** (1 567 contre 715 €/t). Une moyenne sous-estime fortement le prix qu'il faut garantir : c'est le cœur du message.
 2. **À la référence historique, la lentille ne gagne qu'une année sur deux.** C'est exactement le verrou que décrit le Track 3.
-3. **Les contrats publiés sont plus bas** (Unéal : 900 €/t en 2023 ; NatUp : 900 / 700 / 600 €/t par tranche en 2023–2024). Dans notre modèle, ils protègent environ 6 années sur 10 face au blé francilien. **À protection égale, un barème par tranches coûte 18 % de moins qu'un prix unique** (22 % en backtest) : c'est la forme de contrat à proposer.
+3. **Les contrats publiés sont plus bas** (Unéal : 900 €/t en 2023 ; NatUp : 900 / 700 / 600 €/t par tranche en 2023–2024). Dans notre modèle, ils protègent environ 6 années sur 10 face au blé francilien. **À protection égale, un barème par tranches coûte 18 % de moins qu'un prix unique** (19 % en backtest) : c'est la forme de contrat à proposer.
 4. **Le prix plancher est très sensible au prix du blé.** Un contrat indexé sur le prix du blé (multiplicateur médian de 3,44, de 7,44 pour 8 années sur 10, soit 1 488 €/t avec un blé à 200 €/t) déplacerait ce risque vers l'acheteur sans rendre le contrat beaucoup moins cher.
 5. **Le prix plancher est lui-même incertain** : seize années ne suffisent pas à cerner les mauvaises années. Les données de rendement des coopératives sont la première chose à obtenir en pilote.
-6. **Le moteur est générique, la forme du contrat ne l'est pas** : prix fixe ou par tranches pour la lentille, plancher indexé sur le blé pour le pois chiche, le haricot, le pois et la féverole.
+6. **Le moteur est générique, la forme du contrat ne l'est pas** : barème par tranches pour la lentille, dont le risque vient surtout du rendement ; plancher indexé sur le blé pour le pois chiche, le haricot, le pois et la féverole, dont le risque vient surtout du prix du blé.
+7. **La promesse se vérifie en backtest strict** : 78 % pour 80 % visés. Le chiffre est moins flatteur que les 87 % annoncés le matin du 31/10, mais il est mesuré sans aucune information des années testées.
 
 ## Historique
 
 - Version 1 (hypothèses provisoires, prix du blé fixe, 39 séries comptées comme indépendantes) : 85 % de contrats tenus, P\* de 1 377 €/t en Seine-et-Marne.
 - Version 2 (prix du blé mesuré et rééchantillonné, charges et aide sourcées) : 82 %, 1 435 €/t.
 - Version 3 (30/10, séries estimées ensemble regroupées) : 86 %, 1 622 €/t, avec un intervalle de confiance sur P\*.
-- Version 4, actuelle (31/10, hypothèses économiques revues, paiement sur les tonnes acceptées au tri, forfait de collecte, comparaison des contrats) : 87 %, 1 567 €/t. Le modèle et le protocole sont inchangés ; les hypothèses viennent de la revue documentée de [QUESTIONS.md](QUESTIONS.md), fixées avant le recalcul. Avec les hypothèses de la version 3, le pipeline actuel redonne 1 622 €/t.
+- Version 4 (31/10, hypothèses économiques revues, paiement sur les tonnes acceptées au tri, forfait de collecte, comparaison des contrats) : 87 %, 1 567 €/t. Le modèle et le protocole sont inchangés ; les hypothèses viennent de la revue documentée de [QUESTIONS.md](QUESTIONS.md), fixées avant le recalcul. Avec les hypothèses de la version 3, le pipeline actuel redonne 1 622 €/t.
+- Version 4.1, actuelle (31/10, après-midi, backtest strict) : regroupement des séries en double refait chaque année avec le seul passé, à la suite de l'audit de la PR 1. Contrats tenus : 87 → 78 % (M1), 81 → 77 % (M0), 77 → 76 % (M2). Prix 2026 inchangés.
 - Revue des autres cultures (31/10) : haricot 700 → 1 000 €/ha et pois 400 → 450 €/ha, prix de référence et provenances complétés. Recalcul de `09_cultures.py` : P\* haricot 1 779 → 2 185 €/t, pois 409 → 427 €/t. La totalité de l'objet lentille exporté est identique à la version précédente.

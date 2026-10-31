@@ -21,18 +21,19 @@ import yaml
 
 from common import APP_DATA, DATA, IDF_AGRI, TEST_YEARS, VOISINS_LENTILLE, hypotheses
 from model import Calibrated, anomalies, break_even_prices, calibrer_premier_palier, hyp_values, levels, \
-    load, p_star, paiement, pool_for, read_meteo, simulate_years, with_rel
+    load, p_star, paiement, pool_for, read_meteo, series_passees, simulate_years, with_rel
 
 N_SIM, TARGET_YEAR, POOL_YEARS, MIN_TRAIN_YEARS = 20000, 2026, range(2010, 2026), 3
 BASSIN = ["10", "51", "89", "28", "45", "60", "02", "27", "41", "80"]
 CULTURES = ["lentille", "pois_chiche", "haricot", "pois", "feverole"]
 
 
-def backtest(C, met, W, u, h):
+def backtest(C, met, W, u, h, panel, culture, meteo_c):
+    """Comme 03_backtest.py : apprentissage sur les séries regroupées avec le seul passé."""
     tenus, index, couverts, par_annee = [], [], [], {}
     wu = u[u.culture == "ble"]
     for t in TEST_YEARS:
-        trC = C[C.annee < t]
+        trC = series_passees(panel, culture, t).merge(meteo_c, on=["dep", "annee"], how="inner")
         n_ans = trC.groupby("dep").annee.count()
         levC_t = levels(trC[trC.dep.isin(n_ans[n_ans >= MIN_TRAIN_YEARS].index)])
         if len(levC_t) < 3:
@@ -140,9 +141,9 @@ def main():
         mid = float(np.mean(ref)) if ref else None
         grid = range(int(ps * 0.3) // 10 * 10, int(ps * 2.2) // 10 * 10 + 1, 10)
 
-        # Backtest glissant, comme 03_backtest.py (mêmes graines : la lentille y retrouve ses 87 %),
+        # Backtest glissant, comme 03_backtest.py (mêmes graines : la lentille y retrouve ses 78 %),
         # avec en plus un contrat indexé : plancher = m* × prix du blé de la récolte.
-        bt = backtest(C, met, W, u, h)
+        bt = backtest(C, met, W, u, h, panel, c, meteo_c)
 
         # Là où la culture tient le mieux (charges franciliennes partout).
         classement = []

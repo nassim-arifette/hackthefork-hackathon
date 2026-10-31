@@ -159,7 +159,7 @@ Le moteur de l'application juge ces barèmes sur ses 20 000 années simulées po
 | Public reconstitué 900 / 700 / 600 | 5,9 sur 10 | 818 €/t | 55 % |
 | Proposition 1 000 / 750 / 650 + 30 €/t | 6,4 sur 10 | 928 €/t | 65 % |
 | Uniforme 900 €/t, sans prime | 6,1 sur 10 | 900 €/t | 57 % |
-| Tranches recalibrées pour 8 sur 10 : **1 635** / 750 / 650 | 8,0 sur 10 | 1 283 €/t | 87 % |
+| Tranches recalibrées pour 8 sur 10 : **1 635** / 750 / 650 | 8,0 sur 10 | 1 283 €/t | 79 % |
 
 Pour atteindre 8 années sur 10 avec les deuxième et troisième tranches de la proposition, la première tonne doit être payée 1 635 €/t. Ce barème protège autant qu'un prix unique de 1 567 €/t pour un coût moyen inférieur de 18 %. Les coûts du moteur excluent collecte, tri et séchage, détaillés plus haut. Détail et lecture dans [RESULTATS.md](RESULTATS.md#7-comparer-les-contrats).
 
