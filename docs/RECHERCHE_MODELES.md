@@ -2,7 +2,7 @@
 
 ## Décision
 
-**Le premier candidat pour conserver le fonctionnement du produit est LightGBM quantile avec calibration temporelle glissante.** Il obtient le meilleur score sur le prix du contrat parmi les modèles CPU testés dans ce protocole. Le concurrent GPU à exécuter est **TabPFN 3.5**, en prévision de rendements et en prévision directe du prix d'équilibre. La forêt quantile reste le deuxième candidat CPU.
+**La forêt quantile est le premier candidat CPU du nouveau protocole à quantiles bruts ; LightGBM gagnait le contrôle historique à quantiles élargis.** Ce changement de classement résulte de la séparation entre distribution simulée et intervalle conformel, reprise de la branche Youssef. Le concurrent GPU à exécuter est **TabPFN 3.5**, en prévision de rendements et en prévision directe du prix d'équilibre. L'objectif suivant est d'améliorer la calibration de la distribution/prix, puis de comparer le contrat au même protocole.
 
 Le classement porte sur le contrat, pas seulement sur la précision du rendement. La version actuelle de l'application conserve ses résultats ; cette branche fournit les modèles, comparaisons, tests et commandes nécessaires pour choisir son successeur.
 
@@ -47,7 +47,19 @@ Les nouveaux modèles sont comparés sur **192 cas communs de 2019 à 2025**. Ce
 
 Les tableaux ci-dessous sont générés à partir des fichiers de résultats, pas saisis à la main.
 
-### Modèles de rendement avec calibration glissante
+### Nouveau contrôle après séparation distribution / intervalle
+
+Run `experiments/model_benchmark_raw`, calibration glissante, apprentissage final sur tout le passé, 20 000 scénarios, mêmes 192 cas et mêmes hypothèses économiques que le contrôle historique :
+
+| Modèle | Score contrat ↓ | Contrats tenus | Prix médian €/t | Manque moyen €/ha |
+|---|---:|---:|---:|---:|
+| Forêt quantile | 209,5 | 63,0 % | 1 159 | 108,5 |
+| LightGBM | 235,4 | 58,3 % | 1 048 | 142,6 |
+| Linéaire | 264,8 | 67,7 % | 1 370 | 113,2 |
+
+La forêt quantile gagne sur la perte du prix d'équilibre ; la régression linéaire protège davantage en proposant un prix plus élevé. Cette expérience confirme que corriger un intervalle de rendement ne suffit pas à calibrer la distribution du prix. Le run GPU utilisera cette formulation pour tous les candidats. Les colonnes `pinball`, `coverage` et `width` des JSON de recherche conservent leur définition historique sur les bornes élargies ; le classement ci-dessus utilise uniquement les métriques économiques.
+
+### Contrôle historique : rendements avec quantiles élargis
 
 | Modèle | Score contrat ↓ (€/t) | Contrats tenus | Prix médian proposé (€/t) | Manque à gagner moyen (€/ha) |
 |---|---:|---:|---:|---:|
@@ -78,7 +90,7 @@ LightGBM réduit le score contrat de **30.3%** face à la régression linéaire 
 
 Ces prix ne sont pas les prix médians historiques du tableau précédent. Ils sont calculés pour la campagne 2026 avec les données 2010–2025. Les rendements lentille franciliens sont transférés depuis les départements 10, 89, 28 et 45 ; le département 51, doublon de série, n’est plus compté une seconde fois. Le changement par rapport aux 1 622 €/t combine le modèle, sa calibration, le centrage météo local et cette correction du transfert.
 
-**Vérification :** 25 tests passent, dont perturbation des données futures, séparation calibration/ajustement, normalisation sans fuite, quantile empirique minimal et égalité de marge. CatBoost et TabPFN restent à exécuter sur Colab.
+**Vérification :** 29 tests passent, dont perturbation des données futures, séparation calibration/ajustement, normalisation sans fuite, quantile empirique minimal et égalité de marge. CatBoost et TabPFN restent à exécuter sur Colab.
 
 ## Exécution CPU
 
@@ -117,7 +129,7 @@ colab download -s hackthefork /content/benchmark-results.zip ./benchmark-results
 colab stop -s hackthefork
 ```
 
-Le script lance les mêmes modèles CPU, CatBoost, puis TabPFN 3.5 sur les rendements et le prix direct, avec les mêmes années et métriques. Le paquet `tabpfn==9.0.0` et la famille `ModelVersion.V3_5` sont explicitement sélectionnés. La [configuration officielle des poids](https://docs.priorlabs.ai/models/accessing-model-weights) demande l'acceptation de la licence et un secret `TABPFN_TOKEN`. L'authentification Google s'effectue dans le flux du CLI ; aucun mot de passe n'est nécessaire dans le code. Les poids et données restent sur le runtime ; l'API de prédiction hébergée n'est pas utilisée.
+Le script lance les mêmes modèles CPU, CatBoost, puis TabPFN 3.5 sur les rendements et le prix direct, avec les mêmes années et métriques. Après revue de la branche Youssef, le run Colab passe `--simulation-quantiles raw` : les scénarios utilisent les quantiles de distribution, séparés des bornes conformelles. Les runs CPU publiés ci-dessus restent le contrôle historique `expanded` ; les nouveaux scores seront recalculés pour tous les candidats sur `raw`, sans mélanger les classements. Le paquet `tabpfn==9.0.0` et la famille `ModelVersion.V3_5` sont explicitement sélectionnés. La [configuration officielle des poids](https://docs.priorlabs.ai/models/accessing-model-weights) demande l'acceptation de la licence et un secret `TABPFN_TOKEN`. L'authentification Google s'effectue dans le flux du CLI ; aucun mot de passe n'est nécessaire dans le code. Les poids et données restent sur le runtime ; l'API de prédiction hébergée n'est pas utilisée.
 
 L'authentification Google a été validée et un runtime T4 a été créé. L'entraînement complet attend la clé Prior Labs et le montage de Drive depuis le notebook. Aucun résultat TabPFN n'est encore annoncé.
 
@@ -136,7 +148,7 @@ Branche examinée : [fix/validation-scenario-economique](https://github.com/yous
 
 **Décision : reprendre les améliorations de calcul et d'interface, puis remplacer le choix du modèle final par une sélection sur le contrat et un apprentissage temporel glissant.** La branche répond mieux à la négociation producteur–acheteur, mais son modèle automatique actuel n'est pas le candidat à promouvoir.
 
-À reprendre : frontières temporelles des transformations et du regroupement ; tests qui perturbent réellement les données futures ; séparation entre quantiles de distribution et bornes conformelles ; comparaison des pertes de marge et du coût d'achat ; scénarios de dépendance entre cultures ; prix rendu partagé entre carte, parcelles sélectionnées et contrat ; plafond acheteur après tri et transformation. La séparation quantiles/intervalles est aussi une amélioration à porter dans notre comparaison : les anciens résultats de cette branche recherche utilisent explicitement les quantiles élargis dans le Monte-Carlo et devront être comparés à une distribution calibrée séparément.
+À reprendre : frontières temporelles des transformations et du regroupement ; tests qui perturbent réellement les données futures ; séparation entre quantiles de distribution et bornes conformelles ; comparaison des pertes de marge et du coût d'achat ; scénarios de dépendance entre cultures ; prix rendu partagé entre carte, parcelles sélectionnées et contrat ; plafond acheteur après tri et transformation. La séparation quantiles/intervalles est intégrée au run Colab via `--simulation-quantiles raw`. Les anciens résultats de cette branche recherche utilisent explicitement les quantiles élargis dans le Monte-Carlo et restent un contrôle historique ; la calibration de la distribution elle-même reste une expérience à comparer.
 
 ### Le résultat de 3 024 €/t vient largement du calendrier d'apprentissage
 

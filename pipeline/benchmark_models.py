@@ -150,6 +150,10 @@ class FrozenSplit:
         # DO NOT refit on calibration outcomes.
         return self
 
+    def predict_quantiles(self, df):
+        """Distribution quantiles, separate from the calibrated interval bounds."""
+        return self.model.predict(self.features.transform(df))
+
     def predict(self, df):
         q = self.model.predict(self.features.transform(df))
         q[:, 0] -= self.qhat
@@ -202,9 +206,12 @@ def quantile_loss(y, q, tau):
     return np.maximum(tau * e, (tau - 1) * e)
 
 
-def simulate(pool, mL, mW, dep, h, n=20000, seed=42):
+def simulate(pool, mL, mW, dep, h, n=20000, seed=42, simulation_quantiles="expanded"):
     rng = np.random.default_rng(seed)
-    qL, qW = mL.predict(pool), mW.predict(pool)
+    if simulation_quantiles not in ("raw", "expanded"):
+        raise ValueError(simulation_quantiles)
+    predict = "predict_quantiles" if simulation_quantiles == "raw" else "predict"
+    qL, qW = getattr(mL, predict)(pool), getattr(mW, predict)(pool)
     ix = rng.integers(len(pool), size=n)
     yL = sample_quantile(qL[ix], rng.random(n)) * mL.levels[dep] / 10
     yW = sample_quantile(qW[ix], rng.random(n)) * mW.levels[dep] / 10
@@ -281,7 +288,8 @@ def run(args):
             for i, (_, r) in enumerate(test.iterrows()):
                 pool = weather[(weather.dep == r.dep) & (weather.annee < year)].copy()
                 pool["annee"] = year  # trend projected, historical weather and price replayed
-                price = simulate(pool, m, wheat, r.dep, h, args.samples, args.seed + year * 100)
+                price = simulate(pool, m, wheat, r.dep, h, args.samples, args.seed + year * 100,
+                                 getattr(args, "simulation_quantiles", "expanded"))
                 yL, yW = r.rendement_qha / 10, realW.loc[r.dep, "rendement_qha"] / 10
                 realised = (r.prix_ble * yW - h["charges_ble"] + h["charges_lentille"] - h["bonus"]) / yL
                 row = {"year": int(year), "dep": r.dep, "model": kind, "price": float(price),
@@ -328,7 +336,8 @@ def run(args):
         "data_sha256": {p.name: hashlib.sha256(p.read_bytes()).hexdigest()
                         for p in [DATA / n for n in ("panel_rendements.csv", "meteo_dept.csv", "prix_ble.csv", "hypotheses.yaml")]},
         "seed": args.seed, "samples": args.samples, "calibration": args.calibration,
-        "models": args.models, "elapsed_seconds": time.monotonic() - started,
+        "models": args.models, "simulation_quantiles": getattr(args, "simulation_quantiles", "expanded"),
+        "elapsed_seconds": time.monotonic() - started,
         "summary": summarize(pd.DataFrame(detail)), "audit": audit,
         "caveats": ["2019-2025 already examined: research comparison, not fresh confirmatory evidence.",
             "Dependent departments and temporal drift: no 80% population coverage guarantee.",
@@ -349,6 +358,8 @@ if __name__ == "__main__":
     parser.add_argument("--samples", type=int, default=20000)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--device", default="cpu")
+    parser.add_argument("--simulation-quantiles", choices=["raw", "expanded"], default="expanded",
+                        help="raw: distribution quantiles; expanded: reproduce historical exploratory runs")
     parser.add_argument("--calibration", choices=["split", "rolling"], default="split")
     parser.add_argument("--output", type=Path, default=Path("experiments/model_benchmark"))
     run(parser.parse_args())

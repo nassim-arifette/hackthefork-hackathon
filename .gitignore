@@ -35,3 +35,8 @@ credentials*
 
 # Builds et intermédiaires régénérables
 app/dist-single/
+
+# Reprise des expériences : les CSV/JSON finaux sont versionnés séparément
+experiments/**/checkpoints/
+experiments/**/progress.json
+pytest-of-root/

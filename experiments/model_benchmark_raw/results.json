@@ -1,0 +1,973 @@
+{
+  "status": "exploratory_not_unseen_validation",
+  "source_commit": "0462cd96acb8b33a3ca4d89cc1a436c67dc3a706",
+  "script_sha256": "7cd8a8e5cab32baff6f07e916e9d91fb7a8f05f5be5a25983e6fa373d0d78979",
+  "python": "3.12.14",
+  "packages": {
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "scipy": "1.17.0",
+    "scikit-learn": "1.8.0",
+    "lightgbm": "4.7.0",
+    "quantile-forest": "1.4.2",
+    "catboost": "1.2.10"
+  },
+  "data_sha256": {
+    "panel_rendements.csv": "380b2e7a418dee87b0f193d6dc969ab3e336f2aea17870c7f4c6f989dd92f8d4",
+    "meteo_dept.csv": "f50803cf8e5fffe5e152967fe6e85eac5509cd948c649ebbf2899e0d036d52cb",
+    "prix_ble.csv": "2da72c05832daf2a3db1658d293f506aaa8101e13987c03215a2f4e9ca8ac676",
+    "hypotheses.yaml": "4cab9a6f616cf7a19fa160e3cbcda81142a42d1773a0ea2b2b7cfac5a277b23b"
+  },
+  "seed": 42,
+  "samples": 20000,
+  "calibration": "rolling",
+  "models": [
+    "linear",
+    "lightgbm",
+    "qrf"
+  ],
+  "simulation_quantiles": "raw",
+  "elapsed_seconds": 43.13059811800031,
+  "summary": [
+    {
+      "model": "qrf",
+      "n": 192,
+      "years": 7,
+      "held": 0.6302083333333334,
+      "held_year_mean": 0.6462448197669872,
+      "held_year_bootstrap_80": [
+        0.5512471655328798,
+        0.742687074829932
+      ],
+      "contract_loss": 209.48731856174783,
+      "median_price": 1158.5686019764958,
+      "shortfall_eur_ha": 108.53940760482082,
+      "pinball": 0.10089645743557456,
+      "coverage": 0.8010484270336485,
+      "width": 1.0359718933946829
+    },
+    {
+      "model": "lightgbm",
+      "n": 192,
+      "years": 7,
+      "held": 0.5833333333333334,
+      "held_year_mean": 0.6020258294888837,
+      "held_year_bootstrap_80": [
+        0.4903178512784424,
+        0.7141534391534392
+      ],
+      "contract_loss": 235.36064943691522,
+      "median_price": 1047.791211019656,
+      "shortfall_eur_ha": 142.59283235827303,
+      "pinball": 0.09694578277459147,
+      "coverage": 0.7875257382646546,
+      "width": 1.000873176033579
+    },
+    {
+      "model": "linear",
+      "n": 192,
+      "years": 7,
+      "held": 0.6770833333333334,
+      "held_year_mean": 0.6980647431386348,
+      "held_year_bootstrap_80": [
+        0.5673645320197046,
+        0.8399014778325123
+      ],
+      "contract_loss": 264.7643758125918,
+      "median_price": 1370.313546379347,
+      "shortfall_eur_ha": 113.18842974066254,
+      "pinball": 0.10218190164115168,
+      "coverage": 0.8018199233716475,
+      "width": 1.0641758166030497
+    },
+    {
+      "model": "paired_history",
+      "n": 192,
+      "years": 7,
+      "held": 0.4791666666666667,
+      "held_year_mean": 0.5034795527406365,
+      "held_year_bootstrap_80": [
+        0.36400109469074987,
+        0.6445578231292518
+      ],
+      "contract_loss": 323.3332987845958,
+      "median_price": 928.5111111111112,
+      "shortfall_eur_ha": 216.86544961583894,
+      "pinball": null,
+      "coverage": null,
+      "width": null
+    }
+  ],
+  "audit": [
+    {
+      "year": 2019,
+      "model": "linear",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018
+      ],
+      "calibration_years": [
+        2016,
+        2017,
+        2018
+      ],
+      "n_proper": 230,
+      "n_cal": 82,
+      "n_test": 28,
+      "qhat": 0.14620161696798617,
+      "calibration_audit": [
+        {
+          "year": 2016,
+          "train_max": 2015
+        },
+        {
+          "year": 2017,
+          "train_max": 2016
+        },
+        {
+          "year": 2018,
+          "train_max": 2017
+        }
+      ]
+    },
+    {
+      "year": 2019,
+      "model": "lightgbm",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018
+      ],
+      "calibration_years": [
+        2016,
+        2017,
+        2018
+      ],
+      "n_proper": 230,
+      "n_cal": 82,
+      "n_test": 28,
+      "qhat": 0.1683304909711693,
+      "calibration_audit": [
+        {
+          "year": 2016,
+          "train_max": 2015
+        },
+        {
+          "year": 2017,
+          "train_max": 2016
+        },
+        {
+          "year": 2018,
+          "train_max": 2017
+        }
+      ]
+    },
+    {
+      "year": 2019,
+      "model": "qrf",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018
+      ],
+      "calibration_years": [
+        2016,
+        2017,
+        2018
+      ],
+      "n_proper": 230,
+      "n_cal": 82,
+      "n_test": 28,
+      "qhat": 0.13936651583710358,
+      "calibration_audit": [
+        {
+          "year": 2016,
+          "train_max": 2015
+        },
+        {
+          "year": 2017,
+          "train_max": 2016
+        },
+        {
+          "year": 2018,
+          "train_max": 2017
+        }
+      ]
+    },
+    {
+      "year": 2020,
+      "model": "linear",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019
+      ],
+      "calibration_years": [
+        2017,
+        2018,
+        2019
+      ],
+      "n_proper": 258,
+      "n_cal": 83,
+      "n_test": 30,
+      "qhat": 0.08687874219304853,
+      "calibration_audit": [
+        {
+          "year": 2017,
+          "train_max": 2016
+        },
+        {
+          "year": 2018,
+          "train_max": 2017
+        },
+        {
+          "year": 2019,
+          "train_max": 2018
+        }
+      ]
+    },
+    {
+      "year": 2020,
+      "model": "lightgbm",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019
+      ],
+      "calibration_years": [
+        2017,
+        2018,
+        2019
+      ],
+      "n_proper": 258,
+      "n_cal": 83,
+      "n_test": 30,
+      "qhat": 0.1707709634428407,
+      "calibration_audit": [
+        {
+          "year": 2017,
+          "train_max": 2016
+        },
+        {
+          "year": 2018,
+          "train_max": 2017
+        },
+        {
+          "year": 2019,
+          "train_max": 2018
+        }
+      ]
+    },
+    {
+      "year": 2020,
+      "model": "qrf",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019
+      ],
+      "calibration_years": [
+        2017,
+        2018,
+        2019
+      ],
+      "n_proper": 258,
+      "n_cal": 83,
+      "n_test": 30,
+      "qhat": 0.13936651583710358,
+      "calibration_audit": [
+        {
+          "year": 2017,
+          "train_max": 2016
+        },
+        {
+          "year": 2018,
+          "train_max": 2017
+        },
+        {
+          "year": 2019,
+          "train_max": 2018
+        }
+      ]
+    },
+    {
+      "year": 2021,
+      "model": "linear",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020
+      ],
+      "calibration_years": [
+        2018,
+        2019,
+        2020
+      ],
+      "n_proper": 288,
+      "n_cal": 86,
+      "n_test": 30,
+      "qhat": 0.1151607152689691,
+      "calibration_audit": [
+        {
+          "year": 2018,
+          "train_max": 2017
+        },
+        {
+          "year": 2019,
+          "train_max": 2018
+        },
+        {
+          "year": 2020,
+          "train_max": 2019
+        }
+      ]
+    },
+    {
+      "year": 2021,
+      "model": "lightgbm",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020
+      ],
+      "calibration_years": [
+        2018,
+        2019,
+        2020
+      ],
+      "n_proper": 288,
+      "n_cal": 86,
+      "n_test": 30,
+      "qhat": 0.17378080033251486,
+      "calibration_audit": [
+        {
+          "year": 2018,
+          "train_max": 2017
+        },
+        {
+          "year": 2019,
+          "train_max": 2018
+        },
+        {
+          "year": 2020,
+          "train_max": 2019
+        }
+      ]
+    },
+    {
+      "year": 2021,
+      "model": "qrf",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020
+      ],
+      "calibration_years": [
+        2018,
+        2019,
+        2020
+      ],
+      "n_proper": 288,
+      "n_cal": 86,
+      "n_test": 30,
+      "qhat": 0.13936651583710358,
+      "calibration_audit": [
+        {
+          "year": 2018,
+          "train_max": 2017
+        },
+        {
+          "year": 2019,
+          "train_max": 2018
+        },
+        {
+          "year": 2020,
+          "train_max": 2019
+        }
+      ]
+    },
+    {
+      "year": 2022,
+      "model": "linear",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021
+      ],
+      "calibration_years": [
+        2019,
+        2020,
+        2021
+      ],
+      "n_proper": 304,
+      "n_cal": 88,
+      "n_test": 29,
+      "qhat": 0.18319337611624098,
+      "calibration_audit": [
+        {
+          "year": 2019,
+          "train_max": 2018
+        },
+        {
+          "year": 2020,
+          "train_max": 2019
+        },
+        {
+          "year": 2021,
+          "train_max": 2020
+        }
+      ]
+    },
+    {
+      "year": 2022,
+      "model": "lightgbm",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021
+      ],
+      "calibration_years": [
+        2019,
+        2020,
+        2021
+      ],
+      "n_proper": 304,
+      "n_cal": 88,
+      "n_test": 29,
+      "qhat": 0.20319171267229186,
+      "calibration_audit": [
+        {
+          "year": 2019,
+          "train_max": 2018
+        },
+        {
+          "year": 2020,
+          "train_max": 2019
+        },
+        {
+          "year": 2021,
+          "train_max": 2020
+        }
+      ]
+    },
+    {
+      "year": 2022,
+      "model": "qrf",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021
+      ],
+      "calibration_years": [
+        2019,
+        2020,
+        2021
+      ],
+      "n_proper": 304,
+      "n_cal": 88,
+      "n_test": 29,
+      "qhat": 0.16510958767172917,
+      "calibration_audit": [
+        {
+          "year": 2019,
+          "train_max": 2018
+        },
+        {
+          "year": 2020,
+          "train_max": 2019
+        },
+        {
+          "year": 2021,
+          "train_max": 2020
+        }
+      ]
+    },
+    {
+      "year": 2023,
+      "model": "linear",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ],
+      "calibration_years": [
+        2020,
+        2021,
+        2022
+      ],
+      "n_proper": 302,
+      "n_cal": 89,
+      "n_test": 27,
+      "qhat": 0.18319337611624098,
+      "calibration_audit": [
+        {
+          "year": 2020,
+          "train_max": 2019
+        },
+        {
+          "year": 2021,
+          "train_max": 2020
+        },
+        {
+          "year": 2022,
+          "train_max": 2021
+        }
+      ]
+    },
+    {
+      "year": 2023,
+      "model": "lightgbm",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ],
+      "calibration_years": [
+        2020,
+        2021,
+        2022
+      ],
+      "n_proper": 302,
+      "n_cal": 89,
+      "n_test": 27,
+      "qhat": 0.2403717051680696,
+      "calibration_audit": [
+        {
+          "year": 2020,
+          "train_max": 2019
+        },
+        {
+          "year": 2021,
+          "train_max": 2020
+        },
+        {
+          "year": 2022,
+          "train_max": 2021
+        }
+      ]
+    },
+    {
+      "year": 2023,
+      "model": "qrf",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ],
+      "calibration_years": [
+        2020,
+        2021,
+        2022
+      ],
+      "n_proper": 302,
+      "n_cal": 89,
+      "n_test": 27,
+      "qhat": 0.23990435811867356,
+      "calibration_audit": [
+        {
+          "year": 2020,
+          "train_max": 2019
+        },
+        {
+          "year": 2021,
+          "train_max": 2020
+        },
+        {
+          "year": 2022,
+          "train_max": 2021
+        }
+      ]
+    },
+    {
+      "year": 2024,
+      "model": "linear",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "calibration_years": [
+        2021,
+        2022,
+        2023
+      ],
+      "n_proper": 290,
+      "n_cal": 86,
+      "n_test": 24,
+      "qhat": 0.12313152667410154,
+      "calibration_audit": [
+        {
+          "year": 2021,
+          "train_max": 2020
+        },
+        {
+          "year": 2022,
+          "train_max": 2021
+        },
+        {
+          "year": 2023,
+          "train_max": 2022
+        }
+      ]
+    },
+    {
+      "year": 2024,
+      "model": "lightgbm",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "calibration_years": [
+        2021,
+        2022,
+        2023
+      ],
+      "n_proper": 290,
+      "n_cal": 86,
+      "n_test": 24,
+      "qhat": 0.20522500751232564,
+      "calibration_audit": [
+        {
+          "year": 2021,
+          "train_max": 2020
+        },
+        {
+          "year": 2022,
+          "train_max": 2021
+        },
+        {
+          "year": 2023,
+          "train_max": 2022
+        }
+      ]
+    },
+    {
+      "year": 2024,
+      "model": "qrf",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "calibration_years": [
+        2021,
+        2022,
+        2023
+      ],
+      "n_proper": 290,
+      "n_cal": 86,
+      "n_test": 24,
+      "qhat": 0.1679148035411835,
+      "calibration_audit": [
+        {
+          "year": 2021,
+          "train_max": 2020
+        },
+        {
+          "year": 2022,
+          "train_max": 2021
+        },
+        {
+          "year": 2023,
+          "train_max": 2022
+        }
+      ]
+    },
+    {
+      "year": 2025,
+      "model": "linear",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "calibration_years": [
+        2022,
+        2023,
+        2024
+      ],
+      "n_proper": 302,
+      "n_cal": 80,
+      "n_test": 24,
+      "qhat": 0.12360434598454173,
+      "calibration_audit": [
+        {
+          "year": 2022,
+          "train_max": 2021
+        },
+        {
+          "year": 2023,
+          "train_max": 2022
+        },
+        {
+          "year": 2024,
+          "train_max": 2023
+        }
+      ]
+    },
+    {
+      "year": 2025,
+      "model": "lightgbm",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "calibration_years": [
+        2022,
+        2023,
+        2024
+      ],
+      "n_proper": 302,
+      "n_cal": 80,
+      "n_test": 24,
+      "qhat": 0.3348471292617081,
+      "calibration_audit": [
+        {
+          "year": 2022,
+          "train_max": 2021
+        },
+        {
+          "year": 2023,
+          "train_max": 2022
+        },
+        {
+          "year": 2024,
+          "train_max": 2023
+        }
+      ]
+    },
+    {
+      "year": 2025,
+      "model": "qrf",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "calibration_years": [
+        2022,
+        2023,
+        2024
+      ],
+      "n_proper": 302,
+      "n_cal": 80,
+      "n_test": 24,
+      "qhat": 0.2688927872315514,
+      "calibration_audit": [
+        {
+          "year": 2022,
+          "train_max": 2021
+        },
+        {
+          "year": 2023,
+          "train_max": 2022
+        },
+        {
+          "year": 2024,
+          "train_max": 2023
+        }
+      ]
+    }
+  ],
+  "caveats": [
+    "2019-2025 already examined: research comparison, not fresh confirmatory evidence.",
+    "Dependent departments and temporal drift: no 80% population coverage guarantee.",
+    "Historical data are latest-vintage, not publication-time snapshots.",
+    "Training-only duplicate detection may miss groups with fewer than eight past matches.",
+    "Conditional yield scores use realised weather; contract prices use historical weather only.",
+    "Monte Carlo keeps independent crop residuals and three-quantile tail interpolation as controls.",
+    "No validation of transfer to unobserved Ile-de-France lentil yields."
+  ]
+}

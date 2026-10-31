@@ -103,7 +103,7 @@ def main():
         direct = destination / "colab_contract"
         run_visible([sys.executable, "-u", "pipeline/benchmark_models.py", "--models", "trend", "linear",
                      "lightgbm", "qrf", "catboost", "ensemble", "tabpfn", "--device", "cuda",
-                     "--calibration", "rolling", "--output", str(yields)], root, yields, 7 * 8)
+                     "--calibration", "rolling", "--simulation-quantiles", "raw", "--output", str(yields)], root, yields, 7 * 8)
         run_visible([sys.executable, "-u", "pipeline/benchmark_contract.py", "--models", "pooled", "linear",
                      "lightgbm", "qrf", "tabpfn", "--device", "cuda", "--reference",
                      str(yields / "predictions.csv"), "--output", str(direct)], root, direct, 10 * 5)

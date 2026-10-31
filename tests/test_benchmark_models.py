@@ -70,6 +70,20 @@ def test_contract_score_penalizes_underpricing_four_times_more():
     assert quantile_loss(1000, 1100, .8) == pytest.approx(20)
 
 
+def test_raw_simulation_is_independent_of_interval_correction(lentils):
+    from benchmark_models import simulate
+    model = RollingCalibrated("trend").fit(lentils)
+    dep = model.levels.index[0]
+    pool = lentils[lentils.dep == dep]
+    h = {"charges_ble": 440, "charges_lentille": 280, "bonus": 122, "tau": .8}
+    before = simulate(pool, model, model, dep, h, n=500, simulation_quantiles="raw")
+    interval = model.predict(pool).copy()
+    model.qhat += 10
+    after = simulate(pool, model, model, dep, h, n=500, simulation_quantiles="raw")
+    assert before == after
+    assert (model.predict(pool)[:, 2] > interval[:, 2]).all()
+
+
 def test_rolling_calibration_forecasts_precede_their_targets(lentils):
     model = RollingCalibrated("linear").fit(lentils)
     assert all(r["train_max"] < r["year"] for r in model.calibration_audit)
