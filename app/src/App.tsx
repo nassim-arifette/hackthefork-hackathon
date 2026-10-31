@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import MapScene, { PSTAR_RANGE, type Camera, type FranceMode, type Hover } from './components/MapScene';
 import Method from './components/Method';
 import { BacktestReveal, MarginBars, PriceChart, SeasonChart, SecurityChart, Sensitivity } from './components/charts';
@@ -159,6 +159,32 @@ export default function App() {
   const timers = useRef<number[]>([]);
   const onDelivered = useCallback((f: number) => setDelivered(f), []);
 
+  // Parcours de présentation : le texte de l'écran se réduit pour tenir sans défiler (projecteur 720p,
+  // zoom système), jusqu'à 72 % ; les annexes, plus longues, gardent le défilement.
+  const colRef = useRef<HTMLDivElement>(null);
+  useLayoutEffect(() => {
+    const col = colRef.current;
+    if (!col) return;
+    const isAnnex = ANNEXES.some((a) => a.id === view);
+    const fit = () => {
+      col.style.setProperty('--fit', '1');
+      if (isAnnex || window.innerWidth <= 900) return;
+      // Les graphiques gardent leur hauteur (elle suit la largeur) : on réduit par étapes.
+      let z = 1;
+      for (let k = 0; k < 6 && z > 0.72; k++) {
+        const need = col.scrollHeight, avail = col.clientHeight;
+        if (need <= avail + 1) break;
+        z = Math.max(0.72, Math.floor(z * (avail / need) * 100) / 100);
+        col.style.setProperty('--fit', String(z));
+      }
+    };
+    fit();
+    const ts = [120, 700, 1600].map((ms) => window.setTimeout(fit, ms));
+    document.fonts?.ready.then(fit);
+    window.addEventListener('resize', fit);
+    return () => { ts.forEach((x) => window.clearTimeout(x)); window.removeEventListener('resize', fit); };
+  }, [view, impactView]);
+
   const mainIdx = MAIN.findIndex((m) => m.id === view);
   const annex = ANNEXES.find((a) => a.id === view);
   const annexIdx = annex ? ANNEXES.indexOf(annex) : -1;
@@ -215,7 +241,8 @@ export default function App() {
 
   const replayBacktest = useCallback(() => {
     stop(); setBtShown(0); setBtYear(null);
-    backtest.annees.forEach((y, i) => at(900 + i * 1250, () => { setBtYear(y.annee); setBtShown(i + 1); }));
+    // La première année se colore pendant le vol de la caméra : la carte n'est jamais vide.
+    backtest.annees.forEach((y, i) => at(350 + i * 1250, () => { setBtYear(y.annee); setBtShown(i + 1); }));
   }, []);
 
   const replayPrice = useCallback(() => {
@@ -305,7 +332,7 @@ export default function App() {
   };
   const mp: MapPlan = view === 'constat' ? { ...base, camera: 'france', showParcels: false, boats: true }
     : view === 'pari' ? { ...base, price: 0 }
-    : view === 'filiere' ? { ...base, price: 0, silo: true }
+    : view === 'filiere' ? { ...base, camera: 'site', radiusKm: 14, price: 0, silo: true }
     : view === 'prix' ? { ...base, camera: 'site', radiusKm: Math.max(2.5, finalP.km * 1.3), selectKm: targetP.km, silo: true, trucks: tripsP }
     : view === 'preuve' ? { ...base, camera: 'france', showParcels: false, franceMode: 'backtest', btYear }
     : view === 'impact' && impactView === 'france' ? { ...base, camera: 'france', showParcels: false, franceMode: 'pstar' }
@@ -448,7 +475,7 @@ export default function App() {
       </main>
 
       <aside className="column">
-        <div className="column-body" key={view}>
+        <div className="column-body" key={view} ref={colRef}>
           <p className="kicker">{annex ? `Annexe · ${annex.label}` : `${mainIdx + 1} / ${MAIN.length} · ${MAIN[mainIdx].label}`}</p>
 
           {view === 'constat' && (
