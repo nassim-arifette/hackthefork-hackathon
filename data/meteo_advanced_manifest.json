@@ -1,0 +1,324 @@
+{
+  "spec": {
+    "version": "weather-sequences-v1-2026-10-31",
+    "crop_windows": {
+      "lentille": {
+        "vegetative": [
+          "03-01",
+          "04-30"
+        ],
+        "reproductive": [
+          "05-01",
+          "06-30"
+        ],
+        "harvest": [
+          "07-01",
+          "08-15"
+        ],
+        "heat_threshold_c": 30.0,
+        "cold_window": [
+          "03-01",
+          "05-15"
+        ],
+        "cold_variable": "T2M_MIN",
+        "cold_threshold_c": 0.0
+      },
+      "pois_chiche": {
+        "vegetative": [
+          "03-01",
+          "05-31"
+        ],
+        "reproductive": [
+          "06-01",
+          "07-31"
+        ],
+        "harvest": [
+          "08-01",
+          "08-31"
+        ],
+        "heat_threshold_c": 35.0,
+        "cold_window": [
+          "06-01",
+          "07-31"
+        ],
+        "cold_variable": "MEAN_APPROX",
+        "cold_threshold_c": 15.0
+      },
+      "haricot": {
+        "vegetative": [
+          "05-15",
+          "06-30"
+        ],
+        "reproductive": [
+          "07-01",
+          "08-15"
+        ],
+        "harvest": [
+          "08-16",
+          "09-30"
+        ],
+        "heat_threshold_c": 30.0,
+        "cold_window": [
+          "05-15",
+          "06-15"
+        ],
+        "cold_variable": "T2M_MIN",
+        "cold_threshold_c": 0.0
+      },
+      "pois": {
+        "vegetative": [
+          "02-01",
+          "04-30"
+        ],
+        "reproductive": [
+          "05-01",
+          "06-30"
+        ],
+        "harvest": [
+          "07-01",
+          "08-15"
+        ],
+        "heat_threshold_c": 30.0,
+        "cold_window": [
+          "02-01",
+          "04-30"
+        ],
+        "cold_variable": "T2M_MIN",
+        "cold_threshold_c": -2.0
+      },
+      "feverole": {
+        "vegetative": [
+          "02-01",
+          "04-30"
+        ],
+        "reproductive": [
+          "05-01",
+          "07-15"
+        ],
+        "harvest": [
+          "07-16",
+          "08-31"
+        ],
+        "heat_threshold_c": 25.0,
+        "cold_window": [
+          "02-01",
+          "04-30"
+        ],
+        "cold_variable": "T2M_MIN",
+        "cold_threshold_c": -2.0
+      }
+    },
+    "dry_below_mm": 1.0,
+    "wet_at_least_mm": 1.0,
+    "heavy_rain_at_least_mm": 10.0,
+    "growing_degree_day_base_c": 5.0,
+    "reproductive_window_shift_days": 14,
+    "suffixes": [
+      "dry_spell_vegetative_days",
+      "dry_spell_reproductive_days",
+      "wet_spell_harvest_days",
+      "rain_max5_reproductive_mm",
+      "rain_max5_harvest_mm",
+      "rain_top5_share_reproductive",
+      "hot_spell_reproductive_days",
+      "gdd5_vegetative_cdays",
+      "gdd5_reproductive_cdays",
+      "rain_antecedent_mm",
+      "rain_reproductive_early14_mm",
+      "rain_reproductive_late14_mm",
+      "heavy_rain_reproductive_days",
+      "hot_dry_reproductive_days"
+    ],
+    "antecedent_window": "January 1 through day before vegetative start; no previous December",
+    "inputs": "historical daily Tmin, Tmax, precipitation only; no targets or test scores",
+    "use_at_contract": "replay prior years only; current-season observed weather is unavailable",
+    "sources_sha256": {
+      "pipeline/advanced_weather.py": "a4777c87ec5eefa8582ade0b27770766e30535cd1d021ed1f488005bc95100d1",
+      "pipeline/crop_weather.py": "31fe686d550d99ba4eb11cf18110495db3115e9e38a227eed9f2a22b5209c4d3",
+      "data/meteo_dept_cultures.csv": "65900b4f29c3ece9e96d5bf761a169d22c234d10f61fa8c19d97ccfc9b3d38e9",
+      "data_raw/nasa_power/01.json": "522fe2781d2f936f5f77549ac0523e2612347327ee1acee97389807604a9bf3e",
+      "data_raw/nasa_power/02.json": "ad82389a99fb067e4b5a395bf0c3b95daae8267afacbe582c01bd75463d59a52",
+      "data_raw/nasa_power/03.json": "6a4ce2f0dbf663ce3c93c700b6f6fd0d6c5e1d96573a6457e72dedc71bff9e30",
+      "data_raw/nasa_power/04.json": "dc7a7a7d3eaa7fb2f263e7fff53a3ef81eb242ce04457384cee33ec462e66df4",
+      "data_raw/nasa_power/05.json": "7aa41fb6cd84345ea96a0e7ce9c351ce34e9880812914b529bc300b3074445b3",
+      "data_raw/nasa_power/07.json": "6e7c6daf3cc71e6cc8d5a334e7250a4d1417998d2c82b1855128048dd6496448",
+      "data_raw/nasa_power/08.json": "acdecb204bab1a46b4e11f40400621e899d0c448b6c36e87102077355adb60e0",
+      "data_raw/nasa_power/09.json": "0b54bdb668809b1fbe3a579513f637c4ed73319b612c2edf5e25bfef7ad28a5b",
+      "data_raw/nasa_power/10.json": "b9b344e87db921ef24db273c821a95cd33e919e351eae100e6c6a7297a326925",
+      "data_raw/nasa_power/11.json": "730f28d1590e7388aab250f66c03ce1805f8f2ff8bf33ab0938f315ef74a8c3f",
+      "data_raw/nasa_power/12.json": "99c737ef56a15064c2220ee3be296808fea037ee9987ab5f999e082a20a2102a",
+      "data_raw/nasa_power/13.json": "35915b2321e694770d8ed682eb350a169f2afbed9e144fcf02a1bceceb280358",
+      "data_raw/nasa_power/14.json": "429655ddb1db7314928fcce555680535e09efc5b9d732939985eb1bc40a7bc59",
+      "data_raw/nasa_power/15.json": "4cb798f63c952ef486351f46db582d57749a1f90347e6d5636909c5bc29b16ee",
+      "data_raw/nasa_power/16.json": "a1923c61ee5517b00b334cbea0e359d6f0dcc5bd9cdfcdcf654cc4e48331a658",
+      "data_raw/nasa_power/17.json": "e25a3b0309e32024350eac83eca06119f3b98b6cdd13cc12daacf28ec3a21235",
+      "data_raw/nasa_power/18.json": "6e89608a97e1758c1fa6fb8aaf9cbd72e4689af0907ce2160926e30c5aec0761",
+      "data_raw/nasa_power/21.json": "ad5a952b679c1d30857035b5612de8f21a58b6e5969f566d782129574e9e844f",
+      "data_raw/nasa_power/22.json": "7b794bcc18cec33318011484084f532b4c939cc97c4ff5cd7548abfe1bb7d105",
+      "data_raw/nasa_power/23.json": "e6f03dc615b0ba807327eabb98fca7ae776020dd44e38c963688ce9af8ef5472",
+      "data_raw/nasa_power/24.json": "c29095db360780ce6b2d16443a104d7d6121c9c06c9beed4fd471aeda943e967",
+      "data_raw/nasa_power/25.json": "f5c1b02ee9a36fb73418d6d97e1ec16ccc9e211be13bf71c8c21e273b3428de2",
+      "data_raw/nasa_power/26.json": "2af6d73436a7be2c2a8b12503381d76403a0899cade59edc8368c6b0f8638fc9",
+      "data_raw/nasa_power/27.json": "0c5872b36bc6a4f17f6e5136f6318709cd22202e574c8dbea84673050c704fbe",
+      "data_raw/nasa_power/28.json": "a72cfe85938e0c5e3f08c58b7d23d22b7d026ac1bffb93bc7e89d6c1bb621c99",
+      "data_raw/nasa_power/29.json": "cbdc2a8969593ee3578856fbe34368a3eab7fbeb5d2d91cc58abf143f371dc42",
+      "data_raw/nasa_power/2B.json": "225274acf062d19709c1c387724cd94cbc9b93dabcb5aaa4af349b86fd6fa7d1",
+      "data_raw/nasa_power/30.json": "1df19d75beb4cbf502eaad72a1c1a1aae3beaf05f9002cdc97fd97d335c72b89",
+      "data_raw/nasa_power/31.json": "bfda10fcd67a8e449749a54d2213e911890cc43b69cb5f1566d98303b03c147b",
+      "data_raw/nasa_power/32.json": "e664a010e0f431f0c7f16123083d067d74207e9d9a6b6e86c2b0db8dd8a5febc",
+      "data_raw/nasa_power/33.json": "047a871213e3b9c882fb2f0b751fa61a780bdf7e7e445e687c7632655b2c6d6d",
+      "data_raw/nasa_power/34.json": "42cda1670a7266860144f660e773c9e5883d3950dd778dba626849aab6e064b2",
+      "data_raw/nasa_power/35.json": "b27f2bc7a8fd171e0049dfdbfc05726361d8ef7f64b7ca85f7d0d9443424e2e7",
+      "data_raw/nasa_power/36.json": "9f26d588a79b74794784ca8bc6a01da62d44c18430859338a4262372e7945b93",
+      "data_raw/nasa_power/37.json": "c1948b96e828428d3534c9aecbe9d3f7ef65974745e1e92b8a23c1089e59db33",
+      "data_raw/nasa_power/38.json": "c8dd37ba760e895ee84453d28b3e5de714a5d07bd514598e58a97d1ff8e094bf",
+      "data_raw/nasa_power/39.json": "df3c7c78b6f8fd5a6ebfc0582ba8e0dafb9ae005961bcb0e153f29e49b5c9ab1",
+      "data_raw/nasa_power/40.json": "a503456ed8f7392f2f8de8aee9557805a65a1aa30d0d88428c6e969f93fb4b84",
+      "data_raw/nasa_power/41.json": "d29b659394bca61e68cd0513ddaa38cc5267d1200c3e32b966de1643ca832fdf",
+      "data_raw/nasa_power/42.json": "1147eea89d9c7b369077d60cb9d34bacd0e5a1c9dde05c105056fb2e620355cd",
+      "data_raw/nasa_power/43.json": "96034181fcb66324660d63b3aea7b280e2c65b5298e540ad23b1dc57e61cd28f",
+      "data_raw/nasa_power/44.json": "40a14e7fb7a4a165e0a5f4e315bc6ac13df3f28314d225441468d4397d7d6464",
+      "data_raw/nasa_power/45.json": "a572b1ce93259f2fd242031f10f2ed9d89adb3272c6110ceb7c14a9d954f95d3",
+      "data_raw/nasa_power/46.json": "b17f2ad1e7e41735cf8171674dbb45cd566081fa54f179cdaf42869e5dc8702f",
+      "data_raw/nasa_power/47.json": "7ed56afc5e3a4a130af8208013b45ce71676d76fd6be668ad3039c09e1742f72",
+      "data_raw/nasa_power/48.json": "0aca86fe0e1fb89a33ab9210f2bbeff0845008400489e8548b1873cfb79969da",
+      "data_raw/nasa_power/49.json": "29d07a1014305be81c8d88273528a0c6ee2ed60c975ee7a70dd33dfdfd4e3f0a",
+      "data_raw/nasa_power/50.json": "8e3a37dd5078e13371dc15c287047a210a7fc5f14cb091a5e602b60b485ec669",
+      "data_raw/nasa_power/51.json": "7109193c7d2f8060ee969856cbb53a26926be893c40acdb766d553dc32639163",
+      "data_raw/nasa_power/52.json": "c0b65aa602e4cacad7a089a2c3522ac3749629cc078f365db3e45dc7c1f77182",
+      "data_raw/nasa_power/53.json": "a9aa5928053cd560ee3f3b8949e0b75ca8abad9e16d18eaa8711b2bda9d2abf1",
+      "data_raw/nasa_power/54.json": "aaf5fc0cd3e7c55ba118fee42311280c28811cfae2d969269b6e2512348c05ea",
+      "data_raw/nasa_power/55.json": "b50187784e9128e09e845e40ae5918a76c986f123fb295c45186c5d5a8143701",
+      "data_raw/nasa_power/56.json": "86ae2e8a6ca2a7e4efbd6029e8dbe7ce0c0ee94a1e4e2fa166d9108dc7adb554",
+      "data_raw/nasa_power/57.json": "ca9cb87b97a5a5276787615ecd7ee30b237a4bf1060cf4cf29421683e7ae7a06",
+      "data_raw/nasa_power/58.json": "d80a25a095ed2994f583b9c0a6cfc39ac2d088931e038ef4264668f7c00246d9",
+      "data_raw/nasa_power/59.json": "025d9a0e4ff0ebc645657f0c3fadd7d59d0c9042eab2a19fb534489edbf8e40d",
+      "data_raw/nasa_power/60.json": "9276a6477c19ea0f20353f116ea8ddd746b35fa9e30ee07803b0a17c660031ba",
+      "data_raw/nasa_power/61.json": "64d2993645ca10d40f201ff7debd08f872bafb8ef44a8f75b91535aa69208b4a",
+      "data_raw/nasa_power/62.json": "fa1077ae7ca55cc571fa90afd4e832cbeb98360ee4ecdb6715302946c2e9e95d",
+      "data_raw/nasa_power/63.json": "0968b38fea81c03d4897fd755996ad8b03861adc711edb1f02bb25ef19502198",
+      "data_raw/nasa_power/64.json": "426ff4a93e2e3548447d7dc79cf01fb6ffeb94be0deb28a10fdf8494f435dece",
+      "data_raw/nasa_power/65.json": "3956685c4c41b62bea6019f68ab00b93d182959216ee4fac7fb6092e05d4cbf5",
+      "data_raw/nasa_power/66.json": "6734b79d87be407aa815cfef3c49650fc3df06c13ef4bee551cb027c42ded738",
+      "data_raw/nasa_power/67.json": "cd689d49342984e4bab1e7d6231f34a9e154c4fe45f1a04381d1b185368a77e7",
+      "data_raw/nasa_power/68.json": "ca7d618c407bf0a72799d5900e60c7ebfe88b5c0958b16ed265bc45d2c988c03",
+      "data_raw/nasa_power/69.json": "8a8a0624d99d7cfb682926159e818de17a58163f5de3214663d6c9defb9bfd00",
+      "data_raw/nasa_power/70.json": "dd39fde289b88a3b52a1dd4fd55a0a40c6ad2abd1c41ba7956bd4c3098b82f41",
+      "data_raw/nasa_power/71.json": "8291ae7635c72f6580cf1a25568dbd27165c49c69bc217e7fdd47aef46dfeb40",
+      "data_raw/nasa_power/72.json": "ce95dff6037d2af1ef5a90858453ca004708d336aeed27d118cfbf579d78b15f",
+      "data_raw/nasa_power/76.json": "03d85fd4983926f44fb928c1ad1667ddb8bbc5b36dc02109a2b5e1850631f72e",
+      "data_raw/nasa_power/77.json": "c71dabb29c52c2ebedcf3182275dd13a10923a80bc267e5ef0feb3cd58230a1b",
+      "data_raw/nasa_power/78.json": "1c882abd6ce55cd8978e650232c08729a99130c91431cce919e3985901e53017",
+      "data_raw/nasa_power/79.json": "53690ca36c3eaa858bc234adc499b90442421347c445846db9cb2266e08a6121",
+      "data_raw/nasa_power/80.json": "a40836048ea45771aef60af6213311109cf6484887dcef06f4b1fe74549faf32",
+      "data_raw/nasa_power/81.json": "6cb175285af3286d87490cafd89d552d251f8739dd57faea82afe94e85f08bfe",
+      "data_raw/nasa_power/82.json": "4a89c6c8ff45353c663d31d5bc93abf6cf34e242036d398fa9e2d1f2d0297afc",
+      "data_raw/nasa_power/83.json": "0030ef9ad9395bc6949db4844f538a5e424343260e3ea67c47d9d52fe141cb16",
+      "data_raw/nasa_power/84.json": "04f848bcbafd7b62334d89e74956c94d27d901c2fd2ac1f304a157f7057f1634",
+      "data_raw/nasa_power/85.json": "3ce40df6624ece44969b0f30d7e78e554760e5531838ec03c51e0b793539d044",
+      "data_raw/nasa_power/86.json": "f606ee72c3cf308a8ee3fba46075244020cc01c0f2c0399d1f00041ddcbd55f3",
+      "data_raw/nasa_power/87.json": "8cd915cadb45e7c9a34187c921d31a103c6d3dfe18f4fdf10e8902fa7d23c2a0",
+      "data_raw/nasa_power/88.json": "2d22c1e52ab92fd033749c101dab0898f87a98e6bcc18f1ad6fc1768d64043ce",
+      "data_raw/nasa_power/89.json": "21a9b6adcfc1e310ef48b8618478dd112a9c810cd13c7a02f60f73fb8efe884f",
+      "data_raw/nasa_power/91.json": "6ea93d15bff2387c8788ce676cf453ccc957b5775177a004b1d02e4aeb56bf0f",
+      "data_raw/nasa_power/93.json": "52ecf852b0893981811bd3253ff0aa6aa1239592a78a33d65c438ad6f5e03374",
+      "data_raw/nasa_power/95.json": "6fa00413c405a860bbef1d58316e90fffd26c47f8f550df1b44ad7de0a14693f"
+    }
+  },
+  "signature": "af017df852a8488dd7486018f13684c484342175c0cadc13fed5405b1eccc31e",
+  "rows": 1392,
+  "departments": 87,
+  "years": [
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025
+  ],
+  "columns": [
+    "dep",
+    "annee",
+    "lentille_dry_spell_vegetative_days",
+    "lentille_dry_spell_reproductive_days",
+    "lentille_wet_spell_harvest_days",
+    "lentille_rain_max5_reproductive_mm",
+    "lentille_rain_max5_harvest_mm",
+    "lentille_rain_top5_share_reproductive",
+    "lentille_hot_spell_reproductive_days",
+    "lentille_gdd5_vegetative_cdays",
+    "lentille_gdd5_reproductive_cdays",
+    "lentille_rain_antecedent_mm",
+    "lentille_rain_reproductive_early14_mm",
+    "lentille_rain_reproductive_late14_mm",
+    "lentille_heavy_rain_reproductive_days",
+    "lentille_hot_dry_reproductive_days",
+    "pois_chiche_dry_spell_vegetative_days",
+    "pois_chiche_dry_spell_reproductive_days",
+    "pois_chiche_wet_spell_harvest_days",
+    "pois_chiche_rain_max5_reproductive_mm",
+    "pois_chiche_rain_max5_harvest_mm",
+    "pois_chiche_rain_top5_share_reproductive",
+    "pois_chiche_hot_spell_reproductive_days",
+    "pois_chiche_gdd5_vegetative_cdays",
+    "pois_chiche_gdd5_reproductive_cdays",
+    "pois_chiche_rain_antecedent_mm",
+    "pois_chiche_rain_reproductive_early14_mm",
+    "pois_chiche_rain_reproductive_late14_mm",
+    "pois_chiche_heavy_rain_reproductive_days",
+    "pois_chiche_hot_dry_reproductive_days",
+    "haricot_dry_spell_vegetative_days",
+    "haricot_dry_spell_reproductive_days",
+    "haricot_wet_spell_harvest_days",
+    "haricot_rain_max5_reproductive_mm",
+    "haricot_rain_max5_harvest_mm",
+    "haricot_rain_top5_share_reproductive",
+    "haricot_hot_spell_reproductive_days",
+    "haricot_gdd5_vegetative_cdays",
+    "haricot_gdd5_reproductive_cdays",
+    "haricot_rain_antecedent_mm",
+    "haricot_rain_reproductive_early14_mm",
+    "haricot_rain_reproductive_late14_mm",
+    "haricot_heavy_rain_reproductive_days",
+    "haricot_hot_dry_reproductive_days",
+    "pois_dry_spell_vegetative_days",
+    "pois_dry_spell_reproductive_days",
+    "pois_wet_spell_harvest_days",
+    "pois_rain_max5_reproductive_mm",
+    "pois_rain_max5_harvest_mm",
+    "pois_rain_top5_share_reproductive",
+    "pois_hot_spell_reproductive_days",
+    "pois_gdd5_vegetative_cdays",
+    "pois_gdd5_reproductive_cdays",
+    "pois_rain_antecedent_mm",
+    "pois_rain_reproductive_early14_mm",
+    "pois_rain_reproductive_late14_mm",
+    "pois_heavy_rain_reproductive_days",
+    "pois_hot_dry_reproductive_days",
+    "feverole_dry_spell_vegetative_days",
+    "feverole_dry_spell_reproductive_days",
+    "feverole_wet_spell_harvest_days",
+    "feverole_rain_max5_reproductive_mm",
+    "feverole_rain_max5_harvest_mm",
+    "feverole_rain_top5_share_reproductive",
+    "feverole_hot_spell_reproductive_days",
+    "feverole_gdd5_vegetative_cdays",
+    "feverole_gdd5_reproductive_cdays",
+    "feverole_rain_antecedent_mm",
+    "feverole_rain_reproductive_early14_mm",
+    "feverole_rain_reproductive_late14_mm",
+    "feverole_heavy_rain_reproductive_days",
+    "feverole_hot_dry_reproductive_days"
+  ],
+  "output_sha256": "2f63f9a50dca96e180b5d04d0b0ca6a1f4603d2548963f7668ffa059835ecb33"
+}
