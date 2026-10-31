@@ -1,0 +1,529 @@
+{
+ "campagne_test": 2025,
+ "campagne_apprentissage": 2024,
+ "periode": [
+  "04-01",
+  "07-31"
+ ],
+ "coupure": "06-10",
+ "tuile": "31UDP",
+ "zone_km": 24.0,
+ "zone_wgs84": [
+  2.78694,
+  48.44182,
+  3.11284,
+  48.65792
+ ],
+ "nuages_max_tuile": 95,
+ "bloc_km": 4.0,
+ "groupes_rpg": [
+  "15",
+  "8"
+ ],
+ "seuil": 0.5,
+ "campagnes": {
+  "2024": {
+   "n_parcelles_zone": 3674,
+   "n_legumineuses_zone": 127,
+   "surface_legumineuses_ha": 914.7,
+   "n_images": 17,
+   "versions": {
+    "saison": {
+     "n_dates": 17,
+     "n_parcelles": 3352,
+     "n_legumineuses": 114,
+     "dates_par_parcelle_mediane": 4.0
+    },
+    "avant_recolte": {
+     "n_dates": 9,
+     "n_parcelles": 1461,
+     "n_legumineuses": 50,
+     "dates_par_parcelle_mediane": 2.0
+    }
+   },
+   "maturite_ndvi_05": {
+    "BTH": "2024-06-27",
+    "FVL": null
+   },
+   "legumineuses_par_code": {
+    "FVL": {
+     "n": 46,
+     "ha": 310.1
+    },
+    "FVP": {
+     "n": 34,
+     "ha": 241.4
+    },
+    "LEC": {
+     "n": 2,
+     "ha": 15.7
+    },
+    "MPC": {
+     "n": 3,
+     "ha": 30.0
+    },
+    "PHI": {
+     "n": 22,
+     "ha": 160.0
+    },
+    "PPR": {
+     "n": 20,
+     "ha": 157.5
+    }
+   }
+  },
+  "2025": {
+   "n_parcelles_zone": 3659,
+   "n_legumineuses_zone": 152,
+   "surface_legumineuses_ha": 1053.0,
+   "n_images": 28,
+   "versions": {
+    "saison": {
+     "n_dates": 28,
+     "n_parcelles": 3611,
+     "n_legumineuses": 151,
+     "dates_par_parcelle_mediane": 16.0
+    },
+    "avant_recolte": {
+     "n_dates": 16,
+     "n_parcelles": 3611,
+     "n_legumineuses": 151,
+     "dates_par_parcelle_mediane": 8.0
+    }
+   },
+   "maturite_ndvi_05": {
+    "BTH": "2025-06-22",
+    "FVL": "2025-06-26"
+   },
+   "legumineuses_par_code": {
+    "FVL": {
+     "n": 85,
+     "ha": 530.1
+    },
+    "FVP": {
+     "n": 41,
+     "ha": 284.5
+    },
+    "MPC": {
+     "n": 3,
+     "ha": 53.2
+    },
+    "PHF": {
+     "n": 2,
+     "ha": 20.0
+    },
+    "PHI": {
+     "n": 13,
+     "ha": 112.2
+    },
+    "PPR": {
+     "n": 8,
+     "ha": 53.1
+    }
+   }
+  }
+ },
+ "resultats": {
+  "saison": {
+   "coupure": "2025-07-31",
+   "blocs": {
+    "n_parcelles": 3611,
+    "n_legumineuses": 151,
+    "precision": 0.917,
+    "rappel": 0.801,
+    "f1": 0.855,
+    "precision_moyenne": 0.921,
+    "vrais_positifs": 121,
+    "faux_positifs": 11,
+    "faux_negatifs": 30,
+    "surface_rpg_ha": 1051.4,
+    "surface_detectee_ha": 957.3,
+    "surface_bien_detectee_ha": 838.7,
+    "rappel_zone": 0.796
+   },
+   "un_sur_cinq": {
+    "moyenne": {
+     "precision": 0.901,
+     "rappel": 0.732,
+     "precision_moyenne": 0.873
+    },
+    "min": {
+     "precision": 0.845,
+     "rappel": 0.646
+    },
+    "max": {
+     "precision": 0.976,
+     "rappel": 0.819
+    },
+    "surface_detectee_sur_rpg": 0.835,
+    "tirages": [
+     {
+      "n_parcelles": 2892,
+      "n_legumineuses": 125,
+      "precision": 0.868,
+      "rappel": 0.736,
+      "f1": 0.797,
+      "precision_moyenne": 0.859,
+      "vrais_positifs": 92,
+      "faux_positifs": 14,
+      "faux_negatifs": 33,
+      "surface_rpg_ha": 866.7,
+      "surface_detectee_ha": 760.8,
+      "surface_bien_detectee_ha": 618.7,
+      "n_legumineuses_apprentissage": 26
+     },
+     {
+      "n_parcelles": 2893,
+      "n_legumineuses": 118,
+      "precision": 0.956,
+      "rappel": 0.737,
+      "f1": 0.833,
+      "precision_moyenne": 0.877,
+      "vrais_positifs": 87,
+      "faux_positifs": 4,
+      "faux_negatifs": 31,
+      "surface_rpg_ha": 860.5,
+      "surface_detectee_ha": 623.8,
+      "surface_bien_detectee_ha": 594.2,
+      "n_legumineuses_apprentissage": 33
+     },
+     {
+      "n_parcelles": 2864,
+      "n_legumineuses": 105,
+      "precision": 0.86,
+      "rappel": 0.819,
+      "f1": 0.839,
+      "precision_moyenne": 0.896,
+      "vrais_positifs": 86,
+      "faux_positifs": 14,
+      "faux_negatifs": 19,
+      "surface_rpg_ha": 718.6,
+      "surface_detectee_ha": 781.9,
+      "surface_bien_detectee_ha": 607.8,
+      "n_legumineuses_apprentissage": 46
+     },
+     {
+      "n_parcelles": 2896,
+      "n_legumineuses": 127,
+      "precision": 0.976,
+      "rappel": 0.646,
+      "f1": 0.777,
+      "precision_moyenne": 0.908,
+      "vrais_positifs": 82,
+      "faux_positifs": 2,
+      "faux_negatifs": 45,
+      "surface_rpg_ha": 894.4,
+      "surface_detectee_ha": 542.2,
+      "surface_bien_detectee_ha": 525.6,
+      "n_legumineuses_apprentissage": 24
+     },
+     {
+      "n_parcelles": 2899,
+      "n_legumineuses": 129,
+      "precision": 0.845,
+      "rappel": 0.721,
+      "f1": 0.778,
+      "precision_moyenne": 0.826,
+      "vrais_positifs": 93,
+      "faux_positifs": 17,
+      "faux_negatifs": 36,
+      "surface_rpg_ha": 865.3,
+      "surface_detectee_ha": 760.4,
+      "surface_bien_detectee_ha": 608.6,
+      "n_legumineuses_apprentissage": 22
+     }
+    ],
+    "carte": {
+     "n_parcelles": 2892,
+     "n_legumineuses": 125,
+     "precision": 0.868,
+     "rappel": 0.736,
+     "f1": 0.797,
+     "precision_moyenne": 0.859,
+     "vrais_positifs": 92,
+     "faux_positifs": 14,
+     "faux_negatifs": 33,
+     "surface_rpg_ha": 866.7,
+     "surface_detectee_ha": 760.8,
+     "surface_bien_detectee_ha": 618.7
+    }
+   },
+   "transfert": {
+    "n_parcelles": 3611,
+    "n_legumineuses": 151,
+    "precision": 0.148,
+    "rappel": 0.079,
+    "f1": 0.103,
+    "precision_moyenne": 0.114,
+    "vrais_positifs": 12,
+    "faux_positifs": 69,
+    "faux_negatifs": 139,
+    "surface_rpg_ha": 1051.4,
+    "surface_detectee_ha": 674.7,
+    "surface_bien_detectee_ha": 88.4,
+    "n_apprentissage": 3352,
+    "n_legumineuses_apprentissage": 114,
+    "rappel_zone": 0.079
+   },
+   "transfert_relatif": {
+    "n_parcelles": 3611,
+    "n_legumineuses": 151,
+    "precision": 0.558,
+    "rappel": 0.351,
+    "f1": 0.431,
+    "precision_moyenne": 0.442,
+    "vrais_positifs": 53,
+    "faux_positifs": 42,
+    "faux_negatifs": 98,
+    "surface_rpg_ha": 1051.4,
+    "surface_detectee_ha": 719.2,
+    "surface_bien_detectee_ha": 308.5,
+    "n_apprentissage": 3304,
+    "n_legumineuses_apprentissage": 113,
+    "rappel_zone": 0.349
+   }
+  },
+  "avant_recolte": {
+   "coupure": "2025-06-10",
+   "blocs": {
+    "n_parcelles": 3611,
+    "n_legumineuses": 151,
+    "precision": 0.68,
+    "rappel": 0.675,
+    "f1": 0.678,
+    "precision_moyenne": 0.752,
+    "vrais_positifs": 102,
+    "faux_positifs": 48,
+    "faux_negatifs": 49,
+    "surface_rpg_ha": 1051.4,
+    "surface_detectee_ha": 1078.3,
+    "surface_bien_detectee_ha": 725.6,
+    "rappel_zone": 0.671
+   },
+   "un_sur_cinq": {
+    "moyenne": {
+     "precision": 0.689,
+     "rappel": 0.454,
+     "precision_moyenne": 0.601
+    },
+    "min": {
+     "precision": 0.557,
+     "rappel": 0.388
+    },
+    "max": {
+     "precision": 0.926,
+     "rappel": 0.562
+    },
+    "surface_detectee_sur_rpg": 0.687,
+    "tirages": [
+     {
+      "n_parcelles": 2892,
+      "n_legumineuses": 125,
+      "precision": 0.706,
+      "rappel": 0.48,
+      "f1": 0.571,
+      "precision_moyenne": 0.578,
+      "vrais_positifs": 60,
+      "faux_positifs": 25,
+      "faux_negatifs": 65,
+      "surface_rpg_ha": 866.7,
+      "surface_detectee_ha": 532.7,
+      "surface_bien_detectee_ha": 351.8,
+      "n_legumineuses_apprentissage": 26
+     },
+     {
+      "n_parcelles": 2893,
+      "n_legumineuses": 118,
+      "precision": 0.58,
+      "rappel": 0.398,
+      "f1": 0.472,
+      "precision_moyenne": 0.549,
+      "vrais_positifs": 47,
+      "faux_positifs": 34,
+      "faux_negatifs": 71,
+      "surface_rpg_ha": 860.5,
+      "surface_detectee_ha": 554.5,
+      "surface_bien_detectee_ha": 331.9,
+      "n_legumineuses_apprentissage": 33
+     },
+     {
+      "n_parcelles": 2864,
+      "n_legumineuses": 105,
+      "precision": 0.557,
+      "rappel": 0.562,
+      "f1": 0.559,
+      "precision_moyenne": 0.579,
+      "vrais_positifs": 59,
+      "faux_positifs": 47,
+      "faux_negatifs": 46,
+      "surface_rpg_ha": 718.6,
+      "surface_detectee_ha": 789.3,
+      "surface_bien_detectee_ha": 413.9,
+      "n_legumineuses_apprentissage": 46
+     },
+     {
+      "n_parcelles": 2896,
+      "n_legumineuses": 127,
+      "precision": 0.675,
+      "rappel": 0.441,
+      "f1": 0.533,
+      "precision_moyenne": 0.632,
+      "vrais_positifs": 56,
+      "faux_positifs": 27,
+      "faux_negatifs": 71,
+      "surface_rpg_ha": 894.4,
+      "surface_detectee_ha": 569.4,
+      "surface_bien_detectee_ha": 396.4,
+      "n_legumineuses_apprentissage": 24
+     },
+     {
+      "n_parcelles": 2899,
+      "n_legumineuses": 129,
+      "precision": 0.926,
+      "rappel": 0.388,
+      "f1": 0.546,
+      "precision_moyenne": 0.669,
+      "vrais_positifs": 50,
+      "faux_positifs": 4,
+      "faux_negatifs": 79,
+      "surface_rpg_ha": 865.3,
+      "surface_detectee_ha": 380.0,
+      "surface_bien_detectee_ha": 338.0,
+      "n_legumineuses_apprentissage": 22
+     }
+    ],
+    "carte": {
+     "n_parcelles": 2892,
+     "n_legumineuses": 125,
+     "precision": 0.706,
+     "rappel": 0.48,
+     "f1": 0.571,
+     "precision_moyenne": 0.578,
+     "vrais_positifs": 60,
+     "faux_positifs": 25,
+     "faux_negatifs": 65,
+     "surface_rpg_ha": 866.7,
+     "surface_detectee_ha": 532.7,
+     "surface_bien_detectee_ha": 351.8
+    }
+   },
+   "transfert": {
+    "n_parcelles": 3611,
+    "n_legumineuses": 151,
+    "precision": 0.449,
+    "rappel": 0.146,
+    "f1": 0.22,
+    "precision_moyenne": 0.188,
+    "vrais_positifs": 22,
+    "faux_positifs": 27,
+    "faux_negatifs": 129,
+    "surface_rpg_ha": 1051.4,
+    "surface_detectee_ha": 352.9,
+    "surface_bien_detectee_ha": 152.1,
+    "n_apprentissage": 1461,
+    "n_legumineuses_apprentissage": 50,
+    "rappel_zone": 0.145
+   },
+   "transfert_relatif": {
+    "n_parcelles": 3611,
+    "n_legumineuses": 151,
+    "precision": 0.364,
+    "rappel": 0.106,
+    "f1": 0.164,
+    "precision_moyenne": 0.207,
+    "vrais_positifs": 16,
+    "faux_positifs": 28,
+    "faux_negatifs": 135,
+    "surface_rpg_ha": 1051.4,
+    "surface_detectee_ha": 354.7,
+    "surface_bien_detectee_ha": 120.8,
+    "n_apprentissage": 1335,
+    "n_legumineuses_apprentissage": 47,
+    "rappel_zone": 0.105
+   }
+  }
+ },
+ "blocs_connus_carte": [
+  102,
+  104,
+  203,
+  204,
+  402,
+  500,
+  502
+ ],
+ "confusions_carte": {
+  "saison": {
+   "faux_positifs_par_code": {
+    "MIS": 3,
+    "ORP": 2,
+    "TRE": 2,
+    "AVP": 2,
+    "PTR": 1,
+    "JAC": 1
+   },
+   "rappel_par_code": {
+    "FVL": {
+     "n": 72,
+     "vus": 65
+    },
+    "FVP": {
+     "n": 34,
+     "vus": 22
+    },
+    "MPC": {
+     "n": 3,
+     "vus": 0
+    },
+    "PHF": {
+     "n": 1,
+     "vus": 1
+    },
+    "PHI": {
+     "n": 7,
+     "vus": 2
+    },
+    "PPR": {
+     "n": 8,
+     "vus": 2
+    }
+   }
+  },
+  "avant_recolte": {
+   "faux_positifs_par_code": {
+    "ORP": 9,
+    "BTH": 4,
+    "AVP": 3,
+    "MIS": 2,
+    "BTN": 2,
+    "LIF": 2
+   },
+   "rappel_par_code": {
+    "FVL": {
+     "n": 72,
+     "vus": 45
+    },
+    "FVP": {
+     "n": 34,
+     "vus": 9
+    },
+    "MPC": {
+     "n": 3,
+     "vus": 0
+    },
+    "PHF": {
+     "n": 1,
+     "vus": 0
+    },
+    "PHI": {
+     "n": 7,
+     "vus": 4
+    },
+    "PPR": {
+     "n": 8,
+     "vus": 2
+    }
+   }
+  }
+ }
+}

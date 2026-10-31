@@ -26,6 +26,11 @@ export: data/backtest.json data/parcelles.json data/meteo_dept_cultures.csv
 sentinel:
 	$(P) $(PY) 08_sentinel.py
 
+# Le Maillon vu du ciel (prototype) : RPG 2024 et 2025, une cinquantaine d'images Sentinel-2 lues
+# en ligne au premier passage (une dizaine de minutes), puis relu depuis data_raw/sentinel/.
+maillon:
+	$(P) $(PY) 10_maillon.py
+
 app:
 	cd app && npm install && npm run build && npm run build:single
 
@@ -35,4 +40,4 @@ dev:
 test:
 	$(PY) -m pytest -q tests
 
-.PHONY: all export sentinel app dev test
+.PHONY: all export sentinel maillon app dev test

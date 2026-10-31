@@ -69,7 +69,7 @@ Le projet est pensé en trois temps pour le même utilisateur :
 |---|---|---|
 | 1. Avant les semis | « À quel prix je propose le contrat ? » | cœur du hackathon |
 | 2. Où collecter | « Où placer mon site de tri pour sécuriser le plus de tonnes ? » | site déplaçable sur la carte, meilleur point d'une grille |
-| 3. Pendant la saison | « Mes parcelles sous contrat poussent-elles bien ? » (suivi Sentinel-2) | prototype : replay 2025 sur 8 parcelles (étape 6), puis projet « Le Maillon vu du ciel » |
+| 3. Pendant la saison | « Mes parcelles sous contrat poussent-elles bien ? Où sont les légumineuses du bassin ? » (Sentinel-2) | prototypes : replay 2025 sur 8 parcelles (étape 6) ; « Le Maillon vu du ciel » sur 24 km autour du site (étape 7) |
 
 Voir [docs/ROADMAP.md](docs/ROADMAP.md).
 
@@ -81,6 +81,7 @@ python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 make export        # 00_prix_commerce → 01_agreste → 02_weather → 03_backtest → 04_parcels → 05_export → 07_contrats → 06_lettre_llm
 make sentinel      # 08_sentinel : NDVI Sentinel-2 de la saison 2025 (réseau, quelques minutes)
+make maillon       # 10_maillon : légumineuses repérées par Sentinel-2, RPG 2024 et 2025 (réseau au premier passage)
 # 09_cultures (dans make export) : le même moteur sur pois chiche, haricot, pois et féverole
 make test          # données, absence de fuite, propriétés du prix plancher et des contrats, exports
 

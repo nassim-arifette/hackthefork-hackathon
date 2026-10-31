@@ -126,7 +126,15 @@ Mêmes filtres que la lentille (surface ≥ 50 ha, statut 1 ou 2, séries identi
 
 Météo NASA POWER récupérée pour 87 départements (`data/meteo_dept_cultures.csv`) ; `data/meteo_dept.csv`, qui sert au modèle principal, reste limité aux 43 départements de la lentille et de l'Île-de-France.
 
-## 9. Jeu synthétique du pilote (`data/pilote_300t`, ajouté le 31/10)
+## 9. Zone du Maillon : Sentinel-2 et RPG 2024–2025 (vérifié le 31/10/2026)
+
+- **Zone** : 24 × 24 km autour du site de collecte, tuile 31UDP, parcelles RPG d'au moins 1 ha : 3 674 en 2024 (127 légumineuses à graines, 915 ha), 3 659 en 2025 (152, 1 053 ha). Groupes RPG 8 (protéagineux) et 15 (légumineuses à grains) : féveroles d'hiver et de printemps, pois d'hiver et de printemps, mélanges, pois et haricots frais ; lentille : 2 parcelles en 2024, aucune en 2025.
+- **Images** : du 1er avril au 31 juillet, nuages < 95 % sur la tuile ; 19 images lues en 2024 (17 dates utiles), 32 en 2025 (28). Toutes marquées `earthsearch:boa_offset_applied = true`.
+- **Couverture par parcelle** : 4 dates utiles en médiane en 2024, 16 en 2025 ; au 10 juin, 2 et 8. Printemps 2024 très nuageux.
+- **Cache** : `data_raw/sentinel/maillon_2024.csv.gz` et `maillon_2025.csv.gz`, NDVI et NDMI médians par parcelle et par date.
+- **Sortie** : `data/maillon_2025.json` (métriques) et `app/src/data/maillon.json` (carte).
+
+## 10. Jeu synthétique du pilote (`data/pilote_300t`, ajouté le 31/10)
 
 - **Contenu** : 140 lots fictifs de la coopérative `SYN_COOP_01`, 20 fermes, 2019–2025 ; récolte brute et nette, qualité, refus, paiements et coûts par acteur ; trois barèmes paramétrés dans `contrats.json`.
 - **Statut** : **synthétique**, reproductible avec `python3 tools/generer_pilote_300t.py --verifier-reproductibilite`.

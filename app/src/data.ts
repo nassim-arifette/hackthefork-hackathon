@@ -11,6 +11,7 @@ import lettre from './data/lettre.json';
 import contrats from './data/contrats.json';
 import sentinelRaw from './data/sentinel.json';
 import culturesRaw from './data/cultures.json';
+import maillonRaw from './data/maillon.json';
 
 export type Label = 'mesure' | 'source' | 'suppose' | 'synthetique' | 'modele';
 
@@ -122,6 +123,73 @@ export function ndviAt(serie: { day: number; ndvi: number }[], day: number): num
   }
   return serie[serie.length - 1].ndvi;
 }
+
+// ---------- Le Maillon vu du ciel (pipeline/10_maillon.py) ----------
+export type MaillonVersion = 'saison' | 'avant_recolte';
+export type MaillonCat = 'repere' | 'manque' | 'fausse' | 'autre' | 'connu_legume' | 'connu_autre' | 'non_classe';
+export interface MaillonParcel {
+  code: string; legume: boolean; connu: boolean; surface: number; polygon: [number, number][];
+  p: Record<MaillonVersion, number | null>;
+}
+export interface Metriques {
+  n_parcelles: number; n_legumineuses: number; precision: number; rappel: number; precision_moyenne: number;
+  vrais_positifs: number; faux_positifs: number; faux_negatifs: number;
+  surface_rpg_ha: number; surface_detectee_ha: number; surface_bien_detectee_ha: number;
+  rappel_zone?: number; n_apprentissage?: number; n_legumineuses_apprentissage?: number;
+}
+interface MaillonResultat {
+  coupure: string; blocs: Metriques; transfert: Metriques; transfert_relatif: Metriques;
+  un_sur_cinq: {
+    moyenne: { precision: number; rappel: number; precision_moyenne: number };
+    min: { precision: number; rappel: number }; max: { precision: number; rappel: number };
+    surface_detectee_sur_rpg: number; tirages: Metriques[]; carte: Metriques;
+  };
+}
+interface MaillonCampagne {
+  n_parcelles_zone: number; n_legumineuses_zone: number; surface_legumineuses_ha: number; n_images: number;
+  versions: Record<MaillonVersion, { n_dates: number; n_parcelles: number; n_legumineuses: number; dates_par_parcelle_mediane: number }>;
+  legumineuses_par_code: Record<string, { n: number; ha: number }>;
+  /** Date où le NDVI médian du blé (BTH) et de la féverole d'hiver (FVL) repasse sous 0,5 ; null : pas avant le 31 juillet. */
+  maturite_ndvi_05: Record<'BTH' | 'FVL', string | null>;
+}
+type RawMaillon = [string, number, number, number | null, number | null, number, number[]];
+const MR = maillonRaw as any;
+export const MAILLON = {
+  campagne: MR.campagne_test as number,
+  apprentissage: MR.campagne_apprentissage as number,
+  zoneKm: MR.zone_km as number,
+  blocKm: MR.bloc_km as number,
+  zone: MR.zone_wgs84 as [number, number, number, number],
+  seuil: MR.seuil as number,
+  campagnes: MR.campagnes as Record<string, MaillonCampagne>,
+  resultats: MR.resultats as Record<MaillonVersion, MaillonResultat>,
+  confusions: MR.confusions_carte as Record<MaillonVersion, {
+    faux_positifs_par_code: Record<string, number>; rappel_par_code: Record<string, { n: number; vus: number }>;
+  }>,
+  parcelles: (MR.parcelles as RawMaillon[]).map(([code, legume, connu, pa, ps, surface, flat]): MaillonParcel => {
+    const ring: [number, number][] = [];
+    for (let i = 0; i < flat.length; i += 2) ring.push([flat[i], flat[i + 1]]);
+    return { code, legume: legume === 1, connu: connu === 1, surface, polygon: ring, p: { avant_recolte: pa, saison: ps } };
+  }),
+};
+/** Ce que montre la carte pour une parcelle : jugée hors des blocs connus, ou bloc connu du collecteur. */
+export function maillonCat(p: MaillonParcel, v: MaillonVersion): MaillonCat {
+  if (p.connu) return p.legume ? 'connu_legume' : 'connu_autre';
+  const q = p.p[v];
+  if (q === null) return 'non_classe';
+  const vu = q >= MAILLON.seuil;
+  return p.legume ? (vu ? 'repere' : 'manque') : (vu ? 'fausse' : 'autre');
+}
+/** Libellés de la notice Telepac 2025 « Cultures et précisions », pour les codes les plus fréquents de la zone. */
+export const CODE_LABELS: Record<string, string> = {
+  BTH: 'Blé tendre d’hiver', BTP: 'Blé tendre de printemps', BDH: 'Blé dur d’hiver', ORH: 'Orge d’hiver', ORP: 'Orge de printemps',
+  AVH: 'Avoine d’hiver', AVP: 'Avoine de printemps', TTH: 'Triticale d’hiver', MIS: 'Maïs', SOG: 'Sorgho', CZH: 'Colza d’hiver',
+  TRN: 'Tournesol', MOT: 'Moutarde d’hiver', LIF: 'Lin fibres', CHV: 'Chanvre', BTN: 'Betterave', PTC: 'Pomme de terre',
+  SOJ: 'Soja', LUZ: 'Luzerne', TRE: 'Trèfle', JAC: 'Jachère', PTR: 'Prairie temporaire', PPH: 'Prairie permanente',
+  FVL: 'Féverole d’hiver', FVP: 'Féverole de printemps', PHI: 'Pois protéagineux d’hiver', PPR: 'Pois protéagineux de printemps',
+  LEC: 'Lentille', PCH: 'Pois chiche', PHS: 'Pois et haricot secs', PHF: 'Pois et haricot frais',
+  MPC: 'Mélange à légumineuses à graines prépondérantes',
+};
 
 /** Contrats comparés (pipeline/07_contrats.py) : existants, puis calibrés pour 8 années sur 10. */
 export const CONTRATS = {

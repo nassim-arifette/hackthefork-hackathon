@@ -4,12 +4,13 @@ import Method from './components/Method';
 import { BacktestReveal, MarginBars, PriceChart, SeasonChart, SecurityChart, Sensitivity, YieldsChart } from './components/charts';
 import { Figure, Source } from './components/ui';
 import {
-  backtest, bestSite, CHALLENGER, CONTRATS, CULTURES, D77, DEP_NAMES, dec, FEATURE_LABELS, fmt, H, held, lettre, MARKET, meta, parcels, pct, pctFine,
-  reliabilityAt, replay, SAISON, signedPct, siteGeo, SITE_SCENARIO, SUIVI, supplyCurve, thresholds, type ReplayYear, type Statut,
+  backtest, bestSite, CHALLENGER, CODE_LABELS, CONTRATS, CULTURES, D77, DEP_NAMES, dec, FEATURE_LABELS, fmt, H, held, lettre, MAILLON, MARKET, meta,
+  parcels, pct, pctFine, reliabilityAt, replay, SAISON, signedPct, siteGeo, SITE_SCENARIO, SUIVI, supplyCurve, thresholds,
+  type MaillonCat, type MaillonVersion, type ReplayYear, type Statut,
 } from './data';
 import { useTween } from './useTween';
 
-const STEPS = ['Le verrou', 'Le prix', 'L’épreuve', 'La preuve', 'Le contrat', 'La saison'];
+const STEPS = ['Le verrou', 'Le prix', 'L’épreuve', 'La preuve', 'Le contrat', 'La saison', 'Vu du ciel'];
 const pStars = thresholds.par_departement.map((d) => d.p_star);
 const MIN = 600;
 const MAX = 2000;
@@ -39,6 +40,29 @@ function seasonSummary(): string {
   return parts.join(', ') + '.';
 }
 
+const M25 = MAILLON.campagnes[String(MAILLON.campagne)];
+const M24 = MAILLON.campagnes[String(MAILLON.apprentissage)];
+const MAILLON_CAT: Record<MaillonCat, string> = {
+  repere: 'Légumineuse repérée par le satellite.',
+  manque: 'Légumineuse que le satellite n’a pas repérée.',
+  fausse: 'Signalée à tort comme légumineuse.',
+  autre: 'Non signalée, à raison.',
+  connu_legume: 'Carré connu du collecteur : sert d’exemple à l’apprentissage.',
+  connu_autre: 'Carré connu du collecteur : sert d’exemple à l’apprentissage.',
+  non_classe: 'Non classée : parcelle trop étroite, ou trop peu d’images sans nuages.',
+};
+const MAILLON_TABS: { v: MaillonVersion; date: string; label: string }[] = [
+  { v: 'saison', date: '31 juillet', label: 'Saison complète' },
+  { v: 'avant_recolte', date: '10 juin', label: 'Avant la récolte' },
+];
+const quand = (iso: string | null) => (iso ? `le ${dayMonth(iso)}` : 'après le 31 juillet');
+const ECART25 = M25.maturite_ndvi_05.BTH && M25.maturite_ndvi_05.FVL
+  ? Math.round(Math.abs(Date.parse(M25.maturite_ndvi_05.FVL) - Date.parse(M25.maturite_ndvi_05.BTH)) / 864e5) : null;
+const FEMININ = /^(betterave|jachère|prairie|luzerne|pomme|moutarde|féverole|lentille)/;
+const dayMonth = (iso: string | null) => (iso
+  ? new Date(`${iso}T12:00:00`).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' }).replace(/^1 /, '1er ')
+  : 'après le 31 juillet');
+
 /** Volume visé : les parcelles de blé éligibles les plus proches du site, jusqu'au volume. */
 function selectTarget(geo: ReturnType<typeof siteGeo>, price: number, volume: number) {
   const elig = parcels.map((_, i) => i).filter((i) => parcels[i].culture === 'ble' && price >= geo.pRendu[i])
@@ -62,6 +86,7 @@ export default function App() {
   const [hover, setHover] = useState<Hover>(null);
   const [method, setMethod] = useState(false);
   const [volumeKey, setVolumeKey] = useState<'pilote' | 'ambition'>('pilote');
+  const [maillonV, setMaillonV] = useState<MaillonVersion>('saison');
   const VOLUME = H.volumes[volumeKey];
   // Site de collecte : déplaçable d'un clic sur la carte aux étapes « Le prix » et « Le contrat ».
   const [geo, setGeo] = useState(SITE_SCENARIO);
@@ -137,6 +162,28 @@ export default function App() {
   }, [go, step, method]);
   useEffect(() => stop, []);
 
+  const MR = MAILLON.resultats[maillonV];
+  const MU = MR.un_sur_cinq;
+  const conf = MAILLON.confusions[maillonV];
+  const vus = (codes: string[]) => codes.reduce((a, c) => ({ n: a.n + (conf.rappel_par_code[c]?.n ?? 0), vus: a.vus + (conf.rappel_par_code[c]?.vus ?? 0) }), { n: 0, vus: 0 });
+  const FEV = vus(['FVL', 'FVP']), POIS = vus(['PHI', 'PPR']);
+  const POIS_CONNUS = MAILLON.parcelles.filter((q) => q.connu && (q.code === 'PHI' || q.code === 'PPR')).length;
+  const fauxCodes = Object.keys(conf.faux_positifs_par_code).slice(0, 3).map((c) => (CODE_LABELS[c] ?? `code ${c}`).toLowerCase());
+  const S = MAILLON.resultats.saison, A = MAILLON.resultats.avant_recolte;
+  const RELATIF = `Sur la saison complète, comparer chaque parcelle au reste de la zone le même jour fait passer le taux retrouvé de ${pct(S.transfert.rappel)} à ${pct(S.transfert_relatif.rappel)}${A.transfert_relatif.rappel > A.transfert.rappel ? '' : ' ; au 10 juin, il n’apporte rien'}. C’est un essai choisi après coup, à confirmer sur d’autres années.`;
+  const FAUSSES = fauxCodes.map((c) => (/^[aeéèiouy]/.test(c) ? `de l’${c}` : FEMININ.test(c) ? `de la ${c}` : `du ${c}`)).join(', ').replace(/, ([^,]*)$/, ' et $1');
+
+  const mpc = conf.rappel_par_code.MPC;
+  const VOIT = [
+    `Sur la carte, ${FEV.vus} féveroles sur ${FEV.n} sont retrouvées`
+      + (POIS.n === 0 ? '.' : FEV.vus / FEV.n - POIS.vus / POIS.n > 0.2
+        ? `, mais seulement ${POIS.vus} pois sur ${POIS.n} : le carré connu n’en contient que ${POIS_CONNUS}.`
+        : `, et ${POIS.vus} pois sur ${POIS.n}.`),
+    mpc && mpc.vus === 0 ? 'Les mélanges de céréales et de légumineuses passent pour des céréales.' : '',
+    FAUSSES ? `Les fausses alertes viennent surtout ${FAUSSES}.` : '',
+    'LEC' in M25.legumineuses_par_code ? '' : `Cette zone ne compte aucune lentille d’au moins 1 ha en ${MAILLON.campagne} : le modèle repère la famille des légumineuses à graines, pas l’espèce.`,
+  ].filter(Boolean).join(' ');
+
   const haT = useTween(stats.ha);
   const rel = reliabilityAt(price);
 
@@ -156,14 +203,16 @@ export default function App() {
 
       <main className="map">
         <MapScene step={step} price={price} year={step === 2 ? year : null} selectKm={step === 4 ? target.km : null} onHover={setHover}
-          geo={geo} onPickSite={step === 1 || step === 4 ? (s) => { moveSite(s); setBest(null); } : undefined}
-          season={step === 5 ? seasonDay : null} focus={focus} />
+          geo={step === 6 ? SITE_SCENARIO : geo} onPickSite={step === 1 || step === 4 ? (s) => { moveSite(s); setBest(null); } : undefined}
+          season={step === 5 ? seasonDay : null} focus={focus} maillon={step === 6 ? maillonV : null} />
         <div className="map-caption">
           {step === 0
             ? <><b>Surface en lentille par département, 2025</b><span>Agreste, Statistique agricole annuelle</span></>
             : step === 5
               ? <><b>{SUIVI.length} parcelles de lentille déclarées en {SAISON.annee}, près du site</b><span>NDVI Sentinel-2 L2A (Copernicus), replay de la saison {SAISON.annee}</span></>
-              : <><b>{fmt(meta.n_candidates)} parcelles de blé tendre d’hiver en Île-de-France</b><span>Registre parcellaire graphique 2025, IGN</span></>}
+              : step === 6
+                ? <><b>{fmt(M25.n_parcelles_zone)} parcelles d’au moins 1 ha sur {MAILLON.zoneKm} × {MAILLON.zoneKm} km autour du site, {MAILLON.campagne}</b><span>Sentinel-2 L2A (Copernicus) ; RPG {MAILLON.campagne}, IGN. Premier des cinq tirages de carrés connus.</span></>
+                : <><b>{fmt(meta.n_candidates)} parcelles de blé tendre d’hiver en Île-de-France</b><span>Registre parcellaire graphique 2025, IGN</span></>}
         </div>
         {step === 2 && year && <div className="map-year" key={year.annee}>{year.annee}</div>}
         <div className="map-legend">
@@ -171,6 +220,15 @@ export default function App() {
             <div className="ramp"><span>0 ha</span><i /><span>{fmt(Math.max(...Object.values(surf)))} ha</span></div>
           ) : step === 5 ? (
             <div className="ramp ndvi"><span>sol nu</span><i /><span>végétation dense</span><span className="ramp-site"><span className="sw site" />Site de collecte</span></div>
+          ) : step === 6 ? (
+            <ul>
+              <li><i className="sw lentil" />Légumineuse repérée</li>
+              <li><i className="sw slate" />Légumineuse manquée</li>
+              <li><i className="sw wheat" />Fausse alerte</li>
+              <li><i className="sw wheat-dim" />Autre culture</li>
+              <li><i className="sw known" />Carré connu du collecteur</li>
+              <li><i className="sw site" />Site de collecte fictif</li>
+            </ul>
           ) : (
             <ul>
               <li><i className={step === 4 ? 'sw wheat-dim' : 'sw wheat'} />Blé tendre d’hiver</li>
@@ -186,6 +244,12 @@ export default function App() {
           <div className="map-tip">
             {hover.kind === 'dep' ? (
               <><b>{hover.name}</b>{fmt(hover.surface)} ha de lentilles en 2025</>
+            ) : hover.kind === 'maillon' ? (
+              <>
+                <b>{CODE_LABELS[hover.p.code] ?? `Autre culture (code ${hover.p.code})`}, {dec(hover.p.surface)} ha</b>
+                {MAILLON_CAT[hover.cat]}
+                {!hover.p.connu && hover.p.p[maillonV] !== null && <> Probabilité de légumineuse : {dec(hover.p.p[maillonV]!, 2)}.</>}
+              </>
             ) : (
               <>
                 <b>{hover.p.culture === 'ble' ? 'Blé tendre d’hiver' : 'Lentille déjà cultivée'}, {DEP_NAMES[hover.p.dep]}</b>
@@ -524,6 +588,45 @@ export default function App() {
                 <Source k="suppose">Écart moyen de NDVI à la médiane du groupe, du 1er mai au 30 juin. À surveiller sous {dec(SAISON.seuils.surveiller, 2)}, en retard sous {dec(SAISON.seuils.retard, 2)} : seuils de l’équipe, à caler sur des rendements de parcelles.</Source>
               </div>
               <button className="link" onClick={replaySeason}>Rejouer la saison</button>
+            </>
+          )}
+
+          {step === 6 && (
+            <>
+              <h1>Les légumineuses du bassin, un an avant le RPG</h1>
+              <p className="lead">Le RPG d’une campagne n’est publié que l’année suivante. Sur {MAILLON.zoneKm} km de côté autour du site, un collecteur qui connaît les parcelles d’un carré de {MAILLON.blocKm} km sur cinq, celles de ses adhérents par exemple, cherche les légumineuses des autres carrés sur les images Sentinel-2 de {MAILLON.campagne}.</p>
+              <div className="tabs" role="tablist" aria-label="Images utilisées">
+                {MAILLON_TABS.map((t) => (
+                  <button key={t.v} role="tab" aria-selected={maillonV === t.v} className={maillonV === t.v ? 'on' : ''} onClick={() => setMaillonV(t.v)}>
+                    <b>{t.date}</b>{t.label}
+                  </button>
+                ))}
+              </div>
+              <div className="block">
+                <div className="figures two">
+                  <Figure value={pct(MU.moyenne.rappel)} label="des légumineuses des autres carrés sont retrouvées" />
+                  <Figure value={pct(MU.moyenne.precision)} label="des parcelles signalées sont bien des légumineuses" />
+                </div>
+                <Source k="modele">Images Sentinel-2 jusqu’au {MAILLON_TABS.find((t) => t.v === maillonV)!.date} {MAILLON.campagne}, {M25.versions[maillonV].n_dates} dates utiles. Moyenne de cinq tirages : un carré sur cinq connu à chaque fois, jugement sur les quatre autres. Légumineuses retrouvées : de {pct(MU.min.rappel)} à {pct(MU.max.rappel)} selon le tirage.</Source>
+              </div>
+              <div className="block">
+                <h3>Ce que le modèle connaît de {MAILLON.campagne}</h3>
+                <table className="list models">
+                  <thead><tr><th>Exemples d’apprentissage</th><th className="num">Retrouvées</th><th className="num">Justes</th></tr></thead>
+                  <tbody>
+                    <tr className="hl"><td>Un carré sur cinq<span>parcelles connues du collecteur</span></td><td className="num">{pct(MU.moyenne.rappel)}</td><td className="num">{pct(MU.moyenne.precision)}</td></tr>
+                    <tr><td>Quatre carrés sur cinq<span>validation croisée par carrés de {MAILLON.blocKm} km</span></td><td className="num">{pct(MR.blocs.rappel)}</td><td className="num">{pct(MR.blocs.precision)}</td></tr>
+                    <tr><td>Aucun : modèle appris sur {MAILLON.apprentissage}<span>avec le RPG {MAILLON.apprentissage}, appliqué aux images {MAILLON.campagne}</span></td><td className="num bad">{pct(MR.transfert.rappel)}</td><td className="num bad">{pct(MR.transfert.precision)}</td></tr>
+                  </tbody>
+                </table>
+                <p className="body small">D’une année sur l’autre, le modèle ne tient pas encore. Le printemps {MAILLON.apprentissage} a été trop nuageux : {fmt(M24.versions.saison.dates_par_parcelle_mediane)} dates utiles par parcelle en médiane, contre {fmt(M25.versions.saison.dates_par_parcelle_mediane)} en {MAILLON.campagne}. La signature a aussi changé. En {MAILLON.apprentissage}, le NDVI du blé passe sous 0,5 {quand(M24.maturite_ndvi_05.BTH)} et celui des féveroles d’hiver {quand(M24.maturite_ndvi_05.FVL)} ; en {MAILLON.campagne}, {quand(M25.maturite_ndvi_05.BTH)} et {quand(M25.maturite_ndvi_05.FVL)}{ECART25 !== null ? `, à ${ECART25} jours d’écart` : ''}. {RELATIF}</p>
+                <Source k="modele">Retrouvées : part des légumineuses du RPG {MAILLON.campagne} signalées. Justes : part des parcelles signalées qui sont des légumineuses. Seuil de probabilité {dec(MAILLON.seuil, 1)}, LightGBM sur le NDVI et le NDMI par période de 10 jours.</Source>
+              </div>
+              <div className="block">
+                <h3>Ce qu’il voit, ce qu’il manque</h3>
+                <p className="body small">{VOIT}</p>
+                <Source k="mesure">Sentinel-2 L2A (Copernicus), catalogue Earth Search : {fmt(M24.n_images)} dates utiles en {MAILLON.apprentissage}, {fmt(M25.n_images)} en {MAILLON.campagne}, du 1er avril au 31 juillet ; pixels classés végétation ou sol nu, parcelle réduite de 10 m. Étiquettes : RPG {MAILLON.apprentissage} et {MAILLON.campagne} (IGN), groupes protéagineux et légumineuses à grains ; libellés de la notice Telepac 2025.</Source>
+              </div>
             </>
           )}
         </div>

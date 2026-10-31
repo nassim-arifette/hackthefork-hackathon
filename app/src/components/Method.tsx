@@ -1,4 +1,4 @@
-import { backtest, CONTRATS, CULTURES, HYPOTHESES, meta, pct, thresholds } from '../data';
+import { backtest, CONTRATS, CULTURES, HYPOTHESES, MAILLON, meta, pct, thresholds } from '../data';
 import { statusText } from './ui';
 
 const NAMES: Record<string, string> = {
@@ -143,10 +143,19 @@ export default function Method({ onClose }: { onClose: () => void }) {
         </section>
 
         <section>
+          <h3>Vu du ciel : repérer les légumineuses de la saison</h3>
+          <p>Sur {MAILLON.zoneKm} × {MAILLON.zoneKm} km autour du site, chaque parcelle d’au moins 1 ha du RPG est réduite de 10 m. Pour chaque image Sentinel-2 L2A du 1er avril au 31 juillet, on garde les pixels classés végétation ou sol nu ; une parcelle ne compte que si 60 % de ses pixels le sont. Le NDVI et le NDMI médians de la parcelle sont regroupés par période de 10 jours, puis interpolés entre les dates. Un classifieur LightGBM, à classes pondérées, apprend sur ces seules séries à reconnaître les légumineuses à graines (groupes RPG protéagineux et légumineuses à grains).</p>
+          <p className="formula">NDVI = (B08 − B04) ÷ (B08 + B04) ; NDMI = (B08 − B11) ÷ (B08 + B11)</p>
+          <p className="note">La zone est découpée en carrés de {MAILLON.blocKm} km : une parcelle n’est jamais jugée par un modèle qui a vu son carré. La version « 10 juin » n’utilise aucune image postérieure. Le transfert de {MAILLON.apprentissage} à {MAILLON.campagne} suit le protocole fixé avant le calcul ; la variante relative à la zone a été essayée après coup.</p>
+        </section>
+
+        <section>
           <h3>Données</h3>
           <ul>
             <li><b>Agreste, Statistique agricole annuelle 2010–2025.</b> Surfaces et rendements par département. Mesuré.</li>
             <li><b>IGN, Registre parcellaire graphique 2025.</b> {meta.n_parcelles.toLocaleString('fr-FR')} parcelles de blé tendre d’hiver et de lentille en Île-de-France. Mesuré.</li>
+            <li><b>IGN, Registre parcellaire graphique 2024.</b> Étiquettes d’apprentissage du transfert d’une année à l’autre, étape « Vu du ciel ». Mesuré.</li>
+            <li><b>Copernicus Sentinel-2 L2A, 2024 et 2025.</b> Images lues par le catalogue Earth Search (Element 84) : suivi de huit parcelles de lentille et repérage des légumineuses. Mesuré.</li>
             <li><b>NASA POWER.</b> Météo journalière 2010–2025 pour 43 départements. Mesuré.</li>
             <li><b>Eurostat.</b> Indice des prix du blé tendre, calé sur le prix rendu Rouen d’Agreste en 2019-2020 ; prix observés de la lentille 2012–2016 ; commerce extérieur Comext. Mesuré.</li>
           </ul>
@@ -164,6 +173,7 @@ export default function Method({ onClose }: { onClose: () => void }) {
             <li>Charges constantes dans le temps ; aide couplée de 2026 encore indicative, ajustée en fin de campagne selon les surfaces.</li>
             <li>Part refusée au tri et bénéfice de rotation : hypothèses de l’équipe, testées en sensibilité.</li>
             <li>Un prix plancher n’est pas une assurance : une récolte effondrée réduit la marge.</li>
+            <li>Vu du ciel : une zone et deux campagnes ; le modèle ne se transpose pas encore d’une année sur l’autre, et il repère la famille des légumineuses à graines, pas l’espèce.</li>
           </ul>
         </section>
       </div>

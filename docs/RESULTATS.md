@@ -230,7 +230,28 @@ Backtest 2019–2025 sur les départements producteurs : 133, 100, 71, 493 et 44
 - **Le haricot sec irrigué** atteint 2 185 €/t avec 1 000 €/ha de charges, contre 1 779 €/t avec 700 €/ha. Le budget inclut 300 €/ha d'eau et d'énergie ; les rendements restent ceux des séries Agreste, sans distinguer l'irrigation. Au prix de scénario de 1 200 €/t, il bat le blé dans 58,9 % des simulations. Le repère administratif à 1 188 €/t qui étaye ce choix n'est pas une offre d'achat.
 - Le barème par tranches, mis à l'échelle du rendement de chaque culture, coûte de 8 à 22 % de moins que le prix unique à protection égale.
 
-## 10. Ce que ça veut dire
+## 10. Le Maillon vu du ciel, prototype Sentinel-2
+
+`pipeline/10_maillon.py` cherche les légumineuses à graines d'une campagne sans attendre le RPG, publié l'année suivante. Zone de 24 × 24 km autour du site de collecte (tuile 31UDP), parcelles d'au moins 1 ha : 3 659 en 2025, dont 152 légumineuses (1 053 ha) ; 3 674 en 2024, dont 127 (915 ha). Images Sentinel-2 L2A du 1er avril au 31 juillet à moins de 95 % de nuages sur la tuile : 28 dates utiles en 2025, 17 en 2024. Pour chaque parcelle réduite de 10 m : NDVI et NDMI médians des pixels classés végétation ou sol nu, une image comptant si 60 % des pixels sont valides ; puis médiane par période de 10 jours, interpolée. Classifieur LightGBM à classes pondérées sur ces seules séries, seuil de probabilité 0,5. Chaque résultat est jugé sur des parcelles jamais vues à l'apprentissage ; la version « 10 juin » n'utilise aucune image postérieure.
+
+| Ce que le modèle connaît de 2025 | Saison complète (31 juillet) : retrouvées / justes | Avant récolte (10 juin) : retrouvées / justes |
+|---|---|---|
+| **Un carré de 4 km sur cinq**, moyenne de cinq tirages | **73 % / 90 %** | **45 % / 69 %** |
+| Quatre carrés sur cinq, validation croisée par carrés | 80 % / 92 % | 68 % / 68 % |
+| Aucune parcelle : appris sur 2024 et le RPG 2024, protocole prévu | 8 % / 15 % | 15 % / 45 % |
+| Aucune parcelle : même transfert, valeurs relatives à la zone, essai après coup | 35 % / 56 % | 11 % / 36 % |
+
+« Retrouvées » : part des légumineuses du RPG 2025 signalées. « Justes » : part des parcelles signalées qui en sont. Avec un carré connu sur cinq, la part retrouvée va de 65 à 82 % selon le tirage en fin de saison, de 39 à 56 % au 10 juin.
+
+**Lecture :**
+
+- **Dans une campagne, quelques parcelles connues suffisent.** Un collecteur qui connaît les parcelles d'un carré sur cinq, celles de ses adhérents par exemple, repère en fin de saison près des trois quarts des légumineuses des autres carrés, et neuf signalements sur dix sont justes. Le RPG de la campagne n'arrive qu'un an plus tard. Au 10 juin, moins de la moitié des légumineuses sont retrouvées.
+- **Les féveroles sont bien vues, les pois et les mélanges beaucoup moins.** Sur la carte de l'application (premier tirage, saison complète), 87 féveroles sur 106 sont retrouvées, contre 4 pois sur 15 : le carré connu ne contient que 6 pois. Les 3 mélanges de céréales et de légumineuses sont manqués. Les fausses alertes sont surtout des céréales de printemps (orge, avoine), du maïs et du trèfle.
+- **D'une année sur l'autre, le modèle ne tient pas encore.** Appris sur 2024, il ne retrouve que 8 % des légumineuses de 2025. Deux causes sont mesurées. Le printemps 2024 a été très nuageux : 4 dates utiles par parcelle en médiane, contre 16 en 2025. La signature a aussi changé : en 2024, le NDVI médian du blé passe sous 0,5 le 27 juin, celui des féveroles d'hiver pas avant le 31 juillet ; en 2025, ils y passent les 22 et 26 juin. Après l'échec du protocole prévu, deux variantes ont été essayées. L'alignement des saisons sur le temps thermique (degrés-jours depuis le 1er janvier, NASA POWER) n'apporte rien : 6 à 9 % retrouvées, essai non conservé dans le pipeline. Les valeurs relatives à la zone le même jour portent la part retrouvée à 35 % en fin de saison, mais n'aident pas au 10 juin. Ces variantes ont été choisies après avoir vu 2025 : elles orientent la suite, elles ne prouvent rien.
+- **Aucune lentille d'au moins 1 ha dans la zone en 2025** (2 en 2024) : le modèle repère la famille des légumineuses à graines, ici des féveroles et des pois, pas l'espèce.
+- **Pour se passer des parcelles connues** : plusieurs campagnes d'apprentissage, une phénologie relative (levée et maturité comparées aux céréales voisines) et le radar Sentinel-1, insensible aux nuages.
+
+## 11. Ce que ça veut dire
 
 1. **Garantir 8 années sur 10 coûte plus du double du prix d'équilibre médian** (1 567 contre 715 €/t). Une moyenne sous-estime fortement le prix qu'il faut garantir : c'est le cœur du message.
 2. **À la référence historique, la lentille ne gagne qu'une année sur deux.** C'est exactement le verrou que décrit le Track 3.
@@ -239,6 +260,7 @@ Backtest 2019–2025 sur les départements producteurs : 133, 100, 71, 493 et 44
 5. **Le prix plancher est lui-même incertain** : seize années ne suffisent pas à cerner les mauvaises années. Les données de rendement des coopératives sont la première chose à obtenir en pilote.
 6. **Le moteur est générique, la forme du contrat ne l'est pas** : barème par tranches pour la lentille, dont le risque vient surtout du rendement ; plancher indexé sur le blé pour le pois chiche, le haricot, le pois et la féverole, dont le risque vient surtout du prix du blé.
 7. **La promesse se vérifie en backtest strict** : 78 % pour 80 % visés. Le chiffre est moins flatteur que les 87 % annoncés le matin du 31/10, mais il est mesuré sans aucune information des années testées.
+8. **Le satellite peut mesurer l'effet du contrat un an avant le RPG, à condition de connaître quelques parcelles** : avec un carré de 4 km sur cinq, 73 % des légumineuses retrouvées et 90 % de signalements justes en fin de saison. Appris sur l'année précédente seule, il n'en retrouve que 8 %.
 
 ## Historique
 
@@ -247,4 +269,5 @@ Backtest 2019–2025 sur les départements producteurs : 133, 100, 71, 493 et 44
 - Version 3 (30/10, séries estimées ensemble regroupées) : 86 %, 1 622 €/t, avec un intervalle de confiance sur P\*.
 - Version 4 (31/10, hypothèses économiques revues, paiement sur les tonnes acceptées au tri, forfait de collecte, comparaison des contrats) : 87 %, 1 567 €/t. Le modèle et le protocole sont inchangés ; les hypothèses viennent de la revue documentée de [QUESTIONS.md](QUESTIONS.md), fixées avant le recalcul. Avec les hypothèses de la version 3, le pipeline actuel redonne 1 622 €/t.
 - Version 4.1, actuelle (31/10, après-midi, backtest strict) : regroupement des séries en double refait chaque année avec le seul passé, à la suite de l'audit de la PR 1. Contrats tenus : 87 → 78 % (M1), 81 → 77 % (M0), 77 → 76 % (M2). Prix 2026 inchangés.
+- Le Maillon vu du ciel (31/10, après-midi) : `10_maillon.py`, RPG 2024 et 2025, 51 images Sentinel-2 ; étape 7 de l'application. Aucun chiffre existant ne change.
 - Revue des autres cultures (31/10) : haricot 700 → 1 000 €/ha et pois 400 → 450 €/ha, prix de référence et provenances complétés. Recalcul de `09_cultures.py` : P\* haricot 1 779 → 2 185 €/t, pois 409 → 427 €/t. La totalité de l'objet lentille exporté est identique à la version précédente.

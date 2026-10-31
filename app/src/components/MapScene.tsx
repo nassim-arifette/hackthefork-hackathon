@@ -2,7 +2,10 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import DeckGL from '@deck.gl/react';
 import { FlyToInterpolator, MapView, type MapViewState } from '@deck.gl/core';
 import { GeoJsonLayer, PolygonLayer, ScatterplotLayer, TextLayer } from '@deck.gl/layers';
-import { contours, DEP_NAMES, france, held, meta, ndviAt, parcels, SUIVI, SUIVI_INDEX, thresholds, type Parcel, type ReplayYear, type SiteGeo } from '../data';
+import {
+  contours, DEP_NAMES, france, held, MAILLON, maillonCat, meta, ndviAt, parcels, SUIVI, SUIVI_INDEX, thresholds,
+  type MaillonCat, type MaillonParcel, type MaillonVersion, type Parcel, type ReplayYear, type SiteGeo,
+} from '../data';
 
 type RGB = [number, number, number];
 // Mêmes valeurs que les jetons de docs/DESIGN.md.
@@ -17,7 +20,16 @@ const C = {
   lentil: [47, 106, 80] as RGB,
   slate: [91, 115, 133] as RGB,
   fail: [181, 67, 44] as RGB,
+  rule2: [198, 203, 192] as RGB,
 };
+
+// Étape « Vu du ciel » : jugée hors des blocs connus, ou bloc connu du collecteur.
+const MAILLON_COLOR: Record<MaillonCat, RGB> = {
+  repere: C.lentil, manque: C.slate, fausse: C.wheat, autre: C.wheatDim,
+  connu_legume: [157, 184, 166], connu_autre: C.rule2, non_classe: C.landOut,
+};
+const [ZW, ZS, ZE, ZN] = MAILLON.zone;
+const ZONE_RING: [number, number][] = [[ZW, ZS], [ZE, ZS], [ZE, ZN], [ZW, ZN], [ZW, ZS]];
 
 const surf = meta.surface_lentille_par_dep_2025 as Record<string, number>;
 const surfMax = Math.max(...Object.values(surf));
@@ -43,12 +55,13 @@ const SUIVI_CENTER = [SUIVI.reduce((a, p) => a + p.lon, 0) / SUIVI.length, SUIVI
 // Deux parcelles voisines : la lettre de la seconde passe à gauche du point.
 const SUIVI_LEFT = new Set(SUIVI.filter((p, k) => SUIVI.slice(0, k).some((q) => Math.abs(q.lon - p.lon) < 0.01 && Math.abs(q.lat - p.lat) < 0.006)).map((p) => p.id));
 
-function views(width: number): { france: MapViewState; idf: MapViewState; suivi: MapViewState } {
+function views(width: number): { france: MapViewState; idf: MapViewState; suivi: MapViewState; ciel: MapViewState } {
   const z = Math.log2(Math.max(360, width) / 1000);
   return {
     france: { longitude: 2.45, latitude: 46.6, zoom: 4.95 + z, pitch: 0, bearing: 0 },
     idf: { longitude: 2.48, latitude: 48.64, zoom: 8.05 + z, pitch: 0, bearing: 0 },
     suivi: { longitude: SUIVI_CENTER[0], latitude: SUIVI_CENTER[1], zoom: 10.3 + z, pitch: 0, bearing: 0 },
+    ciel: { longitude: (ZW + ZE) / 2, latitude: (ZS + ZN) / 2, zoom: 10.35 + z, pitch: 0, bearing: 0 },
   };
 }
 
@@ -56,7 +69,8 @@ function views(width: number): { france: MapViewState; idf: MapViewState; suivi:
 const NDVI_LO: RGB = [226, 214, 182], NDVI_HI: RGB = [33, 92, 63];
 const ndviColor = (v: number): RGB => mix(NDVI_LO, NDVI_HI, Math.max(0, Math.min(1, (v - 0.15) / 0.75)));
 
-export type Hover = { kind: 'parcel'; p: Parcel; i: number } | { kind: 'dep'; name: string; surface: number } | null;
+export type Hover = { kind: 'parcel'; p: Parcel; i: number } | { kind: 'dep'; name: string; surface: number }
+  | { kind: 'maillon'; p: MaillonParcel; cat: MaillonCat } | null;
 
 interface Props {
   step: number;
@@ -72,13 +86,15 @@ interface Props {
   /** Étape « La saison » : jour du replay, et parcelle mise en avant. */
   season: number | null;
   focus: string | null;
+  /** Étape « Vu du ciel » : version affichée (images jusqu'au 10 juin, ou saison complète). */
+  maillon: MaillonVersion | null;
 }
 
-export default function MapScene({ step, price, year, selectKm, onHover, geo, onPickSite, season, focus }: Props) {
+export default function MapScene({ step, price, year, selectKm, onHover, geo, onPickSite, season, focus, maillon }: Props) {
   const box = useRef<HTMLDivElement>(null);
   const [width, setWidth] = useState(1000);
   const [fontsReady, setFontsReady] = useState(false);
-  const target = step === 0 ? 'france' : step === 5 ? 'suivi' : 'idf';
+  const target = step === 0 ? 'france' : step === 5 ? 'suivi' : step === 6 ? 'ciel' : 'idf';
   const [viewState, setViewState] = useState<MapViewState>(views(1000).france);
   // Seul un changement d'étape anime la caméra. Une largeur mesurée tardivement s'applique sans
   // transition : sinon la dernière image de cette transition peut écraser la suivante.
@@ -124,7 +140,7 @@ export default function MapScene({ step, price, year, selectKm, onHover, geo, on
         getFillColor: C.land, getLineColor: C.border, lineWidthMinPixels: 2,
       }),
       new PolygonLayer<Parcel>({
-        id: 'parcelles', data: parcels, pickable: showParcels, visible: showParcels,
+        id: 'parcelles', data: parcels, pickable: showParcels && maillon === null, visible: showParcels && maillon === null,
         stroked: false, filled: true,
         getPolygon: (p) => p.polygon,
         getFillColor: (p, { index: i }) => {
@@ -172,13 +188,26 @@ export default function MapScene({ step, price, year, selectKm, onHover, geo, on
         getTextAnchor: (d: (typeof SUIVI)[number]) => (SUIVI_LEFT.has(d.id) ? 'end' : 'start'),
         outlineWidth: 6, outlineColor: [255, 255, 255, 235], fontSettings: { sdf: true, fontSize: 64, buffer: 8 },
       }),
+      new PolygonLayer<MaillonParcel>({
+        id: 'maillon', data: MAILLON.parcelles, visible: maillon !== null, pickable: maillon !== null,
+        stroked: false, filled: true, getPolygon: (p) => p.polygon,
+        getFillColor: (p) => MAILLON_COLOR[maillonCat(p, maillon ?? 'saison')],
+        updateTriggers: { getFillColor: [maillon] },
+        transitions: { getFillColor: 400 },
+        onHover: (info) => onHover(info.object ? { kind: 'maillon', p: info.object as MaillonParcel, cat: maillonCat(info.object as MaillonParcel, maillon ?? 'saison') } : null),
+      }),
+      new PolygonLayer({
+        id: 'maillon-zone', data: [ZONE_RING], visible: maillon !== null, pickable: false,
+        stroked: true, filled: false, getPolygon: (d: [number, number][]) => d,
+        getLineColor: [...C.ink, 150] as [number, number, number, number], getLineWidth: 1, lineWidthUnits: 'pixels',
+      }),
       new ScatterplotLayer({
         id: 'site', data: [geo.site], visible: showParcels, getPosition: (d: [number, number]) => d,
         getRadius: 6, radiusUnits: 'pixels', getFillColor: C.ink, stroked: true,
         getLineColor: [255, 255, 255], getLineWidth: 3, lineWidthUnits: 'pixels',
       }),
     ];
-  }, [step, price, year, selectKm, onHover, fontsReady, geo, season, focus]);
+  }, [step, price, year, selectKm, onHover, fontsReady, geo, season, focus, maillon]);
 
   return (
     <div ref={box} className="map-box">

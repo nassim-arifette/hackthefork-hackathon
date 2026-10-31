@@ -11,7 +11,9 @@ Obligatoire au dépôt. Tout ce qui n'a pas été produit pendant l'événement 
 | RPG Île-de-France 2025 | parcelles | voir [SOURCES.md](SOURCES.md) | fourni sur le Drive de l'organisation |
 | Douanes NC8 | importations | voir [SOURCES.md](SOURCES.md) | fourni sur le Drive de l'organisation |
 | Registre national des cantines | extension | voir [SOURCES.md](SOURCES.md) | fourni sur le Drive de l'organisation |
-| Sentinel-2 L2A (Copernicus), via le catalogue Earth Search d'Element 84 | suivi en saison, prototype | données Copernicus en accès libre, citation demandée | lues en ligne par `08_sentinel.py` |
+| Sentinel-2 L2A (Copernicus), via le catalogue Earth Search d'Element 84 | suivi en saison et repérage des légumineuses, prototypes | données Copernicus en accès libre, citation demandée | lues en ligne par `08_sentinel.py` et `10_maillon.py` |
+| RPG 2024 Île-de-France (IGN, data.geopf.fr) | étiquettes d'apprentissage du Maillon | voir [SOURCES.md](SOURCES.md) | téléchargé depuis le site de l'IGN |
+| Notice Telepac 2025 « Cultures et précisions » | libellés des codes de culture | document administratif public | consultée en ligne |
 | Contours des départements (gregoiredavid/france-geojson, dérivé d'IGN Admin Express COG 2018) | centroïdes météo, contours de carte | Licence Ouverte (Etalab), selon le dépôt | téléchargé depuis GitHub |
 | RPG 2025 Île-de-France (IGN, data.geopf.fr) | parcelles de la carte | voir [SOURCES.md](SOURCES.md) | téléchargé depuis le site de l'IGN |
 | Eurostat : prix agricoles et Comext | prix du blé et de la lentille, commerce extérieur | réutilisation autorisée avec citation | via l'API Eurostat |

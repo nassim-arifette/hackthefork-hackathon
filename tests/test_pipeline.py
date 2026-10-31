@@ -222,3 +222,46 @@ def test_every_pulse_hypothesis_is_labelled_and_sourced():
             if key == "nom" or v is None:
                 continue
             assert v["etiquette"] in {"source", "suppose"} and v["source"], (culture, key)
+
+
+def _maillon_module():
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("maillon", DATA.parent / "pipeline" / "10_maillon.py")
+    m = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(m)
+    return m
+
+
+def test_maillon_before_harvest_ignores_later_images():
+    """La version « avant récolte » ne dépend d'aucune image postérieure au 10 juin."""
+    m = _maillon_module()
+    dates = ["2025-04-05", "2025-05-03", "2025-06-01", "2025-06-09", "2025-06-20", "2025-07-15"]
+    obs = pd.DataFrame([{"id_parcel": i, "date": d, "ndvi": 0.2 + 0.1 * k, "ndmi": 0.1}
+                        for i in ("a", "b") for k, d in enumerate(dates)])
+    f1, n1 = m.caracteristiques(obs, np.array(["a", "b"]), 2025, m.COUPURE)
+    brouille = obs.copy()
+    brouille.loc[brouille.date > f"2025-{m.COUPURE}", ["ndvi", "ndmi"]] = -0.9
+    f2, n2 = m.caracteristiques(brouille, np.array(["a", "b"]), 2025, m.COUPURE)
+    pd.testing.assert_frame_equal(f1, f2)
+    assert (n1 == 4).all() and (n2 == 4).all()
+
+
+def test_maillon_export_is_consistent():
+    """Carte et métriques cohérentes : un carré connu n'est jamais jugé, les comptes se recoupent."""
+    d = json.loads((APP_DATA / "maillon.json").read_text())
+    seuil = d["seuil"]
+    for v_idx, nom in ((3, "avant_recolte"), (4, "saison")):
+        jugees = [p for p in d["parcelles"] if not p[2] and p[v_idx] is not None]
+        assert all(p[v_idx] is None for p in d["parcelles"] if p[2])
+        assert all(0 <= p[v_idx] <= 1 for p in jugees)
+        carte = d["resultats"][nom]["un_sur_cinq"]["carte"]
+        vp = sum(1 for p in jugees if p[1] and p[v_idx] >= seuil)
+        fp = sum(1 for p in jugees if not p[1] and p[v_idx] >= seuil)
+        assert vp == carte["vrais_positifs"] and fp == carte["faux_positifs"]
+        for k in ("blocs", "transfert", "transfert_relatif"):
+            r = d["resultats"][nom][k]
+            assert r["precision"] == pytest.approx(r["vrais_positifs"] / (r["vrais_positifs"] + r["faux_positifs"]), abs=1e-3)
+            assert r["rappel"] == pytest.approx(r["vrais_positifs"] / r["n_legumineuses"], abs=1e-3)
+        u = d["resultats"][nom]["un_sur_cinq"]
+        for k in ("precision", "rappel"):
+            assert u["min"][k] <= u["moyenne"][k] <= u["max"][k]

@@ -71,7 +71,7 @@ Dès que le parcours cœur fonctionne avec des chiffres cohérents, prendre ces 
 |---|---|---|---|
 | 1 | ~~Site de collecte déplaçable~~ **fait** | 1 h | Distances, coût rendu, tonnes et courbe se recalculent ; meilleur point d'une grille. |
 | 2 | ~~Suivi Sentinel de 5 à 10 parcelles~~ **fait** (8 parcelles, étape « La saison ») | 1 à 2 h | Courbes précalculées, dates et pixels valides affichés, replay clairement nommé. |
-| 3 | Le Maillon vu du ciel, zone réduite | Créneau restant avant le gel | Carte de classes et métriques sur un bloc géographique tenu à l'écart. |
+| 3 | ~~Le Maillon vu du ciel, zone réduite~~ **fait** (étape « Vu du ciel ») | Créneau restant avant le gel | Carte de classes et métriques sur des carrés de 4 km tenus à l'écart ; transfert 2024 → 2025 testé. |
 | 4 | Météo pondérée par les surfaces ; variables par stade | Seulement si le cœur et la démo sont prêts | Nouvelle version comparée à M1 avec le même protocole. |
 | 5 | ~~Autres cultures~~ **fait** (pois chiche, haricot, pois, féverole) ; données coopératives, offre assureurs | Selon capacité disponible | Une preuve ciblée ou une maquette clairement identifiée. |
 
@@ -207,6 +207,10 @@ flowchart TB
 ### Ce qu'il faut pour le faire pendant l'événement
 
 Le volume d'images, les nuages et le prétraitement sont les points durs. Pour tenir dans le temps : une zone réduite autour du site acheteur, des images 2025 entre avril et juillet et des étiquettes RPG 2025 vérifiées. Garder un bloc géographique de test intact. Une validation sur la même campagne ne démontre pas encore le transfert à 2026 : réserver ce nom au test temporel correspondant. Toute prédiction dite « avant récolte » n'utilise que les images disponibles avant sa date de coupure.
+
+### Résultat du prototype (31/10)
+
+Fait sur 24 × 24 km autour du site, campagnes 2024 et 2025 ([RESULTATS.md §10](RESULTATS.md#10-le-maillon-vu-du-ciel-prototype-sentinel-2)). Dans la campagne, avec les parcelles d'un carré de 4 km sur cinq comme exemples, le modèle retrouve 73 % des légumineuses des autres carrés en fin de saison, avec 90 % de signalements justes ; 45 % et 69 % au 10 juin. Le transfert N−1 → N échoue : appris sur 2024, il retrouve 8 % des légumineuses de 2025, à cause d'un printemps 2024 très nuageux et d'une maturité des féveroles avancée de plus d'un mois en 2025. Le nom « transfert à 2026 » reste donc réservé : il faudra plusieurs campagnes d'apprentissage et le radar Sentinel-1.
 
 ### Modèle économique
 

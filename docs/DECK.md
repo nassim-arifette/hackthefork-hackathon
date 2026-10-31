@@ -13,11 +13,12 @@
 | 7 | La preuve | Prix calculé sur les moyennes : 29 % de contrats tenus. Notre modèle : 78 % pour 80 % promis, sur 133 cas jamais vus, en protocole strict. LightGBM, plus précis, n'en tient que 76 %. | frise du backtest et tableau des quatre façons de fixer le prix | Backtest 2019–2025 |
 | 8 | Le bon contrat protège autant pour moins cher | 900 €/t (Unéal, 2023) : 6 années sur 10. 1 567 €/t sur toutes les tonnes : 8 sur 10. Tranches à 1 635 / 750 / 650 €/t : 8 sur 10 pour 18 % de moins ; en backtest, 79 % de contrats tenus (prix unique : 78 %) pour 19 % de moins. | tableau « Trois façons de garantir 8 années sur 10 » | Modèle ; Unéal ; NatUp (Union Agricole) |
 | 9 | Un moteur, cinq légumineuses | Lentille : barème par tranches, 78 à 79 % de contrats tenus. Pour les quatre autres cultures, le backtest favorise le plancher indexé sur le blé : 78 à 89 %, contre 65 à 70 % à prix fixe. | tableau « Le même moteur, quatre autres légumineuses » | Backtest 2019–2025 ; Agreste ; data/cultures.yaml ; REVUE_FILIERE_CULTURES.md |
-| 10 | Ce que nous ne savons pas encore | Prix incertain (1 099 à 2 877 €/t), rendements départementaux, 24 séries indépendantes seulement, contrats qui cèdent en 2020–2021, charges et rotation supposées. | liste courte | RESULTATS.md, LIMITES.md |
-| 11 | Impact | Pilote : 300 t sur 210 ha. Ambition : 5 000 t sur 3 506 ha, 13 % des importations, 1 250 t de protéines, 631 t d'azote minéral non apporté, 2 647 t CO₂e évitées. | carte du contrat, compteurs | Modèle ; Comext ; GIEC ; DRIAAF |
-| 12 | Qui paie | Coopératives et conditionneurs, par campagne. Étude pilote, puis abonnement par bassin ; ensuite toutes les cultures sous contrat et les assureurs. | trois étapes | — |
-| 13 | Architecture | Pipeline Python, modèles précalculés ; Bedrock pour la lettre (aucun chiffre produit) ; Amplify déployé depuis GitHub ; démo hors ligne en fichier unique. | schéma | ARCHITECTURE.md |
-| 14 | Merci | Lien vers le code et la démo. | — | — |
+| 10 | Vu du ciel, un an avant le RPG | Avec les parcelles d'un carré de 4 km sur cinq, le satellite retrouve 73 % des légumineuses des autres carrés en fin de saison, 90 % de signalements justes. Appris sur 2024 seulement : 8 %. | capture de l'étape « Vu du ciel » | Copernicus Sentinel-2 ; RPG 2024 et 2025, IGN |
+| 11 | Ce que nous ne savons pas encore | Prix incertain (1 099 à 2 877 €/t), rendements départementaux, 24 séries indépendantes seulement, contrats qui cèdent en 2020–2021, charges et rotation supposées. | liste courte | RESULTATS.md, LIMITES.md |
+| 12 | Impact | Pilote : 300 t sur 210 ha. Ambition : 5 000 t sur 3 506 ha, 13 % des importations, 1 250 t de protéines, 631 t d'azote minéral non apporté, 2 647 t CO₂e évitées. | carte du contrat, compteurs | Modèle ; Comext ; GIEC ; DRIAAF |
+| 13 | Qui paie | Coopératives et conditionneurs, par campagne. Étude pilote, puis abonnement par bassin ; ensuite toutes les cultures sous contrat et les assureurs. | trois étapes | — |
+| 14 | Architecture | Pipeline Python, modèles précalculés ; Bedrock pour la lettre (aucun chiffre produit) ; Amplify déployé depuis GitHub ; démo hors ligne en fichier unique. | schéma | ARCHITECTURE.md |
+| 15 | Merci | Lien vers le code et la démo. | — | — |
 
 ## Règles
 

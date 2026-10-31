@@ -89,6 +89,7 @@ a:hover { text-decoration-color: currentColor; }
 .sw.wheat { background: var(--wheat); } .sw.wheat-dim { background: var(--wheat-dim); }
 .sw.lentil { background: var(--lentil); } .sw.slate { background: var(--slate); } .sw.fail { background: var(--fail); }
 .sw.site { border-radius: 50%; background: var(--ink); box-shadow: 0 0 0 2px #fff, 0 0 0 3px var(--rule-2); }
+.sw.known { background: linear-gradient(135deg, #9db8a6 50%, var(--rule-2) 50%); }
 .map-tip {
   position: absolute; left: var(--s5); bottom: 76px; max-width: 320px; pointer-events: none;
   background: #fff; border: 1px solid var(--rule); border-radius: 3px; padding: 9px 12px;
