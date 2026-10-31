@@ -3,8 +3,8 @@ import DeckGL from '@deck.gl/react';
 import { FlyToInterpolator, MapView, type MapViewState } from '@deck.gl/core';
 import { GeoJsonLayer, IconLayer, LineLayer, PolygonLayer, ScatterplotLayer, TextLayer } from '@deck.gl/layers';
 import {
-  BT_BY_YEAR, contours, DEP_NAMES, france, held, MAILLON, maillonCat, meta, ndviAt, parcels, SUIVI, SUIVI_INDEX, thresholds,
-  type MaillonCat, type MaillonParcel, type MaillonVersion, type Parcel, type ReplayYear, type SiteGeo, type TruckTrip,
+  BT_BY_YEAR, contours, DEP_NAMES, france, held, MAILLON, maillonCat, meta, ndviAt, parcels, SITES, SUIVI, SUIVI_INDEX, thresholds,
+  type MaillonCat, type MaillonParcel, type MaillonVersion, type Parcel, type ReplayYear, type SiteExistant, type SiteGeo, type TruckTrip,
 } from '../data';
 import { ICON_ATLAS, ICON_MAPPING, type IconName } from './icons';
 
@@ -120,7 +120,7 @@ function moving(trips: TruckTrip[], t: number): { pos: [number, number]; icon: I
 }
 
 export type Hover = { kind: 'parcel'; p: Parcel; i: number } | { kind: 'dep'; name: string; surface: number; pStar?: number; pstarMode?: boolean; avec?: { rep: string; p: number } }
-  | { kind: 'maillon'; p: MaillonParcel; cat: MaillonCat } | null;
+  | { kind: 'maillon'; p: MaillonParcel; cat: MaillonCat } | { kind: 'site'; s: SiteExistant } | null;
 
 interface Props {
   camera: Camera;
@@ -147,6 +147,8 @@ interface Props {
   maillon: MaillonVersion | null;
   /** Silo de la coopérative au site de collecte. */
   silo?: boolean;
+  /** Sites existants de collecte de grains (Sirene) ; un clic y place le site de collecte. */
+  sites?: boolean;
   /** Camions des parcelles vers le silo ; la clé relance l'animation. */
   trucks?: { key: string; trips: TruckTrip[] } | null;
   boats?: boolean;
@@ -156,9 +158,12 @@ interface Props {
 
 export default function MapScene({
   camera, radiusKm = 6, showParcels, franceMode, btYear = null, depLabels = false, price, year, selectKm, onHover, geo,
-  onPickSite, season, focus, maillon, silo = false, trucks = null, boats = false, onDelivered,
+  onPickSite, season, focus, maillon, silo = false, sites = false, trucks = null, boats = false, onDelivered,
 }: Props) {
   const box = useRef<HTMLDivElement>(null);
+  // Le clic sur un site existant lit toujours le dernier gestionnaire sans recréer les couches.
+  const pickRef = useRef(onPickSite);
+  pickRef.current = onPickSite;
   const [width, setWidth] = useState(1000);
   const [fontsReady, setFontsReady] = useState(false);
   const targetKey = camera === 'site' ? `site:${radiusKm.toFixed(1)}:${geo.site.join(',')}` : camera;
@@ -319,13 +324,22 @@ export default function MapScene({
         getSourcePosition: (d) => d.from, getTargetPosition: (d) => d.to,
         getColor: [...C.ink, 46] as [number, number, number, number], getWidth: 1, widthUnits: 'pixels',
       }),
+      new ScatterplotLayer<SiteExistant>({
+        id: 'sites-existants', data: SITES.liste, visible: sites, pickable: sites,
+        getPosition: (d) => [d.lon, d.lat], getRadius: 3.2, radiusUnits: 'pixels',
+        getFillColor: (d) => (d.coop ? [...C.ink, 215] as [number, number, number, number] : [255, 255, 255, 235]), stroked: true,
+        getLineColor: [...C.ink, 200] as [number, number, number, number], getLineWidth: 1.1, lineWidthUnits: 'pixels',
+        onHover: (info) => onHover(info.object ? { kind: 'site', s: info.object as SiteExistant } : null),
+        // Le clic place le site de collecte sur l'établissement, sans passer par le clic de la carte.
+        onClick: (info) => { const d = info.object as SiteExistant | undefined; if (d && pickRef.current) { pickRef.current([d.lon, d.lat]); return true; } return false; },
+      }),
       new ScatterplotLayer({
         id: 'site', data: [geo.site], visible: showParcels && !silo, getPosition: (d: [number, number]) => d,
         getRadius: 6, radiusUnits: 'pixels', getFillColor: C.ink, stroked: true,
         getLineColor: [255, 255, 255], getLineWidth: 3, lineWidthUnits: 'pixels',
       }),
     ];
-  }, [showParcels, franceMode, btYear, depLabels, price, year, selectKm, onHover, fontsReady, geo, season, focus, maillon, trucks, silo]);
+  }, [showParcels, franceMode, btYear, depLabels, price, year, selectKm, onHover, fontsReady, geo, season, focus, maillon, trucks, silo, sites]);
 
   // Couches animées, recalculées à chaque image de l'horloge.
   const animated = useMemo(() => {
@@ -357,6 +371,7 @@ export default function MapScene({
         viewState={viewState}
         onViewStateChange={({ viewState: v }) => setViewState({ ...(v as MapViewState), pitch: 0, bearing: 0 })}
         controller={{ dragRotate: false, touchRotate: false, doubleClickZoom: true }}
+        pickingRadius={5}
         layers={[...layers, ...animated]}
         onClick={(info) => { if (onPickSite && info.coordinate) onPickSite([info.coordinate[0], info.coordinate[1]]); }}
         getCursor={({ isHovering, isDragging }) => (isDragging ? 'grabbing' : onPickSite || isHovering ? 'crosshair' : 'grab')}

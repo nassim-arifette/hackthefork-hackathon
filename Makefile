@@ -20,6 +20,7 @@ export: data/backtest.json data/parcelles.json data/meteo_dept_cultures.csv
 	$(P) $(PY) 05_export.py
 	$(P) $(PY) 07_contrats.py
 	$(P) $(PY) 09_cultures.py
+	$(P) $(PY) 11_sites.py
 	$(P) $(PY) 06_lettre_llm.py
 
 # Suivi en saison (prototype) : lit environ 150 images Sentinel-2 en ligne, quelques minutes.
@@ -31,6 +32,11 @@ sentinel:
 maillon:
 	$(P) $(PY) 10_maillon.py
 
+# Sites existants de collecte de grains (Sirene) : API Recherche d'entreprises au premier passage,
+# puis relu depuis data_raw/sirene/. Lit les parcelles exportées et la zone du Maillon.
+sites:
+	$(P) $(PY) 11_sites.py
+
 app:
 	cd app && npm install && npm run build && npm run build:single
 
@@ -40,4 +46,4 @@ dev:
 test:
 	$(PY) -m pytest -q tests
 
-.PHONY: all export sentinel maillon app dev test
+.PHONY: all export sentinel maillon sites app dev test

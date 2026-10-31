@@ -6,7 +6,7 @@ import { Bowls, ContractsRow, Filiere, Gauge, HarvestBars, YearsIcons } from './
 import { Figure, Source } from './components/ui';
 import {
   backtest, bestSite, CHALLENGER, CODE_LABELS, CONTRATS, CULTURES, D77, DEP_NAMES, dec, FEATURE_LABELS, fmt, H, held, lettre, MAILLON, MARKET, meta,
-  parcels, pct, pctFine, PITCH, reliabilityAt, replay, SAISON, signedPct, siteGeo, SITE_SCENARIO, SUIVI, supplyCurve, targetParcels, thresholds,
+  NAF_LABELS, parcels, pct, pctFine, PITCH, reliabilityAt, replay, SAISON, signedPct, siteGeo, SITE_SCENARIO, SITES, SUIVI, supplyCurve, targetParcels, thresholds,
   truckTrips, type MaillonCat, type MaillonVersion, type ReplayYear, type Statut, type TruckTrip,
 } from './data';
 import { useTween } from './useTween';
@@ -79,6 +79,7 @@ const BT_ANNEES = [2020, 2021, 2022];
 const ASSUR70 = CONTRATS.assurance.niveaux.find((n) => n.seuil === 0.7)!;
 const FR_SORTED = [...(meta.france as { dep: string; nom: string; p_star: number }[])].sort((a, b) => a.p_star - b.p_star);
 const btC = (a: number) => (backtest.annees.find((y) => y.annee === a) as any).contrats as Record<string, number>;
+const frDate = (iso: string) => new Date(`${iso}T12:00:00`).toLocaleDateString('fr-FR');
 const MAX_2020_21 = Math.max(...[2020, 2021].flatMap((a) => Object.values(btC(a))));
 const FIXES_2022 = ['uneal_2023', 'natup_2023', 'proposition_2027'].map((k) => btC(2022)[k]);
 
@@ -151,6 +152,8 @@ export default function App() {
   // Site de collecte : déplaçable d'un clic sur la carte dans les annexes « Le prix » et « La proposition ».
   const [geo, setGeo] = useState(SITE_SCENARIO);
   const [best, setBest] = useState<{ volume: number; site: [number, number] } | null>(null);
+  // Site déplacé sur le meilleur établissement existant (Sirene) pour ce volume.
+  const [bestReal, setBestReal] = useState<{ key: 'pilote' | 'ambition'; site: [number, number] } | null>(null);
   const moveSite = useCallback((site: [number, number]) => setGeo(siteGeo(site)), []);
   const supply = useMemo(() => supplyCurve(geo), [geo]);
   const timers = useRef<number[]>([]);
@@ -335,7 +338,8 @@ export default function App() {
       <main className="map">
         <MapScene camera={mp.camera} radiusKm={mp.radiusKm} showParcels={mp.showParcels} franceMode={mp.franceMode} btYear={mp.btYear}
           depLabels={mp.depLabels} price={mp.price} year={legacy === 2 ? year : null} selectKm={mp.selectKm} onHover={setHover}
-          geo={legacy === 6 ? SITE_SCENARIO : geo} onPickSite={legacy === 1 || legacy === 4 ? (s) => { moveSite(s); setBest(null); } : undefined}
+          geo={legacy === 6 ? SITE_SCENARIO : geo} onPickSite={legacy === 1 || legacy === 4 ? (s) => { moveSite(s); setBest(null); setBestReal(null); } : undefined}
+          sites={legacy === 4 || legacy === 6}
           season={legacy === 5 ? seasonDay : null} focus={focus} maillon={legacy === 6 ? maillonV : null}
           silo={mp.silo} trucks={mp.trucks} boats={mp.boats} onDelivered={onDelivered} />
         <div className="map-caption">
@@ -393,6 +397,8 @@ export default function App() {
               <li><i className="sw wheat-dim" />Autre culture</li>
               <li><i className="sw known" />Carré connu du collecteur</li>
               <li><i className="sw site" />Site de collecte fictif</li>
+              <li><i className="sw coop" />Coopérative existante</li>
+              <li><i className="sw negoce" />Négociant existant</li>
             </ul>
           ) : (
             <ul>
@@ -401,10 +407,12 @@ export default function App() {
               {legacy === 2 && <li><i className="sw fail" />Contrat non tenu</li>}
               <li><i className="sw slate" />Lentille déjà cultivée</li>
               <li><i className="sw site" />{geo === SITE_SCENARIO ? 'Site de collecte fictif' : 'Site de collecte déplacé'}</li>
+              {legacy === 4 && <li><i className="sw coop" />Coopérative existante</li>}
+              {legacy === 4 && <li><i className="sw negoce" />Négociant existant</li>}
             </ul>
           )}
         </div>
-        {(legacy === 1 || legacy === 4) && <p className="map-hint">Cliquez sur la carte pour déplacer le site de collecte</p>}
+        {(legacy === 1 || legacy === 4) && <p className="map-hint">{legacy === 4 ? 'Cliquez sur la carte, ou sur un site existant, pour y placer la collecte' : 'Cliquez sur la carte pour déplacer le site de collecte'}</p>}
         {hover && (
           <div className="map-tip">
             {hover.kind === 'dep' ? (
@@ -415,6 +423,12 @@ export default function App() {
                   : hover.pstarMode
                     ? <><b>{hover.name}</b>Non classé : moins de 50 ha de lentilles, ou rendement non mesuré</>
                     : <><b>{hover.name}</b>{fmt(hover.surface)} ha de lentilles en 2025</>
+            ) : hover.kind === 'site' ? (
+              <>
+                <b>{hover.s.entreprise}</b>
+                {hover.s.commune}, {hover.s.coop ? 'coopérative' : 'négociant'} ({NAF_LABELS[hover.s.naf] ?? hover.s.naf}).
+                {legacy !== 6 && <> Pour {fmt(VOLUME)}&nbsp;t, parcelles de blé à {dec(hover.s.km[volumeKey], 1)} km en moyenne. Cliquez pour y placer la collecte.</>}
+              </>
             ) : hover.kind === 'maillon' ? (
               <>
                 <b>{CODE_LABELS[hover.p.code] ?? `Autre culture (code ${hover.p.code})`}, {dec(hover.p.surface)} ha</b>
@@ -764,19 +778,24 @@ export default function App() {
               </div>
               <div className="block">
                 <h3>Où placer le site de collecte ?</h3>
-                <p className="body small">Cliquez sur la carte pour déplacer le site : les parcelles retenues, leurs distances et le coût de collecte se recalculent.</p>
+                <p className="body small">Cliquez sur la carte, ou sur un établissement existant, pour déplacer le site : les parcelles retenues, leurs distances et le coût de collecte se recalculent.</p>
                 <div className="figures two">
                   <Figure value={dec(target.meanKm, 1)} unit="km" label={`distance moyenne des parcelles du contrat de ${fmt(VOLUME)}\u00a0t`} />
                   <Figure value={dec(H.forfait + H.kappa * target.meanKm, 1)} unit="€/t" label="coût moyen de collecte par tonne acceptée" />
                 </div>
                 <div className="actions">
                   <button className="link" onClick={findBest} disabled={busy}>{busy ? 'Calcul…' : `Meilleur emplacement pour ${fmt(VOLUME)}\u00a0t`}</button>
-                  {geo !== SITE_SCENARIO && <button className="link" onClick={() => { setGeo(SITE_SCENARIO); setBest(null); }}>Revenir au site du scénario</button>}
+                  <button className="link" onClick={() => { const b = SITES.liste[SITES.meilleur[volumeKey].index]; const s: [number, number] = [b.lon, b.lat]; moveSite(s); setBest(null); setBestReal({ key: volumeKey, site: s }); }}>{`Meilleur site existant pour ${fmt(VOLUME)}\u00a0t`}</button>
+                  {geo !== SITE_SCENARIO && <button className="link" onClick={() => { setGeo(SITE_SCENARIO); setBest(null); setBestReal(null); }}>Revenir au site du scénario</button>}
                 </div>
                 {best && best.volume === VOLUME && geo.site === best.site && (
                   <p className="body small">Point de la grille qui minimise la distance moyenne pour {fmt(VOLUME)}&nbsp;t : {dec(H.kappa * (targetScenario.meanKm - target.meanKm), 1)} €/t de collecte en moins qu’au site du scénario. Le gain reste faible face à un prix garanti de plus de 1 000 €/t : le site se choisit d’abord pour la logistique.</p>
                 )}
-                <Source k="suppose">Forfait de {fmt(H.forfait)} €/t et {dec(H.kappa, 2)} €/t/km ; distance routière approchée par la distance à vol d’oiseau × {dec(H.detour, 1)}. Emplacements candidats sur une grille, à confronter aux sites existants (silos, zones d’activité).</Source>
+                {bestReal && bestReal.key === volumeKey && geo.site === bestReal.site && (
+                  <p className="body small">Établissement existant le plus proche des parcelles de blé pour {fmt(VOLUME)}&nbsp;t : {SITES.meilleur[volumeKey].entreprise}, à {SITES.meilleur[volumeKey].commune}. La collecte y coûte {dec(Math.abs(H.kappa * (targetScenario.meanKm - target.meanKm)), 1)} €/t {targetScenario.meanKm >= target.meanKm ? 'de moins' : 'de plus'} qu’au site du scénario. Le contrat peut s’appuyer sur un établissement qui travaille déjà le grain ; sa capacité reste à vérifier.</p>
+                )}
+                <p className="body small">{fmt(SITES.n)} établissements de collecte ou de stockage de grains, dont {fmt(SITES.nCoop)} de coopératives, sont actifs à moins de 15&nbsp;km des parcelles franciliennes (points sur la carte).</p>
+                <Source k="suppose">Forfait de {fmt(H.forfait)} €/t et {dec(H.kappa, 2)} €/t/km ; distance routière approchée par la distance à vol d’oiseau × {dec(H.detour, 1)}. Emplacements candidats : une grille de points, et les établissements de la base Sirene (Insee, extraction du {frDate(SITES.date)}) des entreprises du commerce de grains (NAF 46.21Z), codés commerce de grains ou entreposage. Sirene ne distingue pas un silo d’un bureau : capacités à vérifier.</Source>
               </div>
               <div className="block">
                 <h3>Impact du contrat</h3>
@@ -978,6 +997,11 @@ export default function App() {
                 <h3>Ce qu’il voit, ce qu’il manque</h3>
                 <p className="body small">{VOIT}</p>
                 <Source k="mesure">Sentinel-2 L2A (Copernicus), catalogue Earth Search : {fmt(M24.n_images)} dates utiles en {MAILLON.apprentissage}, {fmt(M25.n_images)} en {MAILLON.campagne}, du 1er avril au 31 juillet ; pixels classés végétation ou sol nu, parcelle réduite de 10 m. Étiquettes : RPG {MAILLON.apprentissage} et {MAILLON.campagne} (IGN), groupes protéagineux et légumineuses à grains ; libellés de la notice Telepac 2025.</Source>
+              </div>
+              <div className="block">
+                <h3>Et pour la collecte ?</h3>
+                <p className="body small">Les {fmt(SITES.maillon.n_parcelles)} parcelles de légumineuses déclarées en {MAILLON.campagne} dans la zone ({fmt(SITES.maillon.surface_ha)} ha) sont en moyenne à {dec(SITES.maillon.km_moyen_pondere_surface, 1)} km par la route d’un établissement de collecte de grains existant, la plus éloignée à {dec(SITES.maillon.km_max, 1)} km. Le repérage dit où chercher les tonnes, et quel site les collecterait.</p>
+                <Source k="mesure">RPG {MAILLON.campagne} (IGN) et base Sirene (Insee, extraction du {frDate(SITES.date)}) : établissements des entreprises du commerce de grains, codés commerce de grains ou entreposage. Distance routière approchée : vol d’oiseau × {dec(H.detour, 1)}, moyenne pondérée par la surface.</Source>
               </div>
             </>
           )}

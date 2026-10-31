@@ -92,6 +92,7 @@ a:hover { text-decoration-color: currentColor; }
 .sw.known { background: linear-gradient(135deg, #9db8a6 50%, var(--rule-2) 50%); }
 .sw.ink { background: var(--ink); } .sw.land { background: var(--land); box-shadow: inset 0 0 0 1px var(--rule-2); }
 .sw.pstar-pale { background: rgb(188, 206, 194); }
+.sw.coop { width: 9px; height: 9px; border-radius: 50%; background: var(--ink); } .sw.negoce { width: 9px; height: 9px; border-radius: 50%; background: #fff; box-shadow: inset 0 0 0 1.5px var(--ink); }
 .sw.truck { width: 14px; border-radius: 2px; background: linear-gradient(90deg, var(--lentil) 64%, var(--ink) 64%); }
 .map-tip {
   position: absolute; left: var(--s5); bottom: 76px; max-width: 320px; pointer-events: none;
