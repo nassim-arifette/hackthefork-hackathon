@@ -14,6 +14,8 @@
 
 **Recherche mentor réalisée :** éligibilité de la lentille alimentaire confirmée, montant PAC remis dans sa campagne, références de charges et d'effet précédent trouvées, exemples de contrats réels, coefficients d'impact et choix d'usage RPG / SAA documentés dans [QUESTIONS.md](QUESTIONS.md).
 
+**Revue filière des autres cultures réalisée :** guides Terres Inovia consultés et hypothèses tranchées dans [REVUE_FILIERE_CULTURES.md](REVUE_FILIERE_CULTURES.md) : charges pois chiche 500 €/ha, haricot sec irrigué 1 000, pois 450 et féverole 400. Les prix sont qualifiés par leur nature : paiement rapporté du pois chiche, scénario haricot et référentiel de plan d'entreprise pour pois/féverole. Les sensibilités figurent dans [data/cultures.yaml](../data/cultures.yaml) ; les exports ont été recalculés avec `09_cultures.py` et la lentille retrouve exactement ses résultats précédents.
+
 **Pack de simulation disponible :** [contrat public reconstitué et contrat synthétique](CONTRAT_SIMULATION.md), [partenaires ciblés et proposition 300 t](PILOTE_300T.md), [140 lots fictifs, sources publiques et comparateur reproductible](../data/pilote_300t/README.md). Il permet de tester les paiements et coûts des contrats. Ses barèmes sont branchés sur le moteur : protection face au blé et coût moyen dans l'application (étapes « Le prix » et « Le contrat »).
 
 **Proposition centrale, implémentée le 31/10 :** charges blé 700 €/ha, lentille 500 €/ha ; aide 105 €/ha indicative pour 2026 ; bénéfice de rotation 150 €/ha ; prix payé sur les tonnes acceptées au tri (10 % refusés) ; pilote **300 t nettes alimentaires** et ambition de bassin 5 000 t. Le jeu synthétique reste hors apprentissage et hors backtest.
@@ -23,6 +25,8 @@
 ### 1. Mettre les choix documentés dans le moteur
 
 - [x] Répondre aux questions agro par des sources : lentille éligible, 105 €/ha indicatifs pour 2026 et 122 €/ha définitifs pour 2025 ; charges et rotation argumentées.
+- [x] Revoir les hypothèses des quatre autres légumineuses : références de charges, prix et budget d'irrigation du haricot documentés ; scénarios centraux et sensibilités décidés. Voir [REVUE_FILIERE_CULTURES.md](REVUE_FILIERE_CULTURES.md).
+- [x] Recalculer les exports et synchroniser résultats, pitch et interface après cette revue : P\* haricot 2 185 €/t, pois 427 €/t en Seine-et-Marne ; sortie lentille inchangée.
 - [x] Fournir un barème public NatUp 2023–2024 reconstitué, un contrat synthétique complet et des paramètres JSON. Voir [CONTRAT_SIMULATION.md](CONTRAT_SIMULATION.md).
 - [x] Fournir un historique fictif 2019–2025 et son générateur : masse brute/nette, qualité, refus, paiements et coûts par acteur. Références réelles séparées dans [data/pilote_300t](../data/pilote_300t/README.md).
 - [x] Brancher ces barèmes sur les scénarios du moteur et sur le backtest ; les lots fictifs restent hors apprentissage et backtest Agreste.
@@ -226,4 +230,4 @@ Le volume d'images, les nuages et le prétraitement sont les points durs. Pour t
 
 ## 7. Décisions de mentor et sources
 
-Les charges, la rotation, les aides, les références de contrats, les volumes et les coefficients d'impact sont expliqués et sourcés dans [QUESTIONS.md](QUESTIONS.md). Les références Sentinel et RPG sont liées dans les sections ci-dessus. Le registre documentaire commun [SOURCES.md](SOURCES.md) devra reprendre ces références dès leur intégration dans le deck ou l'interface.
+Les charges, la rotation, les aides, les références de contrats, les volumes et les coefficients d'impact sont expliqués et sourcés dans [QUESTIONS.md](QUESTIONS.md). Les décisions propres au pois chiche, au haricot, au pois et à la féverole figurent dans [REVUE_FILIERE_CULTURES.md](REVUE_FILIERE_CULTURES.md) et sont enregistrées dans [SOURCES.md](SOURCES.md). Les références Sentinel et RPG sont liées dans les sections ci-dessus. Le registre documentaire commun doit rester synchronisé avec le deck et l'interface.

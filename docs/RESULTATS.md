@@ -206,25 +206,25 @@ Les seuils de statut (−0,05 et −0,10 d'écart à la médiane du groupe) sont
 
 ## 9. Le même moteur sur d'autres légumineuses
 
-`pipeline/09_cultures.py` applique le même calcul au pois chiche, au haricot sec, au pois protéagineux et à la féverole : modèle quantile M1 appris sur les séries Agreste de chaque culture et la météo de ses départements, même modèle du blé que la lentille, mêmes 20 000 années. La lentille passe par le même chemin et retrouve exactement ses chiffres (1 567 €/t, tranches 1 635 / 750 / 650, 87 % en backtest). Hypothèses propres à chaque culture : `data/cultures.yaml`.
+`pipeline/09_cultures.py` applique le même calcul au pois chiche, au haricot sec, au pois protéagineux et à la féverole : modèle quantile M1 appris sur les séries Agreste de chaque culture et la météo de ses départements, même modèle du blé que la lentille, mêmes 20 000 années. La lentille passe par le même chemin et retrouve exactement ses chiffres (1 567 €/t, tranches 1 635 / 750 / 650, 87 % en backtest). Hypothèses propres à chaque culture : `data/cultures.yaml`, actualisées après la [revue filière du 31/10](REVUE_FILIERE_CULTURES.md), puis exports recalculés. Charges centrales : pois chiche 500, haricot sec irrigué 1 000, pois 450 et féverole 400 €/ha.
 
 | Culture | Séries (couples) | Variabilité nationale | Rendement en Île-de-France | P\* Seine-et-Marne | Contrats tenus, prix fixe | Contrats tenus, indexé sur le blé |
 |---|---|---|---|---|---|---|
 | Lentille | 24 (294) | 0,20 | 17,5 q/ha, voisins | 1 567 €/t | 87 % | 87 % |
 | Pois chiche | 18 (200) | 0,11 | 16,6 q/ha, voisins | 1 064 €/t | 70 % | 83 % |
-| Haricot sec | 13 (156) | 0,10 | 19,1 q/ha, voisins | 1 779 €/t | 70 % | 86 % |
-| Pois protéagineux | 83 (1 161) | 0,15 | 38,7 q/ha, mesuré | 409 €/t | 65 % | 80 % |
+| Haricot sec | 13 (156) | 0,10 | 19,1 q/ha, voisins | 2 185 €/t | 72 % | 87 % |
+| Pois protéagineux | 83 (1 161) | 0,15 | 38,7 q/ha, mesuré | 427 €/t | 66 % | 82 % |
 | Féverole | 69 (1 006) | 0,23 | 33,6 q/ha, mesuré | 462 €/t | 68 % | 82 % |
 
-Backtest 2019–2025 sur les départements producteurs : 133, 100, 71, 493 et 446 cas. Le contrat indexé fixe le plancher à m\* fois le prix du blé de la récolte, m\* calibré sur les seules années passées ; pour 2026 en Seine-et-Marne, m\* vaut 7,44 (lentille), 5,03 (pois chiche), 8,55 (haricot), 1,90 (pois) et 2,17 (féverole).
+Backtest 2019–2025 sur les départements producteurs : 133, 100, 71, 493 et 446 cas. Le contrat indexé fixe le plancher à m\* fois le prix du blé de la récolte, m\* calibré sur les seules années passées ; pour 2026 en Seine-et-Marne, m\* vaut 7,44 (lentille), 5,03 (pois chiche), 10,55 (haricot), 1,99 (pois) et 2,17 (féverole).
 
 **Lecture :**
 
-- **Deux familles de risque.** Pour la lentille, le risque vient du rendement : le prix fixe tient 87 % des contrats et l'indexation n'apporte rien. Pour les quatre autres cultures, moins variables, il vient surtout du prix du blé : le prix fixe cède en 2021 et 2022 (pois : 17 % puis 7 % de contrats tenus ; féverole : 37 % puis 2 %), alors que le plancher indexé remonte à 80–86 %. Les intervalles de rendement restent bien calibrés (couverture de 76 à 90 %) : c'est le prix du blé qui fait céder le contrat.
-- **Le pois chiche demande un plancher d'un tiers plus bas que la lentille** (1 064 contre 1 567 €/t), à rendement comparable, parce que son rendement varie deux fois moins.
-- **Le pois et la féverole restent loin du blé francilien** : 409 et 462 €/t pour 8 années sur 10, contre 200 à 260 €/t de référence (2,9 et 2,3 années sur 10 à la référence). C'est cohérent avec leur recul dans les assolements.
-- **Le haricot sec** est le plus cher (1 779 €/t), mais ses charges sont supposées faute de référence publique : chiffre à reprendre avec une filière.
-- Le barème par tranches, mis à l'échelle du rendement de chaque culture, coûte de 8 à 21 % de moins que le prix unique à protection égale.
+- **L'indexation améliore le backtest des quatre autres cultures.** Le prix fixe tient 66–72 % des contrats, contre 82–87 % pour le plancher indexé. Pour la lentille, les deux taux s'arrondissent à 87 %. Les échecs du prix fixe se concentrent notamment en 2021–2022 (pois : 18 % puis 7 % de contrats tenus ; féverole : 37 % puis 2 %), ce qui motive le transfert du risque de prix du blé à l'acheteur. Ce constat ne classe pas toutes les cultures comme moins variables que la lentille : le coefficient national de la féverole est plus élevé.
+- **Le pois chiche demande un plancher d'un tiers plus bas que la lentille** (1 064 contre 1 567 €/t), avec un rendement francilien emprunté comparable et une variabilité nationale plus faible. À 610 €/t, milieu du prix payé rapporté pour la filière Cavac standard 2025, il bat le blé dans 27,2 % des scénarios franciliens.
+- **Le pois et la féverole restent loin du blé francilien** : 427 et 462 €/t pour 8 années sur 10, contre 200 à 260 €/t dans le référentiel de plan d'entreprise CRIT 2025. Au milieu de cette plage, 230 €/t, ils battent le blé dans 24,0 % et 23,4 % des scénarios. Ces fréquences sont des sorties du modèle, pas des statistiques nationales de rentabilité.
+- **Le haricot sec irrigué** atteint 2 185 €/t avec 1 000 €/ha de charges, contre 1 779 €/t avec 700 €/ha. Le budget inclut 300 €/ha d'eau et d'énergie ; les rendements restent ceux des séries Agreste, sans distinguer l'irrigation. Au prix de scénario de 1 200 €/t, il bat le blé dans 58,9 % des simulations. Le repère administratif à 1 188 €/t qui étaye ce choix n'est pas une offre d'achat.
+- Le barème par tranches, mis à l'échelle du rendement de chaque culture, coûte de 8 à 22 % de moins que le prix unique à protection égale.
 
 ## 10. Ce que ça veut dire
 
@@ -241,3 +241,4 @@ Backtest 2019–2025 sur les départements producteurs : 133, 100, 71, 493 et 44
 - Version 2 (prix du blé mesuré et rééchantillonné, charges et aide sourcées) : 82 %, 1 435 €/t.
 - Version 3 (30/10, séries estimées ensemble regroupées) : 86 %, 1 622 €/t, avec un intervalle de confiance sur P\*.
 - Version 4, actuelle (31/10, hypothèses économiques revues, paiement sur les tonnes acceptées au tri, forfait de collecte, comparaison des contrats) : 87 %, 1 567 €/t. Le modèle et le protocole sont inchangés ; les hypothèses viennent de la revue documentée de [QUESTIONS.md](QUESTIONS.md), fixées avant le recalcul. Avec les hypothèses de la version 3, le pipeline actuel redonne 1 622 €/t.
+- Revue des autres cultures (31/10) : haricot 700 → 1 000 €/ha et pois 400 → 450 €/ha, prix de référence et provenances complétés. Recalcul de `09_cultures.py` : P\* haricot 1 779 → 2 185 €/t, pois 409 → 427 €/t. La totalité de l'objet lentille exporté est identique à la version précédente.

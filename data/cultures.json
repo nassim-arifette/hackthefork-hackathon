@@ -1291,9 +1291,13 @@
    "hypotheses": {
     "charges_eur_ha": {
      "valeur": 500,
-     "etiquette": "source",
-     "source": "charges opérationnelles le plus souvent de 400 à 500 €/ha, désherbage mécanique compris (guide de culture pois chiche Terres Inovia 2026) ; haut de fourchette retenu",
+     "etiquette": "suppose",
+     "source": "500 €/ha retenus à partir du budget conventionnel de 416 à 583 €/ha et de la matrice à 480 €/ha du guide Terres Inovia 2026, p. 4 ; le désherbage mécanique du tableau concerne la colonne bio",
      "url": "https://www.terresinovia.fr/sites/default/files/2026-04/guide_culture_pois-chiche_2026_terresinovia.pdf",
+     "reference_publiee_eur_ha": [
+      416,
+      583
+     ],
      "sensibilite": [
       400,
       500,
@@ -1302,24 +1306,42 @@
     },
     "aide_eur_ha": {
      "valeur": 105,
-     "etiquette": "suppose",
-     "source": "même aide couplée que la lentille : le pois chiche figure parmi les légumineuses à graines éligibles (liste des cultures 2023, DDT des Hautes-Pyrénées) ; montant 2026 indicatif",
-     "url": "https://www.hautes-pyrenees.gouv.fr/contenu/telechargement/13616/94119/file/20230307_liste_des_cultures_aides_couplees_2023.pdf"
+     "etiquette": "source",
+     "source": "aide couplée aux légumineuses à graines, montant indicatif de la campagne 2026 ; pois chiche éligible, notice Telepac 2026, p. 4",
+     "url": "https://www.telepac.agriculture.gouv.fr/telepac/pdf/tas/2026/Dossier-PAC-2026_notice_aides-couplees.pdf"
     },
     "rotation_eur_ha": {
      "valeur": 150,
-     "etiquette": "source",
-     "source": "économie sur la culture suivante jusqu'à 150 €/ha (guide de culture pois chiche Terres Inovia 2026)",
-     "url": "https://www.terresinovia.fr/sites/default/files/2026-04/guide_culture_pois-chiche_2026_terresinovia.pdf"
+     "etiquette": "suppose",
+     "source": "150 €/ha retenus pour le scénario avec rotation ; le guide Terres Inovia 2026 annonce un avantage allant jusqu'à 150 €/ha, pas une moyenne locale mesurée",
+     "url": "https://www.terresinovia.fr/sites/default/files/2026-04/guide_culture_pois-chiche_2026_terresinovia.pdf",
+     "sensibilite": [
+      0,
+      100,
+      150
+     ]
     },
     "part_refusee": {
      "valeur": 0.1,
      "etiquette": "suppose",
-     "source": "même hypothèse que la lentille : graines pour l'alimentation humaine, triées"
+     "source": "10 % de la masse brute non valorisés au prix garanti après tri ; scénario, pas fréquence de lots entièrement rejetés ; recette de déclassement non modélisée"
     },
-    "prix_reference": null
+    "prix_reference": {
+     "valeur": [
+      600,
+      620
+     ],
+     "etiquette": "source",
+     "source": "prix payé pour le pois chiche standard de la récolte 2025, témoignage d'un producteur Pulseo/Cavac publié par Réussir le 27/06/2026 ; référence de cette filière, pas cotation nationale",
+     "url": "https://www.reussir.fr/formats/temoignages/pois-chiche-label-rouge-la-culture-degage-la-meilleure-marge-de-mon",
+     "campagne": 2025,
+     "type_reference": "prix_paye_rapporte"
+    }
    },
-   "reference": null,
+   "reference": [
+    600,
+    620
+   ],
    "p_star": {
     "77": 1064,
     "78": 1011,
@@ -1329,7 +1351,7 @@
    "p_equilibre_median_77": 767,
    "rendement_moyen_77_tha": 1.55,
    "rendement_q10_77_tha": 1.1,
-   "fiabilite_reference": null,
+   "fiabilite_reference": 0.272,
    "fiabilite_par_prix": [
     {
      "prix": 310,
@@ -2214,1428 +2236,1762 @@
    "origine_niveau": "emprunté aux départements voisins",
    "hypotheses": {
     "charges_eur_ha": {
-     "valeur": 700,
+     "valeur": 1000,
      "etiquette": "suppose",
-     "source": "aucune référence publique trouvée le 31/10 ; culture souvent irriguée, charges supposées au niveau de celles du blé",
+     "source": "budget reconstruit pour du haricot sec conventionnel irrigué : 700 €/ha d'intrants et 300 €/ha d'eau/énergie. Repères : semences 340 €/ha en Limagne (2019) ; semences 500 et irrigation 450 €/ha dans un cas flageolet bio Nouvelle-Aquitaine, non transposé directement",
+     "url": "https://www.pleinchamp.com/actualite/grandes-cultures~comment-produire-du-haricot-sec-en-limagne",
+     "url_complementaire": "https://www.bionouvelleaquitaine.com/wp-content/uploads/2023/02/Flageolet.pdf",
+     "postes_supposes_eur_ha": {
+      "semences": 400,
+      "fertilisation": 150,
+      "protection": 150,
+      "eau_energie_irrigation": 300
+     },
      "sensibilite": [
-      500,
       700,
-      900
-     ]
+      1000,
+      1300
+     ],
+     "note_rendement": "les séries Agreste du moteur ne distinguent pas irrigué et non irrigué ; une variation de charges seule ne simule pas la réponse du rendement à l'eau"
     },
     "aide_eur_ha": {
      "valeur": 105,
-     "etiquette": "suppose",
-     "source": "« pois et haricots secs » figurent parmi les légumineuses à graines éligibles (liste des cultures 2023, DDT des Hautes-Pyrénées) ; montant 2026 indicatif",
-     "url": "https://www.hautes-pyrenees.gouv.fr/contenu/telechargement/13616/94119/file/20230307_liste_des_cultures_aides_couplees_2023.pdf"
+     "etiquette": "source",
+     "source": "aide couplée aux légumineuses à graines, montant indicatif de la campagne 2026 ; haricots secs éligibles, notice Telepac 2026, p. 4",
+     "url": "https://www.telepac.agriculture.gouv.fr/telepac/pdf/tas/2026/Dossier-PAC-2026_notice_aides-couplees.pdf"
     },
     "rotation_eur_ha": {
      "valeur": 150,
      "etiquette": "suppose",
-     "source": "même hypothèse que la lentille"
+     "source": "150 €/ha retenus pour le scénario avec rotation, même choix que la lentille ; pas une mesure locale du précédent haricot",
+     "sensibilite": [
+      0,
+      100,
+      150
+     ]
     },
     "part_refusee": {
      "valeur": 0.1,
      "etiquette": "suppose",
-     "source": "même hypothèse que la lentille : graines pour l'alimentation humaine, triées"
+     "source": "10 % de la masse brute non valorisés au prix garanti après tri ; scénario, pas fréquence de lots entièrement rejetés ; recette de déclassement non modélisée"
     },
-    "prix_reference": null
+    "prix_reference": {
+     "valeur": [
+      900,
+      1500
+     ],
+     "etiquette": "suppose",
+     "source": "scénario centré sur 1 200 €/t ; repère administratif ISN sécheresse 2025 en Indre-et-Loire : 1 188 €/t en conventionnel, publié en 2026. Ce barème d'indemnisation n'est pas une cotation ni une offre d'achat ; contrats historiques Limagne 2019 : blanc 830, rouge 990 €/t",
+     "url": "https://www.indre-et-loire.gouv.fr/Actions-de-l-Etat/Agriculture-foret-et-developpement-rural/Agriculture/Les-pertes-aides-de-crises-et-indemnisations/Secheresse-de-mai-a-aout-2025",
+     "type_reference": "scenario"
+    }
    },
-   "reference": null,
+   "reference": [
+    900,
+    1500
+   ],
    "p_star": {
-    "77": 1779,
-    "78": 1669,
-    "91": 1680,
-    "95": 1791
+    "77": 2185,
+    "78": 2060,
+    "91": 2075,
+    "95": 2181
    },
-   "p_equilibre_median_77": 815,
+   "p_equilibre_median_77": 1005,
    "rendement_moyen_77_tha": 1.8,
    "rendement_q10_77_tha": 0.52,
-   "fiabilite_reference": null,
+   "fiabilite_reference": 0.589,
    "fiabilite_par_prix": [
     {
-     "prix": 530,
-     "fiabilite": 0.241
-    },
-    {
-     "prix": 540,
-     "fiabilite": 0.254
-    },
-    {
-     "prix": 550,
-     "fiabilite": 0.268
-    },
-    {
-     "prix": 560,
-     "fiabilite": 0.281
-    },
-    {
-     "prix": 570,
-     "fiabilite": 0.293
-    },
-    {
-     "prix": 580,
-     "fiabilite": 0.304
-    },
-    {
-     "prix": 590,
-     "fiabilite": 0.316
-    },
-    {
-     "prix": 600,
-     "fiabilite": 0.328
-    },
-    {
-     "prix": 610,
-     "fiabilite": 0.338
-    },
-    {
-     "prix": 620,
-     "fiabilite": 0.347
-    },
-    {
-     "prix": 630,
-     "fiabilite": 0.359
-    },
-    {
-     "prix": 640,
-     "fiabilite": 0.369
-    },
-    {
      "prix": 650,
-     "fiabilite": 0.378
+     "fiabilite": 0.231
     },
     {
      "prix": 660,
-     "fiabilite": 0.386
+     "fiabilite": 0.242
     },
     {
      "prix": 670,
-     "fiabilite": 0.394
+     "fiabilite": 0.252
     },
     {
      "prix": 680,
-     "fiabilite": 0.403
+     "fiabilite": 0.265
     },
     {
      "prix": 690,
-     "fiabilite": 0.412
+     "fiabilite": 0.276
     },
     {
      "prix": 700,
-     "fiabilite": 0.42
+     "fiabilite": 0.286
     },
     {
      "prix": 710,
-     "fiabilite": 0.428
+     "fiabilite": 0.295
     },
     {
      "prix": 720,
-     "fiabilite": 0.435
+     "fiabilite": 0.305
     },
     {
      "prix": 730,
-     "fiabilite": 0.442
+     "fiabilite": 0.313
     },
     {
      "prix": 740,
-     "fiabilite": 0.45
+     "fiabilite": 0.323
     },
     {
      "prix": 750,
-     "fiabilite": 0.457
+     "fiabilite": 0.332
     },
     {
      "prix": 760,
-     "fiabilite": 0.464
+     "fiabilite": 0.341
     },
     {
      "prix": 770,
-     "fiabilite": 0.471
+     "fiabilite": 0.349
     },
     {
      "prix": 780,
-     "fiabilite": 0.478
+     "fiabilite": 0.358
     },
     {
      "prix": 790,
-     "fiabilite": 0.484
+     "fiabilite": 0.366
     },
     {
      "prix": 800,
-     "fiabilite": 0.49
+     "fiabilite": 0.373
     },
     {
      "prix": 810,
-     "fiabilite": 0.497
+     "fiabilite": 0.38
     },
     {
      "prix": 820,
-     "fiabilite": 0.503
+     "fiabilite": 0.387
     },
     {
      "prix": 830,
-     "fiabilite": 0.51
+     "fiabilite": 0.395
     },
     {
      "prix": 840,
-     "fiabilite": 0.516
+     "fiabilite": 0.401
     },
     {
      "prix": 850,
-     "fiabilite": 0.522
+     "fiabilite": 0.408
     },
     {
      "prix": 860,
-     "fiabilite": 0.527
+     "fiabilite": 0.415
     },
     {
      "prix": 870,
-     "fiabilite": 0.533
+     "fiabilite": 0.422
     },
     {
      "prix": 880,
-     "fiabilite": 0.539
+     "fiabilite": 0.428
     },
     {
      "prix": 890,
-     "fiabilite": 0.544
+     "fiabilite": 0.434
     },
     {
      "prix": 900,
-     "fiabilite": 0.549
+     "fiabilite": 0.441
     },
     {
      "prix": 910,
-     "fiabilite": 0.555
+     "fiabilite": 0.446
     },
     {
      "prix": 920,
-     "fiabilite": 0.56
+     "fiabilite": 0.452
     },
     {
      "prix": 930,
-     "fiabilite": 0.564
+     "fiabilite": 0.458
     },
     {
      "prix": 940,
-     "fiabilite": 0.569
+     "fiabilite": 0.464
     },
     {
      "prix": 950,
-     "fiabilite": 0.574
+     "fiabilite": 0.469
     },
     {
      "prix": 960,
-     "fiabilite": 0.579
+     "fiabilite": 0.476
     },
     {
      "prix": 970,
-     "fiabilite": 0.584
+     "fiabilite": 0.481
     },
     {
      "prix": 980,
-     "fiabilite": 0.589
+     "fiabilite": 0.486
     },
     {
      "prix": 990,
-     "fiabilite": 0.593
+     "fiabilite": 0.491
     },
     {
      "prix": 1000,
-     "fiabilite": 0.598
+     "fiabilite": 0.497
     },
     {
      "prix": 1010,
-     "fiabilite": 0.602
+     "fiabilite": 0.503
     },
     {
      "prix": 1020,
-     "fiabilite": 0.606
+     "fiabilite": 0.508
     },
     {
      "prix": 1030,
-     "fiabilite": 0.61
+     "fiabilite": 0.513
     },
     {
      "prix": 1040,
-     "fiabilite": 0.614
+     "fiabilite": 0.519
     },
     {
      "prix": 1050,
-     "fiabilite": 0.619
+     "fiabilite": 0.523
     },
     {
      "prix": 1060,
-     "fiabilite": 0.623
+     "fiabilite": 0.528
     },
     {
      "prix": 1070,
-     "fiabilite": 0.627
+     "fiabilite": 0.533
     },
     {
      "prix": 1080,
-     "fiabilite": 0.631
+     "fiabilite": 0.538
     },
     {
      "prix": 1090,
-     "fiabilite": 0.634
+     "fiabilite": 0.543
     },
     {
      "prix": 1100,
-     "fiabilite": 0.638
+     "fiabilite": 0.548
     },
     {
      "prix": 1110,
-     "fiabilite": 0.642
+     "fiabilite": 0.552
     },
     {
      "prix": 1120,
-     "fiabilite": 0.645
+     "fiabilite": 0.556
     },
     {
      "prix": 1130,
-     "fiabilite": 0.648
+     "fiabilite": 0.56
     },
     {
      "prix": 1140,
-     "fiabilite": 0.651
+     "fiabilite": 0.565
     },
     {
      "prix": 1150,
-     "fiabilite": 0.654
+     "fiabilite": 0.569
     },
     {
      "prix": 1160,
-     "fiabilite": 0.658
+     "fiabilite": 0.573
     },
     {
      "prix": 1170,
-     "fiabilite": 0.661
+     "fiabilite": 0.576
     },
     {
      "prix": 1180,
-     "fiabilite": 0.665
+     "fiabilite": 0.58
     },
     {
      "prix": 1190,
-     "fiabilite": 0.668
+     "fiabilite": 0.585
     },
     {
      "prix": 1200,
-     "fiabilite": 0.672
+     "fiabilite": 0.589
     },
     {
      "prix": 1210,
-     "fiabilite": 0.675
+     "fiabilite": 0.592
     },
     {
      "prix": 1220,
-     "fiabilite": 0.678
+     "fiabilite": 0.596
     },
     {
      "prix": 1230,
-     "fiabilite": 0.681
+     "fiabilite": 0.6
     },
     {
      "prix": 1240,
-     "fiabilite": 0.684
+     "fiabilite": 0.603
     },
     {
      "prix": 1250,
-     "fiabilite": 0.687
+     "fiabilite": 0.607
     },
     {
      "prix": 1260,
-     "fiabilite": 0.69
+     "fiabilite": 0.61
     },
     {
      "prix": 1270,
-     "fiabilite": 0.693
+     "fiabilite": 0.613
     },
     {
      "prix": 1280,
-     "fiabilite": 0.696
+     "fiabilite": 0.617
     },
     {
      "prix": 1290,
-     "fiabilite": 0.698
+     "fiabilite": 0.62
     },
     {
      "prix": 1300,
-     "fiabilite": 0.701
+     "fiabilite": 0.623
     },
     {
      "prix": 1310,
-     "fiabilite": 0.704
+     "fiabilite": 0.626
     },
     {
      "prix": 1320,
-     "fiabilite": 0.707
+     "fiabilite": 0.629
     },
     {
      "prix": 1330,
-     "fiabilite": 0.709
+     "fiabilite": 0.633
     },
     {
      "prix": 1340,
-     "fiabilite": 0.711
+     "fiabilite": 0.636
     },
     {
      "prix": 1350,
-     "fiabilite": 0.714
+     "fiabilite": 0.639
     },
     {
      "prix": 1360,
-     "fiabilite": 0.717
+     "fiabilite": 0.641
     },
     {
      "prix": 1370,
-     "fiabilite": 0.719
+     "fiabilite": 0.645
     },
     {
      "prix": 1380,
-     "fiabilite": 0.722
+     "fiabilite": 0.647
     },
     {
      "prix": 1390,
-     "fiabilite": 0.725
+     "fiabilite": 0.65
     },
     {
      "prix": 1400,
-     "fiabilite": 0.728
+     "fiabilite": 0.653
     },
     {
      "prix": 1410,
-     "fiabilite": 0.73
+     "fiabilite": 0.655
     },
     {
      "prix": 1420,
-     "fiabilite": 0.733
+     "fiabilite": 0.658
     },
     {
      "prix": 1430,
-     "fiabilite": 0.735
+     "fiabilite": 0.661
     },
     {
      "prix": 1440,
-     "fiabilite": 0.737
+     "fiabilite": 0.663
     },
     {
      "prix": 1450,
-     "fiabilite": 0.739
+     "fiabilite": 0.666
     },
     {
      "prix": 1460,
-     "fiabilite": 0.742
+     "fiabilite": 0.669
     },
     {
      "prix": 1470,
-     "fiabilite": 0.744
+     "fiabilite": 0.671
     },
     {
      "prix": 1480,
-     "fiabilite": 0.745
+     "fiabilite": 0.674
     },
     {
      "prix": 1490,
-     "fiabilite": 0.747
+     "fiabilite": 0.676
     },
     {
      "prix": 1500,
-     "fiabilite": 0.75
+     "fiabilite": 0.678
     },
     {
      "prix": 1510,
-     "fiabilite": 0.752
+     "fiabilite": 0.682
     },
     {
      "prix": 1520,
-     "fiabilite": 0.754
+     "fiabilite": 0.684
     },
     {
      "prix": 1530,
-     "fiabilite": 0.756
+     "fiabilite": 0.687
     },
     {
      "prix": 1540,
-     "fiabilite": 0.758
+     "fiabilite": 0.689
     },
     {
      "prix": 1550,
-     "fiabilite": 0.76
+     "fiabilite": 0.691
     },
     {
      "prix": 1560,
-     "fiabilite": 0.763
+     "fiabilite": 0.694
     },
     {
      "prix": 1570,
-     "fiabilite": 0.765
+     "fiabilite": 0.695
     },
     {
      "prix": 1580,
-     "fiabilite": 0.766
+     "fiabilite": 0.698
     },
     {
      "prix": 1590,
-     "fiabilite": 0.768
+     "fiabilite": 0.701
     },
     {
      "prix": 1600,
-     "fiabilite": 0.77
+     "fiabilite": 0.703
     },
     {
      "prix": 1610,
-     "fiabilite": 0.772
+     "fiabilite": 0.705
     },
     {
      "prix": 1620,
-     "fiabilite": 0.774
+     "fiabilite": 0.707
     },
     {
      "prix": 1630,
-     "fiabilite": 0.775
+     "fiabilite": 0.709
     },
     {
      "prix": 1640,
-     "fiabilite": 0.777
+     "fiabilite": 0.711
     },
     {
      "prix": 1650,
-     "fiabilite": 0.779
+     "fiabilite": 0.713
     },
     {
      "prix": 1660,
-     "fiabilite": 0.781
+     "fiabilite": 0.715
     },
     {
      "prix": 1670,
-     "fiabilite": 0.782
+     "fiabilite": 0.717
     },
     {
      "prix": 1680,
-     "fiabilite": 0.784
+     "fiabilite": 0.72
     },
     {
      "prix": 1690,
-     "fiabilite": 0.786
+     "fiabilite": 0.722
     },
     {
      "prix": 1700,
-     "fiabilite": 0.788
+     "fiabilite": 0.724
     },
     {
      "prix": 1710,
-     "fiabilite": 0.789
+     "fiabilite": 0.726
     },
     {
      "prix": 1720,
-     "fiabilite": 0.791
+     "fiabilite": 0.728
     },
     {
      "prix": 1730,
-     "fiabilite": 0.792
+     "fiabilite": 0.731
     },
     {
      "prix": 1740,
-     "fiabilite": 0.793
+     "fiabilite": 0.732
     },
     {
      "prix": 1750,
-     "fiabilite": 0.796
+     "fiabilite": 0.734
     },
     {
      "prix": 1760,
-     "fiabilite": 0.798
+     "fiabilite": 0.736
     },
     {
      "prix": 1770,
-     "fiabilite": 0.799
+     "fiabilite": 0.738
     },
     {
      "prix": 1780,
-     "fiabilite": 0.8
+     "fiabilite": 0.74
     },
     {
      "prix": 1790,
-     "fiabilite": 0.802
+     "fiabilite": 0.742
     },
     {
      "prix": 1800,
-     "fiabilite": 0.803
+     "fiabilite": 0.744
     },
     {
      "prix": 1810,
-     "fiabilite": 0.804
+     "fiabilite": 0.745
     },
     {
      "prix": 1820,
-     "fiabilite": 0.806
+     "fiabilite": 0.747
     },
     {
      "prix": 1830,
-     "fiabilite": 0.807
+     "fiabilite": 0.749
     },
     {
      "prix": 1840,
-     "fiabilite": 0.808
+     "fiabilite": 0.751
     },
     {
      "prix": 1850,
-     "fiabilite": 0.81
+     "fiabilite": 0.752
     },
     {
      "prix": 1860,
-     "fiabilite": 0.811
+     "fiabilite": 0.754
     },
     {
      "prix": 1870,
-     "fiabilite": 0.812
+     "fiabilite": 0.755
     },
     {
      "prix": 1880,
-     "fiabilite": 0.814
+     "fiabilite": 0.757
     },
     {
      "prix": 1890,
-     "fiabilite": 0.815
+     "fiabilite": 0.759
     },
     {
      "prix": 1900,
-     "fiabilite": 0.817
+     "fiabilite": 0.76
     },
     {
      "prix": 1910,
-     "fiabilite": 0.818
+     "fiabilite": 0.762
     },
     {
      "prix": 1920,
-     "fiabilite": 0.82
+     "fiabilite": 0.764
     },
     {
      "prix": 1930,
-     "fiabilite": 0.821
+     "fiabilite": 0.765
     },
     {
      "prix": 1940,
-     "fiabilite": 0.822
+     "fiabilite": 0.767
     },
     {
      "prix": 1950,
-     "fiabilite": 0.824
+     "fiabilite": 0.769
     },
     {
      "prix": 1960,
-     "fiabilite": 0.825
+     "fiabilite": 0.77
     },
     {
      "prix": 1970,
-     "fiabilite": 0.826
+     "fiabilite": 0.772
     },
     {
      "prix": 1980,
-     "fiabilite": 0.827
+     "fiabilite": 0.773
     },
     {
      "prix": 1990,
-     "fiabilite": 0.828
+     "fiabilite": 0.774
     },
     {
      "prix": 2000,
-     "fiabilite": 0.83
+     "fiabilite": 0.776
     },
     {
      "prix": 2010,
-     "fiabilite": 0.831
+     "fiabilite": 0.778
     },
     {
      "prix": 2020,
-     "fiabilite": 0.832
+     "fiabilite": 0.779
     },
     {
      "prix": 2030,
-     "fiabilite": 0.833
+     "fiabilite": 0.781
     },
     {
      "prix": 2040,
-     "fiabilite": 0.834
+     "fiabilite": 0.782
     },
     {
      "prix": 2050,
-     "fiabilite": 0.835
+     "fiabilite": 0.783
     },
     {
      "prix": 2060,
-     "fiabilite": 0.837
+     "fiabilite": 0.784
     },
     {
      "prix": 2070,
-     "fiabilite": 0.838
+     "fiabilite": 0.785
     },
     {
      "prix": 2080,
-     "fiabilite": 0.839
+     "fiabilite": 0.786
     },
     {
      "prix": 2090,
-     "fiabilite": 0.84
+     "fiabilite": 0.787
     },
     {
      "prix": 2100,
-     "fiabilite": 0.841
+     "fiabilite": 0.788
     },
     {
      "prix": 2110,
-     "fiabilite": 0.842
+     "fiabilite": 0.79
     },
     {
      "prix": 2120,
-     "fiabilite": 0.843
+     "fiabilite": 0.792
     },
     {
      "prix": 2130,
-     "fiabilite": 0.844
+     "fiabilite": 0.793
     },
     {
      "prix": 2140,
-     "fiabilite": 0.845
+     "fiabilite": 0.794
     },
     {
      "prix": 2150,
-     "fiabilite": 0.846
+     "fiabilite": 0.796
     },
     {
      "prix": 2160,
-     "fiabilite": 0.848
+     "fiabilite": 0.797
     },
     {
      "prix": 2170,
-     "fiabilite": 0.848
+     "fiabilite": 0.798
     },
     {
      "prix": 2180,
-     "fiabilite": 0.849
+     "fiabilite": 0.799
     },
     {
      "prix": 2190,
-     "fiabilite": 0.85
+     "fiabilite": 0.8
     },
     {
      "prix": 2200,
-     "fiabilite": 0.851
+     "fiabilite": 0.802
     },
     {
      "prix": 2210,
-     "fiabilite": 0.852
+     "fiabilite": 0.803
     },
     {
      "prix": 2220,
-     "fiabilite": 0.853
+     "fiabilite": 0.804
     },
     {
      "prix": 2230,
-     "fiabilite": 0.854
+     "fiabilite": 0.806
     },
     {
      "prix": 2240,
-     "fiabilite": 0.855
+     "fiabilite": 0.807
     },
     {
      "prix": 2250,
-     "fiabilite": 0.856
+     "fiabilite": 0.808
     },
     {
      "prix": 2260,
-     "fiabilite": 0.856
+     "fiabilite": 0.809
     },
     {
      "prix": 2270,
-     "fiabilite": 0.857
+     "fiabilite": 0.81
     },
     {
      "prix": 2280,
-     "fiabilite": 0.858
+     "fiabilite": 0.811
     },
     {
      "prix": 2290,
-     "fiabilite": 0.859
+     "fiabilite": 0.813
     },
     {
      "prix": 2300,
-     "fiabilite": 0.86
+     "fiabilite": 0.814
     },
     {
      "prix": 2310,
-     "fiabilite": 0.86
+     "fiabilite": 0.814
     },
     {
      "prix": 2320,
-     "fiabilite": 0.861
+     "fiabilite": 0.815
     },
     {
      "prix": 2330,
-     "fiabilite": 0.862
+     "fiabilite": 0.816
     },
     {
      "prix": 2340,
-     "fiabilite": 0.863
+     "fiabilite": 0.818
     },
     {
      "prix": 2350,
-     "fiabilite": 0.864
+     "fiabilite": 0.819
     },
     {
      "prix": 2360,
-     "fiabilite": 0.865
+     "fiabilite": 0.82
     },
     {
      "prix": 2370,
-     "fiabilite": 0.865
+     "fiabilite": 0.821
     },
     {
      "prix": 2380,
-     "fiabilite": 0.866
+     "fiabilite": 0.822
     },
     {
      "prix": 2390,
-     "fiabilite": 0.867
+     "fiabilite": 0.823
     },
     {
      "prix": 2400,
-     "fiabilite": 0.868
+     "fiabilite": 0.825
     },
     {
      "prix": 2410,
-     "fiabilite": 0.869
+     "fiabilite": 0.826
     },
     {
      "prix": 2420,
-     "fiabilite": 0.87
+     "fiabilite": 0.827
     },
     {
      "prix": 2430,
-     "fiabilite": 0.871
+     "fiabilite": 0.828
     },
     {
      "prix": 2440,
-     "fiabilite": 0.871
+     "fiabilite": 0.829
     },
     {
      "prix": 2450,
-     "fiabilite": 0.872
+     "fiabilite": 0.83
     },
     {
      "prix": 2460,
-     "fiabilite": 0.873
+     "fiabilite": 0.831
     },
     {
      "prix": 2470,
-     "fiabilite": 0.874
+     "fiabilite": 0.832
     },
     {
      "prix": 2480,
-     "fiabilite": 0.874
+     "fiabilite": 0.833
     },
     {
      "prix": 2490,
-     "fiabilite": 0.875
+     "fiabilite": 0.834
     },
     {
      "prix": 2500,
-     "fiabilite": 0.875
+     "fiabilite": 0.835
     },
     {
      "prix": 2510,
-     "fiabilite": 0.876
+     "fiabilite": 0.836
     },
     {
      "prix": 2520,
-     "fiabilite": 0.876
+     "fiabilite": 0.837
     },
     {
      "prix": 2530,
-     "fiabilite": 0.877
+     "fiabilite": 0.838
     },
     {
      "prix": 2540,
-     "fiabilite": 0.878
+     "fiabilite": 0.839
     },
     {
      "prix": 2550,
-     "fiabilite": 0.879
+     "fiabilite": 0.839
     },
     {
      "prix": 2560,
-     "fiabilite": 0.879
+     "fiabilite": 0.84
     },
     {
      "prix": 2570,
-     "fiabilite": 0.879
+     "fiabilite": 0.841
     },
     {
      "prix": 2580,
-     "fiabilite": 0.88
+     "fiabilite": 0.842
     },
     {
      "prix": 2590,
-     "fiabilite": 0.881
+     "fiabilite": 0.843
     },
     {
      "prix": 2600,
-     "fiabilite": 0.881
+     "fiabilite": 0.844
     },
     {
      "prix": 2610,
-     "fiabilite": 0.882
+     "fiabilite": 0.845
     },
     {
      "prix": 2620,
-     "fiabilite": 0.883
+     "fiabilite": 0.846
     },
     {
      "prix": 2630,
-     "fiabilite": 0.884
+     "fiabilite": 0.847
     },
     {
      "prix": 2640,
-     "fiabilite": 0.884
+     "fiabilite": 0.847
     },
     {
      "prix": 2650,
-     "fiabilite": 0.885
+     "fiabilite": 0.848
     },
     {
      "prix": 2660,
-     "fiabilite": 0.885
+     "fiabilite": 0.849
     },
     {
      "prix": 2670,
-     "fiabilite": 0.886
+     "fiabilite": 0.849
     },
     {
      "prix": 2680,
-     "fiabilite": 0.887
+     "fiabilite": 0.85
     },
     {
      "prix": 2690,
-     "fiabilite": 0.887
+     "fiabilite": 0.851
     },
     {
      "prix": 2700,
-     "fiabilite": 0.888
+     "fiabilite": 0.851
     },
     {
      "prix": 2710,
-     "fiabilite": 0.888
+     "fiabilite": 0.852
     },
     {
      "prix": 2720,
-     "fiabilite": 0.889
+     "fiabilite": 0.853
     },
     {
      "prix": 2730,
-     "fiabilite": 0.889
+     "fiabilite": 0.854
     },
     {
      "prix": 2740,
-     "fiabilite": 0.89
+     "fiabilite": 0.855
     },
     {
      "prix": 2750,
-     "fiabilite": 0.891
+     "fiabilite": 0.856
     },
     {
      "prix": 2760,
-     "fiabilite": 0.891
+     "fiabilite": 0.856
     },
     {
      "prix": 2770,
-     "fiabilite": 0.892
+     "fiabilite": 0.857
     },
     {
      "prix": 2780,
-     "fiabilite": 0.893
+     "fiabilite": 0.858
     },
     {
      "prix": 2790,
-     "fiabilite": 0.893
+     "fiabilite": 0.858
     },
     {
      "prix": 2800,
-     "fiabilite": 0.894
+     "fiabilite": 0.858
     },
     {
      "prix": 2810,
-     "fiabilite": 0.895
+     "fiabilite": 0.859
     },
     {
      "prix": 2820,
-     "fiabilite": 0.895
+     "fiabilite": 0.86
     },
     {
      "prix": 2830,
-     "fiabilite": 0.896
+     "fiabilite": 0.861
     },
     {
      "prix": 2840,
-     "fiabilite": 0.897
+     "fiabilite": 0.861
     },
     {
      "prix": 2850,
-     "fiabilite": 0.897
+     "fiabilite": 0.862
     },
     {
      "prix": 2860,
-     "fiabilite": 0.898
+     "fiabilite": 0.863
     },
     {
      "prix": 2870,
-     "fiabilite": 0.898
+     "fiabilite": 0.863
     },
     {
      "prix": 2880,
-     "fiabilite": 0.898
+     "fiabilite": 0.864
     },
     {
      "prix": 2890,
-     "fiabilite": 0.899
+     "fiabilite": 0.865
     },
     {
      "prix": 2900,
-     "fiabilite": 0.9
+     "fiabilite": 0.865
     },
     {
      "prix": 2910,
-     "fiabilite": 0.9
+     "fiabilite": 0.866
     },
     {
      "prix": 2920,
-     "fiabilite": 0.901
+     "fiabilite": 0.867
     },
     {
      "prix": 2930,
-     "fiabilite": 0.901
+     "fiabilite": 0.867
     },
     {
      "prix": 2940,
-     "fiabilite": 0.902
+     "fiabilite": 0.868
     },
     {
      "prix": 2950,
-     "fiabilite": 0.902
+     "fiabilite": 0.869
     },
     {
      "prix": 2960,
-     "fiabilite": 0.903
+     "fiabilite": 0.869
     },
     {
      "prix": 2970,
-     "fiabilite": 0.903
+     "fiabilite": 0.87
     },
     {
      "prix": 2980,
-     "fiabilite": 0.904
+     "fiabilite": 0.871
     },
     {
      "prix": 2990,
-     "fiabilite": 0.904
+     "fiabilite": 0.871
     },
     {
      "prix": 3000,
-     "fiabilite": 0.905
+     "fiabilite": 0.872
     },
     {
      "prix": 3010,
-     "fiabilite": 0.905
+     "fiabilite": 0.873
     },
     {
      "prix": 3020,
-     "fiabilite": 0.906
+     "fiabilite": 0.873
     },
     {
      "prix": 3030,
-     "fiabilite": 0.906
+     "fiabilite": 0.874
     },
     {
      "prix": 3040,
-     "fiabilite": 0.906
+     "fiabilite": 0.874
     },
     {
      "prix": 3050,
-     "fiabilite": 0.907
+     "fiabilite": 0.875
     },
     {
      "prix": 3060,
-     "fiabilite": 0.907
+     "fiabilite": 0.875
     },
     {
      "prix": 3070,
-     "fiabilite": 0.907
+     "fiabilite": 0.876
     },
     {
      "prix": 3080,
-     "fiabilite": 0.908
+     "fiabilite": 0.877
     },
     {
      "prix": 3090,
-     "fiabilite": 0.909
+     "fiabilite": 0.877
     },
     {
      "prix": 3100,
-     "fiabilite": 0.909
+     "fiabilite": 0.878
     },
     {
      "prix": 3110,
-     "fiabilite": 0.909
+     "fiabilite": 0.878
     },
     {
      "prix": 3120,
-     "fiabilite": 0.91
+     "fiabilite": 0.879
     },
     {
      "prix": 3130,
-     "fiabilite": 0.911
+     "fiabilite": 0.879
     },
     {
      "prix": 3140,
-     "fiabilite": 0.911
+     "fiabilite": 0.88
     },
     {
      "prix": 3150,
-     "fiabilite": 0.912
+     "fiabilite": 0.88
     },
     {
      "prix": 3160,
-     "fiabilite": 0.913
+     "fiabilite": 0.881
     },
     {
      "prix": 3170,
-     "fiabilite": 0.913
+     "fiabilite": 0.881
     },
     {
      "prix": 3180,
-     "fiabilite": 0.914
+     "fiabilite": 0.882
     },
     {
      "prix": 3190,
-     "fiabilite": 0.914
+     "fiabilite": 0.882
     },
     {
      "prix": 3200,
-     "fiabilite": 0.915
+     "fiabilite": 0.883
     },
     {
      "prix": 3210,
-     "fiabilite": 0.915
+     "fiabilite": 0.883
     },
     {
      "prix": 3220,
-     "fiabilite": 0.915
+     "fiabilite": 0.884
     },
     {
      "prix": 3230,
-     "fiabilite": 0.916
+     "fiabilite": 0.885
     },
     {
      "prix": 3240,
-     "fiabilite": 0.916
+     "fiabilite": 0.885
     },
     {
      "prix": 3250,
-     "fiabilite": 0.917
+     "fiabilite": 0.885
     },
     {
      "prix": 3260,
-     "fiabilite": 0.917
+     "fiabilite": 0.886
     },
     {
      "prix": 3270,
-     "fiabilite": 0.918
+     "fiabilite": 0.886
     },
     {
      "prix": 3280,
-     "fiabilite": 0.919
+     "fiabilite": 0.887
     },
     {
      "prix": 3290,
-     "fiabilite": 0.919
+     "fiabilite": 0.887
     },
     {
      "prix": 3300,
-     "fiabilite": 0.92
+     "fiabilite": 0.888
     },
     {
      "prix": 3310,
-     "fiabilite": 0.92
+     "fiabilite": 0.888
     },
     {
      "prix": 3320,
-     "fiabilite": 0.921
+     "fiabilite": 0.889
     },
     {
      "prix": 3330,
-     "fiabilite": 0.921
+     "fiabilite": 0.889
     },
     {
      "prix": 3340,
-     "fiabilite": 0.921
+     "fiabilite": 0.89
     },
     {
      "prix": 3350,
-     "fiabilite": 0.922
+     "fiabilite": 0.89
     },
     {
      "prix": 3360,
-     "fiabilite": 0.922
+     "fiabilite": 0.891
     },
     {
      "prix": 3370,
-     "fiabilite": 0.922
+     "fiabilite": 0.892
     },
     {
      "prix": 3380,
-     "fiabilite": 0.923
+     "fiabilite": 0.892
     },
     {
      "prix": 3390,
-     "fiabilite": 0.923
+     "fiabilite": 0.893
     },
     {
      "prix": 3400,
-     "fiabilite": 0.924
+     "fiabilite": 0.893
     },
     {
      "prix": 3410,
-     "fiabilite": 0.924
+     "fiabilite": 0.894
     },
     {
      "prix": 3420,
-     "fiabilite": 0.924
+     "fiabilite": 0.894
     },
     {
      "prix": 3430,
-     "fiabilite": 0.925
+     "fiabilite": 0.895
     },
     {
      "prix": 3440,
-     "fiabilite": 0.925
+     "fiabilite": 0.896
     },
     {
      "prix": 3450,
-     "fiabilite": 0.926
+     "fiabilite": 0.896
     },
     {
      "prix": 3460,
-     "fiabilite": 0.926
+     "fiabilite": 0.897
     },
     {
      "prix": 3470,
-     "fiabilite": 0.927
+     "fiabilite": 0.897
     },
     {
      "prix": 3480,
-     "fiabilite": 0.927
+     "fiabilite": 0.897
     },
     {
      "prix": 3490,
-     "fiabilite": 0.927
+     "fiabilite": 0.898
     },
     {
      "prix": 3500,
-     "fiabilite": 0.928
+     "fiabilite": 0.898
     },
     {
      "prix": 3510,
-     "fiabilite": 0.928
+     "fiabilite": 0.898
     },
     {
      "prix": 3520,
-     "fiabilite": 0.928
+     "fiabilite": 0.898
     },
     {
      "prix": 3530,
-     "fiabilite": 0.929
+     "fiabilite": 0.899
     },
     {
      "prix": 3540,
-     "fiabilite": 0.93
+     "fiabilite": 0.899
     },
     {
      "prix": 3550,
-     "fiabilite": 0.93
+     "fiabilite": 0.9
     },
     {
      "prix": 3560,
-     "fiabilite": 0.93
+     "fiabilite": 0.9
     },
     {
      "prix": 3570,
-     "fiabilite": 0.931
+     "fiabilite": 0.901
     },
     {
      "prix": 3580,
-     "fiabilite": 0.931
+     "fiabilite": 0.901
     },
     {
      "prix": 3590,
-     "fiabilite": 0.932
+     "fiabilite": 0.902
     },
     {
      "prix": 3600,
-     "fiabilite": 0.932
+     "fiabilite": 0.902
     },
     {
      "prix": 3610,
-     "fiabilite": 0.933
+     "fiabilite": 0.902
     },
     {
      "prix": 3620,
-     "fiabilite": 0.933
+     "fiabilite": 0.903
     },
     {
      "prix": 3630,
-     "fiabilite": 0.933
+     "fiabilite": 0.903
     },
     {
      "prix": 3640,
-     "fiabilite": 0.933
+     "fiabilite": 0.903
     },
     {
      "prix": 3650,
-     "fiabilite": 0.934
+     "fiabilite": 0.904
     },
     {
      "prix": 3660,
-     "fiabilite": 0.934
+     "fiabilite": 0.904
     },
     {
      "prix": 3670,
-     "fiabilite": 0.934
+     "fiabilite": 0.905
     },
     {
      "prix": 3680,
-     "fiabilite": 0.934
+     "fiabilite": 0.905
     },
     {
      "prix": 3690,
-     "fiabilite": 0.935
+     "fiabilite": 0.906
     },
     {
      "prix": 3700,
-     "fiabilite": 0.935
+     "fiabilite": 0.906
     },
     {
      "prix": 3710,
-     "fiabilite": 0.935
+     "fiabilite": 0.906
     },
     {
      "prix": 3720,
-     "fiabilite": 0.936
+     "fiabilite": 0.907
     },
     {
      "prix": 3730,
-     "fiabilite": 0.936
+     "fiabilite": 0.907
     },
     {
      "prix": 3740,
-     "fiabilite": 0.937
+     "fiabilite": 0.908
     },
     {
      "prix": 3750,
-     "fiabilite": 0.937
+     "fiabilite": 0.908
     },
     {
      "prix": 3760,
-     "fiabilite": 0.938
+     "fiabilite": 0.909
     },
     {
      "prix": 3770,
-     "fiabilite": 0.938
+     "fiabilite": 0.909
     },
     {
      "prix": 3780,
-     "fiabilite": 0.938
+     "fiabilite": 0.91
     },
     {
      "prix": 3790,
-     "fiabilite": 0.939
+     "fiabilite": 0.91
     },
     {
      "prix": 3800,
-     "fiabilite": 0.939
+     "fiabilite": 0.91
     },
     {
      "prix": 3810,
-     "fiabilite": 0.939
+     "fiabilite": 0.911
     },
     {
      "prix": 3820,
-     "fiabilite": 0.939
+     "fiabilite": 0.911
     },
     {
      "prix": 3830,
-     "fiabilite": 0.94
+     "fiabilite": 0.912
     },
     {
      "prix": 3840,
-     "fiabilite": 0.94
+     "fiabilite": 0.912
     },
     {
      "prix": 3850,
-     "fiabilite": 0.94
+     "fiabilite": 0.912
     },
     {
      "prix": 3860,
-     "fiabilite": 0.941
+     "fiabilite": 0.913
     },
     {
      "prix": 3870,
-     "fiabilite": 0.941
+     "fiabilite": 0.913
     },
     {
      "prix": 3880,
-     "fiabilite": 0.941
+     "fiabilite": 0.913
     },
     {
      "prix": 3890,
-     "fiabilite": 0.941
+     "fiabilite": 0.914
     },
     {
      "prix": 3900,
-     "fiabilite": 0.942
+     "fiabilite": 0.914
     },
     {
      "prix": 3910,
+     "fiabilite": 0.914
+    },
+    {
+     "prix": 3920,
+     "fiabilite": 0.915
+    },
+    {
+     "prix": 3930,
+     "fiabilite": 0.915
+    },
+    {
+     "prix": 3940,
+     "fiabilite": 0.915
+    },
+    {
+     "prix": 3950,
+     "fiabilite": 0.916
+    },
+    {
+     "prix": 3960,
+     "fiabilite": 0.916
+    },
+    {
+     "prix": 3970,
+     "fiabilite": 0.917
+    },
+    {
+     "prix": 3980,
+     "fiabilite": 0.917
+    },
+    {
+     "prix": 3990,
+     "fiabilite": 0.917
+    },
+    {
+     "prix": 4000,
+     "fiabilite": 0.918
+    },
+    {
+     "prix": 4010,
+     "fiabilite": 0.918
+    },
+    {
+     "prix": 4020,
+     "fiabilite": 0.918
+    },
+    {
+     "prix": 4030,
+     "fiabilite": 0.919
+    },
+    {
+     "prix": 4040,
+     "fiabilite": 0.919
+    },
+    {
+     "prix": 4050,
+     "fiabilite": 0.919
+    },
+    {
+     "prix": 4060,
+     "fiabilite": 0.92
+    },
+    {
+     "prix": 4070,
+     "fiabilite": 0.92
+    },
+    {
+     "prix": 4080,
+     "fiabilite": 0.92
+    },
+    {
+     "prix": 4090,
+     "fiabilite": 0.921
+    },
+    {
+     "prix": 4100,
+     "fiabilite": 0.921
+    },
+    {
+     "prix": 4110,
+     "fiabilite": 0.921
+    },
+    {
+     "prix": 4120,
+     "fiabilite": 0.922
+    },
+    {
+     "prix": 4130,
+     "fiabilite": 0.922
+    },
+    {
+     "prix": 4140,
+     "fiabilite": 0.922
+    },
+    {
+     "prix": 4150,
+     "fiabilite": 0.923
+    },
+    {
+     "prix": 4160,
+     "fiabilite": 0.923
+    },
+    {
+     "prix": 4170,
+     "fiabilite": 0.924
+    },
+    {
+     "prix": 4180,
+     "fiabilite": 0.924
+    },
+    {
+     "prix": 4190,
+     "fiabilite": 0.924
+    },
+    {
+     "prix": 4200,
+     "fiabilite": 0.925
+    },
+    {
+     "prix": 4210,
+     "fiabilite": 0.925
+    },
+    {
+     "prix": 4220,
+     "fiabilite": 0.925
+    },
+    {
+     "prix": 4230,
+     "fiabilite": 0.926
+    },
+    {
+     "prix": 4240,
+     "fiabilite": 0.926
+    },
+    {
+     "prix": 4250,
+     "fiabilite": 0.926
+    },
+    {
+     "prix": 4260,
+     "fiabilite": 0.927
+    },
+    {
+     "prix": 4270,
+     "fiabilite": 0.927
+    },
+    {
+     "prix": 4280,
+     "fiabilite": 0.927
+    },
+    {
+     "prix": 4290,
+     "fiabilite": 0.928
+    },
+    {
+     "prix": 4300,
+     "fiabilite": 0.928
+    },
+    {
+     "prix": 4310,
+     "fiabilite": 0.929
+    },
+    {
+     "prix": 4320,
+     "fiabilite": 0.929
+    },
+    {
+     "prix": 4330,
+     "fiabilite": 0.929
+    },
+    {
+     "prix": 4340,
+     "fiabilite": 0.929
+    },
+    {
+     "prix": 4350,
+     "fiabilite": 0.929
+    },
+    {
+     "prix": 4360,
+     "fiabilite": 0.93
+    },
+    {
+     "prix": 4370,
+     "fiabilite": 0.93
+    },
+    {
+     "prix": 4380,
+     "fiabilite": 0.93
+    },
+    {
+     "prix": 4390,
+     "fiabilite": 0.93
+    },
+    {
+     "prix": 4400,
+     "fiabilite": 0.931
+    },
+    {
+     "prix": 4410,
+     "fiabilite": 0.931
+    },
+    {
+     "prix": 4420,
+     "fiabilite": 0.931
+    },
+    {
+     "prix": 4430,
+     "fiabilite": 0.932
+    },
+    {
+     "prix": 4440,
+     "fiabilite": 0.932
+    },
+    {
+     "prix": 4450,
+     "fiabilite": 0.932
+    },
+    {
+     "prix": 4460,
+     "fiabilite": 0.932
+    },
+    {
+     "prix": 4470,
+     "fiabilite": 0.933
+    },
+    {
+     "prix": 4480,
+     "fiabilite": 0.933
+    },
+    {
+     "prix": 4490,
+     "fiabilite": 0.934
+    },
+    {
+     "prix": 4500,
+     "fiabilite": 0.934
+    },
+    {
+     "prix": 4510,
+     "fiabilite": 0.935
+    },
+    {
+     "prix": 4520,
+     "fiabilite": 0.935
+    },
+    {
+     "prix": 4530,
+     "fiabilite": 0.935
+    },
+    {
+     "prix": 4540,
+     "fiabilite": 0.935
+    },
+    {
+     "prix": 4550,
+     "fiabilite": 0.936
+    },
+    {
+     "prix": 4560,
+     "fiabilite": 0.936
+    },
+    {
+     "prix": 4570,
+     "fiabilite": 0.936
+    },
+    {
+     "prix": 4580,
+     "fiabilite": 0.937
+    },
+    {
+     "prix": 4590,
+     "fiabilite": 0.937
+    },
+    {
+     "prix": 4600,
+     "fiabilite": 0.937
+    },
+    {
+     "prix": 4610,
+     "fiabilite": 0.938
+    },
+    {
+     "prix": 4620,
+     "fiabilite": 0.938
+    },
+    {
+     "prix": 4630,
+     "fiabilite": 0.938
+    },
+    {
+     "prix": 4640,
+     "fiabilite": 0.938
+    },
+    {
+     "prix": 4650,
+     "fiabilite": 0.939
+    },
+    {
+     "prix": 4660,
+     "fiabilite": 0.939
+    },
+    {
+     "prix": 4670,
+     "fiabilite": 0.939
+    },
+    {
+     "prix": 4680,
+     "fiabilite": 0.94
+    },
+    {
+     "prix": 4690,
+     "fiabilite": 0.94
+    },
+    {
+     "prix": 4700,
+     "fiabilite": 0.94
+    },
+    {
+     "prix": 4710,
+     "fiabilite": 0.941
+    },
+    {
+     "prix": 4720,
+     "fiabilite": 0.941
+    },
+    {
+     "prix": 4730,
+     "fiabilite": 0.941
+    },
+    {
+     "prix": 4740,
+     "fiabilite": 0.941
+    },
+    {
+     "prix": 4750,
+     "fiabilite": 0.941
+    },
+    {
+     "prix": 4760,
+     "fiabilite": 0.942
+    },
+    {
+     "prix": 4770,
+     "fiabilite": 0.942
+    },
+    {
+     "prix": 4780,
+     "fiabilite": 0.942
+    },
+    {
+     "prix": 4790,
+     "fiabilite": 0.942
+    },
+    {
+     "prix": 4800,
      "fiabilite": 0.942
     }
    ],
    "tranches": {
     "paliers": [
-     1827,
-     851,
-     738
+     2211,
+     1046,
+     906
     ],
     "bornes_tha": [
      1.1,
      2.3
     ],
-    "cout_moyen_t": 1413,
-    "economie": 0.206
+    "cout_moyen_t": 1716,
+    "economie": 0.215
    },
-   "indexe_m_star": 8.55,
+   "indexe_m_star": 10.55,
    "backtest": {
     "n_cas": 71,
-    "taux_tenus": 0.704,
-    "taux_tenus_indexe": 0.859,
+    "taux_tenus": 0.718,
+    "taux_tenus_indexe": 0.873,
     "couverture_80": 0.789,
     "par_annee": {
      "2019": 0.8,
      "2020": 1.0,
      "2021": 0.545,
-     "2022": 0.182,
-     "2023": 0.667,
-     "2024": 0.9,
+     "2022": 0.273,
+     "2023": 0.778,
+     "2024": 0.8,
      "2025": 0.909
     }
    },
@@ -3643,19 +3999,19 @@
     {
      "dep": "11",
      "nom": "Aude",
-     "p_star": 985,
+     "p_star": 1375,
      "rendement_qha": 21.1
     },
     {
      "dep": "09",
      "nom": "Ariège",
-     "p_star": 1017,
+     "p_star": 1403,
      "rendement_qha": 20.2
     },
     {
      "dep": "45",
      "nom": "Loiret",
-     "p_star": 1217,
+     "p_star": 1548,
      "rendement_qha": 23.0
     }
    ],
@@ -3676,32 +4032,41 @@
    "origine_niveau": "mesuré dans chaque département",
    "hypotheses": {
     "charges_eur_ha": {
-     "valeur": 400,
+     "valeur": 450,
      "etiquette": "suppose",
-     "source": "postes de la Chambre d'agriculture Centre-Val de Loire en 2018 (semences 60, fertilisation 60 à 80, herbicides 80 à 120, fongicides 40 €/ha), relevés pour la hausse des intrants",
-     "url": "https://wiki.tripleperformance.fr/images/fr/8/86/CA_Centre_Val_de_Loire_-_Panneau_Cultures_Avenir_2018_-10_Cultures.pdf",
+     "source": "450 €/ha retenus à partir de la projection Cerfrance Nord-Est Île-de-France 2025, guide Terres Inovia pois 2025, p. 3 : 4,5 × 250 + 110 − 810 = 425 €/ha et 3,5 × 250 + 110 − 500 = 485 €/ha ; les 110 € sont l'aide incluse dans les marges de cette source",
+     "url": "https://www.terresinovia.fr/sites/default/files/2025-05/guide-de-culture-pois-conventionnel-2025.pdf",
+     "reference_reconstituee_eur_ha": [
+      425,
+      485
+     ],
      "sensibilite": [
-      300,
-      400,
-      500
+      350,
+      450,
+      550
      ]
     },
     "aide_eur_ha": {
      "valeur": 105,
-     "etiquette": "suppose",
-     "source": "aide couplée aux légumineuses à graines, montant indicatif 2026 ; le guide pois 2025 de Terres Inovia retient 110 €/ha",
-     "url": "https://www.terresinovia.fr/sites/default/files/2025-05/guide-de-culture-pois-conventionnel-2025.pdf"
+     "etiquette": "source",
+     "source": "aide couplée aux légumineuses à graines, montant indicatif de la campagne 2026 ; pois éligible, notice Telepac 2026, p. 4",
+     "url": "https://www.telepac.agriculture.gouv.fr/telepac/pdf/tas/2026/Dossier-PAC-2026_notice_aides-couplees.pdf"
     },
     "rotation_eur_ha": {
      "valeur": 150,
      "etiquette": "suppose",
-     "source": "effet du pois sur le blé suivant : +7 q/ha et −33 kg N/ha (Réussir, citant Intercéréales et Terres Univia), soit environ 180 €/ha ; 150 retenus, comme pour la lentille",
-     "url": "https://www.reussir.fr/decarbonation-il-faudrait-supprimer-600-000-ha-de-cereales-au-profit-des-legumineuses-et-du"
+     "source": "150 €/ha retenus pour le scénario avec rotation ; le guide Terres Inovia pois 2025 décrit un gain moyen de 7,4 q/ha sur le blé suivant et 20 à 60 unités d'azote économisées, à valoriser selon les prix",
+     "url": "https://www.terresinovia.fr/sites/default/files/2025-05/guide-de-culture-pois-conventionnel-2025.pdf",
+     "sensibilite": [
+      0,
+      100,
+      150
+     ]
     },
     "part_refusee": {
      "valeur": 0.05,
      "etiquette": "suppose",
-     "source": "débouchés moins exigeants que l'alimentation directe (ingrédients protéiques, alimentation animale)"
+     "source": "5 % de la masse brute non valorisés au prix garanti, hypothèse de scénario ; recette d'un éventuel déclassement non modélisée"
     },
     "prix_reference": {
      "valeur": [
@@ -3709,8 +4074,9 @@
       260
      ],
      "etiquette": "source",
-     "source": "référentiel de prix CRIT Grand Est 2025, pois protéagineux et féveroles",
-     "url": "https://draaf.grand-est.agriculture.gouv.fr/IMG/pdf/crit_16_avril_2025___annexe_2___referentiel_des_prix_crit_2025.pdf"
+     "source": "référentiel de plan d'entreprise CRIT Grand Est 2025, Champagne-Ardenne, p. 3 : pois protéagineux et féveroles ; pas une cotation actuelle",
+     "url": "https://draaf.grand-est.agriculture.gouv.fr/IMG/pdf/crit_16_avril_2025___annexe_2___referentiel_des_prix_crit_2025.pdf",
+     "type_reference": "referentiel_plan_entreprise"
     }
    },
    "reference": [
@@ -3718,375 +4084,391 @@
     260
    ],
    "p_star": {
-    "77": 409,
-    "78": 379,
-    "91": 384,
-    "95": 395
+    "77": 427,
+    "78": 397,
+    "91": 402,
+    "95": 412
    },
-   "p_equilibre_median_77": 288,
+   "p_equilibre_median_77": 304,
    "rendement_moyen_77_tha": 3.57,
    "rendement_q10_77_tha": 2.52,
-   "fiabilite_reference": 0.29,
+   "fiabilite_reference": 0.24,
    "fiabilite_par_prix": [
     {
      "prix": 120,
-     "fiabilite": 0.011
+     "fiabilite": 0.007
     },
     {
      "prix": 130,
-     "fiabilite": 0.02
+     "fiabilite": 0.01
     },
     {
      "prix": 140,
-     "fiabilite": 0.033
+     "fiabilite": 0.018
     },
     {
      "prix": 150,
-     "fiabilite": 0.049
+     "fiabilite": 0.031
     },
     {
      "prix": 160,
-     "fiabilite": 0.069
+     "fiabilite": 0.046
     },
     {
      "prix": 170,
-     "fiabilite": 0.093
+     "fiabilite": 0.065
     },
     {
      "prix": 180,
-     "fiabilite": 0.122
+     "fiabilite": 0.088
     },
     {
      "prix": 190,
-     "fiabilite": 0.153
+     "fiabilite": 0.114
     },
     {
      "prix": 200,
-     "fiabilite": 0.185
+     "fiabilite": 0.145
     },
     {
      "prix": 210,
-     "fiabilite": 0.219
+     "fiabilite": 0.175
     },
     {
      "prix": 220,
-     "fiabilite": 0.253
+     "fiabilite": 0.208
     },
     {
      "prix": 230,
-     "fiabilite": 0.29
+     "fiabilite": 0.24
     },
     {
      "prix": 240,
-     "fiabilite": 0.325
+     "fiabilite": 0.276
     },
     {
      "prix": 250,
-     "fiabilite": 0.363
+     "fiabilite": 0.311
     },
     {
      "prix": 260,
-     "fiabilite": 0.4
+     "fiabilite": 0.345
     },
     {
      "prix": 270,
-     "fiabilite": 0.436
+     "fiabilite": 0.383
     },
     {
      "prix": 280,
-     "fiabilite": 0.473
+     "fiabilite": 0.419
     },
     {
      "prix": 290,
-     "fiabilite": 0.506
+     "fiabilite": 0.454
     },
     {
      "prix": 300,
-     "fiabilite": 0.541
+     "fiabilite": 0.487
     },
     {
      "prix": 310,
-     "fiabilite": 0.572
+     "fiabilite": 0.52
     },
     {
      "prix": 320,
-     "fiabilite": 0.601
+     "fiabilite": 0.553
     },
     {
      "prix": 330,
-     "fiabilite": 0.629
+     "fiabilite": 0.582
     },
     {
      "prix": 340,
-     "fiabilite": 0.656
+     "fiabilite": 0.612
     },
     {
      "prix": 350,
-     "fiabilite": 0.684
+     "fiabilite": 0.637
     },
     {
      "prix": 360,
-     "fiabilite": 0.707
+     "fiabilite": 0.664
     },
     {
      "prix": 370,
-     "fiabilite": 0.728
+     "fiabilite": 0.691
     },
     {
      "prix": 380,
-     "fiabilite": 0.749
+     "fiabilite": 0.712
     },
     {
      "prix": 390,
-     "fiabilite": 0.768
+     "fiabilite": 0.732
     },
     {
      "prix": 400,
-     "fiabilite": 0.785
+     "fiabilite": 0.754
     },
     {
      "prix": 410,
-     "fiabilite": 0.802
+     "fiabilite": 0.772
     },
     {
      "prix": 420,
-     "fiabilite": 0.815
+     "fiabilite": 0.789
     },
     {
      "prix": 430,
-     "fiabilite": 0.828
+     "fiabilite": 0.804
     },
     {
      "prix": 440,
-     "fiabilite": 0.84
+     "fiabilite": 0.817
     },
     {
      "prix": 450,
-     "fiabilite": 0.851
+     "fiabilite": 0.829
     },
     {
      "prix": 460,
-     "fiabilite": 0.862
+     "fiabilite": 0.841
     },
     {
      "prix": 470,
-     "fiabilite": 0.871
+     "fiabilite": 0.852
     },
     {
      "prix": 480,
-     "fiabilite": 0.88
+     "fiabilite": 0.863
     },
     {
      "prix": 490,
-     "fiabilite": 0.887
+     "fiabilite": 0.873
     },
     {
      "prix": 500,
-     "fiabilite": 0.896
+     "fiabilite": 0.882
     },
     {
      "prix": 510,
-     "fiabilite": 0.904
+     "fiabilite": 0.889
     },
     {
      "prix": 520,
-     "fiabilite": 0.912
+     "fiabilite": 0.897
     },
     {
      "prix": 530,
-     "fiabilite": 0.92
+     "fiabilite": 0.905
     },
     {
      "prix": 540,
-     "fiabilite": 0.926
+     "fiabilite": 0.912
     },
     {
      "prix": 550,
-     "fiabilite": 0.932
+     "fiabilite": 0.92
     },
     {
      "prix": 560,
-     "fiabilite": 0.937
+     "fiabilite": 0.926
     },
     {
      "prix": 570,
-     "fiabilite": 0.942
+     "fiabilite": 0.932
     },
     {
      "prix": 580,
-     "fiabilite": 0.947
+     "fiabilite": 0.937
     },
     {
      "prix": 590,
-     "fiabilite": 0.952
+     "fiabilite": 0.942
     },
     {
      "prix": 600,
-     "fiabilite": 0.956
+     "fiabilite": 0.948
     },
     {
      "prix": 610,
-     "fiabilite": 0.959
+     "fiabilite": 0.951
     },
     {
      "prix": 620,
-     "fiabilite": 0.962
+     "fiabilite": 0.956
     },
     {
      "prix": 630,
-     "fiabilite": 0.965
+     "fiabilite": 0.959
     },
     {
      "prix": 640,
-     "fiabilite": 0.967
+     "fiabilite": 0.962
     },
     {
      "prix": 650,
-     "fiabilite": 0.97
+     "fiabilite": 0.965
     },
     {
      "prix": 660,
-     "fiabilite": 0.972
+     "fiabilite": 0.967
     },
     {
      "prix": 670,
-     "fiabilite": 0.974
+     "fiabilite": 0.97
     },
     {
      "prix": 680,
-     "fiabilite": 0.975
+     "fiabilite": 0.972
     },
     {
      "prix": 690,
-     "fiabilite": 0.977
+     "fiabilite": 0.974
     },
     {
      "prix": 700,
-     "fiabilite": 0.979
+     "fiabilite": 0.975
     },
     {
      "prix": 710,
-     "fiabilite": 0.98
+     "fiabilite": 0.977
     },
     {
      "prix": 720,
-     "fiabilite": 0.981
+     "fiabilite": 0.979
     },
     {
      "prix": 730,
-     "fiabilite": 0.982
+     "fiabilite": 0.98
     },
     {
      "prix": 740,
-     "fiabilite": 0.983
+     "fiabilite": 0.981
     },
     {
      "prix": 750,
-     "fiabilite": 0.984
+     "fiabilite": 0.982
     },
     {
      "prix": 760,
-     "fiabilite": 0.985
+     "fiabilite": 0.983
     },
     {
      "prix": 770,
-     "fiabilite": 0.986
+     "fiabilite": 0.984
     },
     {
      "prix": 780,
-     "fiabilite": 0.987
+     "fiabilite": 0.985
     },
     {
      "prix": 790,
-     "fiabilite": 0.988
+     "fiabilite": 0.986
     },
     {
      "prix": 800,
-     "fiabilite": 0.988
+     "fiabilite": 0.987
     },
     {
      "prix": 810,
-     "fiabilite": 0.989
+     "fiabilite": 0.988
     },
     {
      "prix": 820,
-     "fiabilite": 0.99
+     "fiabilite": 0.988
     },
     {
      "prix": 830,
-     "fiabilite": 0.991
+     "fiabilite": 0.989
     },
     {
      "prix": 840,
-     "fiabilite": 0.992
+     "fiabilite": 0.99
     },
     {
      "prix": 850,
-     "fiabilite": 0.993
+     "fiabilite": 0.992
     },
     {
      "prix": 860,
-     "fiabilite": 0.993
+     "fiabilite": 0.992
     },
     {
      "prix": 870,
-     "fiabilite": 0.994
+     "fiabilite": 0.993
     },
     {
      "prix": 880,
-     "fiabilite": 0.994
+     "fiabilite": 0.993
     },
     {
      "prix": 890,
+     "fiabilite": 0.994
+    },
+    {
+     "prix": 900,
+     "fiabilite": 0.994
+    },
+    {
+     "prix": 910,
      "fiabilite": 0.995
+    },
+    {
+     "prix": 920,
+     "fiabilite": 0.995
+    },
+    {
+     "prix": 930,
+     "fiabilite": 0.996
     }
    ],
    "tranches": {
     "paliers": [
-     455,
-     196,
-     170
+     474,
+     204,
+     177
     ],
     "bornes_tha": [
      2.4,
      4.8
     ],
-    "cout_moyen_t": 377,
-    "economie": 0.077
+    "cout_moyen_t": 393,
+    "economie": 0.079
    },
-   "indexe_m_star": 1.9,
+   "indexe_m_star": 1.99,
    "backtest": {
     "n_cas": 493,
-    "taux_tenus": 0.653,
-    "taux_tenus_indexe": 0.797,
+    "taux_tenus": 0.655,
+    "taux_tenus_indexe": 0.824,
     "couverture_80": 0.807,
     "par_annee": {
      "2019": 0.986,
-     "2020": 0.753,
-     "2021": 0.169,
+     "2020": 0.74,
+     "2021": 0.183,
      "2022": 0.071,
      "2023": 0.696,
      "2024": 0.956,
-     "2025": 0.941
+     "2025": 0.956
     }
    },
    "meilleurs": [
     {
      "dep": "66",
      "nom": "Pyrénées-Orientales",
-     "p_star": 67,
+     "p_star": 86,
      "rendement_qha": 33.3
     },
     {
      "dep": "84",
      "nom": "Vaucluse",
-     "p_star": 100,
+     "p_star": 127,
      "rendement_qha": 22.8
     },
     {
      "dep": "83",
      "nom": "Var",
-     "p_star": 146,
+     "p_star": 173,
      "rendement_qha": 22.5
     }
    ],
@@ -4108,9 +4490,13 @@
    "hypotheses": {
     "charges_eur_ha": {
      "valeur": 400,
-     "etiquette": "suppose",
-     "source": "charges opérationnelles proches de celles du pois (Terres Inovia, guide de culture féverole)",
-     "url": "https://www.terresinovia.fr/",
+     "etiquette": "source",
+     "source": "300 à 400 €/ha de semences, fertilisation et traitements, guide Terres Inovia féverole conventionnelle 2024, p. 3 ; 400 €/ha retenus",
+     "url": "https://www.terresinovia.fr/sites/default/files/2025-06/guide-de-culture-feverole-conventionnel-2024.pdf",
+     "reference_publiee_eur_ha": [
+      300,
+      400
+     ],
      "sensibilite": [
       300,
       400,
@@ -4119,18 +4505,25 @@
     },
     "aide_eur_ha": {
      "valeur": 105,
-     "etiquette": "suppose",
-     "source": "aide couplée aux légumineuses à graines, montant indicatif 2026"
+     "etiquette": "source",
+     "source": "aide couplée aux légumineuses à graines, montant indicatif de la campagne 2026 ; féverole éligible, notice Telepac 2026, p. 4",
+     "url": "https://www.telepac.agriculture.gouv.fr/telepac/pdf/tas/2026/Dossier-PAC-2026_notice_aides-couplees.pdf"
     },
     "rotation_eur_ha": {
      "valeur": 150,
      "etiquette": "suppose",
-     "source": "même hypothèse que pour le pois et la lentille"
+     "source": "150 €/ha retenus pour le scénario avec rotation ; le guide Terres Inovia féverole 2024 estime un avantage d'environ 180 €/ha dans son propre contexte de prix",
+     "url": "https://www.terresinovia.fr/sites/default/files/2025-06/guide-de-culture-feverole-conventionnel-2024.pdf",
+     "sensibilite": [
+      0,
+      100,
+      150
+     ]
     },
     "part_refusee": {
      "valeur": 0.05,
      "etiquette": "suppose",
-     "source": "débouchés moins exigeants que l'alimentation directe (export pour l'alimentation humaine, alimentation animale)"
+     "source": "5 % de la masse brute non valorisés au prix garanti, hypothèse de scénario ; recette d'un éventuel déclassement non modélisée"
     },
     "prix_reference": {
      "valeur": [
@@ -4138,8 +4531,9 @@
       260
      ],
      "etiquette": "source",
-     "source": "référentiel de prix CRIT Grand Est 2025, pois protéagineux et féveroles",
-     "url": "https://draaf.grand-est.agriculture.gouv.fr/IMG/pdf/crit_16_avril_2025___annexe_2___referentiel_des_prix_crit_2025.pdf"
+     "source": "référentiel de plan d'entreprise CRIT Grand Est 2025, Champagne-Ardenne, p. 3 : pois protéagineux et féveroles ; pas une cotation actuelle",
+     "url": "https://draaf.grand-est.agriculture.gouv.fr/IMG/pdf/crit_16_avril_2025___annexe_2___referentiel_des_prix_crit_2025.pdf",
+     "type_reference": "referentiel_plan_entreprise"
     }
    },
    "reference": [

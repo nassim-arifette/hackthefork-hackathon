@@ -477,7 +477,7 @@ export default function App() {
                   <tbody>
                     {CULTURES.map((c) => (
                       <tr key={c.id} className={c.id === 'lentille' ? 'hl' : ''}>
-                        <td>{c.nom}<span>{c.n_series} séries Agreste{c.id === 'haricot' ? ', charges supposées' : ''}</span></td>
+                        <td>{c.nom}<span>{c.n_series} séries Agreste{c.id === 'haricot' ? ', scénario irrigué' : ''}</span></td>
                         <td className="num">{fmt(c.p_star['77'])}</td>
                         <td className={`num${(c.backtest.taux_tenus ?? 0) < H.tau ? ' bad' : ''}`}>{pct(c.backtest.taux_tenus ?? 0)}</td>
                         <td className={`num${(c.backtest.taux_tenus_indexe ?? 0) < H.tau - 0.005 ? ' bad' : ''}`}>{pct(c.backtest.taux_tenus_indexe ?? 0)}</td>
@@ -485,8 +485,9 @@ export default function App() {
                     ))}
                   </tbody>
                 </table>
-                <p className="body small">Pour la lentille, le risque vient du rendement : un prix fixe tient {pct(CULTURES[0].backtest.taux_tenus ?? 0)} des contrats. Pour les quatre autres, il vient surtout du prix du blé : en 2021 et 2022, un prix fixe cède, alors qu’un plancher indexé sur le blé tient {pct(Math.min(...CULTURES.slice(1).map((c) => c.backtest.taux_tenus_indexe ?? 0)))} à {pct(Math.max(...CULTURES.slice(1).map((c) => c.backtest.taux_tenus_indexe ?? 0)))} des contrats. Le moteur choisit la forme du contrat culture par culture. Le pois et la féverole restent loin du blé : il faudrait {fmt(CULTURES.find((c) => c.id === 'pois')!.p_star['77'])} et {fmt(CULTURES.find((c) => c.id === 'feverole')!.p_star['77'])} €/t, pour 200 à 260 €/t de référence.</p>
-                <Source k="modele">Prix plancher pour 8 années sur 10 en Seine-et-Marne, en €/t ; contrats tenus en backtest 2019–2025 sur les départements producteurs, recalibrés sur les seules années passées. Même modèle du blé ; séries Agreste et météo NASA POWER propres à chaque culture. Charges et aides : pois chiche d’après Terres Inovia (2026), haricot, pois et féverole supposés ; référence pois et féverole : CRIT Grand Est 2025.</Source>
+                <p className="body small">Pour la lentille, un prix fixe tient {pct(CULTURES[0].backtest.taux_tenus ?? 0)} des contrats et l’indexation apporte peu. Pour les quatre autres, le plancher indexé sur le blé tient {pct(Math.min(...CULTURES.slice(1).map((c) => c.backtest.taux_tenus_indexe ?? 0)))} à {pct(Math.max(...CULTURES.slice(1).map((c) => c.backtest.taux_tenus_indexe ?? 0)))} des contrats dans ce backtest, davantage que le prix fixe. Cela motive une forme de contrat propre à chaque culture. Le pois et la féverole demandent {fmt(CULTURES.find((c) => c.id === 'pois')!.p_star['77'])} et {fmt(CULTURES.find((c) => c.id === 'feverole')!.p_star['77'])} €/t pour rivaliser avec le blé 8 années sur 10, contre 200 à 260 €/t dans le référentiel de plan d’entreprise CRIT 2025.</p>
+                <p className="body small">Repères de prix : pois chiche standard payé 600 à 620 €/t à un producteur Cavac pour la récolte 2025 ; haricot à 1 200 €/t au centre du scénario 900 à 1 500. Le repère haricot de 1 188 €/t vient d’un barème d’indemnisation, pas d’une offre d’achat.</p>
+                <Source k="modele">Prix plancher pour 8 années sur 10 en Seine-et-Marne, en €/t ; contrats tenus en backtest 2019–2025 sur les départements producteurs, recalibrés sur les seules années passées. Même modèle du blé ; séries Agreste et météo NASA POWER propres à chaque culture. Charges calées sur les guides Terres Inovia pois chiche 2026, pois 2025 et féverole 2024 ; haricot : budget reconstruit incluant l’eau et l’énergie, hors mécanisation et récolte. Aide indicative Telepac 2026. Prix : témoignage Réussir du 27 juin 2026, CRIT Grand Est 2025 et scénario haricot documenté dans la revue filière.</Source>
               </div>
             </>
           )}

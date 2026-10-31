@@ -8,6 +8,8 @@ L'équipe a adopté ce scénario le 31/10 ; il est calculé dans la version 4 de
 
 **Complément disponible :** un [barème public NatUp et un contrat synthétique complet](CONTRAT_SIMULATION.md), un [dossier de pilote 300 t avec partenaires ciblés](PILOTE_300T.md) et un [historique synthétique reproductible de 140 lots](../data/pilote_300t/README.md). Le comparateur fourni avec ce jeu permet de chiffrer les paiements et les coûts ; il ne recalcule pas le P* ni le backtest Agreste de l'application.
 
+**Revue des autres cultures accomplie le 31/10 :** conserver **500 €/ha pour le pois chiche et 400 pour la féverole**, retenir **450 pour le pois et 1 000 pour le haricot sec irrigué**. Les guides Terres Inovia ont été ouverts ; les références de prix et le budget du haricot sont maintenant explicités. La [revue filière détaillée](REVUE_FILIERE_CULTURES.md) distingue le prix payé du pois chiche, le scénario haricot et le référentiel pois/féverole. Les hypothèses sont dans [data/cultures.yaml](../data/cultures.yaml) ; leurs effets chiffrés proviennent des exports recalculés, sans être déduits de cette seule revue.
+
 ## 0. Décisions de l'équipe, 31 octobre
 
 | Sujet | Décision | État |
@@ -289,7 +291,7 @@ Le pari à défendre est clair : **un responsable filière peut choisir un contr
 | [S18] | AWS, Request access to models | Disponibilité et permissions Bedrock. |
 | [S19] | Union Agricole, entretien NatUp, 18 septembre 2023 | Barème par tranches annoncé pour 2023 et reconduit en 2024. |
 
-[S1]: https://www3.telepac.agriculture.gouv.fr/telepac/pdf/tas/2026/Dossier-PAC-2026_notice_aides-couplees.pdf
+[S1]: https://www.telepac.agriculture.gouv.fr/telepac/pdf/tas/2026/Dossier-PAC-2026_notice_aides-couplees.pdf
 [S2]: https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000053594055
 [S3]: https://www.terresinovia.fr/sites/default/files/2025-06/guide-de-culture-lentille-2023.pdf
 [S4]: https://www.terresinovia.fr/sites/default/files/2025-05/guide-de-culture-pois-conventionnel-2025.pdf

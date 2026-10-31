@@ -1,6 +1,6 @@
 # Sources
 
-Chaque source utilisée, avec son étiquette et sa licence. À tenir à jour au fil de l'eau. Une source citée dans le deck ou l'interface doit figurer ici. Les références de la revue du 31/10 sont détaillées, page par page, dans [QUESTIONS.md](QUESTIONS.md), [CONTRAT_SIMULATION.md](CONTRAT_SIMULATION.md) et [PILOTE_300T.md](PILOTE_300T.md).
+Chaque source utilisée, avec son étiquette et sa licence. À tenir à jour au fil de l'eau. Une source citée dans le deck ou l'interface doit figurer ici. Les références de la revue du 31/10 sont détaillées, page par page, dans [QUESTIONS.md](QUESTIONS.md), [CONTRAT_SIMULATION.md](CONTRAT_SIMULATION.md), [PILOTE_300T.md](PILOTE_300T.md) et [REVUE_FILIERE_CULTURES.md](REVUE_FILIERE_CULTURES.md).
 
 ## Données
 
@@ -38,20 +38,26 @@ Chaque source utilisée, avec son étiquette et sa licence. À tenir à jour au 
 | Bruche : 10 à 20 % de pertes de rendement | Réussir | sourcé |
 | Structure de coût du transport (kilomètres, temps, immobilisation) | CNR, enquête longue distance 2013 | sourcé, tarifs non repris |
 
-Les PDF Terres Inovia n'ont pas pu être rouverts depuis l'environnement de développement (accès refusé) : leurs chiffres viennent de la revue du 31/10, à relire avant le pitch.
+Les guides Terres Inovia pois chiche 2026, pois 2025 et féverole 2024 ont été ouverts dans leur intégralité lors de la revue filière du 31/10. Les budgets retenus et leur périmètre sont expliqués dans [REVUE_FILIERE_CULTURES.md](REVUE_FILIERE_CULTURES.md).
 
 ## Autres légumineuses (`data/cultures.yaml`)
 
 | Affirmation | Source | Étiquette |
 |---|---|---|
-| Pois chiche : charges opérationnelles le plus souvent de 400 à 500 €/ha, économie jusqu'à 150 €/ha sur la culture suivante | Terres Inovia, guide de culture pois chiche 2026 | sourcé, via les extraits de recherche |
-| Pois chiche, pois et haricots secs parmi les légumineuses à graines de l'aide couplée | DDT des Hautes-Pyrénées, liste des cultures 2023 | sourcé, liste à confirmer pour 2026 |
-| Pois protéagineux et féveroles : 200 à 260 €/t | DRAAF Grand Est, référentiel des prix CRIT 2025 | sourcé |
-| Pois : postes de charges de 2018 (semences 60, fertilisation 60 à 80, herbicides 80 à 120, fongicides 40 €/ha) | Chambre d'agriculture Centre-Val de Loire | sourcé, ancien |
-| Féverole : charges proches de celles du pois | Terres Inovia, guide de culture féverole | sourcé, via les extraits de recherche |
-| Haricot sec : aucune référence publique de charges ni de prix trouvée le 31/10 | — | supposé |
+| Pois chiche conventionnel : itinéraire à 416–583 €/ha ; matrice de marge à 480 €/ha ; scénario central retenu à 500 €/ha | [Terres Inovia, guide pois chiche 2026, p. 4](https://www.terresinovia.fr/sites/default/files/2026-04/guide_culture_pois-chiche_2026_terresinovia.pdf) | référence publiée ; central supposé, sensibilité 400 / 500 / 600 |
+| Pois chiche : 600–620 €/t payés pour la récolte standard 2025 à un producteur Pulseo/Cavac | [Réussir, témoignage du 27 juin 2026](https://www.reussir.fr/formats/temoignages/pois-chiche-label-rouge-la-culture-degage-la-meilleure-marge-de-mon) | sourcé, paiement rapporté dans une filière et une campagne identifiées |
+| Pois chiche équitable : minimum conventionnel de 769 €/t pour la récolte 2025, plus 38 €/t de prime collective | [Max Havelaar France, document janvier 2026, p. 5 et 9](https://www.fairtrade.net/content/dam/fairtrade/max-havelaar-france/label-origine-france/Prix-minimum-Max-Havelaar-France-2025.pdf) | sourcé ; contrat de filière spécifique, prime collective distincte du paiement individuel |
+| Pois : charges déduites de 425 et 485 €/ha, aide de 110 €/ha incluse dans les marges de la source ; central retenu à 450 €/ha | [Terres Inovia, guide pois 2025, p. 3, projection Cerfrance Nord-Est Île-de-France](https://www.terresinovia.fr/sites/default/files/2025-05/guide-de-culture-pois-conventionnel-2025.pdf) | calcul documenté ; central supposé, sensibilité 350 / 450 / 550 |
+| Féverole : charges de semences, fertilisation et traitements à 300–400 €/ha ; central retenu à 400 €/ha | [Terres Inovia, guide féverole conventionnel 2024, p. 3](https://www.terresinovia.fr/sites/default/files/2025-06/guide-de-culture-feverole-conventionnel-2024.pdf) | référence publiée ; haut de plage choisi, sensibilité 300 / 400 / 500 |
+| Pois protéagineux et féveroles : 200–260 €/t | [CRIT Grand Est du 16 avril 2025, p. 3](https://draaf.grand-est.agriculture.gouv.fr/IMG/pdf/crit_16_avril_2025___annexe_2___referentiel_des_prix_crit_2025.pdf) | sourcé, référence de plan d'entreprise en Champagne-Ardenne, pas cotation actuelle |
+| Variantes alimentaires : pois 280 €/t ; féverole 290 €/t | Guides pois 2025 et féverole 2024, p. 3 | scénarios documentés : prix indicatif publié pour le pois ; milieu de la plage alimentaire 260–320 €/t pour la féverole |
+| Haricot conventionnel en Limagne : semences 340 €/ha, récolte 450 €/ha, contrats historiques blanc 830 €/t et rouge 990 €/t | [Pleinchamp, retour de filière de 2019](https://www.pleinchamp.com/actualite/grandes-cultures~comment-produire-du-haricot-sec-en-limagne) | sourcé, historique ; frais de récolte hors du paramètre d'intrants |
+| Flageolet biologique : semences 500, irrigation 450, mécanisation 100, récolte 250 €/ha | [Bio Nouvelle-Aquitaine, fiche flageolet, p. 3](https://www.bionouvelleaquitaine.com/wp-content/uploads/2023/02/Flageolet.pdf) | sourcé, exemple bio ; total non transposé au conventionnel |
+| Haricot sec irrigué : 400 semences + 150 fertilisation + 150 protection + 300 eau/énergie = 1 000 €/ha | Budget construit dans [REVUE_FILIERE_CULTURES.md](REVUE_FILIERE_CULTURES.md) | supposé, sensibilité 700 / 1 000 / 1 300 ; hors mécanisation, travail, fermage et tri aval |
+| Haricot sec : repère de 1 188 €/t en conventionnel pour les pertes sécheresse 2025 | [Préfecture d'Indre-et-Loire, procédure d'indemnisation publiée en 2026](https://www.indre-et-loire.gouv.fr/Actions-de-l-Etat/Agriculture-foret-et-developpement-rural/Agriculture/Les-pertes-aides-de-crises-et-indemnisations/Secheresse-de-mai-a-aout-2025) | barème administratif ISN, pas cotation ni offre d'achat ; scénario choisi à 1 200 €/t, plage 900–1 500 |
+| Éligibilité des légumineuses à graines et montant indicatif de 105 €/ha pour 2026 | [Notice Telepac 2026, p. 4](https://www.telepac.agriculture.gouv.fr/telepac/pdf/tas/2026/Dossier-PAC-2026_notice_aides-couplees.pdf) | sourcé, montant indicatif 2026 |
 
-Liens : https://www.terresinovia.fr/sites/default/files/2026-04/guide_culture_pois-chiche_2026_terresinovia.pdf ; https://www.hautes-pyrenees.gouv.fr/contenu/telechargement/13616/94119/file/20230307_liste_des_cultures_aides_couplees_2023.pdf ; https://draaf.grand-est.agriculture.gouv.fr/IMG/pdf/crit_16_avril_2025___annexe_2___referentiel_des_prix_crit_2025.pdf ; https://wiki.tripleperformance.fr/images/fr/8/86/CA_Centre_Val_de_Loire_-_Panneau_Cultures_Avenir_2018_-10_Cultures.pdf
+Les charges centrales sont des choix de scénario ancrés sur ces références, avec un périmètre commun hors mécanisation, travail, fermage, frais généraux et tri aval. Le haricot inclut ses consommations variables d'eau et d'énergie. Le bonus de rotation de 150 €/ha reste `suppose` pour les quatre cultures, y compris lorsque la source décrit un gain pouvant atteindre ce montant.
 
 ## Contexte
 
@@ -75,7 +81,7 @@ Liens :
 - https://agreste.agriculture.gouv.fr/agreste-web/download/methode/S-SAA/Methodologie_Statistique-Agricole-Annuelle.pdf
 - https://www.terresinovia.fr/sites/default/files/2025-06/guide-de-culture-lentille-2023.pdf
 - https://www.terresinovia.fr/sites/default/files/2025-05/guide-de-culture-pois-conventionnel-2025.pdf
-- https://www3.telepac.agriculture.gouv.fr/telepac/pdf/tas/2026/Dossier-PAC-2026_notice_aides-couplees.pdf
+- https://www.telepac.agriculture.gouv.fr/telepac/pdf/tas/2026/Dossier-PAC-2026_notice_aides-couplees.pdf
 - https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000053594055
 - https://filoleg.fr/wp-content/uploads/2024/12/Synthese-technico-economique-insertion-LAG.pdf
 - https://driaaf.ile-de-france.agriculture.gouv.fr/IMG/pdf/memento_agricole_idf_2025_v2.pdf
@@ -95,4 +101,4 @@ Liens :
 
 - Le chiffre « 20 000 t produites, 35 000 t importées » cité par Qualisol est **antérieur** aux données récentes : 51 558 t produites (Agreste 2025, provisoire) et 39 371 t importées (Comext 2025). Ne pas l'utiliser comme chiffre actuel.
 - Ciqual était indisponible le 30/10 (erreur 503) : la teneur en protéines vient de la fiche qualité Terres Inovia / Terres Univia (récolte 2024).
-- Toute valeur sans source est marquée **supposé** et vit dans `data/hypotheses.yaml`.
+- Les valeurs choisies par l'équipe sont marquées **supposé** et figurent dans `data/hypotheses.yaml` ou `data/cultures.yaml`, avec leur provenance et leurs sensibilités.
