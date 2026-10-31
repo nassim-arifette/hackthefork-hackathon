@@ -41,3 +41,9 @@ test:
 	$(PY) -m pytest -q tests
 
 .PHONY: all export sentinel maillon app dev test
+
+# Vidéo de secours de la démo (video/README.md) : make video, ou make video COMMIT=<sha>.
+video:
+	bash video/faire_video.sh $(COMMIT)
+
+.PHONY: video

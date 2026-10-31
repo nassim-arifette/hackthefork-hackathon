@@ -1,0 +1,8 @@
+{
+  "_doc": "Minutage de la vidéo de secours, recopié du tableau Temps / Écran de docs/DEMO_SCRIPT.md. Chaque entrée de 'espace' est l'instant (m:ss) où l'on appuie sur Espace. Modifier ici puis relancer make video.",
+  "fps": 30,
+  "duree": "4:00",
+  "espace": ["0:25", "1:00", "1:25", "2:40", "3:20"],
+  "ecrans": ["1. Le constat", "2. Le pari", "3. Le contrat", "4. Le prix", "5. La preuve", "6. L'impact"],
+  "fenetre": { "largeur": 1920, "hauteur": 1080, "echelle": 1 }
+}
