@@ -1,0 +1,224 @@
+{
+  "year": 2026,
+  "n_scenarios": 20000,
+  "tau": 0.8,
+  "hypotheses": {
+    "prix_ble": null,
+    "charges_ble": 440,
+    "charges_lentille": 280,
+    "aide": 122,
+    "rotation": 0,
+    "bonus": 122,
+    "tau": 0.8
+  },
+  "weather_price_years": [
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025
+  ],
+  "lentil_transfer_neighbours": [
+    "10",
+    "89",
+    "28",
+    "45"
+  ],
+  "direct_calibration_factor": 0.5446068848775081,
+  "models": {
+    "linear": {
+      "77": {
+        "p_star_eur_t_depart_ferme": 1426.1547326017517,
+        "simulated_success": 0.8,
+        "yield_lentil_mean_tha": 1.5322899921391229,
+        "yield_lentil_p10_tha": 0.6828024080547103,
+        "p_star_by_reliability": {
+          "0.5": 823.0889527978383,
+          "0.6": 966.4163008121212,
+          "0.7": 1157.0041793621074,
+          "0.8": 1426.1547326017517,
+          "0.9": 1975.5639730287824
+        }
+      },
+      "78": {
+        "p_star_eur_t_depart_ferme": 1367.8923158030786,
+        "simulated_success": 0.8,
+        "yield_lentil_mean_tha": 1.5365719998556968,
+        "yield_lentil_p10_tha": 0.6929487103449288,
+        "p_star_by_reliability": {
+          "0.5": 791.6263874299411,
+          "0.6": 934.0607609058344,
+          "0.7": 1098.8829102817074,
+          "0.8": 1367.8923158030786,
+          "0.9": 1894.8642545118505
+        }
+      },
+      "91": {
+        "p_star_eur_t_depart_ferme": 1342.8793130073113,
+        "simulated_success": 0.8,
+        "yield_lentil_mean_tha": 1.5375762194655378,
+        "yield_lentil_p10_tha": 0.6813129716266153,
+        "p_star_by_reliability": {
+          "0.5": 780.6681921702863,
+          "0.6": 919.833258408816,
+          "0.7": 1089.8106765989608,
+          "0.8": 1342.8793130073113,
+          "0.9": 1832.6094768362188
+        }
+      },
+      "95": {
+        "p_star_eur_t_depart_ferme": 1431.4903800803584,
+        "simulated_success": 0.8,
+        "yield_lentil_mean_tha": 1.5372946617625982,
+        "yield_lentil_p10_tha": 0.694894465454616,
+        "p_star_by_reliability": {
+          "0.5": 830.1017200073691,
+          "0.6": 975.9722191322745,
+          "0.7": 1166.410906386886,
+          "0.8": 1431.4903800803584,
+          "0.9": 1961.7295573893664
+        }
+      }
+    },
+    "lightgbm": {
+      "77": {
+        "p_star_eur_t_depart_ferme": 1295.3339850303792,
+        "simulated_success": 0.8,
+        "yield_lentil_mean_tha": 1.6919190382787588,
+        "yield_lentil_p10_tha": 0.7473687494275131,
+        "p_star_by_reliability": {
+          "0.5": 736.1660628999821,
+          "0.6": 871.2859810687629,
+          "0.7": 1049.7426606923937,
+          "0.8": 1295.3339850303792,
+          "0.9": 1767.1323278868447
+        }
+      },
+      "78": {
+        "p_star_eur_t_depart_ferme": 1265.640201190249,
+        "simulated_success": 0.8,
+        "yield_lentil_mean_tha": 1.691616206506166,
+        "yield_lentil_p10_tha": 0.747765411429016,
+        "p_star_by_reliability": {
+          "0.5": 711.5426089084905,
+          "0.6": 846.4619448947451,
+          "0.7": 1017.5027732518288,
+          "0.8": 1265.640201190249,
+          "0.9": 1695.6090915083416
+        }
+      },
+      "91": {
+        "p_star_eur_t_depart_ferme": 1224.683182507604,
+        "simulated_success": 0.8,
+        "yield_lentil_mean_tha": 1.7001405848447364,
+        "yield_lentil_p10_tha": 0.7415318654266956,
+        "p_star_by_reliability": {
+          "0.5": 696.872101614413,
+          "0.6": 815.8073062079155,
+          "0.7": 985.7188042915581,
+          "0.8": 1224.683182507604,
+          "0.9": 1667.9132210438938
+        }
+      },
+      "95": {
+        "p_star_eur_t_depart_ferme": 1331.9818039837164,
+        "simulated_success": 0.8,
+        "yield_lentil_mean_tha": 1.6851429872584494,
+        "yield_lentil_p10_tha": 0.7440449368065656,
+        "p_star_by_reliability": {
+          "0.5": 746.1423374941885,
+          "0.6": 884.8331825217115,
+          "0.7": 1062.736507179453,
+          "0.8": 1331.9818039837164,
+          "0.9": 1819.066867161516
+        }
+      }
+    },
+    "qrf": {
+      "77": {
+        "p_star_eur_t_depart_ferme": 1097.461894620108,
+        "simulated_success": 0.8,
+        "yield_lentil_mean_tha": 1.7966830471731439,
+        "yield_lentil_p10_tha": 0.9606413170872594,
+        "p_star_by_reliability": {
+          "0.5": 689.754314144969,
+          "0.6": 784.1352461792344,
+          "0.7": 913.5786032369397,
+          "0.8": 1097.461894620108,
+          "0.9": 1417.5404882398334
+        }
+      },
+      "78": {
+        "p_star_eur_t_depart_ferme": 1108.970595701449,
+        "simulated_success": 0.8,
+        "yield_lentil_mean_tha": 1.7285486131916379,
+        "yield_lentil_p10_tha": 0.9051928136677335,
+        "p_star_by_reliability": {
+          "0.5": 693.0411236608185,
+          "0.6": 791.6840720074687,
+          "0.7": 925.6868143143968,
+          "0.8": 1108.970595701449,
+          "0.9": 1417.6804242198564
+        }
+      },
+      "91": {
+        "p_star_eur_t_depart_ferme": 1062.533573019213,
+        "simulated_success": 0.8,
+        "yield_lentil_mean_tha": 1.7627355824058653,
+        "yield_lentil_p10_tha": 0.9394677129536075,
+        "p_star_by_reliability": {
+          "0.5": 670.417304628233,
+          "0.6": 763.9214404395009,
+          "0.7": 888.0901803436357,
+          "0.8": 1062.533573019213,
+          "0.9": 1361.3501436532022
+        }
+      },
+      "95": {
+        "p_star_eur_t_depart_ferme": 1142.3585321019,
+        "simulated_success": 0.8,
+        "yield_lentil_mean_tha": 1.7525426002644673,
+        "yield_lentil_p10_tha": 0.9400709658240364,
+        "p_star_by_reliability": {
+          "0.5": 717.6461621915453,
+          "0.6": 816.626020333634,
+          "0.7": 952.9294135622648,
+          "0.8": 1142.3585321019,
+          "0.9": 1450.9100886867684
+        }
+      }
+    },
+    "direct_qrf": {
+      "77": {
+        "raw_price_eur_t": 1116.9006649312037,
+        "calibrated_price_eur_t": 608.2717918458003
+      },
+      "78": {
+        "raw_price_eur_t": 1065.190639397314,
+        "calibrated_price_eur_t": 580.1101559228522
+      },
+      "91": {
+        "raw_price_eur_t": 1094.3423360719762,
+        "calibrated_price_eur_t": 595.986370637734
+      },
+      "95": {
+        "raw_price_eur_t": 1143.996703575745,
+        "calibrated_price_eur_t": 623.0284810445245
+      }
+    }
+  },
+  "price_basis": "department_depart_ferme_transport_excluded",
+  "direct_model_note": "Alternative estimator of Q80(R); not the Monte Carlo price.",
+  "yield_transfer": "Neighbouring measured lentil yields, not parcel yield predictions."
+}

@@ -1,0 +1,1022 @@
+{
+  "status": "exploratory_not_unseen_validation",
+  "source_commit": "fa35f7599d3d7fddf6129702d0f027037d07a675",
+  "script_sha256": "26ab4ce563aee5274abfbd84fafc451511e081dba1cfcca696dacce92fe0cd3b",
+  "python": "3.12.14",
+  "packages": {
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "scipy": "1.17.0",
+    "scikit-learn": "1.8.0",
+    "lightgbm": "4.7.0",
+    "quantile-forest": "1.4.2",
+    "catboost": "1.2.10"
+  },
+  "data_sha256": {
+    "panel_rendements.csv": "380b2e7a418dee87b0f193d6dc969ab3e336f2aea17870c7f4c6f989dd92f8d4",
+    "meteo_dept.csv": "f50803cf8e5fffe5e152967fe6e85eac5509cd948c649ebbf2899e0d036d52cb",
+    "prix_ble.csv": "2da72c05832daf2a3db1658d293f506aaa8101e13987c03215a2f4e9ca8ac676",
+    "hypotheses.yaml": "4cab9a6f616cf7a19fa160e3cbcda81142a42d1773a0ea2b2b7cfac5a277b23b"
+  },
+  "seed": 42,
+  "samples": 20000,
+  "calibration": "split",
+  "models": [
+    "trend",
+    "linear",
+    "lightgbm",
+    "qrf",
+    "ensemble"
+  ],
+  "elapsed_seconds": 25.068543095999985,
+  "summary": [
+    {
+      "model": "paired_history",
+      "n": 201,
+      "years": 7,
+      "held": 0.48258706467661694,
+      "held_year_mean": 0.4751935256861365,
+      "held_year_bootstrap_80": [
+        0.3258503401360544,
+        0.6286183438892798
+      ],
+      "contract_loss": 351.8823502343286,
+      "median_price": 962.7272727272726,
+      "shortfall_eur_ha": 236.03540852927367,
+      "pinball": null,
+      "coverage": null,
+      "width": null
+    },
+    {
+      "model": "lightgbm",
+      "n": 201,
+      "years": 7,
+      "held": 0.6069651741293532,
+      "held_year_mean": 0.6013605442176871,
+      "held_year_bootstrap_80": [
+        0.45918367346938777,
+        0.7442176870748299
+      ],
+      "contract_loss": 360.1296134297771,
+      "median_price": 1259.9632645924557,
+      "shortfall_eur_ha": 164.94450765506832,
+      "pinball": 0.11495011691111824,
+      "coverage": 0.6451090781140042,
+      "width": 0.9313976842686272
+    },
+    {
+      "model": "ensemble",
+      "n": 201,
+      "years": 7,
+      "held": 0.6467661691542289,
+      "held_year_mean": 0.6404761904761905,
+      "held_year_bootstrap_80": [
+        0.5027210884353741,
+        0.7806122448979592
+      ],
+      "contract_loss": 369.227991732163,
+      "median_price": 1328.028894129801,
+      "shortfall_eur_ha": 148.63664008950335,
+      "pinball": 0.11595045715921588,
+      "coverage": 0.6815153647665964,
+      "width": 0.9191613270593713
+    },
+    {
+      "model": "qrf",
+      "n": 201,
+      "years": 7,
+      "held": 0.5920398009950248,
+      "held_year_mean": 0.5867346938775511,
+      "held_year_bootstrap_80": [
+        0.4387755102040816,
+        0.7346938775510203
+      ],
+      "contract_loss": 397.11906272828,
+      "median_price": 1233.2294025794647,
+      "shortfall_eur_ha": 172.90456174841498,
+      "pinball": 0.12110576544572925,
+      "coverage": 0.6254046446164673,
+      "width": 0.8880597653751762
+    },
+    {
+      "model": "linear",
+      "n": 201,
+      "years": 7,
+      "held": 0.6915422885572139,
+      "held_year_mean": 0.6840136054421768,
+      "held_year_bootstrap_80": [
+        0.5411564625850339,
+        0.826530612244898
+      ],
+      "contract_loss": 397.15997406149205,
+      "median_price": 1457.8984331647569,
+      "shortfall_eur_ha": 127.45154425106549,
+      "pinball": 0.11403022943609632,
+      "coverage": 0.6769176636171711,
+      "width": 0.9183064704144387
+    },
+    {
+      "model": "trend",
+      "n": 201,
+      "years": 7,
+      "held": 0.7263681592039801,
+      "held_year_mean": 0.7193877551020408,
+      "held_year_bootstrap_80": [
+        0.5765306122448978,
+        0.8571428571428571
+      ],
+      "contract_loss": 431.21814405190355,
+      "median_price": 1557.9658748656518,
+      "shortfall_eur_ha": 113.798378485256,
+      "pinball": 0.10917824924775406,
+      "coverage": 0.6578700445695521,
+      "width": 0.8588336559233121
+    }
+  ],
+  "audit": [
+    {
+      "year": 2019,
+      "model": "trend",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015
+      ],
+      "calibration_years": [
+        2016,
+        2017,
+        2018
+      ],
+      "n_proper": 153,
+      "n_cal": 82,
+      "n_test": 28,
+      "qhat": 0.1373341465408442,
+      "calibration_audit": []
+    },
+    {
+      "year": 2019,
+      "model": "linear",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015
+      ],
+      "calibration_years": [
+        2016,
+        2017,
+        2018
+      ],
+      "n_proper": 153,
+      "n_cal": 82,
+      "n_test": 28,
+      "qhat": 0.17943498292248428,
+      "calibration_audit": []
+    },
+    {
+      "year": 2019,
+      "model": "lightgbm",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015
+      ],
+      "calibration_years": [
+        2016,
+        2017,
+        2018
+      ],
+      "n_proper": 153,
+      "n_cal": 82,
+      "n_test": 28,
+      "qhat": 0.18006245359259154,
+      "calibration_audit": []
+    },
+    {
+      "year": 2019,
+      "model": "qrf",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015
+      ],
+      "calibration_years": [
+        2016,
+        2017,
+        2018
+      ],
+      "n_proper": 153,
+      "n_cal": 82,
+      "n_test": 28,
+      "qhat": 0.12818621116009865,
+      "calibration_audit": []
+    },
+    {
+      "year": 2019,
+      "model": "ensemble",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015
+      ],
+      "calibration_years": [
+        2016,
+        2017,
+        2018
+      ],
+      "n_proper": 153,
+      "n_cal": 82,
+      "n_test": 28,
+      "qhat": 0.16974213300775354,
+      "calibration_audit": []
+    },
+    {
+      "year": 2020,
+      "model": "trend",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016
+      ],
+      "calibration_years": [
+        2017,
+        2018,
+        2019
+      ],
+      "n_proper": 180,
+      "n_cal": 83,
+      "n_test": 28,
+      "qhat": 0.12410096469776133,
+      "calibration_audit": []
+    },
+    {
+      "year": 2020,
+      "model": "linear",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016
+      ],
+      "calibration_years": [
+        2017,
+        2018,
+        2019
+      ],
+      "n_proper": 180,
+      "n_cal": 83,
+      "n_test": 28,
+      "qhat": 0.15076655188654053,
+      "calibration_audit": []
+    },
+    {
+      "year": 2020,
+      "model": "lightgbm",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016
+      ],
+      "calibration_years": [
+        2017,
+        2018,
+        2019
+      ],
+      "n_proper": 180,
+      "n_cal": 83,
+      "n_test": 28,
+      "qhat": 0.2151444644611692,
+      "calibration_audit": []
+    },
+    {
+      "year": 2020,
+      "model": "qrf",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016
+      ],
+      "calibration_years": [
+        2017,
+        2018,
+        2019
+      ],
+      "n_proper": 180,
+      "n_cal": 83,
+      "n_test": 28,
+      "qhat": 0.19948554763035897,
+      "calibration_audit": []
+    },
+    {
+      "year": 2020,
+      "model": "ensemble",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016
+      ],
+      "calibration_years": [
+        2017,
+        2018,
+        2019
+      ],
+      "n_proper": 180,
+      "n_cal": 83,
+      "n_test": 28,
+      "qhat": 0.1920139430582234,
+      "calibration_audit": []
+    },
+    {
+      "year": 2021,
+      "model": "trend",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017
+      ],
+      "calibration_years": [
+        2018,
+        2019,
+        2020
+      ],
+      "n_proper": 202,
+      "n_cal": 84,
+      "n_test": 28,
+      "qhat": 0.15990167410332407,
+      "calibration_audit": []
+    },
+    {
+      "year": 2021,
+      "model": "linear",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017
+      ],
+      "calibration_years": [
+        2018,
+        2019,
+        2020
+      ],
+      "n_proper": 202,
+      "n_cal": 84,
+      "n_test": 28,
+      "qhat": 0.1459000741898252,
+      "calibration_audit": []
+    },
+    {
+      "year": 2021,
+      "model": "lightgbm",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017
+      ],
+      "calibration_years": [
+        2018,
+        2019,
+        2020
+      ],
+      "n_proper": 202,
+      "n_cal": 84,
+      "n_test": 28,
+      "qhat": 0.20182600320215816,
+      "calibration_audit": []
+    },
+    {
+      "year": 2021,
+      "model": "qrf",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017
+      ],
+      "calibration_years": [
+        2018,
+        2019,
+        2020
+      ],
+      "n_proper": 202,
+      "n_cal": 84,
+      "n_test": 28,
+      "qhat": 0.20510196467214598,
+      "calibration_audit": []
+    },
+    {
+      "year": 2021,
+      "model": "ensemble",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017
+      ],
+      "calibration_years": [
+        2018,
+        2019,
+        2020
+      ],
+      "n_proper": 202,
+      "n_cal": 84,
+      "n_test": 28,
+      "qhat": 0.17088647550391967,
+      "calibration_audit": []
+    },
+    {
+      "year": 2022,
+      "model": "trend",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018
+      ],
+      "calibration_years": [
+        2019,
+        2020,
+        2021
+      ],
+      "n_proper": 230,
+      "n_cal": 84,
+      "n_test": 28,
+      "qhat": 0.2242473521339533,
+      "calibration_audit": []
+    },
+    {
+      "year": 2022,
+      "model": "linear",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018
+      ],
+      "calibration_years": [
+        2019,
+        2020,
+        2021
+      ],
+      "n_proper": 230,
+      "n_cal": 84,
+      "n_test": 28,
+      "qhat": 0.23114629314015894,
+      "calibration_audit": []
+    },
+    {
+      "year": 2022,
+      "model": "lightgbm",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018
+      ],
+      "calibration_years": [
+        2019,
+        2020,
+        2021
+      ],
+      "n_proper": 230,
+      "n_cal": 84,
+      "n_test": 28,
+      "qhat": 0.30510393941089126,
+      "calibration_audit": []
+    },
+    {
+      "year": 2022,
+      "model": "qrf",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018
+      ],
+      "calibration_years": [
+        2019,
+        2020,
+        2021
+      ],
+      "n_proper": 230,
+      "n_cal": 84,
+      "n_test": 28,
+      "qhat": 0.19665319362562106,
+      "calibration_audit": []
+    },
+    {
+      "year": 2022,
+      "model": "ensemble",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018
+      ],
+      "calibration_years": [
+        2019,
+        2020,
+        2021
+      ],
+      "n_proper": 230,
+      "n_cal": 84,
+      "n_test": 28,
+      "qhat": 0.2799513851397264,
+      "calibration_audit": []
+    },
+    {
+      "year": 2023,
+      "model": "trend",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019
+      ],
+      "calibration_years": [
+        2020,
+        2021,
+        2022
+      ],
+      "n_proper": 258,
+      "n_cal": 90,
+      "n_test": 30,
+      "qhat": 0.2281432085742845,
+      "calibration_audit": []
+    },
+    {
+      "year": 2023,
+      "model": "linear",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019
+      ],
+      "calibration_years": [
+        2020,
+        2021,
+        2022
+      ],
+      "n_proper": 258,
+      "n_cal": 90,
+      "n_test": 30,
+      "qhat": 0.2751851390389293,
+      "calibration_audit": []
+    },
+    {
+      "year": 2023,
+      "model": "lightgbm",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019
+      ],
+      "calibration_years": [
+        2020,
+        2021,
+        2022
+      ],
+      "n_proper": 258,
+      "n_cal": 90,
+      "n_test": 30,
+      "qhat": 0.3156081746729688,
+      "calibration_audit": []
+    },
+    {
+      "year": 2023,
+      "model": "qrf",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019
+      ],
+      "calibration_years": [
+        2020,
+        2021,
+        2022
+      ],
+      "n_proper": 258,
+      "n_cal": 90,
+      "n_test": 30,
+      "qhat": 0.2571094739209293,
+      "calibration_audit": []
+    },
+    {
+      "year": 2023,
+      "model": "ensemble",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019
+      ],
+      "calibration_years": [
+        2020,
+        2021,
+        2022
+      ],
+      "n_proper": 258,
+      "n_cal": 90,
+      "n_test": 30,
+      "qhat": 0.2896337894674142,
+      "calibration_audit": []
+    },
+    {
+      "year": 2024,
+      "model": "trend",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020
+      ],
+      "calibration_years": [
+        2021,
+        2022,
+        2023
+      ],
+      "n_proper": 288,
+      "n_cal": 90,
+      "n_test": 30,
+      "qhat": 0.35453154086600325,
+      "calibration_audit": []
+    },
+    {
+      "year": 2024,
+      "model": "linear",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020
+      ],
+      "calibration_years": [
+        2021,
+        2022,
+        2023
+      ],
+      "n_proper": 288,
+      "n_cal": 90,
+      "n_test": 30,
+      "qhat": 0.2424841553787449,
+      "calibration_audit": []
+    },
+    {
+      "year": 2024,
+      "model": "lightgbm",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020
+      ],
+      "calibration_years": [
+        2021,
+        2022,
+        2023
+      ],
+      "n_proper": 288,
+      "n_cal": 90,
+      "n_test": 30,
+      "qhat": 0.28598874512893846,
+      "calibration_audit": []
+    },
+    {
+      "year": 2024,
+      "model": "qrf",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020
+      ],
+      "calibration_years": [
+        2021,
+        2022,
+        2023
+      ],
+      "n_proper": 288,
+      "n_cal": 90,
+      "n_test": 30,
+      "qhat": 0.24744739096041535,
+      "calibration_audit": []
+    },
+    {
+      "year": 2024,
+      "model": "ensemble",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020
+      ],
+      "calibration_years": [
+        2021,
+        2022,
+        2023
+      ],
+      "n_proper": 288,
+      "n_cal": 90,
+      "n_test": 30,
+      "qhat": 0.23409600326875357,
+      "calibration_audit": []
+    },
+    {
+      "year": 2025,
+      "model": "trend",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021
+      ],
+      "calibration_years": [
+        2022,
+        2023,
+        2024
+      ],
+      "n_proper": 304,
+      "n_cal": 87,
+      "n_test": 29,
+      "qhat": 0.4472702527826462,
+      "calibration_audit": []
+    },
+    {
+      "year": 2025,
+      "model": "linear",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021
+      ],
+      "calibration_years": [
+        2022,
+        2023,
+        2024
+      ],
+      "n_proper": 304,
+      "n_cal": 87,
+      "n_test": 29,
+      "qhat": 0.14288363848990393,
+      "calibration_audit": []
+    },
+    {
+      "year": 2025,
+      "model": "lightgbm",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021
+      ],
+      "calibration_years": [
+        2022,
+        2023,
+        2024
+      ],
+      "n_proper": 304,
+      "n_cal": 87,
+      "n_test": 29,
+      "qhat": 0.33329592864366697,
+      "calibration_audit": []
+    },
+    {
+      "year": 2025,
+      "model": "qrf",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021
+      ],
+      "calibration_years": [
+        2022,
+        2023,
+        2024
+      ],
+      "n_proper": 304,
+      "n_cal": 87,
+      "n_test": 29,
+      "qhat": 0.28057739344457944,
+      "calibration_audit": []
+    },
+    {
+      "year": 2025,
+      "model": "ensemble",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021
+      ],
+      "calibration_years": [
+        2022,
+        2023,
+        2024
+      ],
+      "n_proper": 304,
+      "n_cal": 87,
+      "n_test": 29,
+      "qhat": 0.25752290984015436,
+      "calibration_audit": []
+    }
+  ],
+  "caveats": [
+    "2019-2025 already examined: research comparison, not fresh confirmatory evidence.",
+    "Dependent departments and temporal drift: no 80% population coverage guarantee.",
+    "Historical data are latest-vintage, not publication-time snapshots.",
+    "Training-only duplicate detection may miss groups with fewer than eight past matches.",
+    "Conditional yield scores use realised weather; contract prices use historical weather only.",
+    "Monte Carlo keeps independent crop residuals and three-quantile tail interpolation as controls.",
+    "No validation of transfer to unobserved Ile-de-France lentil yields."
+  ]
+}

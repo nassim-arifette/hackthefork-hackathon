@@ -13,6 +13,9 @@ data_raw/weather.log
 
 # Python
 .venv/
+.venv-research/
+benchmark-input.zip
+benchmark-results.zip
 __pycache__/
 *.pyc
 .ipynb_checkpoints/
