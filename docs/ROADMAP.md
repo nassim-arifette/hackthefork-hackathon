@@ -10,7 +10,7 @@
 
 ## État et décisions proposées au samedi 31/10
 
-**Déjà réalisé :** pipeline Agreste / RPG / NASA POWER / Eurostat, modèles comparés, backtest, incertitude sur P*, application en cinq étapes, version hors ligne et tests. Le scénario du 31/10 est calculé : version 4 de [RESULTATS.md](RESULTATS.md), P* de 1 567 €/t en Seine-et-Marne, 78 % de contrats tenus en backtest strict, comparaison des contrats comprise.
+**Déjà réalisé :** pipeline Agreste / RPG / NASA POWER / Eurostat, modèles comparés, backtest, incertitude sur P*, application en six écrans animés et six annexes, version hors ligne et tests. Le scénario du 31/10 est calculé : version 4 de [RESULTATS.md](RESULTATS.md), P* de 1 567 €/t en Seine-et-Marne, 78 % de contrats tenus en backtest strict, comparaison des contrats comprise.
 
 **Recherche mentor réalisée :** éligibilité de la lentille alimentaire confirmée, montant PAC remis dans sa campagne, références de charges et d'effet précédent trouvées, exemples de contrats réels, coefficients d'impact et choix d'usage RPG / SAA documentés dans [QUESTIONS.md](QUESTIONS.md).
 
@@ -31,10 +31,10 @@
 - [x] Fournir un historique fictif 2019–2025 et son générateur : masse brute/nette, qualité, refus, paiements et coûts par acteur. Références réelles séparées dans [data/pilote_300t](../data/pilote_300t/README.md).
 - [x] Brancher ces barèmes sur les scénarios du moteur et sur le backtest ; les lots fictifs restent hors apprentissage et backtest Agreste.
 - [x] Reporter le scénario central et ses sensibilités dans data/hypotheses.yaml ; conserver les paramètres historiques pour reproduire la version 3.
-- [x] Recalculer P*, les courbes, le backtest et les exports associés, sans changer le protocole d'évaluation. Version 4 dans [RESULTATS.md](RESULTATS.md) ; README et deck synchronisés. La lettre est à régénérer dans CloudShell.
-- [ ] Présenter séparément la marge de campagne et celle intégrant le bénéfice de la culture suivante. Le bonus de rotation est compté une fois.
+- [x] Recalculer P*, les courbes, le backtest et les exports associés, sans changer le protocole d'évaluation. Version 4 dans [RESULTATS.md](RESULTATS.md) ; README, deck et lettre synchronisés.
+- [x] Présenter séparément la marge de campagne et celle intégrant le bénéfice de la culture suivante. Le bonus de rotation est compté une fois : 1 607 €/ha sur la campagne seule (annexe « Deux mauvaises années, rejouées »).
 - [x] Remplacer « prix de marché » par « référence historique 2012–2016 » pour la série Eurostat. Ajouter les cas Unéal et NatUp datés documentés dans [QUESTIONS.md](QUESTIONS.md).
-- [x] Payer les tonnes alimentaires acceptées. Assiette Agreste vérifiée : rendement « au stade arrivée ferme », avant le tri (méthodologie SAA, p. 3) ; 10 % refusés, sensibilité 0 / 10 / 20 %. Reste : facturer tri et collecte sur les tonnes reçues dans le budget acheteur.
+- [x] Payer les tonnes alimentaires acceptées. Assiette Agreste vérifiée : rendement « au stade arrivée ferme », avant le tri (méthodologie SAA, p. 3) ; 10 % refusés, sensibilité 0 / 10 / 20 %. Tri et collecte facturés sur les tonnes reçues dans le budget de l'acheteur (annexe du contrat).
 - [x] Faire l'audit court RPG / SAA : même campagne, 178 identifiants uniques, filtre 1 ha sans effet notable ; 70 % de l'écart en Seine-et-Marne, compatible avec le rattachement au siège. Détail dans [QUESTIONS.md](QUESTIONS.md) §5.
 
 **Critère de sortie :** toutes les vues d'un scénario utilisent le même jeu d'hypothèses et les mêmes exports. Le nouveau prix est un résultat calculé. Le dossier de prospection permet de demander un contrat complet et des données de lots à un partenaire réel.
@@ -42,11 +42,11 @@
 ### 2. Montrer une décision de contrat et un impact chiffré
 
 - [x] Ajouter deux volumes : **pilote 300 t nettes alimentaires** et **ambition 5 000 t** avec son assiette explicite. Montrer les surfaces nécessaires et les tonnes potentielles ; un scénario de mobilisation à 10 % peut compléter la sélection économique.
-- [ ] Afficher le prix uniforme selon la protection visée, puis l'option indexée déjà calculée : m × prix du blé de récolte. Valeurs recalculées : 3,44 en médiane, 7,44 pour 8 années sur 10 ; l'option indexée reste à afficher.
-- [ ] Faire varier le prix du blé pour montrer le budget de l'acheteur. L'indexation transfère ce risque ; rendement et risque de base restent à traiter.
+- [x] Afficher le prix uniforme selon la protection visée, puis l'option indexée : m × prix du blé de récolte, 3,44 en médiane, 7,44 pour 8 années sur 10 (annexe du contrat, « Quatre façons de garantir 8 années sur 10 »).
+- [x] Faire varier le prix du blé pour montrer le budget de l'acheteur : de 357 à 625 k€ d'achat indexé pour 300 t (annexe du contrat). L'indexation transfère ce risque ; le risque de rendement reste porté par l'agriculteur, d'où l'offre d'assurance.
 - [x] Comparer sur le jeu synthétique les trois barèmes : référence publique **900 / 700 / 600**, proposition **1 000 / 750 / 650** et prix uniforme **900 €/t**. Les règles communes de qualité et de service sont des conventions de simulation ; voir [contrats.json](../data/pilote_300t/contrats.json).
 - [x] Intégrer le barème synthétique 1 000 / 750 / 650 €/t aux scénarios du modèle ; comparer aussi **900 €/t + une prime par hectare calculée** (491 €/ha).
-- [x] Comparer les contrats avec les mêmes scénarios du modèle : fréquence de marges gagnantes, coût moyen pour l'acheteur et perte des mauvaises années ; backtest année par année dans `data/backtest.json`. Reste : afficher 2020 et 2021 par contrat. Les résultats du jeu fictif illustrent les mécanismes sans valider leur fréquence réelle.
+- [x] Comparer les contrats avec les mêmes scénarios du modèle : fréquence de marges gagnantes, coût moyen pour l'acheteur et perte des mauvaises années ; backtest année par année dans `data/backtest.json`, et 2020, 2021, 2022 contrat par contrat dans l'annexe du contrat. Les résultats du jeu fictif illustrent les mécanismes sans valider leur fréquence réelle.
 - [x] Ajouter les protéines potentielles : **25 %** de la masse de graines alimentaires ; référence Terres Inovia / Terres Univia disponible.
 - [x] Ajouter l'azote minéral non apporté : **180 kg N par nouvel hectare de blé remplacé**, scénario régional arrondi.
 - [x] Ajouter les émissions directes associées à cet azote : **environ 0,755 t CO₂e/ha**, avec le périmètre expliqué. Les formules et sources GIEC sont dans [QUESTIONS.md](QUESTIONS.md).
@@ -56,8 +56,8 @@
 ### 3. Livrer la démo et répéter
 
 - [x] Corriger le prompt de la lettre : « 8 années sur 10 » signifie que la marge lentille atteint celle du blé dans le modèle ; ce chiffre ne mesure pas la fiabilité de la coopérative.
-- [x] Dans le compte AWS de l'équipe, vérifier une invocation Bedrock puis générer la lettre et la mettre en cache ; procédure dans [AWS.md](AWS.md). À relancer avec les chiffres de la version 4.
-- [ ] Version web déployée par Amplify à chaque push sur `main`, version hors ligne exportée. Reste : vérifier le parcours complet sur l'ordinateur de démo et préparer une vidéo courte.
+- [x] Dans le compte AWS de l'équipe, vérifier une invocation Bedrock puis générer la lettre et la mettre en cache ; procédure dans [AWS.md](AWS.md). Lettre régénérée avec les chiffres de la version 4 (barème par tranches).
+- [ ] Version web déployée par Amplify à chaque push sur `main`, version hors ligne exportée. Vidéo de secours de 4 minutes rendue image par image (branche `video-demo`). Reste : vérifier le parcours complet sur l'ordinateur de démo.
 - [x] Confirmer la règle sur les assistants de code externes ; Claude Code et ChatGPT déclarés dans [DECLARATIONS.md](DECLARATIONS.md).
 - [ ] Track 3 déclaré. Reste : choisir présentateur et opérateur de démo ; répéter en français.
 - [x] Préparer la proposition commerciale, les contacts publics et le brouillon de prise de contact pour un pilote de 300 t nettes : [PILOTE_300T.md](PILOTE_300T.md).
@@ -72,8 +72,8 @@ Dès que le parcours cœur fonctionne avec des chiffres cohérents, prendre ces 
 | 1 | ~~Site de collecte déplaçable~~ **fait** | 1 h | Distances, coût rendu, tonnes et courbe se recalculent ; meilleur point d'une grille. |
 | 2 | ~~Suivi Sentinel de 5 à 10 parcelles~~ **fait** (8 parcelles, étape « La saison ») | 1 à 2 h | Courbes précalculées, dates et pixels valides affichés, replay clairement nommé. |
 | 3 | ~~Le Maillon vu du ciel, zone réduite~~ **fait** (étape « Vu du ciel ») | Créneau restant avant le gel | Carte de classes et métriques sur des carrés de 4 km tenus à l'écart ; transfert 2024 → 2025 testé. |
-| 4 | Météo pondérée par les surfaces ; variables par stade | Seulement si le cœur et la démo sont prêts | Nouvelle version comparée à M1 avec le même protocole. |
-| 5 | ~~Autres cultures~~ **fait** (pois chiche, haricot, pois, féverole) ; données coopératives, offre assureurs | Selon capacité disponible | Une preuve ciblée ou une maquette clairement identifiée. |
+| 4 | Météo pondérée par les surfaces ; variables par stade | Non retenu pour le dépôt : les chiffres validés en backtest strict restent la référence | Limite annoncée dans [LIMITES.md](LIMITES.md). |
+| 5 | ~~Autres cultures~~ **fait** (pois chiche, haricot, pois, féverole) ; ~~offre assureurs~~ **faite** (prime pure, écran 6) ; ~~carte de France des prix~~ **faite** ; ~~sites de collecte existants~~ **faits** (Sirene) ; données coopératives demandées aux partenaires | Selon capacité disponible | Une preuve ciblée ou une maquette clairement identifiée. |
 
 Les scénarios de stress restent séparés du backtest. Toute amélioration inspirée par les années 2020–2021 devient une nouvelle exploration, avec une évaluation distincte des résultats déjà consultés.
 
@@ -220,16 +220,18 @@ Fait sur 24 × 24 km autour du site, campagnes 2024 et 2025 ([RESULTATS.md §10]
 
 ---
 
-## 6. Au-delà
+## 6. Passage à l'échelle
 
 | Piste | Ce qu'elle apporte |
 |---|---|
 | Données de rendement de coopératives | passer du département à la parcelle, et corriger la sous-estimation du risque |
 | Autres cultures sous contrat | pois chiche, haricot sec, chanvre, sorgho : même moteur, nouveaux libellés Agreste |
-| Autres régions | entraînement national déjà en place ; seule la couche parcellaire change |
+| Autres régions | le même calcul donne déjà le prix de 24 départements producteurs (écran 6) ; seule la couche parcellaire change |
 | Modèle hiérarchique bayésien | partage d'information entre départements peu renseignés |
 | Bruche et qualité alimentaire | intégrer le volume payé après tri ; sensibilité 0 / 10 / 20 % de non-valorisation alimentaire, **supposée**, à rapprocher des données coopératives |
-| Offre assureurs | prototype de lecture du risque ; tarification à construire avec les sinistres et les conditions de couverture |
+| Offre assureurs | prime pure calculée sur la même distribution (231 €/ha pour 70 % du rendement moyen) ; chargements et conditions de couverture à construire avec un assureur |
+| Réseau de collecte | 352 établissements du commerce de grains autour de l'Île-de-France (Sirene) ; capacités et silos réels à obtenir des coopératives |
+| Marché | 142 coopératives agricoles et 28 unions font le commerce des grains en France (Sirene) |
 | Historique RPG | rotations réelles, éligibilité plus fine (précédent cultural) |
 
 ## 7. Décisions de mentor et sources

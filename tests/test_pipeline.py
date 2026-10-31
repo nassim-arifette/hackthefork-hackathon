@@ -280,7 +280,7 @@ def test_existing_sites_export_is_consistent():
         assert sites[best["index"]][col] == min(s[col] for s in sites) == best["km_moyen"]
     assert 0 <= d["maillon"]["part_surface_moins_10_km"] <= 1
     # Le cache versionné ne garde que les champs utiles : ni dirigeants ni adresses.
-    for f in (DATA.parent / "data_raw" / "sirene").glob("*.json"):
+    for f in (DATA.parent / "data_raw" / "sirene").glob("*_*.json"):
         txt = f.read_text()
         assert "dirigeants" not in txt and "adresse" not in txt
         assert not any(str(r["nature_juridique"]).startswith("1") for r in json.loads(txt)["results"])

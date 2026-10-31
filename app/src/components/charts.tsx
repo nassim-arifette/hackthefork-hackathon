@@ -1,41 +1,7 @@
-import { backtest, D77, dateOf, fmt, MARKET, meta, ndviAt, pct, reliabilityAt, SAISON, SUIVI, thresholds, type Statut } from '../data';
+import { backtest, D77, dateOf, fmt, MARKET, ndviAt, pct, reliabilityAt, SAISON, SUIVI, thresholds, type Statut } from '../data';
 
 // Largeur logique commune : le texte du panneau fait environ 416 px.
 const W = 416;
-
-/** Rendements nationaux 2010-2025 en indice (moyenne = 100). Étiquettes directes, pas de légende. */
-export function YieldsChart() {
-  const rows = meta.rendements_nationaux;
-  const mB = rows.reduce((a, r) => a + r.ble, 0) / rows.length;
-  const mL = rows.reduce((a, r) => a + r.lentille, 0) / rows.length;
-  const h = 196, l = 28, r = 64, t = 12, b = 26, lo = 50, hi = 135;
-  const X = (y: number) => l + ((W - l - r) * (y - 2010)) / 15;
-  const Y = (v: number) => t + (h - t - b) * (1 - (v - lo) / (hi - lo));
-  const idx = (k: 'ble' | 'lentille', m: number) => rows.map((d) => (100 * d[k]) / m);
-  const path = (vals: number[]) => vals.map((v, i) => `${i ? 'L' : 'M'}${X(2010 + i).toFixed(1)},${Y(v).toFixed(1)}`).join('');
-  const b16 = (100 * rows.find((d) => d.annee === 2016)!.ble) / mB;
-  const l20 = (100 * rows.find((d) => d.annee === 2020)!.lentille) / mL;
-  const lastB = idx('ble', mB)[15], lastL = idx('lentille', mL)[15];
-  return (
-    <svg viewBox={`0 0 ${W} ${h}`} role="img" aria-label="Rendement national du blé et de la lentille, en indice, de 2010 à 2025">
-      {[60, 80, 120].map((v) => (
-        <g key={v}><line x1={l} x2={W - r} y1={Y(v)} y2={Y(v)} className="grid" />
-          <text x={l - 6} y={Y(v) + 3.5} className="tick" textAnchor="end">{v}</text></g>
-      ))}
-      <line x1={l} x2={W - r} y1={Y(100)} y2={Y(100)} className="ref" />
-      <text x={l - 6} y={Y(100) + 3.5} className="tick" textAnchor="end">100</text>
-      {[2010, 2015, 2020, 2025].map((y) => <text key={y} x={X(y)} y={h - 8} className="tick" textAnchor="middle">{y}</text>)}
-      <path d={path(idx('ble', mB))} className="ln wheat" />
-      <path d={path(idx('lentille', mL))} className="ln lentil" />
-      <text x={X(2025) + 8} y={Y(lastB) + 4} className="lbl wheat">Blé</text>
-      <text x={X(2025) + 8} y={Y(lastL) + 4} className="lbl lentil">Lentille</text>
-      <circle cx={X(2016)} cy={Y(b16)} r={3.5} className="pt wheat" />
-      <text x={X(2016)} y={Y(b16) + 17} className="note" textAnchor="middle">2016</text>
-      <circle cx={X(2020)} cy={Y(l20)} r={3.5} className="pt lentil" />
-      <text x={X(2020) + 8} y={Y(l20) + 4} className="note">2020</text>
-    </svg>
-  );
-}
 
 /** Prix proposé → part des années où la lentille gagne (haut) et hectares qui basculent (bas). */
 export function PriceChart({ price, min, max, supply }: { price: number; min: number; max: number; supply: { prix: number; hectares: number }[] }) {

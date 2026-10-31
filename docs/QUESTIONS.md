@@ -24,8 +24,8 @@ L'équipe a adopté ce scénario le 31/10 ; il est calculé dans la version 4 de
 | Repères de prix | « Référence historique 2012–2016 » remplace « prix du marché ». Unéal et NatUp affichés pour comparer. | Fait. |
 | RPG / Agreste | Audit fait. | Résultat au §5. |
 | Contrats | Comparer le prix unique, les barèmes publiés, la proposition du dossier pilote, des tranches calibrées et une prime à l'hectare, sur les mêmes scénarios et en backtest. | Fait : à protection égale, les tranches coûtent 18 % de moins que le prix unique (19 % en backtest, 79 % de contrats tenus contre 78 %). |
-| Lettre Bedrock | Régénérer avec les chiffres de la version 4. | Commande dans [AWS.md](AWS.md). |
-| Présentateur | Décidé plus tard. | — |
+| Lettre Bedrock | Régénérer avec les chiffres de la version 4. | Fait : barème 1 635 / 750 / 650 €/t et 0,48 t/ha l’année faible, contrôlés par le garde-fou ; commande dans [AWS.md](AWS.md). |
+| Présentateur | À désigner samedi soir, avant les répétitions ; un orateur et un opérateur de démo. | — |
 
 ### Pourquoi payer les tonnes acceptées au tri
 

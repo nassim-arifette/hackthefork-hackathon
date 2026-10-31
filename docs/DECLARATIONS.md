@@ -17,6 +17,8 @@ Obligatoire au dépôt. Tout ce qui n'a pas été produit pendant l'événement 
 | Contours des départements (gregoiredavid/france-geojson, dérivé d'IGN Admin Express COG 2018) | centroïdes météo, contours de carte | Licence Ouverte (Etalab), selon le dépôt | téléchargé depuis GitHub |
 | RPG 2025 Île-de-France (IGN, data.geopf.fr) | parcelles de la carte | voir [SOURCES.md](SOURCES.md) | téléchargé depuis le site de l'IGN |
 | Eurostat : prix agricoles et Comext | prix du blé et de la lentille, commerce extérieur | réutilisation autorisée avec citation | via l'API Eurostat |
+| Base Sirene (Insee), via l'API Recherche d'entreprises (DINUM) | sites de collecte existants autour de l'Île-de-France, nombre de coopératives du commerce de grains | Licence Ouverte Etalab 2.0 | interrogée par `11_sites.py` ; réponses allégées (ni dirigeants, ni adresses, ni entrepreneurs individuels) dans `data_raw/sirene/` |
+| Coop FR, « Les entreprises coopératives françaises – chiffres 2024 » | taille du secteur coopératif agricole | document public | cité dans le deck et la fiche |
 
 Les archives du Drive de l'organisation ont été créées le 30/10/2026 à 17h36.
 

@@ -259,11 +259,13 @@ export default function App() {
       if (e.key === 'ArrowRight') { stop(); setPrice((p) => Math.min(MAX, p + 10)); }
       if (e.key === 'ArrowLeft') { stop(); setPrice((p) => Math.max(MIN, p - 10)); }
       if (e.key === 'm') setMethod(true);
+      // Écran 6 : F bascule entre le bassin et la carte de France.
+      if ((e.key === 'f' || e.key === 'F') && view === 'impact') setImpactView((v) => (v === 'france' ? 'bassin' : 'france'));
       if (legacy === 2 && (e.key === '1' || e.key === '2')) setYear(replay[+e.key - 1]);
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [go, method, annex, annexIdx, mainIdx, lastMain, legacy]);
+  }, [go, method, annex, annexIdx, mainIdx, lastMain, legacy, view]);
   useEffect(() => stop, []);
 
   const MR = MAILLON.resultats[maillonV];
@@ -581,12 +583,13 @@ export default function App() {
               <div className="block">
                 <h3>Qui paie, et la suite</h3>
                 <ul className="next-steps">
-                  <li><b>Les coopératives et les conditionneurs</b>, à chaque campagne : ce prix se fixe tous les ans.</li>
+                  <li><b>Les coopératives et les conditionneurs</b>, à chaque campagne : ce prix se fixe tous les ans. {fmt(SITES.marche.cooperatives + SITES.marche.unions)} coopératives et unions font le commerce des grains en France.</li>
                   <li><b>Un pilote de {fmt(VP)} t</b> avec une coopérative, sur les parcelles les plus proches de son silo.</li>
                   <li><b>Le pois chiche, le haricot et les autres régions</b> : le même moteur, culture par culture et département par département.</li>
                   <li><b>Les assureurs</b> : avec la même distribution de récolte, une assurance rendement à {pct(ASSUR70.seuil)} coûte {fmt(ASSUR70.prime_pure_eur_ha)} €/ha de prime pure en Seine-et-Marne ; le sinistre survient {fmt(ASSUR70.frequence_sinistre * 10)} années sur 10.</li>
                 </ul>
-                <Source k="modele">Prime pure hors chargements, récolte valorisée à {fmt(CONTRATS.assurance.prix_assure_eur_t)} €/t, rendement moyen simulé de {dec(CONTRATS.assurance.rendement_moyen_tha, 2)} t/ha.</Source>
+                <Source k="mesure">{fmt(SITES.marche.cooperatives)} coopératives agricoles et {fmt(SITES.marche.unions)} unions actives en NAF 46.21Z, Sirene (Insee), {frDate(SITES.marche.date_extraction)}.</Source>
+                <Source k="modele">Prime pure hors chargements ; récolte à {fmt(CONTRATS.assurance.prix_assure_eur_t)} €/t, {dec(CONTRATS.assurance.rendement_moyen_tha, 2)} t/ha en moyenne simulée.</Source>
               </div>
             </>
           )}

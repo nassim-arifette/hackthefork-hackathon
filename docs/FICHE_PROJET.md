@@ -21,10 +21,10 @@ Premier résultat, en Seine-et-Marne : il faut 1 567 €/t pour tenir 8 années 
 
 ## Le modèle économique
 
-- **Clients** : les coopératives et les conditionneurs de légumes secs, qui fixent ce prix à chaque campagne.
+- **Clients** : les coopératives et les conditionneurs de légumes secs, qui fixent ce prix à chaque campagne. En France, 142 coopératives agricoles et 28 unions de coopératives font le commerce des grains (base Sirene).
 - **Offre** : une étude pilote, puis un abonnement par campagne et par bassin ; les montants sont à valider avec les premiers clients.
 - **Adoption** : un pilote de 300 t avec une coopérative qui développe une filière lentille ; ses données de rendement rendront le prix plus précis.
-- **Extension** : le pois chiche et le haricot pour l'alimentation humaine, d'autres régions, puis les assureurs agricoles.
+- **Extension** : le pois chiche et le haricot pour l'alimentation humaine ; d'autres régions, puisque le même calcul donne déjà un prix pour 24 départements producteurs ; les assureurs agricoles, qui peuvent tarifer une assurance rendement avec la même distribution de récolte.
 
 ## L'impact
 

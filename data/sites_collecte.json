@@ -61,6 +61,12 @@
   "km_max": 12.4,
   "part_surface_moins_10_km": 0.913
  },
+ "marche_france": {
+  "cooperatives": 142,
+  "unions": 28,
+  "date_extraction": "2026-10-31",
+  "definition": "sociétés coopératives agricoles (6317) et unions (6318) actives, NAF 46.21Z"
+ },
  "sites": [
   {
    "siret": "70698018200036",

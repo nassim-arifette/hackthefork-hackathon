@@ -97,7 +97,7 @@ Pour le pois, l'effet précédent est sourcé : +7 q/ha sur le blé suivant et �
 
 ### Qui paie
 
-Les coopératives et les conditionneurs de légumes secs. Ils ont le problème, le budget, et prennent cette décision à chaque campagne.
+Les coopératives et les conditionneurs de légumes secs. Ils ont le problème, le budget, et prennent cette décision à chaque campagne. En France, 142 coopératives agricoles et 28 unions de coopératives font le commerce des grains (Sirene, NAF 46.21Z, **mesuré**) ; le secteur coopératif agricole compte 2 100 entreprises, 316 000 sociétaires et 118 Md€ de chiffre d'affaires (Coop FR, chiffres 2024, **sourcé**).
 
 ### La valeur, en euros
 
@@ -122,7 +122,8 @@ Les montants sont des **hypothèses** à valider avec des coopératives.
 La lentille seule est un petit marché : environ 34 000 ha en 2025 (**mesuré**). C'est la porte d'entrée. Le même moteur s'applique ensuite :
 
 - **à toutes les cultures sous contrat** : pois chiche, haricot sec, chanvre, sorgho, cultures bas carbone ;
-- **aux assureurs agricoles**, qui ont besoin de la même distribution de rendement pour tarifer ;
+- **à d'autres régions** : le même calcul donne déjà un prix pour 24 départements producteurs, de 558 à 2 238 €/t (**modèle**) ;
+- **aux assureurs agricoles**, qui ont besoin de la même distribution de rendement pour tarifer : 231 €/ha de prime pure pour garantir 70 % du rendement moyen en Seine-et-Marne (**modèle**) ;
 - **aux industriels de l'agroalimentaire** qui veulent sécuriser un approvisionnement français.
 
 ### Risques business

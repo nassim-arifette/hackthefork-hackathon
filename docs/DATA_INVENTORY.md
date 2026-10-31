@@ -139,3 +139,11 @@ Météo NASA POWER récupérée pour 87 départements (`data/meteo_dept_cultures
 - **Contenu** : 140 lots fictifs de la coopérative `SYN_COOP_01`, 20 fermes, 2019–2025 ; récolte brute et nette, qualité, refus, paiements et coûts par acteur ; trois barèmes paramétrés dans `contrats.json`.
 - **Statut** : **synthétique**, reproductible avec `python3 tools/generer_pilote_300t.py --verifier-reproductibilite`.
 - **Usage** : exercer les paiements et les coûts d'un contrat. Le moteur reprend les barèmes de `contrats.json` ; les lots ne servent ni à l'apprentissage ni au backtest. Détail dans le [README du jeu](../data/pilote_300t/README.md).
+
+## 11. Sites de collecte existants : base Sirene (vérifié le 31/10/2026)
+
+- **Accès** : API Recherche d'entreprises (`recherche-entreprises.api.gouv.fr`), entreprises actives en NAF 46.21Z, par département : 77, 78, 91, 95 et huit voisins (02, 10, 27, 28, 45, 51, 60, 89) ; jusqu'à 100 établissements par entreprise et par département (75 au plus observés : aucune troncature). Connexion instable depuis le conteneur : reprises automatiques.
+- **Sélection** : établissements actifs, diffusibles, géolocalisés, codés 46.21Z (commerce de grains) ou 52.10B (entreposage), à moins de 15 km d'une parcelle francilienne ; hors entrepreneurs individuels. Résultat : 352 établissements (327 en 46.21Z, 25 en 52.10B), dont 171 de coopératives.
+- **Ce que Sirene ne dit pas** : la nature du site (silo, bureau, magasin d'approvisionnement) et sa capacité.
+- **France entière** : 142 sociétés coopératives agricoles (forme juridique 6317) et 28 unions (6318) actives en NAF 46.21Z.
+- **Cache** : `data_raw/sirene/`, réponses allégées aux champs utiles. **Sorties** : `data/sites_collecte.json` et `app/src/data/sites.json`.
