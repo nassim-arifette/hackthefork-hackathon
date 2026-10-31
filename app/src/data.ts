@@ -218,7 +218,7 @@ export const CONTRATS = {
   yFaible: contrats.rendement_accepte_annee_faible_tha,
   /** Plancher indexé : m × prix du blé de la récolte, m calibré pour la même promesse (07_contrats.py). */
   indexe: (contrats as any).indexe as {
-    m: number; simulation: { protection: number; cout_moyen_t: number; cout_t_annee_faible: number };
+    m: number; simulation: { protection: number; cout_moyen_t: number; cout_t_annee_faible: number; gain_moyen_ha: number; perte_moyenne_ha: number; ecart_moyen_ha: number };
     plancher_par_prix_ble: { prix_ble: number; plancher: number }[];
   },
   /** Assurance rendement de la lentille, même simulation : prime pure hors chargements (offre assureurs). */

@@ -207,6 +207,20 @@ Dans le backtest, chaque forme est recalibrée chaque année sur les seules ann�
 - **La prime à l'hectare est la moins chère en moyenne** et réduit la perte de l'agriculteur les années perdantes. Mais l'acheteur la paie même sans récolte (2 037 €/t l'année faible) et elle protège mal quand le prix du blé flambe : 37 % des contrats tenus en 2022, 74 % sur l'ensemble, sous la cible de 80 %.
 - **Le prix unique coûte cher parce qu'il surpaie les bonnes années.** Son avantage : un coût par tonne connu d'avance pour l'acheteur.
 
+### Ce que gagne l'agriculteur, ce que paie la coopérative
+
+« 8 années sur 10 » est un plancher, pas la moyenne. Face au blé de la même année (marge moyenne du blé : 869 €/ha), marge en €/ha, aide couplée et bénéfice de rotation compris :
+
+| Contrat | Années gagnées | Écart moyen | Les années gagnées | Les années perdues | Coût pour la coopérative |
+|---|---|---|---|---|---|
+| Unéal 2023, 900 €/t | 6 sur 10 | +174 €/ha | +658 €/ha | −592 €/ha | 900 €/t |
+| Prix unique, 1 567 €/t | 8 sur 10 | +1 128 €/ha | +1 555 €/ha | −581 €/ha | 1 567 €/t |
+| **Barème par tranches** | **8 sur 10** | **+722 €/ha** | +1 044 €/ha | −568 €/ha | **1 283 €/t** |
+| Indexé sur le blé | 8 sur 10 | +1 059 €/ha | +1 455 €/ha | −526 €/ha | 1 519 €/t |
+| Prix de base et prime à l'hectare | 8 sur 10 | +665 €/ha | +937 €/ha | −426 €/ha | 1 243 €/t |
+
+Le prix unique surpaie les bonnes années ; le barème par tranches rend à l'agriculteur 722 €/ha de plus que le blé en moyenne, pour un coût inférieur de 18 %. Protéger plus coûte vite très cher : 1 132 €/t pour 7 années sur 10, 1 567 pour 8, 2 632 pour 9, 4 397 pour 9,5 (`thresholds.json`, sensibilité à la fiabilité).
+
 ### Le plancher indexé sur le prix du blé
 
 Plancher = m × prix du blé de la récolte, m calibré sur les mêmes années simulées pour la même promesse : **m = 7,44**, 80 % des années gagnantes, coût moyen 1 519 €/t, 1 540 €/t l'année faible ; 82 % des contrats tenus en backtest.

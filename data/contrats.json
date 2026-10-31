@@ -16,7 +16,10 @@
     "cout_moyen_t": 900,
     "cout_t_annee_faible": 900,
     "verse_moyen_ha": 1288,
-    "perte_moyenne_ha": 592
+    "perte_moyenne_ha": 592,
+    "gain_moyen_ha": 658,
+    "ecart_moyen_ha": 174,
+    "marge_ble_moyenne_ha": 869
    },
    "backtest": {
     "taux_tenus": 0.571,
@@ -39,7 +42,10 @@
     "cout_moyen_t": 818,
     "cout_t_annee_faible": 900,
     "verse_moyen_ha": 1170,
-    "perte_moyenne_ha": 580
+    "perte_moyenne_ha": 580,
+    "gain_moyen_ha": 497,
+    "ecart_moyen_ha": 56,
+    "marge_ble_moyenne_ha": 869
    },
    "backtest": {
     "taux_tenus": 0.549,
@@ -63,7 +69,10 @@
     "cout_moyen_t": 928,
     "cout_t_annee_faible": 1030,
     "verse_moyen_ha": 1328,
-    "perte_moyenne_ha": 577
+    "perte_moyenne_ha": 577,
+    "gain_moyen_ha": 622,
+    "ecart_moyen_ha": 195,
+    "marge_ble_moyenne_ha": 869
    },
    "backtest": {
     "taux_tenus": 0.647,
@@ -81,7 +90,10 @@
     "cout_moyen_t": 1567,
     "cout_t_annee_faible": 1567,
     "verse_moyen_ha": 2242,
-    "perte_moyenne_ha": 581
+    "perte_moyenne_ha": 581,
+    "gain_moyen_ha": 1555,
+    "ecart_moyen_ha": 1128,
+    "marge_ble_moyenne_ha": 869
    },
    "backtest": {
     "taux_tenus": 0.782,
@@ -101,7 +113,10 @@
     "cout_moyen_t": 1283,
     "cout_t_annee_faible": 1635,
     "verse_moyen_ha": 1836,
-    "perte_moyenne_ha": 568
+    "perte_moyenne_ha": 568,
+    "gain_moyen_ha": 1044,
+    "ecart_moyen_ha": 722,
+    "marge_ble_moyenne_ha": 869
    },
    "backtest": {
     "taux_tenus": 0.789,
@@ -118,7 +133,10 @@
     "cout_moyen_t": 1243,
     "cout_t_annee_faible": 2037,
     "verse_moyen_ha": 1779,
-    "perte_moyenne_ha": 426
+    "perte_moyenne_ha": 426,
+    "gain_moyen_ha": 937,
+    "ecart_moyen_ha": 665,
+    "marge_ble_moyenne_ha": 869
    },
    "backtest": {
     "taux_tenus": 0.737,
@@ -132,7 +150,10 @@
   "simulation": {
    "protection": 0.8,
    "cout_moyen_t": 1519,
-   "cout_t_annee_faible": 1540
+   "cout_t_annee_faible": 1540,
+   "gain_moyen_ha": 1455,
+   "perte_moyenne_ha": 526,
+   "ecart_moyen_ha": 1059
   },
   "plancher_par_prix_ble": [
    {
