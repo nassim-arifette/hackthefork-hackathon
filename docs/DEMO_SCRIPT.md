@@ -1,24 +1,30 @@
 # Script de démo (4 minutes, coupées net)
 
-Un membre raconte, un autre pilote. Tous les chiffres ci-dessous viennent des exports du pipeline ([RESULTATS.md](RESULTATS.md), version 4) ; s'ils changent, ce script change avec eux.
+Format du guide participant : 4 minutes de présentation arrêtées net, puis 2 minutes de questions. Un membre raconte, un autre pilote. Le parcours tient en six écrans ; un tiers du temps sert à poser le problème, pour un jury qui ne connaît pas forcément la filière. Tous les chiffres viennent des exports du pipeline ([RESULTATS.md](RESULTATS.md)) et s'affichent à l'écran ; s'ils changent, ce script change avec eux.
 
-Pilotage : `Espace` pour l'étape suivante, `←` `→` pour le prix, `1` et `2` pour l'année à l'étape 3, `M` pour la méthode.
+Pilotage : `Espace` pour l'écran suivant (`Maj` + `Espace` pour revenir), `←` `→` pour le prix à l'écran 4, `M` pour la méthode. Le menu **Annexes** garde les écrans détaillés pour les questions.
 
-| Temps | Étape à l'écran | Ce qu'on dit |
-|---|---|---|
-| 0:00–0:35 | **1. Le verrou** : carte de France des surfaces en lentille, courbe des rendements | « La France importe 39 000 tonnes de lentilles par an. Pourquoi les agriculteurs n'en sèment-ils pas plus ? Regardez cette courbe : le rendement de la lentille varie deux fois plus que celui du blé. En 2020, il perd plus d'un tiers. Une mauvaise année efface la marge. » |
-| 0:35–0:50 | transition vers l'Île-de-France | « Notre utilisatrice est responsable filière d'une coopérative. Elle veut proposer un contrat lentille. Sa question : à quel prix garanti l'agriculteur gagne-t-il au moins autant qu'en blé, huit années sur dix ? » |
-| 0:50–1:45 | **2. Le prix** : la bascule s'anime, puis le curseur | « Voici les 20 762 parcelles de blé d'Île-de-France. Aux prix de 2012 à 2016, entre 650 et 780 €/t, la lentille ne gagne qu'une année sur deux : rien ne bascule. Pour huit années sur dix, il faut 1 567 €/t départ ferme en Seine-et-Marne, payés sur les tonnes acceptées au tri. Ce prix, c'est notre modèle qui le calcule, en rejouant 20 000 années de météo et de prix du blé. Unéal payait 900 €/t en 2023 : face au blé francilien, c'est six années sur dix. » |
-| 1:45–2:25 | **3. L'épreuve** : 2016 puis 2020 | « 2016 : le blé perd 53 % en Seine-et-Marne. Avec le contrat, la lentille rapporte 1 757 €/ha ; le blé perd 84 €/ha. 2020 : c'est la lentille qui s'effondre. Le contrat tient encore ici, mais dans les départements producteurs, il n'a tenu que quatre fois sur dix. » |
-| 2:25–3:10 | **4. La preuve** : la révélation année par année | « On a coupé les données en 2019 : le modèle n'a jamais vu la suite. Un prix calculé sur les moyennes, sans modèle, n'aurait tenu que trois contrats sur dix. Notre modèle en tient 78 % pour 80 % promis : la promesse est presque tenue, et c'est le but, pas 100 %. Et LightGBM, plus précis sur l'année moyenne, n'en tient que 76 % : pour protéger un revenu, c'est la mauvaise année qu'il faut bien prédire. » |
-| 3:10–3:40 | **5. Le contrat** : le pilote, puis l'ambition | « Résultat : une proposition prête à signer. Un pilote de 300 tonnes sur les 27 parcelles les plus proches du site. Puis l'ambition : 5 000 tonnes, 13 % des importations, 1 250 tonnes de protéines et 631 tonnes d'azote en moins sur le blé remplacé. Et le bon barème : en payant cher la première tonne, celle qui manque les mauvaises années, on protège autant pour 18 % de moins. » |
-| (si le temps le permet) | **6. La saison** : le replay 2025 démarre seul | « Et pendant la saison : 148 images Sentinel-2 sur les huit parcelles de lentille les plus proches du site. Six suivent le groupe, deux sont sous le groupe en mai : on sait où aller voir. » |
-| (si le temps le permet) | **7. Vu du ciel** : carte des 24 km autour du site | « Et pour mesurer l'impact sans attendre le RPG : en connaissant les parcelles d'un carré sur cinq, le satellite retrouve trois légumineuses sur quatre dans les autres, avec neuf signalements justes sur dix. D'une année sur l'autre, il ne tient pas encore, et nous le montrons. » |
-| 3:40–4:00 | retour au titre | « Les coopératives paient par campagne. Prochaine étape : un pilote avec leurs données de rendement, qui resserreront l'incertitude sur le prix. Puis toutes les cultures sous contrat, et les assureurs. Le Contrat qui Tient. » |
+| Temps | Écran | Ce qu'on voit | Ce qu'on dit |
+|---|---|---|---|
+| 0:00–0:25 | **1. Le constat** | dix bols de lentilles, dont cinq importés ; des cargos rejoignent les ports | « Près d'une lentille sur deux mangée en France vient de l'étranger : 39 000 tonnes par an. Nos champs pourraient les produire. Pourquoi les agriculteurs n'en sèment-ils pas ? » |
+| 0:25–1:00 | **2. Le pari** | les récoltes de blé et de lentille, année par année ; l'Île-de-France en ocre | « Voici 20 762 parcelles de blé en Île-de-France. Avec le blé, l'agriculteur sait ce qu'il va gagner. La lentille varie deux fois plus : en 2020, sa récolte a chuté de 38 %. Une mauvaise année efface sa marge. Rester au blé, c'est le choix raisonnable. » |
+| 1:00–1:25 | **3. Le contrat** | la filière animée, du champ à l'assiette ; le silo apparaît sur la carte | « La coopérative, l'entreprise des agriculteurs qui collecte, trie et revend leurs récoltes, peut leur garantir un prix minimum avant les semis. Trop bas, l'agriculteur perd et arrête ; trop haut, la coopérative perd. Notre utilisatrice est sa responsable filière. Sa question : quel prix ? » |
+| 1:25–2:40 | **4. Le prix** (démo) | le prix part de 900 €/t et monte ; les parcelles proches du silo passent au vert, les camions arrivent, le compteur monte à 300 t | « 900 €/t, c'est le prix payé par Unéal en 2023 : l'agriculteur gagne moins qu'en blé 4 années sur 10, ce sont ces orages. Notre outil calcule le prix qui le protège 8 années sur 10, en rejouant 20 000 années de météo et de prix du blé : 1 567 €/t en Seine-et-Marne. Les parcelles les plus proches du silo basculent, les camions arrivent : 300 tonnes sur 28 parcelles. Et en payant plus cher la première tonne, celle qui manque les mauvaises années, on protège autant pour 18 % de moins. » |
+| 2:40–3:20 | **5. La preuve** | la carte de France rejoue 2019–2025, département par département ; dix contrats sans modèle, dix avec | « On a remonté le temps : chaque année, le modèle n'apprend que sur les années d'avant, puis on regarde la vraie récolte. Un prix fixé sur la moyenne aurait tenu 3 contrats sur 10 ; le nôtre en tient 8, 78 % pour 80 % promis. Notre modèle, une régression quantile sur la météo, prévoit les mauvaises années, pas la moyenne. LightGBM, plus précis en moyenne, en tient moins. » |
+| 3:20–4:00 | **6. L'impact** | compteurs ; 260 parcelles et leurs camions autour du silo | « À l'échelle d'un bassin : 5 000 tonnes, 13 % des importations, 1 250 tonnes de protéines, 630 tonnes d'azote minéral évitées. Les coopératives paient à chaque campagne. Prochaine étape : un pilote de 300 tonnes avec une coopérative, puis le pois chiche et le haricot, d'autres régions et les assureurs. Le Contrat qui Tient. » |
+
+## Pour les questions (menu Annexes)
+
+- **Le prix, en détail** : courbe de fiabilité, contrats existants, prix plancher par département, site de collecte déplaçable.
+- **Deux mauvaises années, rejouées** : 2016 (le blé s'effondre) et 2020 (la lentille s'effondre).
+- **Le test, en détail** : intervalles prédits et récoltes réelles, comparaison des modèles, poids de la météo.
+- **La proposition de contrat** : barème par tranches, lettre rédigée par Bedrock, comparaison des contrats, autres légumineuses.
+- **La saison, vue par satellite** et **Vu du ciel** : prototypes Sentinel-2.
 
 ## Règles
 
-- Répéter au chronomètre au moins trois fois samedi soir et deux fois dimanche matin.
+- Répéter au chronomètre au moins trois fois samedi soir et deux fois dimanche matin, dont une fois devant quelqu'un d'extérieur.
+- À l'écran 4, laisser le prix monter seul : les camions partent quand il atteint 1 600 €/t livré au silo.
 - Si un chiffre n'est pas à jour, la phrase est retirée, jamais remplacée par une estimation.
 - Jamais d'éditeur ni de terminal à l'écran.
 - La version hors ligne (`app/dist-single/index.html`) est sur la clé USB ; elle est identique à la version en ligne, polices comprises.

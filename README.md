@@ -1,12 +1,12 @@
 # Le Contrat qui Tient
 
-**Hack the Fork Paris 2026 · Track 3 (souveraineté et filières)**
+**Hack the Fork Paris 2026 · Track 3 (souveraineté protéique, des champs français aux protéines de demain)**
 
 Le Contrat qui Tient aide le responsable filière d'une coopérative ou d'un conditionneur de légumes secs à fixer **le prix plancher d'un contrat lentille** qui rapporte à l'agriculteur **au moins autant que le blé 8 années sur 10**. L'outil montre aussi **quelles parcelles d'Île-de-France basculent** à ce prix, et combien de tonnes la coopérative peut sécuriser.
 
-> État (samedi 31/10) : pipeline de bout en bout, tests et démo sur les vraies données (Agreste, RPG 2025, NASA POWER, Eurostat). Scénario économique de la version 4, prix payé sur les tonnes acceptées au tri, comparaison des contrats. Résultats : [docs/RESULTATS.md](docs/RESULTATS.md).
+> État (samedi 31/10) : pipeline de bout en bout, tests et démo sur les vraies données (Agreste, RPG 2025, NASA POWER, Eurostat). Scénario économique de la version 4, prix payé sur les tonnes acceptées au tri, comparaison des contrats. La démo suit le pitch de 4 minutes en six écrans animés (le constat, le pari, le contrat, le prix, la preuve, l'impact) ; les écrans détaillés restent en annexes pour les questions. Résultats : [docs/RESULTATS.md](docs/RESULTATS.md).
 
-![La démo, étape « Le prix »](docs/img/etape-2-prix.png)
+![La démo, écran « Le prix » : les parcelles les plus proches du silo basculent et les camions livrent 300 t](docs/img/ecran-4-prix.png)
 
 ## En chiffres
 
@@ -69,7 +69,7 @@ Le projet est pensé en trois temps pour le même utilisateur :
 |---|---|---|
 | 1. Avant les semis | « À quel prix je propose le contrat ? » | cœur du hackathon |
 | 2. Où collecter | « Où placer mon site de tri pour sécuriser le plus de tonnes ? » | site déplaçable sur la carte, meilleur point d'une grille |
-| 3. Pendant la saison | « Mes parcelles sous contrat poussent-elles bien ? Où sont les légumineuses du bassin ? » (Sentinel-2) | prototypes : replay 2025 sur 8 parcelles (étape 6) ; « Le Maillon vu du ciel » sur 24 km autour du site (étape 7) |
+| 3. Pendant la saison | « Mes parcelles sous contrat poussent-elles bien ? Où sont les légumineuses du bassin ? » (Sentinel-2) | prototypes en annexe : replay 2025 sur 8 parcelles ; « Le Maillon vu du ciel » sur 24 km autour du site |
 
 Voir [docs/ROADMAP.md](docs/ROADMAP.md).
 

@@ -19,7 +19,7 @@ L'équipe a adopté ce scénario le 31/10 ; il est calculé dans la version 4 de
 | Modèle | **Garder M1** pour la démo. Le banc d'essai des modèles probabilistes en cours sera comparé sur le même protocole avant tout changement. | — |
 | Hypothèses | Scénario central de §2 adopté : charges 700 / 500 €/ha, aide 105 €/ha, rotation 150 €/ha, forfait de collecte 5 €/t. | Calculé : P\* de 1 567 €/t en Seine-et-Marne, 78 % de contrats tenus en backtest strict (87 % avant la correction du regroupement des séries). |
 | Tonnes payées | **Tonnes acceptées au tri**, 10 % de refus en scénario central, 0 et 20 % en sensibilité. Raisons ci-dessous. | Appliqué au modèle, au backtest, à la carte, au contrat et à l'impact. |
-| Volumes | Pilote de 300 t, ambition de 5 000 t. | Bascule entre les deux à l'étape « Le contrat ». |
+| Volumes | Pilote de 300 t, ambition de 5 000 t. | Le pilote à l'écran « Le prix », l'ambition à l'écran « L'impact » ; bascule entre les deux dans l'annexe « La proposition de contrat ». |
 | Impact | Protéines, azote non apporté, émissions directes évitées. | Affichés pour le volume choisi (§6). |
 | Repères de prix | « Référence historique 2012–2016 » remplace « prix du marché ». Unéal et NatUp affichés pour comparer. | Fait. |
 | RPG / Agreste | Audit fait. | Résultat au §5. |
@@ -174,7 +174,7 @@ Pour le modèle économique de l'outil, je proposerais une **étude pilote payan
 
 NatUp a publié une collecte de 558 t en 2025. [S10] **NatUp/Lunor est le premier candidat proposé**, pour commencer par une comparaison sur un sous-ensemble de collecte existante. Les contacts, les alternatives et le message préparé figurent dans [PILOTE_300T.md](PILOTE_300T.md). Aucun partenaire n'a encore accepté le pilote. L'historique synthétique laisse volontairement apparaître les années où 220 ha ne suffisent pas à livrer 300 t nettes.
 
-Conserver le scénario de 5 000 t pour montrer l'ambition de bassin. Le calcul de la version 4 mobilise 3 506 ha sur 260 parcelles. Le ratio 5 000 / 39 371 vaut 12,7 % : afficher **« volume équivalent à 13 % des importations 2025 »**. Le remplacement effectif d'importations dépendra des débouchés.
+Conserver le scénario de 5 000 t pour montrer l'ambition de bassin. Le calcul de la version 4 mobilise 3 502 ha sur 260 parcelles. Le ratio 5 000 / 39 371 vaut 12,7 % : afficher **« volume équivalent à 13 % des importations 2025 »**. Le remplacement effectif d'importations dépendra des débouchés.
 
 Séparer les tonnes économiquement candidates, les tonnes d'un scénario de mobilisation et les engagements signés. Pour tester la prospection, prendre **10 % de mobilisation**, sensibilité 5 / 10 / 20 %, explicitement supposés. Appliquer cette proportion aux surfaces candidates après les filtres disponibles, puis recalculer les hectares et distances nécessaires pour atteindre la cible.
 
@@ -243,7 +243,7 @@ La SAA inclut les types variétaux de lentille et compte une surface non récolt
 
 **Exemple de scénario pour la démo :** 100 nouveaux hectares à 1,6 t/ha, avant pertes de tri, donnent **160 t de lentilles, 40 t de protéines potentielles, 18 t d'azote minéral non apporté et environ 76 t CO₂e d'émissions directes associées**. Afficher « scénario » et donner le périmètre en une infobulle suffit.
 
-*Fait, sur les tonnes acceptées au tri : le pilote de 300 t mobilise 210 ha et donne 75 t de protéines, 38 t d'azote non apporté et 159 t CO₂e évitées ; l'ambition de 5 000 t, 3 506 ha, 1 250 t, 631 t N et 2 647 t CO₂e.*
+*Fait, sur les tonnes acceptées au tri : le pilote de 300 t mobilise 216 ha et donne 75 t de protéines, 39 t d'azote non apporté et 163 t CO₂e évitées ; l'ambition de 5 000 t, 3 502 ha, 1 250 t, 630 t N et 2 644 t CO₂e.*
 
 ## 7. Mon arbitrage sur la roadmap et le pitch
 

@@ -250,4 +250,4 @@ P\* est lui-même estimé sur seize années. On le mesure par **bootstrap par bl
 - P\* selon la part refusée au tri (0, 10, 20 %), le bénéfice de rotation (0 à 200 €/ha), les charges du blé (600 à 800 €/ha) et de la lentille (400 à 600 €/ha), l'aide couplée (0, 105, 122 €/ha).
 - P\* avec les hypothèses de la version 3, pour comparaison.
 
-Ces courbes sont précalculées (`05_export.py`) et affichées à l'étape « Le contrat ». Valeurs : voir [RESULTATS.md](RESULTATS.md).
+Ces courbes sont précalculées (`05_export.py`) et affichées dans l'annexe « La proposition de contrat ». Valeurs : voir [RESULTATS.md](RESULTATS.md).

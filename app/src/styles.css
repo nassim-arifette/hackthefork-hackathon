@@ -90,6 +90,8 @@ a:hover { text-decoration-color: currentColor; }
 .sw.lentil { background: var(--lentil); } .sw.slate { background: var(--slate); } .sw.fail { background: var(--fail); }
 .sw.site { border-radius: 50%; background: var(--ink); box-shadow: 0 0 0 2px #fff, 0 0 0 3px var(--rule-2); }
 .sw.known { background: linear-gradient(135deg, #9db8a6 50%, var(--rule-2) 50%); }
+.sw.ink { background: var(--ink); } .sw.land { background: var(--land); box-shadow: inset 0 0 0 1px var(--rule-2); }
+.sw.truck { width: 14px; border-radius: 2px; background: linear-gradient(90deg, var(--lentil) 64%, var(--ink) 64%); }
 .map-tip {
   position: absolute; left: var(--s5); bottom: 76px; max-width: 320px; pointer-events: none;
   background: #fff; border: 1px solid var(--rule); border-radius: 3px; padding: 9px 12px;
@@ -163,6 +165,7 @@ h3 { font-family: var(--sans); font-weight: 600; font-size: 14px; line-height: 1
 .range-marks { position: absolute; left: 10px; right: 10px; top: 30px; height: 20px; pointer-events: none; font-family: var(--sans); }
 .mk-market { position: absolute; top: 0; height: 5px; background: var(--market); }
 .mk-tick { position: absolute; top: -1px; width: 2px; height: 8px; margin-left: -1px; background: var(--lentil); }
+.mk-tick.neutral { background: var(--ink-2); }
 .mk-label { position: absolute; top: 9px; transform: translateX(-50%); font-size: 11px; color: var(--mute); white-space: nowrap; }
 
 /* graphiques */
@@ -267,6 +270,7 @@ h3 { font-family: var(--sans); font-weight: 600; font-size: 14px; line-height: 1
 
 /* feuillet méthode */
 .scrim { position: fixed; inset: 0; background: rgba(29, 33, 28, .28); z-index: 20; animation: appear .2s; }
+.scrim.clear { background: transparent; }
 .sheet {
   position: fixed; top: 0; right: 0; bottom: 0; width: min(720px, 100%); z-index: 21;
   background: var(--page); display: flex; flex-direction: column; box-shadow: -12px 0 32px rgba(29, 33, 28, .14);
@@ -286,6 +290,89 @@ p.note { margin: var(--s2) 0 0; font-family: var(--sans); font-size: 12.5px; col
 .tbl tr.hl td { font-weight: 600; }
 .tbl.hyp td span { display: block; margin-top: 2px; font-size: 12px; color: var(--mute); font-weight: 400; white-space: normal; }
 
+/* ---------- parcours de présentation ---------- */
+.picto { display: block; width: 100%; height: auto; overflow: visible; font-family: var(--sans); }
+.picto-key { display: flex; flex-wrap: wrap; gap: 4px 16px; margin: var(--s2) 0 0; font-family: var(--sans); font-size: 12.5px; color: var(--ink-2); }
+.picto-key i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: -1px; }
+.picto-key .k-fr { background: var(--lentil); } .picto-key .k-imp { background: var(--slate); }
+.picto-key .k-win { background: var(--lentil); } .picto-key .k-loss { background: var(--fail); }
+.bowl { animation: pop .5s cubic-bezier(.2, .9, .3, 1.25) both; transform-box: fill-box; transform-origin: 50% 100%; }
+.bowl.imp { animation-name: arrive; animation-duration: .7s; animation-timing-function: ease-out; }
+.bowl .cup { fill: #fff; stroke: var(--ink-2); stroke-width: 1.6; }
+.bowl.fr .lentil-dot { fill: var(--lentil); }
+.bowl.imp .lentil-dot { fill: var(--slate); }
+.ship path, .ship rect { fill: var(--slate); }
+.hb { transform-box: view-box; animation: grow .5s ease-out both; }
+.hb.ble { fill: var(--wheat); } .hb.lentille { fill: var(--lentil); }
+.hb-note { animation: appear .4s ease-out both; }
+.filiere .field { fill: var(--wheat-dim); stroke: var(--ink-2); stroke-width: 1.2; }
+.filiere .row { stroke: var(--lentil); stroke-width: 3; stroke-linecap: round; }
+.filiere .node path, .filiere .node rect { fill: var(--ink-2); }
+.filiere .plate .dish { fill: #fff; stroke: var(--ink-2); stroke-width: 1.6; }
+.filiere .plate .dish-in { fill: var(--lentil); opacity: .85; }
+.filiere .plate .fork { fill: none; stroke: var(--ink-2); stroke-width: 1.8; stroke-linecap: round; }
+.filiere .link { stroke: var(--rule-2); stroke-width: 2; stroke-dasharray: 2 4; }
+.filiere .node-l { font-size: 12.5px; font-weight: 600; fill: var(--ink); }
+.filiere .node-s { font-size: 11px; fill: var(--mute); }
+.filiere .bracket { fill: none; stroke: var(--wheat); stroke-width: 1.5; }
+.filiere .tag-box { fill: #fff; stroke: var(--wheat); stroke-width: 1.5; }
+.filiere .tag-text { font-size: 11.5px; font-weight: 600; fill: var(--ink); }
+.contract-tag { animation: appear .5s ease-out .9s both; }
+.mini-truck .box { fill: var(--lentil); } .mini-truck .cab { fill: var(--ink); }
+.mini-truck .wheel { fill: var(--ink); stroke: #fff; stroke-width: 1; }
+.parcel-box { fill: var(--wheat); }
+.mover { animation: drive 3.2s ease-in-out infinite both; }
+.dilemma { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s4); }
+.dilemma div { border-top: 2px solid var(--ink); padding-top: var(--s2); font-size: 14.5px; line-height: 1.5; color: var(--ink-2); }
+.dilemma b { display: block; font-family: var(--sans); font-size: 14px; color: var(--ink); margin-bottom: 2px; }
+.years-icons .yr-bg { fill: #f4f5f1; transition: fill .4s; }
+.years-icons .yr.win .yr-bg { fill: rgba(47, 106, 80, .12); }
+.years-icons .yr.loss .yr-bg { fill: rgba(181, 67, 44, .10); }
+.years-icons .sun circle { fill: var(--lentil); }
+.years-icons .sun line { stroke: var(--lentil); stroke-width: 2; stroke-linecap: round; }
+.years-icons .storm path { fill: var(--fail); }
+.years-icons .storm .bolt { fill: none; stroke: var(--fail); stroke-width: 2; stroke-linejoin: round; }
+.years-icons .sun, .years-icons .storm { transition: opacity .35s, transform .35s; transform-box: fill-box; transform-origin: center; }
+.years-icons .yr.win .storm, .years-icons .yr.loss .sun { opacity: 0; transform: scale(.5); }
+.contracts-row + .contracts-row { margin-top: var(--s5); }
+.cr-head { display: flex; justify-content: space-between; align-items: baseline; gap: var(--s3); margin-bottom: 4px; font-family: var(--sans); font-size: 13.5px; color: var(--ink-2); }
+.cr-head b { font-weight: 700; font-stretch: 80%; font-size: 30px; line-height: 1; color: var(--ink); font-variant-numeric: tabular-nums; }
+.cr-head b.bad { color: var(--fail); }
+.doc { animation: pop .4s cubic-bezier(.2, .9, .3, 1.25) both; transform-box: fill-box; transform-origin: center; }
+.doc .paper, .doc .fold { stroke: var(--ink-2); stroke-width: 1.4; }
+.doc .fold { fill: none; }
+.doc.ok .paper { fill: rgba(47, 106, 80, .08); } .doc.ko .paper { fill: rgba(181, 67, 44, .07); }
+.doc .mark { fill: none; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.doc.ok .mark { stroke: var(--lentil); } .doc.ko .mark { stroke: var(--fail); }
+.gauge-track { height: 16px; background: #f1f2ee; border-radius: 2px; overflow: hidden; }
+.gauge-fill { display: block; height: 100%; width: var(--w); background: var(--lentil); animation: fill-in 1.6s ease-out .3s both; }
+.gauge p { margin: var(--s2) 0 0; font-family: var(--sans); font-size: 13px; color: var(--ink-2); }
+.chips { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; font-family: var(--sans); }
+.chip { text-align: center; padding: 6px 0 5px; border-radius: 3px; background: #f4f5f1; color: var(--rule-2); transition: background .3s, color .3s; }
+.chip b { display: block; font-size: 15px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.chip span { display: block; font-size: 11px; }
+.chip.on { color: var(--ink); }
+.chip.on.ok { background: rgba(47, 106, 80, .14); color: var(--lentil); }
+.chip.on.ko { background: rgba(181, 67, 44, .12); color: var(--fail); }
+.chip.cur { box-shadow: inset 0 0 0 2px var(--ink); }
+.next-steps { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 4px; font-size: 15px; line-height: 1.5; color: var(--ink-2); }
+.next-steps b { color: var(--ink); font-family: var(--sans); font-weight: 600; }
+.annex { position: relative; display: flex; align-items: center; }
+.annex-menu {
+  position: absolute; right: 0; top: calc(100% + 8px); z-index: 30; min-width: 250px; padding: 6px 0;
+  background: #fff; border: 1px solid var(--rule); border-radius: 4px; box-shadow: 0 8px 24px rgba(29, 33, 28, .12);
+  animation: appear .15s ease-out;
+}
+.annex-menu p { margin: 4px 14px 6px; font-family: var(--sans); font-size: 11.5px; color: var(--mute); }
+.annex-menu button { display: block; width: 100%; padding: 8px 14px; text-align: left; font-family: var(--sans); font-size: 13.5px; color: var(--ink-2); }
+.annex-menu button:hover, .annex-menu button.on { background: #f4f5f1; color: var(--ink); }
+.masthead .link.on { color: var(--ink); text-decoration-color: currentColor; }
+
+@keyframes pop { from { opacity: 0; transform: scale(.4); } to { opacity: 1; transform: none; } }
+@keyframes arrive { from { opacity: 0; transform: translateX(46px); } to { opacity: 1; transform: none; } }
+@keyframes grow { from { transform: scaleY(0); } to { transform: none; } }
+@keyframes drive { 0% { transform: translateX(0); opacity: 0; } 10% { opacity: 1; } 85% { opacity: 1; } 100% { transform: translateX(var(--dx)); opacity: 0; } }
+@keyframes fill-in { from { width: 0; } }
 @keyframes appear { from { opacity: 0; } to { opacity: 1; } }
 @keyframes slide { from { transform: translateX(24px); opacity: .5; } to { transform: none; opacity: 1; } }
 

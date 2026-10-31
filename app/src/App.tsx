@@ -1,23 +1,44 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import MapScene, { type Hover } from './components/MapScene';
+import MapScene, { type Camera, type FranceMode, type Hover } from './components/MapScene';
 import Method from './components/Method';
-import { BacktestReveal, MarginBars, PriceChart, SeasonChart, SecurityChart, Sensitivity, YieldsChart } from './components/charts';
+import { BacktestReveal, MarginBars, PriceChart, SeasonChart, SecurityChart, Sensitivity } from './components/charts';
+import { Bowls, ContractsRow, Filiere, Gauge, HarvestBars, YearsIcons } from './components/pitch';
 import { Figure, Source } from './components/ui';
 import {
   backtest, bestSite, CHALLENGER, CODE_LABELS, CONTRATS, CULTURES, D77, DEP_NAMES, dec, FEATURE_LABELS, fmt, H, held, lettre, MAILLON, MARKET, meta,
-  parcels, pct, pctFine, reliabilityAt, replay, SAISON, signedPct, siteGeo, SITE_SCENARIO, SUIVI, supplyCurve, thresholds,
-  type MaillonCat, type MaillonVersion, type ReplayYear, type Statut,
+  parcels, pct, pctFine, PITCH, reliabilityAt, replay, SAISON, signedPct, siteGeo, SITE_SCENARIO, SUIVI, supplyCurve, targetParcels, thresholds,
+  truckTrips, type MaillonCat, type MaillonVersion, type ReplayYear, type Statut, type TruckTrip,
 } from './data';
 import { useTween } from './useTween';
 
-const STEPS = ['Le verrou', 'Le prix', 'L’épreuve', 'La preuve', 'Le contrat', 'La saison', 'Vu du ciel'];
+// Le parcours de présentation : six écrans, 4 minutes.
+type MainId = 'constat' | 'pari' | 'filiere' | 'prix' | 'preuve' | 'impact';
+type AnnexId = 'a_prix' | 'a_epreuve' | 'a_preuve' | 'a_contrat' | 'a_saison' | 'a_ciel';
+type ViewId = MainId | AnnexId;
+const MAIN: { id: MainId; label: string }[] = [
+  { id: 'constat', label: 'Le constat' },
+  { id: 'pari', label: 'Le pari' },
+  { id: 'filiere', label: 'Le contrat' },
+  { id: 'prix', label: 'Le prix' },
+  { id: 'preuve', label: 'La preuve' },
+  { id: 'impact', label: 'L’impact' },
+];
+// Les écrans détaillés, gardés pour les questions du jury ; `legacy` reprend leur ancien numéro d'étape.
+const ANNEXES: { id: AnnexId; label: string; legacy: number }[] = [
+  { id: 'a_prix', label: 'Le prix, en détail', legacy: 1 },
+  { id: 'a_epreuve', label: 'Deux mauvaises années, rejouées', legacy: 2 },
+  { id: 'a_preuve', label: 'Le test, en détail', legacy: 3 },
+  { id: 'a_contrat', label: 'La proposition de contrat', legacy: 4 },
+  { id: 'a_saison', label: 'La saison, vue par satellite', legacy: 5 },
+  { id: 'a_ciel', label: 'Vu du ciel', legacy: 6 },
+];
+
 const pStars = thresholds.par_departement.map((d) => d.p_star);
 const MIN = 600;
 const MAX = 2000;
 const G = backtest.global;
 const L25 = meta.lentille_2025;
 const surf = meta.surface_lentille_par_dep_2025 as Record<string, number>;
-const IDF_LENTIL_HA = ['77', '78', '91', '95'].reduce((a, d) => a + (surf[d] ?? 0), 0);
 const MARKET_MID = (MARKET.min + MARKET.max) / 2;
 const REL_MARKET = reliabilityAt(MARKET_MID);
 const CONTRACT_PRICE = Math.ceil((Math.max(...pStars) + 30) / 10) * 10;
@@ -30,6 +51,15 @@ const C_BT = (G as any).contrats as Record<string, { taux_tenus: number; cout_mo
 const C_2022 = (backtest.annees.find((y) => y.annee === 2022) as any).contrats as Record<string, number>;
 const saving = (a: number, b: number) => Math.round((1 - a / b) * 100);
 const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+
+// Chiffres du parcours, tous lus dans les exports du pipeline.
+const VP = H.volumes.pilote;
+const VA = H.volumes.ambition;
+const UNEAL = CONTRATS.existants.find((c) => c.id === 'uneal_2023') as any;
+const UNEAL_PRICE = (UNEAL?.prix ?? START_PRICE) as number;
+const UNEAL_LOSSES = 10 - Math.round(((UNEAL?.simulation?.protection as number | undefined) ?? reliabilityAt(UNEAL_PRICE)) * 10);
+const wins = (p: number) => Math.round(reliabilityAt(p) * 10);
+const round1000 = (x: number) => Math.round(x / 1000) * 1000;
 
 const STATUT_LABEL: Record<Statut, string> = { conforme: 'Conforme', a_surveiller: 'À surveiller', en_retard: 'En retard' };
 function seasonSummary(): string {
@@ -65,19 +95,22 @@ const dayMonth = (iso: string | null) => (iso
 
 /** Volume visé : les parcelles de blé éligibles les plus proches du site, jusqu'au volume. */
 function selectTarget(geo: ReturnType<typeof siteGeo>, price: number, volume: number) {
-  const elig = parcels.map((_, i) => i).filter((i) => parcels[i].culture === 'ble' && price >= geo.pRendu[i])
-    .sort((a, b) => geo.dist[a] - geo.dist[b]);
-  let t = 0, ha = 0, n = 0, km = 0, tkm = 0;
-  for (const i of elig) {
-    if (t >= volume) break;
-    t += parcels[i].tonnes; ha += parcels[i].surface; n++; km = geo.dist[i]; tkm += parcels[i].tonnes * geo.dist[i];
-  }
-  return { ha, n, km, meanKm: t ? tkm / t : 0, reached: t >= volume };
+  const idx = targetParcels(geo, price, volume);
+  let t = 0, ha = 0, km = 0, tkm = 0;
+  for (const i of idx) { t += parcels[i].tonnes; ha += parcels[i].surface; km = geo.dist[i]; tkm += parcels[i].tonnes * geo.dist[i]; }
+  return { idx, ha, n: idx.length, km, meanKm: t ? tkm / t : 0, reached: t >= volume };
 }
 const pos = (p: number) => `${((p - MIN) / (MAX - MIN)) * 100}%`;
 
+interface MapPlan {
+  camera: Camera; radiusKm: number; showParcels: boolean; franceMode: FranceMode; btYear: number | null; depLabels: boolean;
+  selectKm: number | null; silo: boolean; trucks: { key: string; trips: TruckTrip[] } | null; boats: boolean; price: number;
+}
+
 export default function App() {
-  const [step, setStep] = useState(0);
+  const [view, setView] = useState<ViewId>('constat');
+  const [lastMain, setLastMain] = useState<MainId>('constat');
+  const [annexOpen, setAnnexOpen] = useState(false);
   const [price, setPrice] = useState(START_PRICE);
   const [year, setYear] = useState<ReplayYear | null>(null);
   const [shown, setShown] = useState(0);
@@ -87,15 +120,26 @@ export default function App() {
   const [method, setMethod] = useState(false);
   const [volumeKey, setVolumeKey] = useState<'pilote' | 'ambition'>('pilote');
   const [maillonV, setMaillonV] = useState<MaillonVersion>('saison');
+  const [btYear, setBtYear] = useState<number | null>(null);
+  const [btShown, setBtShown] = useState(0);
+  const [delivered, setDelivered] = useState(0);
+  // Les camions partent une fois le prix posé, pas pendant que le curseur s'anime.
+  const [priceAnim, setPriceAnim] = useState(false);
   const VOLUME = H.volumes[volumeKey];
-  // Site de collecte : déplaçable d'un clic sur la carte aux étapes « Le prix » et « Le contrat ».
+  // Site de collecte : déplaçable d'un clic sur la carte dans les annexes « Le prix » et « La proposition ».
   const [geo, setGeo] = useState(SITE_SCENARIO);
   const [best, setBest] = useState<{ volume: number; site: [number, number] } | null>(null);
   const moveSite = useCallback((site: [number, number]) => setGeo(siteGeo(site)), []);
   const supply = useMemo(() => supplyCurve(geo), [geo]);
   const timers = useRef<number[]>([]);
+  const onDelivered = useCallback((f: number) => setDelivered(f), []);
 
-  const stop = () => { timers.current.forEach(clearTimeout); timers.current = []; };
+  const mainIdx = MAIN.findIndex((m) => m.id === view);
+  const annex = ANNEXES.find((a) => a.id === view);
+  const annexIdx = annex ? ANNEXES.indexOf(annex) : -1;
+  const legacy = annex ? annex.legacy : -1;
+
+  const stop = () => { timers.current.forEach(clearTimeout); timers.current = []; setPriceAnim(false); };
   const at = (ms: number, fn: () => void) => { timers.current.push(window.setTimeout(fn, reduce ? 0 : ms)); };
 
   const stats = useMemo(() => {
@@ -110,6 +154,15 @@ export default function App() {
 
   const target = useMemo(() => selectTarget(geo, price, VOLUME), [price, VOLUME, geo]);
   const targetScenario = useMemo(() => selectTarget(SITE_SCENARIO, price, VOLUME), [price, VOLUME]);
+  // Parcours : le pilote à l'écran « Le prix », l'ambition de bassin à l'écran « L'impact ».
+  const targetP = useMemo(() => selectTarget(geo, price, VP), [price, geo]);
+  const finalP = useMemo(() => selectTarget(geo, CONTRACT_PRICE, VP), [geo]);
+  const targetA = useMemo(() => selectTarget(geo, CONTRACT_PRICE, VA), [geo]);
+  const keyP = targetP.reached && !priceAnim ? `p-${targetP.n}-${targetP.km.toFixed(2)}-${geo.site.join(',')}` : null;
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const tripsP = useMemo(() => (keyP ? { key: keyP, trips: truckTrips(targetP.idx, geo) } : null), [keyP]);
+  const tripsA = useMemo(() => ({ key: `a-${targetA.n}-${geo.site.join(',')}`, trips: truckTrips(targetA.idx, geo) }), [targetA, geo]);
+
   const [busy, setBusy] = useState(false);
   const findBest = () => {
     setBusy(true);
@@ -118,9 +171,10 @@ export default function App() {
   };
 
   const animatePrice = useCallback((from: number, to: number, ms = 5600) => {
-    stop();
+    stop(); setPriceAnim(true);
     const n = Math.max(1, Math.round((to - from) / 5));
     for (let i = 0; i <= n; i++) at((ms * i) / n, () => setPrice(Math.round(from + ((to - from) * i) / n)));
+    at(ms + 50, () => setPriceAnim(false));
   }, []);
 
   const reveal = useCallback(() => {
@@ -133,33 +187,57 @@ export default function App() {
     const n = 84;
     for (let i = 1; i <= n; i++) at(600 + i * 75, () => setSeasonDay(Math.round((SAISON.jours * i) / n)));
   }, []);
-  const go = useCallback((s: number) => {
-    const next = Math.max(0, Math.min(STEPS.length - 1, s));
-    stop(); setHover(null); setStep(next);
-    if (next !== 2) setYear(null);
-    if (next === 1 && price < Math.min(...pStars)) at(1900, () => animatePrice(START_PRICE, CONTRACT_PRICE));
-    if (next >= 2 && price < Math.max(...pStars)) setPrice(CONTRACT_PRICE);
-    if (next === 2) setYear(replay[0]);
-    if (next === 3) reveal();
-    if (next === 5) replaySeason();
-  }, [price, animatePrice, reveal, replaySeason]);
+
+  const replayBacktest = useCallback(() => {
+    stop(); setBtShown(0); setBtYear(null);
+    backtest.annees.forEach((y, i) => at(900 + i * 1250, () => { setBtYear(y.annee); setBtShown(i + 1); }));
+  }, []);
+
+  const replayPrice = useCallback(() => {
+    stop(); setDelivered(0); setPrice(START_PRICE);
+    at(1500, () => animatePrice(START_PRICE, CONTRACT_PRICE, 4200));
+  }, [animatePrice]);
+
+  const go = useCallback((v: ViewId) => {
+    stop(); setHover(null); setAnnexOpen(false); setView(v);
+    const lg = ANNEXES.find((a) => a.id === v)?.legacy ?? -1;
+    if (lg < 0) setLastMain(v as MainId);
+    if (lg !== 2) setYear(null);
+    if (v === 'prix') replayPrice();
+    if ((v === 'preuve' || v === 'impact') && price < CONTRACT_PRICE) setPrice(CONTRACT_PRICE);
+    if (v === 'preuve') replayBacktest();
+    if (lg === 1 && price < Math.min(...pStars)) at(1900, () => animatePrice(START_PRICE, CONTRACT_PRICE));
+    if (lg >= 2 && price < Math.max(...pStars)) setPrice(CONTRACT_PRICE);
+    if (lg === 2) setYear(replay[0]);
+    if (lg === 3) reveal();
+    if (lg === 5) replaySeason();
+  }, [price, animatePrice, reveal, replaySeason, replayBacktest, replayPrice]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       const tag = (e.target as HTMLElement).tagName;
       if (tag === 'INPUT' && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) return;
-      if (e.key === 'Escape') { setMethod(false); return; }
+      if (e.key === 'Escape') { setMethod(false); setAnnexOpen(false); return; }
       if (method) return;
-      if (e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); go(step + (e.shiftKey ? -1 : 1)); }
-      if (e.key === 'PageUp') { e.preventDefault(); go(step - 1); }
+      const move = (d: number) => {
+        if (annex) {
+          const k = annexIdx + d;
+          go(k >= 0 && k < ANNEXES.length ? ANNEXES[k].id : lastMain);
+        } else {
+          const k = mainIdx + d;
+          if (k >= 0 && k < MAIN.length) go(MAIN[k].id);
+        }
+      };
+      if (e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); move(e.shiftKey ? -1 : 1); }
+      if (e.key === 'PageUp') { e.preventDefault(); move(-1); }
       if (e.key === 'ArrowRight') { stop(); setPrice((p) => Math.min(MAX, p + 10)); }
       if (e.key === 'ArrowLeft') { stop(); setPrice((p) => Math.max(MIN, p - 10)); }
       if (e.key === 'm') setMethod(true);
-      if (step === 2 && (e.key === '1' || e.key === '2')) setYear(replay[+e.key - 1]);
+      if (legacy === 2 && (e.key === '1' || e.key === '2')) setYear(replay[+e.key - 1]);
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [go, step, method]);
+  }, [go, method, annex, annexIdx, mainIdx, lastMain, legacy]);
   useEffect(() => stop, []);
 
   const MR = MAILLON.resultats[maillonV];
@@ -172,7 +250,6 @@ export default function App() {
   const S = MAILLON.resultats.saison, A = MAILLON.resultats.avant_recolte;
   const RELATIF = `Sur la saison complète, comparer chaque parcelle au reste de la zone le même jour fait passer le taux retrouvé de ${pct(S.transfert.rappel)} à ${pct(S.transfert_relatif.rappel)}${A.transfert_relatif.rappel > A.transfert.rappel ? '' : ' ; au 10 juin, il n’apporte rien'}. C’est un essai choisi après coup, à confirmer sur d’autres années.`;
   const FAUSSES = fauxCodes.map((c) => (/^[aeéèiouy]/.test(c) ? `de l’${c}` : FEMININ.test(c) ? `de la ${c}` : `du ${c}`)).join(', ').replace(/, ([^,]*)$/, ' et $1');
-
   const mpc = conf.rappel_par_code.MPC;
   const VOIT = [
     `Sur la carte, ${FEV.vus} féveroles sur ${FEV.n} sont retrouvées`
@@ -186,41 +263,98 @@ export default function App() {
 
   const haT = useTween(stats.ha);
   const rel = reliabilityAt(price);
+  const w = wins(price);
+  const onImpact = view === 'impact';
+  const haA = useTween(onImpact ? targetA.ha : 0, 1500);
+  const protA = useTween(onImpact ? VA * H.impact.proteines : 0, 1500);
+  const azoteA = useTween(onImpact ? (targetA.ha * H.impact.azote) / 1000 : 0, 1500);
+  const deliveredT = useTween(view === 'prix' && keyP ? delivered * VP : 0, 300);
+
+  // Ce que montre la carte, écran par écran ; les annexes gardent le comportement des anciennes étapes.
+  const base: MapPlan = {
+    camera: 'idf', radiusKm: 6, showParcels: true, franceMode: 'surface', btYear: null, depLabels: false,
+    selectKm: null, silo: false, trucks: null, boats: false, price,
+  };
+  const mp: MapPlan = view === 'constat' ? { ...base, camera: 'france', showParcels: false, boats: true }
+    : view === 'pari' ? { ...base, price: 0 }
+    : view === 'filiere' ? { ...base, price: 0, silo: true }
+    : view === 'prix' ? { ...base, camera: 'site', radiusKm: Math.max(2.5, finalP.km * 1.3), selectKm: targetP.km, silo: true, trucks: tripsP }
+    : view === 'preuve' ? { ...base, camera: 'france', showParcels: false, franceMode: 'backtest', btYear }
+    : view === 'impact' ? { ...base, camera: 'site', radiusKm: Math.max(4, targetA.km * 1.05), selectKm: targetA.km, silo: true, trucks: tripsA, price: CONTRACT_PRICE }
+    : { ...base, camera: legacy === 5 ? 'suivi' : legacy === 6 ? 'ciel' : 'idf', depLabels: legacy === 1, selectKm: legacy === 4 ? target.km : null };
 
   return (
     <div className="app">
       <header className="masthead">
         <div className="wordmark">Le Contrat qui Tient<span>Hack the Fork 2026 · Track 3</span></div>
         <nav className="steps" aria-label="Étapes">
-          {STEPS.map((s, i) => (
-            <button key={s} className={i === step ? 'on' : i < step ? 'done' : ''} onClick={() => go(i)} aria-current={i === step ? 'step' : undefined}>
-              <span className="n">{i + 1}</span>{s}
+          {MAIN.map((s, i) => (
+            <button key={s.id} className={s.id === view ? 'on' : !annex && i < mainIdx ? 'done' : ''} onClick={() => go(s.id)} aria-current={s.id === view ? 'step' : undefined}>
+              <span className="n">{i + 1}</span>{s.label}
             </button>
           ))}
         </nav>
+        <div className="annex">
+          <button className={`link${annex ? ' on' : ''}`} onClick={() => setAnnexOpen((o) => !o)} aria-expanded={annexOpen} aria-haspopup="menu">Annexes</button>
+          {annexOpen && (
+            <div className="annex-menu" role="menu">
+              <p>Pour les questions du jury</p>
+              {ANNEXES.map((a) => (
+                <button key={a.id} role="menuitem" className={a.id === view ? 'on' : ''} onClick={() => go(a.id)}>{a.label}</button>
+              ))}
+            </div>
+          )}
+        </div>
         <button className="link" onClick={() => setMethod(true)}>Méthode et sources</button>
       </header>
 
       <main className="map">
-        <MapScene step={step} price={price} year={step === 2 ? year : null} selectKm={step === 4 ? target.km : null} onHover={setHover}
-          geo={step === 6 ? SITE_SCENARIO : geo} onPickSite={step === 1 || step === 4 ? (s) => { moveSite(s); setBest(null); } : undefined}
-          season={step === 5 ? seasonDay : null} focus={focus} maillon={step === 6 ? maillonV : null} />
+        <MapScene camera={mp.camera} radiusKm={mp.radiusKm} showParcels={mp.showParcels} franceMode={mp.franceMode} btYear={mp.btYear}
+          depLabels={mp.depLabels} price={mp.price} year={legacy === 2 ? year : null} selectKm={mp.selectKm} onHover={setHover}
+          geo={legacy === 6 ? SITE_SCENARIO : geo} onPickSite={legacy === 1 || legacy === 4 ? (s) => { moveSite(s); setBest(null); } : undefined}
+          season={legacy === 5 ? seasonDay : null} focus={focus} maillon={legacy === 6 ? maillonV : null}
+          silo={mp.silo} trucks={mp.trucks} boats={mp.boats} onDelivered={onDelivered} />
         <div className="map-caption">
-          {step === 0
-            ? <><b>Surface en lentille par département, 2025</b><span>Agreste, Statistique agricole annuelle</span></>
-            : step === 5
-              ? <><b>{SUIVI.length} parcelles de lentille déclarées en {SAISON.annee}, près du site</b><span>NDVI Sentinel-2 L2A (Copernicus), replay de la saison {SAISON.annee}</span></>
-              : step === 6
-                ? <><b>{fmt(M25.n_parcelles_zone)} parcelles d’au moins 1 ha sur {MAILLON.zoneKm} × {MAILLON.zoneKm} km autour du site, {MAILLON.campagne}</b><span>Sentinel-2 L2A (Copernicus) ; RPG {MAILLON.campagne}, IGN. Premier des cinq tirages de carrés connus.</span></>
-                : <><b>{fmt(meta.n_candidates)} parcelles de blé tendre d’hiver en Île-de-France</b><span>Registre parcellaire graphique 2025, IGN</span></>}
+          {view === 'constat' ? <><b>Où poussent les lentilles françaises, 2025</b><span>Agreste, Statistique agricole annuelle ; cargos : illustration des importations</span></>
+            : view === 'pari' ? <><b>{fmt(meta.n_candidates)} parcelles de blé tendre d’hiver en Île-de-France</b><span>Registre parcellaire graphique 2025, IGN</span></>
+            : view === 'filiere' ? <><b>Le silo de la coopérative, au milieu des parcelles de blé</b><span>Site de collecte fictif, en Seine-et-Marne ; registre parcellaire 2025, IGN</span></>
+            : view === 'prix' ? <><b>{targetP.reached ? `${fmt(targetP.n)} parcelles retenues pour ${fmt(VP)}\u00a0t, à moins de ${fmt(Math.max(1, targetP.km))}\u00a0km du silo` : targetP.n ? `${fmt(targetP.n)} parcelles acceptent ce prix\u00a0: pas encore ${fmt(VP)}\u00a0t` : 'À ce prix, aucune parcelle de blé ne bascule'}</b><span>Registre parcellaire 2025, IGN ; trajets schématiques</span></>
+            : view === 'preuve' ? <><b>Départements producteurs testés{btYear ? `, ${btYear}` : ''}</b><span>Contrats tenus au prix fixé par le modèle, appris sur les seules années précédentes</span></>
+            : view === 'impact' ? <><b>{fmt(VA)} t sur les {fmt(targetA.n)} parcelles les plus proches du silo</b><span>Registre parcellaire 2025, IGN ; trajets schématiques</span></>
+            : legacy === 5 ? <><b>{SUIVI.length} parcelles de lentille déclarées en {SAISON.annee}, près du site</b><span>NDVI Sentinel-2 L2A (Copernicus), replay de la saison {SAISON.annee}</span></>
+            : legacy === 6 ? <><b>{fmt(M25.n_parcelles_zone)} parcelles d’au moins 1 ha sur {MAILLON.zoneKm} × {MAILLON.zoneKm} km autour du site, {MAILLON.campagne}</b><span>Sentinel-2 L2A (Copernicus) ; RPG {MAILLON.campagne}, IGN. Premier des cinq tirages de carrés connus.</span></>
+            : <><b>{fmt(meta.n_candidates)} parcelles de blé tendre d’hiver en Île-de-France</b><span>Registre parcellaire graphique 2025, IGN</span></>}
         </div>
-        {step === 2 && year && <div className="map-year" key={year.annee}>{year.annee}</div>}
+        {legacy === 2 && year && <div className="map-year" key={year.annee}>{year.annee}</div>}
+        {view === 'preuve' && btYear && <div className="map-year" key={btYear}>{btYear}</div>}
         <div className="map-legend">
-          {step === 0 ? (
-            <div className="ramp"><span>0 ha</span><i /><span>{fmt(Math.max(...Object.values(surf)))} ha</span></div>
-          ) : step === 5 ? (
+          {view === 'constat' ? (
+            <ul>
+              <li><span className="ramp"><span>lentille : 0 ha</span><i /><span>{fmt(Math.max(...Object.values(surf)))} ha par département</span></span></li>
+              <li><i className="sw ink" />Cargo : importations, illustration</li>
+            </ul>
+          ) : view === 'pari' || view === 'filiere' ? (
+            <ul>
+              <li><i className="sw wheat" />Blé tendre d’hiver</li>
+              <li><i className="sw slate" />Lentille déjà cultivée</li>
+              {view === 'filiere' && <li><i className="sw ink" />Silo de la coopérative, fictif</li>}
+            </ul>
+          ) : view === 'prix' || view === 'impact' ? (
+            <ul>
+              <li><i className="sw wheat-dim" />Blé tendre d’hiver</li>
+              <li><i className="sw lentil" />Parcelles du contrat</li>
+              <li><i className="sw truck" />Camion de lentilles, trajet schématique</li>
+              <li><i className="sw ink" />Silo de la coopérative, fictif</li>
+            </ul>
+          ) : view === 'preuve' ? (
+            <ul>
+              <li><i className="sw lentil" />Contrat tenu</li>
+              <li><i className="sw fail" />Contrat rompu</li>
+              <li><i className="sw land" />Département non testé</li>
+            </ul>
+          ) : legacy === 5 ? (
             <div className="ramp ndvi"><span>sol nu</span><i /><span>végétation dense</span><span className="ramp-site"><span className="sw site" />Site de collecte</span></div>
-          ) : step === 6 ? (
+          ) : legacy === 6 ? (
             <ul>
               <li><i className="sw lentil" />Légumineuse repérée</li>
               <li><i className="sw slate" />Légumineuse manquée</li>
@@ -231,15 +365,15 @@ export default function App() {
             </ul>
           ) : (
             <ul>
-              <li><i className={step === 4 ? 'sw wheat-dim' : 'sw wheat'} />Blé tendre d’hiver</li>
-              <li><i className="sw lentil" />{step === 4 ? `Parcelles du contrat de ${fmt(VOLUME)} t` : 'Bascule en lentille'}</li>
-              {step === 2 && <li><i className="sw fail" />Contrat non tenu</li>}
+              <li><i className={legacy === 4 ? 'sw wheat-dim' : 'sw wheat'} />Blé tendre d’hiver</li>
+              <li><i className="sw lentil" />{legacy === 4 ? `Parcelles du contrat de ${fmt(VOLUME)} t` : 'Bascule en lentille'}</li>
+              {legacy === 2 && <li><i className="sw fail" />Contrat non tenu</li>}
               <li><i className="sw slate" />Lentille déjà cultivée</li>
               <li><i className="sw site" />{geo === SITE_SCENARIO ? 'Site de collecte fictif' : 'Site de collecte déplacé'}</li>
             </ul>
           )}
         </div>
-        {(step === 1 || step === 4) && <p className="map-hint">Cliquez sur la carte pour déplacer le site de collecte</p>}
+        {(legacy === 1 || legacy === 4) && <p className="map-hint">Cliquez sur la carte pour déplacer le site de collecte</p>}
         {hover && (
           <div className="map-tip">
             {hover.kind === 'dep' ? (
@@ -261,31 +395,143 @@ export default function App() {
       </main>
 
       <aside className="column">
-        <div className="column-body" key={step}>
-          <p className="kicker">{step + 1} / {STEPS.length} · {STEPS[step]}</p>
+        <div className="column-body" key={view}>
+          <p className="kicker">{annex ? `Annexe · ${annex.label}` : `${mainIdx + 1} / ${MAIN.length} · ${MAIN[mainIdx].label}`}</p>
 
-          {step === 0 && (
+          {view === 'constat' && (
             <>
-              <h1>La France importe {fmt(Math.round(L25.importations_t / 1000) * 1000)} tonnes de lentilles par an.</h1>
-              <p className="lead">Les agriculteurs en sèment peu. Le rendement de la lentille varie deux fois plus que celui du blé : une mauvaise année efface la marge, et le blé reste la valeur sûre.</p>
+              <h1>Près d’une lentille sur deux mangée en France vient de l’étranger.</h1>
               <div className="block">
-                <div className="figures">
-                  <Figure value={fmt(L25.importations_t)} unit="t" label="importées en 2025" />
-                  <Figure value={fmt(L25.production_t)} unit="t" label="produites en 2025" />
-                  <Figure value={<>0,20<span className="vs">/</span>0,09</>} label="variabilité du rendement, lentille / blé" />
+                <Bowls imported={Math.round(PITCH.partImportee * 10)} />
+                <p className="picto-key"><span><i className="k-fr" />lentilles cultivées en France</span><span><i className="k-imp" />lentilles importées</span></p>
+              </div>
+              <div className="block">
+                <div className="figures two">
+                  <Figure value={fmt(round1000(PITCH.conso))} unit="t" label="de lentilles mangées en France chaque année" />
+                  <Figure value={pct(PITCH.partImportee)} label={`importées, soit ${fmt(round1000(L25.importations_t))} t en 2025`} />
                 </div>
-                <Source k="mesure">Eurostat Comext, NC8 0713 40 ; Agreste, Statistique agricole annuelle 2010–2025, 2025 provisoire. Variabilité : coefficient de variation du rendement national.</Source>
+                <Source k="mesure">Calcul sur 2025 : production Agreste ({fmt(L25.production_t)} t) + importations ({fmt(L25.importations_t)} t) − exportations ({fmt(L25.exportations_t)} t), Eurostat Comext ; stocks non comptés.</Source>
               </div>
-              <div className="block">
-                <h3>Rendement national, en indice (100 = moyenne 2010–2025)</h3>
-                <YieldsChart />
-                <Source k="mesure">Agreste. 2016 : récolte de blé catastrophique. 2020 : la lentille perd plus d’un tiers de son rendement.</Source>
-              </div>
-              <p className="body">Sur la carte, les surfaces en lentille en 2025. L’Île-de-France, cerclée de noir, en cultive {fmt(IDF_LENTIL_HA)} ha, quand la Seine-et-Marne compte à elle seule {fmt(116585)} ha de blé tendre d’hiver.</p>
+              <p className="lead">Les champs français pourraient les produire. Pourquoi les agriculteurs n’en sèment-ils pas davantage ?</p>
             </>
           )}
 
-          {step === 1 && (
+          {view === 'pari' && (
+            <>
+              <h1>Avec le blé, l’agriculteur sait ce qu’il va gagner. Avec la lentille, non.</h1>
+              <div className="block">
+                <h3>Récolte par hectare en France, écart à une année moyenne</h3>
+                <HarvestBars />
+                <Source k="mesure">Agreste, rendements nationaux 2010–2025.</Source>
+              </div>
+              <div className="block">
+                <div className="figures two">
+                  <Figure value={`${dec(PITCH.rapportVariabilite, 0)} fois`} label="plus de variations pour la lentille que pour le blé" />
+                  <Figure value={signedPct(PITCH.lentille2020)} label="récolte de lentille en 2020, face aux cinq années précédentes" />
+                </div>
+              </div>
+              <p className="lead">Une mauvaise année de lentille efface sa marge. Rester au blé est le choix raisonnable.</p>
+            </>
+          )}
+
+          {view === 'filiere' && (
+            <>
+              <h1>Un contrat peut retirer le risque. Encore faut-il le bon prix.</h1>
+              <div className="block"><Filiere /></div>
+              <p className="lead">La coopérative est l’entreprise des agriculteurs : elle collecte, trie, stocke et revend leurs récoltes. Avant les semis, elle peut leur garantir un prix minimum par tonne.</p>
+              <div className="dilemma">
+                <div><b>Prix trop bas</b>Les mauvaises années, l’agriculteur gagne moins qu’avec le blé. Il ne recommence pas.</div>
+                <div><b>Prix trop haut</b>La coopérative perd de l’argent et ne peut plus vendre face aux importations.</div>
+              </div>
+            </>
+          )}
+
+          {view === 'prix' && (
+            <>
+              <h1>Le prix qui fait semer</h1>
+              <div className="block control">
+                <label htmlFor="price-main">Prix garanti, livré au silo</label>
+                <div className="readout">
+                  <output htmlFor="price-main">{fmt(price)}<span className="unit">€/t</span></output>
+                  <p><b>{w} années sur 10</b>où la lentille rapporte au moins autant que le blé</p>
+                </div>
+                <div className="range">
+                  <input id="price-main" type="range" min={MIN} max={MAX} step={5} value={price} style={{ ['--fill' as any]: pos(price) }}
+                    onChange={(e) => { stop(); setPrice(+e.target.value); }} />
+                  <div className="range-marks" aria-hidden="true">
+                    <span className="mk-tick neutral" style={{ left: pos(UNEAL_PRICE) }} />
+                    <span className="mk-label" style={{ left: pos(UNEAL_PRICE) }}>Unéal 2023</span>
+                    <span className="mk-tick" style={{ left: pos(D77.p_star) }} />
+                    <span className="mk-label" style={{ left: pos(D77.p_star) }}>8 sur 10</span>
+                  </div>
+                </div>
+              </div>
+              <div className="block">
+                <YearsIcons wins={w} />
+                <p className="picto-key"><span><i className="k-win" />la lentille rapporte au moins autant que le blé</span><span><i className="k-loss" />elle rapporte moins</span></p>
+              </div>
+              <div className="block">
+                <div className="figures two">
+                  <Figure value={fmt(deliveredT)} unit="t" label={`livrées au silo, pour ${fmt(VP)} t visées`} />
+                  <Figure value={fmt(targetP.n)} unit="parcelles" label={targetP.n ? `${fmt(targetP.ha)} ha, à moins de ${fmt(Math.max(1, targetP.km))} km du silo` : 'aucune ne bascule à ce prix'} />
+                </div>
+              </div>
+              <p className="body">À {fmt(UNEAL_PRICE)} €/t, le prix payé par Unéal en 2023, la lentille rapporte moins que le blé {UNEAL_LOSSES} années sur 10. Pour 8 sur 10, il faut {fmt(D77.p_star)} €/t en Seine-et-Marne. Payer plus cher la première tonne ({fmt(C_PALIERS.paliers![0])} €/t, puis {fmt(C_PALIERS.paliers![1])} et {fmt(C_PALIERS.paliers![2])}) protège autant, pour {saving(C_PALIERS.simulation.cout_moyen_t, C_UNIQUE.simulation.cout_moyen_t)} % de moins.</p>
+              <Source k="modele">20 000 années simulées avec la météo et le prix du blé de 2010 à 2025. Parcelles du registre parcellaire 2025 ; silo fictif ; trajets schématiques.</Source>
+              <button className="link" onClick={replayPrice}>Rejouer</button>
+            </>
+          )}
+
+          {view === 'preuve' && (
+            <>
+              <h1>Testé sur des années que le modèle n’avait jamais vues</h1>
+              <div className="block">
+                <ContractsRow label="Prix fixé sur la moyenne, sans modèle" held={Math.round(G.taux_tenus_moyenne * 10)} value={pct(G.taux_tenus_moyenne)} />
+                <ContractsRow label="Notre modèle" held={Math.round(G.taux_tenus * 10)} value={pct(G.taux_tenus)} delay={1500} />
+                <Source k="modele">Contrats tenus, ramenés à 10 contrats : {G.n_cas} cas département × année, de 2019 à 2025, dans les départements producteurs.</Source>
+              </div>
+              <div className="block">
+                <h3>Année par année, avec notre modèle</h3>
+                <div className="chips">
+                  {backtest.annees.map((y, i) => (
+                    <div key={y.annee} className={`chip${i < btShown ? ' on' : ''}${(y.taux_tenus ?? 0) >= H.tau ? ' ok' : ' ko'}${y.annee === btYear ? ' cur' : ''}`}>
+                      <b>{i < btShown ? pct(y.taux_tenus ?? 0) : '·'}</b><span>{y.annee}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <p className="body">Chaque année, le modèle n’apprend que sur les années d’avant, fixe le prix, puis on regarde la vraie récolte. Il relie la météo à la récolte et prévoit les mauvaises années, pas la moyenne. Sur une seule année, son erreur typique est de {Math.round(G.erreur_mediane_M1 * 100)} % : la promesse est de 8 années sur 10, pas de 10.</p>
+              <Source k="modele">Régression quantile avec la météo NASA POWER, choisie avant tout résultat. LightGBM, plus précis sur l’année moyenne, ne tient que {pct(G.taux_tenus_M2)} des contrats.</Source>
+              <button className="link" onClick={replayBacktest}>Rejouer</button>
+            </>
+          )}
+
+          {view === 'impact' && (
+            <>
+              <h1>{fmt(VA)} tonnes produites ici, soit {pct(VA / L25.importations_t)} des importations</h1>
+              <div className="block">
+                <Gauge value={VA / L25.importations_t} label={<>Part des {fmt(round1000(L25.importations_t))} t importées en 2025 que remplacerait le contrat</>} />
+              </div>
+              <div className="block">
+                <div className="figures">
+                  <Figure value={fmt(haA)} unit="ha" label="de blé passés à la lentille" />
+                  <Figure value={fmt(protA)} unit="t" label="de protéines végétales" />
+                  <Figure value={fmt(azoteA)} unit="t" label="d’azote minéral évité" />
+                </div>
+                <Source k="source">Par campagne. Protéines : 25 % du grain (Terres Inovia / Terres Univia). Azote : 180 kg N/ha sur blé en Île-de-France (Agreste 2021) ; {fmt(targetA.ha * H.impact.co2e)} t CO₂e d’émissions directes évitées (GIEC 2019, PRG100 de l’AR6).</Source>
+              </div>
+              <div className="block">
+                <h3>Qui paie, et la suite</h3>
+                <ul className="next-steps">
+                  <li><b>Les coopératives et les conditionneurs</b>, à chaque campagne : ce prix se fixe tous les ans.</li>
+                  <li><b>Un pilote de {fmt(VP)} t</b> avec une coopérative, sur les parcelles les plus proches de son silo.</li>
+                  <li><b>Le pois chiche et le haricot</b> pour l’alimentation humaine, d’autres régions, puis les assureurs.</li>
+                </ul>
+              </div>
+            </>
+          )}
+
+          {legacy === 1 && (
             <>
               <h1>À quel prix la lentille bat-elle le blé 8 années sur 10 ?</h1>
               <p className="lead">Faites varier le prix garanti. Une parcelle de blé bascule quand ce prix, transport déduit, couvre le risque de la lentille dans son département.</p>
@@ -345,7 +591,7 @@ export default function App() {
             </>
           )}
 
-          {step === 2 && (
+          {legacy === 2 && (
             <>
               <h1>Et si la récolte tourne mal ?</h1>
               <p className="lead">On rejoue deux années réelles sur les parcelles sous contrat à {fmt(price)} €/t. Le contrat tient si la lentille rapporte au moins autant que le blé, avec les rendements et le prix du blé de l’année.</p>
@@ -388,7 +634,7 @@ export default function App() {
             </>
           )}
 
-          {step === 3 && (
+          {legacy === 3 && (
             <>
               <h1>Le modèle tient-il sur des années qu’il n’a jamais vues ?</h1>
               <p className="lead">Le modèle d’apprentissage relie la météo de l’année au rendement. Pour chaque année de 2019 à 2025, il n’apprend que des années précédentes et fixe son prix ; on le compare ensuite à la récolte réelle.</p>
@@ -444,7 +690,7 @@ export default function App() {
             </>
           )}
 
-          {step === 4 && (
+          {legacy === 4 && (
             <>
               <h1>La proposition faite à l’agriculteur</h1>
               <div className="tabs" role="tablist" aria-label="Volume du contrat">
@@ -463,7 +709,7 @@ export default function App() {
                   <dt>Ce qu’il ne garantit pas</dt><dd>Une récolte effondrée réduit la marge : {dec(D77.rendement_lentille_q10_tha, 2)} t/ha ou moins une année sur dix. Les lots refusés au tri ne sont pas payés au prix garanti.</dd>
                   <dt>Volume visé</dt><dd>{target.reached
                     ? <><b>{fmt(VOLUME)} t</b> acceptées, soit {pctFine(VOLUME / L25.importations_t)} des importations de 2025, sur {fmt(target.ha)} ha : les {fmt(target.n)} parcelles éligibles les plus proches du site, à moins de {fmt(target.km)} km.</>
-                    : <>Le prix est trop bas pour réunir {fmt(VOLUME)} t. Remontez-le à l’étape 2.</>}</dd>
+                    : <>Le prix est trop bas pour réunir {fmt(VOLUME)} t. Remontez-le dans l’annexe « Le prix, en détail ».</>}</dd>
                 </dl>
                 <Source k="modele">Barème calibré sur les mêmes années simulées que le prix plancher : la première tonne est recalculée, les deux suivantes reprennent la proposition du dossier pilote. Texte assemblé à partir des chiffres calculés ; volumes : hypothèses de l’équipe.</Source>
               </div>
@@ -549,14 +795,14 @@ export default function App() {
                     ))}
                   </tbody>
                 </table>
-                <p className="body small">Pour la lentille, un prix fixe tient {pct(CULTURES[0].backtest.taux_tenus ?? 0)} des contrats et l’indexation l’améliore un peu. Pour les quatre autres, le plancher indexé sur le blé tient {pct(Math.min(...CULTURES.slice(1).map((c) => c.backtest.taux_tenus_indexe ?? 0)))} à {pct(Math.max(...CULTURES.slice(1).map((c) => c.backtest.taux_tenus_indexe ?? 0)))} des contrats dans ce backtest, davantage que le prix fixe. Cela motive une forme de contrat propre à chaque culture. Le pois et la féverole demandent {fmt(CULTURES.find((c) => c.id === 'pois')!.p_star['77'])} et {fmt(CULTURES.find((c) => c.id === 'feverole')!.p_star['77'])} €/t pour rivaliser avec le blé 8 années sur 10, contre 200 à 260 €/t dans le référentiel de plan d’entreprise CRIT 2025.</p>
+                <p className="body small">Pour la lentille, un prix fixe tient {pct(CULTURES[0].backtest.taux_tenus ?? 0)} des contrats et l’indexation l’améliore un peu. Pour les quatre autres, le plancher indexé sur le blé tient {pct(Math.min(...CULTURES.slice(1).map((c) => c.backtest.taux_tenus_indexe ?? 0)))} à {pct(Math.max(...CULTURES.slice(1).map((c) => c.backtest.taux_tenus_indexe ?? 0)))} des contrats dans ce backtest, davantage que le prix fixe. Cela motive une forme de contrat propre à chaque culture. Le pois et la féverole demandent {fmt(CULTURES.find((c) => c.id === 'pois')!.p_star['77'])} et {fmt(CULTURES.find((c) => c.id === 'feverole')!.p_star['77'])} €/t pour rivaliser avec le blé 8 années sur 10, contre 200 à 260 €/t dans le référentiel de plan d’entreprise CRIT 2025, un prix de marché courant. Le projet vise leurs débouchés humains (protéines de pois, farine de féverole), pour lesquels la revue filière retient une variante à 280 et 290 €/t.</p>
                 <p className="body small">Repères de prix : pois chiche standard payé 600 à 620 €/t à un producteur Cavac pour la récolte 2025 ; haricot à 1 200 €/t au centre du scénario 900 à 1 500. Le repère haricot de 1 188 €/t vient d’un barème d’indemnisation, pas d’une offre d’achat.</p>
                 <Source k="modele">Prix plancher pour 8 années sur 10 en Seine-et-Marne, en €/t ; contrats tenus en backtest 2019–2025 sur les départements producteurs, recalibrés sur les seules années passées. Même modèle du blé ; séries Agreste et météo NASA POWER propres à chaque culture. Charges calées sur les guides Terres Inovia pois chiche 2026, pois 2025 et féverole 2024 ; haricot : budget reconstruit incluant l’eau et l’énergie, hors mécanisation et récolte. Aide indicative Telepac 2026. Prix : témoignage Réussir du 27 juin 2026, CRIT Grand Est 2025 et scénario haricot documenté dans la revue filière.</Source>
               </div>
             </>
           )}
 
-          {step === 5 && (
+          {legacy === 5 && (
             <>
               <h1>Les parcelles sous contrat poussent-elles bien ?</h1>
               <p className="lead">Prototype de suivi en saison, rejoué sur {SAISON.annee} : les {SUIVI.length} parcelles de lentille déclarées cette année-là les plus proches du site, vues par Sentinel-2 tous les quelques jours.</p>
@@ -591,7 +837,7 @@ export default function App() {
             </>
           )}
 
-          {step === 6 && (
+          {legacy === 6 && (
             <>
               <h1>Les légumineuses du bassin, un an avant le RPG</h1>
               <p className="lead">Le RPG d’une campagne n’est publié que l’année suivante. Sur {MAILLON.zoneKm} km de côté autour du site, un collecteur qui connaît les parcelles d’un carré de {MAILLON.blocKm} km sur cinq, celles de ses adhérents par exemple, cherche les légumineuses des autres carrés sur les images Sentinel-2 de {MAILLON.campagne}.</p>
@@ -629,16 +875,29 @@ export default function App() {
               </div>
             </>
           )}
+
         </div>
 
         <footer className="column-foot">
-          <button className="link" onClick={() => go(step - 1)} disabled={step === 0}>← Précédent</button>
-          {step < STEPS.length - 1
-            ? <button className="primary" onClick={() => go(step + 1)}>{STEPS[step + 1]} →</button>
-            : <button className="primary" onClick={() => setMethod(true)}>Méthode et sources →</button>}
+          {annex ? (
+            <>
+              <button className="link" onClick={() => go(lastMain)}>← Retour au parcours</button>
+              {annexIdx < ANNEXES.length - 1
+                ? <button className="primary" onClick={() => go(ANNEXES[annexIdx + 1].id)}>{ANNEXES[annexIdx + 1].label} →</button>
+                : <button className="primary" onClick={() => setMethod(true)}>Méthode et sources →</button>}
+            </>
+          ) : (
+            <>
+              <button className="link" onClick={() => go(MAIN[Math.max(0, mainIdx - 1)].id)} disabled={mainIdx === 0}>← Précédent</button>
+              {mainIdx < MAIN.length - 1
+                ? <button className="primary" onClick={() => go(MAIN[mainIdx + 1].id)}>{MAIN[mainIdx + 1].label} →</button>
+                : <button className="primary" onClick={() => setMethod(true)}>Méthode et sources →</button>}
+            </>
+          )}
         </footer>
       </aside>
 
+      {annexOpen && <div className="scrim clear" onClick={() => setAnnexOpen(false)} />}
       {method && <div className="scrim" onClick={() => setMethod(false)} />}
       {method && <Method onClose={() => setMethod(false)} />}
     </div>

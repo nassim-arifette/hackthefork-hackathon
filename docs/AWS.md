@@ -26,11 +26,11 @@ Compte de l'équipe : région **us-east-1** (Virginie du Nord) uniquement, suppr
    cat ../app/src/data/lettre.json
    ```
 4. Si l'appel est refusé (accès au modèle) : console **Amazon Bedrock**, menu **Model access** ou **Model catalog**, activer le modèle Anthropic (un court formulaire peut être demandé la première fois), puis relancer.
-5. Rapporter le contenu de `lettre.json` dans le dépôt (le coller dans la conversation, ou le télécharger avec **Actions > Download file** de CloudShell). La lettre s'affiche alors à l'étape 5.
+5. Rapporter le contenu de `lettre.json` dans le dépôt (le coller dans la conversation, ou le télécharger avec **Actions > Download file** de CloudShell). La lettre s'affiche alors dans l'annexe « La proposition de contrat ».
 
 ### Régénérer la lettre quand les chiffres changent
 
-Le script ne lit que les chiffres exportés par le pipeline. Après un nouvel export (par exemple la version 4 du 31/10), l'ancienne lettre est retirée et l'étape 5 affiche la proposition sans lettre jusqu'à la régénération. Dans CloudShell, où le dépôt est déjà cloné :
+Le script ne lit que les chiffres exportés par le pipeline. Après un nouvel export (par exemple la version 4 du 31/10), l'ancienne lettre est retirée et l'annexe « La proposition de contrat » affiche la proposition sans lettre jusqu'à la régénération. Dans CloudShell, où le dépôt est déjà cloné :
 
 ```bash
 cd ~/hackthefork-hackathon && git pull && cd pipeline && BEDROCK_MODEL_ID=us.anthropic.claude-sonnet-5 python3 06_lettre_llm.py && cat ../app/src/data/lettre.json

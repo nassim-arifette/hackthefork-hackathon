@@ -1,11 +1,12 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import DeckGL from '@deck.gl/react';
 import { FlyToInterpolator, MapView, type MapViewState } from '@deck.gl/core';
-import { GeoJsonLayer, PolygonLayer, ScatterplotLayer, TextLayer } from '@deck.gl/layers';
+import { GeoJsonLayer, IconLayer, LineLayer, PolygonLayer, ScatterplotLayer, TextLayer } from '@deck.gl/layers';
 import {
-  contours, DEP_NAMES, france, held, MAILLON, maillonCat, meta, ndviAt, parcels, SUIVI, SUIVI_INDEX, thresholds,
-  type MaillonCat, type MaillonParcel, type MaillonVersion, type Parcel, type ReplayYear, type SiteGeo,
+  BT_BY_YEAR, contours, DEP_NAMES, france, held, MAILLON, maillonCat, meta, ndviAt, parcels, SUIVI, SUIVI_INDEX, thresholds,
+  type MaillonCat, type MaillonParcel, type MaillonVersion, type Parcel, type ReplayYear, type SiteGeo, type TruckTrip,
 } from '../data';
+import { ICON_ATLAS, ICON_MAPPING, type IconName } from './icons';
 
 type RGB = [number, number, number];
 // Mêmes valeurs que les jetons de docs/DESIGN.md.
@@ -34,6 +35,7 @@ const ZONE_RING: [number, number][] = [[ZW, ZS], [ZE, ZS], [ZE, ZN], [ZW, ZN], [
 const surf = meta.surface_lentille_par_dep_2025 as Record<string, number>;
 const surfMax = Math.max(...Object.values(surf));
 const IDF_CODES = ['75', '77', '78', '91', '92', '93', '94', '95'];
+const reduce = typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
 
 function mix(a: RGB, b: RGB, t: number): RGB {
   return [0, 1, 2].map((i) => Math.round(a[i] + (b[i] - a[i]) * t)) as RGB;
@@ -55,28 +57,72 @@ const SUIVI_CENTER = [SUIVI.reduce((a, p) => a + p.lon, 0) / SUIVI.length, SUIVI
 // Deux parcelles voisines : la lettre de la seconde passe à gauche du point.
 const SUIVI_LEFT = new Set(SUIVI.filter((p, k) => SUIVI.slice(0, k).some((q) => Math.abs(q.lon - p.lon) < 0.01 && Math.abs(q.lat - p.lat) < 0.006)).map((p) => p.id));
 
-function views(width: number): { france: MapViewState; idf: MapViewState; suivi: MapViewState; ciel: MapViewState } {
-  const z = Math.log2(Math.max(360, width) / 1000);
-  return {
-    france: { longitude: 2.45, latitude: 46.6, zoom: 4.95 + z, pitch: 0, bearing: 0 },
-    idf: { longitude: 2.48, latitude: 48.64, zoom: 8.05 + z, pitch: 0, bearing: 0 },
-    suivi: { longitude: SUIVI_CENTER[0], latitude: SUIVI_CENTER[1], zoom: 10.3 + z, pitch: 0, bearing: 0 },
-    ciel: { longitude: (ZW + ZE) / 2, latitude: (ZS + ZN) / 2, zoom: 10.35 + z, pitch: 0, bearing: 0 },
-  };
+// Illustration des importations : des cargos qui rejoignent quatre ports (aucune origine n'est affirmée).
+const BOATS: TruckTrip[] = [
+  { from: [-6.8, 50.25], to: [0.1, 49.47], delay: 0, dur: 6800, tonnes: 0 },
+  { from: [-7.4, 46.4], to: [-2.25, 47.25], delay: 1500, dur: 6200, tonnes: 0 },
+  { from: [6.6, 41.6], to: [4.86, 43.32], delay: 700, dur: 5600, tonnes: 0 },
+  { from: [0.6, 52.5], to: [2.36, 51.06], delay: 2600, dur: 5400, tonnes: 0 },
+];
+
+export type Camera = 'france' | 'idf' | 'suivi' | 'ciel' | 'site';
+export type FranceMode = 'surface' | 'backtest' | 'plain';
+
+function viewFor(target: Camera, width: number, site: [number, number], radiusKm: number): MapViewState {
+  const w = Math.max(360, width);
+  const z = Math.log2(w / 1000);
+  switch (target) {
+    case 'france': return { longitude: 2.45, latitude: 46.6, zoom: 4.95 + z, pitch: 0, bearing: 0 };
+    case 'suivi': return { longitude: SUIVI_CENTER[0], latitude: SUIVI_CENTER[1], zoom: 10.3 + z, pitch: 0, bearing: 0 };
+    case 'ciel': return { longitude: (ZW + ZE) / 2, latitude: (ZS + ZN) / 2, zoom: 10.35 + z, pitch: 0, bearing: 0 };
+    case 'site': {
+      // Le rayon de la collecte occupe environ un tiers de la largeur de la carte.
+      const metersPerPixel = (radiusKm * 1000) / (0.33 * w);
+      const zoom = Math.log2((40075016 * Math.cos((site[1] * Math.PI) / 180)) / (512 * metersPerPixel));
+      return { longitude: site[0], latitude: site[1], zoom: Math.max(8.2, Math.min(12, zoom)), pitch: 0, bearing: 0 };
+    }
+    default: return { longitude: 2.48, latitude: 48.64, zoom: 8.05 + z, pitch: 0, bearing: 0 };
+  }
 }
 
 // Rampe de NDVI : sol nu (0,15) vers végétation dense (0,9).
 const NDVI_LO: RGB = [226, 214, 182], NDVI_HI: RGB = [33, 92, 63];
 const ndviColor = (v: number): RGB => mix(NDVI_LO, NDVI_HI, Math.max(0, Math.min(1, (v - 0.15) / 0.75)));
+const ease = (p: number) => p * p * (3 - 2 * p);
+const PAUSE_MS = 1800;
+
+/** Position de chaque trajet à l'instant `t` : départ échelonné, aller simple, pause, puis on recommence. */
+function moving(trips: TruckTrip[], t: number): { pos: [number, number]; icon: IconName }[] {
+  const out: { pos: [number, number]; icon: IconName }[] = [];
+  for (const tr of trips) {
+    const local = t - tr.delay;
+    if (local < 0) continue;
+    const ph = local % (tr.dur + PAUSE_MS);
+    if (ph > tr.dur) continue;
+    const p = ease(ph / tr.dur);
+    out.push({
+      pos: [tr.from[0] + (tr.to[0] - tr.from[0]) * p, tr.from[1] + (tr.to[1] - tr.from[1]) * p],
+      icon: tr.to[0] >= tr.from[0] ? 'truckR' : 'truckL',
+    });
+  }
+  return out;
+}
 
 export type Hover = { kind: 'parcel'; p: Parcel; i: number } | { kind: 'dep'; name: string; surface: number }
   | { kind: 'maillon'; p: MaillonParcel; cat: MaillonCat } | null;
 
 interface Props {
-  step: number;
+  camera: Camera;
+  /** Caméra « site » : rayon de la collecte à montrer, en km. */
+  radiusKm?: number;
+  showParcels: boolean;
+  franceMode: FranceMode;
+  /** Carte de France du backtest : année affichée. */
+  btYear?: number | null;
+  depLabels?: boolean;
   price: number;
   year: ReplayYear | null;
-  /** Étape « contrat » : distance maximale des parcelles retenues pour le volume visé. */
+  /** Parcelles du contrat : distance maximale des parcelles retenues pour le volume visé. */
   selectKm: number | null;
   onHover: (h: Hover) => void;
   /** Distances et prix rendu de chaque parcelle pour le site de collecte courant. */
@@ -88,17 +134,27 @@ interface Props {
   focus: string | null;
   /** Étape « Vu du ciel » : version affichée (images jusqu'au 10 juin, ou saison complète). */
   maillon: MaillonVersion | null;
+  /** Silo de la coopérative au site de collecte. */
+  silo?: boolean;
+  /** Camions des parcelles vers le silo ; la clé relance l'animation. */
+  trucks?: { key: string; trips: TruckTrip[] } | null;
+  boats?: boolean;
+  /** Part des tonnes déjà arrivées au silo, au premier passage des camions. */
+  onDelivered?: (fraction: number) => void;
 }
 
-export default function MapScene({ step, price, year, selectKm, onHover, geo, onPickSite, season, focus, maillon }: Props) {
+export default function MapScene({
+  camera, radiusKm = 6, showParcels, franceMode, btYear = null, depLabels = false, price, year, selectKm, onHover, geo,
+  onPickSite, season, focus, maillon, silo = false, trucks = null, boats = false, onDelivered,
+}: Props) {
   const box = useRef<HTMLDivElement>(null);
   const [width, setWidth] = useState(1000);
   const [fontsReady, setFontsReady] = useState(false);
-  const target = step === 0 ? 'france' : step === 5 ? 'suivi' : step === 6 ? 'ciel' : 'idf';
-  const [viewState, setViewState] = useState<MapViewState>(views(1000).france);
-  // Seul un changement d'étape anime la caméra. Une largeur mesurée tardivement s'applique sans
+  const targetKey = camera === 'site' ? `site:${radiusKm.toFixed(1)}:${geo.site.join(',')}` : camera;
+  const [viewState, setViewState] = useState<MapViewState>(viewFor('france', 1000, geo.site, radiusKm));
+  // Seul un changement de vue anime la caméra. Une largeur mesurée tardivement s'applique sans
   // transition : sinon la dernière image de cette transition peut écraser la suivante.
-  const shownTarget = useRef(target);
+  const shownTarget = useRef(targetKey);
 
   useEffect(() => {
     const el = box.current;
@@ -110,30 +166,65 @@ export default function MapScene({ step, price, year, selectKm, onHover, geo, on
   }, []);
 
   useEffect(() => {
-    const animate = shownTarget.current !== target;
-    shownTarget.current = target;
+    const animate = shownTarget.current !== targetKey;
+    shownTarget.current = targetKey;
+    const v = viewFor(camera, width, geo.site, radiusKm);
     setViewState(animate
-      ? { ...views(width)[target], transitionDuration: 1800, transitionInterpolator: new FlyToInterpolator({ speed: 1.6 }) } as MapViewState
-      : views(width)[target]);
-  }, [target, width]);
+      ? { ...v, transitionDuration: 1800, transitionInterpolator: new FlyToInterpolator({ speed: 1.6 }) } as MapViewState
+      : v);
+    // La clé de vue résume caméra, rayon et site : pas besoin de les lister à part.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [targetKey, width]);
+
+  // Horloge des animations (camions, bateaux), environ 30 images par seconde, relancée à chaque scène.
+  const animKey = trucks ? `t:${trucks.key}` : boats ? 'boats' : null;
+  const [clock, setClock] = useState(0);
+  useEffect(() => {
+    setClock(0);
+    if (!animKey || reduce) return;
+    let raf = 0, last = -1;
+    const t0 = performance.now();
+    const tick = (now: number) => {
+      if (now - last >= 33) { last = now; setClock(Math.max(0, now - t0)); }
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [animKey]);
+
+  const totalT = useMemo(() => (trucks ? trucks.trips.reduce((a, t) => a + t.tonnes, 0) : 0), [trucks]);
+  const arrivedT = useMemo(() => {
+    if (!trucks) return 0;
+    if (reduce) return totalT;
+    let s = 0;
+    for (const t of trucks.trips) if (clock >= t.delay + t.dur) s += t.tonnes;
+    return s;
+  }, [trucks, clock, totalT]);
+  useEffect(() => { onDelivered?.(totalT ? arrivedT / totalT : 0); }, [arrivedT, totalT, onDelivered]);
 
   const layers = useMemo(() => {
     const lentil = (i: number) => price >= geo.pRendu[i];
-    const showParcels = step > 0;
     const font = '"Archivo Variable", Archivo, system-ui, sans-serif';
+    const btMap = btYear ? BT_BY_YEAR[btYear] : undefined;
     return [
       new GeoJsonLayer({
-        id: 'france', data: france as any, stroked: true, filled: true, pickable: !showParcels,
+        id: 'france', data: france as any, stroked: true, filled: true, pickable: !showParcels && franceMode === 'surface',
         getFillColor: (f: any) => {
-          const s = surf[f.properties.code] ?? 0;
           if (showParcels) return C.landOut;
+          if (franceMode === 'backtest') {
+            const r = btMap?.[f.properties.code];
+            return r === undefined ? C.land : r ? C.lentil : C.fail;
+          }
+          if (franceMode === 'plain') return C.land;
+          const s = surf[f.properties.code] ?? 0;
           return s > 0 ? mix(C.land, C.lentil, 0.12 + 0.88 * Math.sqrt(s / surfMax)) : C.land;
         },
-        getLineColor: (f: any) => (!showParcels && IDF_CODES.includes(f.properties.code) ? C.ink : C.border),
-        getLineWidth: (f: any) => (!showParcels && IDF_CODES.includes(f.properties.code) ? 1.6 : 1),
+        getLineColor: (f: any) => (!showParcels && franceMode === 'surface' && IDF_CODES.includes(f.properties.code) ? C.ink : C.border),
+        getLineWidth: (f: any) => (!showParcels && franceMode === 'surface' && IDF_CODES.includes(f.properties.code) ? 1.6 : 1),
         lineWidthUnits: 'pixels',
-        updateTriggers: { getFillColor: [showParcels], getLineColor: [showParcels], getLineWidth: [showParcels] },
-        onHover: (info: any) => !showParcels && onHover(info.object ? { kind: 'dep', name: info.object.properties.nom, surface: surf[info.object.properties.code] ?? 0 } : null),
+        updateTriggers: { getFillColor: [showParcels, franceMode, btYear], getLineColor: [showParcels, franceMode], getLineWidth: [showParcels, franceMode] },
+        transitions: { getFillColor: 350 },
+        onHover: (info: any) => !showParcels && franceMode === 'surface' && onHover(info.object ? { kind: 'dep', name: info.object.properties.nom, surface: surf[info.object.properties.code] ?? 0 } : null),
       }),
       new GeoJsonLayer({
         id: 'idf', data: contours as any, stroked: true, filled: true, visible: showParcels,
@@ -165,7 +256,7 @@ export default function MapScene({ step, price, year, selectKm, onHover, geo, on
         onHover: (info) => onHover(info.object ? { kind: 'parcel', p: info.object as Parcel, i: info.index } : null),
       }),
       new TextLayer({
-        id: `dep-labels-${fontsReady}`, data: DEP_LABELS, visible: step === 1,
+        id: `dep-labels-${fontsReady}`, data: DEP_LABELS, visible: depLabels,
         getPosition: (d: any) => d.pos, getText: (d: any) => `${d.name}\n${d.pStar} €/t`,
         getSize: 14, getColor: C.ink, fontFamily: font, fontWeight: 600, lineHeight: 1.25, getPixelOffset: [0, -22],
         outlineWidth: 6, outlineColor: [255, 255, 255, 235], fontSettings: { sdf: true, fontSize: 64, buffer: 8 },
@@ -201,13 +292,41 @@ export default function MapScene({ step, price, year, selectKm, onHover, geo, on
         stroked: true, filled: false, getPolygon: (d: [number, number][]) => d,
         getLineColor: [...C.ink, 150] as [number, number, number, number], getLineWidth: 1, lineWidthUnits: 'pixels',
       }),
+      new LineLayer<TruckTrip>({
+        id: 'routes', data: trucks?.trips ?? [], visible: !!trucks, pickable: false,
+        getSourcePosition: (d) => d.from, getTargetPosition: (d) => d.to,
+        getColor: [...C.ink, 46] as [number, number, number, number], getWidth: 1, widthUnits: 'pixels',
+      }),
       new ScatterplotLayer({
-        id: 'site', data: [geo.site], visible: showParcels, getPosition: (d: [number, number]) => d,
+        id: 'site', data: [geo.site], visible: showParcels && !silo, getPosition: (d: [number, number]) => d,
         getRadius: 6, radiusUnits: 'pixels', getFillColor: C.ink, stroked: true,
         getLineColor: [255, 255, 255], getLineWidth: 3, lineWidthUnits: 'pixels',
       }),
     ];
-  }, [step, price, year, selectKm, onHover, fontsReady, geo, season, focus, maillon]);
+  }, [showParcels, franceMode, btYear, depLabels, price, year, selectKm, onHover, fontsReady, geo, season, focus, maillon, trucks, silo]);
+
+  // Couches animées, recalculées à chaque image de l'horloge.
+  const animated = useMemo(() => {
+    if (!ICON_ATLAS) return [];
+    const truckData = trucks && !reduce ? moving(trucks.trips, clock) : [];
+    const boatData = boats && !reduce ? moving(BOATS, clock) : [];
+    return [
+      new IconLayer({
+        id: 'silo', data: silo ? [geo.site] : [], iconAtlas: ICON_ATLAS, iconMapping: ICON_MAPPING,
+        getIcon: () => 'silo', getPosition: (d: [number, number]) => d, getSize: 40, sizeUnits: 'pixels', pickable: false,
+      }),
+      new IconLayer({
+        id: 'trucks', data: truckData, iconAtlas: ICON_ATLAS, iconMapping: ICON_MAPPING,
+        getIcon: (d: { icon: IconName }) => d.icon, getPosition: (d: { pos: [number, number] }) => d.pos,
+        getSize: 30, sizeUnits: 'pixels', pickable: false,
+      }),
+      new IconLayer({
+        id: 'boats', data: boatData, iconAtlas: ICON_ATLAS, iconMapping: ICON_MAPPING,
+        getIcon: () => 'boat', getPosition: (d: { pos: [number, number] }) => d.pos,
+        getSize: 34, sizeUnits: 'pixels', pickable: false,
+      }),
+    ];
+  }, [trucks, boats, silo, clock, geo]);
 
   return (
     <div ref={box} className="map-box">
@@ -216,7 +335,7 @@ export default function MapScene({ step, price, year, selectKm, onHover, geo, on
         viewState={viewState}
         onViewStateChange={({ viewState: v }) => setViewState({ ...(v as MapViewState), pitch: 0, bearing: 0 })}
         controller={{ dragRotate: false, touchRotate: false, doubleClickZoom: true }}
-        layers={layers}
+        layers={[...layers, ...animated]}
         onClick={(info) => { if (onPickSite && info.coordinate) onPickSite([info.coordinate[0], info.coordinate[1]]); }}
         getCursor={({ isHovering, isDragging }) => (isDragging ? 'grabbing' : onPickSite || isHovering ? 'crosshair' : 'grab')}
       />

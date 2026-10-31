@@ -300,6 +300,61 @@ export function held(p: Parcel, dist: number, price: number, r: ReplayYear): boo
   return margeL >= margeB;
 }
 
+/** Parcelles de blé qui acceptent le prix, les plus proches du site d'abord, jusqu'au volume visé. */
+export function targetParcels(geo: SiteGeo, price: number, volume: number): number[] {
+  const elig = parcels.map((_, i) => i).filter((i) => parcels[i].culture === 'ble' && price >= geo.pRendu[i])
+    .sort((a, b) => geo.dist[a] - geo.dist[b]);
+  const out: number[] = [];
+  let t = 0;
+  for (const i of elig) {
+    if (t >= volume) break;
+    out.push(i); t += parcels[i].tonnes;
+  }
+  return out;
+}
+
+/** Un trajet de camion (ou de bateau) : départ, arrivée, délai et durée en ms, tonnes transportées. */
+export interface TruckTrip { from: [number, number]; to: [number, number]; delay: number; dur: number; tonnes: number }
+
+/** Un camion par parcelle retenue (au plus `cap`, réparties sur la liste), les plus proches partent en premier. */
+export function truckTrips(idx: number[], geo: SiteGeo, cap = 90): TruckTrip[] {
+  if (!idx.length) return [];
+  const stride = Math.max(1, idx.length / cap);
+  const picked: number[] = [];
+  for (let k = 0; k < idx.length && picked.length < cap; k += stride) picked.push(idx[Math.floor(k)]);
+  const tonnesEach = idx.reduce((a, i) => a + parcels[i].tonnes, 0) / picked.reduce((a, i) => a + parcels[i].tonnes, 0);
+  const spread = Math.min(5000, 200 * picked.length);
+  return picked.map((i, r) => ({
+    from: [parcels[i].lon, parcels[i].lat], to: geo.site,
+    delay: (spread * r) / picked.length, dur: 1200 + 110 * geo.dist[i],
+    tonnes: parcels[i].tonnes * tonnesEach,
+  }));
+}
+
+/** Backtest : pour chaque année test, contrat tenu ou non dans chaque département testé (modèle retenu). */
+export const BT_BY_YEAR: Record<number, Record<string, boolean>> = {};
+for (const d of backtest.detail as { annee: number; dep: string; tenu: boolean }[]) {
+  (BT_BY_YEAR[d.annee] ??= {})[d.dep] = d.tenu;
+}
+
+/** Chiffres du parcours de présentation, tous calculés à partir des exports. */
+const L25x = meta.lentille_2025;
+const yields = meta.rendements_nationaux;
+const cv = (k: 'ble' | 'lentille') => {
+  const v = yields.map((r) => r[k]), m = v.reduce((a, x) => a + x, 0) / v.length;
+  return Math.sqrt(v.reduce((a, x) => a + (x - m) ** 2, 0) / v.length) / m;
+};
+const lentil = (y: number) => yields.find((r) => r.annee === y)!.lentille;
+export const PITCH = {
+  /** Consommation apparente 2025 : production + importations − exportations (stocks non comptés). */
+  conso: L25x.production_t + L25x.importations_t - L25x.exportations_t,
+  partImportee: L25x.importations_t / (L25x.production_t + L25x.importations_t - L25x.exportations_t),
+  /** La récolte de lentille varie environ deux fois plus que celle du blé (coefficients de variation). */
+  rapportVariabilite: cv('lentille') / cv('ble'),
+  /** Récolte de lentille 2020, par rapport à la moyenne des cinq années précédentes. */
+  lentille2020: lentil(2020) / ([2015, 2016, 2017, 2018, 2019].reduce((a, y) => a + lentil(y), 0) / 5) - 1,
+};
+
 // Signe moins typographique et espace insécable avant « % » : affichage homogène.
 export const fmt = (n: number) => Math.round(n).toLocaleString('fr-FR').replace('-', '\u2212');
 export const pct = (x: number) => `${Math.round(x * 100)}\u00a0%`;

@@ -1,34 +1,35 @@
 # Fiche projet · Le Contrat qui Tient
 
-**Hack the Fork Paris 2026 · Track 3, souveraineté et filières**
+**Hack the Fork Paris 2026 · Track 3, souveraineté protéique : des champs français aux protéines de demain**
 
 ## Le problème
 
-La France importe 39 371 tonnes de lentilles par an (Eurostat, 2025) alors qu'elle veut doubler ses surfaces de légumineuses d'ici 2030. Les agriculteurs en sèment peu parce que le rendement de la lentille varie deux fois plus que celui du blé (Agreste, 2010–2025) : une mauvaise année efface la marge. Les coopératives proposent des contrats à prix minimum, mais ce prix se fixe à l'expérience, sans mesure de la protection qu'il offre, alors que c'est la mauvaise année qui fait perdre l'agriculteur.
+Près d'une lentille sur deux mangée en France vient de l'étranger : 39 371 tonnes importées en 2025, pour environ 86 000 tonnes consommées. Les agriculteurs français pourraient en produire davantage, mais la lentille est risquée. Sa récolte varie deux fois plus que celle du blé, et une mauvaise année, comme 2020 (−38 %), efface la marge. Rester au blé est donc le choix raisonnable.
+
+Les coopératives, qui collectent, trient et revendent les récoltes de leurs agriculteurs, peuvent retirer ce risque avec un contrat : un prix minimum garanti avant les semis. Ce prix se fixe aujourd'hui à l'expérience. Trop bas, l'agriculteur perd les mauvaises années et arrête ; trop haut, la coopérative perd de l'argent.
 
 ## La solution
 
-Le Contrat qui Tient calcule, pour le responsable filière d'une coopérative, le prix plancher qui rapporte à l'agriculteur au moins autant que le blé 8 années sur 10, et montre sur la carte quelles parcelles basculent à ce prix.
+Le Contrat qui Tient calcule, pour le responsable filière d'une coopérative, le prix minimum qui garantit à l'agriculteur de gagner au moins autant qu'avec le blé 8 années sur 10. La carte montre les parcelles qui accepteraient ce prix, au plus près du silo.
 
-- Un modèle d'apprentissage probabiliste relie la météo (NASA POWER) à la distribution du rendement du blé et de la lentille, sur seize ans de données Agreste.
-- Une simulation rejoue 20 000 années de météo et de prix du blé, et en déduit le prix plancher, payé sur les tonnes acceptées au tri.
-- Un backtest strict, sur des années que le modèle n'a jamais vues, mesure la promesse : 78 % des contrats ont tenu pour 80 % visés, contre 29 % pour un prix calculé sur les moyennes.
-- La carte des 20 762 parcelles de blé d'Île-de-France (RPG 2025) montre la bascule et le volume mobilisable.
-- Un prototype satellite (Sentinel-2) repère les légumineuses du bassin un an avant la publication du RPG : avec les parcelles d'un carré de 4 km sur cinq comme exemples, 73 % sont retrouvées en fin de saison, avec 90 % de signalements justes. Appris sur l'année précédente seule, il n'en retrouve que 8 % : c'est la prochaine étape.
+- Un modèle d'apprentissage relie la météo de seize années à la récolte de la lentille et du blé. Il prévoit les mauvaises années, pas seulement la moyenne.
+- Une simulation rejoue 20 000 années de météo et de prix du blé pour en déduire le prix.
+- Testé sur sept années que le modèle n'avait jamais vues : 78 % des contrats ont tenu pour 80 % promis, contre 29 % avec un prix calculé sur la moyenne.
+- Un prototype satellite (Sentinel-2) repère aussi les légumineuses du bassin un an avant la publication du registre parcellaire, à condition de connaître une partie des parcelles.
 
-Premier résultat : aux prix observés de 2012 à 2016, la lentille ne bat le blé francilien qu'une année sur deux ; pour 8 sur 10, il faut 1 567 €/t départ ferme en Seine-et-Marne, avec une incertitude affichée (1 099 à 2 877 €/t). Le prix contractuel d'Unéal en 2023, 900 €/t, protège 6 années sur 10 dans le même modèle. À protection égale, un barème par tranches (1 635 €/t la première tonne par hectare, puis 750 et 650) coûte 18 % de moins qu'un prix unique, et tient autant de contrats en backtest pour 19 % de moins.
+Premier résultat, en Seine-et-Marne : il faut 1 567 €/t pour tenir 8 années sur 10, alors que le prix payé par Unéal en 2023, 900 €/t, ne protège que 6 années sur 10. En payant plus cher la première tonne récoltée par hectare (1 635 €/t, puis 750 et 650), on protège autant pour 18 % de moins.
 
 ## Le modèle économique
 
-- **Clients** : coopératives et conditionneurs de légumes secs, qui fixent ce prix à chaque campagne.
-- **Offre** : étude pilote, puis abonnement par campagne et par bassin (montants à tester en pilote).
-- **Adoption** : pilote d'une campagne avec une coopérative qui monte une filière légumineuses ; ses données de rendement resserrent l'incertitude sur le prix.
-- **Extension** : toutes les cultures sous contrat (pois chiche, haricot, chanvre), puis les assureurs agricoles, qui ont besoin de la même distribution de rendement.
+- **Clients** : les coopératives et les conditionneurs de légumes secs, qui fixent ce prix à chaque campagne.
+- **Offre** : une étude pilote, puis un abonnement par campagne et par bassin ; les montants sont à valider avec les premiers clients.
+- **Adoption** : un pilote de 300 t avec une coopérative qui développe une filière lentille ; ses données de rendement rendront le prix plus précis.
+- **Extension** : le pois chiche et le haricot pour l'alimentation humaine, d'autres régions, puis les assureurs agricoles.
 
-## Impact
+## L'impact
 
-Pour un pilote de 300 t, 210 ha de lentilles sur les parcelles les plus proches du site de collecte. Pour l'ambition de bassin de 5 000 t : 3 506 ha, 13 % des importations 2025, 1 250 t de protéines végétales, 631 t d'azote minéral non apporté et 2 647 t CO₂e d'émissions directes évitées. Pour l'agriculteur, un revenu au moins égal à celui du blé 8 années sur 10.
+Pour un pilote de 300 t : 216 ha de lentilles sur les 28 parcelles les plus proches du silo. Pour un bassin de 5 000 t : 3 502 ha, 13 % des importations de 2025, 1 250 t de protéines végétales, 630 t d'azote minéral non apporté et 2 644 t CO₂e d'émissions directes évitées. Pour l'agriculteur : un revenu au moins égal à celui du blé 8 années sur 10.
 
 ## Données
 
-Ouvertes et traçables : Agreste, IGN (RPG), NASA POWER, Eurostat, Copernicus Sentinel-2. Chaque chiffre affiché porte son statut : mesuré, sourcé, supposé ou modèle.
+Ouvertes et traçables : Agreste, IGN (registre parcellaire), NASA POWER, Eurostat, Copernicus Sentinel-2. Chaque chiffre affiché porte son statut : mesuré, sourcé, supposé ou issu du modèle.

@@ -135,12 +135,12 @@ Pour la carte et les volumes, l'application raisonne en prix rendu au site de co
 | | Pilote | Ambition de bassin |
 |---|---|---|
 | Tonnes acceptées visées | 300 t | 5 000 t |
-| Surface nécessaire | 210 ha | 3 506 ha |
-| Parcelles éligibles les plus proches du site | 27, à moins de 3,2 km | 260, à moins de 9,8 km |
+| Surface nécessaire | 216 ha | 3 502 ha |
+| Parcelles éligibles les plus proches du site | 28, à moins de 3,2 km | 260, à moins de 9,8 km |
 | Part des importations 2025 | 0,8 % | 12,7 % |
 | Protéines potentielles (25 % des tonnes) | 75 t | 1 250 t |
-| Azote minéral non apporté (180 kg N/ha de blé remplacé) | 38 t N | 631 t N |
-| Émissions directes de N₂O évitées (0,755 t CO₂e/ha) | 159 t CO₂e | 2 647 t CO₂e |
+| Azote minéral non apporté (180 kg N/ha de blé remplacé) | 39 t N | 630 t N |
+| Émissions directes de N₂O évitées (0,755 t CO₂e/ha) | 163 t CO₂e | 2 644 t CO₂e |
 
 Les distances sont routières (vol d'oiseau × 1,3). Les compteurs d'impact excluent la fabrication des engrais et les émissions indirectes.
 
@@ -269,5 +269,5 @@ Backtest 2019–2025 sur les départements producteurs : 133, 100, 71, 493 et 44
 - Version 3 (30/10, séries estimées ensemble regroupées) : 86 %, 1 622 €/t, avec un intervalle de confiance sur P\*.
 - Version 4 (31/10, hypothèses économiques revues, paiement sur les tonnes acceptées au tri, forfait de collecte, comparaison des contrats) : 87 %, 1 567 €/t. Le modèle et le protocole sont inchangés ; les hypothèses viennent de la revue documentée de [QUESTIONS.md](QUESTIONS.md), fixées avant le recalcul. Avec les hypothèses de la version 3, le pipeline actuel redonne 1 622 €/t.
 - Version 4.1, actuelle (31/10, après-midi, backtest strict) : regroupement des séries en double refait chaque année avec le seul passé, à la suite de l'audit de la PR 1. Contrats tenus : 87 → 78 % (M1), 81 → 77 % (M0), 77 → 76 % (M2). Prix 2026 inchangés.
-- Le Maillon vu du ciel (31/10, après-midi) : `10_maillon.py`, RPG 2024 et 2025, 51 images Sentinel-2 ; étape 7 de l'application. Aucun chiffre existant ne change.
+- Le Maillon vu du ciel (31/10, après-midi) : `10_maillon.py`, RPG 2024 et 2025, 51 images Sentinel-2 ; annexe « Vu du ciel » de l'application. Aucun chiffre existant ne change.
 - Revue des autres cultures (31/10) : haricot 700 → 1 000 €/ha et pois 400 → 450 €/ha, prix de référence et provenances complétés. Recalcul de `09_cultures.py` : P\* haricot 1 779 → 2 185 €/t, pois 409 → 427 €/t. La totalité de l'objet lentille exporté est identique à la version précédente.
