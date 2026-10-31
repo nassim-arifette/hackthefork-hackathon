@@ -6,6 +6,8 @@ Recherche documentaire du **31 octobre 2026**, pour avancer pendant Hack the For
 
 Les propositions ci-dessous constituent un scénario de travail. Les valeurs déjà calculées restent celles de la version 3 dans [RESULTATS.md](RESULTATS.md) ; les nouveaux paramètres et contrats devront passer dans le pipeline avant de recevoir leurs propres résultats. Cette revue documentaire ne vaut pas validation par l'organisation.
 
+**Complément disponible :** un [barème public NatUp et un contrat synthétique complet](CONTRAT_SIMULATION.md), un [dossier de pilote 300 t avec partenaires ciblés](PILOTE_300T.md) et un [historique synthétique reproductible de 140 lots](../data/pilote_300t/README.md). Le comparateur fourni avec ce jeu permet de chiffrer les paiements et les coûts ; il ne recalcule pas le P* ni le backtest Agreste de l'application.
+
 ## 1. Réponse à chaque question ouverte
 
 | Question du document initial | Réponse de mentor | Action pour le hackathon |
@@ -18,7 +20,7 @@ Les propositions ci-dessous constituent un scénario de travail. Les valeurs dé
 | Bonus de rotation | **150 €/ha**, sensibilité 0 / 100 / 200. L'effet précédent de la lentille est documenté ; le montant reste un pari de scénario. | Compter le bénéfice de la culture suivante une seule fois. Voir §2. |
 | Aide couplée | **Lentille alimentaire éligible ; 105 €/ha indicatifs pour 2026.** Les 122 €/ha sont le montant de la campagne 2025. [S1] [S2] | Corriger le millésime et le statut du montant, puis recalculer. |
 | Transport | **Conserver 0,12 €/t/km** et proposer **5 €/t de forfait de collecte** pour un lot agrégé de référence de 25 t. | Paramètres supposés, avec sensibilités ; distinguer collecte et tri. Voir §4. |
-| Volume coopérative | **300 t pour le pilote, 5 000 t pour l'ambition de bassin.** | Deux boutons de scénario ; afficher surfaces et besoin commercial correspondant. |
+| Volume coopérative | **300 t nettes alimentaires pour le pilote, 5 000 t pour l'ambition de bassin.** | Afficher l'assiette des tonnes et les surfaces nécessaires. Le pilote synthétique est dimensionné à 220 ha ; voir §4. |
 | P* autour de 1 600 €/t | Le résultat justifie de **comparer plusieurs contrats** et plusieurs bassins. Les exemples contractuels récents sont sensiblement plus bas. | Montrer la frontière prix/protection, puis une rémunération à paliers ou avec prime par hectare. Voir §3. |
 | RPG 1 095 ha / Agreste environ 730 ha | **RPG pour les surfaces localisées ; Agreste pour les séries de rendement.** Les périmètres statistiques diffèrent. | Audit ciblé de l'écart ; aucune mise à l'échelle artificielle de la carte. Voir §5. |
 | Lettre Bedrock | **Génération au build, mise en cache**, à partir des seules sorties calculées. | Essai d'invocation sur le compte de l'équipe, puis export. « 8 sur 10 » décrit la comparaison de marges. |
@@ -87,6 +89,7 @@ Avec y en t/ha, la baisse vaut 231 €/t pour un scénario à 0,75 t/ha et 115 �
 | Eurostat 2012–2016, déjà exploité dans le repo | 650–779 €/t | Renommer « référence historique 2012–2016 ». |
 | Unéal, décembre 2023 | Lentilles du partenariat avec Vivien Paille valorisées à 900 €/t. [S8] | Exemple de filière industrielle. |
 | AFP, 23 février 2026, témoignage d'une productrice Unéal | 900 €/t en 2024, 800 en 2025, 650 annoncés pour 2026. [S9] | Exemple récent daté, avec son contexte. |
+| NatUp, entretien de septembre 2023 sur les récoltes 2023–2024 | Trois tranches annoncées : 900 €/t jusqu'à 1 t/ha, 700 de 1 à 2, 600 au-delà avec un éventuel complément de marché. [S19] | Barème réel reconstitué ; clauses non publiées conservées comme inconnues. |
 | NatUp, 18 septembre 2025 | Contrat triennal conventionnel rémunérant la première tonne par hectare 1 000 €. [S10] | Précédent concret pour une rémunération à paliers. |
 
 **Ma réponse au jury :** le prix de 1 622 €/t chiffre le coût d'une protection forte face au blé francilien dans le modèle actuel. L'outil doit permettre de négocier cette protection, de modifier la rémunération et de choisir les hectares les plus intéressants.
@@ -104,10 +107,14 @@ Les contrats existants intègrent déjà le risque. Notre valeur ajoutée est de
 **Contrat à paliers, prototype directement compréhensible :**
 
 ~~~text
-recette_lentille(y) = 1 000 × min(y, 1) + 750 × max(y − 1, 0)
+recette_bareme(y) = 1 000 × min(y, 1)
+                  + 750 × min(max(y − 1, 0), 1)
+                  + 650 × max(y − 2, 0)
 ~~~
 
-y est le rendement payé en t/ha. Le premier palier s'inspire du communiqué NatUp ; **750 €/t sur le surplus est notre hypothèse**, puisque le barème complet n'est pas publié. Le moteur doit en calculer la protection réelle avant d'afficher un objectif atteint.
+y est le rendement net alimentaire payé en t/ha, agrégé par producteur et campagne avant d'appliquer les tranches. Ce **contrat synthétique 2027** retient 1 000 / 750 / 650 €/t, plus 30 €/t net de prime de pré-nettoyage lorsque le service a été effectué. Le premier palier s'inspire du communiqué NatUp de 2025 ; les deux suivants et le montant de la prime sont nos choix. Le barème public distinct de 2023–2024, 900 / 700 / 600, est aussi disponible. [S10] [S19]
+
+Les clauses de qualité, la prise en charge du tri, les exemples et les limites de la reconstitution figurent dans [CONTRAT_SIMULATION.md](CONTRAT_SIMULATION.md). Les trois barèmes sont paramétrés dans [contrats.json](../data/pilote_300t/contrats.json) et comparés sur le même historique synthétique. La protection face au blé reste à calculer dans le moteur avant d'afficher un objectif atteint.
 
 **Pari commercial complémentaire : prix de base de 900 €/t + prime fixe par hectare.** Cette prime rémunère l'engagement dans la filière et soutient aussi les scénarios de faible rendement. Sa valeur peut se calculer dans le moteur :
 
@@ -132,9 +139,11 @@ Pour le modèle économique de l'outil, je proposerais une **étude pilote payan
 
 ## 4. Collecte, volumes et surfaces à mobiliser
 
-### Un pilote à 300 t, une ambition à 5 000 t
+### Un pilote à 300 t nettes alimentaires, une ambition à 5 000 t
 
-À 1,59 t/ha, rendement moyen simulé actuel en Seine-et-Marne, **300 t correspondent à environ 189 ha**. NatUp a publié une collecte de 558 t en 2025 : cet ordre de grandeur rend le pilote de 300 t concret. [S10]
+Pour le pilote, retenir **220 ha, par exemple 20 fermes × 11 ha**. Le dimensionnement indépendant pose 1,59 t **brutes**/ha et 90 % de sortie nette, soit 314,82 t alimentaires avant refus additionnels ; la surface théorique pour 300 t est de 209,6 ha. Ces paramètres sont des hypothèses. Le rendement de 1,59 t/ha du modèle Agreste n'est pas automatiquement un poids brut : vérifier son assiette avant d'y appliquer une nouvelle perte de tri.
+
+NatUp a publié une collecte de 558 t en 2025. [S10] **NatUp/Lunor est le premier candidat proposé**, pour commencer par une comparaison sur un sous-ensemble de collecte existante. Les contacts, les alternatives et le message préparé figurent dans [PILOTE_300T.md](PILOTE_300T.md). Aucun partenaire n'a encore accepté le pilote. L'historique synthétique laisse volontairement apparaître les années où 220 ha ne suffisent pas à livrer 300 t nettes.
 
 Conserver le scénario de 5 000 t pour montrer l'ambition de bassin. Le calcul actuel du repo mobilise 3 147 ha. Le ratio 5 000 / 39 371 vaut 12,7 % : afficher **« volume équivalent à 13 % des importations 2025 »**. Le remplacement effectif d'importations dépendra des débouchés.
 
@@ -146,13 +155,15 @@ Je conserve 0,12 €/t/km. Le CNR distingue les coûts liés aux kilomètres, au
 
 ~~~text
 distance_route = 1,3 × distance_vol_oiseau
-transport_€/t = 5 + 0,12 × distance_route
-prix_rendu = prix_départ_ferme + transport_€/t
+collecte_€/t_reçue = 5 + 0,12 × distance_route
+coût_collecte_total = collecte_€/t_reçue × tonnes_reçues
+prix_rendu_€/t_nette = prix_producteur_€/t_nette
+                      + coût_collecte_total / tonnes_acceptées
 ~~~
 
-Les hypothèses sont : lot agrégé de 25 t ; forfait 5 €/t, soit 125 € par lot ; sensibilité du forfait 0 / 5 / 10 et du coefficient 0,06 / 0,12 / 0,20. La distance est l'aller simple ; le coefficient global retenu représente l'organisation du scénario, retours compris. Pour de petits lots, utiliser ensuite un forfait d'enlèvement divisé par leur tonnage.
+Les hypothèses sont : lot agrégé de 25 t reçues ; forfait 5 €/t reçue, soit 125 € par lot ; sensibilité du forfait 0 / 5 / 10 et du coefficient 0,06 / 0,12 / 0,20. La distance est l'aller simple ; le coefficient global retenu représente l'organisation du scénario, retours compris. Pour de petits lots, utiliser ensuite un forfait d'enlèvement divisé par leur tonnage. Le prix rendu ci-dessus comprend achat et collecte ; ajouter tri et séchage pour le budget du contrat. Si aucune tonne n'est acceptée, le coût total reste dû et son expression par tonne alimentaire est non définie.
 
-100 km routiers supplémentaires ajoutent 12 €/t. **L'extension cartographique aide à organiser la collecte ; les principaux leviers du prix restent le bassin, la rotation et le contrat.** L'optimum affiché doit être le meilleur parmi les emplacements candidats, selon les hypothèses testées.
+100 km routiers supplémentaires ajoutent 12 €/t reçue, soit 12 × tonnes reçues / tonnes acceptées par tonne alimentaire. **L'extension cartographique aide à organiser la collecte ; les principaux leviers du prix restent le bassin, la rotation et le contrat.** L'optimum affiché doit être le meilleur parmi les emplacements candidats, selon les hypothèses testées.
 
 ## 5. Pourquoi RPG et Agreste divergent-ils ?
 
@@ -198,13 +209,15 @@ La question « sans IA, que perd-on ? » doit montrer la comparaison **M0 / M1 /
 
 Pour Bedrock, un modèle visible dans le catalogue doit encore être effectivement invocable avec les permissions du compte. Faire un essai court, enregistrer la lettre, et garder le rendu hors ligne prévu. [S18]
 
-### Les trois questions à poser au mentor sur place
+### Les trois éléments demandés : disponibles pour avancer
 
-Les références documentaires ont permis de choisir des hypothèses. Le temps humain doit maintenant servir à obtenir :
+| Besoin | Livrable disponible | Prochaine donnée terrain utile |
+|---|---|---|
+| Contrat réel à simuler | [Barème NatUp 2023–2024 reconstitué et contrat synthétique 2027 complet](CONTRAT_SIMULATION.md), prix, paliers, prime, qualité, tri et durée. | Un contrat ou décompte réel pour remplacer les clauses inconnues, notamment l'assiette payée et les retenues. |
+| Partenaire pour 300 t | [NatUp/Lunor prioritaire, trois alternatives et proposition de pilote](PILOTE_300T.md), avec contacts publics. | Accord d'un responsable filière sur un périmètre de données et de collecte. |
+| Petit historique coopératif | [140 lots fictifs sur 2019–2025](../data/pilote_300t/README.md), récolte brute/nette, prix, charges et refus, avec générateur et références publiques séparées. | 20 à 50 lots réels et anonymisés avec leur décompte et les règles qualité. |
 
-1. **Un contrat réel à simuler :** prix de base, palier, prime, qualité attendue, paiement du tri, durée.
-2. **Un partenaire pour un pilote de 300 t :** bassin, nombre d'agriculteurs, débouché et volume annuel souhaité.
-3. **Un petit historique exploitable :** récolte brute et nette de tri, prix net payé, charges, refus qualité, par campagne et zone.
+La démonstration peut démarrer avec ces fichiers. Les lots portent le statut **synthétique** et servent à exercer les calculs ; ils ne sont pas ajoutés aux observations Agreste ni utilisés comme preuve de la protection « huit années sur dix ».
 
 Le pari à défendre est clair : **un responsable filière peut choisir un contrat et des hectares avec une meilleure lecture du risque, puis faire grandir une filière de lentilles françaises.**
 
@@ -230,6 +243,7 @@ Le pari à défendre est clair : **un responsable filière peut choisir un contr
 | [S16] | GIEC, raffinement 2019, vol. 4, chap. 11, tableau 11.1 | Facteur direct N₂O-N agrégé. |
 | [S17] | GIEC AR6 WGI, errata du 7 octobre 2025, tableau 7.15 corrigé | PRG100 N₂O. |
 | [S18] | AWS, Request access to models | Disponibilité et permissions Bedrock. |
+| [S19] | Union Agricole, entretien NatUp, 18 septembre 2023 | Barème par tranches annoncé pour 2023 et reconduit en 2024. |
 
 [S1]: https://www3.telepac.agriculture.gouv.fr/telepac/pdf/tas/2026/Dossier-PAC-2026_notice_aides-couplees.pdf
 [S2]: https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000053594055
@@ -249,3 +263,4 @@ Le pari à défendre est clair : **un responsable filière peut choisir un contr
 [S16]: https://www.ipcc-nggip.iges.or.jp/public/2019rf/pdf/4_Volume4/19R_V4_Ch11_Soils_N2O_CO2.pdf
 [S17]: https://www.ipcc.ch/report/ar6/wg1/downloads/report/IPCC_AR6_WGI_Errata.pdf
 [S18]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-access.html
+[S19]: https://www.union-agricole.fr/natup-souhaite-augmenter-les-surfaces-de-lentilles

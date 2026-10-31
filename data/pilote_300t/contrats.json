@@ -1,0 +1,57 @@
+{
+  "version": "1.0",
+  "devise": "EUR_HT",
+  "public_natup_2023_2024": {
+    "statut": "bareme_public_reconstitue_conventions_explicites",
+    "source_url": "https://www.union-agricole.fr/natup-souhaite-augmenter-les-surfaces-de-lentilles",
+    "source_date": "2023-09-18",
+    "campagnes_documentees": [2023, 2024],
+    "duree_contractuelle_campagnes": null,
+    "paliers_marginaux_eur_t": [900, 700, 600],
+    "bornes_cumulees_t_ha": [1, 2, null],
+    "interpretation_paliers": "marginale_reconstituee_depuis_article_non_contrat_signe",
+    "assiette_simulation": "tonnes_nettes_alimentaires_acceptees_par_exploitation_campagne",
+    "assiette_publique_confirmee": null,
+    "prime_service_eur_t_nette": null,
+    "qualite_apres_tri": null,
+    "tri_eur_t_brute_recue": null,
+    "payeur_tri": null,
+    "transport": null,
+    "echeancier_paiement": null
+  },
+  "synthetique_2027": {
+    "statut": "synthetique_proposition_non_signee",
+    "campagnes": [2027, 2028, 2029],
+    "duree_contractuelle_campagnes": 3,
+    "paliers_marginaux_eur_t": [1000, 750, 650],
+    "bornes_cumulees_t_ha": [1, 2, null],
+    "assiette": "tonnes_nettes_alimentaires_acceptees_par_exploitation_campagne",
+    "prime_service_eur_t_nette": 30,
+    "condition_prime": "lot_prenettoye_et_accepte",
+    "qualite_apres_tri": {"humidite_max_pct": 15, "defauts_max_pct": 2, "insectes_vivants_max_nombre": 0, "moisissure_admise": false},
+    "tri_eur_t_brute_recue": 180,
+    "payeur_tri": "acheteur",
+    "statut_cout_tri": "hypothese_proxy_tri_optique_bio_non_devis_lentille_conventionnelle",
+    "source_cout_tri_url": "https://www.bio-hautsdefrance.org/systeme_bio/cultures-innovantes-de-nouvelles-opportunites-pour-les-grandes-cultures-bio/",
+    "transport": {"fixe_eur_t_brute_recue": 5, "variable_eur_t_brute_recue_km_route": 0.12, "statut": "hypothese_non_devis"},
+    "sechage": {"eur_t_recue_point_humidite": 3, "seuil_declenchement_pct": 15, "cible_pct": 14, "payeur": "acheteur", "statut": "hypothese_non_devis"},
+    "refus": "aucun_paiement_alimentaire_aucune_valorisation_supposee_tri_collecte_sechage_deja_effectues_restent_a_charge_acheteur",
+    "echeancier_paiement": {"acompte_pct_estimation_reception": 30, "solde": "apres_agreage_definitif_regularisation_ou_remboursement_trop_verse", "statut": "hypothese_non_simulee_flux_annuels_seulement"}
+  },
+  "uniforme_900": {
+    "statut": "synthetique_comparateur",
+    "paliers_marginaux_eur_t": [900, 900, 900],
+    "bornes_cumulees_t_ha": [1, 2, null],
+    "assiette": "tonnes_nettes_alimentaires_acceptees_par_exploitation_campagne",
+    "herite_conditions": "synthetique_2027",
+    "prime_service_eur_t_nette": 30
+  },
+  "comparaison": {
+    "statut": "rejeu_synthetique_des_baremes_sur_les_memes_lots_2019_2025",
+    "conditions_communes": "synthetique_2027",
+    "bareme_public": "seuls_prix_et_bornes_sont_repris_du_public_les_autres_conditions_sont_des_hypotheses_communes",
+    "echelle": "exploitation_campagne_agregation_avant_application_des_paliers",
+    "exclusions_budget": ["stockage", "conditionnement_final", "frais_generaux", "investissement", "TVA"],
+    "exclusions_solde_agriculteur": ["mecanisation", "travail", "fermage", "frais_generaux", "aides", "effet_rotation", "autres_cultures"]
+  }
+}

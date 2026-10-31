@@ -14,29 +14,35 @@
 
 **Recherche mentor réalisée :** éligibilité de la lentille alimentaire confirmée, montant PAC remis dans sa campagne, références de charges et d'effet précédent trouvées, exemples de contrats réels, coefficients d'impact et choix d'usage RPG / SAA documentés dans [QUESTIONS.md](QUESTIONS.md).
 
-**Proposition centrale à implémenter :** charges blé 700 €/ha, lentille 500 €/ha ; aide 105 €/ha indicative pour 2026 ; bénéfice de rotation 150 €/ha ; pilote 300 t et ambition de bassin 5 000 t. Ces modifications documentaires ne recalculent pas les exports : le P* et le score de backtest de ce scénario restent à produire.
+**Pack de simulation disponible :** [contrat public reconstitué et contrat synthétique](CONTRAT_SIMULATION.md), [partenaires ciblés et proposition 300 t](PILOTE_300T.md), [140 lots fictifs, sources publiques et comparateur reproductible](../data/pilote_300t/README.md). Il permet de tester les paiements et coûts des contrats ; son intégration à l'application reste à faire.
+
+**Proposition centrale à implémenter :** charges blé 700 €/ha, lentille 500 €/ha ; aide 105 €/ha indicative pour 2026 ; bénéfice de rotation 150 €/ha ; pilote **300 t nettes alimentaires** sur un programme proposé de 220 ha et ambition de bassin 5 000 t. Ces modifications documentaires et le jeu synthétique ne recalculent pas les exports : le P* et le score de backtest de ce scénario restent à produire.
 
 ## La suite, par priorité
 
 ### 1. Mettre les choix documentés dans le moteur
 
 - [x] Répondre aux questions agro par des sources : lentille éligible, 105 €/ha indicatifs pour 2026 et 122 €/ha définitifs pour 2025 ; charges et rotation argumentées.
+- [x] Fournir un barème public NatUp 2023–2024 reconstitué, un contrat synthétique complet et des paramètres JSON. Voir [CONTRAT_SIMULATION.md](CONTRAT_SIMULATION.md).
+- [x] Fournir un historique fictif 2019–2025 et son générateur : masse brute/nette, qualité, refus, paiements et coûts par acteur. Références réelles séparées dans [data/pilote_300t](../data/pilote_300t/README.md).
+- [ ] Brancher ces contrats sur les scénarios de l'application avec un mode « données synthétiques » explicite ; garder les lots fictifs hors apprentissage et backtest Agreste.
 - [ ] Reporter le scénario central et ses sensibilités dans data/hypotheses.yaml ; conserver les paramètres historiques pour reproduire la version 3.
 - [ ] Recalculer P*, les courbes, le backtest et les exports associés, sans changer le protocole d'évaluation. Enregistrer cette version dans [RESULTATS.md](RESULTATS.md), puis synchroniser README, deck et lettre.
 - [ ] Présenter séparément la marge de campagne et celle intégrant le bénéfice de la culture suivante. Le bonus de rotation est compté une fois.
 - [ ] Remplacer « prix de marché » par « référence historique 2012–2016 » pour la série Eurostat. Ajouter les cas Unéal et NatUp datés documentés dans [QUESTIONS.md](QUESTIONS.md).
-- [ ] Définir les tonnes payées : récolte brute ou tonnes alimentaires acceptées après tri. Ajouter une sensibilité qualité 0 / 10 / 20 % lorsqu'elle ne double pas une perte déjà incluse.
+- [ ] Reprendre dans l'application les conventions du pack : tonnes alimentaires acceptées pour le paiement, tonnes reçues pour le tri et la collecte. Vérifier l'assiette Agreste avant d'ajouter une perte de tri ; une sensibilité qualité 0 / 10 / 20 % ne doit pas compter une perte deux fois.
 - [ ] Faire l'audit court RPG / SAA : même campagne, même territoire, code LEC, filtre 1 ha et identifiants uniques. Garder RPG pour la carte et SAA pour les rendements pendant cet audit.
 
-**Critère de sortie :** toutes les vues d'un scénario utilisent le même jeu d'hypothèses et les mêmes exports. Le nouveau prix est un résultat calculé. La rencontre avec un mentor sert surtout à obtenir un contrat et un partenaire réels.
+**Critère de sortie :** toutes les vues d'un scénario utilisent le même jeu d'hypothèses et les mêmes exports. Le nouveau prix est un résultat calculé. Le dossier de prospection permet de demander un contrat complet et des données de lots à un partenaire réel.
 
 ### 2. Montrer une décision de contrat et un impact chiffré
 
-- [ ] Ajouter deux volumes : **pilote 300 t** et **ambition 5 000 t**. Montrer les surfaces nécessaires et les tonnes potentielles ; un scénario de mobilisation à 10 % peut compléter la sélection économique.
+- [ ] Ajouter deux volumes : **pilote 300 t nettes alimentaires** et **ambition 5 000 t** avec son assiette explicite. Montrer les surfaces nécessaires et les tonnes potentielles ; un scénario de mobilisation à 10 % peut compléter la sélection économique.
 - [ ] Afficher le prix uniforme selon la protection visée, puis l'option indexée déjà calculée : m × prix du blé de récolte. Les valeurs actuelles 3,59 et 7,8 doivent être recalculées après changement d'hypothèses.
 - [ ] Faire varier le prix du blé pour montrer le budget de l'acheteur. L'indexation transfère ce risque ; rendement et risque de base restent à traiter.
-- [ ] Prototyper un barème à paliers : **1 000 €/t sur la première tonne/ha puis 750 €/t sur le surplus**, ou **900 €/t + une prime par hectare calculée**. Le premier palier est inspiré de NatUp ; les autres paramètres sont des paris de démonstration. Formules dans [QUESTIONS.md](QUESTIONS.md).
-- [ ] Comparer les contrats avec les mêmes scénarios : fréquence de marges gagnantes, coût moyen pour l'acheteur et perte des mauvaises années. Montrer 2020 et 2021.
+- [x] Comparer sur le jeu synthétique les trois barèmes : référence publique **900 / 700 / 600**, proposition **1 000 / 750 / 650** et prix uniforme **900 €/t**. Les règles communes de qualité et de service sont des conventions de simulation ; voir [contrats.json](../data/pilote_300t/contrats.json).
+- [ ] Intégrer le barème synthétique 1 000 / 750 / 650 €/t aux scénarios du modèle ; comparer aussi **900 €/t + une prime par hectare calculée**. Formules dans [QUESTIONS.md](QUESTIONS.md).
+- [ ] Comparer les contrats avec les mêmes scénarios du modèle : fréquence de marges gagnantes, coût moyen pour l'acheteur et perte des mauvaises années. Montrer 2020 et 2021. Les résultats du jeu fictif illustrent les mécanismes sans valider leur fréquence réelle.
 - [ ] Ajouter les protéines potentielles : **25 %** de la masse de graines alimentaires ; référence Terres Inovia / Terres Univia disponible.
 - [ ] Ajouter l'azote minéral non apporté : **180 kg N par nouvel hectare de blé remplacé**, scénario régional arrondi.
 - [ ] Ajouter les émissions directes associées à cet azote : **environ 0,755 t CO₂e/ha**, avec le périmètre expliqué. Les formules et sources GIEC sont dans [QUESTIONS.md](QUESTIONS.md).
@@ -50,7 +56,8 @@
 - [ ] Déployer la version web et exporter la version hors ligne ; vérifier le parcours complet et préparer une vidéo courte.
 - [ ] Confirmer avec l'organisation la règle sur les assistants de code externes ; déclarer Claude Code, ChatGPT pour cette recherche et les autres outils effectivement utilisés.
 - [ ] Vérifier la déclaration du Track 3 ; choisir présentateur et opérateur de démo ; répéter en français.
-- [ ] Préparer la proposition commerciale : un pilote de 300 t, une campagne, un acheteur et un contrat réel à comparer.
+- [x] Préparer la proposition commerciale, les contacts publics et le brouillon de prise de contact pour un pilote de 300 t nettes : [PILOTE_300T.md](PILOTE_300T.md).
+- [ ] Obtenir l'accord d'un candidat et un extrait de données pour comparer son contrat. Le dossier préparé ne constitue pas un engagement du partenaire.
 
 ### 4. Étendre la démonstration pendant l'événement
 
@@ -101,7 +108,7 @@ Décrit dans [PROJET.md](PROJET.md), [MODELE.md](MODELE.md) et [ARCHITECTURE.md]
 
 **Moments forts de la démo** :
 
-1. **La bascule** : on monte le prix, les parcelles candidates virent au vert, le compteur de tonnes potentielles monte et la courbe d'offre se dessine. Comparer le pilote de 300 t à l'ambition de 5 000 t.
+1. **La bascule** : on monte le prix, les parcelles candidates virent au vert, le compteur de tonnes potentielles monte et la courbe d'offre se dessine. Comparer le pilote de 300 t nettes alimentaires à l'ambition de 5 000 t, avec l'assiette des volumes affichée.
 2. **Le replay** :
    - 2016 : le blé s'effondre (−27 %, **mesuré**) et la lentille tient (−13 %) ; le contrat aurait sauvé l'année ;
    - 2020 : la lentille s'effondre (−38 %, **mesuré**) ; on voit où le contrat a tenu et où il a cédé.
@@ -122,15 +129,17 @@ Décrit dans [PROJET.md](PROJET.md), [MODELE.md](MODELE.md) et [ARCHITECTURE.md]
 
 **Ce qu'il faut côté données** : les géométries de parcelles déjà exportées dans `app/src/data/parcels.json` permettent de calculer des centres représentatifs ; les centroïdes sont aussi dans `data/parcelles.json`. Le P* départemental reste indépendant du site. Conserver les mêmes conventions de distance et de coût dans toutes les vues.
 
-Pour le contrat à prix uniforme :
+Pour un contrat uniforme exprimé par tonne nette acceptée, avec un P* recalculé sur cette même assiette :
 
 ```
-prix_rendu[i](site) = P*_dep(i) + forfait_collecte + κ · 1,3 · haversine(centroïde_i, site)
-tonnes_candidates(site, Q) = Σ tonnes_attendues_i · 1{ Q ≥ prix_rendu[i](site) }
+collecte_par_t_recue[i](site) = forfait_collecte + κ · 1,3 · haversine(centroïde_i, site)
+cout_collecte[i](site) = collecte_par_t_recue[i](site) · tonnes_recues_i
+prix_rendu_net[i](site) = P*_net_dep(i) + cout_collecte[i](site) / tonnes_nettes_i
+tonnes_candidates(site, Q) = Σ tonnes_nettes_i · 1{ Q ≥ prix_rendu_net[i](site) }
 tonnes_mobilisables(site, Q) = adoption · tonnes_candidates(site, Q)
 ```
 
-**Hypothèses proposées** : forfait 5 €/t, κ = 0,12 €/t/km, détour 1,3 et adoption paramétrable. Le prix rendu couvre ici l'achat et la collecte. Les frais de tri, stockage et conditionnement restent des postes à ajouter au budget acheteur. Sur 100 km routiers, le terme variable vaut 12 €/t : la carte améliore la collecte, les contrats et le choix du bassin portent l'essentiel de l'arbitrage économique.
+**Hypothèses proposées** : forfait 5 €/t reçue, κ = 0,12 €/t reçue/km, détour 1,3 et adoption paramétrable. Le ratio tonnes reçues / tonnes nettes convertit les assiettes. Un lot sans tonne acceptée conserve ses frais mais son coût par tonne nette est non défini. Le prix rendu couvre ici l'achat et la collecte. Le budget complet ajoute tri, séchage, stockage et conditionnement selon son périmètre. Sur 100 km routiers, le terme variable vaut 12 €/t reçue : la carte améliore la collecte, les contrats et le choix du bassin portent l'essentiel de l'arbitrage économique.
 
 ---
 
