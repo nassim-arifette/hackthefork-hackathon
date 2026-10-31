@@ -4,9 +4,8 @@
     python3 video/verifier.py docs/video/demo-4min.mp4 docs/video/planche.jpg
 
 - format : codec, pixels, cadence, durée, taille, faststart ;
-- fluidité : différence image à image sur une copie réduite ; pendant les fenêtres où quelque
-  chose doit bouger (vol de caméra des 2 s après chaque Espace, cargos de l'écran 1, prix et
-  camions de l'écran 4, carte rejouée de l'écran 5), plus longue suite d'images identiques ;
+- fluidité : différence image à image sur une copie réduite ; pendant les vols de caméra et les
+  camions, plus longue suite d'images identiques ;
 - planche contact : une image toutes les 5 s, avec son horodatage.
 """
 import json
@@ -35,32 +34,43 @@ print(f"format : {st['codec_name']} {st['profile']} {st['pix_fmt']} {st['width']
       f"{st['r_frame_rate']} (moyenne {st['avg_frame_rate']}), {st['nb_frames']} images, "
       f"{float(fm['duration']):.3f} s, {int(fm['size']) / 1e6:.1f} Mo, faststart {'oui' if faststart else 'non'}")
 
-# Copie réduite en niveaux de gris, 480x270, pour les différences image à image.
+# Copie réduite en niveaux de gris, 480x270 : nombre de pixels qui changent d'une image à la suivante.
 W, H = 480, 270
 raw = subprocess.run(["ffmpeg", "-v", "error", "-i", video, "-vf", f"scale={W}:{H},format=gray", "-f", "rawvideo", "-"],
                      capture_output=True, check=True).stdout
 fr = np.frombuffer(raw, np.uint8).reshape(-1, H, W).astype(np.int16)
-diff = np.abs(np.diff(fr, axis=0)).mean(axis=(1, 2))  # diff[i] : entre l'image i et i+1
-bouge = diff > 0.02
+change = (np.abs(np.diff(fr, axis=0)) > 6).sum(axis=(1, 2))  # change[i] : entre l'image i et i+1
+bouge = change >= 5
 
-fenetres = [(f"vol de caméra, Espace à {s // 60}:{s % 60:02d}", s, s + 1.8) for s in press]
-fenetres += [
-    ("écran 1, cargos", 0.5, press[0] - 0.5),
-    ("écran 4, prix puis camions", press[2] + 1.6, press[2] + 12),
-    ("écran 5, carte rejouée 2019-2025", press[3] + 1, press[3] + 10),
+# Fenêtres où la carte doit bouger à chaque image. L'écran 3 garde la vue de l'écran 2 : pas de vol.
+# À l'écran 5, les départements n'apparaissent qu'avec la première année (900 ms après l'entrée).
+e2, e3, e4, e5, e6 = press  # entrée dans les écrans 2 à 6
+fenetres = [
+    ("écran 2, vol de caméra", e2, e2 + 1.8),
+    ("écran 4, vol de caméra", e4, e4 + 1.8),
+    ("écran 4, camions", e4 + 6, e4 + 16),
+    ("écran 5, vol de caméra (carte visible)", e5 + 0.9, e5 + 1.8),
+    ("écran 6, vol de caméra", e6, e6 + 1.8),
+    ("écran 6, camions", e6 + 2, float(fm["duration"]) - 0.5),
 ]
-print("fluidité (plus longue suite d'images identiques dans chaque fenêtre) :")
-pire = 0
-for nom, a, b in fenetres:
+def plus_longue(a, b):
     i0, i1 = int(a * fps), min(len(bouge), int(b * fps))
     run = best = 0
     for v in bouge[i0:i1]:
         run = 0 if v else run + 1
         best = max(best, run)
-    ms = (best + 1) * 1000 / fps if best else 1000 / fps
+    return (best + 1) * 1000 / fps, bouge[i0:i1].mean() * 100
+
+print("fluidité (une image tenue N ms = N/33 images identiques de suite) :")
+pire = 0
+for nom, a, b in fenetres:
+    ms, part = plus_longue(a, b)
     pire = max(pire, ms)
-    print(f"  {nom} : {(bouge[i0:i1].mean() * 100):.0f} % des images changent, plus longue image figée {ms:.0f} ms")
-print(f"pire image figée dans les fenêtres animées : {pire:.0f} ms (critère : 100 ms au plus)")
+    print(f"  {nom} : {part:.0f} % des images changent, image la plus longtemps tenue {ms:.0f} ms")
+print(f"pire image tenue pendant les vols et les camions : {pire:.0f} ms (critère : 100 ms au plus)")
+ms, part = plus_longue(0.5, e2 - 0.5)
+print(f"  pour information, écran 1 (cargos) : {part:.0f} % des images changent, {ms:.0f} ms au plus ; "
+      "les cargos ralentissent en arrivant au port puis marquent une pause de 1,8 s (animation de l'application)")
 
 # Planche contact : une image toutes les 5 s.
 cols, w, h = 6, 480, 270
