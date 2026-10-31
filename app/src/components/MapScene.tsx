@@ -64,6 +64,9 @@ export default function MapScene({ step, price, year, selectKm, onHover }: Props
   const [fontsReady, setFontsReady] = useState(false);
   const target = step === 0 ? 'france' : 'idf';
   const [viewState, setViewState] = useState<MapViewState>(views(1000).france);
+  // Seul un changement d'étape anime la caméra. Une largeur mesurée tardivement s'applique sans
+  // transition : sinon la dernière image de cette transition peut écraser la suivante.
+  const shownTarget = useRef(target);
 
   useEffect(() => {
     const el = box.current;
@@ -75,7 +78,11 @@ export default function MapScene({ step, price, year, selectKm, onHover }: Props
   }, []);
 
   useEffect(() => {
-    setViewState({ ...views(width)[target], transitionDuration: 1800, transitionInterpolator: new FlyToInterpolator({ speed: 1.6 }) } as MapViewState);
+    const animate = shownTarget.current !== target;
+    shownTarget.current = target;
+    setViewState(animate
+      ? { ...views(width)[target], transitionDuration: 1800, transitionInterpolator: new FlyToInterpolator({ speed: 1.6 }) } as MapViewState
+      : views(width)[target]);
   }, [target, width]);
 
   const layers = useMemo(() => {

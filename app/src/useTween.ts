@@ -11,7 +11,8 @@ export function useTween(target: number, ms = 450): number {
     const start = performance.now(), a = from.current;
     let raf = 0;
     const tick = (now: number) => {
-      const t = Math.min(1, (now - start) / ms);
+      // L’horodatage de la frame peut précéder performance.now() : on borne t à [0, 1].
+      const t = Math.min(1, Math.max(0, (now - start) / ms));
       const e = 1 - Math.pow(1 - t, 3);
       const cur = a + (target - a) * e;
       from.current = cur;
