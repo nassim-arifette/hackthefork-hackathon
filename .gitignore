@@ -4,6 +4,9 @@ data_raw/rpg/
 data_raw/agreste/x/
 data_raw/**/*.part
 data_raw/weather.log
+# Large public inputs are reproducibly fetched; derived features and source hashes are versioned.
+data_raw/sim_decadaire/
+data_raw/soil/
 *.gpkg
 *.shp
 *.shx
@@ -41,3 +44,17 @@ experiments/**/run.log
 experiments/multilegumes_policies/summary.csv
 experiments/multilegumes_policies/subgroup_comparisons.csv
 experiments/multilegumes_policies/policy_predictions.csv.gz
+experiments/advanced_benchmark/checkpoints/
+experiments/advanced_benchmark/execution.log
+# Completed tables/manifests are in Git; full execution bundles are in Drive.
+experiments/advanced_*/checkpoints/
+experiments/advanced_*/partitions/
+experiments/advanced_*/executed-inputs.zip
+experiments/advanced_*/*.log
+experiments/advanced_*/residual_diagnostics.csv
+
+# Reconstructed lossless tables; binary parts and checksums are versioned.
+experiments/advanced_combined/predictions.csv.gz
+experiments/advanced_policies/policy_decisions.csv.gz
+experiments/advanced_policies/subgroup_comparisons.csv.gz
+experiments/advanced_policies/summary.csv.gz

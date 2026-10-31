@@ -1,0 +1,76 @@
+{
+  "original_seconds": 22.781111680000322,
+  "batched_seconds": 12.452203184002428,
+  "speedup": 1.8294844168032554,
+  "rows": 1656,
+  "predictions_csv_bitwise_equal": true,
+  "predictions_sha256": "0d6b9c915cb684653d4c3ca629ee83816c6fba075517ecbaf57433416496fce1",
+  "stats": {
+    "generation": 1,
+    "batches": 2,
+    "batched_rows": 2310,
+    "cache_calls": 491,
+    "cache_rows": 6831,
+    "fallback_calls": 70
+  },
+  "environment": "local CPU measurement; not a full Colab-run speed estimate",
+  "options": {
+    "cultures": [
+      "pois"
+    ],
+    "models": [
+      "trend",
+      "qrf_seasonal",
+      "qrf_soil_sparse",
+      "qrf_soil_dense",
+      "qrf_joint_gaussian",
+      "qrf_joint_empirical",
+      "qrf_lgb_mixture",
+      "qrf_wheat_dense"
+    ],
+    "years": [
+      2023
+    ],
+    "samples": 20000,
+    "seed": 42,
+    "threads": 1
+  },
+  "packages": {
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "scipy": "1.17.0",
+    "scikit-learn": "1.8.0",
+    "quantile-forest": "1.4.2",
+    "lightgbm": "4.7.0",
+    "catboost": "1.2.10",
+    "PyYAML": "6.0.3"
+  },
+  "input_files": {
+    "pipeline/benchmark_advanced.py": "858e83e5153e9b3c7136ed56274c2ea0f8e5c717be4558703385696272f99d59",
+    "pipeline/advanced_models.py": "44e4679c8c0134a520cd967c2961c052461889376a2bcfb2106b2347bc5633e0",
+    "pipeline/advanced_weather.py": "a4777c87ec5eefa8582ade0b27770766e30535cd1d021ed1f488005bc95100d1",
+    "pipeline/crop_weather.py": "31fe686d550d99ba4eb11cf18110495db3115e9e38a227eed9f2a22b5209c4d3",
+    "pipeline/fetch_sim_features.py": "10442a2cd795b5ebcdf78bc1ad4008c4d6cec855e5b80cf3e7791e51af849557",
+    "pipeline/multicrop_models.py": "efeed9bcae06974f6f485e83c29fa3ef1142290006fb4af1e8fa01a7c6bc13c2",
+    "pipeline/benchmark_multilegumes.py": "798ce1880fff6037293b3485cb56260f384fe7d5b23041046e13a4cf44c9a184",
+    "pipeline/contract_economics.py": "3df69f37d0aff485adbcac28858ec4f4c171ffbd11b37a58ae7586d46a45188a",
+    "pipeline/common.py": "9a4849d0b5e2e49b2749c12e7e717f033c4cd3a734a40f40c10eed56579da4d5",
+    "pipeline/model.py": "4510d94fe4715083a613094eed3e903d5a1a24c26a437ed7668137a7d55f0803",
+    "data/panel_rendements.csv": "cc353c3b5de58cdb867b5812ca67d54deddab8df9aec68fde2dab04419079a71",
+    "data/meteo_dept_cultures.csv": "65900b4f29c3ece9e96d5bf761a169d22c234d10f61fa8c19d97ccfc9b3d38e9",
+    "data/prix_ble.csv": "2da72c05832daf2a3db1658d293f506aaa8101e13987c03215a2f4e9ca8ac676",
+    "data/hypotheses.yaml": "7ecaf93dc1c8f3e232e8a3970d53863088dcaa59e9712bed72209600eae92498",
+    "data/cultures.yaml": "4535345b14e26cb6ead1b4b980f161883e11298cce673b5c32223da38879a0ff",
+    "data/meteo_saisonnier_cultures.csv": "0b1f2dbf0dbd036a9b8bc6f24de9ae6cf51238607a0c41920f44c1837efcb645",
+    "data/meteo_advanced_cultures.csv": "2f63f9a50dca96e180b5d04d0b0ca6a1f4603d2548963f7668ffa059835ecb33",
+    "data/sim_features.csv": "30e5a025516f9cffd646042e043ec982b4a3ea6e0c170b90dac442ffb68921e7",
+    "data/sim_agri_features.csv": "db558d0d18769c065de0cc6988d2299efd6297699b59a590b5ac228c8f5249fe",
+    "data/soil_features.csv": "5f7fa9187ee82257d1ddacf717f8b339de75bf3e542c9031a46b0e278c01f193",
+    "data/soil_features_crop.csv": "281121a175c8ad462b252373106ce62980043f87cfea8be811becb0384af838c",
+    "data/sim_manifest.json": "999ad2b91f13fbcabd3a735aa260c8f29806290ea0a3f7515a410662a2fb541c",
+    "data/sim_agri_manifest.json": "fc01fc71df529d00bf27022c614a0161712bfce98cc6a6be2379c7601f57c164",
+    "data/soil_manifest.json": "e5f5221269d8fe1b976817d1c960cb19d6a3d7c79a208872ab1b9a22d07c8512",
+    "data/meteo_advanced_manifest.json": "c9be21ca6b17216b444cbc23adf3e265c8d98b4ea87e9698745521d4577d623e"
+  },
+  "helper_sha256": "f119db3df69b86a03d8633674c97b6849333879f8aca0f6bb885b00d5baaf188"
+}

@@ -1,0 +1,50 @@
+{
+  "input_sha256": "2c195374d158ac134cccec3da23ecc633d0363c6b1572bb2af4e872f22e85d74",
+  "input": "/content/advanced-final-artifacts/combined/predictions.csv",
+  "benchmark_signature": "890e8408a149f11a37b19ca73fc47b606d5d74ac4d2c192f83cdda6557e6a3af",
+  "analysis_sources_sha256": {
+    "analyze_advanced.py": "7e67a44bbe2e3eb5450b888257c5d34395c9acf00b7ba664c738a42db3f0e2f6",
+    "analyze_multilegumes.py": "b699a261ec5fe0d1bbf753e264802c96c8ef27bf88a51600ce5f20670c5a9ec4",
+    "contract_economics.py": "3df69f37d0aff485adbcac28858ec4f4c171ffbd11b37a58ae7586d46a45188a"
+  },
+  "first_test_year": 2019,
+  "sensitivity_year": 2023,
+  "calibration_window": 3,
+  "calibration_weighting": "pooled",
+  "selection_window": 3,
+  "calibrations": {
+    "raw": null,
+    "cal80": 0.8,
+    "cal90": 0.9,
+    "cal95": 0.95
+  },
+  "target": 0.8,
+  "selection_scopes": {
+    "all_models": null,
+    "m0_only": "trend",
+    "m0_extended": "trend*",
+    "qrf_reference": "qrf_seasonal"
+  },
+  "selection_objective": "past protection >=80%, then sum(paid)/sum(accepted tonnes)",
+  "n_models": 36,
+  "raw_rows": 212112,
+  "evaluation_rows": 614496,
+  "bootstrap_samples": 2000,
+  "bootstrap_unit": "year",
+  "seed": 42,
+  "vintage_note": "Static maps may postdate early cases; since_2023 is a sensitivity, not a reconstructed data-vintage backtest",
+  "output_sha256": {
+    "REPORT.md": "7e79260237fab3a832fc877b927534ee6adbaa96622fd37e038493c96473811a",
+    "ablation.csv": "98546ae51d0b02a68c36f0277fa6685cc97d6aa0f4655e1f7e80a45d66bc410a",
+    "candidate_catalog.json": "48892e9a4a47f30a2d75a632031ad95f864d6f1b4edc6eba5334059acfaae46c",
+    "global_summary.csv": "3cf574f61478d6557fe1dfb65e3dcd871c9bb238ebddda6a9c6d7bda8cbd93dd",
+    "paired_baselines.csv": "bdf2536e7acd4a7bdc4b43f3ccb831e51e33bf8d706ca3f8a93e3088f67cd57b",
+    "policy_decisions.csv.gz": "f36d8999e43014c4139c8966173d9382de17d60e0e86db552d12b20e01e9eb16",
+    "retrospective_candidates.csv": "0f1e007c4b7968a4c5b92371b67d823de8e27c2b78f096ee87b0c565261caaa6",
+    "selection_candidates.csv.gz": "da19429c4fa5fd7dfe491d69b322e34a22a4a6dc9778e643f027dc54d430e60b",
+    "selection_decisions.csv": "413eba63cb3fa860e6a485e2bdd6a918b3b4f953fb92b081156b5b10dbef85b2",
+    "subgroup_comparisons.csv.gz": "4ff93291636fdc7cedd80a261c2739f4d34d847395247663a8a30a8b19211e28",
+    "summary.csv.gz": "0c3a2a6a67cba187d3b4b7cd574b1db7299a4ecdf3bd761aa8168144d112100d",
+    "yield_diagnostics.csv": "1e73f5173ad327f0b8c9c37ac6ed5f4610e5065e1eda70d89a6565b58f5dba68"
+  }
+}

@@ -1,0 +1,794 @@
+{
+  "source": "Météo-France SIM decadal (Safran–Isba), not CatNat uniform SWI",
+  "catalog": "https://www.data.gouv.fr/api/1/datasets/donnees-changement-climatique-sim-decadaire/",
+  "catalog_sha256": "66777b42e53de91563b2befb772b3a79669860cf1ca279a1b57c1a9a640e415c",
+  "license": "Licence Ouverte Etalab 2.0",
+  "spec_version": "sim-decadal-zonal-v1",
+  "years": [
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025
+  ],
+  "departments": [
+    "01",
+    "02",
+    "03",
+    "04",
+    "05",
+    "07",
+    "08",
+    "09",
+    "10",
+    "11",
+    "12",
+    "13",
+    "14",
+    "15",
+    "16",
+    "17",
+    "18",
+    "21",
+    "22",
+    "23",
+    "24",
+    "25",
+    "26",
+    "27",
+    "28",
+    "29",
+    "2B",
+    "30",
+    "31",
+    "32",
+    "33",
+    "34",
+    "35",
+    "36",
+    "37",
+    "38",
+    "39",
+    "40",
+    "41",
+    "42",
+    "43",
+    "44",
+    "45",
+    "46",
+    "47",
+    "48",
+    "49",
+    "50",
+    "51",
+    "52",
+    "53",
+    "54",
+    "55",
+    "56",
+    "57",
+    "58",
+    "59",
+    "60",
+    "61",
+    "62",
+    "63",
+    "64",
+    "65",
+    "66",
+    "67",
+    "68",
+    "69",
+    "70",
+    "71",
+    "72",
+    "76",
+    "77",
+    "78",
+    "79",
+    "80",
+    "81",
+    "82",
+    "83",
+    "84",
+    "85",
+    "86",
+    "87",
+    "88",
+    "89",
+    "91",
+    "93",
+    "95"
+  ],
+  "rows": 1392,
+  "columns": {
+    "lentille": [
+      "lentille_sim_swi_vegetative",
+      "lentille_sim_swi_reproductive",
+      "lentille_sim_swi_reproductive_min_decade",
+      "lentille_sim_low_swi_reproductive_days_proxy",
+      "lentille_sim_climatic_deficit_reproductive_mm",
+      "lentille_sim_evap_etp_reproductive_ratio",
+      "lentille_sim_rain_harvest_mm",
+      "lentille_sim_swi_january_february"
+    ],
+    "pois_chiche": [
+      "pois_chiche_sim_swi_vegetative",
+      "pois_chiche_sim_swi_reproductive",
+      "pois_chiche_sim_swi_reproductive_min_decade",
+      "pois_chiche_sim_low_swi_reproductive_days_proxy",
+      "pois_chiche_sim_climatic_deficit_reproductive_mm",
+      "pois_chiche_sim_evap_etp_reproductive_ratio",
+      "pois_chiche_sim_rain_harvest_mm",
+      "pois_chiche_sim_swi_january_february"
+    ],
+    "haricot": [
+      "haricot_sim_swi_vegetative",
+      "haricot_sim_swi_reproductive",
+      "haricot_sim_swi_reproductive_min_decade",
+      "haricot_sim_low_swi_reproductive_days_proxy",
+      "haricot_sim_climatic_deficit_reproductive_mm",
+      "haricot_sim_evap_etp_reproductive_ratio",
+      "haricot_sim_rain_harvest_mm",
+      "haricot_sim_swi_january_february"
+    ],
+    "pois": [
+      "pois_sim_swi_vegetative",
+      "pois_sim_swi_reproductive",
+      "pois_sim_swi_reproductive_min_decade",
+      "pois_sim_low_swi_reproductive_days_proxy",
+      "pois_sim_climatic_deficit_reproductive_mm",
+      "pois_sim_evap_etp_reproductive_ratio",
+      "pois_sim_rain_harvest_mm",
+      "pois_sim_swi_january_february"
+    ],
+    "feverole": [
+      "feverole_sim_swi_vegetative",
+      "feverole_sim_swi_reproductive",
+      "feverole_sim_swi_reproductive_min_decade",
+      "feverole_sim_low_swi_reproductive_days_proxy",
+      "feverole_sim_climatic_deficit_reproductive_mm",
+      "feverole_sim_evap_etp_reproductive_ratio",
+      "feverole_sim_rain_harvest_mm",
+      "feverole_sim_swi_january_february"
+    ],
+    "ble": [
+      "ble_sim_swi_vegetative",
+      "ble_sim_swi_reproductive",
+      "ble_sim_swi_reproductive_min_decade",
+      "ble_sim_low_swi_reproductive_days_proxy",
+      "ble_sim_climatic_deficit_reproductive_mm",
+      "ble_sim_evap_etp_reproductive_ratio",
+      "ble_sim_rain_harvest_mm",
+      "ble_sim_swi_january_february"
+    ]
+  },
+  "sources": [
+    {
+      "year": 2010,
+      "url": "https://meteofrance.s3.sbg.io.cloud.ovh.net/data/REF_CC/SIM_DECAD/DECAD_SIM2_2010.csv.gz",
+      "sha256": "7a444e1a65f08c8efb87524554e60ff0554c07f11f0aa2490fb8ea4eafbdf6c1",
+      "compressed_bytes": 6802635,
+      "rows": 356112,
+      "cells": 9892
+    },
+    {
+      "year": 2011,
+      "url": "https://meteofrance.s3.sbg.io.cloud.ovh.net/data/REF_CC/SIM_DECAD/DECAD_SIM2_2011.csv.gz",
+      "sha256": "f82020e0985755e7db05eb2c29da10400da5ce2d9dd2711e7d26b4c9d94793e8",
+      "compressed_bytes": 6389731,
+      "rows": 356112,
+      "cells": 9892
+    },
+    {
+      "year": 2012,
+      "url": "https://meteofrance.s3.sbg.io.cloud.ovh.net/data/REF_CC/SIM_DECAD/DECAD_SIM2_2012.csv.gz",
+      "sha256": "a80582aae96106314f224ac76524ea680b9e5be751545b761f61101d62436f0a",
+      "compressed_bytes": 6674898,
+      "rows": 356112,
+      "cells": 9892
+    },
+    {
+      "year": 2013,
+      "url": "https://meteofrance.s3.sbg.io.cloud.ovh.net/data/REF_CC/SIM_DECAD/DECAD_SIM2_2013.csv.gz",
+      "sha256": "c0860d660d6b806ac3135484fd66d9d7b5a80304c1c64390fdb4881098c5be71",
+      "compressed_bytes": 6872874,
+      "rows": 356112,
+      "cells": 9892
+    },
+    {
+      "year": 2014,
+      "url": "https://meteofrance.s3.sbg.io.cloud.ovh.net/data/REF_CC/SIM_DECAD/DECAD_SIM2_2014.csv.gz",
+      "sha256": "f66801db157aee25244ca5b3e4890a3fafd7fe2eccf31645d678ee9269036f57",
+      "compressed_bytes": 6669108,
+      "rows": 356112,
+      "cells": 9892
+    },
+    {
+      "year": 2015,
+      "url": "https://meteofrance.s3.sbg.io.cloud.ovh.net/data/REF_CC/SIM_DECAD/DECAD_SIM2_2015.csv.gz",
+      "sha256": "33c950747a5e22acaf9bad262391c0dbb7921ae4b23c95f99452e187cd99cde3",
+      "compressed_bytes": 6551101,
+      "rows": 356112,
+      "cells": 9892
+    },
+    {
+      "year": 2016,
+      "url": "https://meteofrance.s3.sbg.io.cloud.ovh.net/data/REF_CC/SIM_DECAD/DECAD_SIM2_2016.csv.gz",
+      "sha256": "28e00c61d1d5108ae9eb0250d42258998fc9929e936359e4778419f87b28bcea",
+      "compressed_bytes": 6600464,
+      "rows": 356112,
+      "cells": 9892
+    },
+    {
+      "year": 2017,
+      "url": "https://meteofrance.s3.sbg.io.cloud.ovh.net/data/REF_CC/SIM_DECAD/DECAD_SIM2_2017.csv.gz",
+      "sha256": "7fcf4a791ccf9f2d46dd5d4a1ea233e6c430a98fb4dedc76bcf484bccb1f3a02",
+      "compressed_bytes": 6542842,
+      "rows": 356112,
+      "cells": 9892
+    },
+    {
+      "year": 2018,
+      "url": "https://meteofrance.s3.sbg.io.cloud.ovh.net/data/REF_CC/SIM_DECAD/DECAD_SIM2_2018.csv.gz",
+      "sha256": "e2d21794f7d514c2c4cd9142ac2f9c4240781b108b48cb1125b091431f121e04",
+      "compressed_bytes": 6697957,
+      "rows": 356112,
+      "cells": 9892
+    },
+    {
+      "year": 2019,
+      "url": "https://meteofrance.s3.sbg.io.cloud.ovh.net/data/REF_CC/SIM_DECAD/DECAD_SIM2_2019.csv.gz",
+      "sha256": "9cf618d7e156d60398d403f56c172d879532041957bbef4081555a74a7bddb80",
+      "compressed_bytes": 6603076,
+      "rows": 356112,
+      "cells": 9892
+    },
+    {
+      "year": 2020,
+      "url": "https://meteofrance.s3.sbg.io.cloud.ovh.net/data/REF_CC/SIM_DECAD/DECAD_SIM2_2020.csv.gz",
+      "sha256": "eccd8fc1a8649e1ba4c015ef174bf89627fd9f96c34202bd52c00d0d224b43fd",
+      "compressed_bytes": 6539616,
+      "rows": 356112,
+      "cells": 9892
+    },
+    {
+      "year": 2021,
+      "url": "https://meteofrance.s3.sbg.io.cloud.ovh.net/data/REF_CC/SIM_DECAD/DECAD_SIM2_2021.csv.gz",
+      "sha256": "9e5ef3a452f9a308e41493475eec4a7704ae236327769be6b9ca881ed011f126",
+      "compressed_bytes": 6615193,
+      "rows": 356112,
+      "cells": 9892
+    },
+    {
+      "year": 2022,
+      "url": "https://meteofrance.s3.sbg.io.cloud.ovh.net/data/REF_CC/SIM_DECAD/DECAD_SIM2_2022.csv.gz",
+      "sha256": "91ecd9a4b7f3345e007958d00960f2157c9a169366235d093e0ccec137800258",
+      "compressed_bytes": 6395767,
+      "rows": 356112,
+      "cells": 9892
+    },
+    {
+      "year": 2023,
+      "url": "https://meteofrance.s3.sbg.io.cloud.ovh.net/data/REF_CC/SIM_DECAD/DECAD_SIM2_2023.csv.gz",
+      "sha256": "915b1f41d57c346554fb89ad4c90aa2b42e362de58c8d495d94025dae8511c9b",
+      "compressed_bytes": 6597814,
+      "rows": 356112,
+      "cells": 9892
+    },
+    {
+      "year": 2024,
+      "url": "https://meteofrance.s3.sbg.io.cloud.ovh.net/data/REF_CC/SIM_DECAD/DECAD_SIM2_2024.csv.gz",
+      "sha256": "7adf6eee178e8e0b796e0d15febb902e3c7a51dcd87eb9bd4ddf910180a09548",
+      "compressed_bytes": 6725617,
+      "rows": 356112,
+      "cells": 9892
+    },
+    {
+      "year": 2025,
+      "url": "https://meteofrance.s3.sbg.io.cloud.ovh.net/data/REF_CC/SIM_DECAD/DECAD_SIM2_2025.csv.gz",
+      "sha256": "d1258327bc5cf3d890b50cd26e194277b1d0bab2b368fb8b0db111e9749b0696",
+      "compressed_bytes": 6574779,
+      "rows": 356112,
+      "cells": 9892
+    }
+  ],
+  "department_geometry_sha256": "c08a1ad48299763b50ef649f05a911c1021500c94719a1aa22a9d06191e43fc3",
+  "default_department_geometry_url": "https://raw.githubusercontent.com/gregoiredavid/france-geojson/master/departements-version-simplifiee.geojson",
+  "geometry": "8 km squares centered on native Lambert II extended grid (EPSG:27572), polygon intersection area weights, normalized over available cells",
+  "spatial_weighting": "department area; NOT crop/RPG area",
+  "agricultural_fractions_sha256": null,
+  "unmapped_agricultural_cells": "none permitted",
+  "coverage": {
+    "01": {
+      "cells": 120,
+      "grid_covered_area_fraction": 1.0000000000000002
+    },
+    "02": {
+      "cells": 154,
+      "grid_covered_area_fraction": 0.9999999999999994
+    },
+    "03": {
+      "cells": 149,
+      "grid_covered_area_fraction": 0.9999999999999997
+    },
+    "04": {
+      "cells": 145,
+      "grid_covered_area_fraction": 0.9999999999999996
+    },
+    "05": {
+      "cells": 127,
+      "grid_covered_area_fraction": 1.0000000000000004
+    },
+    "07": {
+      "cells": 119,
+      "grid_covered_area_fraction": 0.9999999999999997
+    },
+    "08": {
+      "cells": 113,
+      "grid_covered_area_fraction": 1.0000000000000002
+    },
+    "09": {
+      "cells": 110,
+      "grid_covered_area_fraction": 1.0000000000000002
+    },
+    "10": {
+      "cells": 126,
+      "grid_covered_area_fraction": 0.999999999999999
+    },
+    "11": {
+      "cells": 134,
+      "grid_covered_area_fraction": 1.0
+    },
+    "12": {
+      "cells": 175,
+      "grid_covered_area_fraction": 1.0000000000000002
+    },
+    "13": {
+      "cells": 111,
+      "grid_covered_area_fraction": 1.0
+    },
+    "14": {
+      "cells": 117,
+      "grid_covered_area_fraction": 0.9988975893992035
+    },
+    "15": {
+      "cells": 121,
+      "grid_covered_area_fraction": 1.0000000000000002
+    },
+    "16": {
+      "cells": 123,
+      "grid_covered_area_fraction": 1.0000000000000009
+    },
+    "17": {
+      "cells": 155,
+      "grid_covered_area_fraction": 0.99922836830208
+    },
+    "18": {
+      "cells": 148,
+      "grid_covered_area_fraction": 0.9999999999999994
+    },
+    "21": {
+      "cells": 173,
+      "grid_covered_area_fraction": 0.9999999999999998
+    },
+    "22": {
+      "cells": 139,
+      "grid_covered_area_fraction": 0.9999794221707932
+    },
+    "23": {
+      "cells": 116,
+      "grid_covered_area_fraction": 0.9999999999999998
+    },
+    "24": {
+      "cells": 182,
+      "grid_covered_area_fraction": 0.9999999999999998
+    },
+    "25": {
+      "cells": 116,
+      "grid_covered_area_fraction": 0.9999999999999997
+    },
+    "26": {
+      "cells": 142,
+      "grid_covered_area_fraction": 0.9999999999999999
+    },
+    "27": {
+      "cells": 124,
+      "grid_covered_area_fraction": 0.9999999999999992
+    },
+    "28": {
+      "cells": 126,
+      "grid_covered_area_fraction": 1.0000000000000002
+    },
+    "29": {
+      "cells": 142,
+      "grid_covered_area_fraction": 0.9964270045344875
+    },
+    "2B": {
+      "cells": 96,
+      "grid_covered_area_fraction": 0.9938144363882062
+    },
+    "30": {
+      "cells": 130,
+      "grid_covered_area_fraction": 1.0000000000000002
+    },
+    "31": {
+      "cells": 144,
+      "grid_covered_area_fraction": 0.9999999999999992
+    },
+    "32": {
+      "cells": 127,
+      "grid_covered_area_fraction": 0.9999999999999996
+    },
+    "33": {
+      "cells": 201,
+      "grid_covered_area_fraction": 0.9999291077215214
+    },
+    "34": {
+      "cells": 129,
+      "grid_covered_area_fraction": 0.9999869269535797
+    },
+    "35": {
+      "cells": 142,
+      "grid_covered_area_fraction": 0.9990846962477482
+    },
+    "36": {
+      "cells": 140,
+      "grid_covered_area_fraction": 1.0000000000000002
+    },
+    "37": {
+      "cells": 128,
+      "grid_covered_area_fraction": 1.0000000000000002
+    },
+    "38": {
+      "cells": 168,
+      "grid_covered_area_fraction": 1.0000000000000007
+    },
+    "39": {
+      "cells": 110,
+      "grid_covered_area_fraction": 1.0000000000000002
+    },
+    "40": {
+      "cells": 180,
+      "grid_covered_area_fraction": 0.998989042845132
+    },
+    "41": {
+      "cells": 138,
+      "grid_covered_area_fraction": 1.0000000000000002
+    },
+    "42": {
+      "cells": 108,
+      "grid_covered_area_fraction": 1.0000000000000002
+    },
+    "43": {
+      "cells": 105,
+      "grid_covered_area_fraction": 1.0000000000000002
+    },
+    "44": {
+      "cells": 143,
+      "grid_covered_area_fraction": 0.9996888868637691
+    },
+    "45": {
+      "cells": 138,
+      "grid_covered_area_fraction": 1.0000000000000002
+    },
+    "46": {
+      "cells": 113,
+      "grid_covered_area_fraction": 1.0000000000000004
+    },
+    "47": {
+      "cells": 117,
+      "grid_covered_area_fraction": 0.9999999999999997
+    },
+    "48": {
+      "cells": 109,
+      "grid_covered_area_fraction": 1.0000000000000002
+    },
+    "49": {
+      "cells": 145,
+      "grid_covered_area_fraction": 1.0000000000000002
+    },
+    "50": {
+      "cells": 123,
+      "grid_covered_area_fraction": 0.9988057983212327
+    },
+    "51": {
+      "cells": 165,
+      "grid_covered_area_fraction": 1.0000000000000002
+    },
+    "52": {
+      "cells": 131,
+      "grid_covered_area_fraction": 0.9999999999999996
+    },
+    "53": {
+      "cells": 107,
+      "grid_covered_area_fraction": 0.9999999999999997
+    },
+    "54": {
+      "cells": 123,
+      "grid_covered_area_fraction": 1.0000000000000004
+    },
+    "55": {
+      "cells": 130,
+      "grid_covered_area_fraction": 0.9999999999999996
+    },
+    "56": {
+      "cells": 150,
+      "grid_covered_area_fraction": 0.9998794607317687
+    },
+    "57": {
+      "cells": 140,
+      "grid_covered_area_fraction": 0.9999999933416077
+    },
+    "58": {
+      "cells": 140,
+      "grid_covered_area_fraction": 1.0000000000000004
+    },
+    "59": {
+      "cells": 132,
+      "grid_covered_area_fraction": 0.9999737671892299
+    },
+    "60": {
+      "cells": 119,
+      "grid_covered_area_fraction": 1.0000000000000002
+    },
+    "61": {
+      "cells": 134,
+      "grid_covered_area_fraction": 0.9999999999999996
+    },
+    "62": {
+      "cells": 135,
+      "grid_covered_area_fraction": 0.9990997183347395
+    },
+    "63": {
+      "cells": 158,
+      "grid_covered_area_fraction": 0.9999999999999997
+    },
+    "64": {
+      "cells": 155,
+      "grid_covered_area_fraction": 0.9999728548298333
+    },
+    "65": {
+      "cells": 103,
+      "grid_covered_area_fraction": 0.9999999999999993
+    },
+    "66": {
+      "cells": 92,
+      "grid_covered_area_fraction": 1.0000000000000007
+    },
+    "67": {
+      "cells": 108,
+      "grid_covered_area_fraction": 0.9999999999999998
+    },
+    "68": {
+      "cells": 76,
+      "grid_covered_area_fraction": 0.9999999999999999
+    },
+    "69": {
+      "cells": 75,
+      "grid_covered_area_fraction": 1.0000000000000002
+    },
+    "70": {
+      "cells": 112,
+      "grid_covered_area_fraction": 0.9999999999999998
+    },
+    "71": {
+      "cells": 176,
+      "grid_covered_area_fraction": 0.9999999999999998
+    },
+    "72": {
+      "cells": 124,
+      "grid_covered_area_fraction": 0.9999999999999996
+    },
+    "76": {
+      "cells": 127,
+      "grid_covered_area_fraction": 0.9986195641314487
+    },
+    "77": {
+      "cells": 123,
+      "grid_covered_area_fraction": 1.0000000000000007
+    },
+    "78": {
+      "cells": 54,
+      "grid_covered_area_fraction": 1.0000000000000004
+    },
+    "79": {
+      "cells": 125,
+      "grid_covered_area_fraction": 1.0000000000000002
+    },
+    "80": {
+      "cells": 127,
+      "grid_covered_area_fraction": 0.9988293755610308
+    },
+    "81": {
+      "cells": 122,
+      "grid_covered_area_fraction": 0.9999999999999993
+    },
+    "82": {
+      "cells": 88,
+      "grid_covered_area_fraction": 1.0000000000000004
+    },
+    "83": {
+      "cells": 127,
+      "grid_covered_area_fraction": 0.9991816216289522
+    },
+    "84": {
+      "cells": 86,
+      "grid_covered_area_fraction": 0.9999999999999996
+    },
+    "85": {
+      "cells": 138,
+      "grid_covered_area_fraction": 0.9993188595828754
+    },
+    "86": {
+      "cells": 142,
+      "grid_covered_area_fraction": 0.9999999999999993
+    },
+    "87": {
+      "cells": 118,
+      "grid_covered_area_fraction": 0.9999999999999997
+    },
+    "88": {
+      "cells": 128,
+      "grid_covered_area_fraction": 1.0000000000000002
+    },
+    "89": {
+      "cells": 151,
+      "grid_covered_area_fraction": 1.0000000000000004
+    },
+    "91": {
+      "cells": 39,
+      "grid_covered_area_fraction": 0.9999999999999998
+    },
+    "93": {
+      "cells": 13,
+      "grid_covered_area_fraction": 1.000000000000001
+    },
+    "95": {
+      "cells": 36,
+      "grid_covered_area_fraction": 0.9999999999999998
+    }
+  },
+  "window_specifications": {
+    "lentille": {
+      "vegetative": [
+        "03-01",
+        "04-30"
+      ],
+      "reproductive": [
+        "05-01",
+        "06-30"
+      ],
+      "harvest": [
+        "07-01",
+        "08-15"
+      ],
+      "heat_threshold_c": 30.0,
+      "cold_window": [
+        "03-01",
+        "05-15"
+      ],
+      "cold_variable": "T2M_MIN",
+      "cold_threshold_c": 0.0
+    },
+    "pois_chiche": {
+      "vegetative": [
+        "03-01",
+        "05-31"
+      ],
+      "reproductive": [
+        "06-01",
+        "07-31"
+      ],
+      "harvest": [
+        "08-01",
+        "08-31"
+      ],
+      "heat_threshold_c": 35.0,
+      "cold_window": [
+        "06-01",
+        "07-31"
+      ],
+      "cold_variable": "MEAN_APPROX",
+      "cold_threshold_c": 15.0
+    },
+    "haricot": {
+      "vegetative": [
+        "05-15",
+        "06-30"
+      ],
+      "reproductive": [
+        "07-01",
+        "08-15"
+      ],
+      "harvest": [
+        "08-16",
+        "09-30"
+      ],
+      "heat_threshold_c": 30.0,
+      "cold_window": [
+        "05-15",
+        "06-15"
+      ],
+      "cold_variable": "T2M_MIN",
+      "cold_threshold_c": 0.0
+    },
+    "pois": {
+      "vegetative": [
+        "02-01",
+        "04-30"
+      ],
+      "reproductive": [
+        "05-01",
+        "06-30"
+      ],
+      "harvest": [
+        "07-01",
+        "08-15"
+      ],
+      "heat_threshold_c": 30.0,
+      "cold_window": [
+        "02-01",
+        "04-30"
+      ],
+      "cold_variable": "T2M_MIN",
+      "cold_threshold_c": -2.0
+    },
+    "feverole": {
+      "vegetative": [
+        "02-01",
+        "04-30"
+      ],
+      "reproductive": [
+        "05-01",
+        "07-15"
+      ],
+      "harvest": [
+        "07-16",
+        "08-31"
+      ],
+      "heat_threshold_c": 25.0,
+      "cold_window": [
+        "02-01",
+        "04-30"
+      ],
+      "cold_variable": "T2M_MIN",
+      "cold_threshold_c": -2.0
+    },
+    "ble": {
+      "vegetative": [
+        "03-01",
+        "04-30"
+      ],
+      "reproductive": [
+        "05-01",
+        "06-30"
+      ],
+      "harvest": [
+        "07-01",
+        "08-15"
+      ]
+    }
+  },
+  "window_source_code_sha256": "31fe686d550d99ba4eb11cf18110495db3115e9e38a227eed9f2a22b5209c4d3",
+  "parameters_documentation": "https://static.data.gouv.fr/resources/donnees-changement-climatique-sim-decadaire/20260415-135515/sim-decadaires-parametres-20260415.pdf",
+  "temporal_aggregation": "decadal means day-weighted; flux sums prorated by overlap days; partial-decade approximation",
+  "swi_low_threshold": 0.4,
+  "swi_low_threshold_status": "feature engineering hypothesis, not a universal crop damage threshold",
+  "deficit_definition": "sum of positive (ETP minus total precipitation) per decade, prorated by overlap; NOT a full crop water balance",
+  "usage": "historical reanalysis scenarios only for pre-season contract; target-year realized features only for after-harvest diagnostics",
+  "availability_note": "current reanalysis vintage replayed retrospectively; not an archive of data releases available at each historical signature date",
+  "source_code_sha256": "10442a2cd795b5ebcdf78bc1ad4008c4d6cec855e5b80cf3e7791e51af849557",
+  "output_sha256": "30e5a025516f9cffd646042e043ec982b4a3ea6e0c170b90dac442ffb68921e7"
+}

@@ -1,0 +1,2157 @@
+{
+  "created_utc": "2026-10-31T12:04:43.014094+00:00",
+  "scope": "Canonical 34 primary + 2 RPG arms, 2016–2025. Independent CSV/YAML arithmetic and chronology audit; no imported forecasting/evaluation/analysis implementation.",
+  "absolute_tolerance": 1e-09,
+  "relative_tolerance": 0,
+  "byte_identity_claimed": false,
+  "sources": {
+    "primary": {
+      "relative_run": "advanced-canonical/primary",
+      "manifest_signature": "89d5ba58fbf5079b238d2a6d2b0cfba8834b158b4643592bdc56df1a77737887",
+      "sha256": {
+        "predictions.csv": "b0e7420f7bc0191ef0f5c99e037ae4257cadb61fe6680e52f5270f727683ba0d",
+        "manifest.json": "b3bbaebdb9b5ca38b30759728eb76887aef83e77f35ccfecf9560e0831e8047f",
+        "audit.json": "6d31ee018e99f7212c0297e917b075da29a32e53e3ee4c8ff6f56160e6c619d0",
+        "cohorts.json": "1052879b5b23be6d21a7f40c4493308810750005b34af7faa76ba4a08c72ee2d",
+        "summary.csv": "a01e62eeb51a5b4be2a5a4c34c85aa371a6ee760c44c91f2aa6be09522483824",
+        "partition_execution.json": "554a0b5b4271e8e0ec0bb271497797bfd8fb5bce1c8b28b50ab66ab4dcb70e47",
+        "executed-inputs.zip": "a6569eb9fee46daccdb8546cb39c6781017f6d1a18160d42bdbe0ca9b894cd30"
+      },
+      "tracked_archive_members_verified": 25,
+      "numpy_profile": {
+        "numpy_version": "2.3.5",
+        "numpy_dispatch_override": "AVX512F,AVX512CD,AVX512_SKX,AVX512_CLX,AVX512_CNL,AVX512_ICL",
+        "numpy_cpu_features": {
+          "MMX": true,
+          "SSE": true,
+          "SSE2": true,
+          "SSE3": true,
+          "SSSE3": true,
+          "SSE41": true,
+          "POPCNT": true,
+          "SSE42": true,
+          "AVX": true,
+          "F16C": true,
+          "XOP": false,
+          "FMA4": false,
+          "FMA3": true,
+          "AVX2": true,
+          "AVX512F": false,
+          "AVX512CD": false,
+          "AVX512ER": false,
+          "AVX512PF": false,
+          "AVX5124FMAPS": false,
+          "AVX5124VNNIW": false,
+          "AVX512VPOPCNTDQ": false,
+          "AVX512VL": true,
+          "AVX512BW": true,
+          "AVX512DQ": true,
+          "AVX512VNNI": true,
+          "AVX512IFMA": false,
+          "AVX512VBMI": false,
+          "AVX512VBMI2": false,
+          "AVX512BITALG": false,
+          "AVX512FP16": false,
+          "AVX512_KNL": false,
+          "AVX512_KNM": false,
+          "AVX512_SKX": false,
+          "AVX512_CLX": false,
+          "AVX512_CNL": false,
+          "AVX512_ICL": false,
+          "AVX512_SPR": false,
+          "VSX": false,
+          "VSX2": false,
+          "VSX3": false,
+          "VSX4": false,
+          "VX": false,
+          "VXE": false,
+          "VXE2": false,
+          "NEON": false,
+          "NEON_FP16": false,
+          "NEON_VFPV4": false,
+          "ASIMD": false,
+          "FPHP": false,
+          "ASIMDHP": false,
+          "ASIMDDP": false,
+          "ASIMDFHM": false,
+          "SVE": false,
+          "RVV": false,
+          "LSX": false
+        },
+        "numpy_cpu_baseline": [
+          "SSE",
+          "SSE2",
+          "SSE3"
+        ],
+        "numpy_cpu_dispatch": [
+          "SSSE3",
+          "SSE41",
+          "POPCNT",
+          "SSE42",
+          "AVX",
+          "F16C",
+          "FMA3",
+          "AVX2",
+          "AVX512F",
+          "AVX512CD",
+          "AVX512_KNL",
+          "AVX512_KNM",
+          "AVX512_SKX",
+          "AVX512_CLX",
+          "AVX512_CNL",
+          "AVX512_ICL",
+          "AVX512_SPR"
+        ]
+      }
+    },
+    "rpg": {
+      "relative_run": "advanced-canonical/rpg",
+      "manifest_signature": "66dafa8f844f8a23647851d26bfd2b404908dd8e36e49a6ee261a987b3d52b0c",
+      "sha256": {
+        "predictions.csv": "e8288e7d6d2cb26a768454914bb28550f92a58c8f3dcc93771cb77f414fe4894",
+        "manifest.json": "4557f512c48fe75fc20df4802126a3b50d8823f933f4ab9c05cea12716ada45c",
+        "audit.json": "66de42d1f662237371e439efc67102529e31da6beeb0c0eb287ce63598c0a01e",
+        "cohorts.json": "1052879b5b23be6d21a7f40c4493308810750005b34af7faa76ba4a08c72ee2d",
+        "summary.csv": "842ee9322f52aeefb8aef2720b0575ed3382f9fb1d575b10640d3d9ffb7fc099",
+        "partition_execution.json": "0aa1395c2143df7def1b2c1b692715c752caa4b446b664779271e8499626dfde",
+        "executed-inputs.zip": "985de28851d3ce776bde1dd0277da514b007c27757de99395759f8fc6d3654aa"
+      },
+      "tracked_archive_members_verified": 25,
+      "numpy_profile": {
+        "numpy_version": "2.3.5",
+        "numpy_dispatch_override": "AVX512F,AVX512CD,AVX512_SKX,AVX512_CLX,AVX512_CNL,AVX512_ICL",
+        "numpy_cpu_features": {
+          "MMX": true,
+          "SSE": true,
+          "SSE2": true,
+          "SSE3": true,
+          "SSSE3": true,
+          "SSE41": true,
+          "POPCNT": true,
+          "SSE42": true,
+          "AVX": true,
+          "F16C": true,
+          "XOP": false,
+          "FMA4": false,
+          "FMA3": true,
+          "AVX2": true,
+          "AVX512F": false,
+          "AVX512CD": false,
+          "AVX512ER": false,
+          "AVX512PF": false,
+          "AVX5124FMAPS": false,
+          "AVX5124VNNIW": false,
+          "AVX512VPOPCNTDQ": false,
+          "AVX512VL": true,
+          "AVX512BW": true,
+          "AVX512DQ": true,
+          "AVX512VNNI": true,
+          "AVX512IFMA": false,
+          "AVX512VBMI": false,
+          "AVX512VBMI2": false,
+          "AVX512BITALG": false,
+          "AVX512FP16": false,
+          "AVX512_KNL": false,
+          "AVX512_KNM": false,
+          "AVX512_SKX": false,
+          "AVX512_CLX": false,
+          "AVX512_CNL": false,
+          "AVX512_ICL": false,
+          "AVX512_SPR": false,
+          "VSX": false,
+          "VSX2": false,
+          "VSX3": false,
+          "VSX4": false,
+          "VX": false,
+          "VXE": false,
+          "VXE2": false,
+          "NEON": false,
+          "NEON_FP16": false,
+          "NEON_VFPV4": false,
+          "ASIMD": false,
+          "FPHP": false,
+          "ASIMDHP": false,
+          "ASIMDDP": false,
+          "ASIMDFHM": false,
+          "SVE": false,
+          "RVV": false,
+          "LSX": false
+        },
+        "numpy_cpu_baseline": [
+          "SSE",
+          "SSE2",
+          "SSE3"
+        ],
+        "numpy_cpu_dispatch": [
+          "SSSE3",
+          "SSE41",
+          "POPCNT",
+          "SSE42",
+          "AVX",
+          "F16C",
+          "FMA3",
+          "AVX2",
+          "AVX512F",
+          "AVX512CD",
+          "AVX512_KNL",
+          "AVX512_KNM",
+          "AVX512_SKX",
+          "AVX512_CLX",
+          "AVX512_CNL",
+          "AVX512_ICL",
+          "AVX512_SPR"
+        ]
+      }
+    },
+    "previous_reference": {
+      "relative_path": "experiments/multilegumes_benchmark/predictions.csv.gz",
+      "sha256": "bd924d898fb72a8cc41e475fc4913434f14473c0ba47188685dd9af8cfd5807d",
+      "logical_csv_sha256": "8ef8d9396b0bc4b4cf7252764f519247d5851523382bd39fc945acab5de5fd89",
+      "manifest_sha256": "799174b9f4a37ddefa6cc43eddcf86a80bbf5b19528e86674dad718b68190d57"
+    }
+  },
+  "reference_comparison": {
+    "trend": {
+      "n_contract_rows": 5892,
+      "n_distinct_cases": 1964,
+      "same_keys": true,
+      "held_verdict_changes": 0,
+      "common_numeric_columns": {
+        "accepted_yield_actual": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "actual_crop_yield_raw": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "actual_wheat_yield": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "actual_wheat_price": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "actual_need_eur_ha": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "realised_break_even": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "past_mean_accepted": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "refused_fraction": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "history_n": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "history_mean_qha": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "history_cv": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "q10_rel": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "q50_rel": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "q90_rel": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "actual_rel": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "yield_pinball_raw": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "simulation_history_max": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "coefficient": {
+          "max_absolute_difference": 5.115907697472721e-13,
+          "mismatches_above_tolerance": 0
+        },
+        "required_coefficient": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "actual_basis": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "paid_actual_eur_ha": {
+          "max_absolute_difference": 1.3642420526593924e-12,
+          "mismatches_above_tolerance": 0
+        },
+        "shortfall_eur_ha": {
+          "max_absolute_difference": 6.821210263296962e-13,
+          "mismatches_above_tolerance": 0
+        },
+        "effective_price_actual": {
+          "max_absolute_difference": 9.094947017729282e-13,
+          "mismatches_above_tolerance": 0
+        },
+        "expected_unit_cost": {
+          "max_absolute_difference": 6.821210263296962e-13,
+          "mismatches_above_tolerance": 0
+        },
+        "simulation_basis_mean": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "simulation_accepted_mean": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "simulated_protection": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "contract_loss_eur_ha": {
+          "max_absolute_difference": 5.684341886080801e-13,
+          "mismatches_above_tolerance": 0
+        },
+        "tier_bound_1": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "tier_bound_2": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        }
+      },
+      "categorical_mismatches": {
+        "region": 0,
+        "old_cohort": 0,
+        "evaluation": 0,
+        "yield_coverage80_raw": 0,
+        "held": 0
+      },
+      "audit_units_equal": 50,
+      "evaluation_2019_2025": [
+        {
+          "culture": "feverole",
+          "contract": "fixed",
+          "n": 491,
+          "held": 0.6680244399185336,
+          "realized_unit_cost_eur_t": 453.72779720641097,
+          "expected_unit_cost_eur_t": 445.3394193095582,
+          "max_metric_difference": 0.0
+        },
+        {
+          "culture": "feverole",
+          "contract": "indexed",
+          "n": 491,
+          "held": 0.8085539714867617,
+          "realized_unit_cost_eur_t": 506.27888391719057,
+          "expected_unit_cost_eur_t": 423.3634453406701,
+          "max_metric_difference": 0.0
+        },
+        {
+          "culture": "feverole",
+          "contract": "tiers",
+          "n": 491,
+          "held": 0.6476578411405295,
+          "realized_unit_cost_eur_t": 431.3933968213402,
+          "expected_unit_cost_eur_t": 433.00334221318906,
+          "max_metric_difference": 0.0
+        },
+        {
+          "culture": "haricot",
+          "contract": "fixed",
+          "n": 78,
+          "held": 0.6025641025641025,
+          "realized_unit_cost_eur_t": 1037.9862296803315,
+          "expected_unit_cost_eur_t": 1010.4353681794912,
+          "max_metric_difference": 0.0
+        },
+        {
+          "culture": "haricot",
+          "contract": "indexed",
+          "n": 78,
+          "held": 0.6794871794871795,
+          "realized_unit_cost_eur_t": 1193.1455373112806,
+          "expected_unit_cost_eur_t": 993.8469413874614,
+          "max_metric_difference": 0.0
+        },
+        {
+          "culture": "haricot",
+          "contract": "tiers",
+          "n": 78,
+          "held": 0.6025641025641025,
+          "realized_unit_cost_eur_t": 959.4058327590596,
+          "expected_unit_cost_eur_t": 978.2405538601861,
+          "max_metric_difference": 0.0
+        },
+        {
+          "culture": "lentille",
+          "contract": "fixed",
+          "n": 192,
+          "held": 0.6510416666666666,
+          "realized_unit_cost_eur_t": 1197.5169930972909,
+          "expected_unit_cost_eur_t": 1121.2111868269812,
+          "max_metric_difference": 0.0
+        },
+        {
+          "culture": "lentille",
+          "contract": "indexed",
+          "n": 192,
+          "held": 0.7291666666666666,
+          "realized_unit_cost_eur_t": 1374.5550850677503,
+          "expected_unit_cost_eur_t": 1081.0207427796506,
+          "max_metric_difference": 0.0
+        },
+        {
+          "culture": "lentille",
+          "contract": "tiers",
+          "n": 192,
+          "held": 0.6354166666666666,
+          "realized_unit_cost_eur_t": 1094.71128680159,
+          "expected_unit_cost_eur_t": 1084.1210166307815,
+          "max_metric_difference": 0.0
+        },
+        {
+          "culture": "pois",
+          "contract": "fixed",
+          "n": 494,
+          "held": 0.6295546558704453,
+          "realized_unit_cost_eur_t": 368.5166529933468,
+          "expected_unit_cost_eur_t": 360.2525871848694,
+          "max_metric_difference": 0.0
+        },
+        {
+          "culture": "pois",
+          "contract": "indexed",
+          "n": 494,
+          "held": 0.7186234817813765,
+          "realized_unit_cost_eur_t": 408.1341837863763,
+          "expected_unit_cost_eur_t": 341.35796615504086,
+          "max_metric_difference": 0.0
+        },
+        {
+          "culture": "pois",
+          "contract": "tiers",
+          "n": 494,
+          "held": 0.597165991902834,
+          "realized_unit_cost_eur_t": 351.99490821470465,
+          "expected_unit_cost_eur_t": 352.29261629581237,
+          "max_metric_difference": 0.0
+        },
+        {
+          "culture": "pois_chiche",
+          "contract": "fixed",
+          "n": 129,
+          "held": 0.5891472868217055,
+          "realized_unit_cost_eur_t": 611.6210952914986,
+          "expected_unit_cost_eur_t": 590.0407185336862,
+          "max_metric_difference": 0.0
+        },
+        {
+          "culture": "pois_chiche",
+          "contract": "indexed",
+          "n": 129,
+          "held": 0.6821705426356589,
+          "realized_unit_cost_eur_t": 681.4089304714828,
+          "expected_unit_cost_eur_t": 556.1251237169473,
+          "max_metric_difference": 0.0
+        },
+        {
+          "culture": "pois_chiche",
+          "contract": "tiers",
+          "n": 129,
+          "held": 0.5736434108527132,
+          "realized_unit_cost_eur_t": 589.4850134765805,
+          "expected_unit_cost_eur_t": 579.624512744923,
+          "max_metric_difference": 0.0
+        }
+      ]
+    },
+    "qrf_seasonal": {
+      "n_contract_rows": 5892,
+      "n_distinct_cases": 1964,
+      "same_keys": true,
+      "held_verdict_changes": 0,
+      "common_numeric_columns": {
+        "accepted_yield_actual": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "actual_crop_yield_raw": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "actual_wheat_yield": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "actual_wheat_price": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "actual_need_eur_ha": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "realised_break_even": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "past_mean_accepted": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "refused_fraction": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "history_n": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "history_mean_qha": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "history_cv": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "q10_rel": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "q50_rel": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "q90_rel": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "actual_rel": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "yield_pinball_raw": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "simulation_history_max": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "coefficient": {
+          "max_absolute_difference": 6.821210263296962e-13,
+          "mismatches_above_tolerance": 0
+        },
+        "required_coefficient": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "actual_basis": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "paid_actual_eur_ha": {
+          "max_absolute_difference": 1.3642420526593924e-12,
+          "mismatches_above_tolerance": 0
+        },
+        "shortfall_eur_ha": {
+          "max_absolute_difference": 6.821210263296962e-13,
+          "mismatches_above_tolerance": 0
+        },
+        "effective_price_actual": {
+          "max_absolute_difference": 6.821210263296962e-13,
+          "mismatches_above_tolerance": 0
+        },
+        "expected_unit_cost": {
+          "max_absolute_difference": 5.684341886080801e-13,
+          "mismatches_above_tolerance": 0
+        },
+        "simulation_basis_mean": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "simulation_accepted_mean": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "simulated_protection": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "contract_loss_eur_ha": {
+          "max_absolute_difference": 5.400124791776761e-13,
+          "mismatches_above_tolerance": 0
+        },
+        "tier_bound_1": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "tier_bound_2": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        }
+      },
+      "categorical_mismatches": {
+        "region": 0,
+        "old_cohort": 0,
+        "evaluation": 0,
+        "yield_coverage80_raw": 0,
+        "held": 0
+      },
+      "audit_units_equal": 50,
+      "evaluation_2019_2025": [
+        {
+          "culture": "feverole",
+          "contract": "fixed",
+          "n": 491,
+          "held": 0.6232179226069247,
+          "realized_unit_cost_eur_t": 419.28598539360445,
+          "expected_unit_cost_eur_t": 412.34807168487237,
+          "max_metric_difference": 0.0
+        },
+        {
+          "culture": "feverole",
+          "contract": "indexed",
+          "n": 491,
+          "held": 0.7169042769857433,
+          "realized_unit_cost_eur_t": 467.94565889888116,
+          "expected_unit_cost_eur_t": 391.15671779231565,
+          "max_metric_difference": 0.0
+        },
+        {
+          "culture": "feverole",
+          "contract": "tiers",
+          "n": 491,
+          "held": 0.5967413441955194,
+          "realized_unit_cost_eur_t": 405.36348809277837,
+          "expected_unit_cost_eur_t": 402.7470546987568,
+          "max_metric_difference": 0.0
+        },
+        {
+          "culture": "haricot",
+          "contract": "fixed",
+          "n": 78,
+          "held": 0.6025641025641025,
+          "realized_unit_cost_eur_t": 1063.4497911215776,
+          "expected_unit_cost_eur_t": 1038.8786086075556,
+          "max_metric_difference": 0.0
+        },
+        {
+          "culture": "haricot",
+          "contract": "indexed",
+          "n": 78,
+          "held": 0.7307692307692307,
+          "realized_unit_cost_eur_t": 1217.6051671257303,
+          "expected_unit_cost_eur_t": 1007.3563988610367,
+          "max_metric_difference": 0.0
+        },
+        {
+          "culture": "haricot",
+          "contract": "tiers",
+          "n": 78,
+          "held": 0.6025641025641025,
+          "realized_unit_cost_eur_t": 979.152926295845,
+          "expected_unit_cost_eur_t": 989.0055571973252,
+          "max_metric_difference": 0.0
+        },
+        {
+          "culture": "lentille",
+          "contract": "fixed",
+          "n": 192,
+          "held": 0.625,
+          "realized_unit_cost_eur_t": 1060.0473455958227,
+          "expected_unit_cost_eur_t": 1011.9681920085372,
+          "max_metric_difference": 0.0
+        },
+        {
+          "culture": "lentille",
+          "contract": "indexed",
+          "n": 192,
+          "held": 0.6822916666666666,
+          "realized_unit_cost_eur_t": 1252.854345869794,
+          "expected_unit_cost_eur_t": 981.5989219658588,
+          "max_metric_difference": 0.0
+        },
+        {
+          "culture": "lentille",
+          "contract": "tiers",
+          "n": 192,
+          "held": 0.6145833333333334,
+          "realized_unit_cost_eur_t": 982.3283730907913,
+          "expected_unit_cost_eur_t": 959.4499685794209,
+          "max_metric_difference": 0.0
+        },
+        {
+          "culture": "pois",
+          "contract": "fixed",
+          "n": 494,
+          "held": 0.5668016194331984,
+          "realized_unit_cost_eur_t": 345.5678702640191,
+          "expected_unit_cost_eur_t": 338.8015626140432,
+          "max_metric_difference": 0.0
+        },
+        {
+          "culture": "pois",
+          "contract": "indexed",
+          "n": 494,
+          "held": 0.6538461538461539,
+          "realized_unit_cost_eur_t": 383.64432445718245,
+          "expected_unit_cost_eur_t": 321.0712568088744,
+          "max_metric_difference": 0.0
+        },
+        {
+          "culture": "pois",
+          "contract": "tiers",
+          "n": 494,
+          "held": 0.5607287449392713,
+          "realized_unit_cost_eur_t": 335.40618172939327,
+          "expected_unit_cost_eur_t": 330.9066040949319,
+          "max_metric_difference": 0.0
+        },
+        {
+          "culture": "pois_chiche",
+          "contract": "fixed",
+          "n": 129,
+          "held": 0.5348837209302325,
+          "realized_unit_cost_eur_t": 589.090060650901,
+          "expected_unit_cost_eur_t": 569.9576863576842,
+          "max_metric_difference": 0.0
+        },
+        {
+          "culture": "pois_chiche",
+          "contract": "indexed",
+          "n": 129,
+          "held": 0.6589147286821705,
+          "realized_unit_cost_eur_t": 656.6778059585502,
+          "expected_unit_cost_eur_t": 537.0943072025393,
+          "max_metric_difference": 0.0
+        },
+        {
+          "culture": "pois_chiche",
+          "contract": "tiers",
+          "n": 129,
+          "held": 0.5116279069767442,
+          "realized_unit_cost_eur_t": 571.9141774975726,
+          "expected_unit_cost_eur_t": 557.954520091598,
+          "max_metric_difference": 0.0
+        }
+      ]
+    }
+  },
+  "runs": {
+    "primary": {
+      "models": 34,
+      "contract_rows": 200328,
+      "distinct_cases_2016_2025": 1964,
+      "distinct_cases_2019_2025": 1384,
+      "cohort_same_for_every_arm_and_contract": true,
+      "case_counts": [
+        {
+          "culture": "feverole",
+          "cases_2016_2025": 699,
+          "cases_2019_2025": 491,
+          "departments": 76
+        },
+        {
+          "culture": "haricot",
+          "cases_2016_2025": 108,
+          "cases_2019_2025": 78,
+          "departments": 14
+        },
+        {
+          "culture": "lentille",
+          "cases_2016_2025": 274,
+          "cases_2019_2025": 192,
+          "departments": 35
+        },
+        {
+          "culture": "pois",
+          "cases_2016_2025": 718,
+          "cases_2019_2025": 494,
+          "departments": 77
+        },
+        {
+          "culture": "pois_chiche",
+          "cases_2016_2025": 165,
+          "cases_2019_2025": 129,
+          "departments": 23
+        }
+      ],
+      "audited_model_year_crop_units": 1700,
+      "chronology_violations": 0,
+      "economic_arithmetic_checks": {
+        "actual_crop_yield_raw": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "actual_wheat_yield": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "actual_wheat_price": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "accepted_yield_actual": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "actual_need_eur_ha": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "actual_basis": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "required_coefficient": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "paid_actual_eur_ha": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "effective_price_actual": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "shortfall_eur_ha": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "expected_unit_cost": {
+          "max_absolute_difference": 1.3642420526593924e-12,
+          "mismatches_above_tolerance": 0
+        },
+        "contract_loss_eur_ha": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "tier_bound_1": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "tier_bound_2": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "history_n": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "history_mean_qha": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "history_cv": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "past_mean_accepted": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "yield_pinball_t_ha": {
+          "max_absolute_difference": 5.551115123125783e-16,
+          "mismatches_above_tolerance": 0
+        }
+      },
+      "held_mismatch_with_inverse_threshold": 0,
+      "held_mismatch_with_paid_ge_need_absolute_tolerance": 0,
+      "strict_paid_ge_need_machine_rounding_mismatches": 0,
+      "recorded_simulation_protection": {
+        "minimum": 0.8,
+        "maximum": 0.8,
+        "below_80pct": 0,
+        "samples_per_row": 20000,
+        "scope": "Validation of saved coverage and empirical sample count, not re-generation of the 20,000 raw scenario arrays."
+      },
+      "negative_coefficients": 0,
+      "unordered_physical_quantiles": 0,
+      "independent_aggregate_checks": {
+        "summary_groups": 510,
+        "max_absolute_difference": {
+          "n": 0.0,
+          "n_years": 0.0,
+          "n_held": 0.0,
+          "held": 0.0,
+          "held_year_mean": 0.0,
+          "expected_unit_cost_year_mean": 0.0,
+          "expected_unit_cost_pooled": 0.0,
+          "realized_unit_cost_year_mean": 0.0,
+          "realized_unit_cost_pooled": 0.0,
+          "shortfall_eur_ha": 0.0,
+          "contract_loss_eur_ha": 0.0,
+          "old_cohort_n": 0.0
+        },
+        "mismatches_above_tolerance": 0
+      }
+    },
+    "rpg": {
+      "models": 2,
+      "contract_rows": 11784,
+      "distinct_cases_2016_2025": 1964,
+      "distinct_cases_2019_2025": 1384,
+      "cohort_same_for_every_arm_and_contract": true,
+      "case_counts": [
+        {
+          "culture": "feverole",
+          "cases_2016_2025": 699,
+          "cases_2019_2025": 491,
+          "departments": 76
+        },
+        {
+          "culture": "haricot",
+          "cases_2016_2025": 108,
+          "cases_2019_2025": 78,
+          "departments": 14
+        },
+        {
+          "culture": "lentille",
+          "cases_2016_2025": 274,
+          "cases_2019_2025": 192,
+          "departments": 35
+        },
+        {
+          "culture": "pois",
+          "cases_2016_2025": 718,
+          "cases_2019_2025": 494,
+          "departments": 77
+        },
+        {
+          "culture": "pois_chiche",
+          "cases_2016_2025": 165,
+          "cases_2019_2025": 129,
+          "departments": 23
+        }
+      ],
+      "audited_model_year_crop_units": 100,
+      "chronology_violations": 0,
+      "economic_arithmetic_checks": {
+        "actual_crop_yield_raw": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "actual_wheat_yield": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "actual_wheat_price": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "accepted_yield_actual": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "actual_need_eur_ha": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "actual_basis": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "required_coefficient": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "paid_actual_eur_ha": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "effective_price_actual": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "shortfall_eur_ha": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "expected_unit_cost": {
+          "max_absolute_difference": 9.094947017729282e-13,
+          "mismatches_above_tolerance": 0
+        },
+        "contract_loss_eur_ha": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "tier_bound_1": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "tier_bound_2": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "history_n": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "history_mean_qha": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "history_cv": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "past_mean_accepted": {
+          "max_absolute_difference": 0.0,
+          "mismatches_above_tolerance": 0
+        },
+        "yield_pinball_t_ha": {
+          "max_absolute_difference": 4.440892098500626e-16,
+          "mismatches_above_tolerance": 0
+        }
+      },
+      "held_mismatch_with_inverse_threshold": 0,
+      "held_mismatch_with_paid_ge_need_absolute_tolerance": 0,
+      "strict_paid_ge_need_machine_rounding_mismatches": 0,
+      "recorded_simulation_protection": {
+        "minimum": 0.8,
+        "maximum": 0.8,
+        "below_80pct": 0,
+        "samples_per_row": 20000,
+        "scope": "Validation of saved coverage and empirical sample count, not re-generation of the 20,000 raw scenario arrays."
+      },
+      "negative_coefficients": 0,
+      "unordered_physical_quantiles": 0,
+      "independent_aggregate_checks": {
+        "summary_groups": 30,
+        "max_absolute_difference": {
+          "n": 0.0,
+          "n_years": 0.0,
+          "n_held": 0.0,
+          "held": 0.0,
+          "held_year_mean": 0.0,
+          "expected_unit_cost_year_mean": 0.0,
+          "expected_unit_cost_pooled": 0.0,
+          "realized_unit_cost_year_mean": 0.0,
+          "realized_unit_cost_pooled": 0.0,
+          "shortfall_eur_ha": 0.0,
+          "contract_loss_eur_ha": 0.0,
+          "old_cohort_n": 0.0
+        },
+        "mismatches_above_tolerance": 0
+      }
+    }
+  },
+  "source_bundles": {
+    "index_sha256": "06f8f1374737188cd7f91f7cd3abf311838298dcc3550b4b84786c5cfe1c49ff",
+    "parts_verified": [
+      {
+        "name": "primary-part-01-of-02.zip",
+        "sha256": "bc5a383a178f6c73a25d250e89f3b2a1fe7b0c3d3b383d35a8d21c0cc70349db",
+        "size": 83971640
+      },
+      {
+        "name": "primary-part-02-of-02.zip",
+        "sha256": "ce5105ed1c1d6166e9ad8335ba37e97ede1c3f417aee42be145c034f800c8291",
+        "size": 63571187
+      },
+      {
+        "name": "rpg-part-01-of-01.zip",
+        "sha256": "2e46c9306aec01c3fdbf114718c1eb37e7420004c6df2c54cddedb62ba2180bd",
+        "size": 19382240
+      }
+    ],
+    "checkpoint_scope": "Parts SHA verified. This audit uses extracted top-level outputs; individual child checkpoint payloads were not re-extracted/revalidated here."
+  },
+  "numpy_profiles_identical": true,
+  "canonical_execution": "Both runs fresh, no resumed checkpoint/history, identical effective NumPy profiles.",
+  "reference_inputs_identical": {
+    "data/panel_rendements.csv": true,
+    "data/prix_ble.csv": true,
+    "data/meteo_dept_cultures.csv": true,
+    "data/meteo_saisonnier_cultures.csv": true,
+    "data/hypotheses.yaml": true,
+    "data/cultures.yaml": true
+  },
+  "economic_hypotheses": {
+    "lentille": {
+      "charges_ble": 700,
+      "charges_culture": 500,
+      "aide": 105,
+      "rotation": 150,
+      "qualite": 0.1,
+      "tau": 0.8
+    },
+    "pois_chiche": {
+      "charges_ble": 700,
+      "charges_culture": 500,
+      "aide": 105,
+      "rotation": 150,
+      "qualite": 0.1,
+      "tau": 0.8
+    },
+    "haricot": {
+      "charges_ble": 700,
+      "charges_culture": 1000,
+      "aide": 105,
+      "rotation": 150,
+      "qualite": 0.1,
+      "tau": 0.8
+    },
+    "pois": {
+      "charges_ble": 700,
+      "charges_culture": 450,
+      "aide": 105,
+      "rotation": 150,
+      "qualite": 0.05,
+      "tau": 0.8
+    },
+    "feverole": {
+      "charges_ble": 700,
+      "charges_culture": 400,
+      "aide": 105,
+      "rotation": 150,
+      "qualite": 0.05,
+      "tau": 0.8
+    }
+  },
+  "status": "passed",
+  "not_recomputed": [
+    "Model fits and per-contract 20,000 scenario arrays.",
+    "Policies/selection analysis: audited separately once available.",
+    "Child checkpoint numerical payloads: preserved in SHA-verified ZIP parts; not re-extracted in this independent audit."
+  ],
+  "final_policy_audit": {
+    "status": "passed",
+    "manifest_sha256": "290700ba31dc93cb214030f5218eabd5b0f87d1b36d999a860ea982fcc2bd260",
+    "combined_manifest_sha256": "5eb93a62bdd5a9d8ca5df43302413c5b0710540549fadd630bdb3339550aedf3",
+    "output_hashes_verified": 12,
+    "combined_raw_input_hash_verified": true,
+    "decision_rows": 614496,
+    "direct_economic_checks_max_abs": {
+      "raw_coefficient": 0.0,
+      "correction": 0.0,
+      "coefficient": 0.0,
+      "calibration_n": 0.0,
+      "calibration_max_year": 0.0,
+      "calibration_fallback": 0.0,
+      "paid_actual_eur_ha": 0.0,
+      "held": 0.0,
+      "shortfall_eur_ha": 0.0,
+      "contract_loss_eur_ha": 0.0,
+      "expected_paid_eur_ha": 0.0
+    },
+    "independently_reconstructed_calibration_cells": 21600,
+    "selector_decisions_verified": 420,
+    "selector_candidate_score_rows_verified": 17640,
+    "selector_candidate_max_abs_difference": 1.3642420526593924e-12,
+    "global_summary_rows_verified": 4440,
+    "global_metrics_max_abs_difference": {
+      "n": 0.0,
+      "n_years": 0.0,
+      "n_departments": 0.0,
+      "n_held": 0.0,
+      "held": 0.0,
+      "paid_eur_ha_mean": 9.094947017729282e-13,
+      "accepted_yield_mean": 4.440892098500626e-16,
+      "shortfall_eur_ha": 5.684341886080802e-14,
+      "contract_loss_eur_ha": 2.2737367544323206e-13,
+      "zero_price_n": 0.0,
+      "negative_required_n": 0.0,
+      "coefficient_mean": 9.094947017729282e-13,
+      "held_year_mean": 2.220446049250313e-16,
+      "held_worst_year": 0.0,
+      "years_at_target": 0.0,
+      "realized_unit_cost_year_mean": 4.547473508864641e-13,
+      "shortfall_failure_mean": 1.7053025658242404e-13,
+      "shortfall_failure_q90": 1.1368683772161603e-13,
+      "realized_unit_cost": 9.094947017729282e-13,
+      "expected_unit_cost": 9.094947017729282e-13
+    },
+    "paired_point_comparisons_verified": 9000,
+    "paired_point_max_abs_difference": {
+      "n": 0,
+      "n_years": 0,
+      "held_candidate": 0,
+      "held_baseline": 0,
+      "unit_cost_candidate": 9.094947017729282e-13,
+      "unit_cost_baseline": 6.821210263296962e-13,
+      "delta_held": 0,
+      "delta_unit_cost": 1.3642420526593924e-12,
+      "relative_delta_unit_cost": 8.881784197001252e-16,
+      "delta_shortfall": 8.526512829121202e-14,
+      "delta_loss": 2.2737367544323206e-13
+    },
+    "principal_bootstrap_comparisons_verified": 20,
+    "principal_comparisons": [
+      {
+        "period": "full",
+        "culture": "haricot",
+        "contract": "fixed",
+        "policy": "cat_dense/cal95",
+        "comparison": "same_calibration_M0",
+        "baseline": "trend/cal95",
+        "n": 78,
+        "n_years": 7,
+        "held_candidate": 0.8076923076923077,
+        "held_baseline": 0.8205128205128205,
+        "unit_cost_candidate": 1823.1581436875929,
+        "unit_cost_baseline": 1851.898079989157,
+        "delta_held": -0.012820512820512775,
+        "delta_unit_cost": -28.739936301564057,
+        "relative_delta_unit_cost": -0.01551917819458637,
+        "delta_shortfall": 18.860882811344126,
+        "delta_loss": 9.712032565537243,
+        "rescued_n": 0,
+        "lost_n": 1,
+        "delta_held_year_bootstrap_low": -0.0379746835443038,
+        "delta_held_year_bootstrap_high": 0.0,
+        "delta_unit_cost_year_bootstrap_low": -61.937084616738254,
+        "delta_unit_cost_year_bootstrap_high": -1.4311912643078843,
+        "delta_loss_year_bootstrap_low": -7.733204476231348,
+        "delta_loss_year_bootstrap_high": 35.94249422619077,
+        "independent_bootstrap_verified": true
+      },
+      {
+        "period": "full",
+        "culture": "haricot",
+        "contract": "fixed",
+        "policy": "cat_dense/cal95",
+        "comparison": "same_calibration_previous_QRF",
+        "baseline": "qrf_seasonal/cal95",
+        "n": 78,
+        "n_years": 7,
+        "held_candidate": 0.8076923076923077,
+        "held_baseline": 0.8205128205128205,
+        "unit_cost_candidate": 1823.1581436875929,
+        "unit_cost_baseline": 1873.3054617639552,
+        "delta_held": -0.012820512820512775,
+        "delta_unit_cost": -50.14731807636235,
+        "relative_delta_unit_cost": -0.02676942927884396,
+        "delta_shortfall": 10.487036507371059,
+        "delta_loss": -5.476474980457624,
+        "rescued_n": 0,
+        "lost_n": 1,
+        "delta_held_year_bootstrap_low": -0.0379746835443038,
+        "delta_held_year_bootstrap_high": 0.0,
+        "delta_unit_cost_year_bootstrap_low": -86.19405210294705,
+        "delta_unit_cost_year_bootstrap_high": -16.222760325714983,
+        "delta_loss_year_bootstrap_low": -18.77499852700332,
+        "delta_loss_year_bootstrap_high": 11.068081253664273,
+        "independent_bootstrap_verified": true
+      },
+      {
+        "period": "full",
+        "culture": "lentille",
+        "contract": "fixed",
+        "policy": "selector/all_models",
+        "comparison": "same_selector_M0",
+        "baseline": "selector/m0_only",
+        "n": 192,
+        "n_years": 7,
+        "held_candidate": 0.7760416666666666,
+        "held_baseline": 0.7916666666666666,
+        "unit_cost_candidate": 1792.701867986615,
+        "unit_cost_baseline": 1890.8240441909713,
+        "delta_held": -0.015625,
+        "delta_unit_cost": -98.12217620435626,
+        "relative_delta_unit_cost": -0.05189386950404462,
+        "delta_shortfall": 2.1812254607403645,
+        "delta_loss": -18.91878333116398,
+        "rescued_n": 2,
+        "lost_n": 5,
+        "delta_held_year_bootstrap_low": -0.07692307692307693,
+        "delta_held_year_bootstrap_high": 0.030303030303030304,
+        "delta_unit_cost_year_bootstrap_low": -219.17323359193665,
+        "delta_unit_cost_year_bootstrap_high": 33.956424308075825,
+        "delta_loss_year_bootstrap_low": -49.95475019140542,
+        "delta_loss_year_bootstrap_high": 5.725740773770479,
+        "independent_bootstrap_verified": true
+      },
+      {
+        "period": "full",
+        "culture": "lentille",
+        "contract": "fixed",
+        "policy": "selector/all_models",
+        "comparison": "same_selector_previous_QRF",
+        "baseline": "selector/qrf_reference",
+        "n": 192,
+        "n_years": 7,
+        "held_candidate": 0.7760416666666666,
+        "held_baseline": 0.8020833333333334,
+        "unit_cost_candidate": 1792.701867986615,
+        "unit_cost_baseline": 1761.5746061809075,
+        "delta_held": -0.02604166666666674,
+        "delta_unit_cost": 31.127261805707576,
+        "relative_delta_unit_cost": 0.017670135398461184,
+        "delta_shortfall": 5.69529906426196,
+        "delta_loss": 12.388847079345425,
+        "rescued_n": 0,
+        "lost_n": 5,
+        "delta_held_year_bootstrap_low": -0.07813522578534031,
+        "delta_held_year_bootstrap_high": 0.0,
+        "delta_unit_cost_year_bootstrap_low": -21.937172257566857,
+        "delta_unit_cost_year_bootstrap_high": 98.60524368746177,
+        "delta_loss_year_bootstrap_low": 2.179035406588353,
+        "delta_loss_year_bootstrap_high": 24.657104803797292,
+        "independent_bootstrap_verified": true
+      },
+      {
+        "period": "full",
+        "culture": "lentille",
+        "contract": "fixed",
+        "policy": "selector/qrf_reference",
+        "comparison": "same_selector_M0",
+        "baseline": "selector/m0_only",
+        "n": 192,
+        "n_years": 7,
+        "held_candidate": 0.8020833333333334,
+        "held_baseline": 0.7916666666666666,
+        "unit_cost_candidate": 1761.5746061809075,
+        "unit_cost_baseline": 1890.8240441909713,
+        "delta_held": 0.01041666666666674,
+        "delta_unit_cost": -129.24943801006384,
+        "relative_delta_unit_cost": -0.06835614260731804,
+        "delta_shortfall": -3.514073603521595,
+        "delta_loss": -31.307630410509404,
+        "rescued_n": 2,
+        "lost_n": 0,
+        "delta_held_year_bootstrap_low": 0.0,
+        "delta_held_year_bootstrap_high": 0.031088082901554404,
+        "delta_unit_cost_year_bootstrap_low": -254.77330601738,
+        "delta_unit_cost_year_bootstrap_high": 6.537517573994622,
+        "delta_loss_year_bootstrap_low": -63.3431840381269,
+        "delta_loss_year_bootstrap_high": -6.05115776162983,
+        "independent_bootstrap_verified": true
+      },
+      {
+        "period": "full",
+        "culture": "lentille",
+        "contract": "fixed",
+        "policy": "selector/qrf_reference",
+        "comparison": "same_selector_previous_QRF",
+        "baseline": "selector/qrf_reference",
+        "n": 192,
+        "n_years": 7,
+        "held_candidate": 0.8020833333333334,
+        "held_baseline": 0.8020833333333334,
+        "unit_cost_candidate": 1761.5746061809075,
+        "unit_cost_baseline": 1761.5746061809075,
+        "delta_held": 0.0,
+        "delta_unit_cost": 0.0,
+        "relative_delta_unit_cost": 0.0,
+        "delta_shortfall": 0.0,
+        "delta_loss": 0.0,
+        "rescued_n": 0,
+        "lost_n": 0,
+        "delta_held_year_bootstrap_low": 0.0,
+        "delta_held_year_bootstrap_high": 0.0,
+        "delta_unit_cost_year_bootstrap_low": 0.0,
+        "delta_unit_cost_year_bootstrap_high": 0.0,
+        "delta_loss_year_bootstrap_low": 0.0,
+        "delta_loss_year_bootstrap_high": 0.0,
+        "independent_bootstrap_verified": true
+      },
+      {
+        "period": "full",
+        "culture": "pois",
+        "contract": "indexed",
+        "policy": "selector/all_models",
+        "comparison": "same_selector_M0",
+        "baseline": "selector/m0_only",
+        "n": 494,
+        "n_years": 7,
+        "held_candidate": 0.8380566801619433,
+        "held_baseline": 0.8380566801619433,
+        "unit_cost_candidate": 457.68736248273257,
+        "unit_cost_baseline": 468.85043258428755,
+        "delta_held": 0.0,
+        "delta_unit_cost": -11.163070101554979,
+        "relative_delta_unit_cost": -0.023809448228563013,
+        "delta_shortfall": -2.4735864174445688,
+        "delta_loss": -8.762838645218153,
+        "rescued_n": 27,
+        "lost_n": 27,
+        "delta_held_year_bootstrap_low": -0.10756972111553785,
+        "delta_held_year_bootstrap_high": 0.14227642276422764,
+        "delta_unit_cost_year_bootstrap_low": -28.8761592048788,
+        "delta_unit_cost_year_bootstrap_high": 13.409889262192046,
+        "delta_loss_year_bootstrap_low": -21.35224408252666,
+        "delta_loss_year_bootstrap_high": 1.0542943614290994,
+        "independent_bootstrap_verified": true
+      },
+      {
+        "period": "full",
+        "culture": "pois",
+        "contract": "indexed",
+        "policy": "selector/all_models",
+        "comparison": "same_selector_previous_QRF",
+        "baseline": "selector/qrf_reference",
+        "n": 494,
+        "n_years": 7,
+        "held_candidate": 0.8380566801619433,
+        "held_baseline": 0.805668016194332,
+        "unit_cost_candidate": 457.68736248273257,
+        "unit_cost_baseline": 451.77678597024067,
+        "delta_held": 0.03238866396761131,
+        "delta_unit_cost": 5.9105765124919,
+        "relative_delta_unit_cost": 0.013082957549043428,
+        "delta_shortfall": -8.675966684456942,
+        "delta_loss": -5.345959243812317,
+        "rescued_n": 29,
+        "lost_n": 13,
+        "delta_held_year_bootstrap_low": -0.05389221556886228,
+        "delta_held_year_bootstrap_high": 0.16397592612362544,
+        "delta_unit_cost_year_bootstrap_low": -9.91201106132332,
+        "delta_unit_cost_year_bootstrap_high": 28.193690619104082,
+        "delta_loss_year_bootstrap_low": -22.143212831747064,
+        "delta_loss_year_bootstrap_high": 4.978341597395795,
+        "independent_bootstrap_verified": true
+      },
+      {
+        "period": "full",
+        "culture": "pois_chiche",
+        "contract": "indexed",
+        "policy": "selector/all_models",
+        "comparison": "same_selector_M0",
+        "baseline": "selector/m0_only",
+        "n": 129,
+        "n_years": 7,
+        "held_candidate": 0.8449612403100775,
+        "held_baseline": 0.8449612403100775,
+        "unit_cost_candidate": 797.0333550783891,
+        "unit_cost_baseline": 820.1359722724832,
+        "delta_held": 0.0,
+        "delta_unit_cost": -23.102617194094023,
+        "relative_delta_unit_cost": -0.02816925238638157,
+        "delta_shortfall": 2.1754305234105438,
+        "delta_loss": -4.53940426377126,
+        "rescued_n": 2,
+        "lost_n": 2,
+        "delta_held_year_bootstrap_low": -0.044444444444444446,
+        "delta_held_year_bootstrap_high": 0.04918032786885246,
+        "delta_unit_cost_year_bootstrap_low": -55.53642447636672,
+        "delta_unit_cost_year_bootstrap_high": 20.827844033610514,
+        "delta_loss_year_bootstrap_low": -10.056703705199645,
+        "delta_loss_year_bootstrap_high": 0.9177966589214329,
+        "independent_bootstrap_verified": true
+      },
+      {
+        "period": "full",
+        "culture": "pois_chiche",
+        "contract": "indexed",
+        "policy": "selector/all_models",
+        "comparison": "same_selector_previous_QRF",
+        "baseline": "selector/qrf_reference",
+        "n": 129,
+        "n_years": 7,
+        "held_candidate": 0.8449612403100775,
+        "held_baseline": 0.8449612403100775,
+        "unit_cost_candidate": 797.0333550783891,
+        "unit_cost_baseline": 824.4015075490071,
+        "delta_held": 0.0,
+        "delta_unit_cost": -27.36815247061793,
+        "relative_delta_unit_cost": -0.033197601193118875,
+        "delta_shortfall": -0.9528342258335307,
+        "delta_loss": -8.907457752971467,
+        "rescued_n": 2,
+        "lost_n": 2,
+        "delta_held_year_bootstrap_low": -0.03937007874015748,
+        "delta_held_year_bootstrap_high": 0.032520325203252036,
+        "delta_unit_cost_year_bootstrap_low": -61.85066594911611,
+        "delta_unit_cost_year_bootstrap_high": 12.955591957162484,
+        "delta_loss_year_bootstrap_low": -16.628712622779673,
+        "delta_loss_year_bootstrap_high": -1.0809871120935273,
+        "independent_bootstrap_verified": true
+      },
+      {
+        "period": "since_2023",
+        "culture": "haricot",
+        "contract": "fixed",
+        "policy": "cat_dense/cal95",
+        "comparison": "same_calibration_M0",
+        "baseline": "trend/cal95",
+        "n": 33,
+        "n_years": 3,
+        "held_candidate": 0.9090909090909091,
+        "held_baseline": 0.9090909090909091,
+        "unit_cost_candidate": 2450.1230303677744,
+        "unit_cost_baseline": 2483.450896613795,
+        "delta_held": 0.0,
+        "delta_unit_cost": -33.327866246020676,
+        "relative_delta_unit_cost": -0.0134199819660068,
+        "delta_shortfall": 3.1821145575389345,
+        "delta_loss": -8.310000281413863,
+        "rescued_n": 0,
+        "lost_n": 0,
+        "delta_held_year_bootstrap_low": 0.0,
+        "delta_held_year_bootstrap_high": 0.0,
+        "delta_unit_cost_year_bootstrap_low": -105.71313345471253,
+        "delta_unit_cost_year_bootstrap_high": -0.8413648254032021,
+        "delta_loss_year_bootstrap_low": -21.611289083392656,
+        "delta_loss_year_bootstrap_high": -0.3173612823878474,
+        "independent_bootstrap_verified": true
+      },
+      {
+        "period": "since_2023",
+        "culture": "haricot",
+        "contract": "fixed",
+        "policy": "cat_dense/cal95",
+        "comparison": "same_calibration_previous_QRF",
+        "baseline": "qrf_seasonal/cal95",
+        "n": 33,
+        "n_years": 3,
+        "held_candidate": 0.9090909090909091,
+        "held_baseline": 0.9090909090909091,
+        "unit_cost_candidate": 2450.1230303677744,
+        "unit_cost_baseline": 2475.0059647153225,
+        "delta_held": 0.0,
+        "delta_unit_cost": -24.882934347548144,
+        "relative_delta_unit_cost": -0.010053686618250346,
+        "delta_shortfall": 2.6844562717851623,
+        "delta_loss": -5.8956771499363185,
+        "rescued_n": 0,
+        "lost_n": 0,
+        "delta_held_year_bootstrap_low": 0.0,
+        "delta_held_year_bootstrap_high": 0.0,
+        "delta_unit_cost_year_bootstrap_low": -82.76858531678955,
+        "delta_unit_cost_year_bootstrap_high": 23.242946101508043,
+        "delta_loss_year_bootstrap_low": -16.28374192761949,
+        "delta_loss_year_bootstrap_high": 8.767197009586853,
+        "independent_bootstrap_verified": true
+      },
+      {
+        "period": "since_2023",
+        "culture": "lentille",
+        "contract": "fixed",
+        "policy": "selector/all_models",
+        "comparison": "same_selector_M0",
+        "baseline": "selector/m0_only",
+        "n": 75,
+        "n_years": 3,
+        "held_candidate": 1.0,
+        "held_baseline": 1.0,
+        "unit_cost_candidate": 2177.5428407791223,
+        "unit_cost_baseline": 2405.261459154878,
+        "delta_held": 0.0,
+        "delta_unit_cost": -227.7186183757558,
+        "relative_delta_unit_cost": -0.0946752036079137,
+        "delta_shortfall": 0.0,
+        "delta_loss": -59.259671497159616,
+        "rescued_n": 0,
+        "lost_n": 0,
+        "delta_held_year_bootstrap_low": 0.0,
+        "delta_held_year_bootstrap_high": 0.0,
+        "delta_unit_cost_year_bootstrap_low": -357.218814665126,
+        "delta_unit_cost_year_bootstrap_high": -39.72177996224878,
+        "delta_loss_year_bootstrap_low": -93.85031308289523,
+        "delta_loss_year_bootstrap_high": -8.990892488521805,
+        "independent_bootstrap_verified": true
+      },
+      {
+        "period": "since_2023",
+        "culture": "lentille",
+        "contract": "fixed",
+        "policy": "selector/all_models",
+        "comparison": "same_selector_previous_QRF",
+        "baseline": "selector/qrf_reference",
+        "n": 75,
+        "n_years": 3,
+        "held_candidate": 1.0,
+        "held_baseline": 1.0,
+        "unit_cost_candidate": 2177.5428407791223,
+        "unit_cost_baseline": 2095.9615584705602,
+        "delta_held": 0.0,
+        "delta_unit_cost": 81.5812823085621,
+        "relative_delta_unit_cost": 0.03892308137945655,
+        "delta_shortfall": 0.0,
+        "delta_loss": 21.230060257721675,
+        "rescued_n": 0,
+        "lost_n": 0,
+        "delta_held_year_bootstrap_low": 0.0,
+        "delta_held_year_bootstrap_high": 0.0,
+        "delta_unit_cost_year_bootstrap_low": 0.0,
+        "delta_unit_cost_year_bootstrap_high": 207.33418057469237,
+        "delta_loss_year_bootstrap_low": 0.0,
+        "delta_loss_year_bootstrap_high": 46.92940065914638,
+        "independent_bootstrap_verified": true
+      },
+      {
+        "period": "since_2023",
+        "culture": "lentille",
+        "contract": "fixed",
+        "policy": "selector/qrf_reference",
+        "comparison": "same_selector_M0",
+        "baseline": "selector/m0_only",
+        "n": 75,
+        "n_years": 3,
+        "held_candidate": 1.0,
+        "held_baseline": 1.0,
+        "unit_cost_candidate": 2095.9615584705602,
+        "unit_cost_baseline": 2405.261459154878,
+        "delta_held": 0.0,
+        "delta_unit_cost": -309.2999006843179,
+        "relative_delta_unit_cost": -0.1285930473408885,
+        "delta_shortfall": 0.0,
+        "delta_loss": -80.48973175488129,
+        "rescued_n": 0,
+        "lost_n": 0,
+        "delta_held_year_bootstrap_low": 0.0,
+        "delta_held_year_bootstrap_high": 0.0,
+        "delta_unit_cost_year_bootstrap_low": -357.218814665126,
+        "delta_unit_cost_year_bootstrap_high": -247.05596053694114,
+        "delta_loss_year_bootstrap_low": -94.76976885998258,
+        "delta_loss_year_bootstrap_high": -55.92029314766818,
+        "independent_bootstrap_verified": true
+      },
+      {
+        "period": "since_2023",
+        "culture": "lentille",
+        "contract": "fixed",
+        "policy": "selector/qrf_reference",
+        "comparison": "same_selector_previous_QRF",
+        "baseline": "selector/qrf_reference",
+        "n": 75,
+        "n_years": 3,
+        "held_candidate": 1.0,
+        "held_baseline": 1.0,
+        "unit_cost_candidate": 2095.9615584705602,
+        "unit_cost_baseline": 2095.9615584705602,
+        "delta_held": 0.0,
+        "delta_unit_cost": 0.0,
+        "relative_delta_unit_cost": 0.0,
+        "delta_shortfall": 0.0,
+        "delta_loss": 0.0,
+        "rescued_n": 0,
+        "lost_n": 0,
+        "delta_held_year_bootstrap_low": 0.0,
+        "delta_held_year_bootstrap_high": 0.0,
+        "delta_unit_cost_year_bootstrap_low": 0.0,
+        "delta_unit_cost_year_bootstrap_high": 0.0,
+        "delta_loss_year_bootstrap_low": 0.0,
+        "delta_loss_year_bootstrap_high": 0.0,
+        "independent_bootstrap_verified": true
+      },
+      {
+        "period": "since_2023",
+        "culture": "pois",
+        "contract": "indexed",
+        "policy": "selector/all_models",
+        "comparison": "same_selector_M0",
+        "baseline": "selector/m0_only",
+        "n": 205,
+        "n_years": 3,
+        "held_candidate": 0.9609756097560975,
+        "held_baseline": 0.9707317073170731,
+        "unit_cost_candidate": 490.42687639516436,
+        "unit_cost_baseline": 502.4767983943365,
+        "delta_held": -0.009756097560975618,
+        "delta_unit_cost": -12.04992199917217,
+        "relative_delta_unit_cost": -0.023981051538454423,
+        "delta_shortfall": 0.864715688475876,
+        "delta_loss": -6.065846324638116,
+        "rescued_n": 0,
+        "lost_n": 2,
+        "delta_held_year_bootstrap_low": -0.029411764705882353,
+        "delta_held_year_bootstrap_high": 0.0,
+        "delta_unit_cost_year_bootstrap_low": -23.32046102916651,
+        "delta_unit_cost_year_bootstrap_high": -2.313520155390102,
+        "delta_loss_year_bootstrap_low": -11.778214365251438,
+        "delta_loss_year_bootstrap_high": -1.3868713805632362,
+        "independent_bootstrap_verified": true
+      },
+      {
+        "period": "since_2023",
+        "culture": "pois",
+        "contract": "indexed",
+        "policy": "selector/all_models",
+        "comparison": "same_selector_previous_QRF",
+        "baseline": "selector/qrf_reference",
+        "n": 205,
+        "n_years": 3,
+        "held_candidate": 0.9609756097560975,
+        "held_baseline": 0.9609756097560975,
+        "unit_cost_candidate": 490.42687639516436,
+        "unit_cost_baseline": 485.06253134197215,
+        "delta_held": 0.0,
+        "delta_unit_cost": 5.36434505319221,
+        "relative_delta_unit_cost": 0.011059079410547845,
+        "delta_shortfall": -0.5642214863945028,
+        "delta_loss": 2.521103551679957,
+        "rescued_n": 0,
+        "lost_n": 0,
+        "delta_held_year_bootstrap_low": 0.0,
+        "delta_held_year_bootstrap_high": 0.0,
+        "delta_unit_cost_year_bootstrap_low": -0.8868147015367369,
+        "delta_unit_cost_year_bootstrap_high": 14.98554585323391,
+        "delta_loss_year_bootstrap_low": -1.772238914429683,
+        "delta_loss_year_bootstrap_high": 7.448747020465554,
+        "independent_bootstrap_verified": true
+      },
+      {
+        "period": "since_2023",
+        "culture": "pois_chiche",
+        "contract": "indexed",
+        "policy": "selector/all_models",
+        "comparison": "same_selector_M0",
+        "baseline": "selector/m0_only",
+        "n": 56,
+        "n_years": 3,
+        "held_candidate": 0.9285714285714286,
+        "held_baseline": 0.9285714285714286,
+        "unit_cost_candidate": 792.2802901896778,
+        "unit_cost_baseline": 826.5927014330592,
+        "delta_held": 0.0,
+        "delta_unit_cost": -34.31241124338146,
+        "relative_delta_unit_cost": -0.04151066321284258,
+        "delta_shortfall": 1.0242962127935087,
+        "delta_loss": -9.630258927742844,
+        "rescued_n": 0,
+        "lost_n": 0,
+        "delta_held_year_bootstrap_low": 0.0,
+        "delta_held_year_bootstrap_high": 0.0,
+        "delta_unit_cost_year_bootstrap_low": -52.1832019046653,
+        "delta_unit_cost_year_bootstrap_high": -16.567641352137798,
+        "delta_loss_year_bootstrap_low": -16.87275171479584,
+        "delta_loss_year_bootstrap_high": -1.4489267216372421,
+        "independent_bootstrap_verified": true
+      },
+      {
+        "period": "since_2023",
+        "culture": "pois_chiche",
+        "contract": "indexed",
+        "policy": "selector/all_models",
+        "comparison": "same_selector_previous_QRF",
+        "baseline": "selector/qrf_reference",
+        "n": 56,
+        "n_years": 3,
+        "held_candidate": 0.9285714285714286,
+        "held_baseline": 0.9642857142857143,
+        "unit_cost_candidate": 792.2802901896778,
+        "unit_cost_baseline": 864.6254167431173,
+        "delta_held": -0.0357142857142857,
+        "delta_unit_cost": -72.34512655343951,
+        "relative_delta_unit_cost": -0.0836722182259575,
+        "delta_shortfall": 5.346595030170449,
+        "delta_loss": -17.117729454206426,
+        "rescued_n": 0,
+        "lost_n": 2,
+        "delta_held_year_bootstrap_low": -0.1111111111111111,
+        "delta_held_year_bootstrap_high": 0.0,
+        "delta_unit_cost_year_bootstrap_low": -85.28702683906334,
+        "delta_unit_cost_year_bootstrap_high": -52.025983233966585,
+        "delta_loss_year_bootstrap_low": -27.576437930689575,
+        "delta_loss_year_bootstrap_high": -6.200333125246515,
+        "independent_bootstrap_verified": true
+      }
+    ],
+    "useful_subgroup_rows_verified": 16,
+    "useful_subgroups": [
+      {
+        "period": "full",
+        "culture": "haricot",
+        "contract": "fixed",
+        "group_type": "region",
+        "group": "24 - Centre-Val de Loire",
+        "policy": "cat_dense/cal95",
+        "n": 30,
+        "n_years": 7,
+        "held": 0.9,
+        "realized_unit_cost": 2005.9710206429465,
+        "shortfall_eur_ha": 47.13641532823796,
+        "baseline": "trend/cal95",
+        "n_years_baseline": 7,
+        "held_baseline": 0.9,
+        "realized_unit_cost_baseline": 2056.7727856256784,
+        "shortfall_eur_ha_baseline": 29.823019239248,
+        "comparison": "M0",
+        "delta_held": 0.0,
+        "delta_unit_cost": -50.80176498273181,
+        "delta_shortfall": 17.313396088989958,
+        "target_met": true,
+        "target_and_cheaper": true
+      },
+      {
+        "period": "full",
+        "culture": "haricot",
+        "contract": "fixed",
+        "group_type": "region",
+        "group": "76 - Occitanie",
+        "policy": "cat_dense/cal95",
+        "n": 31,
+        "n_years": 7,
+        "held": 0.7096774193548387,
+        "realized_unit_cost": 1554.9414357714343,
+        "shortfall_eur_ha": 84.51407500291982,
+        "baseline": "trend/cal95",
+        "n_years_baseline": 7,
+        "held_baseline": 0.7419354838709677,
+        "realized_unit_cost_baseline": 1564.7744212951138,
+        "shortfall_eur_ha_baseline": 62.806427752807316,
+        "comparison": "M0",
+        "delta_held": -0.032258064516129004,
+        "delta_unit_cost": -9.832985523679554,
+        "delta_shortfall": 21.707647250112508,
+        "target_met": false,
+        "target_and_cheaper": false
+      },
+      {
+        "period": "full",
+        "culture": "lentille",
+        "contract": "fixed",
+        "group_type": "region",
+        "group": "24 - Centre-Val de Loire",
+        "policy": "selector/qrf_reference",
+        "n": 42,
+        "n_years": 7,
+        "held": 0.8095238095238095,
+        "realized_unit_cost": 1834.488556745153,
+        "shortfall_eur_ha": 40.5414315220758,
+        "baseline": "selector/m0_only",
+        "n_years_baseline": 7,
+        "held_baseline": 0.8095238095238095,
+        "realized_unit_cost_baseline": 1929.8009700318364,
+        "shortfall_eur_ha_baseline": 35.73678690798048,
+        "comparison": "M0",
+        "delta_held": 0.0,
+        "delta_unit_cost": -95.31241328668352,
+        "delta_shortfall": 4.8046446140953165,
+        "target_met": true,
+        "target_and_cheaper": true
+      },
+      {
+        "period": "full",
+        "culture": "lentille",
+        "contract": "fixed",
+        "group_type": "region",
+        "group": "52 - Pays de la Loire",
+        "policy": "selector/qrf_reference",
+        "n": 24,
+        "n_years": 7,
+        "held": 0.875,
+        "realized_unit_cost": 1884.0800421191116,
+        "shortfall_eur_ha": 44.51429572977344,
+        "baseline": "selector/m0_only",
+        "n_years_baseline": 7,
+        "held_baseline": 0.875,
+        "realized_unit_cost_baseline": 2109.104175408385,
+        "shortfall_eur_ha_baseline": 51.24994518002296,
+        "comparison": "M0",
+        "delta_held": 0.0,
+        "delta_unit_cost": -225.02413328927332,
+        "delta_shortfall": -6.735649450249525,
+        "target_met": true,
+        "target_and_cheaper": true
+      },
+      {
+        "period": "full",
+        "culture": "lentille",
+        "contract": "fixed",
+        "group_type": "region",
+        "group": "75 - Nouvelle Aquitaine",
+        "policy": "selector/qrf_reference",
+        "n": 26,
+        "n_years": 7,
+        "held": 0.8076923076923077,
+        "realized_unit_cost": 1858.2312676515196,
+        "shortfall_eur_ha": 21.028701247474824,
+        "baseline": "selector/m0_only",
+        "n_years_baseline": 7,
+        "held_baseline": 0.8076923076923077,
+        "realized_unit_cost_baseline": 2028.3567996712288,
+        "shortfall_eur_ha_baseline": 22.889763265521747,
+        "comparison": "M0",
+        "delta_held": 0.0,
+        "delta_unit_cost": -170.12553201970923,
+        "delta_shortfall": -1.8610620180469226,
+        "target_met": true,
+        "target_and_cheaper": true
+      },
+      {
+        "period": "full",
+        "culture": "lentille",
+        "contract": "fixed",
+        "group_type": "region",
+        "group": "76 - Occitanie",
+        "policy": "selector/qrf_reference",
+        "n": 50,
+        "n_years": 7,
+        "held": 0.86,
+        "realized_unit_cost": 1495.6553868478684,
+        "shortfall_eur_ha": 19.07490632298933,
+        "baseline": "selector/m0_only",
+        "n_years_baseline": 7,
+        "held_baseline": 0.86,
+        "realized_unit_cost_baseline": 1595.0988799397185,
+        "shortfall_eur_ha_baseline": 18.865804562983158,
+        "comparison": "M0",
+        "delta_held": 0.0,
+        "delta_unit_cost": -99.44349309185009,
+        "delta_shortfall": 0.20910176000617398,
+        "target_met": true,
+        "target_and_cheaper": true
+      },
+      {
+        "period": "full",
+        "culture": "lentille",
+        "contract": "fixed",
+        "group_type": "region",
+        "group": "84 - Auvergne-Rhône-Alpes",
+        "policy": "selector/qrf_reference",
+        "n": 24,
+        "n_years": 7,
+        "held": 0.7083333333333334,
+        "realized_unit_cost": 2356.3676434892095,
+        "shortfall_eur_ha": 36.95130203359431,
+        "baseline": "selector/m0_only",
+        "n_years_baseline": 7,
+        "held_baseline": 0.6666666666666666,
+        "realized_unit_cost_baseline": 2559.3931574743037,
+        "shortfall_eur_ha_baseline": 45.520601267176424,
+        "comparison": "M0",
+        "delta_held": 0.04166666666666674,
+        "delta_unit_cost": -203.02551398509422,
+        "delta_shortfall": -8.569299233582115,
+        "target_met": false,
+        "target_and_cheaper": false
+      },
+      {
+        "period": "full",
+        "culture": "haricot",
+        "contract": "fixed",
+        "group_type": "history",
+        "group": "10+ observations passées",
+        "policy": "cat_dense/cal95",
+        "n": 48,
+        "n_years": 6,
+        "held": 0.7708333333333334,
+        "realized_unit_cost": 1943.1546528882993,
+        "shortfall_eur_ha": 95.14927464338183,
+        "baseline": "trend/cal95",
+        "n_years_baseline": 6,
+        "held_baseline": 0.7916666666666666,
+        "realized_unit_cost_baseline": 1974.5394358782298,
+        "shortfall_eur_ha_baseline": 71.36784890099162,
+        "comparison": "M0",
+        "delta_held": -0.02083333333333326,
+        "delta_unit_cost": -31.3847829899305,
+        "delta_shortfall": 23.781425742390212,
+        "target_met": false,
+        "target_and_cheaper": false
+      },
+      {
+        "period": "full",
+        "culture": "lentille",
+        "contract": "fixed",
+        "group_type": "history",
+        "group": "6–9 observations passées",
+        "policy": "selector/qrf_reference",
+        "n": 53,
+        "n_years": 7,
+        "held": 0.7358490566037735,
+        "realized_unit_cost": 1261.087948506355,
+        "shortfall_eur_ha": 52.55470017961154,
+        "baseline": "selector/m0_only",
+        "n_years_baseline": 7,
+        "held_baseline": 0.7358490566037735,
+        "realized_unit_cost_baseline": 1378.8213031354974,
+        "shortfall_eur_ha_baseline": 49.44001972310818,
+        "comparison": "M0",
+        "delta_held": 0.0,
+        "delta_unit_cost": -117.73335462914247,
+        "delta_shortfall": 3.1146804565033577,
+        "target_met": false,
+        "target_and_cheaper": false
+      },
+      {
+        "period": "full",
+        "culture": "lentille",
+        "contract": "fixed",
+        "group_type": "history",
+        "group": "10+ observations passées",
+        "policy": "selector/qrf_reference",
+        "n": 120,
+        "n_years": 6,
+        "held": 0.825,
+        "realized_unit_cost": 1971.6257186976643,
+        "shortfall_eur_ha": 30.93802161678288,
+        "baseline": "selector/m0_only",
+        "n_years_baseline": 6,
+        "held_baseline": 0.8083333333333333,
+        "realized_unit_cost_baseline": 2109.3949983973866,
+        "shortfall_eur_ha_baseline": 36.92696839856492,
+        "comparison": "M0",
+        "delta_held": 0.016666666666666607,
+        "delta_unit_cost": -137.76927969972235,
+        "delta_shortfall": -5.988946781782037,
+        "target_met": true,
+        "target_and_cheaper": true
+      },
+      {
+        "period": "full",
+        "culture": "haricot",
+        "contract": "fixed",
+        "group_type": "past_volatility",
+        "group": "CV passé ≤20%",
+        "policy": "cat_dense/cal95",
+        "n": 45,
+        "n_years": 7,
+        "held": 0.8222222222222222,
+        "realized_unit_cost": 1717.0212572335415,
+        "shortfall_eur_ha": 67.55209441689398,
+        "baseline": "trend/cal95",
+        "n_years_baseline": 7,
+        "held_baseline": 0.8444444444444444,
+        "realized_unit_cost_baseline": 1757.4000899457371,
+        "shortfall_eur_ha_baseline": 42.34211986846491,
+        "comparison": "M0",
+        "delta_held": -0.022222222222222254,
+        "delta_unit_cost": -40.37883271219562,
+        "delta_shortfall": 25.209974548429066,
+        "target_met": true,
+        "target_and_cheaper": true
+      },
+      {
+        "period": "full",
+        "culture": "haricot",
+        "contract": "fixed",
+        "group_type": "past_volatility",
+        "group": "CV passé 20–40%",
+        "policy": "cat_dense/cal95",
+        "n": 29,
+        "n_years": 7,
+        "held": 0.7586206896551724,
+        "realized_unit_cost": 1882.4120565596218,
+        "shortfall_eur_ha": 119.27473046780533,
+        "baseline": "trend/cal95",
+        "n_years_baseline": 7,
+        "held_baseline": 0.7586206896551724,
+        "realized_unit_cost_baseline": 1896.645200984051,
+        "shortfall_eur_ha_baseline": 107.66438548140756,
+        "comparison": "M0",
+        "delta_held": 0.0,
+        "delta_unit_cost": -14.233144424429156,
+        "delta_shortfall": 11.610344986397763,
+        "target_met": false,
+        "target_and_cheaper": false
+      },
+      {
+        "period": "full",
+        "culture": "lentille",
+        "contract": "fixed",
+        "group_type": "past_volatility",
+        "group": "CV passé ≤20%",
+        "policy": "selector/qrf_reference",
+        "n": 51,
+        "n_years": 4,
+        "held": 0.6078431372549019,
+        "realized_unit_cost": 1022.7931412146986,
+        "shortfall_eur_ha": 81.82441093540419,
+        "baseline": "selector/m0_only",
+        "n_years_baseline": 4,
+        "held_baseline": 0.6078431372549019,
+        "realized_unit_cost_baseline": 1034.233448031213,
+        "shortfall_eur_ha_baseline": 87.20816374397138,
+        "comparison": "M0",
+        "delta_held": 0.0,
+        "delta_unit_cost": -11.440306816514294,
+        "delta_shortfall": -5.383752808567195,
+        "target_met": false,
+        "target_and_cheaper": false
+      },
+      {
+        "period": "full",
+        "culture": "lentille",
+        "contract": "fixed",
+        "group_type": "past_volatility",
+        "group": "CV passé 20–40%",
+        "policy": "selector/qrf_reference",
+        "n": 129,
+        "n_years": 7,
+        "held": 0.8682170542635659,
+        "realized_unit_cost": 1929.3661024794847,
+        "shortfall_eur_ha": 24.897285631730654,
+        "baseline": "selector/m0_only",
+        "n_years_baseline": 7,
+        "held_baseline": 0.8527131782945736,
+        "realized_unit_cost_baseline": 2091.9735498648333,
+        "shortfall_eur_ha_baseline": 27.97407038754916,
+        "comparison": "M0",
+        "delta_held": 0.015503875968992276,
+        "delta_unit_cost": -162.60744738534868,
+        "delta_shortfall": -3.0767847558185046,
+        "target_met": true,
+        "target_and_cheaper": true
+      },
+      {
+        "period": "full",
+        "culture": "haricot",
+        "contract": "fixed",
+        "group_type": "idf",
+        "group": "Hors Île-de-France",
+        "policy": "cat_dense/cal95",
+        "n": 78,
+        "n_years": 7,
+        "held": 0.8076923076923077,
+        "realized_unit_cost": 1823.1581436875927,
+        "shortfall_eur_ha": 83.31809528623823,
+        "baseline": "trend/cal95",
+        "n_years_baseline": 7,
+        "held_baseline": 0.8205128205128205,
+        "realized_unit_cost_baseline": 1851.898079989157,
+        "shortfall_eur_ha_baseline": 64.4572124748941,
+        "comparison": "M0",
+        "delta_held": -0.012820512820512775,
+        "delta_unit_cost": -28.739936301564285,
+        "delta_shortfall": 18.860882811344126,
+        "target_met": true,
+        "target_and_cheaper": true
+      },
+      {
+        "period": "full",
+        "culture": "lentille",
+        "contract": "fixed",
+        "group_type": "idf",
+        "group": "Hors Île-de-France",
+        "policy": "selector/qrf_reference",
+        "n": 192,
+        "n_years": 7,
+        "held": 0.8020833333333334,
+        "realized_unit_cost": 1761.5746061809077,
+        "shortfall_eur_ha": 38.86333489516169,
+        "baseline": "selector/m0_only",
+        "n_years_baseline": 7,
+        "held_baseline": 0.7916666666666666,
+        "realized_unit_cost_baseline": 1890.8240441909713,
+        "shortfall_eur_ha_baseline": 42.377408498683295,
+        "comparison": "M0",
+        "delta_held": 0.01041666666666674,
+        "delta_unit_cost": -129.2494380100636,
+        "delta_shortfall": -3.5140736035216023,
+        "target_met": true,
+        "target_and_cheaper": true
+      }
+    ],
+    "interpretation": "Full fixed-policy grid is retrospective; selector algorithms use only preceding three years. Year-block bootstrap intervals summarize observed-year sensitivity, not future success probabilities. Subgroups are descriptive without selection-adjusted inference.",
+    "complete_identical_policy_case_sets_verified": 148,
+    "cases_per_policy_all_three_contracts": 4152,
+    "strict_paid_ge_need_machine_rounding_disagreements": 0,
+    "paid_ge_need_absolute_tolerance_disagreements": 0
+  }
+}

@@ -1,0 +1,2952 @@
+{
+  "source": {
+    "doi": "10.57745/1PDFNL",
+    "url": "https://entrepot.recherche.data.gouv.fr/api/access/datafile/557079?format=original",
+    "filename": "safran.gpkg",
+    "published_year": 2022,
+    "md5": "591c0669f8d23b371db93ad14db9c33b",
+    "sha256": "c9bb528148ba5114b051deb02c447b41950e67a51787b90a1c12d6e7df37687f",
+    "bytes": 3358720,
+    "license": "Etalab Open License 2.0"
+  },
+  "source_description": "INRAE BDGSF soil properties and Corine Land Cover 2012 fractions on SAFRAN cells",
+  "aggregation": "department-grid exact intersection weight times CLC2012 fractions 211+241+242; normalize within department",
+  "not_crop_specific": true,
+  "static_columns": [
+    "soil_ru_mean_mm",
+    "soil_ru_sd_spatial_mm",
+    "soil_ru_q10_mm",
+    "soil_ru_q90_mm",
+    "soil_depth_mean_cm",
+    "soil_field_capacity_pct",
+    "soil_wilting_point_pct"
+  ],
+  "spatial_sd_is_not_map_uncertainty": true,
+  "availability": "Retrospective static environmental map for 2019-2025; GeoPackage published in 2022, CLC land cover vintage 2012; no yield target enters extraction",
+  "mapping": {
+    "cells": 8602,
+    "native_grid_distance_max_m": 4.298506946883524,
+    "missing_agricultural_fraction_cells": 4
+  },
+  "department_count": 87,
+  "coverage": [
+    {
+      "dep": "01",
+      "known_soil_land_weight": 0.9925742801347253,
+      "agricultural_weight_before_normalizing": 0.34506281731387534,
+      "positive_agricultural_cells": 116
+    },
+    {
+      "dep": "02",
+      "known_soil_land_weight": 0.9944646033659716,
+      "agricultural_weight_before_normalizing": 0.613199968638937,
+      "positive_agricultural_cells": 152
+    },
+    {
+      "dep": "03",
+      "known_soil_land_weight": 1.0,
+      "agricultural_weight_before_normalizing": 0.2591950756888958,
+      "positive_agricultural_cells": 149
+    },
+    {
+      "dep": "04",
+      "known_soil_land_weight": 0.9906056826013262,
+      "agricultural_weight_before_normalizing": 0.13322665755250995,
+      "positive_agricultural_cells": 122
+    },
+    {
+      "dep": "05",
+      "known_soil_land_weight": 0.977405618377519,
+      "agricultural_weight_before_normalizing": 0.09190498447516461,
+      "positive_agricultural_cells": 87
+    },
+    {
+      "dep": "07",
+      "known_soil_land_weight": 1.0,
+      "agricultural_weight_before_normalizing": 0.12479021330768944,
+      "positive_agricultural_cells": 111
+    },
+    {
+      "dep": "08",
+      "known_soil_land_weight": 0.9575428759752862,
+      "agricultural_weight_before_normalizing": 0.36979282187298235,
+      "positive_agricultural_cells": 97
+    },
+    {
+      "dep": "09",
+      "known_soil_land_weight": 0.9859197801554167,
+      "agricultural_weight_before_normalizing": 0.17018874914850138,
+      "positive_agricultural_cells": 85
+    },
+    {
+      "dep": "10",
+      "known_soil_land_weight": 1.0,
+      "agricultural_weight_before_normalizing": 0.6207612843442807,
+      "positive_agricultural_cells": 126
+    },
+    {
+      "dep": "11",
+      "known_soil_land_weight": 0.9885017415476126,
+      "agricultural_weight_before_normalizing": 0.2005055140394823,
+      "positive_agricultural_cells": 126
+    },
+    {
+      "dep": "12",
+      "known_soil_land_weight": 1.0,
+      "agricultural_weight_before_normalizing": 0.32997244870611553,
+      "positive_agricultural_cells": 167
+    },
+    {
+      "dep": "13",
+      "known_soil_land_weight": 0.9754180307100825,
+      "agricultural_weight_before_normalizing": 0.17859915498911547,
+      "positive_agricultural_cells": 94
+    },
+    {
+      "dep": "14",
+      "known_soil_land_weight": 0.9650703482830554,
+      "agricultural_weight_before_normalizing": 0.39452299601604374,
+      "positive_agricultural_cells": 107
+    },
+    {
+      "dep": "15",
+      "known_soil_land_weight": 1.0,
+      "agricultural_weight_before_normalizing": 0.14736177755682803,
+      "positive_agricultural_cells": 101
+    },
+    {
+      "dep": "16",
+      "known_soil_land_weight": 1.0,
+      "agricultural_weight_before_normalizing": 0.5089940279268033,
+      "positive_agricultural_cells": 123
+    },
+    {
+      "dep": "17",
+      "known_soil_land_weight": 0.9761053293144647,
+      "agricultural_weight_before_normalizing": 0.5956583487739503,
+      "positive_agricultural_cells": 141
+    },
+    {
+      "dep": "18",
+      "known_soil_land_weight": 1.0,
+      "agricultural_weight_before_normalizing": 0.4800109021493939,
+      "positive_agricultural_cells": 148
+    },
+    {
+      "dep": "21",
+      "known_soil_land_weight": 1.0,
+      "agricultural_weight_before_normalizing": 0.3913459396047724,
+      "positive_agricultural_cells": 172
+    },
+    {
+      "dep": "22",
+      "known_soil_land_weight": 0.965666637674382,
+      "agricultural_weight_before_normalizing": 0.6760428273797026,
+      "positive_agricultural_cells": 126
+    },
+    {
+      "dep": "23",
+      "known_soil_land_weight": 1.0,
+      "agricultural_weight_before_normalizing": 0.1810875311269846,
+      "positive_agricultural_cells": 116
+    },
+    {
+      "dep": "24",
+      "known_soil_land_weight": 1.0,
+      "agricultural_weight_before_normalizing": 0.380936537809967,
+      "positive_agricultural_cells": 182
+    },
+    {
+      "dep": "25",
+      "known_soil_land_weight": 0.93334811163583,
+      "agricultural_weight_before_normalizing": 0.19991397836490776,
+      "positive_agricultural_cells": 97
+    },
+    {
+      "dep": "26",
+      "known_soil_land_weight": 1.0,
+      "agricultural_weight_before_normalizing": 0.2629476392364742,
+      "positive_agricultural_cells": 139
+    },
+    {
+      "dep": "27",
+      "known_soil_land_weight": 1.0,
+      "agricultural_weight_before_normalizing": 0.5665473582541165,
+      "positive_agricultural_cells": 124
+    },
+    {
+      "dep": "28",
+      "known_soil_land_weight": 1.0,
+      "agricultural_weight_before_normalizing": 0.7883234138193412,
+      "positive_agricultural_cells": 126
+    },
+    {
+      "dep": "29",
+      "known_soil_land_weight": 0.948900385910334,
+      "agricultural_weight_before_normalizing": 0.620283378351532,
+      "positive_agricultural_cells": 118
+    },
+    {
+      "dep": "2B",
+      "known_soil_land_weight": 0.9298056516253952,
+      "agricultural_weight_before_normalizing": 0.03779640108184862,
+      "positive_agricultural_cells": 54
+    },
+    {
+      "dep": "30",
+      "known_soil_land_weight": 1.0,
+      "agricultural_weight_before_normalizing": 0.13998179454102377,
+      "positive_agricultural_cells": 125
+    },
+    {
+      "dep": "31",
+      "known_soil_land_weight": 0.9964431689449292,
+      "agricultural_weight_before_normalizing": 0.5630850536711655,
+      "positive_agricultural_cells": 137
+    },
+    {
+      "dep": "32",
+      "known_soil_land_weight": 1.0,
+      "agricultural_weight_before_normalizing": 0.7125361035349306,
+      "positive_agricultural_cells": 127
+    },
+    {
+      "dep": "33",
+      "known_soil_land_weight": 0.9879858956458362,
+      "agricultural_weight_before_normalizing": 0.15753197549354625,
+      "positive_agricultural_cells": 182
+    },
+    {
+      "dep": "34",
+      "known_soil_land_weight": 0.9970727928090483,
+      "agricultural_weight_before_normalizing": 0.09293470992143982,
+      "positive_agricultural_cells": 122
+    },
+    {
+      "dep": "35",
+      "known_soil_land_weight": 0.9979858247331117,
+      "agricultural_weight_before_normalizing": 0.6499498233739958,
+      "positive_agricultural_cells": 140
+    },
+    {
+      "dep": "36",
+      "known_soil_land_weight": 1.0,
+      "agricultural_weight_before_normalizing": 0.5347543444689339,
+      "positive_agricultural_cells": 140
+    },
+    {
+      "dep": "37",
+      "known_soil_land_weight": 1.0,
+      "agricultural_weight_before_normalizing": 0.5388565202483087,
+      "positive_agricultural_cells": 128
+    },
+    {
+      "dep": "38",
+      "known_soil_land_weight": 1.0,
+      "agricultural_weight_before_normalizing": 0.25968019967756806,
+      "positive_agricultural_cells": 142
+    },
+    {
+      "dep": "39",
+      "known_soil_land_weight": 0.999549497830283,
+      "agricultural_weight_before_normalizing": 0.22283202863671342,
+      "positive_agricultural_cells": 102
+    },
+    {
+      "dep": "40",
+      "known_soil_land_weight": 0.9837654400083327,
+      "agricultural_weight_before_normalizing": 0.2620757932787606,
+      "positive_agricultural_cells": 169
+    },
+    {
+      "dep": "41",
+      "known_soil_land_weight": 1.0,
+      "agricultural_weight_before_normalizing": 0.5087684613128555,
+      "positive_agricultural_cells": 138
+    },
+    {
+      "dep": "42",
+      "known_soil_land_weight": 1.0,
+      "agricultural_weight_before_normalizing": 0.17258907084254665,
+      "positive_agricultural_cells": 106
+    },
+    {
+      "dep": "43",
+      "known_soil_land_weight": 1.0,
+      "agricultural_weight_before_normalizing": 0.2116781217170201,
+      "positive_agricultural_cells": 105
+    },
+    {
+      "dep": "44",
+      "known_soil_land_weight": 0.9888888471112982,
+      "agricultural_weight_before_normalizing": 0.5537552217283728,
+      "positive_agricultural_cells": 136
+    },
+    {
+      "dep": "45",
+      "known_soil_land_weight": 1.0,
+      "agricultural_weight_before_normalizing": 0.5646739508376543,
+      "positive_agricultural_cells": 138
+    },
+    {
+      "dep": "46",
+      "known_soil_land_weight": 1.0,
+      "agricultural_weight_before_normalizing": 0.22852847123972977,
+      "positive_agricultural_cells": 112
+    },
+    {
+      "dep": "47",
+      "known_soil_land_weight": 1.0,
+      "agricultural_weight_before_normalizing": 0.607628066766064,
+      "positive_agricultural_cells": 117
+    },
+    {
+      "dep": "48",
+      "known_soil_land_weight": 1.0,
+      "agricultural_weight_before_normalizing": 0.09188837236855148,
+      "positive_agricultural_cells": 97
+    },
+    {
+      "dep": "49",
+      "known_soil_land_weight": 1.0,
+      "agricultural_weight_before_normalizing": 0.5357102938888002,
+      "positive_agricultural_cells": 145
+    },
+    {
+      "dep": "50",
+      "known_soil_land_weight": 0.9675766269214691,
+      "agricultural_weight_before_normalizing": 0.3762145308761868,
+      "positive_agricultural_cells": 111
+    },
+    {
+      "dep": "51",
+      "known_soil_land_weight": 1.0,
+      "agricultural_weight_before_normalizing": 0.6633727874676134,
+      "positive_agricultural_cells": 165
+    },
+    {
+      "dep": "52",
+      "known_soil_land_weight": 1.0,
+      "agricultural_weight_before_normalizing": 0.3443029817087584,
+      "positive_agricultural_cells": 131
+    },
+    {
+      "dep": "53",
+      "known_soil_land_weight": 1.0,
+      "agricultural_weight_before_normalizing": 0.4936709552750452,
+      "positive_agricultural_cells": 107
+    },
+    {
+      "dep": "54",
+      "known_soil_land_weight": 0.9942573442738906,
+      "agricultural_weight_before_normalizing": 0.38127550445511227,
+      "positive_agricultural_cells": 119
+    },
+    {
+      "dep": "55",
+      "known_soil_land_weight": 0.9992349442944893,
+      "agricultural_weight_before_normalizing": 0.3979931839578963,
+      "positive_agricultural_cells": 128
+    },
+    {
+      "dep": "56",
+      "known_soil_land_weight": 0.9530764594500348,
+      "agricultural_weight_before_normalizing": 0.5891640459112215,
+      "positive_agricultural_cells": 132
+    },
+    {
+      "dep": "57",
+      "known_soil_land_weight": 0.9602240924793158,
+      "agricultural_weight_before_normalizing": 0.34853473050929323,
+      "positive_agricultural_cells": 119
+    },
+    {
+      "dep": "58",
+      "known_soil_land_weight": 1.0,
+      "agricultural_weight_before_normalizing": 0.24054396388529392,
+      "positive_agricultural_cells": 138
+    },
+    {
+      "dep": "59",
+      "known_soil_land_weight": 0.9452643834441172,
+      "agricultural_weight_before_normalizing": 0.5352718770431251,
+      "positive_agricultural_cells": 112
+    },
+    {
+      "dep": "60",
+      "known_soil_land_weight": 1.0,
+      "agricultural_weight_before_normalizing": 0.6054314163179966,
+      "positive_agricultural_cells": 119
+    },
+    {
+      "dep": "61",
+      "known_soil_land_weight": 1.0,
+      "agricultural_weight_before_normalizing": 0.3742864311943226,
+      "positive_agricultural_cells": 134
+    },
+    {
+      "dep": "62",
+      "known_soil_land_weight": 0.9970606028539902,
+      "agricultural_weight_before_normalizing": 0.6607407142063284,
+      "positive_agricultural_cells": 134
+    },
+    {
+      "dep": "63",
+      "known_soil_land_weight": 1.0,
+      "agricultural_weight_before_normalizing": 0.22875735125116944,
+      "positive_agricultural_cells": 147
+    },
+    {
+      "dep": "64",
+      "known_soil_land_weight": 0.9835560530126944,
+      "agricultural_weight_before_normalizing": 0.30987236622912123,
+      "positive_agricultural_cells": 118
+    },
+    {
+      "dep": "65",
+      "known_soil_land_weight": 0.9819381780256062,
+      "agricultural_weight_before_normalizing": 0.25127526696180263,
+      "positive_agricultural_cells": 77
+    },
+    {
+      "dep": "66",
+      "known_soil_land_weight": 0.9644129587366974,
+      "agricultural_weight_before_normalizing": 0.070110237017823,
+      "positive_agricultural_cells": 59
+    },
+    {
+      "dep": "67",
+      "known_soil_land_weight": 0.9593822220778307,
+      "agricultural_weight_before_normalizing": 0.36054364837235336,
+      "positive_agricultural_cells": 90
+    },
+    {
+      "dep": "68",
+      "known_soil_land_weight": 0.967817373107576,
+      "agricultural_weight_before_normalizing": 0.3492120303796108,
+      "positive_agricultural_cells": 67
+    },
+    {
+      "dep": "69",
+      "known_soil_land_weight": 1.0,
+      "agricultural_weight_before_normalizing": 0.23666964708161606,
+      "positive_agricultural_cells": 75
+    },
+    {
+      "dep": "70",
+      "known_soil_land_weight": 1.0,
+      "agricultural_weight_before_normalizing": 0.3030200489788348,
+      "positive_agricultural_cells": 112
+    },
+    {
+      "dep": "71",
+      "known_soil_land_weight": 1.0,
+      "agricultural_weight_before_normalizing": 0.24025963362118513,
+      "positive_agricultural_cells": 173
+    },
+    {
+      "dep": "72",
+      "known_soil_land_weight": 1.0,
+      "agricultural_weight_before_normalizing": 0.4637060569740242,
+      "positive_agricultural_cells": 124
+    },
+    {
+      "dep": "76",
+      "known_soil_land_weight": 0.9594503307940135,
+      "agricultural_weight_before_normalizing": 0.5079000550701005,
+      "positive_agricultural_cells": 115
+    },
+    {
+      "dep": "77",
+      "known_soil_land_weight": 1.0,
+      "agricultural_weight_before_normalizing": 0.6079496407021449,
+      "positive_agricultural_cells": 123
+    },
+    {
+      "dep": "78",
+      "known_soil_land_weight": 1.0,
+      "agricultural_weight_before_normalizing": 0.4260281450639497,
+      "positive_agricultural_cells": 53
+    },
+    {
+      "dep": "79",
+      "known_soil_land_weight": 1.0,
+      "agricultural_weight_before_normalizing": 0.6749927205568439,
+      "positive_agricultural_cells": 125
+    },
+    {
+      "dep": "80",
+      "known_soil_land_weight": 0.9948517428565522,
+      "agricultural_weight_before_normalizing": 0.7365739526120156,
+      "positive_agricultural_cells": 125
+    },
+    {
+      "dep": "81",
+      "known_soil_land_weight": 1.0,
+      "agricultural_weight_before_normalizing": 0.46455942342113715,
+      "positive_agricultural_cells": 118
+    },
+    {
+      "dep": "82",
+      "known_soil_land_weight": 1.0,
+      "agricultural_weight_before_normalizing": 0.6108407797269872,
+      "positive_agricultural_cells": 88
+    },
+    {
+      "dep": "83",
+      "known_soil_land_weight": 0.9780036030351421,
+      "agricultural_weight_before_normalizing": 0.07904358251683198,
+      "positive_agricultural_cells": 110
+    },
+    {
+      "dep": "84",
+      "known_soil_land_weight": 1.0,
+      "agricultural_weight_before_normalizing": 0.2552361716741959,
+      "positive_agricultural_cells": 86
+    },
+    {
+      "dep": "85",
+      "known_soil_land_weight": 0.9793183029293546,
+      "agricultural_weight_before_normalizing": 0.6230565402598471,
+      "positive_agricultural_cells": 126
+    },
+    {
+      "dep": "86",
+      "known_soil_land_weight": 1.0,
+      "agricultural_weight_before_normalizing": 0.6581169734450569,
+      "positive_agricultural_cells": 142
+    },
+    {
+      "dep": "87",
+      "known_soil_land_weight": 1.0,
+      "agricultural_weight_before_normalizing": 0.24129388691283063,
+      "positive_agricultural_cells": 118
+    },
+    {
+      "dep": "88",
+      "known_soil_land_weight": 1.0,
+      "agricultural_weight_before_normalizing": 0.18151966020309487,
+      "positive_agricultural_cells": 125
+    },
+    {
+      "dep": "89",
+      "known_soil_land_weight": 1.0,
+      "agricultural_weight_before_normalizing": 0.5298603576723158,
+      "positive_agricultural_cells": 150
+    },
+    {
+      "dep": "91",
+      "known_soil_land_weight": 1.0,
+      "agricultural_weight_before_normalizing": 0.49951398525709984,
+      "positive_agricultural_cells": 39
+    },
+    {
+      "dep": "93",
+      "known_soil_land_weight": 1.0,
+      "agricultural_weight_before_normalizing": 0.09577491987787097,
+      "positive_agricultural_cells": 10
+    },
+    {
+      "dep": "95",
+      "known_soil_land_weight": 1.0,
+      "agricultural_weight_before_normalizing": 0.48048704410913956,
+      "positive_agricultural_cells": 35
+    }
+  ],
+  "department_weights_sha256": "781e836b41577468d883462ef9fb22815d6dd0c62c38c950620ed7798d084383",
+  "grid_sha256": "db24f33875ca7d7826da848550b6b3de766271514ea9e1cd29e7b46570736dbe",
+  "output_sha256": "5f7fa9187ee82257d1ddacf717f8b339de75bf3e542c9031a46b0e278c01f193",
+  "source_code_sha256": "9649986663cba33f8baac866c3ccfc72f8009ceea3e06d97c9ad18d4774cb597",
+  "agricultural_fractions_sha256": "8cc82e299ec8de8bafc14820424e0de85c980aa16008027565b7c187bb7d9872",
+  "high_resolution_alternative": {
+    "doi": "10.15454/9IRARJ",
+    "url": "https://entrepot.recherche.data.gouv.fr/api/access/datafile/121589",
+    "status": "public and reachable, full transfer deferred after measured 1 MiB range took 37 seconds; not used"
+  },
+  "rpg_2015": {
+    "url": "https://data.geopf.fr/wfs/ows",
+    "layer": "RPG.2015:parcelles_graphiques",
+    "land_cover_year": 2015,
+    "matched_parcels": 58285,
+    "cql_filter": "code_cultu IN ('LEC','PCH','PHI','PPR','FVL','FVP','FVT','FEV','PHS')",
+    "files": [
+      {
+        "filename": "rpg2015_legumes_0.json",
+        "sha256": "4660def0dff675dfcf22f26f218ddee9a61cb25c2b89c52da59daeab2008969b",
+        "rows": 5000
+      },
+      {
+        "filename": "rpg2015_legumes_5000.json",
+        "sha256": "753355cd8d591c9dd2ee740df7679dac7ffb81ac7fd7b60524091887b897b6a8",
+        "rows": 5000
+      },
+      {
+        "filename": "rpg2015_legumes_10000.json",
+        "sha256": "69ae27a2dfbc6fd28380cd8f1bbbebbf2aa40734bc6ceb170ca212112790671b",
+        "rows": 5000
+      },
+      {
+        "filename": "rpg2015_legumes_15000.json",
+        "sha256": "f56c9d909c99b2d0fbb834c4933c19eb8bd3cc104c17b62bc838ddd5fb7df2ef",
+        "rows": 5000
+      },
+      {
+        "filename": "rpg2015_legumes_20000.json",
+        "sha256": "b9d3ea95ed983bbc2b67b57fb043b98ec2eb80c9eaa210fa4e3deeb7740b6d61",
+        "rows": 5000
+      },
+      {
+        "filename": "rpg2015_legumes_25000.json",
+        "sha256": "69ca8db66ed9705cbab1adf588845e7c1cc8c572dc1958a69d6cb95fbed18989",
+        "rows": 5000
+      },
+      {
+        "filename": "rpg2015_legumes_30000.json",
+        "sha256": "a595938c961e7acf400d3952b5ba4911c59c0b680cba21780ac91c1371705b9d",
+        "rows": 5000
+      },
+      {
+        "filename": "rpg2015_legumes_35000.json",
+        "sha256": "ba458c86d79a082aadd2c7dc9b840782db204eba3547dd2e77409bbd878f0ab2",
+        "rows": 5000
+      },
+      {
+        "filename": "rpg2015_legumes_40000.json",
+        "sha256": "bb54a6db7c506d36884453508bb3195d2bda2de866fd43e12a654634cd3f3d61",
+        "rows": 5000
+      },
+      {
+        "filename": "rpg2015_legumes_45000.json",
+        "sha256": "b3919f1b1d2506f0d24340a59ba2c21cf4aa665b976cf25c5e0040bd94f784c5",
+        "rows": 5000
+      },
+      {
+        "filename": "rpg2015_legumes_50000.json",
+        "sha256": "e0747d826556639178d48dc32bfdcf382f1d6655c5ea659fefb61238b48b1be5",
+        "rows": 5000
+      },
+      {
+        "filename": "rpg2015_legumes_55000.json",
+        "sha256": "2e0021d06a106fd2f11c1879241e7be10fbb8a56fa59b0ce54052ddb990cab46",
+        "rows": 3285
+      }
+    ],
+    "license": "Etalab Open License",
+    "crop_codes": {
+      "LEC": "lentille",
+      "PCH": "pois_chiche",
+      "PHI": "pois",
+      "PPR": "pois",
+      "FVL": "feverole",
+      "FVP": "feverole",
+      "FVT": "feverole",
+      "FEV": "feverole",
+      "PHS": "haricot"
+    },
+    "observed_crop_code_counts": {
+      "FEV": 219,
+      "FVL": 17783,
+      "FVT": 87,
+      "LEC": 5840,
+      "PCH": 3549,
+      "PHI": 6403,
+      "PPR": 24404
+    },
+    "haricot_mask": "No PHS parcels were returned in the executed 2015 extraction; haricot uses general agricultural soil features. PHS, if present in another extraction, groups dry peas and dry beans and would only be a proxy.",
+    "aggregation": "parcel reported hectares, point-on-surface assignment to containing department and nearest native 8-km grid centre",
+    "coverage": [
+      {
+        "dep": "01",
+        "culture": "feverole",
+        "source_parcels": 18,
+        "soil_parcels": 18,
+        "source_surface_ha": 39.629999999999995,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "01",
+        "culture": "lentille",
+        "source_parcels": 9,
+        "soil_parcels": 6,
+        "source_surface_ha": 21.94,
+        "known_soil_area_fraction": 0.8217866909753875
+      },
+      {
+        "dep": "01",
+        "culture": "pois",
+        "source_parcels": 31,
+        "soil_parcels": 31,
+        "source_surface_ha": 67.28999999999999,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "02",
+        "culture": "feverole",
+        "source_parcels": 1402,
+        "soil_parcels": 1402,
+        "source_surface_ha": 9844.539999999999,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "02",
+        "culture": "lentille",
+        "source_parcels": 3,
+        "soil_parcels": 3,
+        "source_surface_ha": 18.11,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "02",
+        "culture": "pois",
+        "source_parcels": 603,
+        "soil_parcels": 603,
+        "source_surface_ha": 3743.3,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "03",
+        "culture": "feverole",
+        "source_parcels": 48,
+        "soil_parcels": 48,
+        "source_surface_ha": 235.94,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "03",
+        "culture": "lentille",
+        "source_parcels": 4,
+        "soil_parcels": 4,
+        "source_surface_ha": 13.3,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "03",
+        "culture": "pois",
+        "source_parcels": 126,
+        "soil_parcels": 126,
+        "source_surface_ha": 591.2899999999998,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "04",
+        "culture": "feverole",
+        "source_parcels": 9,
+        "soil_parcels": 9,
+        "source_surface_ha": 21.9,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "04",
+        "culture": "lentille",
+        "source_parcels": 79,
+        "soil_parcels": 79,
+        "source_surface_ha": 85.73999999999998,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "04",
+        "culture": "pois",
+        "source_parcels": 205,
+        "soil_parcels": 205,
+        "source_surface_ha": 731.87,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "04",
+        "culture": "pois_chiche",
+        "source_parcels": 89,
+        "soil_parcels": 89,
+        "source_surface_ha": 212.45,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "05",
+        "culture": "lentille",
+        "source_parcels": 10,
+        "soil_parcels": 10,
+        "source_surface_ha": 14.579999999999998,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "05",
+        "culture": "pois",
+        "source_parcels": 9,
+        "soil_parcels": 9,
+        "source_surface_ha": 30.09,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "05",
+        "culture": "pois_chiche",
+        "source_parcels": 19,
+        "soil_parcels": 19,
+        "source_surface_ha": 15.84,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "07",
+        "culture": "lentille",
+        "source_parcels": 2,
+        "soil_parcels": 2,
+        "source_surface_ha": 1.8399999999999999,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "07",
+        "culture": "pois",
+        "source_parcels": 37,
+        "soil_parcels": 37,
+        "source_surface_ha": 54.38,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "07",
+        "culture": "pois_chiche",
+        "source_parcels": 28,
+        "soil_parcels": 28,
+        "source_surface_ha": 38.25000000000001,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "08",
+        "culture": "feverole",
+        "source_parcels": 118,
+        "soil_parcels": 118,
+        "source_surface_ha": 673.1600000000001,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "08",
+        "culture": "lentille",
+        "source_parcels": 3,
+        "soil_parcels": 3,
+        "source_surface_ha": 35.18,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "08",
+        "culture": "pois",
+        "source_parcels": 611,
+        "soil_parcels": 609,
+        "source_surface_ha": 3387.0,
+        "known_soil_area_fraction": 0.9980927074106879
+      },
+      {
+        "dep": "08",
+        "culture": "pois_chiche",
+        "source_parcels": 1,
+        "soil_parcels": 1,
+        "source_surface_ha": 1.71,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "09",
+        "culture": "feverole",
+        "source_parcels": 99,
+        "soil_parcels": 99,
+        "source_surface_ha": 258.53000000000003,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "09",
+        "culture": "lentille",
+        "source_parcels": 27,
+        "soil_parcels": 27,
+        "source_surface_ha": 114.06,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "09",
+        "culture": "pois",
+        "source_parcels": 38,
+        "soil_parcels": 38,
+        "source_surface_ha": 157.98999999999995,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "09",
+        "culture": "pois_chiche",
+        "source_parcels": 3,
+        "soil_parcels": 3,
+        "source_surface_ha": 4.74,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "10",
+        "culture": "feverole",
+        "source_parcels": 133,
+        "soil_parcels": 133,
+        "source_surface_ha": 651.36,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "10",
+        "culture": "lentille",
+        "source_parcels": 242,
+        "soil_parcels": 242,
+        "source_surface_ha": 1340.3000000000002,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "10",
+        "culture": "pois",
+        "source_parcels": 1094,
+        "soil_parcels": 1094,
+        "source_surface_ha": 5965.15,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "10",
+        "culture": "pois_chiche",
+        "source_parcels": 3,
+        "soil_parcels": 3,
+        "source_surface_ha": 9.36,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "11",
+        "culture": "feverole",
+        "source_parcels": 77,
+        "soil_parcels": 77,
+        "source_surface_ha": 200.55999999999997,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "11",
+        "culture": "lentille",
+        "source_parcels": 72,
+        "soil_parcels": 72,
+        "source_surface_ha": 245.75,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "11",
+        "culture": "pois",
+        "source_parcels": 543,
+        "soil_parcels": 543,
+        "source_surface_ha": 1862.4299999999998,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "11",
+        "culture": "pois_chiche",
+        "source_parcels": 456,
+        "soil_parcels": 456,
+        "source_surface_ha": 1450.54,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "12",
+        "culture": "feverole",
+        "source_parcels": 31,
+        "soil_parcels": 31,
+        "source_surface_ha": 47.940000000000005,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "12",
+        "culture": "lentille",
+        "source_parcels": 34,
+        "soil_parcels": 34,
+        "source_surface_ha": 94.05,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "12",
+        "culture": "pois",
+        "source_parcels": 56,
+        "soil_parcels": 56,
+        "source_surface_ha": 153.61,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "12",
+        "culture": "pois_chiche",
+        "source_parcels": 3,
+        "soil_parcels": 3,
+        "source_surface_ha": 6.59,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "13",
+        "culture": "feverole",
+        "source_parcels": 18,
+        "soil_parcels": 18,
+        "source_surface_ha": 4.2299999999999995,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "13",
+        "culture": "lentille",
+        "source_parcels": 6,
+        "soil_parcels": 6,
+        "source_surface_ha": 16.04,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "13",
+        "culture": "pois",
+        "source_parcels": 47,
+        "soil_parcels": 47,
+        "source_surface_ha": 186.63,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "13",
+        "culture": "pois_chiche",
+        "source_parcels": 347,
+        "soil_parcels": 347,
+        "source_surface_ha": 878.5899999999999,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "14",
+        "culture": "feverole",
+        "source_parcels": 861,
+        "soil_parcels": 817,
+        "source_surface_ha": 4455.48,
+        "known_soil_area_fraction": 0.9594162694030722
+      },
+      {
+        "dep": "14",
+        "culture": "lentille",
+        "source_parcels": 1,
+        "soil_parcels": 1,
+        "source_surface_ha": 8.7,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "14",
+        "culture": "pois",
+        "source_parcels": 577,
+        "soil_parcels": 573,
+        "source_surface_ha": 3175.3,
+        "known_soil_area_fraction": 0.9950807797688407
+      },
+      {
+        "dep": "15",
+        "culture": "feverole",
+        "source_parcels": 2,
+        "soil_parcels": 2,
+        "source_surface_ha": 1.68,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "15",
+        "culture": "lentille",
+        "source_parcels": 47,
+        "soil_parcels": 47,
+        "source_surface_ha": 65.48,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "15",
+        "culture": "pois",
+        "source_parcels": 9,
+        "soil_parcels": 9,
+        "source_surface_ha": 14.34,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "15",
+        "culture": "pois_chiche",
+        "source_parcels": 1,
+        "soil_parcels": 1,
+        "source_surface_ha": 0.3,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "16",
+        "culture": "feverole",
+        "source_parcels": 110,
+        "soil_parcels": 110,
+        "source_surface_ha": 306.94,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "16",
+        "culture": "lentille",
+        "source_parcels": 206,
+        "soil_parcels": 206,
+        "source_surface_ha": 812.0600000000002,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "16",
+        "culture": "pois",
+        "source_parcels": 760,
+        "soil_parcels": 760,
+        "source_surface_ha": 2840.07,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "16",
+        "culture": "pois_chiche",
+        "source_parcels": 29,
+        "soil_parcels": 29,
+        "source_surface_ha": 106.64999999999999,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "17",
+        "culture": "feverole",
+        "source_parcels": 174,
+        "soil_parcels": 172,
+        "source_surface_ha": 479.03999999999996,
+        "known_soil_area_fraction": 0.977559285237141
+      },
+      {
+        "dep": "17",
+        "culture": "lentille",
+        "source_parcels": 84,
+        "soil_parcels": 82,
+        "source_surface_ha": 408.82,
+        "known_soil_area_fraction": 0.9966733525757058
+      },
+      {
+        "dep": "17",
+        "culture": "pois",
+        "source_parcels": 1977,
+        "soil_parcels": 1949,
+        "source_surface_ha": 8388.39,
+        "known_soil_area_fraction": 0.9889800068904762
+      },
+      {
+        "dep": "17",
+        "culture": "pois_chiche",
+        "source_parcels": 39,
+        "soil_parcels": 39,
+        "source_surface_ha": 144.73999999999998,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "18",
+        "culture": "feverole",
+        "source_parcels": 189,
+        "soil_parcels": 189,
+        "source_surface_ha": 1362.7800000000002,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "18",
+        "culture": "lentille",
+        "source_parcels": 68,
+        "soil_parcels": 68,
+        "source_surface_ha": 590.01,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "18",
+        "culture": "pois",
+        "source_parcels": 631,
+        "soil_parcels": 631,
+        "source_surface_ha": 4754.13,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "18",
+        "culture": "pois_chiche",
+        "source_parcels": 3,
+        "soil_parcels": 3,
+        "source_surface_ha": 33.88,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "21",
+        "culture": "feverole",
+        "source_parcels": 136,
+        "soil_parcels": 136,
+        "source_surface_ha": 558.8499999999999,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "21",
+        "culture": "lentille",
+        "source_parcels": 47,
+        "soil_parcels": 47,
+        "source_surface_ha": 168.71999999999994,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "21",
+        "culture": "pois",
+        "source_parcels": 691,
+        "soil_parcels": 691,
+        "source_surface_ha": 4415.05,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "22",
+        "culture": "feverole",
+        "source_parcels": 336,
+        "soil_parcels": 314,
+        "source_surface_ha": 964.6800000000001,
+        "known_soil_area_fraction": 0.9677094995231579
+      },
+      {
+        "dep": "22",
+        "culture": "lentille",
+        "source_parcels": 2,
+        "soil_parcels": 2,
+        "source_surface_ha": 1.27,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "22",
+        "culture": "pois",
+        "source_parcels": 286,
+        "soil_parcels": 279,
+        "source_surface_ha": 749.73,
+        "known_soil_area_fraction": 0.9847811878943085
+      },
+      {
+        "dep": "23",
+        "culture": "feverole",
+        "source_parcels": 23,
+        "soil_parcels": 23,
+        "source_surface_ha": 79.7,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "23",
+        "culture": "pois",
+        "source_parcels": 51,
+        "soil_parcels": 51,
+        "source_surface_ha": 238.73999999999998,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "24",
+        "culture": "feverole",
+        "source_parcels": 195,
+        "soil_parcels": 195,
+        "source_surface_ha": 504.6099999999999,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "24",
+        "culture": "lentille",
+        "source_parcels": 19,
+        "soil_parcels": 19,
+        "source_surface_ha": 55.970000000000006,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "24",
+        "culture": "pois",
+        "source_parcels": 50,
+        "soil_parcels": 50,
+        "source_surface_ha": 224.52,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "24",
+        "culture": "pois_chiche",
+        "source_parcels": 7,
+        "soil_parcels": 7,
+        "source_surface_ha": 22.38,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "25",
+        "culture": "feverole",
+        "source_parcels": 12,
+        "soil_parcels": 10,
+        "source_surface_ha": 27.44,
+        "known_soil_area_fraction": 0.857871720116618
+      },
+      {
+        "dep": "25",
+        "culture": "lentille",
+        "source_parcels": 1,
+        "soil_parcels": 1,
+        "source_surface_ha": 0.2,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "25",
+        "culture": "pois",
+        "source_parcels": 6,
+        "soil_parcels": 6,
+        "source_surface_ha": 28.55,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "26",
+        "culture": "feverole",
+        "source_parcels": 34,
+        "soil_parcels": 34,
+        "source_surface_ha": 47.65999999999999,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "26",
+        "culture": "lentille",
+        "source_parcels": 43,
+        "soil_parcels": 43,
+        "source_surface_ha": 47.25999999999999,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "26",
+        "culture": "pois",
+        "source_parcels": 265,
+        "soil_parcels": 265,
+        "source_surface_ha": 562.1600000000001,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "26",
+        "culture": "pois_chiche",
+        "source_parcels": 44,
+        "soil_parcels": 44,
+        "source_surface_ha": 54.78999999999999,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "27",
+        "culture": "feverole",
+        "source_parcels": 625,
+        "soil_parcels": 625,
+        "source_surface_ha": 3793.2599999999998,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "27",
+        "culture": "lentille",
+        "source_parcels": 5,
+        "soil_parcels": 5,
+        "source_surface_ha": 19.369999999999997,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "27",
+        "culture": "pois",
+        "source_parcels": 826,
+        "soil_parcels": 826,
+        "source_surface_ha": 5025.749999999999,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "28",
+        "culture": "feverole",
+        "source_parcels": 214,
+        "soil_parcels": 214,
+        "source_surface_ha": 998.21,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "28",
+        "culture": "lentille",
+        "source_parcels": 58,
+        "soil_parcels": 58,
+        "source_surface_ha": 220.81000000000003,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "28",
+        "culture": "pois",
+        "source_parcels": 1312,
+        "soil_parcels": 1312,
+        "source_surface_ha": 8196.23,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "28",
+        "culture": "pois_chiche",
+        "source_parcels": 1,
+        "soil_parcels": 1,
+        "source_surface_ha": 3.15,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "29",
+        "culture": "feverole",
+        "source_parcels": 158,
+        "soil_parcels": 152,
+        "source_surface_ha": 380.44000000000005,
+        "known_soil_area_fraction": 0.9756071916727997
+      },
+      {
+        "dep": "29",
+        "culture": "lentille",
+        "source_parcels": 1,
+        "soil_parcels": 1,
+        "source_surface_ha": 0.22,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "29",
+        "culture": "pois",
+        "source_parcels": 47,
+        "soil_parcels": 46,
+        "source_surface_ha": 153.57000000000005,
+        "known_soil_area_fraction": 0.9705020511818713
+      },
+      {
+        "dep": "2B",
+        "culture": "feverole",
+        "source_parcels": 4,
+        "soil_parcels": 4,
+        "source_surface_ha": 8.06,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "30",
+        "culture": "feverole",
+        "source_parcels": 9,
+        "soil_parcels": 9,
+        "source_surface_ha": 19.290000000000003,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "30",
+        "culture": "lentille",
+        "source_parcels": 35,
+        "soil_parcels": 35,
+        "source_surface_ha": 57.46999999999999,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "30",
+        "culture": "pois",
+        "source_parcels": 60,
+        "soil_parcels": 60,
+        "source_surface_ha": 155.60000000000002,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "30",
+        "culture": "pois_chiche",
+        "source_parcels": 749,
+        "soil_parcels": 749,
+        "source_surface_ha": 1426.44,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "31",
+        "culture": "feverole",
+        "source_parcels": 246,
+        "soil_parcels": 246,
+        "source_surface_ha": 872.17,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "31",
+        "culture": "lentille",
+        "source_parcels": 62,
+        "soil_parcels": 62,
+        "source_surface_ha": 199.11,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "31",
+        "culture": "pois",
+        "source_parcels": 538,
+        "soil_parcels": 538,
+        "source_surface_ha": 2732.98,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "31",
+        "culture": "pois_chiche",
+        "source_parcels": 89,
+        "soil_parcels": 89,
+        "source_surface_ha": 320.87,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "32",
+        "culture": "feverole",
+        "source_parcels": 1260,
+        "soil_parcels": 1260,
+        "source_surface_ha": 5341.24,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "32",
+        "culture": "lentille",
+        "source_parcels": 142,
+        "soil_parcels": 142,
+        "source_surface_ha": 750.0200000000001,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "32",
+        "culture": "pois",
+        "source_parcels": 401,
+        "soil_parcels": 401,
+        "source_surface_ha": 2223.23,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "32",
+        "culture": "pois_chiche",
+        "source_parcels": 117,
+        "soil_parcels": 117,
+        "source_surface_ha": 505.49999999999994,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "33",
+        "culture": "feverole",
+        "source_parcels": 55,
+        "soil_parcels": 55,
+        "source_surface_ha": 270.31999999999994,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "33",
+        "culture": "lentille",
+        "source_parcels": 6,
+        "soil_parcels": 6,
+        "source_surface_ha": 15.88,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "33",
+        "culture": "pois",
+        "source_parcels": 2,
+        "soil_parcels": 2,
+        "source_surface_ha": 5.59,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "33",
+        "culture": "pois_chiche",
+        "source_parcels": 1,
+        "soil_parcels": 1,
+        "source_surface_ha": 3.4,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "34",
+        "culture": "feverole",
+        "source_parcels": 3,
+        "soil_parcels": 3,
+        "source_surface_ha": 4.09,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "34",
+        "culture": "lentille",
+        "source_parcels": 10,
+        "soil_parcels": 10,
+        "source_surface_ha": 10.9,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "34",
+        "culture": "pois",
+        "source_parcels": 468,
+        "soil_parcels": 466,
+        "source_surface_ha": 1010.68,
+        "known_soil_area_fraction": 0.9937467843432145
+      },
+      {
+        "dep": "34",
+        "culture": "pois_chiche",
+        "source_parcels": 934,
+        "soil_parcels": 934,
+        "source_surface_ha": 1920.39,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "35",
+        "culture": "feverole",
+        "source_parcels": 176,
+        "soil_parcels": 176,
+        "source_surface_ha": 469.89,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "35",
+        "culture": "pois",
+        "source_parcels": 215,
+        "soil_parcels": 215,
+        "source_surface_ha": 634.87,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "36",
+        "culture": "feverole",
+        "source_parcels": 227,
+        "soil_parcels": 227,
+        "source_surface_ha": 982.69,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "36",
+        "culture": "lentille",
+        "source_parcels": 307,
+        "soil_parcels": 307,
+        "source_surface_ha": 2938.17,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "36",
+        "culture": "pois",
+        "source_parcels": 664,
+        "soil_parcels": 664,
+        "source_surface_ha": 4706.28,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "37",
+        "culture": "feverole",
+        "source_parcels": 207,
+        "soil_parcels": 207,
+        "source_surface_ha": 876.17,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "37",
+        "culture": "lentille",
+        "source_parcels": 15,
+        "soil_parcels": 15,
+        "source_surface_ha": 50.76000000000001,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "37",
+        "culture": "pois",
+        "source_parcels": 358,
+        "soil_parcels": 358,
+        "source_surface_ha": 1952.87,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "37",
+        "culture": "pois_chiche",
+        "source_parcels": 1,
+        "soil_parcels": 1,
+        "source_surface_ha": 0.95,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "38",
+        "culture": "feverole",
+        "source_parcels": 30,
+        "soil_parcels": 30,
+        "source_surface_ha": 52.339999999999996,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "38",
+        "culture": "lentille",
+        "source_parcels": 14,
+        "soil_parcels": 14,
+        "source_surface_ha": 31.940000000000005,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "38",
+        "culture": "pois",
+        "source_parcels": 152,
+        "soil_parcels": 152,
+        "source_surface_ha": 392.17,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "38",
+        "culture": "pois_chiche",
+        "source_parcels": 2,
+        "soil_parcels": 2,
+        "source_surface_ha": 5.97,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "39",
+        "culture": "feverole",
+        "source_parcels": 34,
+        "soil_parcels": 34,
+        "source_surface_ha": 91.81,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "39",
+        "culture": "lentille",
+        "source_parcels": 1,
+        "soil_parcels": 1,
+        "source_surface_ha": 0.11,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "39",
+        "culture": "pois",
+        "source_parcels": 35,
+        "soil_parcels": 35,
+        "source_surface_ha": 91.22,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "40",
+        "culture": "feverole",
+        "source_parcels": 72,
+        "soil_parcels": 72,
+        "source_surface_ha": 253.31,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "40",
+        "culture": "lentille",
+        "source_parcels": 2,
+        "soil_parcels": 2,
+        "source_surface_ha": 2.2,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "40",
+        "culture": "pois",
+        "source_parcels": 32,
+        "soil_parcels": 32,
+        "source_surface_ha": 362.08000000000004,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "41",
+        "culture": "feverole",
+        "source_parcels": 174,
+        "soil_parcels": 174,
+        "source_surface_ha": 572.73,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "41",
+        "culture": "lentille",
+        "source_parcels": 41,
+        "soil_parcels": 41,
+        "source_surface_ha": 122.91000000000001,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "41",
+        "culture": "pois",
+        "source_parcels": 486,
+        "soil_parcels": 486,
+        "source_surface_ha": 2841.41,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "42",
+        "culture": "feverole",
+        "source_parcels": 2,
+        "soil_parcels": 2,
+        "source_surface_ha": 1.8399999999999999,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "42",
+        "culture": "lentille",
+        "source_parcels": 7,
+        "soil_parcels": 7,
+        "source_surface_ha": 4.34,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "42",
+        "culture": "pois",
+        "source_parcels": 13,
+        "soil_parcels": 13,
+        "source_surface_ha": 29.369999999999997,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "43",
+        "culture": "feverole",
+        "source_parcels": 12,
+        "soil_parcels": 12,
+        "source_surface_ha": 16.79,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "43",
+        "culture": "lentille",
+        "source_parcels": 3101,
+        "soil_parcels": 3101,
+        "source_surface_ha": 4112.8,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "43",
+        "culture": "pois",
+        "source_parcels": 22,
+        "soil_parcels": 22,
+        "source_surface_ha": 37.57,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "43",
+        "culture": "pois_chiche",
+        "source_parcels": 1,
+        "soil_parcels": 1,
+        "source_surface_ha": 0.06,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "44",
+        "culture": "feverole",
+        "source_parcels": 156,
+        "soil_parcels": 156,
+        "source_surface_ha": 541.46,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "44",
+        "culture": "lentille",
+        "source_parcels": 12,
+        "soil_parcels": 12,
+        "source_surface_ha": 23.57,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "44",
+        "culture": "pois",
+        "source_parcels": 123,
+        "soil_parcels": 123,
+        "source_surface_ha": 622.5400000000001,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "44",
+        "culture": "pois_chiche",
+        "source_parcels": 1,
+        "soil_parcels": 1,
+        "source_surface_ha": 0.32,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "45",
+        "culture": "feverole",
+        "source_parcels": 222,
+        "soil_parcels": 222,
+        "source_surface_ha": 982.52,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "45",
+        "culture": "lentille",
+        "source_parcels": 56,
+        "soil_parcels": 56,
+        "source_surface_ha": 191.78,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "45",
+        "culture": "pois",
+        "source_parcels": 510,
+        "soil_parcels": 510,
+        "source_surface_ha": 2888.98,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "46",
+        "culture": "feverole",
+        "source_parcels": 90,
+        "soil_parcels": 90,
+        "source_surface_ha": 151.01000000000002,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "46",
+        "culture": "lentille",
+        "source_parcels": 9,
+        "soil_parcels": 9,
+        "source_surface_ha": 9.819999999999999,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "46",
+        "culture": "pois",
+        "source_parcels": 22,
+        "soil_parcels": 22,
+        "source_surface_ha": 41.940000000000005,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "46",
+        "culture": "pois_chiche",
+        "source_parcels": 3,
+        "soil_parcels": 3,
+        "source_surface_ha": 1.65,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "47",
+        "culture": "feverole",
+        "source_parcels": 384,
+        "soil_parcels": 384,
+        "source_surface_ha": 1245.5700000000002,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "47",
+        "culture": "lentille",
+        "source_parcels": 65,
+        "soil_parcels": 65,
+        "source_surface_ha": 319.66,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "47",
+        "culture": "pois",
+        "source_parcels": 68,
+        "soil_parcels": 68,
+        "source_surface_ha": 239.52,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "47",
+        "culture": "pois_chiche",
+        "source_parcels": 18,
+        "soil_parcels": 18,
+        "source_surface_ha": 51.04999999999999,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "48",
+        "culture": "feverole",
+        "source_parcels": 1,
+        "soil_parcels": 1,
+        "source_surface_ha": 0.55,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "48",
+        "culture": "lentille",
+        "source_parcels": 10,
+        "soil_parcels": 10,
+        "source_surface_ha": 16.51,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "48",
+        "culture": "pois",
+        "source_parcels": 3,
+        "soil_parcels": 3,
+        "source_surface_ha": 3.59,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "49",
+        "culture": "feverole",
+        "source_parcels": 295,
+        "soil_parcels": 295,
+        "source_surface_ha": 1103.4099999999999,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "49",
+        "culture": "lentille",
+        "source_parcels": 22,
+        "soil_parcels": 22,
+        "source_surface_ha": 62.629999999999995,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "49",
+        "culture": "pois",
+        "source_parcels": 290,
+        "soil_parcels": 290,
+        "source_surface_ha": 1192.95,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "49",
+        "culture": "pois_chiche",
+        "source_parcels": 1,
+        "soil_parcels": 1,
+        "source_surface_ha": 1.03,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "50",
+        "culture": "feverole",
+        "source_parcels": 73,
+        "soil_parcels": 71,
+        "source_surface_ha": 197.17000000000002,
+        "known_soil_area_fraction": 0.9863569508545924
+      },
+      {
+        "dep": "50",
+        "culture": "pois",
+        "source_parcels": 43,
+        "soil_parcels": 35,
+        "source_surface_ha": 107.83,
+        "known_soil_area_fraction": 0.8149865529073542
+      },
+      {
+        "dep": "51",
+        "culture": "feverole",
+        "source_parcels": 360,
+        "soil_parcels": 360,
+        "source_surface_ha": 2457.58,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "51",
+        "culture": "lentille",
+        "source_parcels": 87,
+        "soil_parcels": 87,
+        "source_surface_ha": 398.33,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "51",
+        "culture": "pois",
+        "source_parcels": 1680,
+        "soil_parcels": 1680,
+        "source_surface_ha": 9864.31,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "52",
+        "culture": "feverole",
+        "source_parcels": 87,
+        "soil_parcels": 87,
+        "source_surface_ha": 365.58,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "52",
+        "culture": "lentille",
+        "source_parcels": 20,
+        "soil_parcels": 20,
+        "source_surface_ha": 70.32999999999998,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "52",
+        "culture": "pois",
+        "source_parcels": 909,
+        "soil_parcels": 909,
+        "source_surface_ha": 6421.69,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "53",
+        "culture": "feverole",
+        "source_parcels": 196,
+        "soil_parcels": 196,
+        "source_surface_ha": 861.94,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "53",
+        "culture": "lentille",
+        "source_parcels": 1,
+        "soil_parcels": 1,
+        "source_surface_ha": 3.05,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "53",
+        "culture": "pois",
+        "source_parcels": 216,
+        "soil_parcels": 216,
+        "source_surface_ha": 1149.1,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "54",
+        "culture": "feverole",
+        "source_parcels": 174,
+        "soil_parcels": 174,
+        "source_surface_ha": 697.64,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "54",
+        "culture": "lentille",
+        "source_parcels": 12,
+        "soil_parcels": 12,
+        "source_surface_ha": 40.85,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "54",
+        "culture": "pois",
+        "source_parcels": 566,
+        "soil_parcels": 566,
+        "source_surface_ha": 2645.63,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "55",
+        "culture": "feverole",
+        "source_parcels": 70,
+        "soil_parcels": 70,
+        "source_surface_ha": 429.05999999999995,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "55",
+        "culture": "lentille",
+        "source_parcels": 19,
+        "soil_parcels": 19,
+        "source_surface_ha": 101.12000000000002,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "55",
+        "culture": "pois",
+        "source_parcels": 635,
+        "soil_parcels": 635,
+        "source_surface_ha": 4112.790000000001,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "56",
+        "culture": "feverole",
+        "source_parcels": 155,
+        "soil_parcels": 152,
+        "source_surface_ha": 454.35,
+        "known_soil_area_fraction": 0.9833828546274898
+      },
+      {
+        "dep": "56",
+        "culture": "pois",
+        "source_parcels": 159,
+        "soil_parcels": 158,
+        "source_surface_ha": 558.75,
+        "known_soil_area_fraction": 0.9986577181208054
+      },
+      {
+        "dep": "57",
+        "culture": "feverole",
+        "source_parcels": 139,
+        "soil_parcels": 123,
+        "source_surface_ha": 497.4,
+        "known_soil_area_fraction": 0.9632086851628467
+      },
+      {
+        "dep": "57",
+        "culture": "lentille",
+        "source_parcels": 4,
+        "soil_parcels": 3,
+        "source_surface_ha": 1.8900000000000001,
+        "known_soil_area_fraction": 0.8148148148148148
+      },
+      {
+        "dep": "57",
+        "culture": "pois",
+        "source_parcels": 991,
+        "soil_parcels": 940,
+        "source_surface_ha": 3972.2200000000003,
+        "known_soil_area_fraction": 0.9616259925180377
+      },
+      {
+        "dep": "58",
+        "culture": "feverole",
+        "source_parcels": 109,
+        "soil_parcels": 109,
+        "source_surface_ha": 292.99,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "58",
+        "culture": "lentille",
+        "source_parcels": 20,
+        "soil_parcels": 20,
+        "source_surface_ha": 123.68,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "58",
+        "culture": "pois",
+        "source_parcels": 278,
+        "soil_parcels": 278,
+        "source_surface_ha": 1566.6599999999999,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "59",
+        "culture": "feverole",
+        "source_parcels": 536,
+        "soil_parcels": 529,
+        "source_surface_ha": 1594.12,
+        "known_soil_area_fraction": 0.9914121897975059
+      },
+      {
+        "dep": "59",
+        "culture": "lentille",
+        "source_parcels": 1,
+        "soil_parcels": 1,
+        "source_surface_ha": 0.16,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "59",
+        "culture": "pois",
+        "source_parcels": 201,
+        "soil_parcels": 199,
+        "source_surface_ha": 895.1400000000001,
+        "known_soil_area_fraction": 0.9916325937842124
+      },
+      {
+        "dep": "60",
+        "culture": "feverole",
+        "source_parcels": 826,
+        "soil_parcels": 826,
+        "source_surface_ha": 5315.04,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "60",
+        "culture": "lentille",
+        "source_parcels": 13,
+        "soil_parcels": 13,
+        "source_surface_ha": 39.08,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "60",
+        "culture": "pois",
+        "source_parcels": 1493,
+        "soil_parcels": 1493,
+        "source_surface_ha": 7926.719999999999,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "61",
+        "culture": "feverole",
+        "source_parcels": 125,
+        "soil_parcels": 125,
+        "source_surface_ha": 738.1600000000001,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "61",
+        "culture": "lentille",
+        "source_parcels": 1,
+        "soil_parcels": 1,
+        "source_surface_ha": 12.72,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "61",
+        "culture": "pois",
+        "source_parcels": 570,
+        "soil_parcels": 570,
+        "source_surface_ha": 3431.2,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "62",
+        "culture": "feverole",
+        "source_parcels": 949,
+        "soil_parcels": 949,
+        "source_surface_ha": 3243.11,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "62",
+        "culture": "pois",
+        "source_parcels": 319,
+        "soil_parcels": 319,
+        "source_surface_ha": 1582.9600000000003,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "63",
+        "culture": "feverole",
+        "source_parcels": 115,
+        "soil_parcels": 115,
+        "source_surface_ha": 239.04999999999998,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "63",
+        "culture": "lentille",
+        "source_parcels": 25,
+        "soil_parcels": 25,
+        "source_surface_ha": 57.42000000000001,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "63",
+        "culture": "pois",
+        "source_parcels": 118,
+        "soil_parcels": 118,
+        "source_surface_ha": 240.48999999999998,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "64",
+        "culture": "feverole",
+        "source_parcels": 85,
+        "soil_parcels": 85,
+        "source_surface_ha": 135.5,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "64",
+        "culture": "lentille",
+        "source_parcels": 1,
+        "soil_parcels": 1,
+        "source_surface_ha": 1.7,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "64",
+        "culture": "pois",
+        "source_parcels": 12,
+        "soil_parcels": 12,
+        "source_surface_ha": 27.720000000000002,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "65",
+        "culture": "feverole",
+        "source_parcels": 101,
+        "soil_parcels": 101,
+        "source_surface_ha": 166.22,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "65",
+        "culture": "lentille",
+        "source_parcels": 4,
+        "soil_parcels": 4,
+        "source_surface_ha": 11.07,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "65",
+        "culture": "pois",
+        "source_parcels": 23,
+        "soil_parcels": 23,
+        "source_surface_ha": 27.500000000000004,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "65",
+        "culture": "pois_chiche",
+        "source_parcels": 1,
+        "soil_parcels": 1,
+        "source_surface_ha": 0.74,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "66",
+        "culture": "feverole",
+        "source_parcels": 1,
+        "soil_parcels": 1,
+        "source_surface_ha": 1.74,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "66",
+        "culture": "lentille",
+        "source_parcels": 1,
+        "soil_parcels": 1,
+        "source_surface_ha": 0.65,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "66",
+        "culture": "pois",
+        "source_parcels": 15,
+        "soil_parcels": 7,
+        "source_surface_ha": 78.27,
+        "known_soil_area_fraction": 0.534815382649802
+      },
+      {
+        "dep": "66",
+        "culture": "pois_chiche",
+        "source_parcels": 2,
+        "soil_parcels": 2,
+        "source_surface_ha": 4.8100000000000005,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "67",
+        "culture": "feverole",
+        "source_parcels": 36,
+        "soil_parcels": 36,
+        "source_surface_ha": 45.4,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "67",
+        "culture": "pois",
+        "source_parcels": 31,
+        "soil_parcels": 31,
+        "source_surface_ha": 54.980000000000004,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "68",
+        "culture": "feverole",
+        "source_parcels": 21,
+        "soil_parcels": 21,
+        "source_surface_ha": 10.36,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "68",
+        "culture": "lentille",
+        "source_parcels": 2,
+        "soil_parcels": 2,
+        "source_surface_ha": 0.97,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "68",
+        "culture": "pois",
+        "source_parcels": 18,
+        "soil_parcels": 18,
+        "source_surface_ha": 31.67,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "69",
+        "culture": "feverole",
+        "source_parcels": 32,
+        "soil_parcels": 32,
+        "source_surface_ha": 65.21000000000001,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "69",
+        "culture": "lentille",
+        "source_parcels": 14,
+        "soil_parcels": 14,
+        "source_surface_ha": 11.070000000000002,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "69",
+        "culture": "pois",
+        "source_parcels": 41,
+        "soil_parcels": 41,
+        "source_surface_ha": 102.39,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "70",
+        "culture": "feverole",
+        "source_parcels": 42,
+        "soil_parcels": 42,
+        "source_surface_ha": 145.72000000000003,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "70",
+        "culture": "lentille",
+        "source_parcels": 2,
+        "soil_parcels": 2,
+        "source_surface_ha": 4.93,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "70",
+        "culture": "pois",
+        "source_parcels": 62,
+        "soil_parcels": 62,
+        "source_surface_ha": 256.29,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "71",
+        "culture": "feverole",
+        "source_parcels": 31,
+        "soil_parcels": 31,
+        "source_surface_ha": 82.07000000000001,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "71",
+        "culture": "lentille",
+        "source_parcels": 5,
+        "soil_parcels": 5,
+        "source_surface_ha": 15.370000000000001,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "71",
+        "culture": "pois",
+        "source_parcels": 87,
+        "soil_parcels": 87,
+        "source_surface_ha": 315.35999999999996,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "72",
+        "culture": "feverole",
+        "source_parcels": 151,
+        "soil_parcels": 151,
+        "source_surface_ha": 701.3100000000001,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "72",
+        "culture": "lentille",
+        "source_parcels": 6,
+        "soil_parcels": 6,
+        "source_surface_ha": 28.56,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "72",
+        "culture": "pois",
+        "source_parcels": 344,
+        "soil_parcels": 344,
+        "source_surface_ha": 1959.58,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "76",
+        "culture": "feverole",
+        "source_parcels": 848,
+        "soil_parcels": 827,
+        "source_surface_ha": 5096.54,
+        "known_soil_area_fraction": 0.9816659930070205
+      },
+      {
+        "dep": "76",
+        "culture": "lentille",
+        "source_parcels": 3,
+        "soil_parcels": 3,
+        "source_surface_ha": 8.35,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "76",
+        "culture": "pois",
+        "source_parcels": 236,
+        "soil_parcels": 230,
+        "source_surface_ha": 1259.9500000000003,
+        "known_soil_area_fraction": 0.9877217349894835
+      },
+      {
+        "dep": "77",
+        "culture": "feverole",
+        "source_parcels": 1621,
+        "soil_parcels": 1621,
+        "source_surface_ha": 11370.58,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "77",
+        "culture": "lentille",
+        "source_parcels": 21,
+        "soil_parcels": 21,
+        "source_surface_ha": 92.54,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "77",
+        "culture": "pois",
+        "source_parcels": 411,
+        "soil_parcels": 411,
+        "source_surface_ha": 2538.41,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "78",
+        "culture": "feverole",
+        "source_parcels": 309,
+        "soil_parcels": 309,
+        "source_surface_ha": 1352.6799999999998,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "78",
+        "culture": "lentille",
+        "source_parcels": 4,
+        "soil_parcels": 4,
+        "source_surface_ha": 30.36,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "78",
+        "culture": "pois",
+        "source_parcels": 231,
+        "soil_parcels": 231,
+        "source_surface_ha": 1171.5700000000002,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "79",
+        "culture": "feverole",
+        "source_parcels": 171,
+        "soil_parcels": 171,
+        "source_surface_ha": 515.6099999999999,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "79",
+        "culture": "lentille",
+        "source_parcels": 100,
+        "soil_parcels": 100,
+        "source_surface_ha": 478.45000000000005,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "79",
+        "culture": "pois",
+        "source_parcels": 955,
+        "soil_parcels": 955,
+        "source_surface_ha": 4082.4600000000005,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "79",
+        "culture": "pois_chiche",
+        "source_parcels": 3,
+        "soil_parcels": 3,
+        "source_surface_ha": 8.7,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "80",
+        "culture": "feverole",
+        "source_parcels": 514,
+        "soil_parcels": 514,
+        "source_surface_ha": 2289.2799999999997,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "80",
+        "culture": "lentille",
+        "source_parcels": 8,
+        "soil_parcels": 8,
+        "source_surface_ha": 26.34,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "80",
+        "culture": "pois",
+        "source_parcels": 1842,
+        "soil_parcels": 1838,
+        "source_surface_ha": 8254.98,
+        "known_soil_area_fraction": 0.9987389430380207
+      },
+      {
+        "dep": "81",
+        "culture": "feverole",
+        "source_parcels": 351,
+        "soil_parcels": 351,
+        "source_surface_ha": 876.73,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "81",
+        "culture": "lentille",
+        "source_parcels": 84,
+        "soil_parcels": 84,
+        "source_surface_ha": 253.58999999999997,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "81",
+        "culture": "pois",
+        "source_parcels": 153,
+        "soil_parcels": 153,
+        "source_surface_ha": 521.23,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "81",
+        "culture": "pois_chiche",
+        "source_parcels": 253,
+        "soil_parcels": 253,
+        "source_surface_ha": 947.4499999999999,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "82",
+        "culture": "feverole",
+        "source_parcels": 183,
+        "soil_parcels": 183,
+        "source_surface_ha": 537.99,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "82",
+        "culture": "lentille",
+        "source_parcels": 38,
+        "soil_parcels": 38,
+        "source_surface_ha": 115.96000000000001,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "82",
+        "culture": "pois",
+        "source_parcels": 105,
+        "soil_parcels": 105,
+        "source_surface_ha": 421.18999999999994,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "82",
+        "culture": "pois_chiche",
+        "source_parcels": 13,
+        "soil_parcels": 13,
+        "source_surface_ha": 28.800000000000004,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "83",
+        "culture": "feverole",
+        "source_parcels": 4,
+        "soil_parcels": 4,
+        "source_surface_ha": 11.4,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "83",
+        "culture": "lentille",
+        "source_parcels": 16,
+        "soil_parcels": 16,
+        "source_surface_ha": 30.48,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "83",
+        "culture": "pois",
+        "source_parcels": 20,
+        "soil_parcels": 20,
+        "source_surface_ha": 71.63000000000001,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "83",
+        "culture": "pois_chiche",
+        "source_parcels": 94,
+        "soil_parcels": 94,
+        "source_surface_ha": 177.95000000000002,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "84",
+        "culture": "feverole",
+        "source_parcels": 12,
+        "soil_parcels": 12,
+        "source_surface_ha": 4.890000000000001,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "84",
+        "culture": "lentille",
+        "source_parcels": 36,
+        "soil_parcels": 36,
+        "source_surface_ha": 39.760000000000005,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "84",
+        "culture": "pois",
+        "source_parcels": 246,
+        "soil_parcels": 246,
+        "source_surface_ha": 504.68999999999994,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "84",
+        "culture": "pois_chiche",
+        "source_parcels": 149,
+        "soil_parcels": 149,
+        "source_surface_ha": 255.32,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "85",
+        "culture": "feverole",
+        "source_parcels": 258,
+        "soil_parcels": 229,
+        "source_surface_ha": 1017.05,
+        "known_soil_area_fraction": 0.9076151614964849
+      },
+      {
+        "dep": "85",
+        "culture": "lentille",
+        "source_parcels": 108,
+        "soil_parcels": 106,
+        "source_surface_ha": 652.3799999999999,
+        "known_soil_area_fraction": 0.9877218798859563
+      },
+      {
+        "dep": "85",
+        "culture": "pois",
+        "source_parcels": 185,
+        "soil_parcels": 185,
+        "source_surface_ha": 883.9299999999998,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "85",
+        "culture": "pois_chiche",
+        "source_parcels": 2,
+        "soil_parcels": 1,
+        "source_surface_ha": 6.1,
+        "known_soil_area_fraction": 0.5901639344262296
+      },
+      {
+        "dep": "86",
+        "culture": "feverole",
+        "source_parcels": 228,
+        "soil_parcels": 228,
+        "source_surface_ha": 967.9399999999999,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "86",
+        "culture": "lentille",
+        "source_parcels": 6,
+        "soil_parcels": 6,
+        "source_surface_ha": 23.25,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "86",
+        "culture": "pois",
+        "source_parcels": 343,
+        "soil_parcels": 343,
+        "source_surface_ha": 1848.11,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "87",
+        "culture": "feverole",
+        "source_parcels": 22,
+        "soil_parcels": 22,
+        "source_surface_ha": 114.52000000000001,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "87",
+        "culture": "lentille",
+        "source_parcels": 6,
+        "soil_parcels": 6,
+        "source_surface_ha": 12.11,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "87",
+        "culture": "pois",
+        "source_parcels": 42,
+        "soil_parcels": 42,
+        "source_surface_ha": 211.72,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "87",
+        "culture": "pois_chiche",
+        "source_parcels": 1,
+        "soil_parcels": 1,
+        "source_surface_ha": 0.4,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "88",
+        "culture": "feverole",
+        "source_parcels": 13,
+        "soil_parcels": 13,
+        "source_surface_ha": 46.81,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "88",
+        "culture": "lentille",
+        "source_parcels": 4,
+        "soil_parcels": 4,
+        "source_surface_ha": 7.340000000000001,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "88",
+        "culture": "pois",
+        "source_parcels": 91,
+        "soil_parcels": 91,
+        "source_surface_ha": 462.2,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "89",
+        "culture": "feverole",
+        "source_parcels": 214,
+        "soil_parcels": 214,
+        "source_surface_ha": 1020.7,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "89",
+        "culture": "lentille",
+        "source_parcels": 170,
+        "soil_parcels": 170,
+        "source_surface_ha": 1121.5,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "89",
+        "culture": "pois",
+        "source_parcels": 1236,
+        "soil_parcels": 1236,
+        "source_surface_ha": 7082.599999999999,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "89",
+        "culture": "pois_chiche",
+        "source_parcels": 41,
+        "soil_parcels": 41,
+        "source_surface_ha": 218.15000000000003,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "91",
+        "culture": "feverole",
+        "source_parcels": 72,
+        "soil_parcels": 72,
+        "source_surface_ha": 463.08000000000004,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "91",
+        "culture": "lentille",
+        "source_parcels": 3,
+        "soil_parcels": 3,
+        "source_surface_ha": 28.51,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "91",
+        "culture": "pois",
+        "source_parcels": 412,
+        "soil_parcels": 412,
+        "source_surface_ha": 2333.69,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "95",
+        "culture": "feverole",
+        "source_parcels": 159,
+        "soil_parcels": 159,
+        "source_surface_ha": 976.1,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "95",
+        "culture": "lentille",
+        "source_parcels": 3,
+        "soil_parcels": 3,
+        "source_surface_ha": 12.969999999999999,
+        "known_soil_area_fraction": 1.0
+      },
+      {
+        "dep": "95",
+        "culture": "pois",
+        "source_parcels": 102,
+        "soil_parcels": 102,
+        "source_surface_ha": 699.9899999999999,
+        "known_soil_area_fraction": 1.0
+      }
+    ],
+    "dep_crop_rows": 286,
+    "missing_groups": "Groups absent from this file have no usable 2015 parcel mask; model must explicitly fall back to general agricultural soil features",
+    "output_sha256": "281121a175c8ad462b252373106ce62980043f87cfea8be811becb0384af838c",
+    "grid_output_sha256": "23c2d19c68afa561eb1d713ce09cc2b5ced08868fcd27cab00e73599cabbbcb4"
+  }
+}

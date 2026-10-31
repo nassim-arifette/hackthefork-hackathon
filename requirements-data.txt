@@ -1,0 +1,6 @@
+# Optional public-data reconstruction; the benchmark reads the committed CSVs.
+-r requirements-research.txt
+shapely>=2.1,<3
+pyproj>=3.7,<4
+# Only the optional high-resolution soil raster path requires rasterio.
+rasterio>=1.4,<2
