@@ -7,6 +7,8 @@ Calculés par le pipeline (`make export`) le 31 octobre 2026, avec le scénario 
 | Indicateur | Valeur | Source |
 |---|---|---|
 | Importations de lentilles, 2025 | 39 371 t | Eurostat Comext, NC8 0713 40 |
+| Provenance des importations, 2025 | Canada 45 %, Belgique 37 %, Turquie 6 % (pays d'origine hors UE, d'expédition dans l'UE) | Eurostat Comext |
+| Consommation apparente, 2025 | 85 897 t, dont 46 % importées (production + importations − exportations, stocks non comptés) | Agreste SAA, Eurostat Comext |
 | Exportations de lentilles, 2025 | 5 032 t | Eurostat Comext |
 | Production de lentilles, 2025 | 51 558 t (provisoire) | Agreste SAA |
 | Surface en lentille, 2025 | 33 927 ha | Agreste SAA |
@@ -126,6 +128,8 @@ Erreur médiane sur le rendement relatif d'une année : ±35 %.
 
 Le prix plancher baisse là où le blé rend peu (Pyrénées-Orientales : 33 q/ha) ou là où la lentille rend bien face au blé (Indre : 18 q/ha de lentille pour 62 q/ha de blé). Ce classement applique partout les charges franciliennes : il compare des rendements, pas des économies locales.
 
+L'écran 6 de l'application (onglet « La France ») montre les 24 départements classés, de 558 €/t (Pyrénées-Orientales) à 2 238 €/t (Haute-Loire). Agreste publie un seul rendement pour 21 autres départements, estimé avec l'un des 24 : la carte leur donne, en teinte pâle, le prix du département qui les représente. Les autres n'ont pas de série utilisable (moins de 50 ha de lentilles, ou rendement non mesuré).
+
 ## 6. Le contrat de démonstration
 
 **Contrat proposé : barème par tranches, 1 635 €/t pour la première tonne acceptée par hectare, 750 €/t pour la deuxième, 650 €/t au-delà**, départ ferme, sur trois campagnes. Il protège autant qu'un prix unique de 1 567 €/t pour 18 % de moins en moyenne (§7). La lettre d'accompagnement reprend ce barème.
@@ -162,6 +166,17 @@ Un clic sur la carte déplace le site ; distances, parcelles retenues et coût d
 
 Le gain reste de quelques dixièmes d'euro par tonne, face à un prix garanti de plus de 1 000 €/t : avec ces coûts, le site se choisit pour la logistique (silo, accès), pas pour le prix.
 
+### Les sites de collecte qui existent déjà
+
+`pipeline/11_sites.py` liste, dans la base Sirene, les établissements actifs des entreprises du commerce de gros de céréales (NAF 46.21Z), codés commerce de grains (46.21Z) ou entreposage (52.10B), à moins de 15 km d'une parcelle francilienne : **352 établissements, dont 171 de coopératives** (extraction du 31/10/2026, hors entrepreneurs individuels). Sirene ne distingue pas un silo d'un bureau ou d'un magasin : ce sont des sites candidats, capacités inconnues.
+
+| Volume | Site du scénario | Meilleur établissement existant |
+|---|---|---|
+| Pilote, 300 t | 2,4 km en moyenne | Vivescia, Chenoise-Cucharmoy : 1,0 km |
+| Ambition, 5 000 t | 7,1 km | Vivescia, Maison-Rouge : 4,8 km |
+
+Distances : moyenne pondérée par les tonnes des parcelles de blé les plus proches qui réunissent le volume. Le meilleur site existant fait aussi bien que le meilleur point de la grille, à quelques centaines de mètres près : le contrat peut s'appuyer sur un établissement qui travaille déjà le grain. Dans la zone du Maillon, les 152 parcelles de légumineuses déclarées en 2025 (1 053 ha) sont à 6,4 km en moyenne de l'établissement existant le plus proche, 12,4 km au plus ; 91 % de leur surface à moins de 10 km.
+
 ## 7. Comparer les contrats
 
 Calcul de `pipeline/07_contrats.py` sur les mêmes 20 000 années que le prix plancher (Seine-et-Marne), et backtest de `03_backtest.py` sur les 133 cas 2019–2025. Coût moyen : sommes versées par l'acheteur par tonne acceptée, hors collecte et tri. Année faible : 0,43 t/ha acceptées, une année sur dix.
@@ -191,6 +206,51 @@ Dans le backtest, chaque forme est recalibrée chaque année sur les seules ann�
 - **Le barème par tranches protège autant que le prix unique pour nettement moins cher.** Il paie cher les premières tonnes, celles qui manquent les mauvaises années, et moins le surplus des bonnes. En backtest, il tient même un peu plus de contrats (79 % contre 78 %), pour un coût réalisé inférieur de 19 %.
 - **La prime à l'hectare est la moins chère en moyenne** et réduit la perte de l'agriculteur les années perdantes. Mais l'acheteur la paie même sans récolte (2 037 €/t l'année faible) et elle protège mal quand le prix du blé flambe : 37 % des contrats tenus en 2022, 74 % sur l'ensemble, sous la cible de 80 %.
 - **Le prix unique coûte cher parce qu'il surpaie les bonnes années.** Son avantage : un coût par tonne connu d'avance pour l'acheteur.
+
+### Le plancher indexé sur le prix du blé
+
+Plancher = m × prix du blé de la récolte, m calibré sur les mêmes années simulées pour la même promesse : **m = 7,44**, 80 % des années gagnantes, coût moyen 1 519 €/t, 1 540 €/t l'année faible ; 82 % des contrats tenus en backtest.
+
+| Prix du blé | 160 €/t | 200 €/t | 240 €/t | 280 €/t |
+|---|---|---|---|---|
+| Prix fixe nécessaire pour 8 années sur 10 | 1 070 €/t | 1 497 €/t | 1 922 €/t | 2 348 €/t |
+| Plancher indexé, 7,44 × blé | 1 190 €/t | 1 488 €/t | 1 785 €/t | 2 083 €/t |
+
+Un prix fixe ne tient que si le blé reste dans la moyenne ; le plancher indexé suit le blé et reste proche du prix nécessaire, mais l'acheteur porte alors le risque de prix : de 357 à 625 k€ d'achat pour 300 t selon le blé.
+
+### Les mauvaises années, contrat par contrat (backtest strict)
+
+| Contrat | 2020 | 2021 | 2022 | 2019–2025 |
+|---|---|---|---|---|
+| Unéal 2023, 900 €/t | 50 % | 50 % | 16 % | 57 % |
+| NatUp 2023–2024, 900 / 700 / 600 | 44 % | 50 % | 5 % | 55 % |
+| Proposition du dossier pilote | 61 % | 50 % | 16 % | 65 % |
+| Prix unique calibré | 39 % | 56 % | 68 % | 78 % |
+| Barème par tranches calibré | 39 % | 56 % | 68 % | 79 % |
+| Prix de base et prime à l'hectare | 50 % | 50 % | 37 % | 74 % |
+
+En 2020 et 2021, la lentille s'effondre : aucun contrat ne dépasse 61 %. En 2022, le blé flambe : les barèmes publiés tombent entre 5 et 16 %, les contrats calibrés en tiennent 68 %.
+
+### Le budget de l'acheteur, pilote de 300 t
+
+| Par campagne | Prix unique | Tranches | Indexé |
+|---|---|---|---|
+| Achat des lentilles (moyenne des années simulées) | 470 k€ | 385 k€ | 456 k€ |
+| Tri, 180 €/t reçue, 333 t reçues | 60 k€ | 60 k€ | 60 k€ |
+| Collecte, 5 €/t + 0,12 €/t/km, 2,4 km en moyenne | 2 k€ | 2 k€ | 2 k€ |
+| **Total** | **532 k€, 1 773 €/t** | **447 k€, 1 489 €/t** | **517 k€, 1 725 €/t** |
+
+Achat : **modèle**. Tri et collecte : **supposé**, conventions du jeu synthétique du pilote, sans devis (tri optique d'après Bio Hauts-de-France). Séchage, stockage et conditionnement exclus.
+
+### Une offre pour les assureurs
+
+Même distribution de récolte (Seine-et-Marne, rendement moyen simulé 1,59 t/ha), récolte valorisée à 1 567 €/t, prime pure hors chargements :
+
+| Seuil garanti | Années avec sinistre | Prime pure | Capital garanti |
+|---|---|---|---|
+| 60 % du rendement moyen | 25 % | 162 €/ha | 1 495 €/ha |
+| 70 % | 30 % | 231 €/ha | 1 744 €/ha |
+| 80 % | 35 % | 312 €/ha | 1 993 €/ha |
 
 ## 8. Suivi en saison, prototype Sentinel-2
 
@@ -261,6 +321,7 @@ Backtest 2019–2025 sur les départements producteurs : 133, 100, 71, 493 et 44
 6. **Le moteur est générique, la forme du contrat ne l'est pas** : barème par tranches pour la lentille, dont le risque vient surtout du rendement ; plancher indexé sur le blé pour le pois chiche, le haricot, le pois et la féverole, dont le risque vient surtout du prix du blé.
 7. **La promesse se vérifie en backtest strict** : 78 % pour 80 % visés. Le chiffre est moins flatteur que les 87 % annoncés le matin du 31/10, mais il est mesuré sans aucune information des années testées.
 8. **Le satellite peut mesurer l'effet du contrat un an avant le RPG, à condition de connaître quelques parcelles** : avec un carré de 4 km sur cinq, 73 % des légumineuses retrouvées et 90 % de signalements justes en fin de saison. Appris sur l'année précédente seule, il n'en retrouve que 8 %.
+9. **Le contrat s'appuie sur la collecte qui existe** : 352 établissements du commerce de grains à moins de 15 km des parcelles franciliennes, dont un à 1,0 km en moyenne des parcelles du pilote. Les clients possibles sont nombreux : 142 coopératives agricoles et 28 unions de coopératives font le commerce des grains en France (Sirene).
 
 ## Historique
 
@@ -268,6 +329,7 @@ Backtest 2019–2025 sur les départements producteurs : 133, 100, 71, 493 et 44
 - Version 2 (prix du blé mesuré et rééchantillonné, charges et aide sourcées) : 82 %, 1 435 €/t.
 - Version 3 (30/10, séries estimées ensemble regroupées) : 86 %, 1 622 €/t, avec un intervalle de confiance sur P\*.
 - Version 4 (31/10, hypothèses économiques revues, paiement sur les tonnes acceptées au tri, forfait de collecte, comparaison des contrats) : 87 %, 1 567 €/t. Le modèle et le protocole sont inchangés ; les hypothèses viennent de la revue documentée de [QUESTIONS.md](QUESTIONS.md), fixées avant le recalcul. Avec les hypothèses de la version 3, le pipeline actuel redonne 1 622 €/t.
-- Version 4.1, actuelle (31/10, après-midi, backtest strict) : regroupement des séries en double refait chaque année avec le seul passé, à la suite de l'audit de la PR 1. Contrats tenus : 87 → 78 % (M1), 81 → 77 % (M0), 77 → 76 % (M2). Prix 2026 inchangés.
+- Version 4.1 (31/10, après-midi, backtest strict) : regroupement des séries en double refait chaque année avec le seul passé, à la suite de l'audit de la PR 1. Contrats tenus : 87 → 78 % (M1), 81 → 77 % (M0), 77 → 76 % (M2). Prix 2026 inchangés.
 - Le Maillon vu du ciel (31/10, après-midi) : `10_maillon.py`, RPG 2024 et 2025, 51 images Sentinel-2 ; annexe « Vu du ciel » de l'application. Aucun chiffre existant ne change.
 - Revue des autres cultures (31/10) : haricot 700 → 1 000 €/ha et pois 400 → 450 €/ha, prix de référence et provenances complétés. Recalcul de `09_cultures.py` : P\* haricot 1 779 → 2 185 €/t, pois 409 → 427 €/t. La totalité de l'objet lentille exporté est identique à la version précédente.
+- Version 4.2, actuelle (31/10, soir) : contrat indexé, offre d'assurance et budget de l'acheteur exportés par `07_contrats.py` ; carte de France des prix ; sites de collecte existants et clients possibles (`11_sites.py`, Sirene). Aucun chiffre existant ne change.

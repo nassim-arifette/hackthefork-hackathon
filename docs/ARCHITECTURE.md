@@ -134,7 +134,7 @@ Un test vérifie que chaque hypothèse porte une étiquette et une source. Les b
 
 Chaque script est indépendant, idempotent, lit ses entrées depuis le disque et écrit ses sorties. On peut relancer une étape sans relancer les autres.
 
-> Implémentation actuelle : `00_prix_commerce` (Eurostat : prix du blé, prix de la lentille, commerce Comext), `01_agreste`, `02_weather`, `03_backtest` (modèles et backtest, code partagé dans `model.py`), `04_parcels`, `05_export` (modèle final, P\*, sensibilités, bootstrap, exports), `07_contrats` (barèmes publiés, proposition du dossier pilote, tranches et prime calibrées ; catalogue dans `contrats.py`, formules dans `model.py`), `06_lettre_llm` (Bedrock, facultatif), `08_sentinel` (NDVI Sentinel-2 de la saison 2025, prototype de suivi ; `make sentinel`), `09_cultures` (le même moteur sur le pois chiche, le haricot, le pois et la féverole ; météo de 87 départements dans `meteo_dept_cultures.csv`, hypothèses dans `data/cultures.yaml`), `10_maillon` (légumineuses repérées par Sentinel-2 sur 24 km autour du site, RPG 2024 et 2025, LightGBM validé par carrés de 4 km et d'une année à l'autre ; `make maillon`). Le site de collecte se déplace dans le navigateur : distances, prix rendu et courbe d'offre y sont recalculés avec les formules de `05_export`. Les exports sont écrits dans `app/src/data/` et inclus dans le build. `make test` lance les tests : données, absence de fuite, prix plancher, contrats, exports. Le tableau ci-dessous décrit le découpage initial.
+> Implémentation actuelle : `00_prix_commerce` (Eurostat : prix du blé, prix de la lentille, commerce Comext), `01_agreste`, `02_weather`, `03_backtest` (modèles et backtest, code partagé dans `model.py`), `04_parcels`, `05_export` (modèle final, P\*, sensibilités, bootstrap, exports), `07_contrats` (barèmes publiés, proposition du dossier pilote, tranches et prime calibrées ; catalogue dans `contrats.py`, formules dans `model.py`), `06_lettre_llm` (Bedrock, facultatif), `08_sentinel` (NDVI Sentinel-2 de la saison 2025, prototype de suivi ; `make sentinel`), `09_cultures` (le même moteur sur le pois chiche, le haricot, le pois et la féverole ; météo de 87 départements dans `meteo_dept_cultures.csv`, hypothèses dans `data/cultures.yaml`), `10_maillon` (légumineuses repérées par Sentinel-2 sur 24 km autour du site, RPG 2024 et 2025, LightGBM validé par carrés de 4 km et d'une année à l'autre ; `make maillon`), `11_sites` (établissements Sirene du commerce de grains autour de l'Île-de-France, meilleur site existant par volume, distance des légumineuses du Maillon à la collecte, nombre de coopératives en France ; `make sites`). Le site de collecte se déplace dans le navigateur : distances, prix rendu et courbe d'offre y sont recalculés avec les formules de `05_export`. Les exports sont écrits dans `app/src/data/` et inclus dans le build. `make test` lance les tests : données, absence de fuite, prix plancher, contrats, exports. Le tableau ci-dessous décrit le découpage initial.
 
 | Script | Entrées | Sorties | Points d'attention |
 |---|---|---|---|
@@ -287,7 +287,7 @@ app/src/
 
 ### 6.3 Direction visuelle
 
-Règles complètes, jetons et interdits : [DESIGN.md](DESIGN.md). En résumé : un atlas agricole clair et plan, Archivo pour les titres et les chiffres, Source Serif 4 pour le texte, deux couleurs sémantiques (ocre pour le blé, vert lentille), le rouge réservé au contrat non tenu, des lignes de source comme des crédits de presse, des graphiques à étiquettes directes. Parcours guidé en cinq étapes : le verrou, le prix, l'épreuve, la preuve, le contrat.
+Règles complètes, jetons et interdits : [DESIGN.md](DESIGN.md). En résumé : un atlas agricole clair et plan, Archivo pour les titres et les chiffres, Source Serif 4 pour le texte, deux couleurs sémantiques (ocre pour le blé, vert lentille), le rouge réservé au contrat non tenu, des lignes de source comme des crédits de presse, des graphiques à étiquettes directes. Parcours de présentation en six écrans animés (le constat, le pari, le contrat, le prix, la preuve, l'impact) ; six annexes pour les questions (le prix en détail, deux mauvaises années rejouées, le test en détail, la proposition de contrat, la saison par satellite, vu du ciel).
 
 ### 6.4 Performance
 
@@ -302,7 +302,7 @@ Si la limite est dépassée : restreindre à une zone de démo (rayon autour du 
 
 ### 6.5 Raccourcis de démo
 
-Le présentateur ne doit jamais chercher un bouton : `Espace` passe à l'étape suivante (`Maj + Espace` pour revenir), `←` et `→` déplacent le prix, `1` et `2` choisissent l'année à l'étape « L'épreuve », `M` ouvre la méthode, `Échap` la ferme.
+Le présentateur ne doit jamais chercher un bouton : `Espace` passe à l'écran suivant (`Maj + Espace` pour revenir), `←` et `→` déplacent le prix, `1` et `2` choisissent l'année dans l'annexe « Deux mauvaises années, rejouées », `F` montre la carte de France à l'écran 6, `M` ouvre la méthode, `Échap` la ferme.
 
 ---
 

@@ -117,6 +117,29 @@ def km_moyen(d: np.ndarray, t: np.ndarray, volume: float) -> float:
     return float((prise * d[o][: j + 1]).sum() / volume)
 
 
+def marche() -> dict:
+    """Clients possibles en France : coopératives agricoles (6317) et unions (6318) actives en NAF 46.21Z."""
+    f = CACHE / "national.json"
+    if f.exists():
+        return json.loads(f.read_text())
+    out = {"extrait_le": date.today().isoformat()}
+    for nom, nj in (("cooperatives", "6317"), ("unions", "6318")):
+        params = {"activite_principale": NAF_ENTREPRISE, "nature_juridique": nj, "etat_administratif": "A", "per_page": 1}
+        for attempt in range(12):
+            try:
+                r = requests.get(API, params=params, timeout=30)
+                r.raise_for_status()
+                out[nom] = int(r.json()["total_results"])
+                break
+            except (requests.RequestException, ValueError, KeyError):
+                if attempt == 11:
+                    raise
+                time.sleep(min(20, 2 ** (attempt + 1)))
+    CACHE.mkdir(parents=True, exist_ok=True)
+    f.write_text(json.dumps(out, ensure_ascii=False))
+    return out
+
+
 def main():
     H = hypotheses()
     detour, forfait, kappa = val(H, "facteur_detour_route"), val(H, "forfait_collecte_eur_t"), val(H, "cout_transport_eur_t_km")
@@ -164,11 +187,13 @@ def main():
                "part_surface_moins_10_km": round(float(surf[dmin <= 10].sum() / surf.sum()), 3)}
     print("Maillon, légumineuses 2025 → site existant le plus proche :", maillon)
 
+    national = marche()
+    print(f"France : {national['cooperatives']} coopératives agricoles et {national['unions']} unions actives en NAF {NAF_ENTREPRISE}")
     n_coop = sum(s["cooperative"] for s in sites)
     meta = {
         "source": "Base Sirene (Insee), API Recherche d'entreprises (recherche-entreprises.api.gouv.fr)",
         "url": "https://recherche-entreprises.api.gouv.fr/docs/",
-        "date_extraction": min(json.loads(f.read_text())["extrait_le"] for f in CACHE.glob("*.json")),
+        "date_extraction": min(json.loads(f.read_text())["extrait_le"] for f in CACHE.glob("*_*.json")),
         "etiquette": "mesure",
         "selection": (f"Entreprises NAF {NAF_ENTREPRISE} actives, hors entrepreneurs individuels ; établissements actifs, diffusibles, géolocalisés, "
                       f"NAF 46.21Z ou 52.10B, à moins de {MARGE_KM} km d'une parcelle francilienne"),
@@ -181,6 +206,9 @@ def main():
                          "gain_collecte_eur_t": round(kappa * (ref[k] - sites[i]["km_moyen"][k]), 1)}
                      for k, i in meilleurs.items()},
         "maillon": maillon,
+        "marche_france": {"cooperatives": national["cooperatives"], "unions": national["unions"],
+                          "date_extraction": national["extrait_le"],
+                          "definition": f"sociétés coopératives agricoles (6317) et unions (6318) actives, NAF {NAF_ENTREPRISE}"},
     }
     (DATA / "sites_collecte.json").write_text(json.dumps(meta | {"sites": sites}, ensure_ascii=False, indent=1))
     # Pour l'application : [lon, lat, commune, entreprise, naf, coopérative, km pilote, km ambition].

@@ -4,7 +4,7 @@
 
 ## Le problème
 
-Près d'une lentille sur deux mangée en France vient de l'étranger : 39 371 tonnes importées en 2025, pour environ 86 000 tonnes consommées. Les agriculteurs français pourraient en produire davantage, mais la lentille est risquée. Sa récolte varie deux fois plus que celle du blé, et une mauvaise année, comme 2020 (−38 %), efface la marge. Rester au blé est donc le choix raisonnable.
+Près d'une lentille sur deux mangée en France vient de l'étranger : 39 371 tonnes importées en 2025, pour environ 86 000 tonnes consommées, dont 45 % du Canada. Les agriculteurs français pourraient en produire davantage, mais la lentille est risquée. Sa récolte varie deux fois plus que celle du blé, et une mauvaise année, comme 2020 (−38 %), efface la marge. Rester au blé est donc le choix raisonnable.
 
 Les coopératives, qui collectent, trient et revendent les récoltes de leurs agriculteurs, peuvent retirer ce risque avec un contrat : un prix minimum garanti avant les semis. Ce prix se fixe aujourd'hui à l'expérience. Trop bas, l'agriculteur perd les mauvaises années et arrête ; trop haut, la coopérative perd de l'argent.
 
@@ -21,10 +21,10 @@ Premier résultat, en Seine-et-Marne : il faut 1 567 €/t pour tenir 8 années 
 
 ## Le modèle économique
 
-- **Clients** : les coopératives et les conditionneurs de légumes secs, qui fixent ce prix à chaque campagne.
+- **Clients** : les coopératives et les conditionneurs de légumes secs, qui fixent ce prix à chaque campagne. En France, 142 coopératives agricoles et 28 unions de coopératives font le commerce des grains (base Sirene).
 - **Offre** : une étude pilote, puis un abonnement par campagne et par bassin ; les montants sont à valider avec les premiers clients.
 - **Adoption** : un pilote de 300 t avec une coopérative qui développe une filière lentille ; ses données de rendement rendront le prix plus précis.
-- **Extension** : le pois chiche et le haricot pour l'alimentation humaine, d'autres régions, puis les assureurs agricoles.
+- **Extension** : le pois chiche et le haricot pour l'alimentation humaine ; d'autres régions, puisque le même calcul donne déjà un prix pour 24 départements producteurs ; les assureurs agricoles, qui peuvent tarifer une assurance rendement avec la même distribution de récolte.
 
 ## L'impact
 

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import MapScene, { PSTAR_RANGE, type Camera, type FranceMode, type Hover } from './components/MapScene';
 import Method from './components/Method';
 import { BacktestReveal, MarginBars, PriceChart, SeasonChart, SecurityChart, Sensitivity } from './components/charts';
@@ -79,6 +79,9 @@ const BT_ANNEES = [2020, 2021, 2022];
 const ASSUR70 = CONTRATS.assurance.niveaux.find((n) => n.seuil === 0.7)!;
 const FR_SORTED = [...(meta.france as { dep: string; nom: string; p_star: number }[])].sort((a, b) => a.p_star - b.p_star);
 const btC = (a: number) => (backtest.annees.find((y) => y.annee === a) as any).contrats as Record<string, number>;
+// Provenance des importations de 2025 (Comext) : pays d'origine hors UE, d'expédition dans l'UE.
+const ORIG = (meta.lentille_2025 as unknown as { origines: { pays: string; tonnes: number; part: number }[] }).origines;
+const PAYS: Record<string, string> = { CA: 'Canada', BE: 'Belgique', TR: 'Turquie', PT: 'Portugal', US: 'États-Unis', DE: 'Allemagne' };
 const frDate = (iso: string) => new Date(`${iso}T12:00:00`).toLocaleDateString('fr-FR');
 const MAX_2020_21 = Math.max(...[2020, 2021].flatMap((a) => Object.values(btC(a))));
 const FIXES_2022 = ['uneal_2023', 'natup_2023', 'proposition_2027'].map((k) => btC(2022)[k]);
@@ -159,6 +162,32 @@ export default function App() {
   const timers = useRef<number[]>([]);
   const onDelivered = useCallback((f: number) => setDelivered(f), []);
 
+  // Parcours de présentation : le texte de l'écran se réduit pour tenir sans défiler (projecteur 720p,
+  // zoom système), jusqu'à 72 % ; les annexes, plus longues, gardent le défilement.
+  const colRef = useRef<HTMLDivElement>(null);
+  useLayoutEffect(() => {
+    const col = colRef.current;
+    if (!col) return;
+    const isAnnex = ANNEXES.some((a) => a.id === view);
+    const fit = () => {
+      col.style.setProperty('--fit', '1');
+      if (isAnnex || window.innerWidth <= 900) return;
+      // Les graphiques gardent leur hauteur (elle suit la largeur) : on réduit par étapes.
+      let z = 1;
+      for (let k = 0; k < 6 && z > 0.72; k++) {
+        const need = col.scrollHeight, avail = col.clientHeight;
+        if (need <= avail + 1) break;
+        z = Math.max(0.72, Math.floor(z * (avail / need) * 100) / 100);
+        col.style.setProperty('--fit', String(z));
+      }
+    };
+    fit();
+    const ts = [120, 700, 1600].map((ms) => window.setTimeout(fit, ms));
+    document.fonts?.ready.then(fit);
+    window.addEventListener('resize', fit);
+    return () => { ts.forEach((x) => window.clearTimeout(x)); window.removeEventListener('resize', fit); };
+  }, [view, impactView]);
+
   const mainIdx = MAIN.findIndex((m) => m.id === view);
   const annex = ANNEXES.find((a) => a.id === view);
   const annexIdx = annex ? ANNEXES.indexOf(annex) : -1;
@@ -215,7 +244,8 @@ export default function App() {
 
   const replayBacktest = useCallback(() => {
     stop(); setBtShown(0); setBtYear(null);
-    backtest.annees.forEach((y, i) => at(900 + i * 1250, () => { setBtYear(y.annee); setBtShown(i + 1); }));
+    // La première année se colore pendant le vol de la caméra : la carte n'est jamais vide.
+    backtest.annees.forEach((y, i) => at(350 + i * 1250, () => { setBtYear(y.annee); setBtShown(i + 1); }));
   }, []);
 
   const replayPrice = useCallback(() => {
@@ -259,11 +289,13 @@ export default function App() {
       if (e.key === 'ArrowRight') { stop(); setPrice((p) => Math.min(MAX, p + 10)); }
       if (e.key === 'ArrowLeft') { stop(); setPrice((p) => Math.max(MIN, p - 10)); }
       if (e.key === 'm') setMethod(true);
+      // Écran 6 : F bascule entre le bassin et la carte de France.
+      if ((e.key === 'f' || e.key === 'F') && view === 'impact') setImpactView((v) => (v === 'france' ? 'bassin' : 'france'));
       if (legacy === 2 && (e.key === '1' || e.key === '2')) setYear(replay[+e.key - 1]);
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [go, method, annex, annexIdx, mainIdx, lastMain, legacy]);
+  }, [go, method, annex, annexIdx, mainIdx, lastMain, legacy, view]);
   useEffect(() => stop, []);
 
   const MR = MAILLON.resultats[maillonV];
@@ -303,7 +335,7 @@ export default function App() {
   };
   const mp: MapPlan = view === 'constat' ? { ...base, camera: 'france', showParcels: false, boats: true }
     : view === 'pari' ? { ...base, price: 0 }
-    : view === 'filiere' ? { ...base, price: 0, silo: true }
+    : view === 'filiere' ? { ...base, camera: 'site', radiusKm: 14, price: 0, silo: true }
     : view === 'prix' ? { ...base, camera: 'site', radiusKm: Math.max(2.5, finalP.km * 1.3), selectKm: targetP.km, silo: true, trucks: tripsP }
     : view === 'preuve' ? { ...base, camera: 'france', showParcels: false, franceMode: 'backtest', btYear }
     : view === 'impact' && impactView === 'france' ? { ...base, camera: 'france', showParcels: false, franceMode: 'pstar' }
@@ -446,7 +478,7 @@ export default function App() {
       </main>
 
       <aside className="column">
-        <div className="column-body" key={view}>
+        <div className="column-body" key={view} ref={colRef}>
           <p className="kicker">{annex ? `Annexe · ${annex.label}` : `${mainIdx + 1} / ${MAIN.length} · ${MAIN[mainIdx].label}`}</p>
 
           {view === 'constat' && (
@@ -459,9 +491,9 @@ export default function App() {
               <div className="block">
                 <div className="figures two">
                   <Figure value={fmt(round1000(PITCH.conso))} unit="t" label="de lentilles mangées en France chaque année" />
-                  <Figure value={pct(PITCH.partImportee)} label={`importées, soit ${fmt(round1000(L25.importations_t))} t en 2025`} />
+                  <Figure value={pct(PITCH.partImportee)} label={`importées, soit ${fmt(round1000(L25.importations_t))} t en 2025, dont ${pct(ORIG[0].part)} du ${PAYS[ORIG[0].pays] ?? ORIG[0].pays}`} />
                 </div>
-                <Source k="mesure">Calcul sur 2025 : production Agreste ({fmt(L25.production_t)} t) + importations ({fmt(L25.importations_t)} t) − exportations ({fmt(L25.exportations_t)} t), Eurostat Comext ; stocks non comptés.</Source>
+                <Source k="mesure">Calcul sur 2025 : production Agreste ({fmt(L25.production_t)} t) + importations ({fmt(L25.importations_t)} t) − exportations ({fmt(L25.exportations_t)} t), Eurostat Comext ; stocks non comptés. Provenance : {ORIG.slice(0, 3).map((o) => `${PAYS[o.pays] ?? o.pays} ${pct(o.part)}`).join(', ')} (pays d’origine hors UE, d’expédition dans l’UE).</Source>
               </div>
               <p className="lead">Les champs français pourraient les produire. Pourquoi les agriculteurs n’en sèment-ils pas davantage ?</p>
             </>
@@ -581,12 +613,13 @@ export default function App() {
               <div className="block">
                 <h3>Qui paie, et la suite</h3>
                 <ul className="next-steps">
-                  <li><b>Les coopératives et les conditionneurs</b>, à chaque campagne : ce prix se fixe tous les ans.</li>
+                  <li><b>Les coopératives et les conditionneurs</b>, à chaque campagne : ce prix se fixe tous les ans. {fmt(SITES.marche.cooperatives + SITES.marche.unions)} coopératives et unions font le commerce des grains en France.</li>
                   <li><b>Un pilote de {fmt(VP)} t</b> avec une coopérative, sur les parcelles les plus proches de son silo.</li>
                   <li><b>Le pois chiche, le haricot et les autres régions</b> : le même moteur, culture par culture et département par département.</li>
                   <li><b>Les assureurs</b> : avec la même distribution de récolte, une assurance rendement à {pct(ASSUR70.seuil)} coûte {fmt(ASSUR70.prime_pure_eur_ha)} €/ha de prime pure en Seine-et-Marne ; le sinistre survient {fmt(ASSUR70.frequence_sinistre * 10)} années sur 10.</li>
                 </ul>
-                <Source k="modele">Prime pure hors chargements, récolte valorisée à {fmt(CONTRATS.assurance.prix_assure_eur_t)} €/t, rendement moyen simulé de {dec(CONTRATS.assurance.rendement_moyen_tha, 2)} t/ha.</Source>
+                <Source k="mesure">{fmt(SITES.marche.cooperatives)} coopératives agricoles et {fmt(SITES.marche.unions)} unions actives en NAF 46.21Z, Sirene (Insee), {frDate(SITES.marche.date_extraction)}.</Source>
+                <Source k="modele">Prime pure hors chargements ; récolte à {fmt(CONTRATS.assurance.prix_assure_eur_t)} €/t, {dec(CONTRATS.assurance.rendement_moyen_tha, 2)} t/ha en moyenne simulée.</Source>
               </div>
             </>
           )}

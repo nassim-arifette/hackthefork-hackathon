@@ -217,7 +217,10 @@ def main():
                                    "annees": [int(prix_lent.annee.min()), int(prix_lent.annee.max())]},
         "lentille_2025": {"production_t": round(float(prod_lent.production_q[2025]) / 10),
                           "surface_ha": round(float(prod_lent.surface_ha[2025])),
-                          "importations_t": int(c25.importations_t), "exportations_t": int(c25.exportations_t)},
+                          "importations_t": int(c25.importations_t), "exportations_t": int(c25.exportations_t),
+                          # Pays d'origine hors UE, pays d'expédition dans l'UE (Comext).
+                          "origines": [{"pays": r.pays, "tonnes": int(r.tonnes), "part": float(r.part)}
+                                       for r in pd.read_csv(DATA / "commerce_lentilles_origines.csv").head(5).itertuples()]},
         "commerce": commerce.to_dict(orient="records"),
         "surface_lentille_par_dep_2025": surf_dep,
         "contrat_indexe": indexe,

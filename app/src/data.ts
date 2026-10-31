@@ -203,6 +203,8 @@ export const SITES = {
   scenario: SR.scenario as { site: [number, number]; km_moyen: { pilote: number; ambition: number } },
   meilleur: SR.meilleur as Record<'pilote' | 'ambition', { index: number; commune: string; entreprise: string; km_moyen: number; gain_collecte_eur_t: number }>,
   maillon: SR.maillon as { n_parcelles: number; surface_ha: number; km_moyen_pondere_surface: number; km_max: number; part_surface_moins_10_km: number },
+  /** Clients possibles : coopératives agricoles et unions actives dans le commerce de grains, en France. */
+  marche: SR.marche_france as { cooperatives: number; unions: number; date_extraction: string },
   liste: (SR.sites as RawSite[]).map(([lon, lat, commune, entreprise, naf, coop, kp, ka]): SiteExistant => ({
     lon, lat, commune, entreprise, naf, coop: coop === 1, km: { pilote: kp, ambition: ka },
   })),

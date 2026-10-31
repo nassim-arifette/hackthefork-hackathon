@@ -4,7 +4,8 @@
   AM011100, nominal), chaîné sur la base 2015 = 100 puis calé en niveau sur le prix du blé
   rendu Rouen publié par Agreste pour la campagne 2019-2020 (178,8 €/t).
 - Prix de la lentille : prix de vente absolus Eurostat (apri_ap_crpouta, 02991000), France.
-- Commerce : Eurostat Comext (DS-045409), code NC8 07134000 (lentilles sèches), France.
+- Commerce : Eurostat Comext (DS-045409), code NC8 07134000 (lentilles sèches), France ; importations
+  de 2025 par pays partenaire (origine hors UE, expédition dans l'UE).
 Sorties : data/prix_ble.csv, data/prix_lentille_observes.csv, data/commerce_lentilles.csv.
 """
 import json
@@ -87,7 +88,21 @@ def commerce() -> pd.DataFrame:
     return pd.concat(out, axis=1).reset_index()
 
 
+def origines(annee: int = 2025) -> pd.DataFrame:
+    """Importations de lentilles par pays partenaire : pays d'origine hors UE, pays d'expédition dans l'UE."""
+    d = cube(fetch(f"comext_lentilles_origines_{annee}", COMEXT,
+                   {"format": "JSON", "lang": "EN", "freq": "A", "reporter": "FR", "product": "07134000",
+                    "flow": 1, "indicators": "QUANTITY_IN_100KG", "time": str(annee)}))
+    total = float(d[d.partner == "WORLD"].value.iloc[0]) / 10
+    pays = d[d.partner.str.fullmatch(r"[A-Z]{2}")].assign(tonnes=lambda x: (x.value / 10).round().astype(int))
+    pays = pays.sort_values("tonnes", ascending=False)[["partner", "tonnes"]].rename(columns={"partner": "pays"})
+    pays["part"] = (pays.tonnes / total).round(3)
+    pays.insert(0, "annee", annee)
+    return pays
+
+
 def main():
+    origines().to_csv(DATA / "commerce_lentilles_origines.csv", index=False)
     pb = prix_ble()
     pb.to_csv(DATA / "prix_ble.csv", index=False)
     pl = prix_lentille()

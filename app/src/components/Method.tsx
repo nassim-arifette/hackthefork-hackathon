@@ -154,10 +154,12 @@ export default function Method({ onClose }: { onClose: () => void }) {
           <ul>
             <li><b>Agreste, Statistique agricole annuelle 2010–2025.</b> Surfaces et rendements par département. Mesuré.</li>
             <li><b>IGN, Registre parcellaire graphique 2025.</b> {meta.n_parcelles.toLocaleString('fr-FR')} parcelles de blé tendre d’hiver et de lentille en Île-de-France. Mesuré.</li>
-            <li><b>IGN, Registre parcellaire graphique 2024.</b> Étiquettes d’apprentissage du transfert d’une année à l’autre, étape « Vu du ciel ». Mesuré.</li>
+            <li><b>IGN, Registre parcellaire graphique 2024.</b> Étiquettes d’apprentissage du transfert d’une année à l’autre, annexe « Vu du ciel ». Mesuré.</li>
             <li><b>Copernicus Sentinel-2 L2A, 2024 et 2025.</b> Images lues par le catalogue Earth Search (Element 84) : suivi de huit parcelles de lentille et repérage des légumineuses. Mesuré.</li>
             <li><b>NASA POWER.</b> Météo journalière 2010–2025 pour 43 départements. Mesuré.</li>
-            <li><b>Eurostat.</b> Indice des prix du blé tendre, calé sur le prix rendu Rouen d’Agreste en 2019-2020 ; prix observés de la lentille 2012–2016 ; commerce extérieur Comext. Mesuré.</li>
+            <li><b>Eurostat.</b> Indice des prix du blé tendre, calé sur le prix rendu Rouen d’Agreste en 2019-2020 ; prix observés de la lentille 2012–2016 ; commerce extérieur Comext, provenance des importations comprise. Mesuré.</li>
+            <li><b>Insee, base Sirene</b>, via l’API Recherche d’entreprises. Établissements du commerce de grains autour de l’Île-de-France, nombre de coopératives en France. Mesuré ; Sirene ne distingue pas un silo d’un bureau.</li>
+            <li><b>Telepac, notice 2025 « Cultures et précisions ».</b> Libellés des codes de culture du RPG. Sourcé.</li>
           </ul>
         </section>
 
@@ -173,6 +175,7 @@ export default function Method({ onClose }: { onClose: () => void }) {
             <li>Charges constantes dans le temps ; aide couplée de 2026 encore indicative, ajustée en fin de campagne selon les surfaces.</li>
             <li>Part refusée au tri et bénéfice de rotation : hypothèses de l’équipe, testées en sensibilité.</li>
             <li>Un prix plancher n’est pas une assurance : une récolte effondrée réduit la marge.</li>
+            <li>Coûts de tri et de collecte de l’acheteur : hypothèses sans devis. Camions et cargos de la démo : trajets schématiques.</li>
             <li>Vu du ciel : une zone et deux campagnes ; le modèle ne se transpose pas encore d’une année sur l’autre, et il repère la famille des légumineuses à graines, pas l’espèce.</li>
           </ul>
         </section>
