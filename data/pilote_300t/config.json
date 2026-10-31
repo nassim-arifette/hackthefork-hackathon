@@ -1,0 +1,33 @@
+{
+  "statut_donnees": "synthetique",
+  "version": "1.0",
+  "graine_aleatoire": 20261031,
+  "cooperative_id": "SYN_COOP_01",
+  "surfaces_fermes_ha": [6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16],
+  "nombre_blocs_rotation": 6,
+  "objectif_pilote_t_net": 300,
+  "prime_historique_prenettoyage_eur_t_nette": 20,
+  "cout_prenettoyage_eur_t_recoltee": 12,
+  "cout_sechage_eur_t_recue_point_humidite": 3,
+  "humidite_seuil_sechage_pct": 15,
+  "humidite_cible_sechage_pct": 14,
+  "masse_relative_grain_defectueux_min": 0.70,
+  "masse_relative_grain_defectueux_max": 0.80,
+  "regle_perte_defauts": "Comptage : union bruche/germination = b+g-b*g, recouvrement d'independance suppose. Masse relative atteinte r entre 0.70 et 0.80 : fraction massique defectueuse f=u*r/(1-u+u*r). Retrait de matiere defectueuse R=M*(f-cible_residuelle)/(1-cible_residuelle), sans retrait additionnel de grains sains. Hypotheses de scenario, pas efficacite industrielle observee.",
+  "campagnes": [
+    {"annee": 2019, "scenario": "campagne_normale", "rendement_brut_central_t_ha": 1.85, "humidite_centrale_pct": 12.6, "impuretes_recolte_centrales_pct": 5.0, "grains_bruches_centraux_pct": 7.0, "grains_germes_centraux_pct": 0.5, "prix_base_hypothese_eur_t": 650, "charges_intrants_centrales_eur_ha": 400},
+    {"annee": 2020, "scenario": "stress_quantite", "rendement_brut_central_t_ha": 1.10, "humidite_centrale_pct": 11.8, "impuretes_recolte_centrales_pct": 6.0, "grains_bruches_centraux_pct": 9.0, "grains_germes_centraux_pct": 0.5, "prix_base_hypothese_eur_t": 690, "charges_intrants_centrales_eur_ha": 410},
+    {"annee": 2021, "scenario": "stress_quantite_qualite", "rendement_brut_central_t_ha": 0.82, "humidite_centrale_pct": 15.4, "impuretes_recolte_centrales_pct": 9.0, "grains_bruches_centraux_pct": 12.0, "grains_germes_centraux_pct": 12.0, "prix_base_hypothese_eur_t": 770, "charges_intrants_centrales_eur_ha": 440},
+    {"annee": 2022, "scenario": "chaleur_intrants_chers", "rendement_brut_central_t_ha": 1.45, "humidite_centrale_pct": 11.2, "impuretes_recolte_centrales_pct": 5.5, "grains_bruches_centraux_pct": 12.0, "grains_germes_centraux_pct": 0.5, "prix_base_hypothese_eur_t": 850, "charges_intrants_centrales_eur_ha": 535},
+    {"annee": 2023, "scenario": "reprise_prix_intrants_hauts", "rendement_brut_central_t_ha": 2.05, "humidite_centrale_pct": 13.1, "impuretes_recolte_centrales_pct": 5.0, "grains_bruches_centraux_pct": 10.2, "grains_germes_centraux_pct": 0.7, "prix_base_hypothese_eur_t": 900, "charges_intrants_centrales_eur_ha": 565},
+    {"annee": 2024, "scenario": "bon_brut_qualite_variable", "rendement_brut_central_t_ha": 2.30, "humidite_centrale_pct": 13.4, "impuretes_recolte_centrales_pct": 7.0, "grains_bruches_centraux_pct": 14.5, "grains_germes_centraux_pct": 3.0, "prix_base_hypothese_eur_t": 820, "charges_intrants_centrales_eur_ha": 505},
+    {"annee": 2025, "scenario": "pression_bruche", "rendement_brut_central_t_ha": 1.80, "humidite_centrale_pct": 11.8, "impuretes_recolte_centrales_pct": 5.5, "grains_bruches_centraux_pct": 24.4, "grains_germes_centraux_pct": 0.5, "prix_base_hypothese_eur_t": 880, "charges_intrants_centrales_eur_ha": 495}
+  ],
+  "refus_imposes_scenario": [
+    {"annee": 2021, "ferme_numero": 3, "motif": "defauts_residuels_superieurs_2_pct"},
+    {"annee": 2021, "ferme_numero": 15, "motif": "defauts_residuels_superieurs_2_pct"},
+    {"annee": 2024, "ferme_numero": 8, "motif": "moisissure_detectee"},
+    {"annee": 2025, "ferme_numero": 6, "motif": "insectes_vivants_apres_tri"},
+    {"annee": 2025, "ferme_numero": 19, "motif": "defauts_residuels_superieurs_2_pct"}
+  ]
+}
