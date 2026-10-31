@@ -15,6 +15,7 @@ Pilotage : `Espace` pour l'écran suivant (`Maj` + `Espace` pour revenir), `←`
 
 ## Pour les questions (menu Annexes)
 
+- **Simulateur** (bouton en haut à droite) : la réponse à « c'est quoi le produit ? ». Changer le prix de revente ou la protection visée, montrer le bandeau du haut et les parcelles sur la carte.
 - **Le prix, en détail** : courbe de fiabilité, contrats existants, prix plancher par département, site de collecte déplaçable.
 - **Deux mauvaises années, rejouées** : 2016 (le blé s'effondre) et 2020 (la lentille s'effondre).
 - **Le test, en détail** : intervalles prédits et récoltes réelles, comparaison des modèles, poids de la météo.

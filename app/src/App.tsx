@@ -10,11 +10,30 @@ import {
   truckTrips, type MaillonCat, type MaillonVersion, type ReplayYear, type Statut, type TruckTrip,
 } from './data';
 import { useTween } from './useTween';
+import { parcellesPour, SIM_DEFAUTS, SIM_REFERENCE, simuler, type SimParams } from './simulateur';
+
+/** Champ numérique du simulateur ; les valeurs hors bornes sont ramenées dans les bornes pour le calcul. */
+function Champ({ label, unit, value, onChange, min, max, step = 1, hint }: {
+  label: string; unit: string; value: number; onChange: (v: number) => void; min: number; max: number; step?: number; hint?: string;
+}) {
+  return (
+    <label className="sim-field">
+      <span className="sim-label">{label}</span>
+      <span className="sim-input">
+        <input type="number" inputMode="decimal" value={value} min={min} max={max} step={step}
+          onChange={(e) => { const v = parseFloat(e.target.value); if (Number.isFinite(v)) onChange(v); }} />
+        <em>{unit}</em>
+      </span>
+      {hint && <small>{hint}</small>}
+    </label>
+  );
+}
+const borne = (v: number, a: number, b: number) => Math.min(b, Math.max(a, v));
 
 // Le parcours de présentation : six écrans, 4 minutes.
 type MainId = 'constat' | 'pari' | 'filiere' | 'prix' | 'preuve' | 'impact';
 type AnnexId = 'a_prix' | 'a_epreuve' | 'a_preuve' | 'a_contrat' | 'a_saison' | 'a_ciel';
-type ViewId = MainId | AnnexId;
+type ViewId = MainId | AnnexId | 'outil';
 const MAIN: { id: MainId; label: string }[] = [
   { id: 'constat', label: 'Le constat' },
   { id: 'pari', label: 'Le pari' },
@@ -61,6 +80,7 @@ const UNEAL_LOSSES = 10 - Math.round(((UNEAL?.simulation?.protection as number |
 const wins = (p: number) => Math.round(reliabilityAt(p) * 10);
 const round1000 = (x: number) => Math.round(x / 1000) * 1000;
 const keur = (x: number) => `${fmt(x / 1000)}\u00a0k€`;
+const euros = (x: number) => (Math.abs(x) >= 1e6 ? `${dec(x / 1e6, 1)}\u00a0M€` : keur(x));
 const IDX = CONTRATS.indexe;
 // Ce que gagne l'agriculteur face au blé de la même année, ce que paie la coopérative (07_contrats.py).
 type Ferme = { id: string; label: string; p: number; ecart: number; gain: number; perte: number; cout: number };
@@ -95,6 +115,10 @@ const btC = (a: number) => (backtest.annees.find((y) => y.annee === a) as any).c
 // Provenance des importations de 2025 (Comext) : pays d'origine hors UE, d'expédition dans l'UE.
 const ORIG = (meta.lentille_2025 as unknown as { origines: { pays: string; tonnes: number; part: number }[] }).origines;
 const PAYS: Record<string, string> = { CA: 'Canada', BE: 'Belgique', TR: 'Turquie', PT: 'Portugal', US: 'États-Unis', DE: 'Allemagne' };
+// Prix des lentilles importées, €/t à la frontière (Comext, valeur / tonnes ; 05_export.py).
+const PRIX_IMPORT = (meta as unknown as { prix_import: { annee: number; monde: number; canada: number }[] }).prix_import;
+const IMPORT_DER = PRIX_IMPORT[PRIX_IMPORT.length - 1];
+const IMPORT_RECENT = PRIX_IMPORT.filter((r) => r.annee >= 2020).map((r) => r.monde);
 const frDate = (iso: string) => new Date(`${iso}T12:00:00`).toLocaleDateString('fr-FR');
 const MAX_2020_21 = Math.max(...[2020, 2021].flatMap((a) => Object.values(btC(a))));
 const FIXES_2022 = ['uneal_2023', 'natup_2023', 'proposition_2027'].map((k) => btC(2022)[k]);
@@ -146,7 +170,8 @@ interface MapPlan {
 }
 
 export default function App() {
-  const [view, setView] = useState<ViewId>('constat');
+  const [view, setView] = useState<ViewId>(() => (typeof window !== 'undefined' && window.location.hash === '#simulateur' ? 'outil' : 'constat'));
+  const outil = view === 'outil';
   const [lastMain, setLastMain] = useState<MainId>('constat');
   const [annexOpen, setAnnexOpen] = useState(false);
   const [price, setPrice] = useState(START_PRICE);
@@ -181,7 +206,7 @@ export default function App() {
   useLayoutEffect(() => {
     const col = colRef.current;
     if (!col) return;
-    const isAnnex = ANNEXES.some((a) => a.id === view);
+    const isAnnex = ANNEXES.some((a) => a.id === view) || view === 'outil';
     const fit = () => {
       col.style.setProperty('--fit', '1');
       if (isAnnex || window.innerWidth <= 900) return;
@@ -230,6 +255,28 @@ export default function App() {
   const tripsP = useMemo(() => (keyP ? { key: keyP, trips: truckTrips(targetP.idx, geo) } : null), [keyP]);
   const tripsA = useMemo(() => ({ key: `a-${targetA.n}-${geo.site.join(',')}`, trips: truckTrips(targetA.idx, geo) }), [targetA, geo]);
 
+  // Simulateur : les chiffres de la coopérative, recalculés sur les années simulées (simulateur.ts).
+  const [simP, setSimP] = useState<SimParams>(SIM_DEFAUTS);
+  const [simVolIn, setSimVol] = useState<number>(VP);
+  const [simTriIn, setSimTri] = useState<number>(CONTRATS.couts.tri_eur_t_brute);
+  const [simReventeIn, setSimRevente] = useState<number>(IMPORT_DER.monde);
+  const simVol = borne(simVolIn, 10, 30000), simTri = borne(simTriIn, 0, 1000), simRevente = borne(simReventeIn, 0, 10000);
+  const simPc = useMemo<SimParams>(() => ({
+    chargesBle: borne(simP.chargesBle, 0, 3000), chargesLentille: borne(simP.chargesLentille, 0, 3000), aide: borne(simP.aide, 0, 1000),
+    rotation: borne(simP.rotation, 0, 1000), qualite: borne(simP.qualite, 0, 0.6), tau: borne(simP.tau, 0.5, 0.95),
+  }), [simP]);
+  const simR = useMemo(() => simuler(simPc), [simPc]);
+  const simT = useMemo(() => parcellesPour(geo, simVol, simPc.qualite), [geo, simVol, simPc.qualite]);
+  const tripsS = useMemo(() => ({ key: `s-${simT.n}-${geo.site.join(',')}`, trips: truckTrips(simT.idx, geo) }), [simT, geo]);
+  const simB = useMemo(() => {
+    const recues = simVol / (1 - simPc.qualite);
+    const achat = simR.coutPaliers * simVol, tri = simTri * recues;
+    const collecte = (CONTRATS.couts.collecte_fixe_eur_t_brute + CONTRATS.couts.collecte_eur_t_brute_km * simT.meanKm) * recues;
+    const total = achat + tri + collecte, parT = total / simVol;
+    return { recues, achat, tri, collecte, total, parT, margeT: simRevente - parT, marge: (simRevente - parT) * simVol };
+  }, [simVol, simPc.qualite, simR, simTri, simT, simRevente]);
+  const setSim = (k: keyof SimParams) => (v: number) => setSimP((p) => ({ ...p, [k]: v }));
+
   const [busy, setBusy] = useState(false);
   const findBest = () => {
     setBusy(true);
@@ -269,7 +316,8 @@ export default function App() {
   const go = useCallback((v: ViewId) => {
     stop(); setHover(null); setAnnexOpen(false); setView(v);
     const lg = ANNEXES.find((a) => a.id === v)?.legacy ?? -1;
-    if (lg < 0) setLastMain(v as MainId);
+    if (lg < 0 && v !== 'outil') setLastMain(v as MainId);
+    try { window.history.replaceState(null, '', v === 'outil' ? '#simulateur' : window.location.pathname + window.location.search); } catch { /* bac à sable */ }
     if (lg !== 2) setYear(null);
     if (v === 'prix') replayPrice();
     if (v === 'impact') setImpactView('bassin');
@@ -285,9 +333,10 @@ export default function App() {
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       const tag = (e.target as HTMLElement).tagName;
-      if (tag === 'INPUT' && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) return;
       if (e.key === 'Escape') { setMethod(false); setAnnexOpen(false); return; }
+      if (tag === 'INPUT' || tag === 'SELECT' || tag === 'TEXTAREA') return;
       if (method) return;
+      if (outil) { if (e.key === 'm') setMethod(true); return; }
       const move = (d: number) => {
         if (annex) {
           const k = annexIdx + d;
@@ -308,7 +357,7 @@ export default function App() {
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [go, method, annex, annexIdx, mainIdx, lastMain, legacy, view]);
+  }, [go, method, annex, annexIdx, mainIdx, lastMain, legacy, view, outil]);
   useEffect(() => stop, []);
 
   const MR = MAILLON.resultats[maillonV];
@@ -353,6 +402,7 @@ export default function App() {
     : view === 'preuve' ? { ...base, camera: 'france', showParcels: false, franceMode: 'backtest', btYear }
     : view === 'impact' && impactView === 'france' ? { ...base, camera: 'france', showParcels: false, franceMode: 'pstar' }
     : view === 'impact' ? { ...base, camera: 'site', radiusKm: Math.max(4, targetA.km * 1.05), selectKm: targetA.km, silo: true, trucks: tripsA, price: CONTRACT_PRICE }
+    : outil ? { ...base, camera: 'site', radiusKm: Math.max(2.5, simT.km * 1.3), selectKm: simT.km, silo: true, trucks: tripsS, price: 1e6 }
     : { ...base, camera: legacy === 5 ? 'suivi' : legacy === 6 ? 'ciel' : 'idf', depLabels: legacy === 1, selectKm: legacy === 4 ? target.km : null };
 
   return (
@@ -361,11 +411,12 @@ export default function App() {
         <div className="wordmark">Le Contrat qui Tient<span>Hack the Fork 2026 · Track 3</span></div>
         <nav className="steps" aria-label="Étapes">
           {MAIN.map((s, i) => (
-            <button key={s.id} className={s.id === view ? 'on' : !annex && i < mainIdx ? 'done' : ''} onClick={() => go(s.id)} aria-current={s.id === view ? 'step' : undefined}>
+            <button key={s.id} className={s.id === view ? 'on' : !annex && !outil && i < mainIdx ? 'done' : ''} onClick={() => go(s.id)} aria-current={s.id === view ? 'step' : undefined}>
               <span className="n">{i + 1}</span>{s.label}
             </button>
           ))}
         </nav>
+        <button className={`sim-link${outil ? ' on' : ''}`} onClick={() => go('outil')} aria-current={outil ? 'page' : undefined}>Simulateur</button>
         <div className="annex">
           <button className={`link${annex ? ' on' : ''}`} onClick={() => setAnnexOpen((o) => !o)} aria-expanded={annexOpen} aria-haspopup="menu">Annexes</button>
           {annexOpen && (
@@ -383,8 +434,8 @@ export default function App() {
       <main className="map">
         <MapScene camera={mp.camera} radiusKm={mp.radiusKm} showParcels={mp.showParcels} franceMode={mp.franceMode} btYear={mp.btYear}
           depLabels={mp.depLabels} price={mp.price} year={legacy === 2 ? year : null} selectKm={mp.selectKm} onHover={setHover}
-          geo={legacy === 6 ? SITE_SCENARIO : geo} onPickSite={legacy === 1 || legacy === 4 ? (s) => { moveSite(s); setBest(null); setBestReal(null); } : undefined}
-          sites={legacy === 4 || legacy === 6}
+          geo={legacy === 6 ? SITE_SCENARIO : geo} onPickSite={legacy === 1 || legacy === 4 || outil ? (s) => { moveSite(s); setBest(null); setBestReal(null); } : undefined}
+          sites={legacy === 4 || legacy === 6 || outil}
           season={legacy === 5 ? seasonDay : null} focus={focus} maillon={legacy === 6 ? maillonV : null}
           silo={mp.silo} trucks={mp.trucks} boats={mp.boats} onDelivered={onDelivered} />
         <div className="map-caption">
@@ -395,6 +446,7 @@ export default function App() {
             : view === 'preuve' ? <><b>Départements producteurs testés{btYear ? `, ${btYear}` : ''}</b><span>Contrats tenus au prix fixé par le modèle, appris sur les seules années précédentes</span></>
             : view === 'impact' && impactView === 'france' ? <><b>Prix garanti nécessaire pour 8 années sur 10, par département producteur</b><span>Modèle : même calcul qu’en Seine-et-Marne, avec les rendements de chaque département</span></>
             : view === 'impact' ? <><b>{fmt(VA)} t sur les {fmt(targetA.n)} parcelles les plus proches du silo</b><span>Registre parcellaire 2025, IGN ; trajets schématiques</span></>
+            : outil ? <><b>{fmt(simT.n)} parcelles de blé pour {fmt(simVol)} t, à moins de {fmt(Math.max(1, simT.km))} km du silo</b><span>Registre parcellaire 2025, IGN ; contrat calibré pour la Seine-et-Marne ; trajets schématiques</span></>
             : legacy === 5 ? <><b>{SUIVI.length} parcelles de lentille déclarées en {SAISON.annee}, près du site</b><span>NDVI Sentinel-2 L2A (Copernicus), replay de la saison {SAISON.annee}</span></>
             : legacy === 6 ? <><b>{fmt(M25.n_parcelles_zone)} parcelles d’au moins 1 ha sur {MAILLON.zoneKm} × {MAILLON.zoneKm} km autour du site, {MAILLON.campagne}</b><span>Sentinel-2 L2A (Copernicus) ; RPG {MAILLON.campagne}, IGN. Premier des cinq tirages de carrés connus.</span></>
             : <><b>{fmt(meta.n_candidates)} parcelles de blé tendre d’hiver en Île-de-France</b><span>Registre parcellaire graphique 2025, IGN</span></>}
@@ -447,17 +499,17 @@ export default function App() {
             </ul>
           ) : (
             <ul>
-              <li><i className={legacy === 4 ? 'sw wheat-dim' : 'sw wheat'} />Blé tendre d’hiver</li>
-              <li><i className="sw lentil" />{legacy === 4 ? `Parcelles du contrat de ${fmt(VOLUME)} t` : 'Bascule en lentille'}</li>
+              <li><i className={legacy === 4 || outil ? 'sw wheat-dim' : 'sw wheat'} />Blé tendre d’hiver</li>
+              <li><i className="sw lentil" />{outil ? `Parcelles du contrat de ${fmt(simVol)} t` : legacy === 4 ? `Parcelles du contrat de ${fmt(VOLUME)} t` : 'Bascule en lentille'}</li>
               {legacy === 2 && <li><i className="sw fail" />Contrat non tenu</li>}
               <li><i className="sw slate" />Lentille déjà cultivée</li>
               <li><i className="sw site" />{geo === SITE_SCENARIO ? 'Site de collecte fictif' : 'Site de collecte déplacé'}</li>
-              {legacy === 4 && <li><i className="sw coop" />Coopérative existante</li>}
-              {legacy === 4 && <li><i className="sw negoce" />Négociant existant</li>}
+              {(legacy === 4 || outil) && <li><i className="sw coop" />Coopérative existante</li>}
+              {(legacy === 4 || outil) && <li><i className="sw negoce" />Négociant existant</li>}
             </ul>
           )}
         </div>
-        {(legacy === 1 || legacy === 4) && <p className="map-hint">{legacy === 4 ? 'Cliquez sur la carte, ou sur un site existant, pour y placer la collecte' : 'Cliquez sur la carte pour déplacer le site de collecte'}</p>}
+        {(legacy === 1 || legacy === 4 || outil) && <p className="map-hint">{legacy === 1 ? 'Cliquez sur la carte pour déplacer le site de collecte' : 'Cliquez sur la carte, ou sur un site existant, pour y placer la collecte'}</p>}
         {hover && (
           <div className="map-tip">
             {hover.kind === 'dep' ? (
@@ -492,7 +544,69 @@ export default function App() {
 
       <aside className="column">
         <div className="column-body" key={view} ref={colRef}>
-          <p className="kicker">{annex ? `Annexe · ${annex.label}` : `${mainIdx + 1} / ${MAIN.length} · ${MAIN[mainIdx].label}`}</p>
+          <p className="kicker">{outil ? 'Simulateur · vos chiffres' : annex ? `Annexe · ${annex.label}` : `${mainIdx + 1} / ${MAIN.length} · ${MAIN[mainIdx].label}`}</p>
+
+          {outil && (
+            <>
+              <h1>Votre contrat lentille, avec vos chiffres</h1>
+              <p className="lead">Saisissez les chiffres de votre coopérative : l’outil recalcule le prix garanti, le barème, les parcelles et votre budget sur 20 000 années de météo et de prix du blé.</p>
+              <div className="sim-sticky" aria-live="polite">
+                <div><b>{fmt(simR.paliers[0])} €/t</b><span>la 1re tonne par hectare</span></div>
+                <div><b>{fmt(simB.parT)} €/t</b><span>votre coût, tri et collecte compris</span></div>
+                <div className={simB.margeT >= 0 ? 'ok' : 'ko'}><b>{signe(Math.round(simB.margeT))} €/t</b><span>à votre prix de revente</span></div>
+              </div>
+              <div className="block sim-form">
+                <h3>Vos hypothèses</h3>
+                <label className="sim-field sim-range">
+                  <span className="sim-label">Protection visée : la lentille rapporte au moins autant que le blé <b>{dec(simPc.tau * 10, simPc.tau * 10 % 1 ? 1 : 0)} années sur 10</b></span>
+                  <input type="range" min={0.5} max={0.95} step={0.05} value={simPc.tau} onChange={(e) => setSim('tau')(+e.target.value)} aria-label="Protection visée" />
+                </label>
+                <div className="sim-grid">
+                  <Champ label="Volume visé" unit="t acceptées" value={simVolIn} onChange={setSimVol} min={10} max={30000} step={50} />
+                  <Champ label="Votre prix de revente" unit="€/t" value={simReventeIn} onChange={setSimRevente} min={0} max={10000} step={10} hint={`import ${IMPORT_DER.annee} : ${fmt(IMPORT_DER.monde)} €/t`} />
+                  <Champ label="Charges du blé" unit="€/ha" value={simP.chargesBle} onChange={setSim('chargesBle')} min={0} max={3000} step={10} />
+                  <Champ label="Charges de la lentille" unit="€/ha" value={simP.chargesLentille} onChange={setSim('chargesLentille')} min={0} max={3000} step={10} />
+                  <Champ label="Aide couplée" unit="€/ha" value={simP.aide} onChange={setSim('aide')} min={0} max={1000} step={5} />
+                  <Champ label="Bénéfice de rotation" unit="€/ha" value={simP.rotation} onChange={setSim('rotation')} min={0} max={1000} step={10} hint="pour le blé suivant" />
+                  <Champ label="Part refusée au tri" unit="%" value={Math.round(simP.qualite * 1000) / 10} onChange={(v) => setSim('qualite')(v / 100)} min={0} max={60} step={1} />
+                  <Champ label="Coût du tri" unit="€/t reçue" value={simTriIn} onChange={setSimTri} min={0} max={1000} step={10} />
+                </div>
+                <button className="link" onClick={() => { setSimP(SIM_DEFAUTS); setSimVol(VP); setSimTri(CONTRATS.couts.tri_eur_t_brute); setSimRevente(IMPORT_DER.monde); }}>Revenir aux hypothèses du dossier</button>
+              </div>
+              <div className="block">
+                <h3>Le contrat à proposer</h3>
+                <div className="figures two">
+                  <Figure value={fmt(simR.paliers[0])} unit="€/t" label={`la première tonne par hectare, puis ${fmt(simR.paliers[1])} et ${fmt(simR.paliers[2])} : ${fmt(simR.coutPaliers)} €/t en moyenne`} />
+                  <Figure value={fmt(simR.pStar)} unit="€/t" label="le prix unique qui donne la même protection, sur toutes les tonnes" />
+                </div>
+                <p className="body small">Pour l’agriculteur, avec le barème par tranches : au moins le revenu du blé {dec(simPc.tau * 10, simPc.tau * 10 % 1 ? 1 : 0)} années sur 10, et en moyenne {signe(Math.round(simR.agriPaliers.ecart))} €/ha face au blé (marge moyenne du blé : {fmt(simR.margeBle)} €/ha). Les autres années, {fmt(simR.agriPaliers.perte)} €/ha de moins. Le barème coûte {saving(simR.coutPaliers, simR.pStar)} % de moins que le prix unique.</p>
+              </div>
+              <div className="block">
+                <h3>Votre budget pour {fmt(simVol)} t</h3>
+                <table className="list models contracts">
+                  <tbody>
+                    <tr><td>Achat des lentilles<span>barème par tranches, moyenne des années simulées</span></td><td className="num">{euros(simB.achat)}</td></tr>
+                    <tr><td>Tri<span>{fmt(simTri)} €/t reçue, {fmt(simB.recues)} t reçues</span></td><td className="num">{euros(simB.tri)}</td></tr>
+                    <tr><td>Collecte<span>{fmt(CONTRATS.couts.collecte_fixe_eur_t_brute)} €/t + {dec(CONTRATS.couts.collecte_eur_t_brute_km, 2)} €/t/km, {dec(simT.meanKm, 1)} km en moyenne</span></td><td className="num">{euros(simB.collecte)}</td></tr>
+                    <tr className="hl"><td>Total<span>{fmt(simB.parT)} €/t acceptée</span></td><td className="num">{euros(simB.total)}</td></tr>
+                  </tbody>
+                </table>
+                <div className={`sim-verdict${simB.margeT >= 0 ? ' ok' : ' ko'}`}>
+                  {simB.margeT >= 0
+                    ? <p>Revendues {fmt(simRevente)} €/t, vos lentilles dégagent <b>{fmt(simB.margeT)} €/t</b>, soit <b>{euros(simB.marge)}</b> par campagne.</p>
+                    : <p>Revendues {fmt(simRevente)} €/t, vos lentilles perdent <b>{fmt(-simB.margeT)} €/t</b>, soit <b>{euros(-simB.marge)}</b> par campagne. Il faut les revendre au moins {fmt(simB.parT)} €/t, viser une protection plus basse ou collecter dans un bassin moins cher.</p>}
+                  <p className="sim-import">Lentilles importées : {fmt(IMPORT_DER.monde)} €/t en {IMPORT_DER.annee} (Canada : {fmt(IMPORT_DER.canada)} €/t), entre {fmt(Math.min(...IMPORT_RECENT))} et {fmt(Math.max(...IMPORT_RECENT))} €/t depuis 2020. Écart avec votre coût : {signe(Math.round(simB.parT - IMPORT_DER.monde))} €/t, soit {signe(Math.round((simB.parT - IMPORT_DER.monde) / 20))} centimes par sachet de 500 g.</p>
+                </div>
+              </div>
+              <div className="block">
+                <h3>Les parcelles</h3>
+                <p className="body small">{simT.reached
+                  ? <>{fmt(simT.n)} parcelles de blé, {fmt(simT.ha)} ha, à {dec(simT.meanKm, 1)} km en moyenne du silo. Cliquez sur la carte, ou sur un établissement existant, pour déplacer la collecte.</>
+                  : <>Le registre ne compte pas assez de blé autour de ce silo pour {fmt(simVol)} t : {fmt(simT.tonnes)} t possibles sur {fmt(simT.n)} parcelles.</>}</p>
+              </div>
+              <Source k="modele">Mêmes 20 000 années simulées que le prix plancher, Seine-et-Marne, campagne 2026, recalculées dans le navigateur ; avec les hypothèses du dossier, on retrouve {fmt(SIM_REFERENCE.p_star)} €/t et une première tranche à {fmt(SIM_REFERENCE.paliers[0])} €/t. Prix des importations : Eurostat Comext, valeur à la frontière divisée par les tonnes (mesuré). Tri et collecte : hypothèses sans devis.</Source>
+            </>
+          )}
 
           {view === 'constat' && (
             <>
@@ -1074,7 +1188,12 @@ export default function App() {
         </div>
 
         <footer className="column-foot">
-          {annex ? (
+          {outil ? (
+            <>
+              <button className="link" onClick={() => go(lastMain)}>← Retour au parcours</button>
+              <button className="primary" onClick={() => setMethod(true)}>Méthode et sources →</button>
+            </>
+          ) : annex ? (
             <>
               <button className="link" onClick={() => go(lastMain)}>← Retour au parcours</button>
               {annexIdx < ANNEXES.length - 1

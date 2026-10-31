@@ -222,6 +222,10 @@ def main():
                           "origines": [{"pays": r.pays, "tonnes": int(r.tonnes), "part": float(r.part)}
                                        for r in pd.read_csv(DATA / "commerce_lentilles_origines.csv").head(5).itertuples()]},
         "commerce": commerce.to_dict(orient="records"),
+        # Prix des lentilles importées, €/t à la frontière (Comext, valeur / tonnes).
+        "prix_import": [{"annee": int(r.annee), "monde": int(r.prix_import_eur_t), "canada": int(r.prix_import_canada_eur_t)}
+                        for r in pd.read_csv(DATA / "prix_import_lentilles.csv").itertuples()
+                        if r.prix_import_eur_t == r.prix_import_eur_t and r.prix_import_canada_eur_t == r.prix_import_canada_eur_t],
         "surface_lentille_par_dep_2025": surf_dep,
         "contrat_indexe": indexe,
         "challenger_lightgbm": challenger,

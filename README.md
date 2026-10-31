@@ -2,7 +2,7 @@
 
 **Hack the Fork Paris 2026 · Track 3 (souveraineté protéique, des champs français aux protéines de demain)**
 
-**Démo en ligne : https://main.d1lkeu0ybo1cz4.amplifyapp.com/** · hors ligne : `make app`, puis ouvrir `app/dist-single/index.html`
+**Démo en ligne : https://main.d1lkeu0ybo1cz4.amplifyapp.com/** · **simulateur : https://main.d1lkeu0ybo1cz4.amplifyapp.com/#simulateur** · hors ligne : `make app`, puis ouvrir `app/dist-single/index.html`
 
 Le Contrat qui Tient aide le responsable filière d'une coopérative ou d'un conditionneur de légumes secs à fixer **le prix plancher d'un contrat lentille** qui rapporte à l'agriculteur **au moins autant que le blé 8 années sur 10**. L'outil montre aussi **quelles parcelles d'Île-de-France basculent** à ce prix, et combien de tonnes la coopérative peut sécuriser.
 
@@ -40,6 +40,10 @@ Vidéo de la démo, 4 minutes : [docs/video/demo-4min.mp4](docs/video/demo-4min.
 - Les coopératives proposent déjà des contrats à prix minimum. Mais ce prix se fixe à l'expérience ou sur des moyennes, alors que c'est **la mauvaise année** qui fait perdre l'agriculteur.
 
 ## Ce que fait l'outil
+
+**Le simulateur** (bouton « Simulateur » de l'application, ou l'adresse `#simulateur`) est l'outil de la responsable filière : elle saisit ses charges, l'aide, la part refusée au tri, la protection visée, le volume, son prix de revente et place son silo ; elle obtient aussitôt le barème à proposer, le prix unique équivalent, le gain de l'agriculteur face au blé, les parcelles à contractualiser, son budget et l'écart avec le prix des lentilles importées. Le calcul est refait dans le navigateur sur les 20 000 années simulées du pipeline : avec les hypothèses du dossier, il retrouve exactement 1 567 €/t et la première tranche à 1 635 €/t.
+
+![Le simulateur : barème, coût et marge mis à jour à chaque saisie](docs/img/simulateur.png)
 
 | Entrée | Sortie |
 |---|---|

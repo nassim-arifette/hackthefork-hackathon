@@ -5,7 +5,8 @@
   rendu Rouen publié par Agreste pour la campagne 2019-2020 (178,8 €/t).
 - Prix de la lentille : prix de vente absolus Eurostat (apri_ap_crpouta, 02991000), France.
 - Commerce : Eurostat Comext (DS-045409), code NC8 07134000 (lentilles sèches), France ; importations
-  de 2025 par pays partenaire (origine hors UE, expédition dans l'UE).
+  de 2025 par pays partenaire (origine hors UE, expédition dans l'UE) ; prix des importations
+  (valeur statistique / tonnes), toutes origines et Canada.
 Sorties : data/prix_ble.csv, data/prix_lentille_observes.csv, data/commerce_lentilles.csv.
 """
 import json
@@ -88,6 +89,20 @@ def commerce() -> pd.DataFrame:
     return pd.concat(out, axis=1).reset_index()
 
 
+def prix_import() -> pd.DataFrame:
+    """Prix des lentilles importées (€/t) : valeur statistique à la frontière / tonnes, toutes origines et Canada."""
+    d = cube(fetch("comext_lentilles_valeur", COMEXT,
+                   {"format": "JSON", "lang": "EN", "freq": "A", "reporter": "FR", "product": "07134000", "flow": 1,
+                    "partner": ["WORLD", "CA"], "indicators": ["VALUE_IN_EUROS", "QUANTITY_IN_100KG"]}))
+    w = d.pivot_table(index=["time", "partner"], columns="indicators", values="value").reset_index()
+    w["prix"] = (w.VALUE_IN_EUROS / (w.QUANTITY_IN_100KG / 10)).round()
+    out = w.pivot(index="time", columns="partner", values="prix").reset_index()
+    out = out.rename(columns={"time": "annee", "WORLD": "prix_import_eur_t", "CA": "prix_import_canada_eur_t"})
+    out["annee"] = out.annee.astype(int)
+    out = out[out.annee >= 2010].astype({"prix_import_eur_t": int, "prix_import_canada_eur_t": int})
+    return out[["annee", "prix_import_eur_t", "prix_import_canada_eur_t"]].sort_values("annee")
+
+
 def origines(annee: int = 2025) -> pd.DataFrame:
     """Importations de lentilles par pays partenaire : pays d'origine hors UE, pays d'expédition dans l'UE."""
     d = cube(fetch(f"comext_lentilles_origines_{annee}", COMEXT,
@@ -103,6 +118,7 @@ def origines(annee: int = 2025) -> pd.DataFrame:
 
 def main():
     origines().to_csv(DATA / "commerce_lentilles_origines.csv", index=False)
+    prix_import().to_csv(DATA / "prix_import_lentilles.csv", index=False)
     pb = prix_ble()
     pb.to_csv(DATA / "prix_ble.csv", index=False)
     pl = prix_lentille()

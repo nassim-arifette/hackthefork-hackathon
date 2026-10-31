@@ -13,7 +13,8 @@ plancher est donné pour quelques prix du blé (le prix fixe équivalent est dan
 Assurance rendement de la lentille, pour l'offre assureurs : fréquence de sinistre et prime pure
 (hors chargements) à 60, 70 et 80 % du rendement moyen, valorisés au prix plancher.
 Coûts de l'acheteur hors achat (tri, collecte, séchage) : conventions du contrat synthétique de
-data/pilote_300t/contrats.json, reprises telles quelles. Sortie : contrats.json.
+data/pilote_300t/contrats.json, reprises telles quelles. Sorties : contrats.json, et simulateur.json
+(les années simulées, pour le simulateur de l'application).
 """
 import json
 
@@ -21,8 +22,8 @@ import numpy as np
 
 from common import APP_DATA, DATA, ROOT, VOISINS_LENTILLE, hypotheses
 from contrats import calibres, existants
-from model import Calibrated, hyp_values, levels, levels_lookup, load, marge_lentille, paiement, \
-    p_star, pool_for, simulate_years, with_rel
+from model import Calibrated, calibrer_premier_palier, hyp_values, levels, levels_lookup, load, marge_lentille, \
+    paiement, p_star, pool_for, simulate_years, with_rel
 
 TARGET_YEAR, POOL_YEARS, N_SIM, DEP = 2026, range(2010, 2026), 20000, "77"
 
@@ -109,6 +110,23 @@ def main():
         "collecte_eur_t_brute_km": syn["transport"]["variable_eur_t_brute_recue_km_route"],
         "sechage_eur_t_point": syn["sechage"]["eur_t_recue_point_humidite"], "statut": "hypothese_non_devis",
     }
+
+    # Simulateur de l'application : les mêmes années simulées, pour recalculer dans le navigateur le
+    # prix et le barème avec les chiffres de la coopérative. Les arrondis sont vérifiés : avec les
+    # hypothèses par défaut, on retrouve exactement P* et la première tranche calibrée.
+    yl_r, yw_r, pb_r = np.round(yL, 4), np.round(yW, 4), np.round(pB, 2)
+    R_r = (pb_r * yw_r - h["charges_ble"] + h["charges_lentille"] - h["bonus"]) / (yl_r * (1 - h["qualite"]))
+    paliers = next(c for c in out["calibres"] if c["id"] == "paliers")["paliers"]
+    suite = tuple(paliers[1:])
+    p1_r = calibrer_premier_palier(suite, yl_r, yw_r, pb_r, h, h["tau"])
+    assert round(p_star(R_r, h["tau"])) == round(ps) and p1_r == paliers[0], (p_star(R_r, h["tau"]), ps, p1_r)
+    sim = {"dep": DEP, "campagne": TARGET_YEAR, "n": int(len(yL)),
+           "defauts": {k: h[k] for k in ("charges_ble", "charges_lentille", "aide", "rotation", "qualite", "tau")},
+           "suite_paliers": list(suite), "bornes": [1.0, 2.0],
+           "reference": {"p_star": round(ps), "paliers": paliers},
+           "yL": yl_r.tolist(), "yW": yw_r.tolist(), "pB": pb_r.tolist()}
+    (APP_DATA / "simulateur.json").write_text(json.dumps(sim, separators=(",", ":")))
+    print(f"simulateur : {len(yL)} années, P* {round(ps)} et première tranche {p1_r} retrouvés après arrondi")
 
     (DATA / "contrats.json").write_text(json.dumps(out, ensure_ascii=False, indent=1))
     (APP_DATA / "contrats.json").write_text(json.dumps(out, ensure_ascii=False, separators=(",", ":")))

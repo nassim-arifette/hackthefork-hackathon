@@ -269,20 +269,19 @@ FeatureCollection en WGS84, coordonnées arrondies à 5 décimales (environ 1 m)
 ```
 app/src/
   main.tsx
-  App.tsx                 routeur d'étapes (bascule → replay → backtest → contrat)
-  data/load.ts            chargement et validation des JSON (schémas ci-dessus)
-  state/store.ts          prix, année, étape, sélection
+  App.tsx                 parcours en six écrans, six annexes, simulateur (#simulateur), clavier
+  data.ts                 lecture des exports JSON, géométrie du site, sélection des parcelles
+  simulateur.ts           prix, barème calibré, gains et budget recalculés sur les années simulées
+  useTween.ts             compteurs animés
+  styles.css              jetons, mise en page, animations (mouvement réduit respecté)
   components/
-    MapView.tsx           deck.gl : parcelles extrudées, site acheteur, contours
-    PriceSlider.tsx       curseur €/t, raccourcis clavier ← →
-    BigCounter.tsx        compteur animé de tonnes et d'hectares
-    SupplyChart.tsx       courbe d'offre + point courant
-    ReplayPanel.tsx       2016 / 2020 : chocs mesurés, verdicts par parcelle
-    BacktestReveal.tsx    frise 2019–2025, bande d'incertitude puis point réel
-    ContractCard.tsx      texte du contrat depuis le cache
-    SourceBadge.tsx       étiquette mesuré / sourcé / supposé / synthétique
-    HypothesesDrawer.tsx  paramètres et sensibilités
-  styles/tokens.css
+    MapScene.tsx          deck.gl : France, parcelles, silo, camions, cargos, sites Sirene, Vu du ciel
+    pitch.tsx             pictogrammes animés des écrans 1 à 5
+    charts.tsx            courbes et graphiques des annexes
+    Method.tsx            panneau « Méthode et sources »
+    ui.tsx                chiffres et lignes de source étiquetées
+    icons.ts              atlas d'icônes (camion, silo, cargo)
+  data/                   exports du pipeline, dont simulateur.json et sites.json
 ```
 
 ### 6.3 Direction visuelle

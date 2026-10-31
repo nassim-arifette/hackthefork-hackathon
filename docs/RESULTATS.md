@@ -266,6 +266,25 @@ Même distribution de récolte (Seine-et-Marne, rendement moyen simulé 1,59 t/h
 | 70 % | 30 % | 231 €/ha | 1 744 €/ha |
 | 80 % | 35 % | 312 €/ha | 1 993 €/ha |
 
+### Le prix des lentilles importées
+
+Eurostat Comext, valeur statistique à la frontière divisée par les tonnes (`00_prix_commerce.py`, **mesuré**) :
+
+| Année | Toutes origines | Canada |
+|---|---|---|
+| 2020 | 819 €/t | 617 €/t |
+| 2021 | 938 €/t | 804 €/t |
+| 2022 | 1 250 €/t | 1 139 €/t |
+| 2023 | 1 172 €/t | 1 045 €/t |
+| 2024 | 1 168 €/t | 1 083 €/t |
+| 2025 | 1 069 €/t | 960 €/t |
+
+Le pilote francilien coûte à la coopérative 1 489 €/t acceptée avec le barème par tranches, tri et collecte compris : 420 €/t de plus que l'import en 2025, environ 21 centimes par sachet de 500 g ; l'écart tombe vers 290 €/t sur 2022–2024. Le prix de l'import a bondi de 53 % entre 2020 et 2022. Dans les départements où le blé rend moins (Pyrénées-Orientales, Hérault, Gard, à charges franciliennes), le prix garanti pour 8 années sur 10 rejoint le prix de l'import une fois tri et collecte ajoutés. Les contrats publiés (Unéal, NatUp : 900 à 1 000 €/t la première tonne) sont, eux, sous le prix de l'import.
+
+### Le simulateur
+
+`07_contrats.py` exporte les 20 000 années simulées de la Seine-et-Marne (`app/src/data/simulateur.json`, rendements arrondis à 0,1 kg/ha et prix du blé au centime) ; `app/src/simulateur.ts` y refait le calcul du pipeline. Vérifications : avec les hypothèses du dossier, P\* = 1 567 €/t et première tranche à 1 635 €/t (test et contrôle à l'export) ; dans l'application, protection à 7 sur 10 → 1 132 €/t, charges du blé à 600 €/ha → 1 703 €/t, sans aide → 1 709 €/t, 20 % refusés au tri → 1 763 €/t, les valeurs exactes des sensibilités de `thresholds.json`.
+
 ## 8. Suivi en saison, prototype Sentinel-2
 
 `pipeline/08_sentinel.py` rejoue la saison 2025 sur les 8 parcelles de lentille déclarées au RPG 2025 (au moins 4 ha) les plus proches du site : 148 images Sentinel-2 L2A du 1er mars au 15 août 2025, NDVI médian des pixels valides (couche SCL), parcelle réduite de 10 m. Entre 19 et 25 dates utiles par parcelle, sur 37 à 43 images.
@@ -346,4 +365,5 @@ Backtest 2019–2025 sur les départements producteurs : 133, 100, 71, 493 et 44
 - Version 4.1 (31/10, après-midi, backtest strict) : regroupement des séries en double refait chaque année avec le seul passé, à la suite de l'audit de la PR 1. Contrats tenus : 87 → 78 % (M1), 81 → 77 % (M0), 77 → 76 % (M2). Prix 2026 inchangés.
 - Le Maillon vu du ciel (31/10, après-midi) : `10_maillon.py`, RPG 2024 et 2025, 51 images Sentinel-2 ; annexe « Vu du ciel » de l'application. Aucun chiffre existant ne change.
 - Revue des autres cultures (31/10) : haricot 700 → 1 000 €/ha et pois 400 → 450 €/ha, prix de référence et provenances complétés. Recalcul de `09_cultures.py` : P\* haricot 1 779 → 2 185 €/t, pois 409 → 427 €/t. La totalité de l'objet lentille exporté est identique à la version précédente.
-- Version 4.2, actuelle (31/10, soir) : contrat indexé, offre d'assurance et budget de l'acheteur exportés par `07_contrats.py` ; carte de France des prix ; sites de collecte existants et clients possibles (`11_sites.py`, Sirene). Aucun chiffre existant ne change.
+- Version 4.3, actuelle (31/10, soir) : simulateur dans l'application (le calcul refait dans le navigateur avec les chiffres de la coopérative), prix des lentilles importées exporté par `00_prix_commerce.py`, gains de l'agriculteur face au blé exportés par `07_contrats.py`. Aucun chiffre existant ne change.
+- Version 4.2 (31/10, soir) : contrat indexé, offre d'assurance et budget de l'acheteur exportés par `07_contrats.py` ; carte de France des prix ; sites de collecte existants et clients possibles (`11_sites.py`, Sirene). Aucun chiffre existant ne change.

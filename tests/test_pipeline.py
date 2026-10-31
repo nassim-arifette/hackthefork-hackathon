@@ -318,3 +318,22 @@ def test_farmer_gain_is_consistent_with_protection():
         p = s["protection"]
         assert s["gain_moyen_ha"] > 0 and s["perte_moyenne_ha"] > 0
         assert abs(p * s["gain_moyen_ha"] - (1 - p) * s["perte_moyenne_ha"] - s["ecart_moyen_ha"]) <= 3
+
+
+def test_simulator_export_reproduces_the_pipeline():
+    """Le simulateur de l'app retrouve P* et la première tranche à partir des années exportées."""
+    s = json.loads((APP_DATA / "simulateur.json").read_text())
+    yL, yW, pB = (np.array(s[k]) for k in ("yL", "yW", "pB"))
+    d = s["defauts"]
+    acc = yL * (1 - d["qualite"])
+    mb = pB * yW - d["charges_ble"]
+    R = (mb + d["charges_lentille"] - d["aide"] - d["rotation"]) / acc
+    assert round(float(np.quantile(R, d["tau"], method="inverted_cdf"))) == s["reference"]["p_star"]
+    t = json.loads((APP_DATA / "thresholds.json").read_text())
+    assert s["reference"]["p_star"] == next(x["p_star"] for x in t["par_departement"] if x["dep"] == s["dep"])
+    p1, p2, p3 = s["reference"]["paliers"]
+    pay = lambda a, y: a * np.minimum(y, 1) + p2 * np.clip(y - 1, 0, 1) + p3 * np.maximum(y - 2, 0)
+    gagne = lambda a: np.mean(pay(a, acc) - d["charges_lentille"] + d["aide"] + d["rotation"] >= mb)
+    assert gagne(p1) >= d["tau"] > gagne(p1 - 1)
+    meta = json.loads((APP_DATA / "meta.json").read_text())
+    assert all(400 < r["monde"] < 2000 for r in meta["prix_import"])
