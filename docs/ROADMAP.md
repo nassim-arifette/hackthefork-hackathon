@@ -6,7 +6,7 @@ Le projet est construit en couches. Le cœur doit être parfait avant toute exte
 flowchart LR
   T1["Temps 1 · Avant les semis<br/>Le Contrat qui Tient<br/><b>cœur</b>"] --> T2["Temps 2 · Où collecter<br/>Site de tri déplaçable<br/><b>extension légère</b>"]
   T2 --> T3["Temps 3 · Pendant la saison<br/>Suivi Sentinel-2 des parcelles<br/><b>extension</b>"]
-  T3 --> MV["Le Maillon vu du ciel<br/>détection régionale + goulot logistique<br/><b>après le hackathon</b>"]
+  T3 --> MV["Le Maillon vu du ciel<br/>détection régionale + goulot logistique<br/><b>extension</b>"]
 ```
 
 ---
@@ -42,12 +42,14 @@ L'impact pèse 30 % de la note et ne montre aujourd'hui que les tonnes et la par
 - [ ] Scénarios de stress pour les années d'effondrement comme 2020 et 2021, sans jamais toucher aux années test.
 - [ ] Garder l'historique des versions et de leurs résultats dans `docs/RESULTATS.md`.
 
-### 5. Extensions (après le cœur, ou en perspective dans le pitch)
+### 5. Extensions (dès que le cœur est stable, dans cet ordre)
 
 - [ ] Site de tri déplaçable (temps 2 ci-dessous) : environ 1 h, fort effet visuel.
 - [ ] Suivi Sentinel-2 des parcelles sous contrat (temps 3).
 - [ ] Le Maillon vu du ciel (section 5).
-- [ ] Après le hackathon : données de rendement des coopératives (passage à la parcelle, P\* moins incertain), autres cultures sous contrat (pois chiche, haricot sec), offre pour les assureurs.
+- [ ] Données de rendement d'une coopérative (passage à la parcelle, P\* moins incertain) : à demander dès samedi aux mentors et partenaires.
+- [ ] Autres cultures sous contrat (pois chiche, haricot sec) : même pipeline, nouveaux libellés Agreste.
+- [ ] Offre pour les assureurs : même distribution de rendement, présentée comme tarif de risque.
 
 ## 1. Planning du hackathon
 
@@ -126,7 +128,7 @@ tonnes(site, Q)     = Σ tonnes_attendues_i · 1{ Q ≥ prix_rendu[i](site) }
 
 ---
 
-## 5. Le Maillon vu du ciel (après le hackathon)
+## 5. Le Maillon vu du ciel
 
 ### Le problème
 
@@ -165,9 +167,9 @@ flowchart TB
 | Métriques | précision, rappel, F1 par classe, surface détectée contre surface RPG |
 | Goulot | rayon ou temps de trajet autour des sites, tonnes potentielles hors couverture |
 
-### Pourquoi après le hackathon
+### Ce qu'il faut pour le faire pendant l'événement
 
-Le volume de données, les nuages et le prétraitement demandent plus de 36 heures pour un résultat fiable. Une démonstration partielle risquerait de fragiliser la note de rigueur.
+Le volume d'images, les nuages et le prétraitement sont les points durs. Pour tenir dans le temps : une zone réduite autour du site acheteur, quelques dates sans nuages entre avril et juillet, et une validation sur le RPG 2025. Tout résultat partiel est montré comme tel, avec sa précision mesurée.
 
 ### Modèle économique
 
