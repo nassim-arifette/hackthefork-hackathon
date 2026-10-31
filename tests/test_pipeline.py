@@ -299,3 +299,12 @@ def test_new_contract_exports_are_consistent():
         assert a["prime_pure_eur_ha"] <= b["prime_pure_eur_ha"] and a["frequence_sinistre"] <= b["frequence_sinistre"]
     for k in ("tri_eur_t_brute", "collecte_fixe_eur_t_brute", "collecte_eur_t_brute_km", "sechage_eur_t_point"):
         assert c["couts_acheteur"][k] > 0
+
+
+def test_import_origins_are_consistent():
+    """Provenance des importations : parts entre 0 et 1, triées, inférieures au total importé."""
+    meta = json.loads((APP_DATA / "meta.json").read_text())
+    o = meta["lentille_2025"]["origines"]
+    parts = [x["part"] for x in o]
+    assert parts == sorted(parts, reverse=True) and 0 < sum(parts) <= 1
+    assert sum(x["tonnes"] for x in o) <= meta["lentille_2025"]["importations_t"]

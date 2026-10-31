@@ -79,6 +79,9 @@ const BT_ANNEES = [2020, 2021, 2022];
 const ASSUR70 = CONTRATS.assurance.niveaux.find((n) => n.seuil === 0.7)!;
 const FR_SORTED = [...(meta.france as { dep: string; nom: string; p_star: number }[])].sort((a, b) => a.p_star - b.p_star);
 const btC = (a: number) => (backtest.annees.find((y) => y.annee === a) as any).contrats as Record<string, number>;
+// Provenance des importations de 2025 (Comext) : pays d'origine hors UE, d'expédition dans l'UE.
+const ORIG = (meta.lentille_2025 as unknown as { origines: { pays: string; tonnes: number; part: number }[] }).origines;
+const PAYS: Record<string, string> = { CA: 'Canada', BE: 'Belgique', TR: 'Turquie', PT: 'Portugal', US: 'États-Unis', DE: 'Allemagne' };
 const frDate = (iso: string) => new Date(`${iso}T12:00:00`).toLocaleDateString('fr-FR');
 const MAX_2020_21 = Math.max(...[2020, 2021].flatMap((a) => Object.values(btC(a))));
 const FIXES_2022 = ['uneal_2023', 'natup_2023', 'proposition_2027'].map((k) => btC(2022)[k]);
@@ -488,9 +491,9 @@ export default function App() {
               <div className="block">
                 <div className="figures two">
                   <Figure value={fmt(round1000(PITCH.conso))} unit="t" label="de lentilles mangées en France chaque année" />
-                  <Figure value={pct(PITCH.partImportee)} label={`importées, soit ${fmt(round1000(L25.importations_t))} t en 2025`} />
+                  <Figure value={pct(PITCH.partImportee)} label={`importées, soit ${fmt(round1000(L25.importations_t))} t en 2025, dont ${pct(ORIG[0].part)} du ${PAYS[ORIG[0].pays] ?? ORIG[0].pays}`} />
                 </div>
-                <Source k="mesure">Calcul sur 2025 : production Agreste ({fmt(L25.production_t)} t) + importations ({fmt(L25.importations_t)} t) − exportations ({fmt(L25.exportations_t)} t), Eurostat Comext ; stocks non comptés.</Source>
+                <Source k="mesure">Calcul sur 2025 : production Agreste ({fmt(L25.production_t)} t) + importations ({fmt(L25.importations_t)} t) − exportations ({fmt(L25.exportations_t)} t), Eurostat Comext ; stocks non comptés. Provenance : {ORIG.slice(0, 3).map((o) => `${PAYS[o.pays] ?? o.pays} ${pct(o.part)}`).join(', ')} (pays d’origine hors UE, d’expédition dans l’UE).</Source>
               </div>
               <p className="lead">Les champs français pourraient les produire. Pourquoi les agriculteurs n’en sèment-ils pas davantage ?</p>
             </>

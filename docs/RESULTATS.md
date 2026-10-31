@@ -7,6 +7,8 @@ Calculés par le pipeline (`make export`) le 31 octobre 2026, avec le scénario 
 | Indicateur | Valeur | Source |
 |---|---|---|
 | Importations de lentilles, 2025 | 39 371 t | Eurostat Comext, NC8 0713 40 |
+| Provenance des importations, 2025 | Canada 45 %, Belgique 37 %, Turquie 6 % (pays d'origine hors UE, d'expédition dans l'UE) | Eurostat Comext |
+| Consommation apparente, 2025 | 85 897 t, dont 46 % importées (production + importations − exportations, stocks non comptés) | Agreste SAA, Eurostat Comext |
 | Exportations de lentilles, 2025 | 5 032 t | Eurostat Comext |
 | Production de lentilles, 2025 | 51 558 t (provisoire) | Agreste SAA |
 | Surface en lentille, 2025 | 33 927 ha | Agreste SAA |

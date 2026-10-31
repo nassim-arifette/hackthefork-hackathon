@@ -15,6 +15,7 @@
 
 | Question | Réponse courte |
 |---|---|
+| D'où viennent les lentilles importées ? | Du Canada pour 45 %, de Belgique pour 37 % (pays d'expédition, qui en produit peu), de Turquie pour 6 % (Comext 2025). |
 | Ça finit au bétail ? | Non : des lentilles pour l'alimentation humaine, achetées par un conditionneur de légumes secs. Le prix garanti ne s'applique qu'aux tonnes acceptées au tri. |
 | Vous payez quelles tonnes ? | Les tonnes acceptées au tri, comme dans tout contrat de collecte : un lot refusé (bruche, impuretés, calibre) ne touche pas le prix garanti. Agreste mesure la récolte avant ce tri ; on retire 10 %, une seule fois. À 0 % de refus, le prix plancher serait de 1 411 €/t ; à 20 %, de 1 763 €/t. |
 | Où est l'IA ? | Un modèle d'apprentissage probabiliste : il apprend sur 294 couples département × année comment la météo déplace la distribution du rendement. Deux modèles entraînés et comparés (régression quantile, LightGBM), calibrés par conformal prediction, validés sur des années jamais vues. |

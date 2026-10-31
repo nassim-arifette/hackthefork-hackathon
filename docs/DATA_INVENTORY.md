@@ -92,7 +92,7 @@ Aube et Marne présentent des rendements lentille identiques sur plusieurs anné
 
 - **Prix du blé tendre** : l'indice Eurostat des prix à la production (France, nominal) existe pour 2010–2025 en trois bases (2010, 2015, 2020). Il est chaîné sur la base 2015 et calé sur le prix rendu Rouen d'Agreste (178,8 €/t en 2019-2020). Les prix absolus Eurostat pour la France s'arrêtent en 2016 et sont incohérents avec l'indice (+39 % de 2010 à 2015, contre +3 % pour l'indice) : écartés.
 - **Prix de la lentille** : prix de vente Eurostat de 650 à 779 €/t sur 2012–2016. Les valeurs 2010 et 2011 (140 €/t) sont incohérentes avec la suite : écartées.
-- **Commerce** : Comext, NC8 07134000, France. Importations : 29 101 t (2020), 42 188 t (2024), 39 371 t (2025). Exportations : environ 5 000 t par an.
+- **Commerce** : Comext, NC8 07134000, France. Importations : 29 101 t (2020), 42 188 t (2024), 39 371 t (2025). Exportations : environ 5 000 t par an. Provenance 2025 : Canada 17 540 t (45 %), Belgique 14 359 t (37 %), Turquie 2 314 t (6 %), Portugal, États-Unis ; Comext donne le pays d'origine hors UE et le pays d'expédition dans l'UE, d'où la Belgique, qui en produit peu.
 
 ## 5. Estimations régionales dans Agreste
 
