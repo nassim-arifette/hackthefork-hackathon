@@ -196,6 +196,20 @@ export const CONTRATS = {
   existants: contrats.existants,
   calibres: Object.fromEntries(contrats.calibres.map((c) => [c.id, c])) as Record<'unique' | 'paliers' | 'prime_ha', (typeof contrats.calibres)[number]>,
   yFaible: contrats.rendement_accepte_annee_faible_tha,
+  /** Plancher indexé : m × prix du blé de la récolte, m calibré pour la même promesse (07_contrats.py). */
+  indexe: (contrats as any).indexe as {
+    m: number; simulation: { protection: number; cout_moyen_t: number; cout_t_annee_faible: number };
+    plancher_par_prix_ble: { prix_ble: number; plancher: number }[];
+  },
+  /** Assurance rendement de la lentille, même simulation : prime pure hors chargements (offre assureurs). */
+  assurance: (contrats as any).assurance as {
+    prix_assure_eur_t: number; rendement_moyen_tha: number;
+    niveaux: { seuil: number; frequence_sinistre: number; prime_pure_eur_ha: number; capital_eur_ha: number }[];
+  },
+  /** Coûts de l'acheteur hors achat, conventions du contrat synthétique (hypothèses sans devis). */
+  couts: (contrats as any).couts_acheteur as {
+    tri_eur_t_brute: number; collecte_fixe_eur_t_brute: number; collecte_eur_t_brute_km: number; sechage_eur_t_point: number;
+  },
 };
 
 /** Part des années simulées où la lentille bat le blé, au prix donné (Seine-et-Marne). */

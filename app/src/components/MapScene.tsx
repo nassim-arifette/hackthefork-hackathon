@@ -33,6 +33,17 @@ const [ZW, ZS, ZE, ZN] = MAILLON.zone;
 const ZONE_RING: [number, number][] = [[ZW, ZS], [ZE, ZS], [ZE, ZN], [ZW, ZN], [ZW, ZS]];
 
 const surf = meta.surface_lentille_par_dep_2025 as Record<string, number>;
+// Prix plancher pour 8 années sur 10 dans chaque département producteur classé (même calcul qu'en Seine-et-Marne).
+const PSTAR_FR = Object.fromEntries((meta.france as { dep: string; p_star: number }[]).map((d) => [d.dep, d.p_star]));
+// Agreste publie parfois un seul rendement pour plusieurs départements : ceux-là prennent, en teinte pâle,
+// le prix calculé pour le département qui les représente.
+const NOM_CODE = Object.fromEntries((france as any).features.map((f: any) => [f.properties.nom, f.properties.code]));
+const AVEC_FR: Record<string, { rep: string; p: number }> = {};
+for (const d of meta.france as { nom: string; p_star: number; avec: string[] }[]) {
+  for (const n of d.avec) if (NOM_CODE[n]) AVEC_FR[NOM_CODE[n]] = { rep: d.nom, p: d.p_star };
+}
+const PS_VALUES = Object.values(PSTAR_FR);
+export const PSTAR_RANGE: [number, number] = [Math.min(...PS_VALUES), Math.max(...PS_VALUES)];
 const surfMax = Math.max(...Object.values(surf));
 const IDF_CODES = ['75', '77', '78', '91', '92', '93', '94', '95'];
 const reduce = typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
@@ -66,7 +77,7 @@ const BOATS: TruckTrip[] = [
 ];
 
 export type Camera = 'france' | 'idf' | 'suivi' | 'ciel' | 'site';
-export type FranceMode = 'surface' | 'backtest' | 'plain';
+export type FranceMode = 'surface' | 'backtest' | 'pstar' | 'plain';
 
 function viewFor(target: Camera, width: number, site: [number, number], radiusKm: number): MapViewState {
   const w = Math.max(360, width);
@@ -108,7 +119,7 @@ function moving(trips: TruckTrip[], t: number): { pos: [number, number]; icon: I
   return out;
 }
 
-export type Hover = { kind: 'parcel'; p: Parcel; i: number } | { kind: 'dep'; name: string; surface: number }
+export type Hover = { kind: 'parcel'; p: Parcel; i: number } | { kind: 'dep'; name: string; surface: number; pStar?: number; pstarMode?: boolean; avec?: { rep: string; p: number } }
   | { kind: 'maillon'; p: MaillonParcel; cat: MaillonCat } | null;
 
 interface Props {
@@ -208,12 +219,19 @@ export default function MapScene({
     const btMap = btYear ? BT_BY_YEAR[btYear] : undefined;
     return [
       new GeoJsonLayer({
-        id: 'france', data: france as any, stroked: true, filled: true, pickable: !showParcels && franceMode === 'surface',
+        id: 'france', data: france as any, stroked: true, filled: true, pickable: !showParcels && (franceMode === 'surface' || franceMode === 'pstar'),
         getFillColor: (f: any) => {
           if (showParcels) return C.landOut;
           if (franceMode === 'backtest') {
             const r = btMap?.[f.properties.code];
             return r === undefined ? C.land : r ? C.lentil : C.fail;
+          }
+          if (franceMode === 'pstar') {
+            const code = f.properties.code, v = PSTAR_FR[code] ?? AVEC_FR[code]?.p;
+            if (v === undefined) return C.land;
+            // Vert foncé là où la lentille bat le blé à bas prix, clair là où il faut payer cher.
+            const c = mix(C.lentil, [214, 226, 218], (v - PSTAR_RANGE[0]) / (PSTAR_RANGE[1] - PSTAR_RANGE[0]));
+            return PSTAR_FR[code] === undefined ? mix(c, C.land, 0.55) : c;
           }
           if (franceMode === 'plain') return C.land;
           const s = surf[f.properties.code] ?? 0;
@@ -224,7 +242,11 @@ export default function MapScene({
         lineWidthUnits: 'pixels',
         updateTriggers: { getFillColor: [showParcels, franceMode, btYear], getLineColor: [showParcels, franceMode], getLineWidth: [showParcels, franceMode] },
         transitions: { getFillColor: 350 },
-        onHover: (info: any) => !showParcels && franceMode === 'surface' && onHover(info.object ? { kind: 'dep', name: info.object.properties.nom, surface: surf[info.object.properties.code] ?? 0 } : null),
+        onHover: (info: any) => {
+          if (showParcels || (franceMode !== 'surface' && franceMode !== 'pstar')) return;
+          const c = info.object?.properties.code;
+          onHover(info.object ? { kind: 'dep', name: info.object.properties.nom, surface: surf[c] ?? 0, pStar: franceMode === 'pstar' ? PSTAR_FR[c] : undefined, pstarMode: franceMode === 'pstar', avec: AVEC_FR[c] } : null);
+        },
       }),
       new GeoJsonLayer({
         id: 'idf', data: contours as any, stroked: true, filled: true, visible: showParcels,

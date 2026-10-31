@@ -125,5 +125,65 @@
     "cout_moyen_t": 1192
    }
   }
- ]
+ ],
+ "indexe": {
+  "id": "indexe",
+  "m": 7.44,
+  "simulation": {
+   "protection": 0.8,
+   "cout_moyen_t": 1519,
+   "cout_t_annee_faible": 1540
+  },
+  "plancher_par_prix_ble": [
+   {
+    "prix_ble": 160,
+    "plancher": 1190
+   },
+   {
+    "prix_ble": 200,
+    "plancher": 1488
+   },
+   {
+    "prix_ble": 240,
+    "plancher": 1785
+   },
+   {
+    "prix_ble": 280,
+    "plancher": 2083
+   }
+  ]
+ },
+ "assurance": {
+  "prix_assure_eur_t": 1567.0,
+  "rendement_moyen_tha": 1.59,
+  "niveaux": [
+   {
+    "seuil": 0.6,
+    "frequence_sinistre": 0.25,
+    "prime_pure_eur_ha": 162,
+    "capital_eur_ha": 1495
+   },
+   {
+    "seuil": 0.7,
+    "frequence_sinistre": 0.3,
+    "prime_pure_eur_ha": 231,
+    "capital_eur_ha": 1744
+   },
+   {
+    "seuil": 0.8,
+    "frequence_sinistre": 0.349,
+    "prime_pure_eur_ha": 312,
+    "capital_eur_ha": 1993
+   }
+  ]
+ },
+ "couts_acheteur": {
+  "tri_eur_t_brute": 180,
+  "statut_tri": "hypothese_proxy_tri_optique_bio_non_devis_lentille_conventionnelle",
+  "source_tri": "https://www.bio-hautsdefrance.org/systeme_bio/cultures-innovantes-de-nouvelles-opportunites-pour-les-grandes-cultures-bio/",
+  "collecte_fixe_eur_t_brute": 5,
+  "collecte_eur_t_brute_km": 0.12,
+  "sechage_eur_t_point": 3,
+  "statut": "hypothese_non_devis"
+ }
 }

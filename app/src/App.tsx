@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import MapScene, { type Camera, type FranceMode, type Hover } from './components/MapScene';
+import MapScene, { PSTAR_RANGE, type Camera, type FranceMode, type Hover } from './components/MapScene';
 import Method from './components/Method';
 import { BacktestReveal, MarginBars, PriceChart, SeasonChart, SecurityChart, Sensitivity } from './components/charts';
 import { Bowls, ContractsRow, Filiere, Gauge, HarvestBars, YearsIcons } from './components/pitch';
@@ -60,6 +60,27 @@ const UNEAL_PRICE = (UNEAL?.prix ?? START_PRICE) as number;
 const UNEAL_LOSSES = 10 - Math.round(((UNEAL?.simulation?.protection as number | undefined) ?? reliabilityAt(UNEAL_PRICE)) * 10);
 const wins = (p: number) => Math.round(reliabilityAt(p) * 10);
 const round1000 = (x: number) => Math.round(x / 1000) * 1000;
+const keur = (x: number) => `${fmt(x / 1000)}\u00a0k€`;
+const IDX = CONTRATS.indexe;
+const IDX_BT = CULTURES.find((c) => c.id === 'lentille')!.backtest.taux_tenus_indexe ?? 0;
+const IDX_200 = IDX.plancher_par_prix_ble.find((r) => r.prix_ble === 200)!.plancher;
+const FIXE_PAR_BLE = thresholds.sensibilite.prix_ble_fixe as { x: number; p_star: number }[];
+// Mobilisation : part des parcelles éligibles qui signent réellement (hypothèse d'illustration).
+const ADOPTION = 0.1;
+const BT_CONTRATS: { id: string; label: string }[] = [
+  { id: 'uneal_2023', label: 'Unéal 2023, 900 €/t' },
+  { id: 'natup_2023', label: 'NatUp 2023–2024, 900 / 700 / 600' },
+  { id: 'proposition_2027', label: 'Proposition du dossier pilote' },
+  { id: 'unique', label: 'Prix unique calibré' },
+  { id: 'paliers', label: 'Barème par tranches calibré' },
+  { id: 'prime_ha', label: 'Prix de base et prime à l’hectare' },
+];
+const BT_ANNEES = [2020, 2021, 2022];
+const ASSUR70 = CONTRATS.assurance.niveaux.find((n) => n.seuil === 0.7)!;
+const FR_SORTED = [...(meta.france as { dep: string; nom: string; p_star: number }[])].sort((a, b) => a.p_star - b.p_star);
+const btC = (a: number) => (backtest.annees.find((y) => y.annee === a) as any).contrats as Record<string, number>;
+const MAX_2020_21 = Math.max(...[2020, 2021].flatMap((a) => Object.values(btC(a))));
+const FIXES_2022 = ['uneal_2023', 'natup_2023', 'proposition_2027'].map((k) => btC(2022)[k]);
 
 const STATUT_LABEL: Record<Statut, string> = { conforme: 'Conforme', a_surveiller: 'À surveiller', en_retard: 'En retard' };
 function seasonSummary(): string {
@@ -123,6 +144,7 @@ export default function App() {
   const [btYear, setBtYear] = useState<number | null>(null);
   const [btShown, setBtShown] = useState(0);
   const [delivered, setDelivered] = useState(0);
+  const [impactView, setImpactView] = useState<'bassin' | 'france'>('bassin');
   // Les camions partent une fois le prix posé, pas pendant que le curseur s'anime.
   const [priceAnim, setPriceAnim] = useState(false);
   const VOLUME = H.volumes[volumeKey];
@@ -204,6 +226,7 @@ export default function App() {
     if (lg < 0) setLastMain(v as MainId);
     if (lg !== 2) setYear(null);
     if (v === 'prix') replayPrice();
+    if (v === 'impact') setImpactView('bassin');
     if ((v === 'preuve' || v === 'impact') && price < CONTRACT_PRICE) setPrice(CONTRACT_PRICE);
     if (v === 'preuve') replayBacktest();
     if (lg === 1 && price < Math.min(...pStars)) at(1900, () => animatePrice(START_PRICE, CONTRACT_PRICE));
@@ -280,6 +303,7 @@ export default function App() {
     : view === 'filiere' ? { ...base, price: 0, silo: true }
     : view === 'prix' ? { ...base, camera: 'site', radiusKm: Math.max(2.5, finalP.km * 1.3), selectKm: targetP.km, silo: true, trucks: tripsP }
     : view === 'preuve' ? { ...base, camera: 'france', showParcels: false, franceMode: 'backtest', btYear }
+    : view === 'impact' && impactView === 'france' ? { ...base, camera: 'france', showParcels: false, franceMode: 'pstar' }
     : view === 'impact' ? { ...base, camera: 'site', radiusKm: Math.max(4, targetA.km * 1.05), selectKm: targetA.km, silo: true, trucks: tripsA, price: CONTRACT_PRICE }
     : { ...base, camera: legacy === 5 ? 'suivi' : legacy === 6 ? 'ciel' : 'idf', depLabels: legacy === 1, selectKm: legacy === 4 ? target.km : null };
 
@@ -320,6 +344,7 @@ export default function App() {
             : view === 'filiere' ? <><b>Le silo de la coopérative, au milieu des parcelles de blé</b><span>Site de collecte fictif, en Seine-et-Marne ; registre parcellaire 2025, IGN</span></>
             : view === 'prix' ? <><b>{targetP.reached ? `${fmt(targetP.n)} parcelles retenues pour ${fmt(VP)}\u00a0t, à moins de ${fmt(Math.max(1, targetP.km))}\u00a0km du silo` : targetP.n ? `${fmt(targetP.n)} parcelles acceptent ce prix\u00a0: pas encore ${fmt(VP)}\u00a0t` : 'À ce prix, aucune parcelle de blé ne bascule'}</b><span>Registre parcellaire 2025, IGN ; trajets schématiques</span></>
             : view === 'preuve' ? <><b>Départements producteurs testés{btYear ? `, ${btYear}` : ''}</b><span>Contrats tenus au prix fixé par le modèle, appris sur les seules années précédentes</span></>
+            : view === 'impact' && impactView === 'france' ? <><b>Prix garanti nécessaire pour 8 années sur 10, par département producteur</b><span>Modèle : même calcul qu’en Seine-et-Marne, avec les rendements de chaque département</span></>
             : view === 'impact' ? <><b>{fmt(VA)} t sur les {fmt(targetA.n)} parcelles les plus proches du silo</b><span>Registre parcellaire 2025, IGN ; trajets schématiques</span></>
             : legacy === 5 ? <><b>{SUIVI.length} parcelles de lentille déclarées en {SAISON.annee}, près du site</b><span>NDVI Sentinel-2 L2A (Copernicus), replay de la saison {SAISON.annee}</span></>
             : legacy === 6 ? <><b>{fmt(M25.n_parcelles_zone)} parcelles d’au moins 1 ha sur {MAILLON.zoneKm} × {MAILLON.zoneKm} km autour du site, {MAILLON.campagne}</b><span>Sentinel-2 L2A (Copernicus) ; RPG {MAILLON.campagne}, IGN. Premier des cinq tirages de carrés connus.</span></>
@@ -338,6 +363,12 @@ export default function App() {
               <li><i className="sw wheat" />Blé tendre d’hiver</li>
               <li><i className="sw slate" />Lentille déjà cultivée</li>
               {view === 'filiere' && <li><i className="sw ink" />Silo de la coopérative, fictif</li>}
+            </ul>
+          ) : view === 'impact' && impactView === 'france' ? (
+            <ul>
+              <li><span className="ramp pstar"><span>{fmt(PSTAR_RANGE[0])} €/t</span><i /><span>{fmt(PSTAR_RANGE[1])} €/t</span></span></li>
+              <li><i className="sw pstar-pale" />Même rendement publié qu’un voisin</li>
+              <li><i className="sw land" />Département non classé</li>
             </ul>
           ) : view === 'prix' || view === 'impact' ? (
             <ul>
@@ -377,7 +408,13 @@ export default function App() {
         {hover && (
           <div className="map-tip">
             {hover.kind === 'dep' ? (
-              <><b>{hover.name}</b>{fmt(hover.surface)} ha de lentilles en 2025</>
+              hover.pStar !== undefined
+                ? <><b>{hover.name}</b>{fmt(hover.pStar)} €/t pour que la lentille batte le blé 8 années sur 10</>
+                : hover.pstarMode && hover.avec
+                  ? <><b>{hover.name}</b>Agreste publie le même rendement qu’en {hover.avec.rep} : prix calculé là-bas, {fmt(hover.avec.p)} €/t</>
+                  : hover.pstarMode
+                    ? <><b>{hover.name}</b>Non classé : moins de 50 ha de lentilles, ou rendement non mesuré</>
+                    : <><b>{hover.name}</b>{fmt(hover.surface)} ha de lentilles en 2025</>
             ) : hover.kind === 'maillon' ? (
               <>
                 <b>{CODE_LABELS[hover.p.code] ?? `Autre culture (code ${hover.p.code})`}, {dec(hover.p.surface)} ha</b>
@@ -509,6 +546,13 @@ export default function App() {
           {view === 'impact' && (
             <>
               <h1>{fmt(VA)} tonnes produites ici, soit {pct(VA / L25.importations_t)} des importations</h1>
+              <div className="tabs" role="tablist" aria-label="Échelle">
+                <button role="tab" aria-selected={impactView === 'bassin'} className={impactView === 'bassin' ? 'on' : ''} onClick={() => setImpactView('bassin')}><b>Ce bassin</b>{fmt(VA)} t autour du silo</button>
+                <button role="tab" aria-selected={impactView === 'france'} className={impactView === 'france' ? 'on' : ''} onClick={() => setImpactView('france')}><b>La France</b>{fmt(FR_SORTED.length)} départements producteurs</button>
+              </div>
+              {impactView === 'france' && (
+                <p className="body">Le même calcul donne le prix de chaque département producteur : de {fmt(FR_SORTED[0].p_star)} €/t ({FR_SORTED[0].nom}) à {fmt(FR_SORTED[FR_SORTED.length - 1].p_star)} €/t ({FR_SORTED[FR_SORTED.length - 1].nom}). Là où le blé rend peu, la lentille gagne à moindre prix.</p>
+              )}
               <div className="block">
                 <Gauge value={VA / L25.importations_t} label={<>Part des {fmt(round1000(L25.importations_t))} t importées en 2025 que remplacerait le contrat</>} />
               </div>
@@ -525,8 +569,10 @@ export default function App() {
                 <ul className="next-steps">
                   <li><b>Les coopératives et les conditionneurs</b>, à chaque campagne : ce prix se fixe tous les ans.</li>
                   <li><b>Un pilote de {fmt(VP)} t</b> avec une coopérative, sur les parcelles les plus proches de son silo.</li>
-                  <li><b>Le pois chiche et le haricot</b> pour l’alimentation humaine, d’autres régions, puis les assureurs.</li>
+                  <li><b>Le pois chiche, le haricot et les autres régions</b> : le même moteur, culture par culture et département par département.</li>
+                  <li><b>Les assureurs</b> : avec la même distribution de récolte, une assurance rendement à {pct(ASSUR70.seuil)} coûte {fmt(ASSUR70.prime_pure_eur_ha)} €/ha de prime pure en Seine-et-Marne ; le sinistre survient {fmt(ASSUR70.frequence_sinistre * 10)} années sur 10.</li>
                 </ul>
+                <Source k="modele">Prime pure hors chargements, récolte valorisée à {fmt(CONTRATS.assurance.prix_assure_eur_t)} €/t, rendement moyen simulé de {dec(CONTRATS.assurance.rendement_moyen_tha, 2)} t/ha.</Source>
               </div>
             </>
           )}
@@ -553,10 +599,12 @@ export default function App() {
                 </div>
               </div>
               <div className="block">
-                <div className="figures two">
+                <div className="figures">
                   <Figure value={fmt(haT)} unit="ha" label={`de blé basculent à ce prix (${fmt(stats.n)} parcelles)`} />
                   <Figure value={fmt(stats.tonnes)} unit="t" label="de lentilles si toutes ces parcelles signaient" />
+                  <Figure value={fmt(stats.tonnes * ADOPTION)} unit="t" label={`si ${fmt(ADOPTION * 100)}\u00a0% seulement signent`} />
                 </div>
+                <Source k="suppose">Mobilisation de {fmt(ADOPTION * 100)} % des parcelles éligibles : hypothèse d’illustration ; les parcelles éligibles et leurs tonnes sont des sorties du modèle.</Source>
               </div>
               <div className="block">
                 <h3>Ce que le prix achète</h3>
@@ -617,7 +665,8 @@ export default function App() {
                     <MarginBars
                       lentil={price * year.par_departement['77'].rendement_lentille_tha * (1 - H.qualite) - H.chargesLentille + H.aide + H.rotation}
                       wheat={year.prix_ble * year.par_departement['77'].rendement_ble_tha - H.chargesBle} />
-                    <Source k="modele">Au prix garanti, transport non déduit, sur les tonnes acceptées au tri ({pct(1 - H.qualite)} de la récolte) ; bénéfice de rotation de {fmt(H.rotation)} €/ha compris ; rendement et prix du blé de l’année mesurés.</Source>
+                    <p className="body small">Dont {fmt(H.rotation)} €/ha de bénéfice de rotation, gagné sur le blé de l’année suivante. Sur la campagne seule, la lentille sous contrat dégage {fmt(price * year.par_departement['77'].rendement_lentille_tha * (1 - H.qualite) - H.chargesLentille + H.aide)} €/ha ; le bénéfice de rotation n’est compté qu’une fois.</p>
+                    <Source k="modele">Au prix garanti, transport non déduit, sur les tonnes acceptées au tri ({pct(1 - H.qualite)} de la récolte) ; bénéfice de rotation de {fmt(H.rotation)} €/ha compris dans la barre ; rendement et prix du blé de l’année mesurés.</Source>
                   </div>
                   <div className="block verdict">
                     <div className="verdict-v">{stats.n ? pct(stats.kept / stats.n) : '—'}</div>
@@ -752,17 +801,74 @@ export default function App() {
                 <Source k="modele">Même simulation, quantile variable.</Source>
               </div>
               <div className="block">
-                <h3>Trois façons de garantir 8 années sur 10</h3>
+                <h3>Quatre façons de garantir 8 années sur 10</h3>
                 <table className="list models contracts">
                   <thead><tr><th>Contrat</th><th className="num">Coût moyen</th><th className="num">Année faible</th><th className="num">Backtest</th></tr></thead>
                   <tbody>
                     <tr><td>Prix unique<span>{fmt(C_UNIQUE.prix!)} €/t sur toutes les tonnes</span></td><td className="num">{fmt(C_UNIQUE.simulation.cout_moyen_t)}</td><td className="num">{fmt(C_UNIQUE.simulation.cout_t_annee_faible)}</td><td className="num">{pct(C_BT.unique.taux_tenus)}</td></tr>
                     <tr className="hl"><td>Barème par tranches<span>{fmt(C_PALIERS.paliers![0])} €/t la première tonne par hectare, puis {fmt(C_PALIERS.paliers![1])} et {fmt(C_PALIERS.paliers![2])}</span></td><td className="num">{fmt(C_PALIERS.simulation.cout_moyen_t)}</td><td className="num">{fmt(C_PALIERS.simulation.cout_t_annee_faible)}</td><td className="num">{pct(C_BT.paliers.taux_tenus)}</td></tr>
+                    <tr><td>Indexé sur le blé<span>{dec(IDX.m, 2)} × le prix du blé de la récolte, soit {fmt(IDX_200)} €/t avec un blé à 200 €/t</span></td><td className="num">{fmt(IDX.simulation.cout_moyen_t)}</td><td className="num">{fmt(IDX.simulation.cout_t_annee_faible)}</td><td className="num">{pct(IDX_BT)}</td></tr>
                     <tr><td>Prix de base et prime à l’hectare<span>{fmt(C_PRIME.prix!)} €/t et {fmt(C_PRIME.prime_ha!)} €/ha, versés même sans récolte</span></td><td className="num">{fmt(C_PRIME.simulation.cout_moyen_t)}</td><td className="num">{fmt(C_PRIME.simulation.cout_t_annee_faible)}</td><td className={`num${C_BT.prime_ha.taux_tenus < H.tau ? ' bad' : ''}`}>{pct(C_BT.prime_ha.taux_tenus)}</td></tr>
                   </tbody>
                 </table>
                 <p className="body small">Le barème par tranches paie cher les premières tonnes, celles qui manquent les mauvaises années, et moins le surplus des bonnes : même protection, {saving(C_PALIERS.simulation.cout_moyen_t, C_UNIQUE.simulation.cout_moyen_t)} % de moins en moyenne. Sur 2019–2025, il tient autant de contrats que le prix unique, pour un coût réalisé inférieur de {saving(C_BT.paliers.cout_moyen_t, C_BT.unique.cout_moyen_t)} %. La prime à l’hectare coûte encore moins, mais l’acheteur la paie même quand la récolte manque, et elle a cédé quand le blé a flambé : {pct(C_2022.prime_ha)} des contrats tenus en 2022.</p>
                 <Source k="modele">Seine-et-Marne, mêmes années simulées. Coût moyen : sommes versées par tonne acceptée, en €/t, hors collecte et tri. Année faible : {dec(CONTRATS.yFaible, 2)} t/ha acceptées, une année sur dix. Backtest : chaque forme recalibrée sur les seules années passées, {G.n_cas} cas.</Source>
+              </div>
+              <div className="block">
+                <h3>Les mauvaises années, contrat par contrat</h3>
+                <table className="list models contracts">
+                  <thead><tr><th>Contrat</th>{BT_ANNEES.map((a) => <th key={a} className="num">{a}</th>)}<th className="num">2019–2025</th></tr></thead>
+                  <tbody>
+                    {BT_CONTRATS.map((c) => (
+                      <tr key={c.id} className={c.id === 'paliers' ? 'hl' : ''}>
+                        <td>{c.label}</td>
+                        {BT_ANNEES.map((a) => {
+                          const v = btC(a)[c.id];
+                          return <td key={a} className={`num${v < H.tau ? ' bad' : ''}`}>{pct(v)}</td>;
+                        })}
+                        <td className={`num${C_BT[c.id].taux_tenus < H.tau - 0.005 ? ' bad' : ''}`}>{pct(C_BT[c.id].taux_tenus)}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+                <p className="body small">En 2020 et 2021, la lentille s’effondre : aucun contrat ne dépasse {pct(MAX_2020_21)}. En 2022, le blé flambe : les barèmes publiés et la proposition du dossier pilote tombent entre {pct(Math.min(...FIXES_2022))} et {pct(Math.max(...FIXES_2022))}, quand le prix unique et le barème par tranches calibrés en tiennent {pct(btC(2022).paliers)} ; la prime à l’hectare, {pct(btC(2022).prime_ha)}.</p>
+                <Source k="modele">Part des contrats tenus dans le backtest strict, chaque contrat calibré sur les seules années passées ; départements producteurs.</Source>
+              </div>
+              <div className="block">
+                <h3>Le budget de l’acheteur, contrat de {fmt(VOLUME)} t</h3>
+                <table className="list models contracts">
+                  <thead><tr><th>Par campagne</th><th className="num">Prix unique</th><th className="num">Tranches</th><th className="num">Indexé</th></tr></thead>
+                  <tbody>
+                    {(() => {
+                      const recues = VOLUME / (1 - H.qualite);
+                      const tri = recues * CONTRATS.couts.tri_eur_t_brute;
+                      const collecte = recues * (CONTRATS.couts.collecte_fixe_eur_t_brute + CONTRATS.couts.collecte_eur_t_brute_km * target.meanKm);
+                      const achat = [C_UNIQUE.simulation.cout_moyen_t, C_PALIERS.simulation.cout_moyen_t, IDX.simulation.cout_moyen_t].map((c) => c * VOLUME);
+                      return (
+                        <>
+                          <tr><td>Achat des lentilles<span>moyenne des années simulées</span></td>{achat.map((a, i) => <td key={i} className="num">{keur(a)}</td>)}</tr>
+                          <tr><td>Tri<span>{fmt(CONTRATS.couts.tri_eur_t_brute)} €/t reçue, {fmt(recues)} t reçues</span></td>{achat.map((_, i) => <td key={i} className="num">{keur(tri)}</td>)}</tr>
+                          <tr><td>Collecte<span>{fmt(CONTRATS.couts.collecte_fixe_eur_t_brute)} €/t + {dec(CONTRATS.couts.collecte_eur_t_brute_km, 2)} €/t/km, {dec(target.meanKm, 1)} km en moyenne</span></td>{achat.map((_, i) => <td key={i} className="num">{keur(collecte)}</td>)}</tr>
+                          <tr className="hl"><td>Total<span>par tonne acceptée</span></td>{achat.map((a, i) => <td key={i} className="num">{keur(a + tri + collecte)}<span>{fmt((a + tri + collecte) / VOLUME)} €/t</span></td>)}</tr>
+                        </>
+                      );
+                    })()}
+                  </tbody>
+                </table>
+                <Source k="suppose">Achat : modèle, mêmes années simulées. Tri et collecte : conventions du contrat synthétique, hypothèses sans devis (tri optique d’après Bio Hauts-de-France, 100 à 300 €/t à tester) ; séchage, stockage et conditionnement exclus.</Source>
+              </div>
+              <div className="block">
+                <h3>Si le prix du blé change</h3>
+                <table className="list models contracts">
+                  <thead><tr><th>Prix du blé</th>{IDX.plancher_par_prix_ble.map((r) => <th key={r.prix_ble} className="num">{fmt(r.prix_ble)} €/t</th>)}</tr></thead>
+                  <tbody>
+                    <tr><td>Prix fixe nécessaire<span>pour 8 années sur 10</span></td>{IDX.plancher_par_prix_ble.map((r) => <td key={r.prix_ble} className="num">{fmt(FIXE_PAR_BLE.find((f) => f.x === r.prix_ble)?.p_star ?? 0)}</td>)}</tr>
+                    <tr className="hl"><td>Plancher indexé<span>{dec(IDX.m, 2)} × le prix du blé</span></td>{IDX.plancher_par_prix_ble.map((r) => <td key={r.prix_ble} className="num">{fmt(r.plancher)}</td>)}</tr>
+                    <tr><td>Achat indexé<span>{fmt(VOLUME)} t par campagne</span></td>{IDX.plancher_par_prix_ble.map((r) => <td key={r.prix_ble} className="num">{keur(r.plancher * VOLUME)}</td>)}</tr>
+                  </tbody>
+                </table>
+                <p className="body small">Un prix fixe ne tient sa promesse que si le prix du blé reste dans la moyenne : à {fmt(FIXE_PAR_BLE[FIXE_PAR_BLE.length - 1].x)} €/t de blé, il faudrait {fmt(FIXE_PAR_BLE[FIXE_PAR_BLE.length - 1].p_star)} €/t. Le plancher indexé suit le blé et reste proche du prix nécessaire ; l’acheteur porte alors le risque de prix, de {keur(IDX.plancher_par_prix_ble[0].plancher * VOLUME)} à {keur(IDX.plancher_par_prix_ble[IDX.plancher_par_prix_ble.length - 1].plancher * VOLUME)} d’achat selon l’année.</p>
+                <Source k="modele">Prix fixe nécessaire : même simulation, prix du blé imposé. Plancher indexé : coefficient calibré sur les années simulées, prix du blé de la récolte.</Source>
               </div>
               <div className="block">
                 <h3>Ce qui fait bouger le prix plancher</h3>
