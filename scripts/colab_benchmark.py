@@ -11,6 +11,36 @@ import time
 import zipfile
 
 
+def check_tabpfn_access():
+    """Read-only checks from pinned TabPFN 9.0.0; never print or persist a key."""
+    from tabpfn import browser_auth as auth
+
+    token = os.environ.get("TABPFN_TOKEN", "").strip()
+    if not token:
+        raise RuntimeError("Clé absente : saisir la clé Prior Labs dans TABPFN_TOKEN.")
+    api_url = auth.settings.tabpfn.auth_api_url
+    valid = auth.verify_token(token, api_url)
+    if valid is False:
+        raise RuntimeError("Clé refusée ou expirée. Copier la clé API depuis "
+                           "https://ux.priorlabs.ai/account puis remplacer TABPFN_TOKEN "
+                           "en mémoire (une ancienne valeur peut masquer le secret Colab).")
+    if valid is not True:
+        raise RuntimeError("Serveur de vérification Prior Labs inaccessible. Réessayer la vérification.")
+    try:
+        license_name = auth._get_license_name("tabpfn_3_5")
+    except Exception:
+        raise RuntimeError("Métadonnées du modèle TabPFN 3.5 inaccessibles sur Hugging Face. "
+                           "Vérifier l'accès réseau au modèle puis réessayer.") from None
+    accepted = auth.check_license_accepted(token, api_url, license_name)
+    if accepted is False:
+        raise RuntimeError("Clé valide, mais licence TabPFN 3.5 non acceptée. Ouvrir "
+                           "https://ux.priorlabs.ai/account/licenses avec le compte de cette clé, "
+                           "accepter la licence 3.5, puis relancer. Aucune licence n'est acceptée par ce script.")
+    if accepted is not True:
+        raise RuntimeError("Serveur de licence Prior Labs inaccessible. Réessayer la vérification.")
+    print("Accès TabPFN 3.5 vérifié : clé valide et licence acceptée.", flush=True)
+
+
 def run_visible(command, cwd, output, total):
     """Stream logs and poll completed work, including while a long fit is running."""
     from IPython.display import display
@@ -93,11 +123,16 @@ def main():
     from benchmark_checkpoint import atomic_json
     atomic_json(destination / "run.json", {"archive_sha256": digest, "status": "installing"})
     print(f"Sauvegarde automatique : {destination}", flush=True)
+    phase = "installation"
     try:
         subprocess.run([sys.executable, "-m", "pip", "install", "-q", "-r",
                         str(root / "requirements-research.txt"), "tabpfn==9.0.0", "ipywidgets>=8,<9"], check=True)
         # Probe in a fresh process: notebook imports may predate pip's updates.
         subprocess.run([sys.executable, "-c", "import torch; assert torch.cuda.is_available(), 'Sélectionner un runtime GPU'; print(torch.cuda.get_device_name(0))"], check=True)
+        phase = "authentification"
+        # Fresh process avoids stale imports/accepted-repo caches after a token change.
+        subprocess.run([sys.executable, str(Path(__file__).resolve()), "--check-tabpfn"], check=True)
+        phase = "benchmark"
         atomic_json(destination / "run.json", {"archive_sha256": digest, "status": "running"})
         yields = destination / "colab_benchmark"
         direct = destination / "colab_contract"
@@ -120,9 +155,20 @@ def main():
     except BaseException as exc:
         atomic_json(destination / "run.json", {"archive_sha256": digest, "status": "interrupted",
                                                "error_type": type(exc).__name__})
-        print("Les étapes terminées sont dans Drive. Relancer la dernière cellule reprend le calcul.")
+        if phase == "authentification":
+            print("Corriger l'accès TabPFN indiqué ci-dessus, puis relancer la dernière cellule. "
+                  "Les étapes déjà terminées restent dans Drive.")
+        else:
+            print("Les étapes terminées sont dans Drive. Relancer la dernière cellule reprend le calcul.")
         raise
 
 
 if __name__ == "__main__":
-    main()
+    if sys.argv[1:] == ["--check-tabpfn"]:
+        try:
+            check_tabpfn_access()
+        except RuntimeError as exc:
+            print(str(exc), flush=True)
+            raise SystemExit(2) from None
+    else:
+        main()
