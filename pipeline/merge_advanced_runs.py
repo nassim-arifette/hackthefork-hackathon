@@ -212,6 +212,240 @@ def assert_frame_exact(actual, expected, keys, message):
         raise ValueError(message) from exc
 
 
+def numpy_execution_profile(runtime):
+    """Normalize recorded dispatcher evidence, never infer absent CPU flags.
+
+    A serial launcher may record only its environment override. That evidence
+    is weaker than the effective flags captured in a fresh V3 worker process.
+    CPU brand and core count are deliberately outside the numerical profile.
+    """
+    if runtime is None:
+        return None
+    if not isinstance(runtime, dict):
+        raise ValueError("Invalid NumPy execution metadata")
+    override_keys = [key for key in ("numpy_dispatch_override", "NPY_DISABLE_CPU_FEATURES") if key in runtime]
+    fields = ("numpy_cpu_features", "numpy_cpu_baseline", "numpy_cpu_dispatch", "numpy_version")
+    if not override_keys and not any(key in runtime for key in fields):
+        return numpy_execution_profile(runtime.get("runtime"))
+    profile = {}
+    for key in override_keys:
+        value = runtime[key]
+        if value is not None and not isinstance(value, str):
+            raise ValueError("Invalid NumPy dispatcher override")
+        normalized = sorted(set(part.strip() for part in (value or "").split(",") if part.strip()))
+        if "disabled_features" in profile and profile["disabled_features"] != normalized:
+            raise ValueError("Conflicting NumPy dispatcher override aliases")
+        profile["disabled_features"] = normalized
+    if "numpy_cpu_features" in runtime:
+        features = runtime["numpy_cpu_features"]
+        if (not isinstance(features, dict) or not features
+                or any(not isinstance(key, str) or not key or type(value) is not bool
+                       for key, value in features.items())):
+            raise ValueError("Invalid effective NumPy CPU feature flags")
+        profile["effective_features"] = dict(sorted(features.items()))
+    for name in ("numpy_cpu_baseline", "numpy_cpu_dispatch"):
+        if name in runtime:
+            values = runtime[name]
+            if not isinstance(values, list) or any(not isinstance(value, str) or not value for value in values):
+                raise ValueError("Invalid NumPy dispatcher capability list")
+            profile[name] = sorted(set(values))
+    if "numpy_version" in runtime:
+        if not isinstance(runtime["numpy_version"], str) or not runtime["numpy_version"]:
+            raise ValueError("Invalid recorded NumPy version")
+        profile["numpy_version"] = runtime["numpy_version"]
+    nested = numpy_execution_profile(runtime.get("runtime"))
+    if nested is not None:
+        if any(profile[key] != nested[key] for key in set(profile) & set(nested)):
+            raise ValueError("Conflicting nested NumPy execution metadata")
+        profile.update(nested)
+    return profile
+
+
+def require_matching_numpy_profiles(left, right, context):
+    if left != right:
+        if left is None or right is None:
+            raise ValueError(f"NumPy execution profile missing for one {context}")
+        differing = sorted(key for key in set(left) | set(right) if left.get(key) != right.get(key))
+        raise ValueError(f"NumPy execution profiles differ for {context}: {differing}")
+
+
+def execution_environment(directory, partition, package_numpy):
+    """Preserve serial/partition evidence and reject mixed resumed profiles."""
+    directory = Path(directory)
+    evidence = {}
+    for name in ("execution_environment.json", "execution.json"):
+        path = directory / name
+        if path.exists():
+            metadata = json.loads(path.read_text())
+            if not isinstance(metadata, dict):
+                raise ValueError(f"Invalid execution metadata: {name}")
+            evidence[name] = {"sha256": sha256(path), "metadata": metadata}
+    serial = numpy_execution_profile(evidence.get("execution_environment.json", {}).get("metadata"))
+    layout = partition["layout"] if partition is not None else None
+    profile = numpy_execution_profile(layout.get("runtime")) if layout else serial
+    if layout and serial is not None:
+        # An override-only serial declaration can corroborate a richer worker
+        # record, but cannot replace missing effective-worker evidence.
+        if profile is None or any(profile.get(key) != value for key, value in serial.items()):
+            raise ValueError("Serial and partition NumPy execution metadata differ")
+    if profile is not None and profile.get("numpy_version", package_numpy) != package_numpy:
+        raise ValueError("Recorded NumPy execution version differs from the signed package version")
+    if layout and profile is not None and layout.get("start_checkpoint_sha256"):
+        history = layout.get("execution_history", [])
+        if not history:
+            require_matching_numpy_profiles(profile, serial, "reused serial checkpoints")
+        def check_history(execution):
+            require_matching_numpy_profiles(profile, numpy_execution_profile(execution.get("runtime")),
+                                            "resumed execution attempts")
+            for previous in execution.get("execution_history", []):
+                check_history(previous)
+        for previous in history:
+            check_history(previous)
+    if layout:
+        evidence["partition_runtime"] = deepcopy(layout.get("runtime"))
+    return {"profile": profile, "evidence": evidence,
+        "scope": ("effective_dispatch_and_override" if profile is not None
+                  and "effective_features" in profile and "disabled_features" in profile else
+                  "recorded_fields_only" if profile is not None else "unrecorded_not_verified")}
+
+
+def verify_partition_layout(source, directory, archive_hash):
+    """Bind a logical full run to its actual immutable crop executions.
+
+    Runtime absolute child directories are descriptive metadata only. Every
+    verified child and checkpoint is resolved inside this downloaded run.
+    """
+    directory = Path(directory).resolve()
+    manifest = source["manifest.json"]
+    layout = manifest.get("execution_layout")
+    layout_file = directory / "partition_execution.json"
+    if layout is None:
+        if layout_file.exists():
+            raise ValueError("Partition execution exists without a completed manifest layout")
+        return None
+    if (layout.get("kind") != "independent_crop_partitions" or layout.get("status") != "completed"
+            or layout.get("workers") not in range(1, 6)
+            or layout.get("logical_signature") != manifest["signature"]):
+        raise ValueError("Invalid or incomplete partition execution layout")
+    if not layout_file.is_file() or json.loads(layout_file.read_text()) != layout:
+        raise ValueError("Partition layout file differs from completed manifest")
+    if layout.get("source_archive_sha256") != archive_hash:
+        raise ValueError("Partition execution used a different source archive")
+    if layout.get("thread_environment") != {"OMP_NUM_THREADS": "1", "OPENBLAS_NUM_THREADS": "1", "MKL_NUM_THREADS": "1"}:
+        raise ValueError("Partition numerical thread environment differs")
+    def verify_execution_files(execution, ancestor=False):
+        if (execution.get("logical_signature") != manifest["signature"]
+                or execution.get("source_archive_sha256") != archive_hash):
+            raise ValueError("Execution history belongs to a different logical run or source archive")
+        wrapper_name = execution.get("wrapper_source", "")
+        wrapper = (directory / wrapper_name).resolve()
+        if (not wrapper_name or Path(wrapper_name).is_absolute()
+                or not wrapper.is_relative_to(directory)):
+            raise ValueError("Invalid archived partition wrapper path")
+        if not wrapper.is_file() or sha256(wrapper) != execution.get("wrapper_sha256"):
+            raise ValueError("Archived partition wrapper hash differs")
+        auxiliary = execution.get("auxiliary_files", {})
+        if not isinstance(auxiliary, dict):
+            raise ValueError("Invalid auxiliary execution-file mapping")
+        for name, expected in auxiliary.items():
+            path = (directory / name).resolve()
+            if (Path(name).is_absolute() or not path.is_relative_to(directory)
+                    or not path.is_file() or sha256(path) != expected):
+                raise ValueError(f"Archived auxiliary execution file differs: {name}")
+        saved_at_start = execution.get("start_checkpoint_sha256", {})
+        if not isinstance(saved_at_start, dict):
+            raise ValueError("Invalid resumed-checkpoint hash mapping")
+        for name, expected in saved_at_start.items():
+            path = (directory / name).resolve()
+            if (Path(name).is_absolute() or not path.is_relative_to(directory)
+                    or not path.is_file() or sha256(path) != expected):
+                raise ValueError(f"Checkpoint saved before resumption was changed: {name}")
+        runtime = execution.get("runtime")
+        if runtime is not None:
+            if (not isinstance(runtime, dict)
+                    or any(not isinstance(runtime.get(key), str) or not runtime[key]
+                           for key in ("python", "machine", "platform"))
+                    or (runtime.get("logical_cpus") is not None
+                        and (not isinstance(runtime["logical_cpus"], int) or runtime["logical_cpus"] < 1))):
+                raise ValueError("Invalid execution runtime metadata")
+        history = execution.get("execution_history", [])
+        if not isinstance(history, list):
+            raise ValueError("Invalid execution history")
+        for prior in history:
+            verify_execution_files(prior, ancestor=True)
+
+    verify_execution_files(layout)
+    spec = manifest["spec"]
+    cultures, years = spec["options"]["cultures"], spec["options"]["years"]
+    models = list(spec["candidates"])
+    children = layout.get("children", [])
+    if len(children) != len(cultures) or {c["culture"] for c in children} != set(cultures):
+        raise ValueError("Partition children do not cover the full crop set exactly once")
+    child_specs, child_signatures = {}, {}
+    for child in children:
+        culture = child["culture"]
+        child_dir = (directory / "partitions" / culture).resolve()
+        if not child_dir.is_relative_to(directory):
+            raise ValueError("Partition child resolves outside the downloaded run")
+        expected_spec = deepcopy(spec)
+        expected_spec["options"]["cultures"] = [culture]
+        expected_signature = spec_signature(expected_spec)
+        child_manifest = json.loads((child_dir / "manifest.json").read_text())
+        if (child_manifest.get("spec") != expected_spec or child_manifest.get("signature") != expected_signature
+                or child.get("signature") != expected_signature or child.get("exit_code") != 0
+                or child.get("total") != len(years) * len(models)
+                or child.get("spec_difference") != {"options.cultures": [culture]}):
+            raise ValueError("Child execution differs from its one-crop restriction")
+        child_specs[culture], child_signatures[culture] = expected_spec, expected_signature
+    required_outputs = {"predictions.csv", "summary.json", "summary.csv", "audit.json",
+        "residual_diagnostics.csv", "cohorts.json", "partition_checkpoint_provenance.json"}
+    hashes = layout.get("results", {}).get("outputs_sha256", {})
+    if set(hashes) != required_outputs:
+        raise ValueError("Partition result hashes do not cover every consolidated output")
+    for name, expected in hashes.items():
+        actual = logical_csv_sha256(csv_path(directory, name)) if name.endswith(".csv") else sha256(directory / name)
+        if actual != expected:
+            raise ValueError(f"Consolidated partition output hash differs: {name}")
+    provenance_file = directory / "partition_checkpoint_provenance.json"
+    records = json.loads(provenance_file.read_text())
+    expected_units = {f"{c}-{y}-{m}.json": (c, y, m) for c in cultures for y in years for m in models}
+    if len(records) != len(expected_units) or {r["checkpoint"] for r in records} != set(expected_units):
+        raise ValueError("Partition checkpoint provenance is incomplete or duplicated")
+    if (layout["results"].get("checkpoints") != len(records)
+            or layout["results"].get("rows") != len(source["predictions.csv"])):
+        raise ValueError("Partition result counts differ from consolidated artifacts")
+    for record in records:
+        name = record["checkpoint"]
+        culture, year, model = expected_units[name]
+        parent_path = directory / "checkpoints" / name
+        child_path = directory / "partitions" / culture / "checkpoints" / name
+        if (not parent_path.is_file() or not child_path.is_file()
+                or sha256(parent_path) != record["parent_sha256"]
+                or sha256(child_path) != record["child_sha256"]
+                or record["child_signature"] != child_signatures[culture]):
+            raise ValueError("Partition checkpoint bytes or child signature differ from provenance")
+        parent, child = json.loads(parent_path.read_text()), json.loads(child_path.read_text())
+        if parent.get("signature") != manifest["signature"] or child.get("signature") != child_signatures[culture]:
+            raise ValueError("Partition checkpoint logical/executed signatures differ")
+        for kind in ("rows", "audits", "diagnostics"):
+            if parent.get(kind) != child.get(kind):
+                raise ValueError("Partition consolidation changed a numerical checkpoint payload")
+        if parent.get("executed_child_signature") is not None:
+            if (parent["executed_child_signature"] != child_signatures[culture]
+                    or parent.get("executed_child_checkpoint_sha256") != record["child_sha256"]):
+                raise ValueError("Consolidated checkpoint does not bind its actual child execution")
+        else:
+            reused = child.get("reused_from", {})
+            if (reused.get("logical_signature") != manifest["signature"]
+                    or reused.get("checkpoint") != name or reused.get("checkpoint_sha256") != record["parent_sha256"]):
+                raise ValueError("Reused checkpoint does not bind its original serial execution")
+    return {"layout": deepcopy(layout), "layout_sha256": sha256(layout_file),
+        "checkpoint_provenance_sha256": sha256(provenance_file),
+        "child_executed_specs": child_specs, "verified_checkpoint_pairs": len(records),
+        "scope": "The original signature describes a logical full run. Actual executions restrict it "
+                 "to one crop; reused serial checkpoints and consolidated child checkpoints are bound separately."}
+
+
 def validate_source(source, directory):
     spec = source["manifest.json"]["spec"]
     models = list(spec["candidates"])
@@ -321,6 +555,13 @@ def merge_runs(primary_directory, rpg_directory, output):
     primary_spec, rpg_spec = primary["manifest.json"]["spec"], rpg["manifest.json"]["spec"]
     primary_payload, primary_archive_hash = read_archive(primary_directory, primary_spec)
     rpg_payload, rpg_archive_hash = read_archive(rpg_directory, rpg_spec)
+    primary_partition = verify_partition_layout(primary, primary_directory, primary_archive_hash)
+    rpg_partition = verify_partition_layout(rpg, rpg_directory, rpg_archive_hash)
+    environments = {
+        "primary": execution_environment(primary_directory, primary_partition, primary_spec["packages"]["numpy"]),
+        "rpg": execution_environment(rpg_directory, rpg_partition, rpg_spec["packages"]["numpy"])}
+    require_matching_numpy_profiles(environments["primary"]["profile"], environments["rpg"]["profile"],
+                                    "primary and RPG runs")
     alias = verify_alias(primary_payload, rpg_payload, primary_spec, rpg_spec)
     primary_economics = validate_source(primary, primary_directory)
     if validate_source(rpg, rpg_directory) != primary_economics:
@@ -355,10 +596,17 @@ def merge_runs(primary_directory, rpg_directory, output):
     renamed_diagnostics["model"] = renamed_diagnostics.model.map(RENAMES)
     diagnostics = pd.concat([primary["residual_diagnostics.csv"], renamed_diagnostics], ignore_index=True)
     source_records = {}
-    for label, source, archive_hash in (("primary", primary, primary_archive_hash), ("rpg", rpg, rpg_archive_hash)):
+    for label, source, archive_hash, partition in (("primary", primary, primary_archive_hash, primary_partition),
+                                                  ("rpg", rpg, rpg_archive_hash, rpg_partition)):
         source_records[label] = {"executed_signature": source["manifest.json"]["signature"],
             "executed_spec": source["manifest.json"]["spec"], "artifact_sha256": source["artifact_hashes"],
-            "executed_archive_sha256": archive_hash, "all_tracked_archive_members_verified": True}
+            "executed_archive_sha256": archive_hash, "all_tracked_archive_members_verified": True,
+            "execution_environment": environments[label]}
+        if partition is not None:
+            record = source_records[label]
+            record["logical_signature"] = record.pop("executed_signature")
+            record["logical_spec"] = record.pop("executed_spec")
+            record["partition_execution"] = partition
     spec = {"execution": "composition of immutable source runs; no combined run was executed",
         "options": deepcopy(primary_spec["options"]) | {"models": list(candidates)},
         "packages": primary_spec["packages"], "target": primary_spec["target"],
@@ -368,6 +616,8 @@ def merge_runs(primary_directory, rpg_directory, output):
                              **{m: "rpg" for m in RENAMES.values()}},
             "renames": RENAMES, "allowed_changed_files": sorted(ALLOWED_CHANGED_FILES),
             "changed_files": changed, "rpg_alias": alias, "sources": source_records,
+            "numpy_execution_profile_check": ("unrecorded_not_verified" if environments["primary"]["profile"] is None
+                                               else environments["primary"]["scope"]),
             "composer_sha256": sha256(Path(__file__))}}
     signature = spec_signature(spec)
     output.mkdir(parents=True, exist_ok=True)

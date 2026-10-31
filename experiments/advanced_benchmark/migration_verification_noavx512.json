@@ -1,0 +1,734 @@
+{
+  "status": "completed",
+  "created_utc": "20261031T112718392183Z",
+  "scope": {
+    "culture": "pois",
+    "year": 2018,
+    "requested_models": [
+      "trend",
+      "qrf_seasonal",
+      "qrf_soil_dense",
+      "cat_sparse"
+    ],
+    "selected_models": [
+      "trend",
+      "qrf_seasonal",
+      "qrf_soil_dense",
+      "cat_sparse"
+    ],
+    "missing_original_checkpoints": [],
+    "interpretation": "Targeted checkpoint replay on this runtime. Only checkpoints bound at the latest partition start predate this execution attempt; this is not a global hardware-invariance claim."
+  },
+  "runtime": {
+    "python": "3.13.16",
+    "machine": "x86_64",
+    "platform": "Linux-6.6.159+-x86_64-with-glibc2.39",
+    "logical_cpus": 12
+  },
+  "thread_environment": {
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1"
+  },
+  "original_child_manifest_sha256": "45c5c2f388d10d20b98e446bed54259beb09aeac198bf9da6deb873c9a5c8c73",
+  "original_child_signature": "61169dd0520b9eedd0f497b4de4f1cf0cdce11aab967692df8a9606bd20ec083",
+  "partition_layout_sha256": "e16194b91a47092e0f930e6d22f00de1fb5e9675c866c76bb8aba546efeda1e4",
+  "partition_runtime": {
+    "python": "3.13.16",
+    "machine": "x86_64",
+    "logical_cpus": 12,
+    "platform": "Linux"
+  },
+  "prior_runtimes": [
+    null
+  ],
+  "packages": {
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "scipy": "1.17.0",
+    "scikit-learn": "1.8.0",
+    "quantile-forest": "1.4.2",
+    "lightgbm": "4.7.0",
+    "catboost": "1.2.10",
+    "PyYAML": "6.0.3"
+  },
+  "package_changes": {},
+  "source_files_verified": 25,
+  "helper_path": "/content/batched_prediction.py",
+  "helper_sha256": "f119db3df69b86a03d8633674c97b6849333879f8aca0f6bb885b00d5baaf188",
+  "verification_script_sha256": "83ac0da4ca701722c27adb59bb066bd70b976c9f53d670e6b4000f8540f86aa4",
+  "replay_directory": "/content/advanced-migration-verification-noavx512/replay-20261031T112718392183Z",
+  "original_checkpoints": {
+    "trend": {
+      "path": "/content/hackthefork-advanced-results/partitions/pois/checkpoints/pois-2018-trend.json",
+      "sha256": "0be4e134cafa015aaea41db1c8a79e743d2a82fae29ebe6dde4b1e76ecb73ff4",
+      "core_sha256": "bc53153e08c5e111eba97c59efde6761ec036940bc55b02e31b9b4da8fbcc32e",
+      "matched_checkpoint_at_latest_partition_start": true
+    },
+    "qrf_seasonal": {
+      "path": "/content/hackthefork-advanced-results/partitions/pois/checkpoints/pois-2018-qrf_seasonal.json",
+      "sha256": "6209a3e2a9db22d656224154f8c60e429abc7fec4eb98aab69ae2b915b04ecee",
+      "core_sha256": "2c5cbb42b3fef9df09bc2c6bb7b7f9519fbf2f511563abdbf2d7c15673bf1aeb",
+      "matched_checkpoint_at_latest_partition_start": true
+    },
+    "qrf_soil_dense": {
+      "path": "/content/hackthefork-advanced-results/partitions/pois/checkpoints/pois-2018-qrf_soil_dense.json",
+      "sha256": "2a824508719273cc586778f3f26e946cd220fafa6d118e57535e1e2437075579",
+      "core_sha256": "0e6c1a277d779be56e9bcb077ba612d9cfaa43b8bc12db91c16186620a24db4e",
+      "matched_checkpoint_at_latest_partition_start": true
+    },
+    "cat_sparse": {
+      "path": "/content/hackthefork-advanced-results/partitions/pois/checkpoints/pois-2018-cat_sparse.json",
+      "sha256": "97c636b29e8c8f00de26aab18dd319a8122561d4c4be480a0a901cead664152f",
+      "core_sha256": "a6e01e696272d39f6ae1851b5d0f3a892bf8a678606945209f003945a8ae28a3",
+      "matched_checkpoint_at_latest_partition_start": true
+    }
+  },
+  "elapsed_seconds": 13.29,
+  "batching_stats": {
+    "generation": 1,
+    "batches": 1,
+    "batched_rows": 711,
+    "cache_calls": 76,
+    "cache_rows": 675,
+    "fallback_calls": 76
+  },
+  "comparisons": {
+    "trend": {
+      "core_exact": false,
+      "original_checkpoint_sha256": "0be4e134cafa015aaea41db1c8a79e743d2a82fae29ebe6dde4b1e76ecb73ff4",
+      "replay_checkpoint_sha256": "1fcd07c8d4e34404eec26327175c8c001cbe2fabe03ad5ff27264261ed27bd96",
+      "original_core_sha256": "bc53153e08c5e111eba97c59efde6761ec036940bc55b02e31b9b4da8fbcc32e",
+      "replay_core_sha256": "7cce2d359280d34f9130dbe63977710465e5cd583dea3d392ecd820ed349a455",
+      "original_predates_latest_partition_start": true,
+      "differences": {
+        "count": 14,
+        "numeric_count": 14,
+        "max_absolute_numeric_difference": 2.2737367544323206e-13,
+        "max_relative_numeric_difference": 5.606774578640743e-16,
+        "examples": [
+          {
+            "path": ".diagnostics[25].wheat_residual_standardized",
+            "before": -0.6644922372732104,
+            "after": -0.6644922372732106,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 2.220446049250313e-16,
+            "relative_difference": 3.341568079654422e-16
+          },
+          {
+            "path": ".rows[36].coefficient",
+            "before": 302.97819651420537,
+            "after": 302.9781965142054,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 5.684341886080802e-14,
+            "relative_difference": 1.87615543015297e-16
+          },
+          {
+            "path": ".rows[36].contract_loss_eur_ha",
+            "before": 76.03759264375749,
+            "after": 76.03759264375753,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 4.263256414560601e-14,
+            "relative_difference": 5.606774578640743e-16
+          },
+          {
+            "path": ".rows[36].effective_price_actual",
+            "before": 302.97819651420537,
+            "after": 302.9781965142054,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 5.684341886080802e-14,
+            "relative_difference": 1.87615543015297e-16
+          },
+          {
+            "path": ".rows[36].expected_unit_cost",
+            "before": 302.97819651420537,
+            "after": 302.9781965142055,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 1.1368683772161603e-13,
+            "relative_difference": 3.752310860305939e-16
+          },
+          {
+            "path": ".rows[36].paid_actual_eur_ha",
+            "before": 950.9879632187877,
+            "after": 950.987963218788,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 2.2737367544323206e-13,
+            "relative_difference": 2.390920645027361e-16
+          },
+          {
+            "path": ".rows[75].wheat_residual_standardized",
+            "before": -0.6644922372732104,
+            "after": -0.6644922372732106,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 2.220446049250313e-16,
+            "relative_difference": 3.341568079654422e-16
+          },
+          {
+            "path": ".rows[76].wheat_residual_standardized",
+            "before": -0.6644922372732104,
+            "after": -0.6644922372732106,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 2.220446049250313e-16,
+            "relative_difference": 3.341568079654422e-16
+          },
+          {
+            "path": ".rows[77].wheat_residual_standardized",
+            "before": -0.6644922372732104,
+            "after": -0.6644922372732106,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 2.220446049250313e-16,
+            "relative_difference": 3.341568079654422e-16
+          },
+          {
+            "path": ".rows[205].coefficient",
+            "before": 1.5988356219697497,
+            "after": 1.5988356219697493,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 4.440892098500626e-16,
+            "relative_difference": 2.777578906472881e-16
+          },
+          {
+            "path": ".rows[205].contract_loss_eur_ha",
+            "before": 103.52015837471149,
+            "after": 103.52015837471144,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 4.263256414560601e-14,
+            "relative_difference": 4.1182862173847434e-16
+          },
+          {
+            "path": ".rows[205].effective_price_actual",
+            "before": 286.6712270191761,
+            "after": 286.67122701917606,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 5.684341886080802e-14,
+            "relative_difference": 1.982878416221577e-16
+          },
+          {
+            "path": ".rows[205].expected_unit_cost",
+            "before": 300.61862492142495,
+            "after": 300.6186249214249,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 5.684341886080802e-14,
+            "relative_difference": 1.890881474015977e-16
+          },
+          {
+            "path": ".rows[205].paid_actual_eur_ha",
+            "before": 1034.6107918735577,
+            "after": 1034.6107918735574,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 2.2737367544323206e-13,
+            "relative_difference": 2.197673533169756e-16
+          }
+        ]
+      },
+      "same_cohort": true,
+      "before_rows": 225,
+      "after_rows": 225,
+      "all_held_verdicts_identical": true,
+      "per_contract": {
+        "fixed": {
+          "n_cases": 75,
+          "changed_held_verdicts": 0,
+          "coefficient_max_abs_difference": 5.684341886080802e-14,
+          "paid_actual_eur_ha_max_abs_difference": 2.2737367544323206e-13,
+          "expected_unit_cost_max_abs_difference": 1.1368683772161603e-13,
+          "shortfall_eur_ha_max_abs_difference": 0.0
+        },
+        "indexed": {
+          "n_cases": 75,
+          "changed_held_verdicts": 0,
+          "coefficient_max_abs_difference": 4.440892098500626e-16,
+          "paid_actual_eur_ha_max_abs_difference": 2.2737367544323206e-13,
+          "expected_unit_cost_max_abs_difference": 5.684341886080802e-14,
+          "shortfall_eur_ha_max_abs_difference": 0.0
+        },
+        "tiers": {
+          "n_cases": 75,
+          "changed_held_verdicts": 0,
+          "coefficient_max_abs_difference": 0.0,
+          "paid_actual_eur_ha_max_abs_difference": 0.0,
+          "expected_unit_cost_max_abs_difference": 0.0,
+          "shortfall_eur_ha_max_abs_difference": 0.0
+        }
+      }
+    },
+    "qrf_seasonal": {
+      "core_exact": false,
+      "original_checkpoint_sha256": "6209a3e2a9db22d656224154f8c60e429abc7fec4eb98aab69ae2b915b04ecee",
+      "replay_checkpoint_sha256": "85724d1769964a89178fc22c04878d985f2a188a831452b35f434d8995446493",
+      "original_core_sha256": "2c5cbb42b3fef9df09bc2c6bb7b7f9519fbf2f511563abdbf2d7c15673bf1aeb",
+      "replay_core_sha256": "bf54561cde489408bf35b3a00f6b81c7648c56b5946e1611df3161fd4303687e",
+      "original_predates_latest_partition_start": true,
+      "differences": {
+        "count": 14,
+        "numeric_count": 14,
+        "max_absolute_numeric_difference": 4.547473508864641e-13,
+        "max_relative_numeric_difference": 2.422912817926861e-15,
+        "examples": [
+          {
+            "path": ".diagnostics[25].wheat_residual_standardized",
+            "before": -0.6644922372732104,
+            "after": -0.6644922372732106,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 2.220446049250313e-16,
+            "relative_difference": 3.341568079654422e-16
+          },
+          {
+            "path": ".rows[46].coefficient",
+            "before": 1.43303462050799,
+            "after": 1.433034620507991,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 8.881784197001252e-16,
+            "relative_difference": 6.197885291740393e-16
+          },
+          {
+            "path": ".rows[46].contract_loss_eur_ha",
+            "before": 35.19116645895992,
+            "after": 35.191166458960005,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 8.526512829121202e-14,
+            "relative_difference": 2.422912817926861e-15
+          },
+          {
+            "path": ".rows[46].effective_price_actual",
+            "before": 256.94310745708265,
+            "after": 256.94310745708276,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 1.1368683772161603e-13,
+            "relative_difference": 4.4245918424025116e-16
+          },
+          {
+            "path": ".rows[46].expected_unit_cost",
+            "before": 272.35449351392384,
+            "after": 272.35449351392407,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 2.2737367544323206e-13,
+            "relative_difference": 8.348445898933099e-16
+          },
+          {
+            "path": ".rows[46].paid_actual_eur_ha",
+            "before": 854.3358322947997,
+            "after": 854.3358322948002,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 4.547473508864641e-13,
+            "relative_difference": 5.322817254018059e-16
+          },
+          {
+            "path": ".rows[75].wheat_residual_standardized",
+            "before": -0.6644922372732104,
+            "after": -0.6644922372732106,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 2.220446049250313e-16,
+            "relative_difference": 3.341568079654422e-16
+          },
+          {
+            "path": ".rows[76].wheat_residual_standardized",
+            "before": -0.6644922372732104,
+            "after": -0.6644922372732106,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 2.220446049250313e-16,
+            "relative_difference": 3.341568079654422e-16
+          },
+          {
+            "path": ".rows[77].wheat_residual_standardized",
+            "before": -0.6644922372732104,
+            "after": -0.6644922372732106,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 2.220446049250313e-16,
+            "relative_difference": 3.341568079654422e-16
+          },
+          {
+            "path": ".rows[171].coefficient",
+            "before": 297.70975624896647,
+            "after": 297.7097562489666,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 1.1368683772161603e-13,
+            "relative_difference": 3.8187138760257093e-16
+          },
+          {
+            "path": ".rows[171].contract_loss_eur_ha",
+            "before": 63.98619709789419,
+            "after": 63.98619709789426,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 7.105427357601002e-14,
+            "relative_difference": 1.110462518460069e-15
+          },
+          {
+            "path": ".rows[171].effective_price_actual",
+            "before": 297.70975624896647,
+            "after": 297.7097562489666,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 1.1368683772161603e-13,
+            "relative_difference": 3.8187138760257093e-16
+          },
+          {
+            "path": ".rows[171].expected_unit_cost",
+            "before": 297.7097562489664,
+            "after": 297.7097562489665,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 1.1368683772161603e-13,
+            "relative_difference": 3.81871387602571e-16
+          },
+          {
+            "path": ".rows[171].paid_actual_eur_ha",
+            "before": 962.4509854894712,
+            "after": 962.4509854894716,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 3.410605131648481e-13,
+            "relative_difference": 3.543666309317515e-16
+          }
+        ]
+      },
+      "same_cohort": true,
+      "before_rows": 225,
+      "after_rows": 225,
+      "all_held_verdicts_identical": true,
+      "per_contract": {
+        "fixed": {
+          "n_cases": 75,
+          "changed_held_verdicts": 0,
+          "coefficient_max_abs_difference": 1.1368683772161603e-13,
+          "paid_actual_eur_ha_max_abs_difference": 3.410605131648481e-13,
+          "expected_unit_cost_max_abs_difference": 1.1368683772161603e-13,
+          "shortfall_eur_ha_max_abs_difference": 0.0
+        },
+        "indexed": {
+          "n_cases": 75,
+          "changed_held_verdicts": 0,
+          "coefficient_max_abs_difference": 8.881784197001252e-16,
+          "paid_actual_eur_ha_max_abs_difference": 4.547473508864641e-13,
+          "expected_unit_cost_max_abs_difference": 2.2737367544323206e-13,
+          "shortfall_eur_ha_max_abs_difference": 0.0
+        },
+        "tiers": {
+          "n_cases": 75,
+          "changed_held_verdicts": 0,
+          "coefficient_max_abs_difference": 0.0,
+          "paid_actual_eur_ha_max_abs_difference": 0.0,
+          "expected_unit_cost_max_abs_difference": 0.0,
+          "shortfall_eur_ha_max_abs_difference": 0.0
+        }
+      }
+    },
+    "qrf_soil_dense": {
+      "core_exact": false,
+      "original_checkpoint_sha256": "2a824508719273cc586778f3f26e946cd220fafa6d118e57535e1e2437075579",
+      "replay_checkpoint_sha256": "94443d437cf0c3da6f3cce85953b5c1f8f2836564738c3794511bd001806239f",
+      "original_core_sha256": "0e6c1a277d779be56e9bcb077ba612d9cfaa43b8bc12db91c16186620a24db4e",
+      "replay_core_sha256": "2e1a84a8ae7fb02083e7fcc468094fae596e94ff0f832975b208c2af66211e1c",
+      "original_predates_latest_partition_start": true,
+      "differences": {
+        "count": 14,
+        "numeric_count": 14,
+        "max_absolute_numeric_difference": 4.547473508864641e-13,
+        "max_relative_numeric_difference": 1.9394649157049447e-15,
+        "examples": [
+          {
+            "path": ".diagnostics[25].wheat_residual_standardized",
+            "before": -0.6644922372732104,
+            "after": -0.6644922372732106,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 2.220446049250313e-16,
+            "relative_difference": 3.341568079654422e-16
+          },
+          {
+            "path": ".rows[10].coefficient",
+            "before": 0.6768930390590564,
+            "after": 0.676893039059057,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 5.551115123125783e-16,
+            "relative_difference": 8.200874883928987e-16
+          },
+          {
+            "path": ".rows[10].contract_loss_eur_ha",
+            "before": 14.654407615346528,
+            "after": 14.654407615346557,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 2.842170943040401e-14,
+            "relative_difference": 1.9394649157049447e-15
+          },
+          {
+            "path": ".rows[10].effective_price_actual",
+            "before": 121.36692190328883,
+            "after": 121.36692190328893,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 9.947598300641403e-14,
+            "relative_difference": 8.196301055215138e-16
+          },
+          {
+            "path": ".rows[10].expected_unit_cost",
+            "before": 128.21739182673403,
+            "after": 128.2173918267342,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 1.7053025658242404e-13,
+            "relative_difference": 1.3300087776927257e-15
+          },
+          {
+            "path": ".rows[10].paid_actual_eur_ha",
+            "before": 175.0232380767328,
+            "after": 175.02323807673295,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 1.4210854715202004e-13,
+            "relative_difference": 8.119410240240064e-16
+          },
+          {
+            "path": ".rows[38].coefficient",
+            "before": 292.15161169860966,
+            "after": 292.1516116986098,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 1.7053025658242404e-13,
+            "relative_difference": 5.837046579717208e-16
+          },
+          {
+            "path": ".rows[38].contract_loss_eur_ha",
+            "before": 51.184636183725424,
+            "after": 51.184636183725516,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 9.237055564881302e-14,
+            "relative_difference": 1.8046539457123823e-15
+          },
+          {
+            "path": ".rows[38].effective_price_actual",
+            "before": 263.3882951824351,
+            "after": 263.3882951824353,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 1.7053025658242404e-13,
+            "relative_difference": 6.474481201387733e-16
+          },
+          {
+            "path": ".rows[38].expected_unit_cost",
+            "before": 265.68286103375505,
+            "after": 265.6828610337552,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 1.7053025658242404e-13,
+            "relative_difference": 6.4185644463064575e-16
+          },
+          {
+            "path": ".rows[38].paid_actual_eur_ha",
+            "before": 826.7231809186273,
+            "after": 826.7231809186278,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 4.547473508864641e-13,
+            "relative_difference": 5.500599975691545e-16
+          },
+          {
+            "path": ".rows[75].wheat_residual_standardized",
+            "before": -0.6644922372732104,
+            "after": -0.6644922372732106,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 2.220446049250313e-16,
+            "relative_difference": 3.341568079654422e-16
+          },
+          {
+            "path": ".rows[76].wheat_residual_standardized",
+            "before": -0.6644922372732104,
+            "after": -0.6644922372732106,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 2.220446049250313e-16,
+            "relative_difference": 3.341568079654422e-16
+          },
+          {
+            "path": ".rows[77].wheat_residual_standardized",
+            "before": -0.6644922372732104,
+            "after": -0.6644922372732106,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 2.220446049250313e-16,
+            "relative_difference": 3.341568079654422e-16
+          }
+        ]
+      },
+      "same_cohort": true,
+      "before_rows": 225,
+      "after_rows": 225,
+      "all_held_verdicts_identical": true,
+      "per_contract": {
+        "fixed": {
+          "n_cases": 75,
+          "changed_held_verdicts": 0,
+          "coefficient_max_abs_difference": 0.0,
+          "paid_actual_eur_ha_max_abs_difference": 0.0,
+          "expected_unit_cost_max_abs_difference": 0.0,
+          "shortfall_eur_ha_max_abs_difference": 0.0
+        },
+        "indexed": {
+          "n_cases": 75,
+          "changed_held_verdicts": 0,
+          "coefficient_max_abs_difference": 5.551115123125783e-16,
+          "paid_actual_eur_ha_max_abs_difference": 1.4210854715202004e-13,
+          "expected_unit_cost_max_abs_difference": 1.7053025658242404e-13,
+          "shortfall_eur_ha_max_abs_difference": 0.0
+        },
+        "tiers": {
+          "n_cases": 75,
+          "changed_held_verdicts": 0,
+          "coefficient_max_abs_difference": 1.7053025658242404e-13,
+          "paid_actual_eur_ha_max_abs_difference": 4.547473508864641e-13,
+          "expected_unit_cost_max_abs_difference": 1.7053025658242404e-13,
+          "shortfall_eur_ha_max_abs_difference": 0.0
+        }
+      }
+    },
+    "cat_sparse": {
+      "core_exact": false,
+      "original_checkpoint_sha256": "97c636b29e8c8f00de26aab18dd319a8122561d4c4be480a0a901cead664152f",
+      "replay_checkpoint_sha256": "0562fb08a6fc4ef728ba450baab1e2aa68b7da05d3229eb6d0866fc77256b05b",
+      "original_core_sha256": "a6e01e696272d39f6ae1851b5d0f3a892bf8a678606945209f003945a8ae28a3",
+      "replay_core_sha256": "b019248dc7392613286d6abdddf380f6151d1af6596665effbd0e631ae34ca45",
+      "original_predates_latest_partition_start": true,
+      "differences": {
+        "count": 14,
+        "numeric_count": 14,
+        "max_absolute_numeric_difference": 2.2737367544323206e-13,
+        "max_relative_numeric_difference": 3.1603129609045207e-15,
+        "examples": [
+          {
+            "path": ".diagnostics[25].wheat_residual_standardized",
+            "before": -0.6644922372732104,
+            "after": -0.6644922372732106,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 2.220446049250313e-16,
+            "relative_difference": 3.341568079654422e-16
+          },
+          {
+            "path": ".rows[1].coefficient",
+            "before": 1.7236188479228387,
+            "after": 1.7236188479228383,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 4.440892098500626e-16,
+            "relative_difference": 2.576493117287745e-16
+          },
+          {
+            "path": ".rows[1].contract_loss_eur_ha",
+            "before": 14.05206431590113,
+            "after": 14.052064315901086,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 4.440892098500626e-14,
+            "relative_difference": 3.1603129609045207e-15
+          },
+          {
+            "path": ".rows[1].effective_price_actual",
+            "before": 309.04485943256503,
+            "after": 309.0448594325649,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 1.1368683772161603e-13,
+            "relative_difference": 3.6786516342758647e-16
+          },
+          {
+            "path": ".rows[1].expected_unit_cost",
+            "before": 324.75547279806443,
+            "after": 324.75547279806426,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 1.7053025658242404e-13,
+            "relative_difference": 5.251035651936838e-16
+          },
+          {
+            "path": ".rows[1].paid_actual_eur_ha",
+            "before": 766.5703215795058,
+            "after": 766.5703215795056,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 2.2737367544323206e-13,
+            "relative_difference": 2.9661163371774195e-16
+          },
+          {
+            "path": ".rows[9].coefficient",
+            "before": 136.1638026743305,
+            "after": 136.16380267433055,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 5.684341886080802e-14,
+            "relative_difference": 4.174635089823624e-16
+          },
+          {
+            "path": ".rows[9].contract_loss_eur_ha",
+            "before": 18.922123967330364,
+            "after": 18.92212396733038,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 1.4210854715202004e-14,
+            "relative_difference": 7.51017948076943e-16
+          },
+          {
+            "path": ".rows[9].effective_price_actual",
+            "before": 136.1638026743305,
+            "after": 136.16380267433055,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 5.684341886080802e-14,
+            "relative_difference": 4.174635089823624e-16
+          },
+          {
+            "path": ".rows[9].expected_unit_cost",
+            "before": 136.1638026743305,
+            "after": 136.16380267433058,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 8.526512829121202e-14,
+            "relative_difference": 6.261952634735435e-16
+          },
+          {
+            "path": ".rows[9].paid_actual_eur_ha",
+            "before": 196.361819836652,
+            "after": 196.36181983665207,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 8.526512829121202e-14,
+            "relative_difference": 4.3422457768084296e-16
+          },
+          {
+            "path": ".rows[75].wheat_residual_standardized",
+            "before": -0.6644922372732104,
+            "after": -0.6644922372732106,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 2.220446049250313e-16,
+            "relative_difference": 3.341568079654422e-16
+          },
+          {
+            "path": ".rows[76].wheat_residual_standardized",
+            "before": -0.6644922372732104,
+            "after": -0.6644922372732106,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 2.220446049250313e-16,
+            "relative_difference": 3.341568079654422e-16
+          },
+          {
+            "path": ".rows[77].wheat_residual_standardized",
+            "before": -0.6644922372732104,
+            "after": -0.6644922372732106,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 2.220446049250313e-16,
+            "relative_difference": 3.341568079654422e-16
+          }
+        ]
+      },
+      "same_cohort": true,
+      "before_rows": 225,
+      "after_rows": 225,
+      "all_held_verdicts_identical": true,
+      "per_contract": {
+        "fixed": {
+          "n_cases": 75,
+          "changed_held_verdicts": 0,
+          "coefficient_max_abs_difference": 5.684341886080802e-14,
+          "paid_actual_eur_ha_max_abs_difference": 8.526512829121202e-14,
+          "expected_unit_cost_max_abs_difference": 8.526512829121202e-14,
+          "shortfall_eur_ha_max_abs_difference": 0.0
+        },
+        "indexed": {
+          "n_cases": 75,
+          "changed_held_verdicts": 0,
+          "coefficient_max_abs_difference": 4.440892098500626e-16,
+          "paid_actual_eur_ha_max_abs_difference": 2.2737367544323206e-13,
+          "expected_unit_cost_max_abs_difference": 1.7053025658242404e-13,
+          "shortfall_eur_ha_max_abs_difference": 0.0
+        },
+        "tiers": {
+          "n_cases": 75,
+          "changed_held_verdicts": 0,
+          "coefficient_max_abs_difference": 0.0,
+          "paid_actual_eur_ha_max_abs_difference": 0.0,
+          "expected_unit_cost_max_abs_difference": 0.0,
+          "shortfall_eur_ha_max_abs_difference": 0.0
+        }
+      }
+    }
+  },
+  "all_core_exact": false,
+  "all_cohorts_identical": true,
+  "all_verdicts_identical": true,
+  "replay_manifest_sha256": "7184eeaf81cbff554cba5fa4bdbb941e9354ff76d5255b2d0c6ebb4881d758f6"
+}

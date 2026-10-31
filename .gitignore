@@ -46,3 +46,9 @@ experiments/multilegumes_policies/subgroup_comparisons.csv
 experiments/multilegumes_policies/policy_predictions.csv.gz
 experiments/advanced_benchmark/checkpoints/
 experiments/advanced_benchmark/execution.log
+# Completed tables/manifests are in Git; full execution bundles are in Drive.
+experiments/advanced_*/checkpoints/
+experiments/advanced_*/partitions/
+experiments/advanced_*/executed-inputs.zip
+experiments/advanced_*/*.log
+experiments/advanced_*/residual_diagnostics.csv

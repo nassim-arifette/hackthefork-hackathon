@@ -22,6 +22,7 @@ import importlib.metadata
 import json
 import os
 from pathlib import Path
+import platform
 import signal
 import subprocess
 import sys
@@ -31,6 +32,44 @@ import zipfile
 
 CORE = ("rows", "audits", "diagnostics")
 THREAD_ENV = {"OMP_NUM_THREADS": "1", "OPENBLAS_NUM_THREADS": "1", "MKL_NUM_THREADS": "1"}
+BATCHED_WORKER = '''"""Archived execution entry point; logical benchmark source stays unchanged."""
+import argparse
+import hashlib
+import importlib.util
+import json
+from pathlib import Path
+import sys
+
+p = argparse.ArgumentParser()
+p.add_argument("--root", required=True)
+p.add_argument("--helper", required=True)
+p.add_argument("--helper-sha256", required=True)
+p.add_argument("--stats", required=True)
+args, remaining = p.parse_known_args()
+if remaining and remaining[0] == "--":
+    remaining = remaining[1:]
+helper = Path(args.helper)
+if hashlib.sha256(helper.read_bytes()).hexdigest() != args.helper_sha256:
+    raise ValueError("Archived batching helper changed")
+sys.path.insert(0, str(Path(args.root) / "pipeline"))
+import benchmark_advanced as benchmark
+spec = importlib.util.spec_from_file_location("executed_prediction_batching", helper)
+module = importlib.util.module_from_spec(spec)
+sys.modules[spec.name] = module
+spec.loader.exec_module(module)
+handle = module.install_batched_predictions(benchmark)
+success = False
+try:
+    with handle:
+        benchmark.run(benchmark.parser().parse_args(remaining))
+    success = True
+finally:
+    record = {"helper_sha256": args.helper_sha256, "success": success, "stats": handle.stats}
+    target = Path(args.stats)
+    temporary = target.with_suffix(".json.tmp")
+    temporary.write_text(json.dumps(record, indent=2) + "\\n")
+    temporary.replace(target)
+'''
 
 
 def sha256(path):
@@ -198,7 +237,110 @@ def stop_original(pid, root, output, timeout=10):
     raise RuntimeError("Original benchmark did not stop within 10 seconds; no child execution launched")
 
 
-def child_command(root, child, options):
+def _process_info(pid, proc_root=Path("/proc")):
+    directory = Path(proc_root) / str(pid)
+    if not directory.exists():
+        return None
+    argv = [arg.decode() for arg in (directory / "cmdline").read_bytes().split(b"\0") if arg]
+    if not argv:
+        return None
+    status = (directory / "status").read_text().splitlines()
+    ppid = int(next(line.split()[1] for line in status if line.startswith("PPid:")))
+    return {"argv": argv, "ppid": ppid, "cwd": (directory / "cwd").resolve()}
+
+
+def _argument(argv, name):
+    values = [arg.split("=", 1)[1] for arg in argv if arg.startswith(name + "=")]
+    values += [argv[i + 1] for i, arg in enumerate(argv[:-1]) if arg == name]
+    if len(values) != 1:
+        raise ValueError(f"Expected exactly one {name} argument")
+    return values[0]
+
+
+def verify_wrapper_tree(pid, root, output, proc_root=Path("/proc")):
+    """Plan termination only after exact wrapper/child command and ownership checks."""
+    root, output = Path(root).resolve(), Path(output).resolve()
+    info = _process_info(pid, proc_root)
+    if info is None:
+        raise ValueError("Requested wrapper process is absent; inspect prior workers before resuming")
+    execution = json.loads((output / "execution.json").read_text())
+    layout = json.loads((output / "partition_execution.json").read_text())
+    registered = execution.get("partition_pid") == pid or layout.get("wrapper_pid") == pid
+    if not registered:
+        raise ValueError("Requested wrapper PID is not registered for this output")
+    if execution.get("partition_pid") == pid and execution.get("partition_command") != info["argv"]:
+        raise ValueError("Registered wrapper command does not match the running process")
+    if (info["cwd"] / _argument(info["argv"], "--root")).resolve() != root or (
+            info["cwd"] / _argument(info["argv"], "--output")).resolve() != output:
+        raise ValueError("Wrapper belongs to a different source or output")
+    wrapper_args = [arg for arg in info["argv"] if Path(arg).name.startswith("parallel_advanced") and arg.endswith(".py")]
+    if len(wrapper_args) != 1:
+        raise ValueError("Requested parent is not a parallel advanced wrapper")
+    children = []
+    for child in layout.get("children", []):
+        child_pid = child.get("pid")
+        if not child_pid:
+            continue
+        live = _process_info(child_pid, proc_root)
+        if live is None:
+            continue
+        if live["ppid"] != pid or live["argv"] != child.get("command"):
+            raise ValueError("Refusing to stop a worker with different ownership or command")
+        expected_output = output / "partitions" / child["culture"]
+        if (live["cwd"] / _argument(live["argv"], "--output")).resolve() != expected_output:
+            raise ValueError("Worker has an unexpected output directory")
+        scripts = [Path(arg) for arg in live["argv"] if arg.endswith(".py")]
+        permitted = root / "pipeline/benchmark_advanced.py"
+        if not any((live["cwd"] / script).resolve() == permitted for script in scripts):
+            auxiliaries = layout.get("auxiliary_files", {})
+            worker_scripts = [name for name in auxiliaries if Path(name).name == "batched_worker.py"]
+            if not any((live["cwd"] / script).resolve() == (output / name).resolve()
+                       for script in scripts for name in worker_scripts):
+                raise ValueError("Worker is neither the frozen benchmark nor an archived batching entry")
+        children.append(child_pid)
+    kernel_children = Path(proc_root) / str(pid) / "task" / str(pid) / "children"
+    if kernel_children.exists():
+        actual = {int(value) for value in kernel_children.read_text().split()
+                  if _process_info(int(value), proc_root) is not None}
+        if actual != set(children):
+            raise ValueError("Wrapper owns unregistered live children; no process will be stopped")
+    return {"requested_pid": pid, "child_pids": children, "commands_verified": True}
+
+
+def stop_wrapper_tree(pid, root, output, timeout=10):
+    # Freeze scheduling during ownership verification, then terminate exactly
+    # the verified parent and its current children. Restore scheduling on error.
+    verify_wrapper_tree(pid, root, output)
+    os.kill(pid, signal.SIGSTOP)
+    try:
+        plan = verify_wrapper_tree(pid, root, output)
+    except BaseException:
+        os.kill(pid, signal.SIGCONT)
+        raise
+    targets = [pid, *plan["child_pids"]]
+    for target in targets:
+        try:
+            os.kill(target, signal.SIGTERM)
+        except ProcessLookupError:
+            pass
+    try:
+        os.kill(pid, signal.SIGCONT)
+    except ProcessLookupError:
+        pass
+    until = time.monotonic() + timeout
+    while time.monotonic() < until:
+        alive = []
+        for target in targets:
+            path = Path("/proc") / str(target) / "stat"
+            if path.exists() and not path.read_text().split(") ", 1)[1].startswith("Z "):
+                alive.append(target)
+        if not alive:
+            return {**plan, "stopped": True, "signal": "SIGTERM", "scheduling_frozen_during_verification": True}
+        time.sleep(.1)
+    raise RuntimeError(f"Verified execution processes did not stop within 10 seconds: {alive}")
+
+
+def child_command(root, child, options, batching=None):
     command = [sys.executable, "-u", str(Path(root) / "pipeline/benchmark_advanced.py"),
                "--output", child["directory"], "--data-dir", str(Path(root) / "data"),
                "--cultures", child["culture"], "--years", *map(str, options["years"]),
@@ -206,7 +348,65 @@ def child_command(root, child, options):
                "--threads", str(options["threads"])]
     if options.get("models") is not None:
         command.extend(["--models", *options["models"]])
+    if batching is not None:
+        command = [sys.executable, "-u", batching["entry"], "--root", str(root),
+            "--helper", batching["helper"], "--helper-sha256", batching["helper_sha256"],
+            "--stats", str(Path(child["directory"]) / "batching_stats.json"), "--", *command[3:]]
     return command
+
+
+def _checked_auxiliary(output, relative, expected):
+    path = (Path(output) / relative).resolve()
+    if not path.is_relative_to(Path(output).resolve()) or not path.is_file() or sha256(path) != expected:
+        raise ValueError(f"Execution auxiliary changed or missing: {relative}")
+    return path
+
+
+def archive_execution(output, helper=None):
+    """Retain every executed wrapper/helper version instead of overwriting history."""
+    output = Path(output).resolve()
+    attempt = output / "executions" / str(time.time_ns())
+    attempt.mkdir(parents=True)
+    history = []
+    previous_path = output / "partition_execution.json"
+    if previous_path.exists():
+        previous = json.loads(previous_path.read_text())
+        old_source = _checked_auxiliary(output, previous["wrapper_source"], previous["wrapper_sha256"])
+        archived = attempt / "previous_parallel_advanced.py"
+        archived.write_bytes(old_source.read_bytes())
+        previous["wrapper_source"] = str(archived.relative_to(output))
+        for name, expected in previous.get("auxiliary_files", {}).items():
+            _checked_auxiliary(output, name, expected)
+        history.append(previous)
+        atomic_json(attempt / "previous_execution.json", previous)
+    wrapper = attempt / "parallel_advanced.py"
+    wrapper.write_bytes(Path(__file__).read_bytes())
+    auxiliary = {str(wrapper.relative_to(output)): sha256(wrapper)}
+    batching = None
+    if helper is not None:
+        helper = Path(helper).resolve()
+        copied = attempt / "batched_prediction.py"
+        copied.write_bytes(helper.read_bytes())
+        entry = attempt / "batched_worker.py"
+        entry.write_text(BATCHED_WORKER)
+        auxiliary.update({str(copied.relative_to(output)): sha256(copied), str(entry.relative_to(output)): sha256(entry)})
+        batching = {"entry": str(entry), "helper": str(copied), "helper_sha256": sha256(copied)}
+    return {"wrapper_source": str(wrapper.relative_to(output)), "auxiliary_files": auxiliary,
+            "execution_history": history, "batching": batching}
+
+
+def runtime_metadata():
+    """Record the effective NumPy dispatcher because QRF tie ordering uses it."""
+    import numpy as np
+    from numpy._core import _multiarray_umath
+    return {"python": platform.python_version(), "machine": platform.machine(),
+            "logical_cpus": os.cpu_count(), "platform": platform.system(),
+            "numpy_version": np.__version__,
+            "numpy_dispatch_override": os.environ.get("NPY_DISABLE_CPU_FEATURES"),
+            "numpy_cpu_features": {name: bool(enabled) for name, enabled in
+                getattr(_multiarray_umath, "__cpu_features__", {}).items()},
+            "numpy_cpu_baseline": list(getattr(_multiarray_umath, "__cpu_baseline__", [])),
+            "numpy_cpu_dispatch": list(getattr(_multiarray_umath, "__cpu_dispatch__", []))}
 
 
 def consolidate(output, manifest, children, benchmark):
@@ -262,8 +462,12 @@ def consolidate(output, manifest, children, benchmark):
 
 def run(args):
     root, output = args.root.resolve(), args.output.resolve()
-    if args.workers not in (1, 2):
-        raise ValueError("Use one or two crop workers")
+    if not 1 <= args.workers <= 5:
+        raise ValueError("Use one through five crop workers")
+    if args.stop_pid is not None and args.stop_wrapper_pid is not None:
+        raise ValueError("Specify either one original benchmark or one wrapper tree to stop")
+    if args.stop_only and args.stop_pid is None and args.stop_wrapper_pid is None:
+        raise ValueError("--stop-only requires an explicit process identifier")
     source_archive = args.source_archive
     if source_archive is None and (output / "executed-inputs.zip").exists():
         source_archive = output / "executed-inputs.zip"
@@ -273,22 +477,39 @@ def run(args):
     benchmark = importlib.import_module("benchmark_advanced")
     if Path(benchmark.__file__).resolve() != root / "pipeline/benchmark_advanced.py":
         raise ValueError("Imported benchmark came from a different checkout")
-    stop = stop_original(args.stop_pid, root, output)
+    stop = (stop_wrapper_tree(args.stop_wrapper_pid, root, output) if args.stop_wrapper_pid is not None
+            else stop_original(args.stop_pid, root, output))
+    if args.stop_only:
+        path = output / "partition_execution.json"
+        prior = json.loads(path.read_text()) if path.exists() else {}
+        action_dir = output / "executions" / f"stop-{time.time_ns()}"
+        action_dir.mkdir(parents=True)
+        source = action_dir / "stop_wrapper.py"
+        source.write_bytes(Path(__file__).read_bytes())
+        prior["status"] = "interrupted"
+        prior["stop_for_resume"] = stop
+        prior.setdefault("auxiliary_files", {})[str(source.relative_to(output))] = sha256(source)
+        atomic_json(path, prior)
+        progress = json.loads((output / "progress.json").read_text()) if (output / "progress.json").exists() else {}
+        progress.update(status="interrupted", active="stopped for checkpoint migration or execution upgrade")
+        atomic_json(output / "progress.json", progress)
+        print(json.dumps({"status": "stopped", **stop}), flush=True)
+        return
     # Original process is stopped before snapshotting its completed checkpoints.
     children = prepare_partitions(root, output, manifest, benchmark)
+    execution = archive_execution(output, args.batched_helper)
     started = time.monotonic()
     layout = {"kind": "independent_crop_partitions", "status": "running", "workers": args.workers,
         "logical_signature": manifest["signature"], "wrapper_sha256": sha256(__file__),
+        "wrapper_pid": os.getpid(),
+        "runtime": runtime_metadata(),
         "thread_environment": THREAD_ENV,
         "source_archive_sha256": sha256(source_archive) if source_archive else None,
         "stop_original": stop, "children": children,
-        "invariance": "Only cultures is restricted; same source/data/package/options, seeds, per-crop sequential years and numerical checkpoint payloads"}
-    wrapper_copy = output / "parallel_advanced.executed.py"
-    if wrapper_copy.resolve() != Path(__file__).resolve():
-        temporary = wrapper_copy.with_suffix(".py.tmp")
-        temporary.write_bytes(Path(__file__).read_bytes())
-        temporary.replace(wrapper_copy)
-    layout["wrapper_source"] = wrapper_copy.name
+        "invariance": "Only cultures is restricted; same source/data/package/options, seeds, per-crop sequential years and numerical checkpoint payloads",
+        **execution}
+    layout["start_checkpoint_sha256"] = {str(path.relative_to(output)): sha256(path)
+        for child in children for path in sorted((Path(child["directory"]) / "checkpoints").glob("*.json"))}
     atomic_json(output / "partition_execution.json", layout)
     queue, active = deque(sorted(children, key=lambda child: -child["remaining_work_estimate"])), {}
     total = sum(child["total"] for child in children)
@@ -297,7 +518,7 @@ def run(args):
             while queue and len(active) < args.workers:
                 child = queue.popleft()
                 log = open(Path(child["directory"]) / "worker.log", "a", encoding="utf-8")
-                command = child_command(root, child, manifest["spec"]["options"])
+                command = child_command(root, child, manifest["spec"]["options"], execution["batching"])
                 process = subprocess.Popen(command, cwd=root, stdout=log, stderr=subprocess.STDOUT,
                                            env={**os.environ, **THREAD_ENV})
                 active[child["culture"]] = (process, log, child)
@@ -310,6 +531,9 @@ def run(args):
                     continue
                 log.close()
                 child["exit_code"] = status
+                stats = Path(child["directory"]) / "batching_stats.json"
+                if execution["batching"] and stats.exists():
+                    child["batching_stats"] = json.loads(stats.read_text())
                 del active[culture]
                 if status:
                     raise RuntimeError(f"Crop worker {culture} failed ({status}); completed checkpoints remain resumable")
@@ -322,6 +546,8 @@ def run(args):
             if active:
                 time.sleep(2)
         verify_manifest(root, output, source_archive)
+        for name, expected in layout["auxiliary_files"].items():
+            _checked_auxiliary(output, name, expected)
         # Check child manifests have not changed while their processes ran.
         for child in children:
             check_partition_spec(manifest, json.loads((Path(child["directory"]) / "manifest.json").read_text()), child["culture"])
@@ -354,5 +580,8 @@ if __name__ == "__main__":
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--workers", type=int, default=2)
     parser.add_argument("--stop-pid", type=int)
+    parser.add_argument("--stop-wrapper-pid", type=int)
+    parser.add_argument("--stop-only", action="store_true")
+    parser.add_argument("--batched-helper", type=Path)
     parser.add_argument("--source-archive", type=Path)
     run(parser.parse_args())

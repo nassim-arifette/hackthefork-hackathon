@@ -1,6 +1,7 @@
 """Advanced benchmark with visible progress and source-keyed Drive checkpoints."""
 import hashlib
 import json
+import os
 from pathlib import Path
 import shutil
 import subprocess
@@ -11,6 +12,11 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts'))
 from colab_multilegumes import run_visible
 
+# quantile-forest samples one observation per leaf by default. NumPy's SIMD
+# argsort can reorder tied leaf IDs across CPUs before this seeded sample.
+# Apply the evaluated execution profile before launching fresh child processes.
+NUMPY_DISABLED_FEATURES = 'AVX512F,AVX512CD,AVX512_SKX,AVX512_CLX,AVX512_CNL,AVX512_ICL'
+
 
 def inputs():
     names = ('panel_rendements.csv', 'meteo_dept_cultures.csv',
@@ -20,7 +26,7 @@ def inputs():
     files = [*sorted((ROOT / 'pipeline').glob('*.py')),
              *[ROOT / 'data' / name for name in names],
              ROOT / 'requirements-research.txt', Path(__file__).resolve(),
-             ROOT / 'scripts/colab_multilegumes.py']
+             ROOT / 'scripts/colab_multilegumes.py', ROOT / 'scripts/parallel_advanced.py']
     optional = ('sim_agri_features.csv', 'soil_features_crop.csv',
                 'meteo_advanced_manifest.json', 'sim_manifest.json',
                 'sim_agri_manifest.json', 'soil_manifest.json',
@@ -64,6 +70,7 @@ def prepare_rpg_alias(primary_archive, alias_data, secondary_archive):
 
 
 def main():
+    os.environ['NPY_DISABLE_CPU_FEATURES'] = NUMPY_DISABLED_FEATURES
     drive = Path('/content/drive/MyDrive')
     if not drive.is_dir():
         raise RuntimeError('Monter Google Drive avant de lancer cette cellule.')
@@ -77,6 +84,15 @@ def main():
     primary, rpg, combined = [destination / name for name in ('primary', 'rpg', 'combined')]
     primary.mkdir(exist_ok=True)
     rpg.mkdir(exist_ok=True)
+    runtime = {'NPY_DISABLE_CPU_FEATURES': NUMPY_DISABLED_FEATURES,
+               'reason': 'Match the evaluated QRF leaf-sampling execution profile'}
+    probe = ('import json, sys; sys.path.insert(0, "scripts"); '
+             'from parallel_advanced import runtime_metadata; '
+             'print(json.dumps(runtime_metadata()))')
+    runtime['runtime'] = json.loads(subprocess.check_output(
+        [sys.executable, '-c', probe], cwd=ROOT, text=True))
+    for directory in (primary, rpg):
+        (directory / 'execution_environment.json').write_text(json.dumps(runtime, indent=2) + '\n')
     with zipfile.ZipFile(primary / 'executed-inputs.zip', 'w', zipfile.ZIP_DEFLATED) as archive:
         for path in files:
             archive.write(path, path.relative_to(ROOT))

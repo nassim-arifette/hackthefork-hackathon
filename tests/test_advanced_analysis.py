@@ -132,6 +132,14 @@ def test_paired_bootstrap_and_subgroups_keep_exact_cases():
     assert (identity.delta_unit_cost_year_bootstrap_low == 0).all()
     summary = grouped_period_summaries(rows)
     assert "idf" in set(summary.group_type)
+    departments = summary[(summary.period == "full") & (summary.group_type == "department")]
+    assert set(departments.group) == {"01", "77", "03"}
+    assert (departments.n == 6).all()
+    assert (departments.n_departments == 1).all()
+    local = departments[(departments.group == "77") & (departments.policy == "trend/raw")].iloc[0]
+    reference_rows = rows[(rows.dep == "77") & (rows.policy == "trend/raw")]
+    assert local.realized_unit_cost == pytest.approx(
+        reference_rows.paid_actual_eur_ha.sum() / reference_rows.accepted_yield_actual.sum())
     idf = summary[(summary.period == "full") & (summary.group_type == "idf") & (summary.group == "Île-de-France")]
     assert (idf.n == 6).all()
     later = summary[(summary.period == "since_2023") & (summary.group_type == "all")]
@@ -147,7 +155,7 @@ def test_vectorized_subgroups_match_the_existing_metric_definition():
     rows, _, _ = evaluated()
     old = grouped_summaries(add_groups(rows))
     new = grouped_period_summaries(rows)
-    new = new[(new.period == "full") & (new.group_type != "idf")]
+    new = new[(new.period == "full") & ~new.group_type.isin(["idf", "department"])]
     keys = ["culture", "contract", "policy", "group_type", "group"]
     new = new.sort_values(keys).reset_index(drop=True)
     old = old.sort_values(keys).reset_index(drop=True)

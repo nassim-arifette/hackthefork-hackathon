@@ -198,6 +198,7 @@ def grouped_period_summaries(evaluated, first_test_year=2019, sensitivity_year=2
             continue
         parts = []
         for kind, column in (("all", None), ("year", "year"), ("region", "region"),
+                             ("department", "dep"),
                              ("old_cohort", "old_cohort"), ("history", "history_group"),
                              ("past_volatility", "volatility_group"), ("idf", "idf_group")):
             if column is not None and column not in current:
@@ -408,7 +409,7 @@ def write_report(summary, pairs, decisions, output, manifest, catalog):
             ["Culture", "Contrat", "Candidat rétrospectif", "Cas", "Marge ≥ blé", "Paiement €/t", "Statut"]), "",
         "## Décomposition et sous-groupes", "",
         "`ablation.csv` publie les transitions de variables, distributions et paramètres en brut et avec cal95, avec les cas sauvés et perdus. Les colonnes `parent` et `candidate` identifient exactement les deux configurations ; le catalogue précise toute autre différence.",
-        "`summary.csv.gz` et `subgroup_comparisons.csv.gz` incluent tous les groupes, favorables et défavorables : année, région, Île-de-France, historique, volatilité passée, ancienne/nouvelle cohorte. Les effectifs sont conservés. Aucun sous-groupe n'est créé après sélection d'un résultat favorable.", "",
+        "`summary.csv.gz` et `subgroup_comparisons.csv.gz` incluent tous les groupes, favorables et défavorables : année, région, département, Île-de-France, historique, volatilité passée, ancienne/nouvelle cohorte. Les effectifs sont conservés. Aucun sous-groupe n'est créé après sélection d'un résultat favorable.", "",
         "## Reproduction et traçabilité", "",
         f"- `global_summary.csv` : tous les candidats et sélecteurs, périodes complète et depuis {manifest['sensitivity_year']}.",
         "- `paired_baselines.csv` : écarts appariés contre M0 et ancien QRF, calibrages identiques, intervalles par années.",

@@ -1,0 +1,830 @@
+{
+  "status": "completed",
+  "created_utc": "20261031T112156206107Z",
+  "scope": {
+    "culture": "pois",
+    "year": 2018,
+    "requested_models": [
+      "trend",
+      "qrf_seasonal",
+      "qrf_soil_dense",
+      "cat_sparse"
+    ],
+    "selected_models": [
+      "trend",
+      "qrf_seasonal",
+      "qrf_soil_dense",
+      "cat_sparse"
+    ],
+    "missing_original_checkpoints": [],
+    "interpretation": "Targeted checkpoint replay on this runtime. Only checkpoints bound at the latest partition start predate this execution attempt; this is not a global hardware-invariance claim."
+  },
+  "runtime": {
+    "python": "3.13.16",
+    "machine": "x86_64",
+    "platform": "Linux-6.6.159+-x86_64-with-glibc2.39",
+    "logical_cpus": 12
+  },
+  "thread_environment": {
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1"
+  },
+  "original_child_manifest_sha256": "45c5c2f388d10d20b98e446bed54259beb09aeac198bf9da6deb873c9a5c8c73",
+  "original_child_signature": "61169dd0520b9eedd0f497b4de4f1cf0cdce11aab967692df8a9606bd20ec083",
+  "partition_layout_sha256": "e16194b91a47092e0f930e6d22f00de1fb5e9675c866c76bb8aba546efeda1e4",
+  "partition_runtime": {
+    "python": "3.13.16",
+    "machine": "x86_64",
+    "logical_cpus": 12,
+    "platform": "Linux"
+  },
+  "prior_runtimes": [
+    null
+  ],
+  "packages": {
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "scipy": "1.17.0",
+    "scikit-learn": "1.8.0",
+    "quantile-forest": "1.4.2",
+    "lightgbm": "4.7.0",
+    "catboost": "1.2.10",
+    "PyYAML": "6.0.3"
+  },
+  "package_changes": {},
+  "source_files_verified": 25,
+  "helper_path": "/content/batched_prediction.py",
+  "helper_sha256": "f119db3df69b86a03d8633674c97b6849333879f8aca0f6bb885b00d5baaf188",
+  "verification_script_sha256": "83ac0da4ca701722c27adb59bb066bd70b976c9f53d670e6b4000f8540f86aa4",
+  "replay_directory": "/content/advanced-migration-verification/replay-20261031T112156206107Z",
+  "original_checkpoints": {
+    "trend": {
+      "path": "/content/hackthefork-advanced-results/partitions/pois/checkpoints/pois-2018-trend.json",
+      "sha256": "0be4e134cafa015aaea41db1c8a79e743d2a82fae29ebe6dde4b1e76ecb73ff4",
+      "core_sha256": "bc53153e08c5e111eba97c59efde6761ec036940bc55b02e31b9b4da8fbcc32e",
+      "matched_checkpoint_at_latest_partition_start": true
+    },
+    "qrf_seasonal": {
+      "path": "/content/hackthefork-advanced-results/partitions/pois/checkpoints/pois-2018-qrf_seasonal.json",
+      "sha256": "6209a3e2a9db22d656224154f8c60e429abc7fec4eb98aab69ae2b915b04ecee",
+      "core_sha256": "2c5cbb42b3fef9df09bc2c6bb7b7f9519fbf2f511563abdbf2d7c15673bf1aeb",
+      "matched_checkpoint_at_latest_partition_start": true
+    },
+    "qrf_soil_dense": {
+      "path": "/content/hackthefork-advanced-results/partitions/pois/checkpoints/pois-2018-qrf_soil_dense.json",
+      "sha256": "2a824508719273cc586778f3f26e946cd220fafa6d118e57535e1e2437075579",
+      "core_sha256": "0e6c1a277d779be56e9bcb077ba612d9cfaa43b8bc12db91c16186620a24db4e",
+      "matched_checkpoint_at_latest_partition_start": true
+    },
+    "cat_sparse": {
+      "path": "/content/hackthefork-advanced-results/partitions/pois/checkpoints/pois-2018-cat_sparse.json",
+      "sha256": "97c636b29e8c8f00de26aab18dd319a8122561d4c4be480a0a901cead664152f",
+      "core_sha256": "a6e01e696272d39f6ae1851b5d0f3a892bf8a678606945209f003945a8ae28a3",
+      "matched_checkpoint_at_latest_partition_start": true
+    }
+  },
+  "elapsed_seconds": 13.416,
+  "batching_stats": {
+    "generation": 1,
+    "batches": 1,
+    "batched_rows": 711,
+    "cache_calls": 76,
+    "cache_rows": 675,
+    "fallback_calls": 76
+  },
+  "comparisons": {
+    "trend": {
+      "core_exact": false,
+      "original_checkpoint_sha256": "0be4e134cafa015aaea41db1c8a79e743d2a82fae29ebe6dde4b1e76ecb73ff4",
+      "replay_checkpoint_sha256": "1fcd07c8d4e34404eec26327175c8c001cbe2fabe03ad5ff27264261ed27bd96",
+      "original_core_sha256": "bc53153e08c5e111eba97c59efde6761ec036940bc55b02e31b9b4da8fbcc32e",
+      "replay_core_sha256": "7cce2d359280d34f9130dbe63977710465e5cd583dea3d392ecd820ed349a455",
+      "original_predates_latest_partition_start": true,
+      "differences": {
+        "count": 14,
+        "numeric_count": 14,
+        "max_absolute_numeric_difference": 2.2737367544323206e-13,
+        "max_relative_numeric_difference": 5.606774578640743e-16,
+        "examples": [
+          {
+            "path": ".diagnostics[25].wheat_residual_standardized",
+            "before": -0.6644922372732104,
+            "after": -0.6644922372732106,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 2.220446049250313e-16,
+            "relative_difference": 3.341568079654422e-16
+          },
+          {
+            "path": ".rows[36].coefficient",
+            "before": 302.97819651420537,
+            "after": 302.9781965142054,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 5.684341886080802e-14,
+            "relative_difference": 1.87615543015297e-16
+          },
+          {
+            "path": ".rows[36].contract_loss_eur_ha",
+            "before": 76.03759264375749,
+            "after": 76.03759264375753,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 4.263256414560601e-14,
+            "relative_difference": 5.606774578640743e-16
+          },
+          {
+            "path": ".rows[36].effective_price_actual",
+            "before": 302.97819651420537,
+            "after": 302.9781965142054,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 5.684341886080802e-14,
+            "relative_difference": 1.87615543015297e-16
+          },
+          {
+            "path": ".rows[36].expected_unit_cost",
+            "before": 302.97819651420537,
+            "after": 302.9781965142055,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 1.1368683772161603e-13,
+            "relative_difference": 3.752310860305939e-16
+          },
+          {
+            "path": ".rows[36].paid_actual_eur_ha",
+            "before": 950.9879632187877,
+            "after": 950.987963218788,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 2.2737367544323206e-13,
+            "relative_difference": 2.390920645027361e-16
+          },
+          {
+            "path": ".rows[75].wheat_residual_standardized",
+            "before": -0.6644922372732104,
+            "after": -0.6644922372732106,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 2.220446049250313e-16,
+            "relative_difference": 3.341568079654422e-16
+          },
+          {
+            "path": ".rows[76].wheat_residual_standardized",
+            "before": -0.6644922372732104,
+            "after": -0.6644922372732106,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 2.220446049250313e-16,
+            "relative_difference": 3.341568079654422e-16
+          },
+          {
+            "path": ".rows[77].wheat_residual_standardized",
+            "before": -0.6644922372732104,
+            "after": -0.6644922372732106,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 2.220446049250313e-16,
+            "relative_difference": 3.341568079654422e-16
+          },
+          {
+            "path": ".rows[205].coefficient",
+            "before": 1.5988356219697497,
+            "after": 1.5988356219697493,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 4.440892098500626e-16,
+            "relative_difference": 2.777578906472881e-16
+          },
+          {
+            "path": ".rows[205].contract_loss_eur_ha",
+            "before": 103.52015837471149,
+            "after": 103.52015837471144,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 4.263256414560601e-14,
+            "relative_difference": 4.1182862173847434e-16
+          },
+          {
+            "path": ".rows[205].effective_price_actual",
+            "before": 286.6712270191761,
+            "after": 286.67122701917606,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 5.684341886080802e-14,
+            "relative_difference": 1.982878416221577e-16
+          },
+          {
+            "path": ".rows[205].expected_unit_cost",
+            "before": 300.61862492142495,
+            "after": 300.6186249214249,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 5.684341886080802e-14,
+            "relative_difference": 1.890881474015977e-16
+          },
+          {
+            "path": ".rows[205].paid_actual_eur_ha",
+            "before": 1034.6107918735577,
+            "after": 1034.6107918735574,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 2.2737367544323206e-13,
+            "relative_difference": 2.197673533169756e-16
+          }
+        ]
+      },
+      "same_cohort": true,
+      "before_rows": 225,
+      "after_rows": 225,
+      "all_held_verdicts_identical": true,
+      "per_contract": {
+        "fixed": {
+          "n_cases": 75,
+          "changed_held_verdicts": 0,
+          "coefficient_max_abs_difference": 5.684341886080802e-14,
+          "paid_actual_eur_ha_max_abs_difference": 2.2737367544323206e-13,
+          "expected_unit_cost_max_abs_difference": 1.1368683772161603e-13,
+          "shortfall_eur_ha_max_abs_difference": 0.0
+        },
+        "indexed": {
+          "n_cases": 75,
+          "changed_held_verdicts": 0,
+          "coefficient_max_abs_difference": 4.440892098500626e-16,
+          "paid_actual_eur_ha_max_abs_difference": 2.2737367544323206e-13,
+          "expected_unit_cost_max_abs_difference": 5.684341886080802e-14,
+          "shortfall_eur_ha_max_abs_difference": 0.0
+        },
+        "tiers": {
+          "n_cases": 75,
+          "changed_held_verdicts": 0,
+          "coefficient_max_abs_difference": 0.0,
+          "paid_actual_eur_ha_max_abs_difference": 0.0,
+          "expected_unit_cost_max_abs_difference": 0.0,
+          "shortfall_eur_ha_max_abs_difference": 0.0
+        }
+      }
+    },
+    "qrf_seasonal": {
+      "core_exact": false,
+      "original_checkpoint_sha256": "6209a3e2a9db22d656224154f8c60e429abc7fec4eb98aab69ae2b915b04ecee",
+      "replay_checkpoint_sha256": "e55de87f795363beb3bc5b33cc2b77799b53c8c4b61d1e7b567090586d94960e",
+      "original_core_sha256": "2c5cbb42b3fef9df09bc2c6bb7b7f9519fbf2f511563abdbf2d7c15673bf1aeb",
+      "replay_core_sha256": "576c8281853767cf04d2ee830c0d02adc1af8799af973bd796d66cbd9f5c2249",
+      "original_predates_latest_partition_start": true,
+      "differences": {
+        "count": 3599,
+        "numeric_count": 3593,
+        "max_absolute_numeric_difference": 15.119373766549643,
+        "max_relative_numeric_difference": 1.6842618240056062,
+        "examples": [
+          {
+            "path": ".diagnostics[0].crop_residual_standardized",
+            "before": -0.39385650993028215,
+            "after": -0.3945356018842222,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 0.0006790919539400586,
+            "relative_difference": 0.0017212437881318006
+          },
+          {
+            "path": ".diagnostics[1].crop_residual_standardized",
+            "before": -0.04215779463732864,
+            "after": -0.030638272016825847,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 0.011519522620502792,
+            "relative_difference": 0.2732477521559637
+          },
+          {
+            "path": ".diagnostics[2].crop_residual_standardized",
+            "before": -0.5784989729213093,
+            "after": -0.5326502361243378,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 0.045848736796971434,
+            "relative_difference": 0.0792546554844239
+          },
+          {
+            "path": ".diagnostics[3].crop_residual_standardized",
+            "before": -0.6544069959059883,
+            "after": -0.5580583806220024,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 0.09634861528398586,
+            "relative_difference": 0.147230417594477
+          },
+          {
+            "path": ".diagnostics[4].crop_residual_standardized",
+            "before": -0.04962969877399666,
+            "after": 0.008775594974838503,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 0.05840529374883516,
+            "relative_difference": 1.1768214434425794
+          },
+          {
+            "path": ".diagnostics[5].crop_residual_standardized",
+            "before": 0.504397146733941,
+            "after": 0.5169118745534698,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 0.012514727819528781,
+            "relative_difference": 0.024210563609782673
+          },
+          {
+            "path": ".diagnostics[6].crop_residual_standardized",
+            "before": -0.1610020465374032,
+            "after": -0.13782342681627108,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 0.02317861972113211,
+            "relative_difference": 0.1439647521234916
+          },
+          {
+            "path": ".diagnostics[7].crop_residual_standardized",
+            "before": 0.45678070578833996,
+            "after": 0.44196351353036684,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 0.014817192257973122,
+            "relative_difference": 0.032438305887725075
+          },
+          {
+            "path": ".diagnostics[8].crop_residual_standardized",
+            "before": -0.990826327057442,
+            "after": -0.9881557584159736,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 0.002670568641468418,
+            "relative_difference": 0.0026952943906925425
+          },
+          {
+            "path": ".diagnostics[9].crop_residual_standardized",
+            "before": -0.1347340937218782,
+            "after": -0.08851885000355715,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 0.046215243718321045,
+            "relative_difference": 0.3430107587595447
+          },
+          {
+            "path": ".diagnostics[10].crop_residual_standardized",
+            "before": -0.5232226253525595,
+            "after": -0.5085314820460397,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 0.014691143306519772,
+            "relative_difference": 0.0280781881261739
+          },
+          {
+            "path": ".diagnostics[11].crop_residual_standardized",
+            "before": -0.5670036046391217,
+            "after": -0.6146343847887418,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 0.04763078014962008,
+            "relative_difference": 0.07749449319531876
+          },
+          {
+            "path": ".diagnostics[12].crop_residual_standardized",
+            "before": 0.08356745228942376,
+            "after": 0.12425270541073019,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 0.04068525312130643,
+            "relative_difference": 0.32743957555545455
+          },
+          {
+            "path": ".diagnostics[13].crop_residual_standardized",
+            "before": -0.1404685587918128,
+            "after": -0.07043088156655107,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 0.07003767722526173,
+            "relative_difference": 0.4986003830868938
+          },
+          {
+            "path": ".diagnostics[14].crop_residual_standardized",
+            "before": 0.0016022925771702876,
+            "after": -0.0010963876414451846,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 0.0026986802186154723,
+            "relative_difference": 1.6842618240056062
+          },
+          {
+            "path": ".diagnostics[15].crop_residual_standardized",
+            "before": 0.14718186512582238,
+            "after": 0.1369910966786658,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 0.010190768447156578,
+            "relative_difference": 0.0692392941103493
+          },
+          {
+            "path": ".diagnostics[16].crop_residual_standardized",
+            "before": -0.3939913141310846,
+            "after": -0.3807283292718049,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 0.013262984859279736,
+            "relative_difference": 0.033663140235794684
+          },
+          {
+            "path": ".diagnostics[17].crop_residual_standardized",
+            "before": -0.3035515335442713,
+            "after": -0.29974472127558366,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 0.0038068122686876205,
+            "relative_difference": 0.01254090936138334
+          },
+          {
+            "path": ".diagnostics[18].crop_residual_standardized",
+            "before": 0.18573671797013092,
+            "after": 0.20182647609847826,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 0.016089758128347342,
+            "relative_difference": 0.07972075041580066
+          },
+          {
+            "path": ".diagnostics[19].crop_residual_standardized",
+            "before": -0.05476151842359395,
+            "after": -0.006021263959604385,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 0.04874025446398956,
+            "relative_difference": 0.8900457085023024
+          }
+        ]
+      },
+      "same_cohort": true,
+      "before_rows": 225,
+      "after_rows": 225,
+      "all_held_verdicts_identical": true,
+      "per_contract": {
+        "fixed": {
+          "n_cases": 75,
+          "changed_held_verdicts": 0,
+          "coefficient_max_abs_difference": 4.865711159292516,
+          "paid_actual_eur_ha_max_abs_difference": 12.970503203968065,
+          "expected_unit_cost_max_abs_difference": 4.865711159292516,
+          "shortfall_eur_ha_max_abs_difference": 0.9030163511941964
+        },
+        "indexed": {
+          "n_cases": 75,
+          "changed_held_verdicts": 0,
+          "coefficient_max_abs_difference": 0.03594463955819105,
+          "paid_actual_eur_ha_max_abs_difference": 14.645639256448703,
+          "expected_unit_cost_max_abs_difference": 6.76292333537026,
+          "shortfall_eur_ha_max_abs_difference": 7.430407751245184
+        },
+        "tiers": {
+          "n_cases": 75,
+          "changed_held_verdicts": 0,
+          "coefficient_max_abs_difference": 4.745915282625219,
+          "paid_actual_eur_ha_max_abs_difference": 15.119373766549643,
+          "expected_unit_cost_max_abs_difference": 4.080923046865337,
+          "shortfall_eur_ha_max_abs_difference": 0.0
+        }
+      }
+    },
+    "qrf_soil_dense": {
+      "core_exact": false,
+      "original_checkpoint_sha256": "2a824508719273cc586778f3f26e946cd220fafa6d118e57535e1e2437075579",
+      "replay_checkpoint_sha256": "9a774f02cfa5c29c0ae9605eccc6203b273958476859999014e6779b704452c5",
+      "original_core_sha256": "0e6c1a277d779be56e9bcb077ba612d9cfaa43b8bc12db91c16186620a24db4e",
+      "replay_core_sha256": "ed44918869960a31937e7c35ac4104aca9eff66d48f57c3492566c28275bcf2f",
+      "original_predates_latest_partition_start": true,
+      "differences": {
+        "count": 3572,
+        "numeric_count": 3569,
+        "max_absolute_numeric_difference": 16.208996989319076,
+        "max_relative_numeric_difference": 1.8242933368790044,
+        "examples": [
+          {
+            "path": ".diagnostics[0].crop_residual_standardized",
+            "before": -0.3722878477310027,
+            "after": -0.38299340379095675,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 0.010705556059954047,
+            "relative_difference": 0.027952324906873046
+          },
+          {
+            "path": ".diagnostics[1].crop_residual_standardized",
+            "before": -0.13004275896981585,
+            "after": -0.13735977623352788,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 0.007317017263712033,
+            "relative_difference": 0.053268995220786014
+          },
+          {
+            "path": ".diagnostics[2].crop_residual_standardized",
+            "before": -0.5383079249355062,
+            "after": -0.5675677516920763,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 0.02925982675657013,
+            "relative_difference": 0.051553011370604654
+          },
+          {
+            "path": ".diagnostics[3].crop_residual_standardized",
+            "before": -0.7023213049521382,
+            "after": -0.6914684513312441,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 0.010852853620894054,
+            "relative_difference": 0.015452832691204853
+          },
+          {
+            "path": ".diagnostics[4].crop_residual_standardized",
+            "before": -0.18859424187956192,
+            "after": -0.2701204515224028,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 0.08152620964284091,
+            "relative_difference": 0.30181428019743783
+          },
+          {
+            "path": ".diagnostics[5].crop_residual_standardized",
+            "before": 0.2874166577501039,
+            "after": 0.2992800331399362,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 0.011863375389832287,
+            "relative_difference": 0.039639715571286566
+          },
+          {
+            "path": ".diagnostics[6].crop_residual_standardized",
+            "before": -0.33473976296871927,
+            "after": -0.403726082022286,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 0.06898631905356672,
+            "relative_difference": 0.1708740706273186
+          },
+          {
+            "path": ".diagnostics[7].crop_residual_standardized",
+            "before": 0.2795987539092976,
+            "after": 0.267929141733464,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 0.011669612175833621,
+            "relative_difference": 0.041736996365939694
+          },
+          {
+            "path": ".diagnostics[8].crop_residual_standardized",
+            "before": -1.247935338773578,
+            "after": -1.3391008615486644,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 0.09116552277508627,
+            "relative_difference": 0.06807965358909092
+          },
+          {
+            "path": ".diagnostics[9].crop_residual_standardized",
+            "before": -0.18890280041403026,
+            "after": -0.22360769862812815,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 0.03470489821409789,
+            "relative_difference": 0.15520439782269768
+          },
+          {
+            "path": ".diagnostics[10].crop_residual_standardized",
+            "before": -0.6055579972485762,
+            "after": -0.5923425607127933,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 0.013215436535782832,
+            "relative_difference": 0.021823568668614266
+          },
+          {
+            "path": ".diagnostics[11].crop_residual_standardized",
+            "before": -0.6764711575899556,
+            "after": -0.7325983656443075,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 0.056127208054351896,
+            "relative_difference": 0.07661388652565311
+          },
+          {
+            "path": ".diagnostics[12].crop_residual_standardized",
+            "before": 0.047152428943487076,
+            "after": 0.048113841175399304,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 0.0009614122319122273,
+            "relative_difference": 0.019982030293681875
+          },
+          {
+            "path": ".diagnostics[13].crop_residual_standardized",
+            "before": -0.1298064522470938,
+            "after": -0.13396467609886983,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 0.004158223851776027,
+            "relative_difference": 0.03103970369552595
+          },
+          {
+            "path": ".diagnostics[14].crop_residual_standardized",
+            "before": -0.07731430622294867,
+            "after": -0.09346994035204091,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 0.01615563412909224,
+            "relative_difference": 0.17284309873574752
+          },
+          {
+            "path": ".diagnostics[15].crop_residual_standardized",
+            "before": 0.019602331161647002,
+            "after": 0.02016936242367036,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 0.000567031262023357,
+            "relative_difference": 0.028113494621818114
+          },
+          {
+            "path": ".diagnostics[16].crop_residual_standardized",
+            "before": -0.4957300989990998,
+            "after": -0.5534408629575183,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 0.057710763958418454,
+            "relative_difference": 0.10427629729040859
+          },
+          {
+            "path": ".diagnostics[17].crop_residual_standardized",
+            "before": -0.3193344804334492,
+            "after": -0.3816016867059407,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 0.06226720627249149,
+            "relative_difference": 0.16317329938972236
+          },
+          {
+            "path": ".diagnostics[18].crop_residual_standardized",
+            "before": -0.010443965728530583,
+            "after": 0.008608891360620438,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 0.01905285708915102,
+            "relative_difference": 1.8242933368790044
+          },
+          {
+            "path": ".diagnostics[19].crop_residual_standardized",
+            "before": -0.1583772768124912,
+            "after": -0.19236249193797275,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 0.033985215125481555,
+            "relative_difference": 0.1766727743183951
+          }
+        ]
+      },
+      "same_cohort": true,
+      "before_rows": 225,
+      "after_rows": 225,
+      "all_held_verdicts_identical": true,
+      "per_contract": {
+        "fixed": {
+          "n_cases": 75,
+          "changed_held_verdicts": 0,
+          "coefficient_max_abs_difference": 5.6746192900805,
+          "paid_actual_eur_ha_max_abs_difference": 12.98439048007208,
+          "expected_unit_cost_max_abs_difference": 5.6746192900805,
+          "shortfall_eur_ha_max_abs_difference": 4.478946448991792
+        },
+        "indexed": {
+          "n_cases": 75,
+          "changed_held_verdicts": 0,
+          "coefficient_max_abs_difference": 0.02689309820934982,
+          "paid_actual_eur_ha_max_abs_difference": 16.208996989319076,
+          "expected_unit_cost_max_abs_difference": 4.939484488115511,
+          "shortfall_eur_ha_max_abs_difference": 7.713162596882739
+        },
+        "tiers": {
+          "n_cases": 75,
+          "changed_held_verdicts": 0,
+          "coefficient_max_abs_difference": 6.0657057772696135,
+          "paid_actual_eur_ha_max_abs_difference": 9.663540232019272,
+          "expected_unit_cost_max_abs_difference": 6.62421871229742,
+          "shortfall_eur_ha_max_abs_difference": 0.0
+        }
+      }
+    },
+    "cat_sparse": {
+      "core_exact": false,
+      "original_checkpoint_sha256": "97c636b29e8c8f00de26aab18dd319a8122561d4c4be480a0a901cead664152f",
+      "replay_checkpoint_sha256": "0562fb08a6fc4ef728ba450baab1e2aa68b7da05d3229eb6d0866fc77256b05b",
+      "original_core_sha256": "a6e01e696272d39f6ae1851b5d0f3a892bf8a678606945209f003945a8ae28a3",
+      "replay_core_sha256": "b019248dc7392613286d6abdddf380f6151d1af6596665effbd0e631ae34ca45",
+      "original_predates_latest_partition_start": true,
+      "differences": {
+        "count": 14,
+        "numeric_count": 14,
+        "max_absolute_numeric_difference": 2.2737367544323206e-13,
+        "max_relative_numeric_difference": 3.1603129609045207e-15,
+        "examples": [
+          {
+            "path": ".diagnostics[25].wheat_residual_standardized",
+            "before": -0.6644922372732104,
+            "after": -0.6644922372732106,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 2.220446049250313e-16,
+            "relative_difference": 3.341568079654422e-16
+          },
+          {
+            "path": ".rows[1].coefficient",
+            "before": 1.7236188479228387,
+            "after": 1.7236188479228383,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 4.440892098500626e-16,
+            "relative_difference": 2.576493117287745e-16
+          },
+          {
+            "path": ".rows[1].contract_loss_eur_ha",
+            "before": 14.05206431590113,
+            "after": 14.052064315901086,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 4.440892098500626e-14,
+            "relative_difference": 3.1603129609045207e-15
+          },
+          {
+            "path": ".rows[1].effective_price_actual",
+            "before": 309.04485943256503,
+            "after": 309.0448594325649,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 1.1368683772161603e-13,
+            "relative_difference": 3.6786516342758647e-16
+          },
+          {
+            "path": ".rows[1].expected_unit_cost",
+            "before": 324.75547279806443,
+            "after": 324.75547279806426,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 1.7053025658242404e-13,
+            "relative_difference": 5.251035651936838e-16
+          },
+          {
+            "path": ".rows[1].paid_actual_eur_ha",
+            "before": 766.5703215795058,
+            "after": 766.5703215795056,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 2.2737367544323206e-13,
+            "relative_difference": 2.9661163371774195e-16
+          },
+          {
+            "path": ".rows[9].coefficient",
+            "before": 136.1638026743305,
+            "after": 136.16380267433055,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 5.684341886080802e-14,
+            "relative_difference": 4.174635089823624e-16
+          },
+          {
+            "path": ".rows[9].contract_loss_eur_ha",
+            "before": 18.922123967330364,
+            "after": 18.92212396733038,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 1.4210854715202004e-14,
+            "relative_difference": 7.51017948076943e-16
+          },
+          {
+            "path": ".rows[9].effective_price_actual",
+            "before": 136.1638026743305,
+            "after": 136.16380267433055,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 5.684341886080802e-14,
+            "relative_difference": 4.174635089823624e-16
+          },
+          {
+            "path": ".rows[9].expected_unit_cost",
+            "before": 136.1638026743305,
+            "after": 136.16380267433058,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 8.526512829121202e-14,
+            "relative_difference": 6.261952634735435e-16
+          },
+          {
+            "path": ".rows[9].paid_actual_eur_ha",
+            "before": 196.361819836652,
+            "after": 196.36181983665207,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 8.526512829121202e-14,
+            "relative_difference": 4.3422457768084296e-16
+          },
+          {
+            "path": ".rows[75].wheat_residual_standardized",
+            "before": -0.6644922372732104,
+            "after": -0.6644922372732106,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 2.220446049250313e-16,
+            "relative_difference": 3.341568079654422e-16
+          },
+          {
+            "path": ".rows[76].wheat_residual_standardized",
+            "before": -0.6644922372732104,
+            "after": -0.6644922372732106,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 2.220446049250313e-16,
+            "relative_difference": 3.341568079654422e-16
+          },
+          {
+            "path": ".rows[77].wheat_residual_standardized",
+            "before": -0.6644922372732104,
+            "after": -0.6644922372732106,
+            "reason": "numeric value/type differs",
+            "absolute_difference": 2.220446049250313e-16,
+            "relative_difference": 3.341568079654422e-16
+          }
+        ]
+      },
+      "same_cohort": true,
+      "before_rows": 225,
+      "after_rows": 225,
+      "all_held_verdicts_identical": true,
+      "per_contract": {
+        "fixed": {
+          "n_cases": 75,
+          "changed_held_verdicts": 0,
+          "coefficient_max_abs_difference": 5.684341886080802e-14,
+          "paid_actual_eur_ha_max_abs_difference": 8.526512829121202e-14,
+          "expected_unit_cost_max_abs_difference": 8.526512829121202e-14,
+          "shortfall_eur_ha_max_abs_difference": 0.0
+        },
+        "indexed": {
+          "n_cases": 75,
+          "changed_held_verdicts": 0,
+          "coefficient_max_abs_difference": 4.440892098500626e-16,
+          "paid_actual_eur_ha_max_abs_difference": 2.2737367544323206e-13,
+          "expected_unit_cost_max_abs_difference": 1.7053025658242404e-13,
+          "shortfall_eur_ha_max_abs_difference": 0.0
+        },
+        "tiers": {
+          "n_cases": 75,
+          "changed_held_verdicts": 0,
+          "coefficient_max_abs_difference": 0.0,
+          "paid_actual_eur_ha_max_abs_difference": 0.0,
+          "expected_unit_cost_max_abs_difference": 0.0,
+          "shortfall_eur_ha_max_abs_difference": 0.0
+        }
+      }
+    }
+  },
+  "all_core_exact": false,
+  "all_cohorts_identical": true,
+  "all_verdicts_identical": true,
+  "replay_manifest_sha256": "7184eeaf81cbff554cba5fa4bdbb941e9354ff76d5255b2d0c6ebb4881d758f6"
+}

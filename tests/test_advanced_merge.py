@@ -9,7 +9,7 @@ import pytest
 
 from contract_economics import contract_basis, evaluate
 from merge_advanced_runs import (ALIAS_CSV, ALIAS_MANIFEST, MANDATORY_FILES, RENAMES,
-    digest_bytes, merge_runs, spec_signature, validate_specs)
+    digest_bytes, merge_runs, sha256, spec_signature, validate_specs)
 
 
 def fixtures(tmp_path):
@@ -202,3 +202,259 @@ def test_gzip_artifacts_keep_logical_csv_provenance_and_composition(tmp_path):
     compressed = merge_runs(primary, rpg, tmp_path / "compressed")
     assert plain["signature"] == compressed["signature"]
     assert plain["output_sha256"] == compressed["output_sha256"]
+
+
+def partition_fixture(primary):
+    """Represent actual crop execution plus a reused serial checkpoint."""
+    from benchmark_multilegumes import summarize
+    manifest = json.loads((primary / "manifest.json").read_text())
+    rows = pd.read_csv(primary / "predictions.csv", dtype={"dep": str}, float_precision="round_trip")
+    diagnostics = pd.read_csv(primary / "residual_diagnostics.csv", dtype={"dep": str}, float_precision="round_trip")
+    audits = json.loads((primary / "audit.json").read_text())
+    child_dir = primary / "partitions/lentille"
+    (child_dir / "checkpoints").mkdir(parents=True)
+    (primary / "checkpoints").mkdir()
+    child_spec = deepcopy(manifest["spec"])
+    child_spec["options"]["cultures"] = ["lentille"]
+    child_signature = spec_signature(child_spec)
+    (child_dir / "manifest.json").write_text(json.dumps({"spec": child_spec, "signature": child_signature}))
+    provenance = []
+    for i, audit in enumerate(audits):
+        year, model = audit["year"], audit["model"]
+        name = f"lentille-{year}-{model}.json"
+        part = rows[(rows.year == year) & (rows.model == model)]
+        diags = diagnostics[(diagnostics.year == year) & (diagnostics.model == model)]
+        payload = {"rows": part.astype(object).where(pd.notna(part), None).to_dict("records"),
+                   "audits": [audit], "diagnostics": diags.to_dict("records")}
+        parent_path, child_path = primary / "checkpoints" / name, child_dir / "checkpoints" / name
+        parent = {"signature": manifest["signature"], **payload}
+        child = {"signature": child_signature, **payload}
+        if i == 0:
+            parent_path.write_text(json.dumps(parent))
+            child["reused_from"] = {"logical_signature": manifest["signature"],
+                                    "checkpoint": name, "checkpoint_sha256": sha256(parent_path)}
+            child_path.write_text(json.dumps(child))
+        else:
+            child_path.write_text(json.dumps(child))
+            parent.update(executed_child_signature=child_signature,
+                          executed_child_checkpoint_sha256=sha256(child_path))
+            parent_path.write_text(json.dumps(parent))
+        provenance.append({"checkpoint": name, "parent_sha256": sha256(parent_path),
+                           "child_sha256": sha256(child_path), "child_signature": child_signature})
+    (primary / "partition_checkpoint_provenance.json").write_text(json.dumps(provenance))
+    summary = summarize(rows)
+    (primary / "summary.json").write_text(json.dumps(summary))
+    pd.DataFrame(summary).to_csv(primary / "summary.csv", index=False)
+    wrapper = primary / "parallel_advanced.executed.py"
+    wrapper.write_text("# immutable wrapper fixture\n")
+    outputs = ["predictions.csv", "summary.json", "summary.csv", "audit.json",
+               "residual_diagnostics.csv", "cohorts.json", "partition_checkpoint_provenance.json"]
+    layout = {"kind": "independent_crop_partitions", "status": "completed", "workers": 2,
+        "logical_signature": manifest["signature"], "source_archive_sha256": sha256(primary / "executed-inputs.zip"),
+        "wrapper_source": wrapper.name, "wrapper_sha256": sha256(wrapper),
+        "thread_environment": {"OMP_NUM_THREADS": "1", "OPENBLAS_NUM_THREADS": "1", "MKL_NUM_THREADS": "1"},
+        "children": [{"culture": "lentille", "directory": "/content/runtime/partitions/lentille",
+            "signature": child_signature, "exit_code": 0, "total": len(audits),
+            "spec_difference": {"options.cultures": ["lentille"]}}],
+        "results": {"rows": len(rows), "checkpoints": len(provenance),
+                    "outputs_sha256": {name: sha256(primary / name) for name in outputs}}}
+    (primary / "partition_execution.json").write_text(json.dumps(layout))
+    manifest["execution_layout"] = layout
+    (primary / "manifest.json").write_text(json.dumps(manifest))
+    return child_dir
+
+
+def test_partition_execution_keeps_logical_and_actual_specs_distinct(tmp_path):
+    primary, rpg, _ = fixtures(tmp_path)
+    partition_fixture(primary)
+    result = merge_runs(primary, rpg, tmp_path / "combined")
+    source = result["spec"]["composition"]["sources"]["primary"]
+    assert "executed_spec" not in source
+    assert source["logical_spec"]["options"]["cultures"] == ["lentille"]
+    assert source["partition_execution"]["verified_checkpoint_pairs"] == 6
+    assert source["partition_execution"]["child_executed_specs"]["lentille"]["options"]["cultures"] == ["lentille"]
+
+
+@pytest.mark.parametrize("tamper,message", [("wrapper", "wrapper hash"),
+    ("child_spec", "one-crop restriction"), ("checkpoint", "checkpoint bytes")])
+def test_partition_proofs_must_match_saved_executions(tmp_path, tamper, message):
+    primary, rpg, _ = fixtures(tmp_path)
+    child_dir = partition_fixture(primary)
+    if tamper == "wrapper":
+        (primary / "parallel_advanced.executed.py").write_text("# modified\n")
+    elif tamper == "child_spec":
+        path = child_dir / "manifest.json"
+        child = json.loads(path.read_text())
+        child["spec"]["options"]["seed"] = 43
+        child["signature"] = spec_signature(child["spec"])
+        path.write_text(json.dumps(child))
+    else:
+        path = next((child_dir / "checkpoints").glob("*.json"))
+        path.write_bytes(path.read_bytes() + b"\n")
+    with pytest.raises(ValueError, match=message):
+        merge_runs(primary, rpg, tmp_path / "bad")
+
+
+def test_auxiliary_acceleration_source_and_execution_history_are_preserved(tmp_path):
+    primary, rpg, _ = fixtures(tmp_path)
+    partition_fixture(primary)
+    manifest = json.loads((primary / "manifest.json").read_text())
+    layout = manifest["execution_layout"]
+    prior = deepcopy(layout)
+    prior["status"] = "interrupted"
+    original_wrapper = primary / prior["wrapper_source"]
+    archive = primary / "executions/attempt1"
+    archive.mkdir(parents=True)
+    prior_wrapper = archive / "parallel_advanced.py"
+    prior_wrapper.write_bytes(original_wrapper.read_bytes())
+    prior["wrapper_source"] = str(prior_wrapper.relative_to(primary))
+    helper = primary / "executions/batched_prediction.py"
+    helper.write_text("# exact batched prediction fixture\n")
+    layout["auxiliary_files"] = {str(helper.relative_to(primary)): sha256(helper)}
+    layout["execution_history"] = [prior]
+    checkpoint = next((primary / "partitions/lentille/checkpoints").glob("*.json"))
+    layout["start_checkpoint_sha256"] = {str(checkpoint.relative_to(primary)): sha256(checkpoint)}
+    layout["workers"] = 5
+    layout["runtime"] = {"python": "3.13.5", "machine": "x86_64", "logical_cpus": 12, "platform": "Linux"}
+    (primary / "partition_execution.json").write_text(json.dumps(layout))
+    (primary / "manifest.json").write_text(json.dumps(manifest))
+    result = merge_runs(primary, rpg, tmp_path / "with_history")
+    copied = result["spec"]["composition"]["sources"]["primary"]["partition_execution"]["layout"]
+    assert copied["execution_history"] == [prior]
+    assert copied["auxiliary_files"] == layout["auxiliary_files"]
+    assert copied["workers"] == 5 and copied["runtime"]["logical_cpus"] == 12
+    assert copied["start_checkpoint_sha256"] == layout["start_checkpoint_sha256"]
+    helper.write_text("# modified acceleration code\n")
+    with pytest.raises(ValueError, match="auxiliary execution file differs"):
+        merge_runs(primary, rpg, tmp_path / "bad_auxiliary")
+
+
+def test_pre_restart_checkpoint_hash_is_binding(tmp_path):
+    primary, rpg, _ = fixtures(tmp_path)
+    partition_fixture(primary)
+    manifest = json.loads((primary / "manifest.json").read_text())
+    layout = manifest["execution_layout"]
+    checkpoint = next((primary / "partitions/lentille/checkpoints").glob("*.json"))
+    layout["start_checkpoint_sha256"] = {str(checkpoint.relative_to(primary)): "incorrect"}
+    (primary / "partition_execution.json").write_text(json.dumps(layout))
+    (primary / "manifest.json").write_text(json.dumps(manifest))
+    with pytest.raises(ValueError, match="saved before resumption"):
+        merge_runs(primary, rpg, tmp_path / "bad_resumption")
+
+
+def numpy_runtime(**extra):
+    return {"python": "3.13.16", "machine": "x86_64", "logical_cpus": 12, "platform": "Linux",
+        "numpy_version": "2.3.5", "numpy_dispatch_override": "AVX512F,AVX512_SKX",
+        "numpy_cpu_features": {"SSE2": True, "AVX2": True, "AVX512F": False, "AVX512_SKX": False},
+        "numpy_cpu_baseline": ["SSE", "SSE2"], "numpy_cpu_dispatch": ["AVX2", "AVX512_SKX"], **extra}
+
+
+def record_partition_runtime(directory, runtime):
+    manifest = json.loads((directory / "manifest.json").read_text())
+    manifest["execution_layout"]["runtime"] = runtime
+    (directory / "manifest.json").write_text(json.dumps(manifest))
+    (directory / "partition_execution.json").write_text(json.dumps(manifest["execution_layout"]))
+
+
+def record_serial_runtime(directory, runtime):
+    record = {"NPY_DISABLE_CPU_FEATURES": runtime["numpy_dispatch_override"],
+              "runtime": runtime, "reason": "Fresh subprocess before importing NumPy"}
+    (directory / "execution_environment.json").write_text(json.dumps(record))
+
+
+def test_numpy_profile_matches_serial_and_partition_without_requiring_same_cpu_brand(tmp_path):
+    primary, rpg, _ = fixtures(tmp_path)
+    partition_fixture(primary)
+    record_partition_runtime(primary, numpy_runtime())
+    record_serial_runtime(rpg, numpy_runtime(machine="a_different_recorded_cpu", logical_cpus=32))
+    (primary / "execution.json").write_text(json.dumps({"partition_pid": 123, "status": "launched"}))
+    result = merge_runs(primary, rpg, tmp_path / "combined")
+    composition = result["spec"]["composition"]
+    assert composition["numpy_execution_profile_check"] == "effective_dispatch_and_override"
+    environments = {key: source["execution_environment"] for key, source in composition["sources"].items()}
+    assert environments["primary"]["profile"] == environments["rpg"]["profile"]
+    assert environments["primary"]["evidence"]["execution.json"]["sha256"] == sha256(primary / "execution.json")
+    assert environments["rpg"]["evidence"]["execution_environment.json"]["metadata"]["runtime"]["logical_cpus"] == 32
+
+
+@pytest.mark.parametrize("change", ["override", "effective_flags", "missing_profile", "missing_override", "missing_flags"])
+def test_numpy_execution_profile_mismatches_are_rejected(tmp_path, change):
+    primary, rpg, _ = fixtures(tmp_path)
+    partition_fixture(primary)
+    record_partition_runtime(primary, numpy_runtime())
+    runtime = numpy_runtime()
+    if change == "override":
+        runtime["numpy_dispatch_override"] = None
+    elif change == "effective_flags":
+        runtime["numpy_cpu_features"]["AVX512F"] = True
+    elif change == "missing_flags":
+        runtime.pop("numpy_cpu_features")
+    if change != "missing_profile":
+        record_serial_runtime(rpg, runtime)
+    if change == "missing_override":
+        path = rpg / "execution_environment.json"
+        metadata = json.loads(path.read_text())
+        metadata.pop("NPY_DISABLE_CPU_FEATURES")
+        metadata["runtime"].pop("numpy_dispatch_override")
+        path.write_text(json.dumps(metadata))
+    with pytest.raises(ValueError, match="NumPy execution profile"):
+        merge_runs(primary, rpg, tmp_path / "bad")
+
+
+def test_legacy_missing_numpy_evidence_is_not_claimed_verified(tmp_path):
+    primary, rpg, _ = fixtures(tmp_path)
+    result = merge_runs(primary, rpg, tmp_path / "legacy")
+    assert result["spec"]["composition"]["numpy_execution_profile_check"] == "unrecorded_not_verified"
+
+
+def test_override_only_serial_metadata_is_not_claimed_effective_flags(tmp_path):
+    primary, rpg, _ = fixtures(tmp_path)
+    for directory in (primary, rpg):
+        (directory / "execution_environment.json").write_text(json.dumps({"NPY_DISABLE_CPU_FEATURES": "AVX512F"}))
+    result = merge_runs(primary, rpg, tmp_path / "legacy_serial")
+    assert result["spec"]["composition"]["numpy_execution_profile_check"] == "recorded_fields_only"
+
+
+@pytest.mark.parametrize("prior_recorded", [True, False])
+def test_resumed_checkpoints_cannot_hide_different_or_unrecorded_numpy_profile(tmp_path, prior_recorded):
+    primary, rpg, _ = fixtures(tmp_path)
+    partition_fixture(primary)
+    record_partition_runtime(primary, numpy_runtime())
+    record_serial_runtime(rpg, numpy_runtime())
+    manifest = json.loads((primary / "manifest.json").read_text())
+    layout = manifest["execution_layout"]
+    prior = deepcopy(layout)
+    prior["status"] = "interrupted"
+    if prior_recorded:
+        prior["runtime"]["numpy_dispatch_override"] = None
+    else:
+        prior.pop("runtime")
+    checkpoint = next((primary / "partitions/lentille/checkpoints").glob("*.json"))
+    layout["execution_history"] = [prior]
+    layout["start_checkpoint_sha256"] = {str(checkpoint.relative_to(primary)): sha256(checkpoint)}
+    (primary / "manifest.json").write_text(json.dumps(manifest))
+    (primary / "partition_execution.json").write_text(json.dumps(layout))
+    with pytest.raises(ValueError, match="NumPy execution profile.*resumed"):
+        merge_runs(primary, rpg, tmp_path / "mixed")
+
+
+def test_same_numpy_profile_allows_partitioned_reruns_and_checkpoint_resumption(tmp_path):
+    primary, rpg, _ = fixtures(tmp_path)
+    for directory in (primary, rpg):
+        partition_fixture(directory)
+        record_partition_runtime(directory, numpy_runtime())
+    manifest = json.loads((primary / "manifest.json").read_text())
+    layout = manifest["execution_layout"]
+    prior = deepcopy(layout)
+    prior["status"] = "interrupted"
+    prior["runtime"]["machine"] = "another_cpu_brand"
+    prior["runtime"]["logical_cpus"] = 2
+    prior["runtime"]["numpy_dispatch_override"] = "AVX512_SKX, AVX512F"
+    checkpoint = next((primary / "partitions/lentille/checkpoints").glob("*.json"))
+    layout["execution_history"] = [prior]
+    layout["start_checkpoint_sha256"] = {str(checkpoint.relative_to(primary)): sha256(checkpoint)}
+    (primary / "manifest.json").write_text(json.dumps(manifest))
+    (primary / "partition_execution.json").write_text(json.dumps(layout))
+    result = merge_runs(primary, rpg, tmp_path / "same_profile")
+    assert result["spec"]["composition"]["numpy_execution_profile_check"] == "effective_dispatch_and_override"
+    assert all("partition_execution" in source for source in result["spec"]["composition"]["sources"].values())
