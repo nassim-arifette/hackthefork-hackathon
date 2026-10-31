@@ -1,55 +1,71 @@
 # Feuille de route
 
-Le projet est construit en couches. Le cœur doit être parfait avant toute extension. Chaque extension se branche sur le même utilisateur (le responsable filière) et sur la même carte.
+**Revue mentor documentée du 31 octobre 2026 : choisir des hypothèses, les simuler et montrer les arbitrages.** Les réponses détaillées et leurs sources sont dans [QUESTIONS.md](QUESTIONS.md). Le cœur doit être démontrable de bout en bout ; chaque extension sert ensuite le même responsable filière et la même carte.
 
-```mermaid
-flowchart LR
-  T1["Temps 1 · Avant les semis<br/>Le Contrat qui Tient<br/><b>cœur</b>"] --> T2["Temps 2 · Où collecter<br/>Site de tri déplaçable<br/><b>extension légère</b>"]
-  T2 --> T3["Temps 3 · Pendant la saison<br/>Suivi Sentinel-2 des parcelles<br/><b>extension</b>"]
-  T3 --> MV["Le Maillon vu du ciel<br/>détection régionale + goulot logistique<br/><b>extension</b>"]
-```
+| Temps | Décision de l'utilisateur | Livrable |
+|---|---|---|
+| 1. Avant les semis | Quel contrat et quelles parcelles ? | Prix, protection, volume et comparaison de barèmes. |
+| 2. Où collecter | Quel emplacement parmi les candidats ? | Site déplaçable et coût rendu recalculé. |
+| 3. Pendant la saison | Quelles parcelles surveiller ? | Quelques courbes Sentinel en replay, puis détection régionale. |
 
----
+## État et décisions proposées au samedi 31/10
 
-## État au vendredi 30/10, soir
+**Déjà réalisé d'après le repo :** pipeline Agreste / RPG / NASA POWER / Eurostat, modèles comparés, backtest, incertitude sur P*, application en cinq étapes, version hors ligne et 15 tests. Les résultats du 30/10 restent la version 3 de [RESULTATS.md](RESULTATS.md).
 
-Fait : pipeline complet sur données réelles (Agreste, RPG 2025, NASA POWER, Eurostat), deux modèles d'apprentissage comparés, backtest sans fuite, incertitude sur P\*, 15 tests, application en cinq étapes avec version hors ligne, documentation et contenu du deck. Reste : confronter les hypothèses à un mentor, brancher Bedrock, déployer sur Amplify, répéter.
+**Recherche mentor réalisée :** éligibilité de la lentille alimentaire confirmée, montant PAC remis dans sa campagne, références de charges et d'effet précédent trouvées, exemples de contrats réels, coefficients d'impact et choix d'usage RPG / SAA documentés dans [QUESTIONS.md](QUESTIONS.md).
 
-## La suite, par priorité (décidé le 30/10 au soir)
+**Proposition centrale à implémenter :** charges blé 700 €/ha, lentille 500 €/ha ; aide 105 €/ha indicative pour 2026 ; bénéfice de rotation 150 €/ha ; pilote 300 t et ambition de bassin 5 000 t. Ces modifications documentaires ne recalculent pas les exports : le P* et le score de backtest de ce scénario restent à produire.
 
-### 1. Fiabiliser l'existant (samedi matin)
+## La suite, par priorité
 
-- [ ] Faire valider les hypothèses par un mentor agro (`docs/QUESTIONS.md`) : charges, éligibilité de la lentille à l'aide couplée, transport, bonus de rotation. Un bonus de rotation sourcé de 100 à 200 €/ha ferait passer P\* de 1 622 à environ 1 400 €/t en Seine-et-Marne.
-- [ ] Corriger le prompt de la lettre Bedrock : préciser que « 8 années sur 10 » désigne les années où la lentille rapporte au moins autant que le blé, pas la fiabilité de la coopérative. Puis relancer `06_lettre_llm.py` dans CloudShell (`docs/AWS.md`).
-- [ ] Expliquer l'écart en Île-de-France entre le RPG (1 095 ha de lentille déclarés) et Agreste (environ 730 ha).
+### 1. Mettre les choix documentés dans le moteur
 
-### 2. Compléter l'impact (samedi matin)
+- [x] Répondre aux questions agro par des sources : lentille éligible, 105 €/ha indicatifs pour 2026 et 122 €/ha définitifs pour 2025 ; charges et rotation argumentées.
+- [ ] Reporter le scénario central et ses sensibilités dans data/hypotheses.yaml ; conserver les paramètres historiques pour reproduire la version 3.
+- [ ] Recalculer P*, les courbes, le backtest et les exports associés, sans changer le protocole d'évaluation. Enregistrer cette version dans [RESULTATS.md](RESULTATS.md), puis synchroniser README, deck et lettre.
+- [ ] Présenter séparément la marge de campagne et celle intégrant le bénéfice de la culture suivante. Le bonus de rotation est compté une fois.
+- [ ] Remplacer « prix de marché » par « référence historique 2012–2016 » pour la série Eurostat. Ajouter les cas Unéal et NatUp datés documentés dans [QUESTIONS.md](QUESTIONS.md).
+- [ ] Définir les tonnes payées : récolte brute ou tonnes alimentaires acceptées après tri. Ajouter une sensibilité qualité 0 / 10 / 20 % lorsqu'elle ne double pas une perte déjà incluse.
+- [ ] Faire l'audit court RPG / SAA : même campagne, même territoire, code LEC, filtre 1 ha et identifiants uniques. Garder RPG pour la carte et SAA pour les rendements pendant cet audit.
 
-L'impact pèse 30 % de la note et ne montre aujourd'hui que les tonnes et la part des importations.
+**Critère de sortie :** toutes les vues d'un scénario utilisent le même jeu d'hypothèses et les mêmes exports. Le nouveau prix est un résultat calculé. La rencontre avec un mentor sert surtout à obtenir un contrat et un partenaire réels.
 
-- [ ] Protéines produites : teneur de la lentille sèche dans Ciqual (site indisponible le 30/10, à réessayer).
-- [ ] Azote minéral évité : dose sur blé contre zéro sur lentille, à sourcer (Agreste, pratiques culturales).
-- [ ] Émissions évitées en CO2e : facteur ADEME Base Empreinte ou HESTIA.
+### 2. Montrer une décision de contrat et un impact chiffré
 
-### 3. Le contrat indexé sur le prix du blé (samedi)
+- [ ] Ajouter deux volumes : **pilote 300 t** et **ambition 5 000 t**. Montrer les surfaces nécessaires et les tonnes potentielles ; un scénario de mobilisation à 10 % peut compléter la sélection économique.
+- [ ] Afficher le prix uniforme selon la protection visée, puis l'option indexée déjà calculée : m × prix du blé de récolte. Les valeurs actuelles 3,59 et 7,8 doivent être recalculées après changement d'hypothèses.
+- [ ] Faire varier le prix du blé pour montrer le budget de l'acheteur. L'indexation transfère ce risque ; rendement et risque de base restent à traiter.
+- [ ] Prototyper un barème à paliers : **1 000 €/t sur la première tonne/ha puis 750 €/t sur le surplus**, ou **900 €/t + une prime par hectare calculée**. Le premier palier est inspiré de NatUp ; les autres paramètres sont des paris de démonstration. Formules dans [QUESTIONS.md](QUESTIONS.md).
+- [ ] Comparer les contrats avec les mêmes scénarios : fréquence de marges gagnantes, coût moyen pour l'acheteur et perte des mauvaises années. Montrer 2020 et 2021.
+- [ ] Ajouter les protéines potentielles : **25 %** de la masse de graines alimentaires ; référence Terres Inovia / Terres Univia disponible.
+- [ ] Ajouter l'azote minéral non apporté : **180 kg N par nouvel hectare de blé remplacé**, scénario régional arrondi.
+- [ ] Ajouter les émissions directes associées à cet azote : **environ 0,755 t CO₂e/ha**, avec le périmètre expliqué. Les formules et sources GIEC sont dans [QUESTIONS.md](QUESTIONS.md).
 
-- [ ] Afficher à l'étape 5 une deuxième option : un plancher égal à m × le prix du blé de la récolte. Le calcul existe déjà (`meta.contrat_indexe` : multiplicateur médian 3,6 ; 7,8 pour 8 années sur 10). Il retire à l'agriculteur le risque lié au prix du blé.
+**Critère de sortie :** l'utilisateur peut arbitrer entre coût, protection et volume, et voir l'impact du scénario choisi. Le récit commercial est « comparer et calibrer les contrats existants » ; les 32 % de la baseline ne sont pas attribués à toute la profession.
 
-### 4. Améliorer le modèle (samedi après-midi, si le cœur est stable)
+### 3. Livrer la démo et répéter
 
-- [ ] Météo pondérée par les surfaces cultivées (RPG) plutôt qu'au centroïde du département.
-- [ ] Variables météo par stade de la lentille (floraison, récolte).
-- [ ] Scénarios de stress pour les années d'effondrement comme 2020 et 2021, sans jamais toucher aux années test.
-- [ ] Garder l'historique des versions et de leurs résultats dans `docs/RESULTATS.md`.
+- [ ] Corriger le prompt de la lettre : « 8 années sur 10 » signifie que la marge lentille atteint celle du blé dans le modèle ; ce chiffre ne mesure pas la fiabilité de la coopérative.
+- [ ] Dans le compte AWS de l'équipe, vérifier une invocation Bedrock puis générer la lettre au build et la mettre en cache ; procédure dans [AWS.md](AWS.md).
+- [ ] Déployer la version web et exporter la version hors ligne ; vérifier le parcours complet et préparer une vidéo courte.
+- [ ] Confirmer avec l'organisation la règle sur les assistants de code externes ; déclarer Claude Code, ChatGPT pour cette recherche et les autres outils effectivement utilisés.
+- [ ] Vérifier la déclaration du Track 3 ; choisir présentateur et opérateur de démo ; répéter en français.
+- [ ] Préparer la proposition commerciale : un pilote de 300 t, une campagne, un acheteur et un contrat réel à comparer.
 
-### 5. Extensions (dès que le cœur est stable, dans cet ordre)
+### 4. Étendre la démonstration pendant l'événement
 
-- [ ] Site de tri déplaçable (temps 2 ci-dessous) : environ 1 h, fort effet visuel.
-- [ ] Suivi Sentinel-2 des parcelles sous contrat (temps 3).
-- [ ] Le Maillon vu du ciel (section 5).
-- [ ] Données de rendement d'une coopérative (passage à la parcelle, P\* moins incertain) : à demander dès samedi aux mentors et partenaires.
-- [ ] Autres cultures sous contrat (pois chiche, haricot sec) : même pipeline, nouveaux libellés Agreste.
-- [ ] Offre pour les assureurs : même distribution de rendement, présentée comme tarif de risque.
+Dès que le parcours cœur fonctionne avec des chiffres cohérents, prendre ces extensions dans cet ordre. Les temps ci-dessous sont des budgets de travail proposés.
+
+| Priorité | Extension | Budget de travail | Critère de sortie |
+|---|---|---|---|
+| 1 | Site de collecte déplaçable | 1 h | Distances, coût rendu, tonnes et courbe se recalculent. |
+| 2 | Suivi Sentinel de 5 à 10 parcelles | 1 à 2 h | Courbes précalculées, dates et pixels valides affichés, replay clairement nommé. |
+| 3 | Le Maillon vu du ciel, zone réduite | Créneau restant avant le gel | Carte de classes et métriques sur un bloc géographique tenu à l'écart. |
+| 4 | Météo pondérée par les surfaces ; variables par stade | Seulement si le cœur et la démo sont prêts | Nouvelle version comparée à M1 avec le même protocole. |
+| 5 | Autres cultures, données coopératives, offre assureurs | Selon capacité disponible | Une preuve ciblée ou une maquette clairement identifiée. |
+
+Les scénarios de stress restent séparés du backtest. Toute amélioration inspirée par les années 2020–2021 devient une nouvelle exploration, avec une évaluation distincte des résultats déjà consultés.
+
 
 ## 1. Planning du hackathon
 
@@ -57,8 +73,8 @@ L'impact pèse 30 % de la note et ne montre aujourd'hui que les tonnes et la par
 |---|---|---|
 | Ven. 30/10, soir | déclarer le Track 3 ; dépôt et documentation ; panel Agreste ; météo NASA POWER | `panel_rendements.csv` et `meteo_dept.csv` existent |
 | Ven. nuit | baseline M0 ; parcelles RPG sur la carte ; front sur données synthétiques au bon format | la carte s'affiche, le curseur fait basculer les parcelles |
-| Sam. 31/10, 10h15–13h | **squelette de bout en bout** avec un P\* grossier ; hypothèses testées avec un mentor | démo cliquable du début à la fin |
-| Sam. 14h–18h | M1 et conformal ; backtest ; courbe d'offre ; replay 2016 et 2020 | l'écran de preuve affiche de vrais chiffres |
+| Sam. 31/10, 10h15–13h | scénario mentor, comparaison de contrats et impact | démo cliquable avec hypothèses et chiffres cohérents |
+| Sam. 14h–18h | prix et backtest du scénario, site déplaçable, prototype Sentinel selon avancement | arbitrage prix / protection / volume visible ; extensions utilisables |
 | Sam. soir | texte du contrat (LLM, cache) ; impact chiffré ; deck ; **gel du code** ; vidéos ; version fichier unique | plus aucune fonctionnalité après le gel |
 | Dim. 1/11, 8h30–9h30 | dépôt du deck PDF, de la fiche projet et des déclarations ; test sur l'ordinateur commun | dépôt avant 9h30 (viser 9h) |
 
@@ -66,10 +82,10 @@ L'impact pèse 30 % de la note et ne montre aujourd'hui que les tonnes et la par
 
 | Moment | Condition | Si oui | Si non |
 |---|---|---|---|
-| Sam. 10h | la lentille est exploitable sur le panel national | on garde la lentille | pois chiche ou haricot sec **pour l'alimentation humaine**, annoncé comme tel |
-| Sam. 13h | le squelette tourne de bout en bout | vrai modèle et backtest | on coupe le replay et le texte du LLM, on garde curseur et backtest |
-| Sam. 18h | modèle et backtest affichent de vrais chiffres | temps 2 (site de tri déplaçable) | on peaufine le cœur, rien d'autre |
-| Sam. soir | cœur et temps 2 propres | temps 3 léger | le temps 3 reste une slide |
+| Sam. 10h | le panel lentille et la démo existent déjà | on garde la lentille et le Track 3 | si une panne technique survient, repartir de l'export fonctionnel |
+| Sam. 13h | le scénario recalculé est cohérent dans toutes les vues | comparaison de contrats et impact | garder la version 3 identifiée, présenter les nouveaux paramètres comme scénarios à calculer |
+| Sam. 18h | les contrats et l'impact sont démontrables | temps 2 puis temps 3 selon avancement | concentrer le créneau sur la démo et la répétition |
+| Sam. soir | cœur et extensions intégrées avant le gel | répétition avec les extensions qui tournent | conserver les prototypes séparés et présenter leur prochaine décision utile |
 
 ### Coupes possibles
 
@@ -85,11 +101,12 @@ Décrit dans [PROJET.md](PROJET.md), [MODELE.md](MODELE.md) et [ARCHITECTURE.md]
 
 **Moments forts de la démo** :
 
-1. **La bascule** : on monte le prix, les parcelles de blé virent au vert en partant du site acheteur, le compteur de tonnes monte, la courbe d'offre se dessine.
+1. **La bascule** : on monte le prix, les parcelles candidates virent au vert, le compteur de tonnes potentielles monte et la courbe d'offre se dessine. Comparer le pilote de 300 t à l'ambition de 5 000 t.
 2. **Le replay** :
    - 2016 : le blé s'effondre (−27 %, **mesuré**) et la lentille tient (−13 %) ; le contrat aurait sauvé l'année ;
    - 2020 : la lentille s'effondre (−38 %, **mesuré**) ; on voit où le contrat a tenu et où il a cédé.
-3. **La prédiction à l'aveugle** : données coupées en 2019, la bande d'incertitude s'affiche pour chaque année de 2020 à 2025, puis le point réel tombe.
+3. **La preuve sur années tenues à l'écart** : afficher le backtest glissant 2019–2025 et ses résultats année par année. Chaque prédiction utilise uniquement les données des années antérieures, conformément à [MODELE.md](MODELE.md).
+4. **Le choix du contrat** : comparer prix uniforme, indexation et nouveau barème, avec leur coût acheteur et leur protection effectivement calculée.
 
 ---
 
@@ -97,18 +114,23 @@ Décrit dans [PROJET.md](PROJET.md), [MODELE.md](MODELE.md) et [ARCHITECTURE.md]
 
 **Question** : « Où placer mon site de tri ou de collecte pour sécuriser le plus de tonnes à un prix donné ? »
 
-**Principe** : le coût de transport est déjà dans le modèle. Il suffit de rendre le site acheteur déplaçable.
+**Principe** : le coût variable de transport est déjà dans le modèle. Rendre le site acheteur déplaçable et ajouter le forfait de collecte proposé dans [QUESTIONS.md](QUESTIONS.md).
 
 - Le responsable filière fait glisser le site sur la carte ; les distances, les prix rendus, les bascules et la courbe d'offre se recalculent en direct dans le navigateur.
-- Bouton « meilleur emplacement » : recherche sur une grille de positions candidates, précalculée ou exécutée dans un Web Worker.
+- Bouton « meilleur emplacement parmi les candidats » : recherche sur une grille, précalculée ou exécutée dans un Web Worker. Indiquer que l'optimum dépend du prix, des sites testés et des hypothèses.
 - Option : afficher les établissements existants de collecte et de stockage de grains (base Sirene, codes NAF à vérifier) comme points de départ.
 
-**Ce qu'il faut côté données** : rien de plus. `parcels.geojson` contient déjà les centroïdes, et `p_star_dep` est indépendant du site.
+**Ce qu'il faut côté données** : les géométries de parcelles déjà exportées dans `app/src/data/parcels.json` permettent de calculer des centres représentatifs ; les centroïdes sont aussi dans `data/parcelles.json`. Le P* départemental reste indépendant du site. Conserver les mêmes conventions de distance et de coût dans toutes les vues.
+
+Pour le contrat à prix uniforme :
 
 ```
-prix_rendu[i](site) = P*_dep(i) + κ · 1,3 · haversine(centroïde_i, site)
-tonnes(site, Q)     = Σ tonnes_attendues_i · 1{ Q ≥ prix_rendu[i](site) }
+prix_rendu[i](site) = P*_dep(i) + forfait_collecte + κ · 1,3 · haversine(centroïde_i, site)
+tonnes_candidates(site, Q) = Σ tonnes_attendues_i · 1{ Q ≥ prix_rendu[i](site) }
+tonnes_mobilisables(site, Q) = adoption · tonnes_candidates(site, Q)
 ```
+
+**Hypothèses proposées** : forfait 5 €/t, κ = 0,12 €/t/km, détour 1,3 et adoption paramétrable. Le prix rendu couvre ici l'achat et la collecte. Les frais de tri, stockage et conditionnement restent des postes à ajouter au budget acheteur. Sur 100 km routiers, le terme variable vaut 12 €/t : la carte améliore la collecte, les contrats et le choix du bassin portent l'essentiel de l'arbitrage économique.
 
 ---
 
@@ -116,13 +138,16 @@ tonnes(site, Q)     = Σ tonnes_attendues_i · 1{ Q ≥ prix_rendu[i](site) }
 
 **Question** : « Mes parcelles sous contrat poussent-elles bien cette année ? Quelle collecte attendre ? »
 
-**Principe léger** : pas de détection de culture. Le RPG dit déjà où sont les parcelles. On affiche la courbe de verdure de quelques parcelles de lentille de la saison, comparée aux saisons précédentes.
+**Principe léger** : démarrer avec 5 à 10 parcelles dont la culture est connue pour la campagne utilisée. Au hackathon de fin octobre, montrer un **replay 2025** associé au RPG 2025 vérifié ; une vue 2026 utilise une déclaration de culture 2026 ou porte le statut d'hypothèse. Le RPG de l'année précédente ne donne pas la culture actuelle.
+
+Comparer les courbes à des références **de lentille** et de calendrier comparables. Une même parcelle a pu porter du blé l'année précédente : son historique brut ne constitue pas une référence lentille.
 
 - Indice : NDVI = (B08 − B04) / (B08 + B04), Sentinel-2 L2A.
-- Masque nuages : couche de classification de scène `SCL` (on garde végétation, sol nu, eau).
-- Statistique zonale : médiane du NDVI par parcelle et par date, sur un tampon intérieur de 10 m pour éviter les bords.
-- Lissage : interpolation sur une grille de 10 jours, puis Savitzky-Golay.
-- Affichage : courbe de la saison en cours contre l'enveloppe des saisons passées ; alerte si la courbe sort de l'enveloppe.
+- Masque nuages : garder `SCL = 4` (végétation) et `SCL = 5` (sol nu), exclure notamment l'eau `SCL = 6`. Les classes viennent de la documentation [Copernicus Sentinel-2 L2A](https://documentation.dataspace.copernicus.eu/APIs/SentinelHub/Data/S2L2A.html).
+- Statistique zonale : médiane du NDVI par parcelle et par date, sur un tampon intérieur de 10 m pour limiter les bords ; prévoir le cas des petites parcelles dont le tampon devient vide.
+- Qualité : afficher le nombre de pixels et les dates réellement observées. Seuil de 70 % de pixels valides, tampon de 10 m et grille de 10 jours sont des choix d'ingénierie.
+- Lissage : interpolation courte puis Savitzky-Golay si utile ; laisser visibles les longues périodes sans observation.
+- Affichage : courbe de la campagne rejouée contre une enveloppe de références lentille ; signaler une anomalie à examiner si elle s'en écarte.
 
 **Limite à annoncer** : sans rendement mesuré à la parcelle, on ne transforme pas le NDVI en tonnes. C'est un signal d'alerte, pas une prévision de récolte.
 
@@ -132,35 +157,34 @@ tonnes(site, Q)     = Σ tonnes_attendues_i · 1{ Q ≥ prix_rendu[i](site) }
 
 ### Le problème
 
-Pour produire plus de légumineuses, il faut aussi la chaîne derrière : tri, nettoyage, stockage, conditionnement. Pour décider où investir dans un site, il faut savoir où poussent les légumineuses. Or le RPG d'une campagne n'est publié qu'**un an après**.
+Pour produire plus de légumineuses, il faut aussi la chaîne derrière : tri, nettoyage, stockage, conditionnement. Pour décider où investir dans un site, il faut savoir où poussent les légumineuses. La couche publique du RPG est millésimée et diffusée avec un décalage : elle décrit les parcelles de l'année N dans leur situation arrêtée au 1er janvier N+1. Elle ne fournit pas directement la culture d'une saison en cours. [Source IGN](https://www.data.gouv.fr/datasets/rpg).
 
 ### Ce que fait le produit
 
 1. **Détecter** les parcelles de légumineuses de la saison en cours à partir des séries Sentinel-2, avant la récolte.
-2. **Vérifier** sur le RPG de l'année précédente (entraînement) puis de l'année en cours lorsqu'il sort (validation).
+2. **Apprendre** sur les images et les étiquettes de la même campagne N−1, puis tester la campagne N avec ses propres étiquettes lorsqu'elles sont disponibles. Pour un prototype 2025, séparer aussi spatialement les parcelles d'apprentissage et de test.
 3. **Croiser** avec les sites de tri et de stockage existants pour repérer le goulot : les surfaces sans capacité à proximité.
 
 ### Architecture cible
 
 ```mermaid
 flowchart TB
-  STAC[Catalogue STAC Sentinel-2 L2A<br/>données ouvertes AWS] --> DL[Sélection des tuiles<br/>par emprise et dates]
-  DL --> CM[Masque nuages SCL]
-  CM --> ZS[Statistiques zonales<br/>NDVI médian par parcelle et date]
-  RPG[RPG année N-1<br/>étiquettes] --> FE
-  ZS --> FE[Variables phénologiques<br/>date et valeur du pic, pente de reverdissement,<br/>surface sous la courbe]
-  FE --> CL[Classifieur LightGBM<br/>légumineuse / autre]
-  CL --> MAP[Carte des légumineuses<br/>saison N]
-  SIR[Sites de tri et stockage<br/>Sirene + données coopératives] --> GO
-  MAP --> GO[Goulot logistique<br/>tonnes hors rayon d'un site]
-  RPGN[RPG année N<br/>publié un an plus tard] -.validation.-> CL
+  STAC["Sentinel-2 L2A"] --> CM["Masque SCL et statistiques par parcelle"]
+  CM --> FE["Variables de saison"]
+  RPG["RPG de la campagne correspondante"] --> TRAIN["Apprentissage et test spatial séparés"]
+  FE --> TRAIN
+  TRAIN --> CL["Classifieur appliqué à une autre campagne"]
+  CL --> MAP["Carte et métriques de détection"]
+  RPGN["Étiquettes de la campagne test"] -.-> MAP
+  SIR["Sites et capacités de collecte"] --> GO["Volumes potentiels hors couverture"]
+  MAP --> GO
 ```
 
 | Étape | Choix technique |
 |---|---|
-| Accès aux images | Sentinel-2 L2A en GeoTIFF optimisés cloud, via un catalogue STAC sur les données ouvertes AWS [à vérifier : bucket et région] |
+| Accès aux images | Earth Search STAC v1 ; collection `sentinel-2-c1-l2a`, bucket `e84-earth-search-sentinel-data`, région `us-west-2`, d'après le [registre AWS](https://registry.opendata.aws/sentinel-2-l2a-cogs/). Choisir une collection couvrant les dates du prototype et conserver ses métadonnées. |
 | Lecture | `pystac-client`, `rioxarray` ou `stackstac`, lecture fenêtrée par emprise de parcelle |
-| Nuages | couche `SCL`, plus suppression des dates à moins de 70 % de pixels valides [seuil supposé] |
+| Nuages | SCL 4 et 5 ; suppression des dates à moins de 70 % de pixels valides (seuil supposé). |
 | Variables | NDVI et un indice d'humidité (NDMI), série lissée, variables phénologiques |
 | Modèle | LightGBM, classes déséquilibrées (pondération) |
 | Validation | **par blocs géographiques** (pas de parcelles voisines entre apprentissage et test), puis transfert temporel N-1 → N |
@@ -169,7 +193,7 @@ flowchart TB
 
 ### Ce qu'il faut pour le faire pendant l'événement
 
-Le volume d'images, les nuages et le prétraitement sont les points durs. Pour tenir dans le temps : une zone réduite autour du site acheteur, quelques dates sans nuages entre avril et juillet, et une validation sur le RPG 2025. Tout résultat partiel est montré comme tel, avec sa précision mesurée.
+Le volume d'images, les nuages et le prétraitement sont les points durs. Pour tenir dans le temps : une zone réduite autour du site acheteur, des images 2025 entre avril et juillet et des étiquettes RPG 2025 vérifiées. Garder un bloc géographique de test intact. Une validation sur la même campagne ne démontre pas encore le transfert à 2026 : réserver ce nom au test temporel correspondant. Toute prédiction dite « avant récolte » n'utilise que les images disponibles avant sa date de coupure.
 
 ### Modèle économique
 
@@ -187,6 +211,10 @@ Le volume d'images, les nuages et le prétraitement sont les points durs. Pour t
 | Autres cultures sous contrat | pois chiche, haricot sec, chanvre, sorgho : même moteur, nouveaux libellés Agreste |
 | Autres régions | entraînement national déjà en place ; seule la couche parcellaire change |
 | Modèle hiérarchique bayésien | partage d'information entre départements peu renseignés |
-| Bruche | intégrer le risque de perte de qualité (10 à 20 % de pertes, **sourcé**) |
-| Offre assureurs | même distribution de rendement pour tarifer l'assurance récolte |
+| Bruche et qualité alimentaire | intégrer le volume payé après tri ; sensibilité 0 / 10 / 20 % de non-valorisation alimentaire, **supposée**, à rapprocher des données coopératives |
+| Offre assureurs | prototype de lecture du risque ; tarification à construire avec les sinistres et les conditions de couverture |
 | Historique RPG | rotations réelles, éligibilité plus fine (précédent cultural) |
+
+## 7. Décisions de mentor et sources
+
+Les charges, la rotation, les aides, les références de contrats, les volumes et les coefficients d'impact sont expliqués et sourcés dans [QUESTIONS.md](QUESTIONS.md). Les références Sentinel et RPG sont liées dans les sections ci-dessus. Le registre documentaire commun [SOURCES.md](SOURCES.md) devra reprendre ces références dès leur intégration dans le deck ou l'interface.
