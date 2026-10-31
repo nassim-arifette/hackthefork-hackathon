@@ -16,6 +16,7 @@ data_raw/weather.log
 __pycache__/
 *.pyc
 .ipynb_checkpoints/
+pytest-of-root/
 
 # Node
 node_modules/
@@ -32,3 +33,11 @@ credentials*
 
 # Builds et intermédiaires régénérables
 app/dist-single/
+
+# Raw benchmark tables are versioned as lossless gzip; full checkpoint archives are on Drive.
+experiments/**/predictions.csv
+experiments/**/results-colab.zip
+experiments/**/run.log
+experiments/multilegumes_policies/summary.csv
+experiments/multilegumes_policies/subgroup_comparisons.csv
+experiments/multilegumes_policies/policy_predictions.csv.gz

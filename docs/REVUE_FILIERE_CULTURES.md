@@ -73,7 +73,7 @@ Cas à 4,5 t/ha : 4,5 × 250 + 110 − 810 = 425 €/ha
 Cas à 3,5 t/ha : 3,5 × 250 + 110 − 500 = 485 €/ha
 ```
 
-**450 €/ha est l'arrondi retenu**, au milieu de ces deux cas. Ce calcul déduit un budget de références économiques publiées ; il ne mesure pas les charges de chaque exploitation. La sensibilité 350 / 450 / 550 couvre des itinéraires plus sobres ou plus coûteux.
+**450 €/ha est l'arrondi retenu**, proche du milieu arithmétique de ces deux cas (455 €/ha). Ce calcul déduit un budget de références économiques publiées ; il ne mesure pas les charges de chaque exploitation. La sensibilité 350 / 450 / 550 couvre des itinéraires plus sobres ou plus coûteux.
 
 ### Féverole : conserver 400 €/ha
 
@@ -93,18 +93,20 @@ Les fractions non valorisées au prix garanti restent **10 % pour pois chiche et
 
 ## 7. Effet du recalcul sur la démonstration
 
-Les exports [data/cultures.json](../data/cultures.json) et [app/src/data/cultures.json](../app/src/data/cultures.json) ont été régénérés avec `pipeline/09_cultures.py`, sur les mêmes données et avec les mêmes graines aléatoires. Avant modification, ce pipeline a reproduit les deux exports existants à l'octet près. Après modification, l'objet lentille complet reste identique. Les valeurs ci-dessous sont **calculées par le modèle**, avec les nouveaux budgets centraux.
+Les exports [data/cultures.json](../data/cultures.json) et [app/src/data/cultures.json](../app/src/data/cultures.json) sont régénérés avec `pipeline/09_cultures.py`, sur les mêmes données et avec les mêmes graines aléatoires. Lors de PR3, avant la correction des arrondis, le pipeline avait reproduit les exports à l'octet près et conservé l'objet lentille complet après le seul changement de budgets. Les valeurs ci-dessous incluent désormais l'arrondi contractuel à l'euro supérieur et sont **calculées par le modèle**, avec les nouveaux budgets centraux.
 
 | Culture | Ancien P\* en Seine-et-Marne | Nouveau P\* | Prix de comparaison retenu | Scénarios où la culture bat le blé à ce prix |
 |---|---:|---:|---:|---:|
-| Pois chiche | 1 064 €/t | **1 064 €/t** | 610 €/t, milieu du paiement rapporté 2025 | **27,2 %** |
-| Haricot sec | 1 779 €/t | **2 185 €/t** | 1 200 €/t, centre du scénario | **58,9 %** |
+| Pois chiche | 1 065 €/t | **1 065 €/t** | 610 €/t, milieu du paiement rapporté 2025 | **27,2 %** |
+| Haricot sec | 1 779 €/t | **2 186 €/t** | 1 200 €/t, centre du scénario | **58,9 %** |
 | Pois protéagineux | 409 €/t | **427 €/t** | 230 €/t, milieu du référentiel CRIT | **24,0 %** |
 | Féverole | 462 €/t | **462 €/t** | 230 €/t, milieu du référentiel CRIT | **23,4 %** |
 
-P\* est le prix qui permet de battre la marge du blé dans 80 % des simulations, avec aide, rotation et fraction non valorisée. Il n'est pas un prix payé observé. Ajouter une référence de prix ne modifie pas P\* : cela permet de calculer la fréquence de réussite à cette référence. Les hausses de P\* du haricot et du pois proviennent des charges révisées.
+P\* est le prix qui permet d'égaler ou dépasser la marge du blé dans au moins 80 % des simulations, avec aide, rotation et fraction non valorisée. Il est borné à zéro et arrondi au plafond pour le contrat ; ce n'est pas un prix payé observé. Ajouter une référence de prix ne modifie pas P\* : cela permet de calculer la fréquence de réussite à cette référence. À convention d'arrondi constante, les hausses de P\* du haricot et du pois proviennent des charges révisées.
 
-Les contrats indexés sur le blé tiennent désormais dans **82 à 87 % des cas du backtest 2019–2025**, contre **66 à 72 % pour le prix fixe**, sur les quatre cultures. Le détail par culture et les barèmes recalibrés sont dans [RESULTATS.md](RESULTATS.md) et les exports. Les valeurs de sensibilité du YAML sont des variantes disponibles ; ce recalcul porte sur le scénario central.
+Les contrats indexés sur le blé tiennent désormais dans **82,3 à 87,3 % des cas du backtest historique 2019–2025**, contre **65,5 à 71,8 % pour le prix fixe**, sur les quatre cultures. Ce backtest entraîne et calibre sur le passé, mais conserve les regroupements Agreste établis sur 2010–2025 ; le benchmark strict est distinct. Le détail par culture et les barèmes recalibrés sont dans [RESULTATS.md](RESULTATS.md) et les exports. Les valeurs de sensibilité du YAML sont des variantes disponibles ; ce recalcul porte sur le scénario central.
+
+Les paramètres numériques de la lentille, du pois chiche et de la féverole sont inchangés par PR3. Seules les charges du haricot (+300 €/ha) et du pois (+50 €/ha) changent le besoin de paiement. Le pois indexé passe de 79,7 % avec l'ancien budget à 82,4 % avec le nouveau budget et les prix recalibrés : ce changement économique ne constitue pas une amélioration du modèle de rendement.
 
 **Conséquence pour le pitch :** le haricot est un cas de contrat à forte valeur, dont l'accès à l'eau compte dans le budget. Le pois et la féverole demandent surtout de construire un débouché et une rémunération suffisants face au blé francilien. Un coût mieux documenté ne suffit pas, à lui seul, à rendre la substitution attractive au prix de référence.
 

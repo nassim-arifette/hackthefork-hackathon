@@ -21,10 +21,10 @@
     779
    ],
    "p_star": {
-    "77": 1567,
-    "78": 1445,
+    "77": 1568,
+    "78": 1446,
     "91": 1450,
-    "95": 1540
+    "95": 1541
    },
    "p_equilibre_median_77": 715,
    "rendement_moyen_77_tha": 1.59,
@@ -1257,19 +1257,19 @@
     {
      "dep": "66",
      "nom": "Pyrénées-Orientales",
-     "p_star": 558,
+     "p_star": 559,
      "rendement_qha": 9.0
     },
     {
      "dep": "34",
      "nom": "Hérault",
-     "p_star": 842,
+     "p_star": 843,
      "rendement_qha": 8.0
     },
     {
      "dep": "30",
      "nom": "Gard",
-     "p_star": 900,
+     "p_star": 901,
      "rendement_qha": 10.4
     }
    ],
@@ -1343,7 +1343,7 @@
     620
    ],
    "p_star": {
-    "77": 1064,
+    "77": 1065,
     "78": 1011,
     "91": 1007,
     "95": 1075
@@ -2172,16 +2172,16 @@
    ],
    "tranches": {
     "paliers": [
-     1175,
-     509,
-     441
+     1174,
+     510,
+     442
     ],
     "bornes_tha": [
      1.0,
      1.9
     ],
     "cout_moyen_t": 983,
-    "economie": 0.076
+    "economie": 0.077
    },
    "indexe_m_star": 5.03,
    "backtest": {
@@ -2203,7 +2203,7 @@
     {
      "dep": "34",
      "nom": "Hérault",
-     "p_star": 292,
+     "p_star": 293,
      "rendement_qha": 15.2
     },
     {
@@ -2215,7 +2215,7 @@
     {
      "dep": "30",
      "nom": "Gard",
-     "p_star": 362,
+     "p_star": 363,
      "rendement_qha": 16.3
     }
    ],
@@ -2291,10 +2291,10 @@
     1500
    ],
    "p_star": {
-    "77": 2185,
+    "77": 2186,
     "78": 2060,
     "91": 2075,
-    "95": 2181
+    "95": 2182
    },
    "p_equilibre_median_77": 1005,
    "rendement_moyen_77_tha": 1.8,
@@ -3970,7 +3970,7 @@
     "paliers": [
      2211,
      1046,
-     906
+     907
     ],
     "bornes_tha": [
      1.1,
@@ -4087,7 +4087,7 @@
     "77": 427,
     "78": 397,
     "91": 402,
-    "95": 412
+    "95": 413
    },
    "p_equilibre_median_77": 304,
    "rendement_moyen_77_tha": 3.57,
@@ -4426,17 +4426,17 @@
    "tranches": {
     "paliers": [
      474,
-     204,
-     177
+     205,
+     178
     ],
     "bornes_tha": [
      2.4,
      4.8
     ],
     "cout_moyen_t": 393,
-    "economie": 0.079
+    "economie": 0.078
    },
-   "indexe_m_star": 1.99,
+   "indexe_m_star": 2.0,
    "backtest": {
     "n_cas": 493,
     "taux_tenus": 0.655,
@@ -4462,13 +4462,13 @@
     {
      "dep": "84",
      "nom": "Vaucluse",
-     "p_star": 127,
+     "p_star": 128,
      "rendement_qha": 22.8
     },
     {
      "dep": "83",
      "nom": "Var",
-     "p_star": 173,
+     "p_star": 174,
      "rendement_qha": 22.5
     }
    ],
@@ -4543,8 +4543,8 @@
    "p_star": {
     "77": 462,
     "78": 459,
-    "91": 458,
-    "95": 481
+    "91": 459,
+    "95": 482
    },
    "p_equilibre_median_77": 314,
    "rendement_moyen_77_tha": 3.27,
@@ -4911,7 +4911,7 @@
    "tranches": {
     "paliers": [
      501,
-     221,
+     222,
      192
     ],
     "bornes_tha": [
@@ -4921,7 +4921,7 @@
     "cout_moyen_t": 414,
     "economie": 0.103
    },
-   "indexe_m_star": 2.17,
+   "indexe_m_star": 2.18,
    "backtest": {
     "n_cas": 446,
     "taux_tenus": 0.675,
@@ -4941,13 +4941,13 @@
     {
      "dep": "04",
      "nom": "Alpes-de-Haute-Provence",
-     "p_star": 117,
+     "p_star": 118,
      "rendement_qha": 27.0
     },
     {
      "dep": "83",
      "nom": "Var",
-     "p_star": 160,
+     "p_star": 161,
      "rendement_qha": 20.0
     },
     {

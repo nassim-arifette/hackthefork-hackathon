@@ -10,11 +10,11 @@
 
 ## État et décisions proposées au samedi 31/10
 
-**Déjà réalisé :** pipeline Agreste / RPG / NASA POWER / Eurostat, modèles comparés, backtest, incertitude sur P*, application en cinq étapes, version hors ligne et tests. Le scénario du 31/10 est calculé : version 4 de [RESULTATS.md](RESULTATS.md), P* de 1 567 €/t en Seine-et-Marne, 87 % de contrats tenus, comparaison des contrats comprise.
+**Déjà réalisé :** pipeline Agreste / RPG / NASA POWER / Eurostat, modèles comparés, backtest, incertitude sur P*, application en cinq étapes, version hors ligne et tests. Le scénario du 31/10 est calculé : version 4 de [RESULTATS.md](RESULTATS.md), P* exporté de 1 568 €/t en Seine-et-Marne, 87,2 % de contrats tenus sur la cohorte historique, comparaison des contrats comprise. Ce backtest entraîne sur le passé mais conserve les regroupements Agreste de 2010–2025 ; il se distingue du benchmark multicultures strict.
 
 **Recherche mentor réalisée :** éligibilité de la lentille alimentaire confirmée, montant PAC remis dans sa campagne, références de charges et d'effet précédent trouvées, exemples de contrats réels, coefficients d'impact et choix d'usage RPG / SAA documentés dans [QUESTIONS.md](QUESTIONS.md).
 
-**Revue filière des autres cultures réalisée :** guides Terres Inovia consultés et hypothèses tranchées dans [REVUE_FILIERE_CULTURES.md](REVUE_FILIERE_CULTURES.md) : charges pois chiche 500 €/ha, haricot sec irrigué 1 000, pois 450 et féverole 400. Les prix sont qualifiés par leur nature : paiement rapporté du pois chiche, scénario haricot et référentiel de plan d'entreprise pour pois/féverole. Les sensibilités figurent dans [data/cultures.yaml](../data/cultures.yaml) ; les exports ont été recalculés avec `09_cultures.py` et la lentille retrouve exactement ses résultats précédents.
+**Revue filière des autres cultures réalisée :** guides Terres Inovia consultés et hypothèses tranchées dans [REVUE_FILIERE_CULTURES.md](REVUE_FILIERE_CULTURES.md) : charges pois chiche 500 €/ha, haricot sec irrigué 1 000, pois 450 et féverole 400. Les prix sont qualifiés par leur nature : paiement rapporté du pois chiche, scénario haricot et référentiel de plan d'entreprise pour pois/féverole. Les sensibilités figurent dans [data/cultures.yaml](../data/cultures.yaml). La revue économique seule laisse les paramètres de la lentille, du pois chiche et de la féverole inchangés ; les exports recalculés intègrent aussi l'arrondi des garanties au plafond.
 
 **Pack de simulation disponible :** [contrat public reconstitué et contrat synthétique](CONTRAT_SIMULATION.md), [partenaires ciblés et proposition 300 t](PILOTE_300T.md), [140 lots fictifs, sources publiques et comparateur reproductible](../data/pilote_300t/README.md). Il permet de tester les paiements et coûts des contrats. Ses barèmes sont branchés sur le moteur : protection face au blé et coût moyen dans l'application (étapes « Le prix » et « Le contrat »).
 
@@ -26,7 +26,7 @@
 
 - [x] Répondre aux questions agro par des sources : lentille éligible, 105 €/ha indicatifs pour 2026 et 122 €/ha définitifs pour 2025 ; charges et rotation argumentées.
 - [x] Revoir les hypothèses des quatre autres légumineuses : références de charges, prix et budget d'irrigation du haricot documentés ; scénarios centraux et sensibilités décidés. Voir [REVUE_FILIERE_CULTURES.md](REVUE_FILIERE_CULTURES.md).
-- [x] Recalculer les exports et synchroniser résultats, pitch et interface après cette revue : P\* haricot 2 185 €/t, pois 427 €/t en Seine-et-Marne ; sortie lentille inchangée.
+- [x] Recalculer les exports et synchroniser résultats, pitch et interface après cette revue : P\* au plafond haricot 2 186 €/t, pois 427 €/t en Seine-et-Marne ; paramètres économiques lentille inchangés, prix exporté de 1 568 €/t après correction d'arrondi.
 - [x] Fournir un barème public NatUp 2023–2024 reconstitué, un contrat synthétique complet et des paramètres JSON. Voir [CONTRAT_SIMULATION.md](CONTRAT_SIMULATION.md).
 - [x] Fournir un historique fictif 2019–2025 et son générateur : masse brute/nette, qualité, refus, paiements et coûts par acteur. Références réelles séparées dans [data/pilote_300t](../data/pilote_300t/README.md).
 - [x] Brancher ces barèmes sur les scénarios du moteur et sur le backtest ; les lots fictifs restent hors apprentissage et backtest Agreste.

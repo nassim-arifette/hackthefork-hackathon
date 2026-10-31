@@ -1,0 +1,28 @@
+{
+  "input_sha256": "8ef8d9396b0bc4b4cf7252764f519247d5851523382bd39fc945acab5de5fd89",
+  "script_sha256": "b699a261ec5fe0d1bbf753e264802c96c8ef27bf88a51600ce5f20670c5a9ec4",
+  "first_test_year": 2019,
+  "calibration_window": 3,
+  "calibration_weighting": "pooled",
+  "selection_window": 3,
+  "calibration_quantiles": {
+    "raw": null,
+    "cal80": 0.8,
+    "cal90": 0.9,
+    "cal95": 0.95,
+    "signed80": 0.8,
+    "signed90": 0.9,
+    "signed95": 0.95
+  },
+  "target": 0.8,
+  "selector_objective": "past pooled protection >=80%, then paid/accepted tonnes",
+  "bootstrap_unit": "year",
+  "bootstrap_samples": 2000,
+  "seed": 42,
+  "raw_rows": 35352,
+  "evaluation_rows": 182688,
+  "input": "experiments/multilegumes_benchmark/predictions.csv",
+  "negative_calibration_corrections_allowed": "signed ablations only",
+  "selector_requires_raw_simulation_floor": true,
+  "output_summary_only": false
+}

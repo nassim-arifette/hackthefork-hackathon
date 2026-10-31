@@ -30,7 +30,9 @@ Sens des chiffres, à respecter :
 - Le barème paie plus cher la première tonne acceptée par hectare : c'est celle qui manque
   les mauvaises années. Les tonnes suivantes sont payées moins cher.
 - « 8 années sur 10 » veut dire : dans 8 années simulées sur 10, la lentille payée selon ce
-  barème rapporte au moins autant par hectare que le blé. Ce n'est ni une mesure de la
+  barème dégage une marge par hectare au moins égale à celle du blé, après charges,
+  aide et effet de rotation retenus dans le scénario. Dis « marge » et « années simulées »,
+  jamais « revenu garanti » ni fréquence certaine d'années futures. Ce n'est ni une mesure de la
   fiabilité de la coopérative, ni une garantie de revenu.
 - Le prix est payé sur les tonnes acceptées au tri pour l'alimentation humaine.
 - Les deux autres années sur dix, et en cas de récolte faible, la lentille peut rapporter

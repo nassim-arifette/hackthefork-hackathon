@@ -41,7 +41,7 @@ def calibres(yL, yW, pB, h: dict, prix_unique: float) -> list[dict]:
     p1 = calibrer_premier_palier(suite, yL, yW, pB, h, h["tau"])
     prime = calibrer_prime_ha(PRIX_BASE_PRIME, yL, yW, pB, h, h["tau"])
     return [
-        {"id": "unique", "nom": "Prix unique", "prix": round(prix_unique)},
+        {"id": "unique", "nom": "Prix unique", "prix": max(0, math.ceil(prix_unique))},
         {"id": "paliers", "nom": "Barème par tranches", "paliers": [p1, *suite]},
         {"id": "prime_ha", "nom": "Prix de base et prime à l'hectare", "prix": PRIX_BASE_PRIME,
          "prime_ha": math.ceil(prime)},

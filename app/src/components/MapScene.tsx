@@ -62,8 +62,8 @@ interface Props {
   step: number;
   price: number;
   year: ReplayYear | null;
-  /** Étape « contrat » : distance maximale des parcelles retenues pour le volume visé. */
-  selectKm: number | null;
+  /** Exact parcel selection used by the procurement evaluator, including cost-ranked supply. */
+  selectedParcels: ReadonlySet<number> | null;
   onHover: (h: Hover) => void;
   /** Distances et prix rendu de chaque parcelle pour le site de collecte courant. */
   geo: SiteGeo;
@@ -74,7 +74,7 @@ interface Props {
   focus: string | null;
 }
 
-export default function MapScene({ step, price, year, selectKm, onHover, geo, onPickSite, season, focus }: Props) {
+export default function MapScene({ step, price, year, selectedParcels, onHover, geo, onPickSite, season, focus }: Props) {
   const box = useRef<HTMLDivElement>(null);
   const [width, setWidth] = useState(1000);
   const [fontsReady, setFontsReady] = useState(false);
@@ -132,9 +132,9 @@ export default function MapScene({ step, price, year, selectKm, onHover, geo, on
             const s = SUIVI_INDEX.has(i) ? SUIVI.find((q) => q.id === p.id) : undefined;
             return s ? ndviColor(ndviAt(s.serie, season)) : C.wheatDim;
           }
-          if (selectKm !== null) {
+          if (selectedParcels !== null) {
             if (p.culture === 'lentille') return C.slate;
-            return lentil(i) && geo.dist[i] <= selectKm ? C.lentil : C.wheatDim;
+            return selectedParcels.has(i) ? C.lentil : C.wheatDim;
           }
           if (p.culture === 'ble' && lentil(i)) return year ? (held(p, geo.dist[i], price, year) ? C.lentil : C.fail) : C.lentil;
           if (p.culture === 'lentille') return C.slate;
@@ -144,7 +144,7 @@ export default function MapScene({ step, price, year, selectKm, onHover, geo, on
           }
           return C.wheat;
         },
-        updateTriggers: { getFillColor: [price, year?.annee, selectKm, geo, season] },
+        updateTriggers: { getFillColor: [price, year?.annee, selectedParcels, geo, season] },
         transitions: { getFillColor: 500 },
         onHover: (info) => onHover(info.object ? { kind: 'parcel', p: info.object as Parcel, i: info.index } : null),
       }),
@@ -178,7 +178,7 @@ export default function MapScene({ step, price, year, selectKm, onHover, geo, on
         getLineColor: [255, 255, 255], getLineWidth: 3, lineWidthUnits: 'pixels',
       }),
     ];
-  }, [step, price, year, selectKm, onHover, fontsReady, geo, season, focus]);
+  }, [step, price, year, selectedParcels, onHover, fontsReady, geo, season, focus]);
 
   return (
     <div ref={box} className="map-box">

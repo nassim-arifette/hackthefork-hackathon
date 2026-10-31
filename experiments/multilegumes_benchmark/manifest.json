@@ -1,0 +1,234 @@
+{
+  "kind": "composite_exact_crop_reuse",
+  "signature": "f9040e5c5bfe8ec60a166187f37a5272f06212fce3b387717e9409d609859e71",
+  "spec": {
+    "options": {
+      "cultures": [
+        "lentille",
+        "pois_chiche",
+        "haricot",
+        "pois",
+        "feverole"
+      ],
+      "models": [
+        "trend",
+        "linear",
+        "qrf",
+        "qrf_seasonal",
+        "lightgbm_seasonal",
+        "catboost_seasonal"
+      ],
+      "years": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "samples": 20000,
+      "seed": 42,
+      "threads": 1,
+      "seasonal_file": "meteo_saisonnier_cultures.csv",
+      "seasonal_columns": null
+    },
+    "seasonal_columns": {
+      "lentille": [
+        "lentille_rain_vegetative_mm",
+        "lentille_rain_reproductive_mm",
+        "lentille_rain_harvest_mm",
+        "lentille_heat_excess_cdays",
+        "lentille_cold_days"
+      ],
+      "pois_chiche": [
+        "pois_chiche_rain_vegetative_mm",
+        "pois_chiche_rain_reproductive_mm",
+        "pois_chiche_rain_harvest_mm",
+        "pois_chiche_heat_excess_cdays",
+        "pois_chiche_cold_days"
+      ],
+      "haricot": [
+        "haricot_rain_vegetative_mm",
+        "haricot_rain_reproductive_mm",
+        "haricot_rain_harvest_mm",
+        "haricot_heat_excess_cdays",
+        "haricot_cold_days"
+      ],
+      "pois": [
+        "pois_rain_vegetative_mm",
+        "pois_rain_reproductive_mm",
+        "pois_rain_harvest_mm",
+        "pois_heat_excess_cdays",
+        "pois_cold_days"
+      ],
+      "feverole": [
+        "feverole_rain_vegetative_mm",
+        "feverole_rain_reproductive_mm",
+        "feverole_rain_harvest_mm",
+        "feverole_heat_excess_cdays",
+        "feverole_cold_days"
+      ]
+    },
+    "packages": {
+      "numpy": "2.3.5",
+      "pandas": "2.2.3",
+      "scipy": "1.17.0",
+      "scikit-learn": "1.8.0",
+      "quantile-forest": "1.4.2",
+      "lightgbm": "4.7.0",
+      "catboost": "1.2.10",
+      "PyYAML": "6.0.3"
+    },
+    "files": {
+      "pipeline/multicrop_models.py": "efeed9bcae06974f6f485e83c29fa3ef1142290006fb4af1e8fa01a7c6bc13c2",
+      "pipeline/benchmark_multilegumes.py": "798ce1880fff6037293b3485cb56260f384fe7d5b23041046e13a4cf44c9a184",
+      "pipeline/contract_economics.py": "3df69f37d0aff485adbcac28858ec4f4c171ffbd11b37a58ae7586d46a45188a",
+      "pipeline/common.py": "9a4849d0b5e2e49b2749c12e7e717f033c4cd3a734a40f40c10eed56579da4d5",
+      "pipeline/model.py": "bc7f0fa5cca39b4d515f32f1ce7130a5e2e0735ce319e9f86e4fbe32c7915662",
+      "data/panel_rendements.csv": "cc353c3b5de58cdb867b5812ca67d54deddab8df9aec68fde2dab04419079a71",
+      "data/meteo_dept_cultures.csv": "65900b4f29c3ece9e96d5bf761a169d22c234d10f61fa8c19d97ccfc9b3d38e9",
+      "data/prix_ble.csv": "2da72c05832daf2a3db1658d293f506aaa8101e13987c03215a2f4e9ca8ac676",
+      "data/hypotheses.yaml": "7ecaf93dc1c8f3e232e8a3970d53863088dcaa59e9712bed72209600eae92498",
+      "data/cultures.yaml": "4535345b14e26cb6ead1b4b980f161883e11298cce673b5c32223da38879a0ff",
+      "data/meteo_saisonnier_cultures.csv": "0b1f2dbf0dbd036a9b8bc6f24de9ae6cf51238607a0c41920f44c1837efcb645",
+      "pipeline/crop_weather.py": "31fe686d550d99ba4eb11cf18110495db3115e9e38a227eed9f2a22b5209c4d3"
+    },
+    "distribution": "raw Q10/Q50/Q90, piecewise-linear tails, relative-yield floor .02",
+    "wheat_model": "linear, six legacy weather features, all available 87 weather departments",
+    "economic_basis": "euros per accepted tonne; fixed scenario hypotheses; need remains signed",
+    "target": 0.8,
+    "evaluation_years": [
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024,
+      2025
+    ],
+    "warmup_years": [
+      2016,
+      2017,
+      2018
+    ],
+    "composition": {
+      "method": "exact crop rows; no repricing or model modification",
+      "sources": {
+        "previous": {
+          "directory": "experiments/multilegumes_pre_pr3",
+          "signature": "b9460e8a28b4043f1580f52a78954ed9b5ee36c27c1044697d5f48f10f0bff1e",
+          "artifact_sha256": {
+            "manifest.json": "ac1600ace322cd4793ecf09b0d48cb6760ad082937641c6e84550f2be3910fb4",
+            "predictions.csv": "5eb6a50dd1cd9de9d9af61e3a23040622e917e16a04b56c9b9472bac8cce1fb7",
+            "audit.json": "2b8ec39be6a894e91815c5b6718681912b2f5fbbf636c396e2ecf3bba309afce",
+            "cohorts.json": "1052879b5b23be6d21a7f40c4493308810750005b34af7faa76ba4a08c72ee2d"
+          },
+          "used_cultures": [
+            "feverole",
+            "lentille",
+            "pois_chiche"
+          ]
+        },
+        "replacement": {
+          "directory": "experiments/multilegumes_pr3_recalculation",
+          "signature": "6e006243cc0b83cf9647ded3753d3bd30374886ff265d76a22735cc5f49d197e",
+          "artifact_sha256": {
+            "manifest.json": "560869fef4fac27e7ca8075a7633b481dc748e0588b56fdfe745dc50dec3d11b",
+            "predictions.csv": "67541a6d61837eb14e1197f18b01dcab6be04277151b00642ba0456be97c263b",
+            "audit.json": "6699ab0ed66fc5e4851e7e60e7b2679dbe94600e5102be669e3577351a1a74c1",
+            "cohorts.json": "4880c972dfe1cc6185e56cfc353b754565002f33d4173c9d59ccae903226364e"
+          },
+          "used_cultures": [
+            "haricot",
+            "pois"
+          ]
+        }
+      },
+      "changed_files": [
+        "data/cultures.yaml"
+      ],
+      "hypotheses": {
+        "lentille": {
+          "prix_ble": null,
+          "qualite": 0.1,
+          "forfait": 5,
+          "charges_ble": 700,
+          "charges_lentille": 500,
+          "aide": 105,
+          "rotation": 150,
+          "bonus": 255,
+          "tau": 0.8,
+          "charges_culture": 500
+        },
+        "pois_chiche": {
+          "prix_ble": null,
+          "qualite": 0.1,
+          "forfait": 5,
+          "charges_ble": 700,
+          "charges_lentille": 500,
+          "aide": 105,
+          "rotation": 150,
+          "bonus": 255,
+          "tau": 0.8,
+          "charges_culture": 500
+        },
+        "haricot": {
+          "prix_ble": null,
+          "qualite": 0.1,
+          "forfait": 5,
+          "charges_ble": 700,
+          "charges_lentille": 1000,
+          "aide": 105,
+          "rotation": 150,
+          "bonus": 255,
+          "tau": 0.8,
+          "charges_culture": 1000
+        },
+        "pois": {
+          "prix_ble": null,
+          "qualite": 0.05,
+          "forfait": 5,
+          "charges_ble": 700,
+          "charges_lentille": 450,
+          "aide": 105,
+          "rotation": 150,
+          "bonus": 255,
+          "tau": 0.8,
+          "charges_culture": 450
+        },
+        "feverole": {
+          "prix_ble": null,
+          "qualite": 0.05,
+          "forfait": 5,
+          "charges_ble": 700,
+          "charges_lentille": 400,
+          "aide": 105,
+          "rotation": 150,
+          "bonus": 255,
+          "tau": 0.8,
+          "charges_culture": 400
+        }
+      },
+      "crop_source": {
+        "lentille": "previous",
+        "pois_chiche": "previous",
+        "haricot": "replacement",
+        "pois": "replacement",
+        "feverole": "previous"
+      },
+      "merge_script_sha256": "8ffd248f2c2a962a76fe0853a8933395f4ec942df838256e7db4dd91277d220e",
+      "effective_fit_count": 300
+    }
+  },
+  "output_sha256": {
+    "predictions.csv": "8ef8d9396b0bc4b4cf7252764f519247d5851523382bd39fc945acab5de5fd89",
+    "audit.json": "e170742c8a8b37acf3b8b2d19dfbff35bf18a2559786f2292336ff4afc50f565",
+    "cohorts.json": "1052879b5b23be6d21a7f40c4493308810750005b34af7faa76ba4a08c72ee2d",
+    "summary.csv": "98b33deefe009debc04078cb819b5e9ab22447a4d4507a9c7c6756188517da4c",
+    "summary.json": "30e714799fc06c97c7f178dff23bc9e7b3a6441ac3627e6dae6a1bd2ea32d533"
+  }
+}
