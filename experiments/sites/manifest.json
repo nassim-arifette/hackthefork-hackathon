@@ -1,0 +1,24 @@
+{
+  "command": "python pipeline/benchmark_sites.py",
+  "numpy_version": "2.3.5",
+  "source_sha256": {
+    "app/src/data/parcels.json": "40415cb85f321d1e35ce9018d8e9e47806e404e9ae62824f978294cf39b4a5b2",
+    "app/src/data/thresholds.json": "e3eefc635bf5c56a14e47e19e58082e7f839acc14e10645541e539f09074a424",
+    "app/src/data/meta.json": "ffb9ade1af4c984c1e6167e70ee093c8e956c5de2183a668a8440683b8a0b965",
+    "data/pilote_300t/contrats.json": "1e9647088688a0dbcecdfa85b1f0e1c36836e4b2f8cbf7a6e4d1efec5e1d6348",
+    "pipeline/benchmark_sites.py": "9e9f8b1373c4684cc27edc37404386f6713d9173050181b6ce03564b261b808e"
+  },
+  "scenario_site": [
+    2.95,
+    48.55
+  ],
+  "parameters": {
+    "loss": 0.1,
+    "fixed_gross_t": 5,
+    "transport_gross_t_km": 0.12,
+    "sorting_gross_t": 180,
+    "detour": 1.3
+  },
+  "sorting_status": "hypothese_proxy_tri_optique_bio_non_devis_lentille_conventionnelle",
+  "sorting_source": "https://www.bio-hautsdefrance.org/systeme_bio/cultures-innovantes-de-nouvelles-opportunites-pour-les-grandes-cultures-bio/"
+}

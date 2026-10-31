@@ -38,7 +38,7 @@ export function YieldsChart() {
 }
 
 /** Prix proposé → part des années où la lentille gagne (haut) et hectares qui basculent (bas). */
-export function PriceChart({ price, min, max, supply }: { price: number; min: number; max: number; supply: { prix: number; hectares: number }[] }) {
+export function PriceChart({ price, min, max, supply, collection }: { price: number; min: number; max: number; supply: { prix: number; hectares: number }[]; collection: number }) {
   const h = 276, l = 40, r = 14;
   const top = [26, 118] as const;
   const bot = [170, 236] as const;
@@ -47,7 +47,7 @@ export function PriceChart({ price, min, max, supply }: { price: number; min: nu
   const haMax = Math.max(1, ...supply.map((s) => s.hectares));
   const Yh = (v: number) => bot[0] + (bot[1] - bot[0]) * (1 - v / haMax);
   const rel: [number, number][] = [];
-  for (let p = min; p <= max; p += 10) rel.push([p, reliabilityAt(p)]);
+  for (let p = min; p <= max; p += 10) rel.push([p, reliabilityAt(p - collection)]);
   const relPath = rel.map(([p, v], i) => `${i ? 'L' : 'M'}${X(p).toFixed(1)},${Yr(v).toFixed(1)}`).join('');
   const pts = supply.filter((s) => s.prix >= min && s.prix <= max);
   const supPath = `M${X(min)},${Yh(0)}` + pts.map((s) => `L${X(s.prix).toFixed(1)},${Yh(s.hectares).toFixed(1)}`).join('') + `L${X(max)},${Yh(0)}Z`;
@@ -55,8 +55,8 @@ export function PriceChart({ price, min, max, supply }: { price: number; min: nu
   const ticks = [800, 1200, 1600, 2000].filter((v) => v > min && v < max);
   return (
     <svg viewBox={`0 0 ${W} ${h}`} role="img" aria-label="Part des années gagnantes et hectares qui basculent selon le prix">
-      <rect x={X(MARKET.min)} width={X(MARKET.max) - X(MARKET.min)} y={top[0] - 14} height={bot[1] - top[0] + 14} className="band-market" />
-      <text x={X(MARKET.max) + 5} y={Yr(0.12)} className="note">référence 2012–2016</text>
+      <rect x={X(MARKET.min + collection)} width={X(MARKET.max) - X(MARKET.min)} y={top[0] - 14} height={bot[1] - top[0] + 14} className="band-market" />
+      <text x={X(MARKET.max + collection) + 5} y={Yr(0.12)} className="note">référence ferme + collecte</text>
 
       <text x={l} y={10} className="axis-title">Années où la lentille rapporte au moins autant que le blé</text>
       {[0, 0.5, 1].map((v) => (
@@ -64,7 +64,7 @@ export function PriceChart({ price, min, max, supply }: { price: number; min: nu
           <text x={l - 6} y={Yr(v) + 3.5} className="tick" textAnchor="end">{v === 0 ? '0' : v === 1 ? '10' : '5'}</text></g>
       ))}
       <line x1={l} x2={W - r} y1={Yr(0.8)} y2={Yr(0.8)} className="ref" />
-      <text x={X(MARKET.max) + 5} y={Yr(0.8) - 5} className="note">objectif 8 sur 10</text>
+      <text x={X(MARKET.max + collection) + 5} y={Yr(0.8) - 5} className="note">objectif 8 sur 10</text>
       <path d={relPath} className="ln lentil" />
 
       <text x={l} y={bot[0] - 12} className="axis-title">Hectares de blé qui basculent</text>
@@ -75,7 +75,7 @@ export function PriceChart({ price, min, max, supply }: { price: number; min: nu
       {ticks.map((tk) => <text key={tk} x={X(tk)} y={h - 14} className="tick" textAnchor="middle">{fmt(tk)}</text>)}
       <text x={W - r} y={h - 1} className="tick" textAnchor="end">€/t rendu</text>
       <line x1={X(cur)} x2={X(cur)} y1={top[0] - 14} y2={bot[1]} className="cursor" />
-      <circle cx={X(cur)} cy={Yr(reliabilityAt(cur))} r={4.5} className="pt ink" />
+      <circle cx={X(cur)} cy={Yr(reliabilityAt(cur - collection))} r={4.5} className="pt ink" />
     </svg>
   );
 }

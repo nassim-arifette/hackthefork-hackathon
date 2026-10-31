@@ -1,0 +1,24 @@
+{
+  "environment": "Google Colab CPU runtime",
+  "date": "2026-10-31",
+  "command": [
+    "/usr/bin/python3",
+    "-u",
+    "/content/hackthefork-multilegumes/pipeline/benchmark_multilegumes.py",
+    "--seasonal-file",
+    "/content/hackthefork-multilegumes/data/meteo_saisonnier_cultures.csv",
+    "--output",
+    "/content/hackthefork-multilegumes-pr3",
+    "--samples",
+    "20000",
+    "--threads",
+    "1",
+    "--cultures",
+    "haricot",
+    "pois"
+  ],
+  "pid": 8009,
+  "threads": 1,
+  "checkpoint_storage": "Colab local; exported by CLI and backed up with Drive connector",
+  "drive_note": "Drive mount requires renewed Google consent; notebook supports per-model Drive writes."
+}

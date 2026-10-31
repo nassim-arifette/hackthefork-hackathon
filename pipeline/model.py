@@ -235,8 +235,9 @@ def break_even_prices(X_pool, mL, mW, levL, levW, h, n=6000, seed=0):
 
 def p_star(R: np.ndarray, tau: float) -> float:
     """Plus petit prix tel que la lentille rapporte au moins autant que le blé dans une part
-    tau des scénarios (égalités comprises) : quantile empirique « inverted_cdf »."""
-    return float(np.quantile(R, tau, method="inverted_cdf"))
+    tau des scénarios (égalités comprises) : quantile empirique « inverted_cdf ».
+    Les besoins R restent signés ; le prix contractuel est borné à zéro."""
+    return max(0.0, float(np.quantile(R, tau, method="inverted_cdf")))
 
 
 # ---------- contrats ----------
@@ -269,11 +270,33 @@ def protection(c: dict, yL, yW, pB, h: dict) -> float:
 
 
 def calibrer_premier_palier(suite, yL, yW, pB, h: dict, tau: float, bornes=(1.0, 2.0)) -> int:
-    """Plus petit prix entier de la première tranche tel que le barème (p1, *suite) atteigne tau."""
-    lo, hi = 0, 20000
+    """Plus petit prix entier >= 0 de la première tranche atteignant tau.
+
+    L'inversion analytique fournit la borne initiale, sans plafond arbitraire.
+    La vérification par ``protection`` et la dichotomie conservent l'entier minimal
+    même aux égalités affectées par l'arrondi machine dans le calcul de marge.
+    """
+    from contract_economics import calibrate_coefficient
+
+    y = np.asarray(yL, dtype=float) * (1 - h["qualite"])
+    b1, b2 = bornes
+    if not 0 < b1 <= b2 or np.any(y < 0):
+        raise ValueError("Bornes positives croissantes et rendement accepté >= 0 requis")
+    p2, p3 = suite
+    reste = (np.asarray(pB) * np.asarray(yW) - h["charges_ble"]
+             + h["charges_lentille"] - h["bonus"]
+             - p2 * np.clip(y - b1, 0, b2 - b1) - p3 * np.maximum(y - b2, 0))
+    seuil = calibrate_coefficient(reste, np.minimum(y, b1), tau)
+    atteint = lambda prix: protection({"paliers": (prix, *suite), "bornes": bornes},
+                                       yL, yW, pB, h) >= tau
+    if atteint(0):
+        return 0
+    lo, hi = 0, max(1, int(np.ceil(seuil)))
+    while not atteint(hi):
+        hi *= 2
     while hi - lo > 1:
         mid = (lo + hi) // 2
-        if protection({"paliers": (mid, *suite), "bornes": bornes}, yL, yW, pB, h) >= tau:
+        if atteint(mid):
             hi = mid
         else:
             lo = mid

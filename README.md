@@ -6,6 +6,8 @@ Le Contrat qui Tient aide le responsable filière d'une coopérative ou d'un con
 
 > État (samedi 31/10) : pipeline de bout en bout, tests et démo sur les vraies données (Agreste, RPG 2025, NASA POWER, Eurostat). Scénario économique de la version 4, prix payé sur les tonnes acceptées au tri, comparaison des contrats. Résultats : [docs/RESULTATS.md](docs/RESULTATS.md).
 
+**Nouvel audit : cinq légumineuses, six modèles et trois contrats.** Les [conclusions et comparaisons avec M0](docs/AUDIT_MULTILEGUMES.md) utilisent les mêmes cas pour chaque candidat, des réglages choisis sur le passé et des analyses par année, région et historique disponible. Les [résultats de localisation](experiments/sites/README.md) séparent collecte et coût rendu complet. Le [notebook Colab](notebooks/multilegumes_colab.ipynb) affiche la progression et sauvegarde après chaque culture–modèle–année sur Drive. Les exports de démonstration ci-dessous conservent le modèle M1, avec les corrections de calcul et de logistique ; les nouveaux modèles sont comparés dans l'audit.
+
 ![La démo, étape « Le prix »](docs/img/etape-2-prix.png)
 
 ## En chiffres
@@ -15,10 +17,10 @@ Le Contrat qui Tient aide le responsable filière d'une coopérative ou d'un con
 | Importations de lentilles, 2025 | **39 371 t** (Eurostat Comext) |
 | Variabilité du rendement, lentille contre blé | **0,20 contre 0,09** (Agreste, 2010–2025) |
 | Aux prix observés de 2012 à 2016 (650 à 779 €/t), la lentille bat le blé francilien | **5 années sur 10** (modèle) |
-| Prix plancher pour 8 années sur 10, Seine-et-Marne | **1 567 €/t** départ ferme, sur les tonnes acceptées au tri ; incertitude de 1 099 à 2 877 €/t (modèle) |
-| Backtest 2019–2025, années jamais vues | **78 %** de contrats tenus pour 80 % visés, sur 133 cas, contre **29 %** pour un prix calculé sur les moyennes (protocole strict : rien des années testées n'entre dans le calcul) |
-| À protection égale, un barème par tranches plutôt qu'un prix unique | **18 % moins cher** en moyenne, 19 % en backtest, où il tient 79 % des contrats contre 78 % (modèle) |
-| Pois chiche, haricot, pois, féverole : même moteur | prix fixe tenu dans 65 à 70 % des cas ; **indexé sur le blé, 78 à 89 %** (backtest, après [revue des budgets](docs/REVUE_FILIERE_CULTURES.md)) |
+| Prix plancher pour 8 années sur 10, Seine-et-Marne | **1 568 €/t** départ ferme, sur les tonnes acceptées au tri ; incertitude de 1 099 à 2 877 €/t (modèle) |
+| Backtest de démonstration 2019–2025 | **78 %** de contrats tenus pour 80 % visés, sur la cohorte historique de 133 cas, contre **29 %** pour un prix calculé sur les moyennes ; regroupements d'entraînement recalculés sur le passé |
+| Un barème par tranches plutôt qu'un prix unique | **18 % moins cher** en simulation, 19 % en backtest, où il tient 79 % des contrats contre 78 % (modèle) |
+| Pois chiche, haricot, pois, féverole : même moteur | prix fixe tenu dans 65 à 70 % des cas ; **indexé sur le blé, 78 à 89 %** (backtest de démonstration, après [revue des budgets](docs/REVUE_FILIERE_CULTURES.md)) |
 
 ---
 
@@ -57,7 +59,7 @@ flowchart LR
 1. **Un modèle d'apprentissage probabiliste** apprend comment la météo NASA POWER (pluie de printemps, chaleur à la floraison, gel tardif, pluie à la récolte) déplace la distribution des rendements du blé et de la lentille. Deux modèles sont entraînés et comparés : une régression quantile calibrée par conformal prediction (retenue) et un LightGBM quantile (challenger).
 2. **Une simulation Monte-Carlo** rejoue 20 000 années : chacune reprend la météo et le prix du blé d'une année réelle, puis compare la marge en lentille sous contrat avec la marge en blé.
 3. **Le prix plancher** est le quantile 80 % du prix d'équilibre lentille/blé : au-dessus de ce prix, la lentille gagne dans 80 % des scénarios.
-4. **Un backtest sans fuite** vérifie, année par année de 2019 à 2025, si les prix que le modèle aurait fixés auraient vraiment tenu.
+4. **Un backtest glissant** vérifie, année par année de 2019 à 2025, si les prix que le modèle aurait fixés auraient tenu sous les hypothèses économiques retenues. Les regroupements d'entraînement Agreste sont reconstruits sur le passé. La démonstration conserve sa cohorte historique de 133 cas ; l'audit multicultures évalue 192 cas lentille avec une préparation commune à tous les candidats.
 
 Le détail mathématique est dans [docs/MODELE.md](docs/MODELE.md), et l'architecture technique complète dans [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 

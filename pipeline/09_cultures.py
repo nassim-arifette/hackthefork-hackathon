@@ -14,6 +14,7 @@ La lentille passe par le même chemin : on doit retrouver les chiffres du pipeli
 Hypothèses : data/cultures.yaml. Sortie : data/cultures.json et app/src/data/cultures.json.
 """
 import json
+import math
 
 import numpy as np
 import pandas as pd
@@ -125,14 +126,14 @@ def main():
             pool = pool_for(meteo, dep, POOL_YEARS, TARGET_YEAR)
             yC, yW, pB = simulate_years(pool, mC, mW, lev_idf[dep], levW_all[dep], h, n=N_SIM, seed=int(dep))
             R = (pB * yW - h["charges_ble"] + h["charges_lentille"] - h["bonus"]) / (yC * (1 - h["qualite"]))
-            p_dep[dep] = round(p_star(R, h["tau"]))
+            p_dep[dep] = math.ceil(p_star(R, h["tau"]))
             sims[dep] = (yC, yW, pB, R)
         yC, yW, pB, R = sims["77"]
         ps = p_star(R, h["tau"])
         m_star = p_star(R / pB, h["tau"])  # contrat indexé : plancher = m* × prix du blé
         if c == "lentille":
             ratios = (proposition[1] / ps, proposition[2] / ps)
-        p2, p3 = round(ps * ratios[0]), round(ps * ratios[1])
+        p2, p3 = math.ceil(ps * ratios[0]), math.ceil(ps * ratios[1])
         paid = yC * (1 - h["qualite"])
         # Tranches à l'échelle du rendement : pour la lentille (1,43 t/ha acceptées), 1 et 2 t/ha.
         bornes = (round(0.7 * float(paid.mean()), 1), round(1.4 * float(paid.mean()), 1))
@@ -150,7 +151,7 @@ def main():
         for dep in sorted(set(levC.index) & set(levW_all.index) & set(met.dep)):
             pool = pool_for(met, dep, POOL_YEARS, TARGET_YEAR)
             Rd, _, _ = break_even_prices(pool, mC, mW, levC[dep], levW_all[dep], h, n=N_SIM, seed=int(dep[:2], 36))
-            classement.append({"dep": dep, "nom": noms.get(dep, dep), "p_star": round(p_star(Rd, h["tau"])),
+            classement.append({"dep": dep, "nom": noms.get(dep, dep), "p_star": math.ceil(p_star(Rd, h["tau"])),
                                "rendement_qha": round(float(levC[dep]), 1)})
         classement.sort(key=lambda x: x["p_star"])
 
@@ -166,7 +167,7 @@ def main():
             "fiabilite_par_prix": [{"prix": p, "fiabilite": round(float(np.mean(R <= p)), 3)} for p in grid],
             "tranches": {"paliers": [p1, p2, p3], "bornes_tha": list(bornes), "cout_moyen_t": round(cout_tr),
                          "economie": round(1 - cout_tr / ps, 3)},
-            "indexe_m_star": round(m_star, 2),
+            "indexe_m_star": math.ceil(100 * m_star) / 100,
             "backtest": bt, "meilleurs": classement[:3], "n_departements_classes": len(classement),
         }
         out.append(rec)

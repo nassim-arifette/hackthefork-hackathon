@@ -9,7 +9,7 @@ Ce document décrit l'architecture complète : vue d'ensemble, données, pipelin
 1. **Tout est précalculé.** Le pipeline Python produit des fichiers JSON. Le navigateur lit, filtre et anime. Aucun calcul lourd ni appel réseau pendant la démo.
 2. **Un seul parcours de démo**, parfait de bout en bout, plutôt que plusieurs à moitié finis.
 3. **Chaque chiffre porte son étiquette** : mesuré, sourcé, supposé ou synthétique. L'étiquette voyage avec la donnée jusque dans l'interface.
-4. **Aucune fuite temporelle** dans le backtest.
+4. **Entraînement et calibration sur les années antérieures**, avec groupes de légumineuses reconstruits à chaque coupure ; la cohorte test historique est conservée et documentée séparément du benchmark de recherche.
 5. **Le LLM ne produit aucun chiffre.** Il rédige autour de chiffres calculés, et ses réponses sont mises en cache au build.
 6. **Pas de secret dans le dépôt**, pas de fichier de plus de 100 Mo dans git, pas de donnée personnelle.
 

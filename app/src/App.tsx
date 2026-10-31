@@ -5,7 +5,7 @@ import { BacktestReveal, MarginBars, PriceChart, SeasonChart, SecurityChart, Sen
 import { Figure, Source } from './components/ui';
 import {
   backtest, bestSite, CHALLENGER, CONTRATS, CULTURES, D77, DEP_NAMES, dec, FEATURE_LABELS, fmt, H, held, lettre, MARKET, meta, parcels, pct, pctFine,
-  reliabilityAt, replay, SAISON, signedPct, siteGeo, SITE_SCENARIO, SUIVI, supplyCurve, thresholds, type ReplayYear, type Statut,
+  reliabilityAt, replay, SAISON, signedPct, siteGeo, selectTarget, SITE_SCENARIO, SUIVI, supplyCurve, thresholds, type ReplayYear, type Statut, type SiteMode, type SiteSearchResult,
 } from './data';
 import { useTween } from './useTween';
 
@@ -39,17 +39,6 @@ function seasonSummary(): string {
   return parts.join(', ') + '.';
 }
 
-/** Volume visé : les parcelles de blé éligibles les plus proches du site, jusqu'au volume. */
-function selectTarget(geo: ReturnType<typeof siteGeo>, price: number, volume: number) {
-  const elig = parcels.map((_, i) => i).filter((i) => parcels[i].culture === 'ble' && price >= geo.pRendu[i])
-    .sort((a, b) => geo.dist[a] - geo.dist[b]);
-  let t = 0, ha = 0, n = 0, km = 0, tkm = 0;
-  for (const i of elig) {
-    if (t >= volume) break;
-    t += parcels[i].tonnes; ha += parcels[i].surface; n++; km = geo.dist[i]; tkm += parcels[i].tonnes * geo.dist[i];
-  }
-  return { ha, n, km, meanKm: t ? tkm / t : 0, reached: t >= volume };
-}
 const pos = (p: number) => `${((p - MIN) / (MAX - MIN)) * 100}%`;
 
 export default function App() {
@@ -65,9 +54,17 @@ export default function App() {
   const VOLUME = H.volumes[volumeKey];
   // Site de collecte : déplaçable d'un clic sur la carte aux étapes « Le prix » et « Le contrat ».
   const [geo, setGeo] = useState(SITE_SCENARIO);
-  const [best, setBest] = useState<{ volume: number; site: [number, number] } | null>(null);
+  const [siteMode, setSiteMode] = useState<SiteMode>('collection');
+  const [best, setBest] = useState<{ volume: number; price: number; mode: SiteMode; result: SiteSearchResult; before: number } | null>(null);
   const moveSite = useCallback((site: [number, number]) => setGeo(siteGeo(site)), []);
   const supply = useMemo(() => supplyCurve(geo), [geo]);
+  const collection77 = useMemo(() => {
+    let tonnes = 0, cost = 0;
+    parcels.forEach((p, i) => {
+      if (p.culture === 'ble' && p.dep === '77') { tonnes += p.tonnes; cost += p.tonnes * geo.collecte[i]; }
+    });
+    return tonnes ? cost / tonnes : 0;
+  }, [geo]);
   const timers = useRef<number[]>([]);
 
   const stop = () => { timers.current.forEach(clearTimeout); timers.current = []; };
@@ -83,13 +80,26 @@ export default function App() {
     return { tonnes, ha, n, kept };
   }, [price, year, geo]);
 
-  const target = useMemo(() => selectTarget(geo, price, VOLUME), [price, VOLUME, geo]);
-  const targetScenario = useMemo(() => selectTarget(SITE_SCENARIO, price, VOLUME), [price, VOLUME]);
+  const target = useMemo(() => selectTarget(geo, price, VOLUME, siteMode), [price, VOLUME, geo, siteMode]);
+  const selectedParcels = useMemo(() => new Set(target.indices), [target]);
+  const targetScenario = useMemo(() => selectTarget(SITE_SCENARIO, price, VOLUME, siteMode), [price, VOLUME, siteMode]);
   const [busy, setBusy] = useState(false);
-  const findBest = () => {
+  const [searchError, setSearchError] = useState<string | null>(null);
+  const searchVersion = useRef(0);
+  useEffect(() => { searchVersion.current++; }, [price, VOLUME, siteMode, geo]);
+  useEffect(() => () => { searchVersion.current++; }, []);
+  const findBest = async () => {
+    const version = searchVersion.current;
     setBusy(true);
-    // Laisse le navigateur afficher « Calcul… » avant la recherche sur la grille.
-    window.setTimeout(() => { const b = bestSite(VOLUME); moveSite(b.site); setBest({ volume: VOLUME, site: b.site }); setBusy(false); }, 30);
+    setSearchError(null);
+    try {
+      const result = await bestSite(VOLUME, price, siteMode, geo);
+      if (version !== searchVersion.current) return;
+      setBest({ volume: VOLUME, price, mode: siteMode, result, before: target.objective });
+      if (result.selection.reached) moveSite(result.site);
+    } catch {
+      setSearchError('La recherche n’a pas abouti. Le site courant est conservé.');
+    } finally { setBusy(false); }
   };
 
   const animatePrice = useCallback((from: number, to: number, ms = 5600) => {
@@ -138,7 +148,7 @@ export default function App() {
   useEffect(() => stop, []);
 
   const haT = useTween(stats.ha);
-  const rel = reliabilityAt(price);
+  const rel = reliabilityAt(price - collection77);
 
   return (
     <div className="app">
@@ -155,7 +165,7 @@ export default function App() {
       </header>
 
       <main className="map">
-        <MapScene step={step} price={price} year={step === 2 ? year : null} selectKm={step === 4 ? target.km : null} onHover={setHover}
+        <MapScene step={step} price={price} year={step === 2 ? year : null} selectedParcels={step === 4 ? selectedParcels : null} onHover={setHover}
           geo={geo} onPickSite={step === 1 || step === 4 ? (s) => { moveSite(s); setBest(null); } : undefined}
           season={step === 5 ? seasonDay : null} focus={focus} />
         <div className="map-caption">
@@ -174,7 +184,7 @@ export default function App() {
           ) : (
             <ul>
               <li><i className={step === 4 ? 'sw wheat-dim' : 'sw wheat'} />Blé tendre d’hiver</li>
-              <li><i className="sw lentil" />{step === 4 ? `Parcelles du contrat de ${fmt(VOLUME)} t` : 'Bascule en lentille'}</li>
+              <li><i className="sw lentil" />{step === 4 ? `Parcelles sélectionnées, cible ${fmt(VOLUME)} t` : 'Bascule en lentille'}</li>
               {step === 2 && <li><i className="sw fail" />Contrat non tenu</li>}
               <li><i className="sw slate" />Lentille déjà cultivée</li>
               <li><i className="sw site" />{geo === SITE_SCENARIO ? 'Site de collecte fictif' : 'Site de collecte déplacé'}</li>
@@ -189,7 +199,7 @@ export default function App() {
             ) : (
               <>
                 <b>{hover.p.culture === 'ble' ? 'Blé tendre d’hiver' : 'Lentille déjà cultivée'}, {DEP_NAMES[hover.p.dep]}</b>
-                {dec(hover.p.surface)} ha, à {fmt(geo.dist[hover.i])} km du site. Bascule à {fmt(geo.pRendu[hover.i])} €/t rendu.
+                {dec(hover.p.surface)} ha, à {fmt(geo.dist[hover.i])} km du site. Bascule à {fmt(Math.ceil(geo.pRendu[hover.i]))} €/t rendu.
               </>
             )}
           </div>
@@ -229,16 +239,16 @@ export default function App() {
                 <label htmlFor="price">Prix garanti, rendu au site acheteur</label>
                 <div className="readout">
                   <output htmlFor="price">{fmt(price)}<span className="unit">€/t</span></output>
-                  <p><b>{dec(rel * 10, 1)} années sur 10</b> où la lentille rapporte au moins autant que le blé en Seine‑et‑Marne</p>
+                  <p><b>{dec(rel * 10, 1)} années sur 10</b> pour une référence Seine‑et‑Marne, après {dec(collection77, 1)} €/t de collecte moyenne</p>
                 </div>
                 <div className="range">
                   <input id="price" type="range" min={MIN} max={MAX} step={5} value={price} style={{ ['--fill' as any]: pos(price) }}
                     onChange={(e) => { stop(); setPrice(+e.target.value); }} />
                   <div className="range-marks" aria-hidden="true">
-                    <span className="mk-market" style={{ left: pos(MARKET.min), width: `calc(${pos(MARKET.max)} - ${pos(MARKET.min)})` }} />
-                    <span className="mk-label" style={{ left: pos(MARKET_MID) }}>réf. 2012–2016</span>
-                    <span className="mk-tick" style={{ left: pos(D77.p_star) }} />
-                    <span className="mk-label" style={{ left: pos(D77.p_star) }}>8 sur 10</span>
+                    <span className="mk-market" style={{ left: pos(MARKET.min + collection77), width: `calc(${pos(MARKET.max)} - ${pos(MARKET.min)})` }} />
+                    <span className="mk-label" style={{ left: pos(MARKET_MID + collection77) }}>réf. ferme + collecte</span>
+                    <span className="mk-tick" style={{ left: pos(D77.p_star + collection77) }} />
+                    <span className="mk-label" style={{ left: pos(D77.p_star + collection77) }}>8 sur 10</span>
                   </div>
                 </div>
               </div>
@@ -250,10 +260,10 @@ export default function App() {
               </div>
               <div className="block">
                 <h3>Ce que le prix achète</h3>
-                <PriceChart price={price} min={MIN} max={MAX} supply={supply} />
-                <Source k="modele">20 000 années rejouées : météo et prix du blé de 2010 à 2025. Référence historique du prix de la lentille : Eurostat, {MARKET.annees[0]}–{MARKET.annees[1]}.</Source>
+                <PriceChart price={price} min={MIN} max={MAX} supply={supply} collection={collection77} />
+                <Source k="modele">20 000 années rejouées : météo et prix du blé de 2010 à 2025. Fiabilité de référence en Seine-et-Marne après collecte moyenne, pondérée par les tonnes attendues de ses parcelles de blé vers le site courant. La carte applique la distance propre à chaque parcelle. Référence Eurostat {MARKET.annees[0]}–{MARKET.annees[1]} : prix ferme augmenté de cette collecte sur l’axe rendu.</Source>
               </div>
-              <p className="pull">À la référence historique de {fmt(MARKET.min)} à {fmt(MARKET.max)} €/t, la lentille ne gagne que {dec(REL_MARKET * 10, 1)} années sur 10. Pour 8 sur 10, il faut {fmt(D77.p_star)} €/t en Seine-et-Marne.</p>
+              <p className="pull">À la référence historique de {fmt(MARKET.min)} à {fmt(MARKET.max)} €/t départ ferme, la lentille ne gagne que {dec(REL_MARKET * 10, 1)} années sur 10. Pour 8 sur 10, il faut {fmt(D77.p_star)} €/t départ ferme en Seine-et-Marne, auxquels s’ajoute la collecte.</p>
               <div className="block">
                 <h3>Les contrats d’aujourd’hui, face au blé francilien</h3>
                 <table className="list models">
@@ -267,7 +277,7 @@ export default function App() {
                 <Source k="modele">Mêmes années simulées, Seine-et-Marne. Prix Unéal (12/12/2023) et barème NatUp 2023–2024 (Union Agricole, 18/09/2023) publiés ; proposition du dossier pilote supposée. Ces contrats partagent aussi le risque par les volumes et la qualité : seule la protection face au blé est mesurée ici.</Source>
               </div>
               <div className="block">
-                <h3>Prix plancher par département</h3>
+                <h3>Prix plancher départ ferme par département</h3>
                 <table className="list">
                   <tbody>
                     {thresholds.par_departement.map((d) => (
@@ -305,9 +315,9 @@ export default function App() {
                   <div className="block">
                     <h3>Marge par hectare en Seine-et-Marne, {year.annee}</h3>
                     <MarginBars
-                      lentil={price * year.par_departement['77'].rendement_lentille_tha * (1 - H.qualite) - H.chargesLentille + H.aide + H.rotation}
+                      lentil={(price - collection77) * year.par_departement['77'].rendement_lentille_tha * (1 - H.qualite) - H.chargesLentille + H.aide + H.rotation}
                       wheat={year.prix_ble * year.par_departement['77'].rendement_ble_tha - H.chargesBle} />
-                    <Source k="modele">Au prix garanti, transport non déduit, sur les tonnes acceptées au tri ({pct(1 - H.qualite)} de la récolte) ; bénéfice de rotation de {fmt(H.rotation)} €/ha compris ; rendement et prix du blé de l’année mesurés.</Source>
+                    <Source k="modele">Prix rendu moins {dec(collection77, 1)} €/t de collecte moyenne des parcelles de blé du 77 vers le site courant, sur les tonnes acceptées ({pct(1 - H.qualite)} de la récolte) ; bénéfice de rotation de {fmt(H.rotation)} €/ha compris. La carte utilise la distance de chaque parcelle.</Source>
                   </div>
                   <div className="block verdict">
                     <div className="verdict-v">{stats.n ? pct(stats.kept / stats.n) : '—'}</div>
@@ -397,32 +407,58 @@ export default function App() {
                   <dt>Prix garanti</dt><dd><b>{fmt(C_PALIERS.paliers![0])} €/t</b> pour la première tonne acceptée par hectare, <b>{fmt(C_PALIERS.paliers![1])} €/t</b> pour la deuxième, <b>{fmt(C_PALIERS.paliers![2])} €/t</b> au-delà. Départ ferme en Seine-et-Marne, sur les tonnes acceptées au tri pour l’alimentation humaine.</dd>
                   <dt>Ce qu’il garantit</dt><dd>Une marge au moins égale à celle du blé dans {pct(H.tau)} des années simulées : la protection d’un prix unique de {fmt(D77.p_star)} €/t, pour {saving(C_PALIERS.simulation.cout_moyen_t, C_UNIQUE.simulation.cout_moyen_t)} % de moins en moyenne.</dd>
                   <dt>Ce qu’il ne garantit pas</dt><dd>Une récolte effondrée réduit la marge : {dec(D77.rendement_lentille_q10_tha, 2)} t/ha ou moins une année sur dix. Les lots refusés au tri ne sont pas payés au prix garanti.</dd>
-                  <dt>Volume visé</dt><dd>{target.reached
-                    ? <><b>{fmt(VOLUME)} t</b> acceptées, soit {pctFine(VOLUME / L25.importations_t)} des importations de 2025, sur {fmt(target.ha)} ha : les {fmt(target.n)} parcelles éligibles les plus proches du site, à moins de {fmt(target.km)} km.</>
-                    : <>Le prix est trop bas pour réunir {fmt(VOLUME)} t. Remontez-le à l’étape 2.</>}</dd>
+                  <dt>Dimensionnement</dt><dd>La cible de <b>{fmt(VOLUME)} t</b> ci-dessous est un scénario d’approvisionnement séparé, avec des prix proportionnels aux tonnes. Ce barème n’engage aucun producteur ni volume livré.</dd>
                 </dl>
                 <Source k="modele">Barème calibré sur les mêmes années simulées que le prix plancher : la première tonne est recalculée, les deux suivantes reprennent la proposition du dossier pilote. Texte assemblé à partir des chiffres calculés ; volumes : hypothèses de l’équipe.</Source>
               </div>
               <div className="block">
-                <h3>Où placer le site de collecte ?</h3>
-                <p className="body small">Cliquez sur la carte pour déplacer le site : les parcelles retenues, leurs distances et le coût de collecte se recalculent.</p>
-                <div className="figures two">
-                  <Figure value={dec(target.meanKm, 1)} unit="km" label={`distance moyenne des parcelles du contrat de ${fmt(VOLUME)}\u00a0t`} />
-                  <Figure value={dec(H.forfait + H.kappa * target.meanKm, 1)} unit="€/t" label="coût moyen de collecte par tonne acceptée" />
+                <h3>Site et approvisionnement : deux scénarios</h3>
+                <div className="tabs" role="tablist" aria-label="Objectif de recherche du site">
+                  <button role="tab" aria-selected={siteMode === 'collection'} className={siteMode === 'collection' ? 'on' : ''} onClick={() => { setSiteMode('collection'); setBest(null); }}><b>Collecte</b>Au prix rendu affiché</button>
+                  <button role="tab" aria-selected={siteMode === 'landed'} className={siteMode === 'landed' ? 'on' : ''} onClick={() => { setSiteMode('landed'); setBest(null); }}><b>Coût rendu</b>Prix ferme par département</button>
                 </div>
+                <p className="body small">{siteMode === 'collection'
+                  ? <>Prix unique de <b>{fmt(price)} €/t rendu</b>, réglé à l’étape « Le prix ». La collecte est déduite de ce prix pour tester la protection face au blé. La recherche réduit la collecte ; le prix d’achat rendu reste fixe.</>
+                  : <>Chaque département reçoit son propre prix plancher départ ferme. La recherche réduit le règlement producteur, la collecte et le tri par tonne acceptée. Ces prix différenciés sont une hypothèse commerciale ; le curseur de prix et le barème ci-dessus ne s’appliquent pas.</>}</p>
+                <p className="body small">{target.reached
+                  ? <>Cible de <b>{fmt(VOLUME)} t</b> : les {fmt(target.n)} parcelles entières retenues représentent <b>{dec(target.tonnes, 1)} t attendues</b> sur {fmt(target.ha)} ha, dont {dec(target.tonnes - VOLUME, 1)} t au-delà de la cible. Le rendement et l’acceptation restent incertains.</>
+                  : <>Cible non atteinte au site courant : {dec(target.tonnes, 1)} t attendues sur {fmt(target.n)} parcelles admissibles, pour {fmt(VOLUME)} t visées.</>}</p>
+                {target.n > 0 && <>
+                  <div className="figures two">
+                    <Figure value={dec(target.meanKm, 1)} unit="km" label="distance moyenne pondérée par les tonnes sélectionnées" />
+                    <Figure value={dec(target.collectionPerT, 1)} unit="€/t" label="collecte par tonne nette acceptée" />
+                  </div>
+                  <table className="list contracts">
+                    <thead><tr><th>Budget par tonne nette</th><th className="num">Site courant</th><th className="num">Site du scénario</th></tr></thead>
+                    <tbody>
+                      <tr><td>Règlement départ ferme</td><td className="num">{dec(target.farmPerT, 1)}</td><td className="num">{targetScenario.reached ? dec(targetScenario.farmPerT, 1) : '—'}</td></tr>
+                      <tr><td>Collecte</td><td className="num">{dec(target.collectionPerT, 1)}</td><td className="num">{targetScenario.reached ? dec(targetScenario.collectionPerT, 1) : '—'}</td></tr>
+                      <tr><td>Tri supposé</td><td className="num">{dec(target.sortingPerT, 1)}</td><td className="num">{targetScenario.reached ? dec(targetScenario.sortingPerT, 1) : '—'}</td></tr>
+                      <tr className="hl"><td>Total rendu et trié, €/t</td><td className="num">{dec(target.landedPerT, 1)}</td><td className="num">{targetScenario.reached ? dec(targetScenario.landedPerT, 1) : '—'}</td></tr>
+                    </tbody>
+                  </table>
+                  {!targetScenario.reached && <p className="body small">La cible n’est pas atteinte au site du scénario ; ses coûts ne sont pas comparés.</p>}
+                  <p className="body small">Budget attendu : {fmt(target.budget)} € pour {dec(target.tonnes, 1)} t sélectionnées. Hors séchage, stockage, conditionnement, investissement et récupération des écarts.</p>
+                </>}
                 <div className="actions">
-                  <button className="link" onClick={findBest} disabled={busy}>{busy ? 'Calcul…' : `Meilleur emplacement pour ${fmt(VOLUME)}\u00a0t`}</button>
+                  <button className="link" onClick={findBest} disabled={busy}>{busy ? 'Calcul…' : `Comparer les emplacements pour ${fmt(VOLUME)}\u00a0t`}</button>
                   {geo !== SITE_SCENARIO && <button className="link" onClick={() => { setGeo(SITE_SCENARIO); setBest(null); }}>Revenir au site du scénario</button>}
                 </div>
-                {best && best.volume === VOLUME && geo.site === best.site && (
-                  <p className="body small">Point de la grille qui minimise la distance moyenne pour {fmt(VOLUME)}&nbsp;t : {dec(H.kappa * (targetScenario.meanKm - target.meanKm), 1)} €/t de collecte en moins qu’au site du scénario. Le gain reste faible face à un prix garanti de plus de 1 000 €/t : le site se choisit d’abord pour la logistique.</p>
+                {searchError && <p className="body small" role="alert">{searchError}</p>}
+                {best && best.volume === VOLUME && best.price === price && best.mode === siteMode && (
+                  <p className="body small" role="status">{best.result.selection.reached
+                    ? <>{fmt(best.result.evaluated)} emplacements évalués. {best.result.improved
+                      ? <>Meilleur candidat testé : {Number.isFinite(best.before) ? `${dec(best.before - best.result.selection.objective, 2)} €/t de ${siteMode === 'collection' ? 'collecte' : 'coût rendu'} économisés par rapport au site avant recherche.` : 'la cible devient atteignable en volume attendu.'}</>
+                      : <>Le site courant est conservé : aucun candidat testé n’améliore l’objectif.</>}</>
+                    : <>Aucun emplacement testé ne réunit {fmt(VOLUME)} t dans ce scénario. Le site courant est conservé.</>}</p>
                 )}
-                <Source k="suppose">Forfait de {fmt(H.forfait)} €/t et {dec(H.kappa, 2)} €/t/km ; distance routière approchée par la distance à vol d’oiseau × {dec(H.detour, 1)}. Emplacements candidats sur une grille, à confronter aux sites existants (silos, zones d’activité).</Source>
+                <Source k="suppose">Collecte : {fmt(H.forfait)} €/t brute + {dec(H.kappa, 2)} €/t brute/km routier, retours compris. Tri : {fmt(H.tri)} €/t brute, proxy du dossier pilote, sans devis. Ces coûts sont divisés par {pct(1 - H.qualite)} de tonnes acceptées. Route approchée par vol d’oiseau × {dec(H.detour, 1)}.</Source>
+                <p className="body small">Parcelles entières classées par distance ou coût unitaire ; grille affinée, site actuel inclus. Le résultat est le meilleur candidat testé pour cette règle, sans preuve d’optimum global. Les sites sont théoriques ; disponibilité des producteurs, rotations, routes et capacités de tri restent à vérifier. Le pilote peut aussi porter sur une collecte existante, sans nouveau site.</p>
               </div>
               <div className="block">
-                <h3>Impact du contrat</h3>
+                <h3>Impact du scénario d’approvisionnement</h3>
                 <div className="figures">
-                  <Figure value={fmt(VOLUME * H.impact.proteines)} unit="t" label="de protéines végétales" />
+                  <Figure value={fmt(target.tonnes * H.impact.proteines)} unit="t" label="de protéines végétales attendues" />
                   <Figure value={fmt((target.ha * H.impact.azote) / 1000)} unit="t" label="d’azote minéral non apporté" />
                   <Figure value={fmt(target.ha * H.impact.co2e)} unit="t CO₂e" label="d’émissions directes évitées" />
                 </div>

@@ -39,7 +39,7 @@
    },
    "unique": {
     "taux_tenus": 0.782,
-    "cout_moyen_t": 1960
+    "cout_moyen_t": 1961
    },
    "paliers": {
     "taux_tenus": 0.789,
@@ -363,7 +363,7 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 959
+     "verse_eur_ha": 961
     },
     "paliers": {
      "tenu": true,
@@ -424,7 +424,7 @@
     },
     "unique": {
      "tenu": false,
-     "verse_eur_ha": 1038
+     "verse_eur_ha": 1039
     },
     "paliers": {
      "tenu": true,
@@ -729,7 +729,7 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 831
+     "verse_eur_ha": 832
     },
     "paliers": {
      "tenu": true,
@@ -790,7 +790,7 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 1385
+     "verse_eur_ha": 1387
     },
     "paliers": {
      "tenu": true,
@@ -912,7 +912,7 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 1082
+     "verse_eur_ha": 1083
     },
     "paliers": {
      "tenu": true,
@@ -1278,7 +1278,7 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 896
+     "verse_eur_ha": 897
     },
     "paliers": {
      "tenu": true,
@@ -1583,7 +1583,7 @@
     },
     "unique": {
      "tenu": false,
-     "verse_eur_ha": 390
+     "verse_eur_ha": 391
     },
     "paliers": {
      "tenu": false,
@@ -1766,7 +1766,7 @@
     },
     "unique": {
      "tenu": false,
-     "verse_eur_ha": 363
+     "verse_eur_ha": 364
     },
     "paliers": {
      "tenu": false,
@@ -1827,7 +1827,7 @@
     },
     "unique": {
      "tenu": false,
-     "verse_eur_ha": 1058
+     "verse_eur_ha": 1060
     },
     "paliers": {
      "tenu": false,
@@ -1949,7 +1949,7 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 1374
+     "verse_eur_ha": 1376
     },
     "paliers": {
      "tenu": true,
@@ -2193,7 +2193,7 @@
     },
     "unique": {
      "tenu": false,
-     "verse_eur_ha": 402
+     "verse_eur_ha": 403
     },
     "paliers": {
      "tenu": false,
@@ -2498,7 +2498,7 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 1789
+     "verse_eur_ha": 1790
     },
     "paliers": {
      "tenu": true,
@@ -2559,7 +2559,7 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 3071
+     "verse_eur_ha": 3073
     },
     "paliers": {
      "tenu": true,
@@ -2681,7 +2681,7 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 2170
+     "verse_eur_ha": 2172
     },
     "paliers": {
      "tenu": true,
@@ -2803,7 +2803,7 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 2282
+     "verse_eur_ha": 2284
     },
     "paliers": {
      "tenu": true,
@@ -2925,7 +2925,7 @@
     },
     "unique": {
      "tenu": false,
-     "verse_eur_ha": 768
+     "verse_eur_ha": 769
     },
     "paliers": {
      "tenu": false,
@@ -2986,7 +2986,7 @@
     },
     "unique": {
      "tenu": false,
-     "verse_eur_ha": 660
+     "verse_eur_ha": 661
     },
     "paliers": {
      "tenu": false,
@@ -3108,7 +3108,7 @@
     },
     "unique": {
      "tenu": false,
-     "verse_eur_ha": 835
+     "verse_eur_ha": 836
     },
     "paliers": {
      "tenu": false,
@@ -3352,7 +3352,7 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 657
+     "verse_eur_ha": 658
     },
     "paliers": {
      "tenu": true,
@@ -3413,7 +3413,7 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 1125
+     "verse_eur_ha": 1126
     },
     "paliers": {
      "tenu": true,
@@ -3840,7 +3840,7 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 4932
+     "verse_eur_ha": 4934
     },
     "paliers": {
      "tenu": true,
@@ -4023,7 +4023,7 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 2919
+     "verse_eur_ha": 2920
     },
     "paliers": {
      "tenu": true,
@@ -4145,7 +4145,7 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 3717
+     "verse_eur_ha": 3718
     },
     "paliers": {
      "tenu": true,
@@ -4206,7 +4206,7 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 2829
+     "verse_eur_ha": 2830
     },
     "paliers": {
      "tenu": true,
@@ -4389,7 +4389,7 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 2050
+     "verse_eur_ha": 2051
     },
     "paliers": {
      "tenu": true,
@@ -4816,7 +4816,7 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 5914
+     "verse_eur_ha": 5916
     },
     "paliers": {
      "tenu": true,
@@ -4877,7 +4877,7 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 4239
+     "verse_eur_ha": 4241
     },
     "paliers": {
      "tenu": true,
@@ -4938,7 +4938,7 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 4320
+     "verse_eur_ha": 4322
     },
     "paliers": {
      "tenu": true,
@@ -4999,7 +4999,7 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 5615
+     "verse_eur_ha": 5617
     },
     "paliers": {
      "tenu": true,
@@ -5060,7 +5060,7 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 4975
+     "verse_eur_ha": 4977
     },
     "paliers": {
      "tenu": true,
@@ -5182,7 +5182,7 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 3557
+     "verse_eur_ha": 3558
     },
     "paliers": {
      "tenu": true,
@@ -5609,7 +5609,7 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 1189
+     "verse_eur_ha": 1190
     },
     "paliers": {
      "tenu": true,
@@ -5975,7 +5975,7 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 2377
+     "verse_eur_ha": 2378
     },
     "paliers": {
      "tenu": true,
@@ -6036,7 +6036,7 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 3706
+     "verse_eur_ha": 3708
     },
     "paliers": {
      "tenu": true,
@@ -6097,7 +6097,7 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 2721
+     "verse_eur_ha": 2723
     },
     "paliers": {
      "tenu": true,
@@ -6341,7 +6341,7 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 3426
+     "verse_eur_ha": 3428
     },
     "paliers": {
      "tenu": true,
@@ -6402,7 +6402,7 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 3394
+     "verse_eur_ha": 3396
     },
     "paliers": {
      "tenu": true,
@@ -6463,7 +6463,7 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 4268
+     "verse_eur_ha": 4270
     },
     "paliers": {
      "tenu": true,
@@ -6829,7 +6829,7 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 1199
+     "verse_eur_ha": 1200
     },
     "paliers": {
      "tenu": true,
@@ -6890,7 +6890,7 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 653
+     "verse_eur_ha": 654
     },
     "paliers": {
      "tenu": true,
@@ -7012,7 +7012,7 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 1604
+     "verse_eur_ha": 1605
     },
     "paliers": {
      "tenu": true,
@@ -7073,7 +7073,7 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 3159
+     "verse_eur_ha": 3160
     },
     "paliers": {
      "tenu": true,
@@ -7195,7 +7195,7 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 2233
+     "verse_eur_ha": 2235
     },
     "paliers": {
      "tenu": true,
@@ -7256,7 +7256,7 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 4881
+     "verse_eur_ha": 4883
     },
     "paliers": {
      "tenu": true,
@@ -7317,7 +7317,7 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 2223
+     "verse_eur_ha": 2224
     },
     "paliers": {
      "tenu": true,
@@ -7378,7 +7378,7 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 2294
+     "verse_eur_ha": 2295
     },
     "paliers": {
      "tenu": true,
@@ -7439,7 +7439,7 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 4160
+     "verse_eur_ha": 4162
     },
     "paliers": {
      "tenu": true,
@@ -7561,7 +7561,7 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 3108
+     "verse_eur_ha": 3109
     },
     "paliers": {
      "tenu": true,
@@ -7805,7 +7805,7 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 4298
+     "verse_eur_ha": 4300
     },
     "paliers": {
      "tenu": true,
@@ -8049,7 +8049,7 @@
     },
     "unique": {
      "tenu": true,
-     "verse_eur_ha": 5152
+     "verse_eur_ha": 5154
     },
     "paliers": {
      "tenu": true,

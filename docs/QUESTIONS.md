@@ -6,6 +6,8 @@ Recherche documentaire du **31 octobre 2026**, pour avancer pendant Hack the For
 
 L'équipe a adopté ce scénario le 31/10 ; il est calculé dans la version 4 de [RESULTATS.md](RESULTATS.md). Les chiffres cités plus bas sont ceux de cette version, variantes de contrat comprises (§3, [RESULTATS.md §7](RESULTATS.md#7-comparer-les-contrats)). Cette revue documentaire ne vaut pas validation par l'organisation.
 
+Les prix courants intègrent l'arrondi contractuel au plafond. Les taux de production utilisent désormais des groupes de légumineuses d'entraînement reconstruits sur le passé ; la cohorte test historique est conservée. Le benchmark multicultures de recherche utilise des règles et cohortes communes distinctes.
+
 **Complément disponible :** un [barème public NatUp et un contrat synthétique complet](CONTRAT_SIMULATION.md), un [dossier de pilote 300 t avec partenaires ciblés](PILOTE_300T.md) et un [historique synthétique reproductible de 140 lots](../data/pilote_300t/README.md). Le comparateur fourni avec ce jeu permet de chiffrer les paiements et les coûts ; il ne recalcule pas le P* ni le backtest Agreste de l'application.
 
 **Revue des autres cultures accomplie le 31/10 :** conserver **500 €/ha pour le pois chiche et 400 pour la féverole**, retenir **450 pour le pois et 1 000 pour le haricot sec irrigué**. Les guides Terres Inovia ont été ouverts ; les références de prix et le budget du haricot sont maintenant explicités. La [revue filière détaillée](REVUE_FILIERE_CULTURES.md) distingue le prix payé du pois chiche, le scénario haricot et le référentiel pois/féverole. Les hypothèses sont dans [data/cultures.yaml](../data/cultures.yaml) ; leurs effets chiffrés proviennent des exports recalculés, sans être déduits de cette seule revue.
@@ -17,7 +19,7 @@ L'équipe a adopté ce scénario le 31/10 ; il est calculé dans la version 4 de
 | Assistant de code | Claude Code est autorisé. | Déclaré dans [DECLARATIONS.md](DECLARATIONS.md), avec ChatGPT pour cette recherche. |
 | Track | Track 3, déclaré. | — |
 | Modèle | **Garder M1** pour la démo. Le banc d'essai des modèles probabilistes en cours sera comparé sur le même protocole avant tout changement. | — |
-| Hypothèses | Scénario central de §2 adopté : charges 700 / 500 €/ha, aide 105 €/ha, rotation 150 €/ha, forfait de collecte 5 €/t. | Calculé : P\* de 1 567 €/t en Seine-et-Marne, 78 % de contrats tenus en backtest strict (87 % avant la correction du regroupement des séries). |
+| Hypothèses | Scénario central de §2 adopté : charges 700 / 500 €/ha, aide 105 €/ha, rotation 150 €/ha, forfait de collecte 5 €/t brute. | Calculé : P\* de 1 568 €/t en Seine-et-Marne, 78,2 % de contrats tenus dans le backtest de production corrigé. |
 | Tonnes payées | **Tonnes acceptées au tri**, 10 % de refus en scénario central, 0 et 20 % en sensibilité. Raisons ci-dessous. | Appliqué au modèle, au backtest, à la carte, au contrat et à l'impact. |
 | Volumes | Pilote de 300 t, ambition de 5 000 t. | Bascule entre les deux à l'étape « Le contrat ». |
 | Impact | Protéines, azote non apporté, émissions directes évitées. | Affichés pour le volume choisi (§6). |
@@ -33,7 +35,7 @@ C'est la règle des contrats de collecte : le prix convenu s'applique à la marc
 
 Agreste mesure le rendement « au stade arrivée ferme » (méthodologie SAA, p. 3), avant le tri de la coopérative. Le modèle applique donc la part refusée **une seule fois**, au rendement Agreste : 10 % en scénario central, cohérent avec les 10 à 20 % de pertes possibles liées à la bruche. Les lots refusés gardent une valeur (alimentation animale) que le modèle ne compte pas : c'est un choix prudent pour l'agriculteur.
 
-Effet sur le prix plancher de la Seine-et-Marne : 1 411 €/t sans refus, **1 567 €/t avec 10 %**, 1 763 €/t avec 20 %. Le contrat doit l'écrire noir sur blanc : normes de réception, barème de réfaction, et prix de repli pour les lots déclassés.
+Effet sur le prix plancher de la Seine-et-Marne : 1 411 €/t sans refus, **1 568 €/t avec 10 %**, 1 764 €/t avec 20 %. Le contrat doit l'écrire noir sur blanc : normes de réception, barème de réfaction, et prix de repli pour les lots déclassés.
 
 ## 1. Réponse à chaque question ouverte
 
@@ -105,7 +107,7 @@ Proposé :  −700 + 500 − 105 − 150 = −455 €/ha
 R_nouveau,s = R_actuel,s − 173 / y_lentille,s
 ~~~
 
-Avec y en t/ha, la baisse vaut 231 €/t pour un scénario à 0,75 t/ha et 115 €/t à 1,5 t/ha. **Recalcul fait** : 1 411 €/t avec ces seuls paramètres, puis 1 567 €/t une fois les 10 % de refus au tri appliqués (scénario retenu, §0).
+Avec y en t/ha, la baisse vaut 231 €/t pour un scénario à 0,75 t/ha et 115 €/t à 1,5 t/ha. **Recalcul fait** : 1 411 €/t avec ces seuls paramètres, puis 1 568 €/t une fois les 10 % de refus au tri appliqués (scénario retenu, §0).
 
 ## 3. Un P* élevé : quelle proposition commerciale ?
 
@@ -119,7 +121,7 @@ Avec y en t/ha, la baisse vaut 231 €/t pour un scénario à 0,75 t/ha et 115 �
 | NatUp, entretien de septembre 2023 sur les récoltes 2023–2024 | Trois tranches annoncées : 900 €/t jusqu'à 1 t/ha, 700 de 1 à 2, 600 au-delà avec un éventuel complément de marché. [S19] | Barème réel reconstitué ; clauses non publiées conservées comme inconnues. |
 | NatUp, 18 septembre 2025 | Contrat triennal conventionnel rémunérant la première tonne par hectare 1 000 €. [S10] | Précédent concret pour une rémunération à paliers. |
 
-**Ma réponse au jury :** le prix de 1 567 €/t chiffre le coût d'une protection forte face au blé francilien dans le modèle actuel. L'outil doit permettre de négocier cette protection, de modifier la rémunération et de choisir les hectares les plus intéressants. Dans le même modèle, 900 €/t protège 6,1 années sur 10 et 1 000 €/t, 6,5.
+**Ma réponse au jury :** le prix de 1 568 €/t chiffre le coût d'une protection forte face au blé francilien dans le modèle actuel. L'outil doit permettre de négocier cette protection, de modifier la rémunération et de choisir les hectares les plus intéressants. Dans le même modèle, 900 €/t protège 6,1 années sur 10 et 1 000 €/t, 6,5.
 
 Les contrats existants intègrent déjà le risque. Notre valeur ajoutée est de **comparer leurs barèmes, mesurer leur protection et cibler les parcelles**. Le score de 29 % dans le repo est celui de la baseline calculée sur les moyennes ; il ne mesure pas la performance de l'ensemble des contrats des coopératives.
 
@@ -141,7 +143,7 @@ recette_bareme(y) = 1 000 × min(y, 1)
 
 y est le rendement net alimentaire payé en t/ha, agrégé par producteur et campagne avant d'appliquer les tranches. Ce **contrat synthétique 2027** retient 1 000 / 750 / 650 €/t, plus 30 €/t net de prime de pré-nettoyage lorsque le service a été effectué. Le premier palier s'inspire du communiqué NatUp de 2025 ; les deux suivants et le montant de la prime sont nos choix. Le barème public distinct de 2023–2024, 900 / 700 / 600, est aussi disponible. [S10] [S19]
 
-Les clauses de qualité, la prise en charge du tri, les exemples et les limites de la reconstitution figurent dans [CONTRAT_SIMULATION.md](CONTRAT_SIMULATION.md). Les trois barèmes sont paramétrés dans [contrats.json](../data/pilote_300t/contrats.json) et comparés sur le même historique synthétique. **Protection calculée par le moteur** (Seine-et-Marne, face au blé) : 5,9 années sur 10 pour le barème NatUp 2023–2024, 6,4 pour la proposition 2027, 6,1 pour le prix uniforme de 900 €/t. Pour atteindre 8 sur 10 en gardant 750 et 650 €/t, la première tonne doit être payée 1 635 €/t : le coût moyen tombe alors à 1 283 €/t, contre 1 567 €/t pour le prix unique.
+Les clauses de qualité, la prise en charge du tri, les exemples et les limites de la reconstitution figurent dans [CONTRAT_SIMULATION.md](CONTRAT_SIMULATION.md). Les trois barèmes sont paramétrés dans [contrats.json](../data/pilote_300t/contrats.json) et comparés sur le même historique synthétique. **Protection calculée par le moteur** (Seine-et-Marne, face au blé) : 5,9 années sur 10 pour le barème NatUp 2023–2024, 6,4 pour la proposition 2027, 6,1 pour le prix uniforme de 900 €/t. Pour atteindre 8 sur 10 en gardant 750 et 650 €/t, la première tonne doit être payée 1 635 €/t : le coût moyen tombe alors à 1 283 €/t, contre 1 568 €/t pour le prix unique.
 
 **Pari commercial complémentaire : prix de base de 900 €/t + prime fixe par hectare.** Cette prime rémunère l'engagement dans la filière et soutient aussi les scénarios de faible rendement. Sa valeur peut se calculer dans le moteur :
 
@@ -158,7 +160,7 @@ L'indexation retire une partie du décalage avec le prix du blé en transférant
 
 ### Où chercher la viabilité ?
 
-Je ciblerais **un industriel ou une marque qui valorise une origine française traçable**, avec un collecteur partenaire, un besoin de volume défini et un contrat sur plusieurs campagnes. Montrer ensuite le coût matière à l'échelle d'un produit : entre 900 et 1 567 €/t, l'écart est de **3,3 centimes pour 50 g de lentilles sèches**, avant tri, transformation, distribution et taxes. C'est un argument d'achat à tester.
+Je ciblerais **un industriel ou une marque qui valorise une origine française traçable**, avec un collecteur partenaire, un besoin de volume défini et un contrat sur plusieurs campagnes. Montrer ensuite le coût matière à l'échelle d'un produit : entre 900 et 1 568 €/t, l'écart est de **3,3 centimes pour 50 g de lentilles sèches**, avant tri, transformation, distribution et taxes. C'est un argument d'achat à tester.
 
 Ajouter au calcul acheteur le tri, le stockage, les pertes de qualité et le conditionnement. Pour la qualité alimentaire, tester une sensibilité **0 / 10 / 20 % de volume non valorisé**, en vérifiant ce que le rendement de départ contient déjà. La bruche et les refus qualité sont réels ; un taux unique de perte doit rester une hypothèse du scénario. [S3] *Fait : paiement sur les tonnes acceptées, 10 % en central (§0) ; le rendement Agreste est mesuré avant tri.*
 
@@ -168,13 +170,13 @@ Pour le modèle économique de l'outil, je proposerais une **étude pilote payan
 
 ### Un pilote à 300 t nettes alimentaires, une ambition à 5 000 t
 
-À 1,43 t/ha acceptées au tri (1,59 t/ha récoltées, rendement moyen simulé en Seine-et-Marne), **300 t correspondent à 210 ha** : c'est la surface théorique de 209,6 ha du dimensionnement indépendant, et l'application retient les 27 parcelles éligibles les plus proches du site. Pour le programme, retenir **220 ha, par exemple 20 fermes × 11 ha**, soit 314,82 t alimentaires attendues avant refus additionnels. Ces paramètres sont des hypothèses.
+À 1,43 t/ha acceptées au tri (1,59 t/ha récoltées, rendement moyen simulé en Seine-et-Marne), **300 t correspondent théoriquement à 210 ha**. Le scénario spatial de l'application prend toutefois des parcelles entières : au site initial et à 1 600 €/t rendu, il retient 28 parcelles, 216,42 ha et 309,7 t acceptées attendues. Pour le programme indépendant, retenir **220 ha, par exemple 20 fermes × 11 ha**, soit 314,82 t alimentaires attendues avant refus additionnels. Ces paramètres sont des hypothèses.
 
 **Assiette vérifiée :** la méthodologie de la SAA définit le rendement comme « un rendement en récolte, c'est-à-dire au stade arrivée ferme » (p. 3), donc avant la réception et le tri de la coopérative. Retirer 10 % au rendement Agreste ne compte pas la perte deux fois. La SAA parle aussi d'une production « récoltée et commercialisable » : une partie des impuretés peut déjà en être exclue, d'où la sensibilité 0 / 10 / 20 %. [S12]
 
 NatUp a publié une collecte de 558 t en 2025. [S10] **NatUp/Lunor est le premier candidat proposé**, pour commencer par une comparaison sur un sous-ensemble de collecte existante. Les contacts, les alternatives et le message préparé figurent dans [PILOTE_300T.md](PILOTE_300T.md). Aucun partenaire n'a encore accepté le pilote. L'historique synthétique laisse volontairement apparaître les années où 220 ha ne suffisent pas à livrer 300 t nettes.
 
-Conserver le scénario de 5 000 t pour montrer l'ambition de bassin. Le calcul de la version 4 mobilise 3 506 ha sur 260 parcelles. Le ratio 5 000 / 39 371 vaut 12,7 % : afficher **« volume équivalent à 13 % des importations 2025 »**. Le remplacement effectif d'importations dépendra des débouchés.
+Conserver le scénario de 5 000 t pour montrer l'ambition de bassin. Au site initial et à 1 600 €/t rendu, la sélection de 260 parcelles entières représente 3 501,83 ha et 5 011,6 t acceptées attendues. Le ratio cible 5 000 / 39 371 vaut 12,7 % : afficher **« volume équivalent à 13 % des importations 2025 »**. Le remplacement effectif d'importations dépendra des débouchés.
 
 Séparer les tonnes économiquement candidates, les tonnes d'un scénario de mobilisation et les engagements signés. Pour tester la prospection, prendre **10 % de mobilisation**, sensibilité 5 / 10 / 20 %, explicitement supposés. Appliquer cette proportion aux surfaces candidates après les filtres disponibles, puis recalculer les hectares et distances nécessaires pour atteindre la cible.
 
@@ -243,13 +245,13 @@ La SAA inclut les types variétaux de lentille et compte une surface non récolt
 
 **Exemple de scénario pour la démo :** 100 nouveaux hectares à 1,6 t/ha, avant pertes de tri, donnent **160 t de lentilles, 40 t de protéines potentielles, 18 t d'azote minéral non apporté et environ 76 t CO₂e d'émissions directes associées**. Afficher « scénario » et donner le périmètre en une infobulle suffit.
 
-*Fait, sur les tonnes acceptées au tri : le pilote de 300 t mobilise 210 ha et donne 75 t de protéines, 38 t d'azote non apporté et 159 t CO₂e évitées ; l'ambition de 5 000 t, 3 506 ha, 1 250 t, 631 t N et 2 647 t CO₂e.*
+*Fait, sur les parcelles entières sélectionnées au site initial à 1 600 €/t rendu : la cible pilote donne 309,7 t attendues sur 216,42 ha, soit 77 t de protéines, 39 t d'azote non apporté et 163 t CO₂e directes évitées ; l'ambition donne 5 011,6 t sur 3 501,83 ha, soit 1 253 t de protéines, 630 t N et 2 644 t CO₂e. Ces potentiels ne sont pas des volumes engagés.*
 
 ## 7. Mon arbitrage sur la roadmap et le pitch
 
 **Pendant le hackathon :** mettre à jour les hypothèses, comparer les contrats, ajouter les compteurs d'impact, puis rendre le site déplaçable. Ensuite, prototyper Sentinel sur 5 à 10 parcelles en replay d'une saison achevée. Le détail et les critères de sortie sont dans [ROADMAP.md](ROADMAP.md).
 
-Je conserverais M1 pour la démo : les résultats existants permettent déjà de montrer la différence entre prévision moyenne et décision sous risque. Toute nouvelle méthode sera une version distincte, comparée sur le même protocole. Avec les hypothèses de la version 4 et le backtest strict, le modèle tient 78 % des contrats sur sept années ; les nouveaux barèmes de contrat doivent être évalués à leur tour.
+Je conserverais M1 pour la démo : les résultats existants permettent déjà de montrer la différence entre prévision moyenne et décision sous risque. Toute nouvelle méthode sera une version distincte, comparée sur le même protocole. Avec les hypothèses de la version 4.1 et les groupes d’entraînement corrigés, le modèle tient 78,2 % des contrats sur sept années ; les nouveaux barèmes de contrat doivent être évalués à leur tour.
 
 La question « sans IA, que perd-on ? » doit montrer la comparaison **M0 / M1 / M2** déjà présente dans le repo. La valeur démontrée vient de la distribution et de sa calibration ; la météo peut modifier le coût de la protection, même lorsqu'elle améliore peu la précision moyenne. Éviter d'assimiler tous les calculs sans IA à une simple moyenne.
 

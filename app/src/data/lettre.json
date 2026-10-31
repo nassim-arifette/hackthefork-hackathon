@@ -1,7 +1,7 @@
 {
  "source": "llm",
  "modele": "us.anthropic.claude-sonnet-5",
- "texte": "Madame, Monsieur,\n\nPour la campagne 2026, nous vous proposons un contrat lentille sur 3 campagnes, payé départ ferme selon le barème suivant : 1 635 €/t jusqu'à 1 t/ha acceptée, 750 €/t de 1 à 2 t/ha, puis 650 €/t au-delà de 2 t/ha — ce barème valorise la première tonne par hectare, celle qui manque les mauvaises années, et le prix s'applique uniquement aux tonnes acceptées au tri pour l'alimentation humaine. Sur 8 années sur 10, ce barème assure à la lentille un revenu à l'hectare au moins égal à celui du blé ; ce chiffre ne mesure ni la fiabilité de notre coopérative ni ne garantit votre revenu. Les deux autres années sur dix, notamment si le rendement tombe à 0,48 t/ha comme cela arrive une année sur dix, la lentille peut rapporter moins que le blé. Ce contrat s'inscrit dans un pilote de 300 t ouvert à plusieurs producteurs d'Île-de-France. Nous restons à votre disposition pour en examiner les modalités avec vous.\n\nCordialement,\nLa coopérative",
+ "texte": "Madame, Monsieur,\n\nPour la campagne 2026, nous vous proposons un contrat lentille sur 3 campagnes, payé départ ferme selon le barème suivant : 1 635 €/t jusqu'à 1 t/ha acceptée, 750 €/t de 1 à 2 t/ha, puis 650 €/t au-delà de 2 t/ha — ce barème valorise la première tonne par hectare, celle qui manque les mauvaises années, et le prix s'applique uniquement aux tonnes acceptées au tri pour l'alimentation humaine. Dans 8 années simulées sur 10, la marge à l'hectare de la lentille sous ce barème est au moins égale à celle du blé, après charges, aide et effet de rotation retenus dans le scénario ; ce chiffre ne mesure ni la fiabilité de notre coopérative ni ne garantit votre revenu. Dans les autres scénarios, notamment si le rendement tombe à 0,48 t/ha comme dans une année simulée sur dix, la lentille peut rapporter moins que le blé. Ce contrat s'inscrit dans un pilote de 300 t ouvert à plusieurs producteurs d'Île-de-France. Nous restons à votre disposition pour en examiner les modalités avec vous.\n\nCordialement,\nLa coopérative",
  "chiffres": {
   "barème garanti": "1 635 €/t jusqu'à 1 t/ha acceptée, 750 €/t de 1 à 2 t/ha, 650 €/t au-delà de 2 t/ha, départ ferme",
   "fiabilité": "8 années sur 10",
@@ -10,5 +10,6 @@
   "volume du pilote": "300 t",
   "tonnes payées": "tonnes acceptées au tri pour l'alimentation humaine",
   "campagne": "2026"
- }
+ },
+ "revision_editoriale": "Précision de la grandeur comparée (marge) et de la fréquence simulée ; chiffres conservés."
 }

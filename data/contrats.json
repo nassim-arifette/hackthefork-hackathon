@@ -75,17 +75,17 @@
   {
    "id": "unique",
    "nom": "Prix unique",
-   "prix": 1567,
+   "prix": 1568,
    "simulation": {
     "protection": 0.8,
-    "cout_moyen_t": 1567,
-    "cout_t_annee_faible": 1567,
-    "verse_moyen_ha": 2242,
+    "cout_moyen_t": 1568,
+    "cout_t_annee_faible": 1568,
+    "verse_moyen_ha": 2243,
     "perte_moyenne_ha": 581
    },
    "backtest": {
     "taux_tenus": 0.782,
-    "cout_moyen_t": 1960
+    "cout_moyen_t": 1961
    }
   },
   {

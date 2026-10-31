@@ -2,6 +2,8 @@
 
 Ce document décrit le modèle de rendement, la simulation Monte-Carlo, le calcul du prix plancher et le protocole de backtest, tels qu'ils sont codés dans `pipeline/model.py`, `03_backtest.py` et `05_export.py`. Chaque membre de l'équipe doit pouvoir l'expliquer au jury.
 
+Il s'agit du moteur de production de l'application, version 4.1. Les groupes de légumineuses d'entraînement sont reconstruits sur les seules années antérieures à chaque test. Les représentants de la cohorte test restent ceux du panel historique, soit 133 cas pour la lentille ; le chemin de préparation du blé est conservé. Le benchmark multicultures de recherche dispose de ses propres règles communes, de 192 cas pour la lentille et de résultats distincts.
+
 Notations : `d` département, `t` année, `c` culture (`B` blé tendre d'hiver, `L` lentille), `y` rendement, `τ` fiabilité visée (0,8 par défaut), `r` part de la récolte refusée au tri (0,10).
 
 ---
@@ -75,14 +77,14 @@ Q_q(rel[d,t]) = a(q) + b(q) · tendance + Σ_k β_k(q) · anomalie_k[d,t]
 
 À chaque entraînement, M0, M1 et M2 sont comparés sur les trois dernières années d'entraînement (perte pinball) ; le meilleur est retenu. Ce choix n'utilise jamais l'année test.
 
-### Résultat de la comparaison (backtest strict, scénario de la version 4)
+### Résultat de la comparaison (backtest de production corrigé, version 4.1)
 
 | | M0 tendance | M1 retenu | M2 LightGBM | auto |
 |---|---|---|---|---|
 | Perte pinball | 0,1094 | 0,1105 | 0,1020 | 0,1038 |
 | Couverture à 80 % | 70 % | 79 % | 77 % | 70 % |
-| Contrats tenus (80 % visés) | 77 % | **78 %** | 76 % | 75 % |
-| P\* Seine-et-Marne 2026 | 2 932 €/t | 1 567 €/t | 1 000 €/t | — |
+| Contrats tenus (80 % visés) | 76,7 % | **78,2 %** | 75,9 % | 75,2 % |
+| P\* Seine-et-Marne 2026 | 2 932 €/t | 1 568 €/t | 1 001 €/t | — |
 
 Pour référence, un prix fixé sur les moyennes des années passées, sans modèle, ne tient que 29 % des contrats, avec un P\* 2026 de 742 €/t.
 
@@ -111,8 +113,8 @@ Objectif : obtenir la distribution conjointe des marges blé et lentille pour un
 
 Pour chaque scénario `s` (N = 20 000) :
 
-1. **Tirer une année historique** `t_s` parmi 2010–2025, avec la tendance projetée en 2026. On tire **la même année pour les deux cultures**, ce qui conserve leur corrélation réelle : quasi nulle au niveau national (−0,08, **mesuré**), mais variable selon les départements.
-2. **Calculer les quantiles conditionnels** des deux cultures avec la météo de `t_s`, puis tirer `y_B` et `y_L` dans leurs distributions, et les multiplier par le niveau du département.
+1. **Tirer une année historique** `t_s` parmi 2010–2025, avec la tendance projetée en 2026. On tire **la même année pour les deux cultures**, ce qui conserve leur exposition à une même météo historique. La corrélation des rendements nationaux observés est quasi nulle (−0,08, **mesuré**).
+2. **Calculer les quantiles conditionnels** des deux cultures avec la météo de `t_s`, puis tirer indépendamment `y_B` et `y_L` dans leurs distributions et les multiplier par le niveau du département. La dépendance résiduelle entre les deux rendements, au-delà de la météo, n'est pas modélisée.
 3. **Prendre le prix du blé de la même année** `t_s` dans la série mesurée (`data/prix_ble.csv` : indice Eurostat des prix à la production du blé tendre, chaîné et calé sur le prix rendu Rouen Agreste de la campagne 2019-2020). Le lien réel entre récolte et prix est conservé, et le risque de prix (2022 : 338 €/t) entre dans la simulation.
 4. **Calculer les marges** (en €/ha, avec `y` en t/ha) :
 
@@ -148,10 +150,10 @@ P ≥ R_s = (p_B · y_B − charges_B + charges_L − aide − rotation) / (y_L 
 `R_s` est le **prix d'équilibre** du scénario `s`. Donc :
 
 ```
-P* = quantile_τ( R_s )
+P* = max(0, quantile_τ( R_s ))
 ```
 
-Le quantile est pris au sens strict (`method="inverted_cdf"`) : c'est le plus petit prix simulé pour lequel la lentille gagne dans au moins 80 % des scénarios, égalités comprises. C'est rapide, exact, et facile à expliquer : « dans 80 % des années simulées, ce prix suffit ».
+Le quantile est pris au sens strict (`method="inverted_cdf"`) : c'est le plus petit prix non négatif pour lequel la lentille gagne dans au moins 80 % des scénarios, égalités comprises. Les besoins négatifs, possibles avec aide et rotation, restent dans le calcul. Les prix contractuels exportés sont arrondis à l'euro supérieur pour conserver cette couverture ; les médianes restent indicatives.
 
 Les scénarios où `y_L` est proche de zéro donnent un `R_s` très grand : ils se retrouvent dans les 20 % que le contrat n'assure pas. C'est la limite assumée d'un prix plancher, qui n'est pas une assurance récolte.
 
@@ -160,14 +162,15 @@ Les scénarios où `y_L` est proche de zéro donnent un `R_s` très grand : ils 
 Le prix plancher s'entend **départ ferme**. Pour l'acheteur, le coût rendu à son site vaut :
 
 ```
-coût_rendu[i] = P*_d(i) + forfait + κ · 1,3 · distance(i, site)
+collecte_nette[i] = (forfait + κ · 1,3 · distance(i, site)) / (1 − r)
+coût_rendu[i] = P*_d(i) + collecte_nette[i]
 ```
 
-- `forfait` : 5 €/t pour l'enlèvement d'un lot agrégé de 25 t (**supposé**) ;
-- `κ` : 0,12 €/t/km (**supposé**) ;
+- `forfait` : 5 €/t brute pour l'enlèvement d'un lot agrégé de 25 t (**supposé**) ;
+- `κ` : 0,12 €/t brute/km (**supposé**) ;
 - `1,3` : passage de la distance à vol d'oiseau à la distance routière (**supposé**).
 
-Pour un prix rendu `Q` proposé par l'acheteur, la parcelle `i` bascule si `Q − forfait − κ · 1,3 · distance(i) ≥ P*_d(i)`.
+Pour un prix rendu `Q` proposé par l'acheteur, la parcelle `i` bascule si `Q − collecte_nette[i] ≥ P*_d(i)`. La collecte est déjà contenue dans `Q` : on ne l'ajoute pas une seconde fois au coût acheteur. Le tri est un poste séparé ; le proxy de 180 €/t brute représente 200 €/t acceptée à 10 % de refus.
 
 ### Courbe d'offre
 
@@ -179,7 +182,7 @@ Les parcelles éligibles sont les parcelles RPG en blé tendre d'hiver. S(Q) est
 
 ### Contrat indexé
 
-Variante calculée à l'export : un plancher égal à `m × prix du blé de la récolte`. Le multiplicateur `m*` est le quantile τ de `R_s / p_B` : 7,44 pour 8 années sur 10 en Seine-et-Marne, 3,44 en médiane.
+Variante calculée à l'export : un plancher égal à `m × prix du blé de la récolte`. Le multiplicateur sans unité `m*` est fixé avant campagne, au quantile empirique τ de `R_s / p_B`, borné à zéro et arrondi au centième supérieur : 7,44 pour 8 années sur 10 en Seine-et-Marne, contre une médiane indicative de 3,44. Le prix payé en €/t n'est pas fixé à la signature : il dépend du prix du blé à la récolte.
 
 ### Contrats à tranches et prime à l'hectare
 
@@ -193,7 +196,7 @@ marge_L  = versé(r) − coût_producteur · y_L − charges_L + aide + rotation
 ```
 
 - **Protection** : part des scénarios où `marge_L ≥ marge_B`.
-- **Tranches calibrées** : `p2` et `p3` fixés (750 et 650 €/t, ceux du dossier pilote), `p1` est le plus petit prix entier qui atteint τ (recherche par dichotomie, la protection croît avec `p1`).
+- **Tranches calibrées** : `p2` et `p3` fixés (750 et 650 €/t, ceux du dossier pilote), `p1` est le plus petit prix entier non négatif qui atteint τ. Le quantile du besoin restant divisé par les tonnes de première tranche donne une borne initiale ; une vérification et une dichotomie assurent la minimalité, sans plafond arbitraire. Zéro est possible.
 - **Prime à l'hectare calibrée** : à prix de base `P0` (900 €/t), `prime_ha* = quantile_τ( marge_B − marge_L(P0) )`, borné à 0 et arrondi à l'euro supérieur.
 - **Coût moyen pour l'acheteur** : `E[versé] / E[r]`, en €/t acceptée, hors collecte et tri.
 
@@ -207,16 +210,16 @@ Dans le backtest, ces deux formes sont recalibrées pour chaque cas avec les sc�
 
 ## 5. Backtest
 
-### Protocole glissant, sans fuite
+### Protocole de production : groupes d'entraînement reconstruits sur le passé
 
 Pour chaque année test `t` de 2019 à 2025 :
 
-1. regrouper les séries Agreste en double avec les seules années `< t`, puis entraîner M0, M1 et M2 sur ces années uniquement, niveaux et calibration conformal compris ;
+1. regrouper les séries de légumineuses Agreste en double avec les seules années `< t`, puis entraîner M0, M1 et M2 sur ces années uniquement, niveaux et calibration conformal compris ;
 2. calculer `P*[d, t]` pour chaque département, en rejouant la météo et le prix du blé des années `< t` ;
 3. observer l'année `t` réelle : rendements Agreste, prix du blé réalisé ;
 4. le contrat **a tenu** si `P*[d,t] · y_L_réel · (1 − r) − charges_L + aide + rotation ≥ p_B_réel · y_B_réel − charges_B`.
 
-Les années test ne servent ni à l'entraînement, ni au choix des hyperparamètres, ni au choix du seuil. Le protocole est figé avant de regarder les résultats.
+Les années test ne servent pas à entraîner les modèles de rendement ni à calibrer leur prix. Depuis la correction du 31 octobre, `series_passees` reconstruit les groupes de légumineuses avant chaque entraînement, avec au moins huit années identiques et un représentant choisi selon les surfaces historiques. La cohorte test conserve les représentants du panel regroupé sur 2010–2025, et le chemin historique du blé reste inchangé. L'ancien score de 87,2 % devient 78,2 % sur les mêmes 133 cas. Le benchmark multicultures de recherche reconstruit séparément groupes, niveaux et transformations, avec une cohorte commune à ses candidats : les deux tableaux ne sont pas interchangeables.
 
 La référence « moyennes » fixe le prix d'équilibre avec les rendements moyens et le prix moyen du blé des années `< t`, sans distribution : c'est la façon naïve de fixer un prix.
 
@@ -226,7 +229,7 @@ Les contrats publiés (Unéal 900 €/t, barème NatUp 2023–2024, proposition 
 
 | Métrique | Ce qu'elle mesure | Cible |
 |---|---|---|
-| Taux de contrats tenus | fiabilité réelle du prix | proche de τ = 80 % |
+| Taux de contrats tenus | fréquence observée de marge au moins égale au blé | au moins τ = 80 %, à confronter à l’incertitude et au coût |
 | Couverture de l'intervalle 80 % | calibration du modèle de rendement | proche de 80 % |
 | Pinball loss moyenne | précision des quantiles | inférieure à la baseline M0 |
 | Largeur moyenne de l'intervalle | utilité (un intervalle trop large ne sert à rien) | la plus faible à couverture égale |
@@ -241,7 +244,7 @@ Les contrats publiés (Unéal 900 €/t, barème NatUp 2023–2024, proposition 
 
 ## 6. Incertitude sur P\*
 
-P\* est lui-même estimé sur seize années. On le mesure par **bootstrap par blocs d'années** : 40 tirages avec remise des années 2010–2025, réentraînement des deux modèles et recalcul de P\*. Pour la Seine-et-Marne : intervalle à 80 % de 1 099 à 2 877 €/t, médiane 1 742 €/t, pour une estimation centrale de 1 567 €/t. Seize années ne suffisent pas à cerner les mauvaises années : c'est la première raison de récupérer les données de rendement des coopératives.
+P\* est lui-même estimé sur seize années. On le mesure par **bootstrap par blocs d'années** : 40 tirages avec remise des années 2010–2025, réentraînement des deux modèles et recalcul de P\*. Pour la Seine-et-Marne : intervalle à 80 % de 1 099 à 2 877 €/t, médiane 1 742 €/t, pour une estimation centrale de 1 568 €/t. Seize années ne suffisent pas à cerner les mauvaises années : c'est la première raison de récupérer les données de rendement des coopératives.
 
 ## 7. Sensibilités affichées
 

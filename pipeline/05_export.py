@@ -5,6 +5,7 @@ Le modèle final (M1 calibré) est entraîné sur 2010-2025. P* est calculé pou
 Sorties : app/src/data/*.json, lus tels quels par le front.
 """
 import json
+import math
 
 import numpy as np
 import pandas as pd
@@ -64,7 +65,7 @@ def main():
         R, yL, yW, _ = simulate(meteo, dep, mL, mW, lev_idf, levW_all[dep], h, seed=int(dep))
         deps[dep] = {
             "dep": dep,
-            "p_star": round(p_star(R, h["tau"])),
+            "p_star": math.ceil(p_star(R, h["tau"])),
             "p_equilibre_median": round(p_star(R, 0.5)),
             "rendement_lentille_moyen_tha": round(float(yL.mean()), 2),
             "rendement_lentille_accepte_tha": round(float(yL.mean() * (1 - h["qualite"])), 2),
@@ -82,7 +83,7 @@ def main():
     gain = mL2.model.models[1].booster_.feature_importance(importance_type="gain")
     importances = sorted(({"variable": f, "part": round(float(g / gain.sum()), 3)}
                           for f, g in zip(FEATURES, gain)), key=lambda x: -x["part"])
-    challenger = {"p_star_77": round(p_star(R2, h["tau"])), "importances_q50": importances,
+    challenger = {"p_star_77": math.ceil(p_star(R2, h["tau"])), "importances_q50": importances,
                   "elargissement_conformal": round(mL2.qhat, 3)}
     print("Challenger LightGBM :", challenger)
 
@@ -92,7 +93,7 @@ def main():
     prix_moyen = float(prix.loc[2010:2025].mean())
     p_moy = (prix_moyen * levW_all["77"] / 10 - h["charges_ble"] + h["charges_lentille"] - h["bonus"]) \
         / (lev_idf / 10 * (1 - h["qualite"]))
-    strategies_77 = {"moyenne": round(p_moy), "M0": round(p_star(R0, h["tau"])),
+    strategies_77 = {"moyenne": round(p_moy), "M0": math.ceil(p_star(R0, h["tau"])),
                      "M1": deps["77"]["p_star"], "M2": challenger["p_star_77"]}
     print("Stratégies 77 :", strategies_77)
 
@@ -106,7 +107,9 @@ def main():
     s = rng.integers(0, len(pool77), N_SIM)
     pB = pool77.prix_ble.to_numpy()[s]
     m_ratio = ((pB * yW77 - h["charges_ble"] + h["charges_lentille"] - h["bonus"]) / (yL77 * (1 - h["qualite"]))) / pB
-    indexe = {"m_star": round(float(np.quantile(m_ratio, h["tau"])), 2),
+    # Le coefficient affiché est celui du contrat : arrondi vers le haut au centième
+    # pour conserver la couverture du quantile empirique (égalités comprises).
+    indexe = {"m_star": math.ceil(100 * p_star(m_ratio, h["tau"])) / 100,
               "m_median": round(float(np.quantile(m_ratio, 0.5)), 2)}
 
     # Sensibilités (Seine-et-Marne).
@@ -114,7 +117,7 @@ def main():
         hh = h | kw
         hh["bonus"] = hh["aide"] + hh["rotation"]
         R, _, _, _ = simulate(meteo, "77", mL, mW, lev_idf, levW_all["77"], hh, seed=77)
-        return round(p_star(R, hh["tau"]))
+        return math.ceil(p_star(R, hh["tau"]))
     sens = {
         "fiabilite": [{"x": t, "p_star": ps77(tau=t)} for t in np.round(np.arange(0.5, 0.96, 0.05), 2).tolist()],
         "prix_ble_fixe": [{"x": p, "p_star": ps77(prix_ble=p)} for p in (160, 200, 240, 280)],
@@ -140,7 +143,7 @@ def main():
             continue
         R, yL, _, _ = simulate(meteo, dep, mL, mW, levL[dep], levW_all[dep], h, seed=int(dep[:2], 36))
         avec = sorted(noms[d] for d in grp[grp == dep].index if d != dep)
-        france.append({"dep": dep, "nom": noms[dep], "avec": avec, "p_star": round(p_star(R, h["tau"])),
+        france.append({"dep": dep, "nom": noms[dep], "avec": avec, "p_star": math.ceil(p_star(R, h["tau"])),
                        "rendement_lentille_qha": round(float(levL[dep]), 1),
                        "rendement_ble_qha": round(float(levW_all[dep]), 1)})
     france.sort(key=lambda x: x["p_star"])
@@ -156,10 +159,11 @@ def main():
         dep = deps[p[1]]
         # Tonnes acceptées au tri : ce sont elles que le contrat paie et que l'acheteur reçoit.
         tonnes = p[3] * dep["rendement_lentille_moyen_tha"] * (1 - h["qualite"])
-        p_rendu = dep["p_star"] + h["forfait"] + kappa * d
+        # Collecte facturée sur le brut, répartie sur les tonnes acceptées reçues.
+        p_rendu = dep["p_star"] + (h["forfait"] + kappa * d) / (1 - h["qualite"])
         # [id, dep, culture actuelle, surface ha, distance km, prix rendu de bascule, tonnes, anneau,
         #  longitude, latitude] : le point représentatif permet de déplacer le site dans l'application.
-        out_parc.append([p[0], p[1], p[2], p[3], round(float(d), 1), round(float(p_rendu)),
+        out_parc.append([p[0], p[1], p[2], p[3], round(float(d), 1), math.ceil(float(p_rendu)),
                          round(float(tonnes), 1), p[6], p[4], p[5]])
 
     cand = sorted((x for x in out_parc if x[2] == "ble"), key=lambda x: x[5])

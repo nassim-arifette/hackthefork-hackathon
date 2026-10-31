@@ -11,6 +11,9 @@ import lettre from './data/lettre.json';
 import contrats from './data/contrats.json';
 import sentinelRaw from './data/sentinel.json';
 import culturesRaw from './data/cultures.json';
+import pilotContracts from '../../data/pilote_300t/contrats.json';
+import { makeSiteGeo, selectSupply, searchSites, type SiteGeo, type SiteMode } from './sites';
+export type { SiteGeo, SiteMode, SiteSearchResult } from './sites';
 
 export type Label = 'mesure' | 'source' | 'suppose' | 'synthetique' | 'modele';
 
@@ -46,6 +49,7 @@ export const H = {
   detour: hyp.facteur_detour_route.valeur as number,
   forfait: hyp.forfait_collecte_eur_t.valeur as number,
   qualite: hyp.part_non_valorisee.valeur as number,
+  tri: pilotContracts.synthetique_2027.tri_eur_t_brute_recue,
   tau: hyp.fiabilite_visee.valeur as number,
   site: hyp.site_acheteur.valeur as [number, number],
   volumes: { pilote: hyp.volume_pilote_t.valeur as number, ambition: hyp.volume_vise_t.valeur as number },
@@ -145,26 +149,21 @@ export function reliabilityAt(price: number, dep = D77): number {
 
 // ---------- site de collecte ----------
 const P_STAR_DEP: Record<string, number> = Object.fromEntries(thresholds.par_departement.map((d) => [d.dep, d.p_star]));
-const RAD = Math.PI / 180;
-
-function haversineKm(lon1: number, lat1: number, lon2: number, lat2: number): number {
-  const a = Math.sin(((lat2 - lat1) * RAD) / 2) ** 2
-    + Math.cos(lat1 * RAD) * Math.cos(lat2 * RAD) * Math.sin(((lon2 - lon1) * RAD) / 2) ** 2;
-  return 2 * 6371 * Math.asin(Math.sqrt(a));
-}
 
 /** Distances au site (km routiers approchés) et prix rendu de bascule de chaque parcelle. Même calcul que 05_export.py. */
-export interface SiteGeo { site: [number, number]; dist: Float64Array; pRendu: Float64Array }
 export function siteGeo(site: [number, number]): SiteGeo {
-  const n = parcels.length, dist = new Float64Array(n), pRendu = new Float64Array(n);
-  for (let i = 0; i < n; i++) {
-    const p = parcels[i];
-    dist[i] = haversineKm(p.lon, p.lat, site[0], site[1]) * H.detour;
-    pRendu[i] = P_STAR_DEP[p.dep] + H.forfait + H.kappa * dist[i];
-  }
-  return { site, dist, pRendu };
+  return makeSiteGeo(parcels, P_STAR_DEP, H, site);
 }
 export const SITE_SCENARIO = siteGeo(H.site);
+
+export function selectTarget(geo: SiteGeo, price: number, volume: number, mode: SiteMode = 'collection') {
+  return selectSupply(parcels, geo, H, { volume, price, mode });
+}
+
+export function bestSite(volume: number, price: number, mode: SiteMode, current: SiteGeo) {
+  return searchSites(parcels, P_STAR_DEP, H, { volume, price, mode }, current,
+    () => new Promise<void>((resolve) => window.setTimeout(resolve, 0)));
+}
 
 /** Courbe d'offre : hectares et tonnes de blé qui basculent à chaque prix rendu, de 400 à 3 000 €/t. */
 export function supplyCurve(geo: SiteGeo) {
@@ -178,54 +177,10 @@ export function supplyCurve(geo: SiteGeo) {
   return out;
 }
 
-/** Distance moyenne (km routiers), pondérée par les tonnes, des parcelles de blé les plus proches
- *  qu'il faut réunir pour atteindre le volume. Recherche rapide par tranches de 250 m. */
-const WHEAT = parcels.map((p, i) => ({ p, i })).filter(({ p }) => p.culture === 'ble');
-const W_LON = Float64Array.from(WHEAT, ({ p }) => p.lon), W_LAT = Float64Array.from(WHEAT, ({ p }) => p.lat);
-const W_T = Float64Array.from(WHEAT, ({ p }) => p.tonnes);
-function meanKmFor(site: [number, number], volume: number): number {
-  const B = 400, step = 0.25, tB = new Float64Array(B), tdB = new Float64Array(B);
-  const kx = 111.32 * Math.cos(site[1] * RAD), ky = 110.57;
-  for (let k = 0; k < W_T.length; k++) {
-    const d = Math.hypot((W_LON[k] - site[0]) * kx, (W_LAT[k] - site[1]) * ky) * H.detour;
-    const b = Math.min(B - 1, Math.floor(d / step));
-    tB[b] += W_T[k]; tdB[b] += W_T[k] * d;
-  }
-  let t = 0, td = 0;
-  for (let b = 0; b < B && t < volume; b++) {
-    const take = Math.min(1, (volume - t) / (tB[b] || 1));
-    t += tB[b] * take; td += tdB[b] * take;
-  }
-  return t ? td / t : Infinity;
-}
-
-/** Meilleur point de collecte pour le volume, sur une grille de candidats affinée deux fois. */
-export function bestSite(volume: number): { site: [number, number]; km: number } {
-  let lonMin = Infinity, lonMax = -Infinity, latMin = Infinity, latMax = -Infinity;
-  for (let k = 0; k < W_LON.length; k++) {
-    lonMin = Math.min(lonMin, W_LON[k]); lonMax = Math.max(lonMax, W_LON[k]);
-    latMin = Math.min(latMin, W_LAT[k]); latMax = Math.max(latMax, W_LAT[k]);
-  }
-  let best = { site: [lonMin, latMin] as [number, number], km: Infinity };
-  const scan = (lo0: number, lo1: number, la0: number, la1: number, dLon: number, dLat: number) => {
-    for (let lo = lo0; lo <= lo1; lo += dLon)
-      for (let la = la0; la <= la1; la += dLat) {
-        const km = meanKmFor([lo, la], volume);
-        if (km < best.km) best = { site: [lo, la], km };
-      }
-  };
-  scan(lonMin, lonMax, latMin, latMax, 0.06, 0.04);
-  const [a, b] = best.site;
-  scan(a - 0.06, a + 0.06, b - 0.04, b + 0.04, 0.01, 0.007);
-  const [c, d] = best.site;
-  scan(c - 0.01, c + 0.01, d - 0.007, d + 0.007, 0.002, 0.0014);
-  return { site: [Math.round(best.site[0] * 1e5) / 1e5, Math.round(best.site[1] * 1e5) / 1e5], km: best.km };
-}
-
 /** Le contrat a-t-il tenu sur cette parcelle l'année rejouée ? Même règle que le backtest. */
 export function held(p: Parcel, dist: number, price: number, r: ReplayYear): boolean {
   const d = r.par_departement[p.dep as keyof ReplayYear['par_departement']];
-  const farm = price - H.forfait - H.kappa * dist;
+  const farm = price - (H.forfait + H.kappa * dist) / (1 - H.qualite);
   // Le prix garanti est payé sur les tonnes acceptées au tri.
   const margeL = farm * d.rendement_lentille_tha * (1 - H.qualite) - H.chargesLentille + H.aide + H.rotation;
   const margeB = r.prix_ble * d.rendement_ble_tha - H.chargesBle;

@@ -124,7 +124,7 @@ Mêmes filtres que la lentille (surface ≥ 50 ha, statut 1 ou 2, séries identi
 | Pois protéagineux | 1 161 | 83 | 97 884 ha | statuts 1 et 2 (2 527 ha en Seine-et-Marne) |
 | Féverole | 1 006 | 69 | 112 231 ha | statuts 1 et 2 (5 331 ha en Seine-et-Marne) |
 
-Météo NASA POWER récupérée pour 87 départements (`data/meteo_dept_cultures.csv`) ; `data/meteo_dept.csv`, qui sert au modèle principal, reste limité aux 43 départements de la lentille et de l'Île-de-France.
+Météo NASA POWER récupérée pour 87 départements (`data/meteo_dept_cultures.csv`) ; `data/meteo_dept.csv`, utilisé par le modèle final principal, reste limité aux 43 départements de la lentille et de l'Île-de-France. Depuis la correction du 31 octobre, le backtest de production utilise aussi le fichier étendu pour reconstruire les groupes de légumineuses d'entraînement avec le seul passé ; les cohortes d'évaluation restent fondées sur les représentants historiques.
 
 ## 9. Jeu synthétique du pilote (`data/pilote_300t`, ajouté le 31/10)
 
