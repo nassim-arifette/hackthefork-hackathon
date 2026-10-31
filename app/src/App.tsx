@@ -62,6 +62,19 @@ const wins = (p: number) => Math.round(reliabilityAt(p) * 10);
 const round1000 = (x: number) => Math.round(x / 1000) * 1000;
 const keur = (x: number) => `${fmt(x / 1000)}\u00a0k€`;
 const IDX = CONTRATS.indexe;
+// Ce que gagne l'agriculteur face au blé de la même année, ce que paie la coopérative (07_contrats.py).
+type Ferme = { id: string; label: string; p: number; ecart: number; gain: number; perte: number; cout: number };
+const ferme = (id: string, label: string, s: any): Ferme => ({
+  id, label, p: s.protection, ecart: s.ecart_moyen_ha, gain: s.gain_moyen_ha, perte: s.perte_moyenne_ha, cout: s.cout_moyen_t,
+});
+const FERME: Ferme[] = [
+  ferme('uneal', `Unéal 2023, ${fmt(UNEAL_PRICE)} €/t`, UNEAL.simulation),
+  ferme('unique', `Prix unique, ${fmt(C_UNIQUE.prix!)} €/t`, C_UNIQUE.simulation),
+  ferme('paliers', 'Barème par tranches', C_PALIERS.simulation),
+  ferme('indexe', 'Indexé sur le blé', IDX.simulation),
+  ferme('prime', 'Prix de base et prime à l’hectare', C_PRIME.simulation),
+];
+const signe = (x: number) => `${x >= 0 ? '+' : '−'}${fmt(Math.abs(x))}`;
 const IDX_BT = CULTURES.find((c) => c.id === 'lentille')!.backtest.taux_tenus_indexe ?? 0;
 const IDX_200 = IDX.plancher_par_prix_ble.find((r) => r.prix_ble === 200)!.plancher;
 const FIXE_PAR_BLE = thresholds.sensibilite.prix_ble_fixe as { x: number; p_star: number }[];
@@ -559,7 +572,7 @@ export default function App() {
                   <Figure value={fmt(targetP.n)} unit="parcelles" label={targetP.n ? `${fmt(targetP.ha)} ha, à moins de ${fmt(Math.max(1, targetP.km))} km du silo` : 'aucune ne bascule à ce prix'} />
                 </div>
               </div>
-              <p className="body">À {fmt(UNEAL_PRICE)} €/t, le prix payé par Unéal en 2023, la lentille rapporte moins que le blé {UNEAL_LOSSES} années sur 10. Pour 8 sur 10, il faut {fmt(D77.p_star)} €/t en Seine-et-Marne. Payer plus cher la première tonne ({fmt(C_PALIERS.paliers![0])} €/t, puis {fmt(C_PALIERS.paliers![1])} et {fmt(C_PALIERS.paliers![2])}) protège autant, pour {saving(C_PALIERS.simulation.cout_moyen_t, C_UNIQUE.simulation.cout_moyen_t)} % de moins.</p>
+              <p className="body">À {fmt(UNEAL_PRICE)} €/t, le prix payé par Unéal en 2023, la lentille rapporte moins que le blé {UNEAL_LOSSES} années sur 10. Pour 8 sur 10, il faut {fmt(D77.p_star)} €/t en Seine-et-Marne : ces 8 années, elle rapporte en moyenne {fmt(C_UNIQUE.simulation.gain_moyen_ha)} €/ha de plus que le blé ; les 2 autres, {fmt(C_UNIQUE.simulation.perte_moyenne_ha)} €/ha de moins. Payer plus cher la première tonne ({fmt(C_PALIERS.paliers![0])} €/t, puis {fmt(C_PALIERS.paliers![1])} et {fmt(C_PALIERS.paliers![2])}) protège autant, pour {saving(C_PALIERS.simulation.cout_moyen_t, C_UNIQUE.simulation.cout_moyen_t)} % de moins.</p>
               <Source k="modele">20 000 années simulées avec la météo et le prix du blé de 2010 à 2025. Parcelles du registre parcellaire 2025 ; silo fictif ; trajets schématiques.</Source>
               <button className="link" onClick={replayPrice}>Rejouer</button>
             </>
@@ -865,6 +878,25 @@ export default function App() {
                 </table>
                 <p className="body small">Le barème par tranches paie cher les premières tonnes, celles qui manquent les mauvaises années, et moins le surplus des bonnes : même protection, {saving(C_PALIERS.simulation.cout_moyen_t, C_UNIQUE.simulation.cout_moyen_t)} % de moins en moyenne. Sur 2019–2025, il tient autant de contrats que le prix unique, pour un coût réalisé inférieur de {saving(C_BT.paliers.cout_moyen_t, C_BT.unique.cout_moyen_t)} %. La prime à l’hectare coûte encore moins, mais l’acheteur la paie même quand la récolte manque, et elle a cédé quand le blé a flambé : {pct(C_2022.prime_ha)} des contrats tenus en 2022.</p>
                 <Source k="modele">Seine-et-Marne, mêmes années simulées. Coût moyen : sommes versées par tonne acceptée, en €/t, hors collecte et tri. Année faible : {dec(CONTRATS.yFaible, 2)} t/ha acceptées, une année sur dix. Backtest : chaque forme recalibrée sur les seules années passées, {G.n_cas} cas.</Source>
+              </div>
+              <div className="block">
+                <h3>Ce que gagne l’agriculteur, ce que paie la coopérative</h3>
+                <table className="list models contracts">
+                  <thead><tr><th>Contrat</th><th className="num">Écart moyen</th><th className="num">Années gagnées</th><th className="num">Années perdues</th><th className="num">Coût</th></tr></thead>
+                  <tbody>
+                    {FERME.map((r) => (
+                      <tr key={r.id} className={r.id === 'paliers' ? 'hl' : ''}>
+                        <td>{r.label}<span>la lentille gagne {fmt(r.p * 10)} années sur 10</span></td>
+                        <td className="num">{signe(r.ecart)}</td>
+                        <td className="num">{signe(r.gain)}</td>
+                        <td className="num bad">{signe(-r.perte)}</td>
+                        <td className="num">{fmt(r.cout)}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+                <p className="body small">« 8 années sur 10 » est un plancher, pas la moyenne : ces années-là, la lentille sous contrat rapporte plus que le blé, souvent beaucoup plus. Au prix unique, l’agriculteur gagne en moyenne {fmt(C_UNIQUE.simulation.ecart_moyen_ha)} €/ha de plus qu’en blé, dont la marge moyenne est de {fmt(C_UNIQUE.simulation.marge_ble_moyenne_ha)} €/ha. C’est la coopérative qui paie cet écart : le barème par tranches garde la même protection, laisse encore {fmt(C_PALIERS.simulation.ecart_moyen_ha)} €/ha de plus que le blé à l’agriculteur, et coûte {saving(C_PALIERS.simulation.cout_moyen_t, C_UNIQUE.simulation.cout_moyen_t)} % de moins. Au prix d’Unéal, la lentille ne gagne que {fmt(UNEAL.simulation.protection * 10)} années sur 10 : pas assez pour quitter le blé.</p>
+                <Source k="modele">Seine-et-Marne, mêmes années simulées, face au blé de la même année. Écart moyen, années gagnées et années perdues : marge en €/ha, aide couplée et bénéfice de rotation compris ; sur les années gagnées ou perdues seulement pour les deux dernières. Coût : €/t acceptée payé par la coopérative, hors collecte et tri.</Source>
               </div>
               <div className="block">
                 <h3>Les mauvaises années, contrat par contrat</h3>

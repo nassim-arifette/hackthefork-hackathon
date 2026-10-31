@@ -5,7 +5,8 @@ Mêmes 20 000 années que le prix plancher (05_export.py, graine 77). Pour chaqu
 - le coût moyen d'achat par tonne acceptée (sommes versées / tonnes acceptées), hors
   collecte et tri ;
 - le coût par tonne une année de faible rendement (rendement accepté du premier décile) ;
-- la perte moyenne de l'agriculteur face au blé, les années où la lentille perd.
+- la perte moyenne de l'agriculteur face au blé, les années où la lentille perd, et son gain moyen
+  les années où elle gagne : « 8 années sur 10 » est un plancher, pas le résultat moyen.
 Les résultats du backtest 2019-2025 (03_backtest.py) sont joints.
 Contrat indexé : plancher = m × prix du blé de la récolte, m calibré sur les mêmes années ; son
 plancher est donné pour quelques prix du blé (le prix fixe équivalent est dans thresholds.json).
@@ -38,6 +39,11 @@ def mesurer(c: dict, yL, yW, pB, h: dict) -> dict:
         "cout_t_annee_faible": round(float(paiement(c, np.array([y10]))[0] / y10)),
         "verse_moyen_ha": round(float(verse.mean())),
         "perte_moyenne_ha": round(float(ecart[perd].mean())) if perd.any() else 0,
+        # Ce que gagne l'agriculteur face au blé de la même année : « 8 années sur 10 » est un plancher,
+        # pas le résultat moyen.
+        "gain_moyen_ha": round(float(-ecart[~perd].mean())) if (~perd).any() else 0,
+        "ecart_moyen_ha": round(float(-ecart.mean())),
+        "marge_ble_moyenne_ha": round(float((pB * yW - h["charges_ble"]).mean())),
     }
 
 
@@ -68,12 +74,17 @@ def main():
     # Contrat indexé sur le blé : payé m × prix du blé de l'année par tonne acceptée.
     m_star = float(p_star(R / pB, h["tau"]))
     faible = paid <= np.quantile(paid, 0.1)
+    ecart_i = m_star * pB * paid - h["charges_lentille"] + h["bonus"] - (pB * yW - h["charges_ble"])
+    gagne_i = ecart_i >= 0
     out["indexe"] = {
         "id": "indexe", "m": round(m_star, 2),
         "simulation": {
             "protection": round(float(np.mean(m_star * pB >= R)), 3),
             "cout_moyen_t": round(float((m_star * pB * paid).mean() / paid.mean())),
             "cout_t_annee_faible": round(float((m_star * pB[faible] * paid[faible]).sum() / paid[faible].sum())),
+            "gain_moyen_ha": round(float(ecart_i[gagne_i].mean())),
+            "perte_moyenne_ha": round(float(-ecart_i[~gagne_i].mean())),
+            "ecart_moyen_ha": round(float(ecart_i.mean())),
         },
         # Plancher indexé pour quelques prix du blé ; le prix fixe équivalent est dans thresholds.json.
         "plancher_par_prix_ble": [{"prix_ble": p, "plancher": round(m_star * p)} for p in (160, 200, 240, 280)],

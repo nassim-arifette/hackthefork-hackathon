@@ -308,3 +308,13 @@ def test_import_origins_are_consistent():
     parts = [x["part"] for x in o]
     assert parts == sorted(parts, reverse=True) and 0 < sum(parts) <= 1
     assert sum(x["tonnes"] for x in o) <= meta["lentille_2025"]["importations_t"]
+
+
+def test_farmer_gain_is_consistent_with_protection():
+    """« 8 années sur 10 » est un plancher : gain moyen positif, écart moyen = p × gain − (1 − p) × perte."""
+    c = json.loads((DATA / "contrats.json").read_text())
+    sims = [x["simulation"] for x in c["existants"] + c["calibres"]] + [c["indexe"]["simulation"]]
+    for s in sims:
+        p = s["protection"]
+        assert s["gain_moyen_ha"] > 0 and s["perte_moyenne_ha"] > 0
+        assert abs(p * s["gain_moyen_ha"] - (1 - p) * s["perte_moyenne_ha"] - s["ecart_moyen_ha"]) <= 3
