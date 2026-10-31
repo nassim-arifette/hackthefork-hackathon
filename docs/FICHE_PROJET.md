@@ -4,7 +4,7 @@
 
 ## Le problème
 
-Près d'une lentille sur deux mangée en France vient de l'étranger : 39 371 tonnes importées en 2025, pour environ 86 000 tonnes consommées. Les agriculteurs français pourraient en produire davantage, mais la lentille est risquée. Sa récolte varie deux fois plus que celle du blé, et une mauvaise année, comme 2020 (−38 %), efface la marge. Rester au blé est donc le choix raisonnable.
+Près d'une lentille sur deux mangée en France vient de l'étranger : 39 371 tonnes importées en 2025, pour environ 86 000 tonnes consommées, dont 45 % du Canada. Les agriculteurs français pourraient en produire davantage, mais la lentille est risquée. Sa récolte varie deux fois plus que celle du blé, et une mauvaise année, comme 2020 (−38 %), efface la marge. Rester au blé est donc le choix raisonnable.
 
 Les coopératives, qui collectent, trient et revendent les récoltes de leurs agriculteurs, peuvent retirer ce risque avec un contrat : un prix minimum garanti avant les semis. Ce prix se fixe aujourd'hui à l'expérience. Trop bas, l'agriculteur perd les mauvaises années et arrête ; trop haut, la coopérative perd de l'argent.
 
