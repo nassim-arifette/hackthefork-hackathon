@@ -12,7 +12,7 @@ LOCAL=1 make video          # sans Modal, en local (~1 h avec 2 segments en para
 
 La commande construit `app/dist-single/index.html`, enregistre les segments sur Modal, assemble `docs/video/demo-4min.mp4`, écrit `docs/video/planche.jpg` et affiche le rapport de vérification. Compter une quinzaine de minutes avec Modal. Il faut `MODAL_TOKEN_ID` et `MODAL_TOKEN_SECRET` dans l'environnement, et `pip install 'modal[api-proxy-support]'` derrière un proxy.
 
-Pour changer le minutage, modifier `video/timing.json` : `espace` liste les instants où l'on appuie sur Espace, `duree` la durée totale.
+Pour changer le minutage, modifier `video/timing.json` : `espace` liste les instants où l'on appuie sur Espace, `touches` les autres touches (par exemple `{ "a": "3:42", "touche": "f" }` pour la carte de France des prix à l'écran 6), `duree` la durée totale.
 
 ## Méthode : temps virtuel, image par image
 
@@ -25,9 +25,9 @@ La page ne tourne pas en temps réel. `horloge.js` est injecté avant l'applicat
 
 Chaque image correspond donc exactement à 1/30 s de démo, quelle que soit la vitesse du rendu : la vidéo est fluide et reproductible, même en rendu logiciel. Avant le chrono, le script attend `document.fonts.ready` et le premier rendu de la carte, à temps figé.
 
-La vidéo est découpée en 13 segments d'au plus 20 s, coupés aux changements d'écran (`decoupe.py`). Chaque segment tourne dans son propre conteneur Modal (CPU, 4 cœurs) : il refait le parcours depuis le chargement, en accéléré jusqu'à 1 s avant son écran, puis image par image. `assembler.sh` les met bout à bout et encode le fichier final (H.264, yuv420p, 30 i/s constants, `+faststart`, au plus 45 Mo).
+La vidéo est découpée en 15 segments d'au plus 20 s, coupés à chaque touche (`decoupe.py`). Chaque segment tourne dans son propre conteneur Modal (CPU, 4 cœurs). Il refait le parcours depuis le chargement et frappe chaque touche à son image, en accéléré jusqu'à 1 s avant la dernière touche qui précède le segment, puis image par image. `assembler.sh` les met bout à bout et encode le fichier final (H.264, yuv420p, 30 i/s constants, `+faststart`, au plus 45 Mo).
 
-Cadre : fenêtre 1920×1080 à l'échelle 1. En 1280×720 à l'échelle 1,5 comme en 1440×810 à l'échelle 4/3, le panneau de droite déborde et coupe des phrases du script (écran 2 : « Une mauvaise année de lentille efface sa marge… » ; écran 5 : la phrase sur le test).
+Cadre : fenêtre 1920×1080 à l'échelle 1, la définition du projecteur.
 
 ## Pourquoi pas une capture en temps réel sur GPU (voie A)
 
@@ -35,7 +35,7 @@ Essai sur Modal avec un GPU NVIDIA L4 (`sonde_gpu.cjs`, `modal run video/modal_a
 
 ## Vérifier
 
-`verifier.py` contrôle le format, mesure la plus longue image figée pendant les passages animés (vols de caméra, cargos, prix et camions, carte rejouée) à partir des différences image à image, et produit la planche contact (une image toutes les 5 s). Les messages console de chaque segment sont listés pendant l'enregistrement. Les avertissements « GL Driver Message » viennent du rendu logiciel et sont ignorés.
+`verifier.py` contrôle le format, mesure la plus longue image figée pendant les vols de caméra et les camions à partir des différences image à image, et produit la planche contact (une image toutes les 5 s). Les cargos de l'écran 1 sont rapportés à part : ils ralentissent en arrivant au port puis marquent une pause de 1,8 s, ce qui donne des images identiques voulues. Les messages console de chaque segment sont listés pendant l'enregistrement. Les avertissements « GL Driver Message » viennent du rendu logiciel et sont ignorés.
 
 ## Fichiers
 

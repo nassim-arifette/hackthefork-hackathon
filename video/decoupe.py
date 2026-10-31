@@ -5,10 +5,11 @@ import sys
 
 
 def plan(timing: dict, taille: int = 600) -> list[tuple[int, int]]:
-    """Segments [de, a) d'au plus `taille` images ; aucun ne chevauche un appui sur Espace."""
+    """Segments [de, a) d'au plus `taille` images ; aucun ne chevauche une touche (Espace ou autre)."""
     sec = lambda s: int(s.split(":")[0]) * 60 + int(s.split(":")[1])
     fps = timing["fps"]
-    bornes = [0] + [round(sec(s) * fps) for s in timing["espace"]] + [round(sec(timing["duree"]) * fps)]
+    touches = [round(sec(s) * fps) for s in timing["espace"]] + [round(sec(k["a"]) * fps) for k in timing.get("touches", [])]
+    bornes = sorted({0, *touches, round(sec(timing["duree"]) * fps)})
     segs = []
     for d, f in zip(bornes, bornes[1:]):
         n = -(-(f - d) // taille)

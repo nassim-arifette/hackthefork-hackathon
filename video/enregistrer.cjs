@@ -18,7 +18,13 @@ const cfg = JSON.parse(fs.readFileSync(args.config || path.join(ici, 'timing.jso
 const sec = (s) => { const [m, x] = s.split(':').map(Number); return m * 60 + x; };
 const fps = cfg.fps;
 const total = Math.round(sec(cfg.duree) * fps);
-const presses = cfg.espace.map((s) => Math.round(sec(s) * fps));
+// Touches à frapper, par numéro d'image : Espace (écran suivant) puis les touches de « touches ».
+const evenements = new Map();
+const ajoute = (t, touche) => { const i = Math.round(sec(t) * fps); evenements.set(i, [...(evenements.get(i) || []), touche]); };
+cfg.espace.forEach((t) => ajoute(t, 'Space'));
+(cfg.touches || []).forEach((k) => ajoute(k.a, k.touche));
+const presses = [...evenements.keys()].sort((x, y) => x - y);
+const frappe = async (page, i) => { for (const k of evenements.get(i) || []) await page.keyboard.press(k); };
 const de = Number(args.de ?? 0);
 const a = Math.min(total, Number(args.a ?? total));
 const html = path.resolve(args.html);
@@ -70,7 +76,7 @@ const qualite = Number(args.qualite ?? 92);
 
   const dt = 1000 / fps;
   const t0 = Date.now();
-  // Avance rapide jusqu'à 1 s avant l'écran où commence le segment, par pas de 15 images
+  // Avance rapide jusqu'à 1 s avant la dernière touche frappée avant le segment, par pas de 15 images
   // (les minuteries s'exécutent toujours dans l'ordre), puis image par image sans capture.
   const ecranDebut = Math.max(0, ...presses.filter((p) => p <= de));
   const fin_rapide = Math.max(0, ecranDebut - fps);
@@ -78,13 +84,13 @@ const qualite = Number(args.qualite ?? 92);
   while (i0 < fin_rapide) {
     const prochain = presses.find((p) => p > i0) ?? Infinity;
     const n = Math.min(15, fin_rapide - i0, prochain - i0);
-    if (presses.includes(i0)) await page.keyboard.press('Space');
+    await frappe(page, i0);
     await page.evaluate((d) => window.__vt.step(d), (i0 === 0 ? 0 : dt) + (n - 1) * dt);
     i0 += n;
   }
   let tCap = Date.now();
   for (let i = i0; i < a; i++) {
-    if (presses.includes(i)) await page.keyboard.press('Space');
+    await frappe(page, i);
     await page.evaluate((d) => window.__vt.step(d), i === 0 ? 0 : dt);
     if (i < de) continue;
     if (i === de) tCap = Date.now();

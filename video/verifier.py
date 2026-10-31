@@ -42,17 +42,20 @@ fr = np.frombuffer(raw, np.uint8).reshape(-1, H, W).astype(np.int16)
 change = (np.abs(np.diff(fr, axis=0)) > 6).sum(axis=(1, 2))  # change[i] : entre l'image i et i+1
 bouge = change >= 5
 
-# Fenêtres où la carte doit bouger à chaque image. L'écran 3 garde la vue de l'écran 2 : pas de vol.
-# À l'écran 5, les départements n'apparaissent qu'avec la première année (900 ms après l'entrée).
+# Fenêtres où la carte doit bouger à chaque image : vols de caméra (1,8 s) et camions.
+# À l'écran 5, la première année se colore 350 ms après l'entrée, pendant le vol.
 e2, e3, e4, e5, e6 = press  # entrée dans les écrans 2 à 6
+autres = sorted(sec(k["a"]) for k in cfg.get("touches", []))
+fin_camions = autres[0] if autres else float(fm["duration"]) - 0.5
 fenetres = [
     ("écran 2, vol de caméra", e2, e2 + 1.8),
+    ("écran 3, descente vers le silo", e3, e3 + 1.8),
     ("écran 4, vol de caméra", e4, e4 + 1.8),
     ("écran 4, camions", e4 + 6, e4 + 16),
-    ("écran 5, vol de caméra (carte visible)", e5 + 0.9, e5 + 1.8),
+    ("écran 5, vol de caméra (carte colorée)", e5 + 0.4, e5 + 1.8),
     ("écran 6, vol de caméra", e6, e6 + 1.8),
-    ("écran 6, camions", e6 + 2, float(fm["duration"]) - 0.5),
-]
+    ("écran 6, camions", e6 + 2, fin_camions - 0.1),
+] + [(f"touche {k['touche']} à {k['a']}, vol de caméra", sec(k["a"]), sec(k["a"]) + 1.8) for k in cfg.get("touches", [])]
 def plus_longue(a, b):
     i0, i1 = int(a * fps), min(len(bouge), int(b * fps))
     run = best = 0
@@ -85,7 +88,8 @@ for k, t in enumerate(temps):
          "-pix_fmt", "rgb24", "-"], capture_output=True, check=True).stdout, np.uint8).reshape(h, w, 3))
     x, y = (k % cols) * w, (k // cols) * (h + 26)
     ecran = sum(1 for d in debuts if d <= t)
-    draw.text((x + 6, y + 3), f"{t // 60}:{t % 60:02d}  écran {ecran}", fill="black", font=font)
+    tch = "".join(f" +{k['touche'].upper()}" for k in cfg.get("touches", []) if sec(k["a"]) <= t and ecran == sum(1 for d in debuts if d <= sec(k["a"])))
+    draw.text((x + 6, y + 3), f"{t // 60}:{t % 60:02d}  écran {ecran}{tch}", fill="black", font=font)
     sheet.paste(img, (x, y + 26))
 sheet.save(planche, quality=85)
 print(f"planche : {planche} ({len(temps)} vignettes)")
