@@ -20,7 +20,7 @@ def panel():
 def test_panel_unique_and_complete(panel):
     assert not panel.duplicated(["dep", "culture", "annee"]).any()
     assert set(panel.annee) == set(range(2010, 2026))
-    assert set(panel.culture) == {"ble", "lentille"}
+    assert set(panel.culture) == {"ble", "lentille", "pois_chiche", "haricot", "pois", "feverole"}
 
 
 def test_panel_units_are_quintals_per_hectare(panel):
@@ -182,3 +182,26 @@ def test_sentinel_series_are_physical():
         e, s = p["ecart_floraison"], d["seuils_statut"]
         attendu = "en_retard" if e < s["retard"] else "a_surveiller" if e < s["surveiller"] else "conforme"
         assert p["statut"] == attendu
+
+
+def test_other_pulses_reuse_the_lentil_engine():
+    """La lentille passe par le même chemin que les autres cultures et retrouve ses chiffres."""
+    d = json.loads((APP_DATA / "cultures.json").read_text())
+    c = {x["id"]: x for x in d["cultures"]}
+    d77 = next(x for x in json.loads((APP_DATA / "thresholds.json").read_text())["par_departement"] if x["dep"] == "77")
+    assert c["lentille"]["p_star"]["77"] == d77["p_star"]
+    assert c["lentille"]["backtest"]["taux_tenus"] == pytest.approx(
+        json.loads((DATA / "backtest.json").read_text())["global"]["taux_tenus"])
+    for x in d["cultures"]:
+        assert x["p_star"]["77"] > x["p_equilibre_median_77"] > 0
+        p1, p2, p3 = x["tranches"]["paliers"]
+        assert p1 >= p2 >= p3 > 0
+
+
+def test_every_pulse_hypothesis_is_labelled_and_sourced():
+    import yaml
+    for culture, hyp in yaml.safe_load((DATA / "cultures.yaml").read_text()).items():
+        for key, v in hyp.items():
+            if key == "nom" or v is None:
+                continue
+            assert v["etiquette"] in {"source", "suppose"} and v["source"], (culture, key)

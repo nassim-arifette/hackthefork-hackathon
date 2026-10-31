@@ -18,6 +18,7 @@ Le Contrat qui Tient aide le responsable filière d'une coopérative ou d'un con
 | Prix plancher pour 8 années sur 10, Seine-et-Marne | **1 567 €/t** départ ferme, sur les tonnes acceptées au tri ; incertitude de 1 099 à 2 877 €/t (modèle) |
 | Backtest 2019–2025, années jamais vues | **87 %** de contrats tenus pour 80 % visés, sur 133 cas, contre **29 %** pour un prix calculé sur les moyennes |
 | À protection égale, un barème par tranches plutôt qu'un prix unique | **18 % moins cher** en moyenne, 22 % en backtest, avec les mêmes 87 % de contrats tenus (modèle) |
+| Pois chiche, haricot, pois, féverole : même moteur | prix fixe tenu dans 65 à 70 % des cas seulement ; **indexé sur le blé, 80 à 86 %** (backtest) |
 
 ---
 
@@ -80,6 +81,7 @@ python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 make export        # 00_prix_commerce → 01_agreste → 02_weather → 03_backtest → 04_parcels → 05_export → 07_contrats → 06_lettre_llm
 make sentinel      # 08_sentinel : NDVI Sentinel-2 de la saison 2025 (réseau, quelques minutes)
+# 09_cultures (dans make export) : le même moteur sur pois chiche, haricot, pois et féverole
 make test          # données, absence de fuite, propriétés du prix plancher et des contrats, exports
 
 # 2. Application (Node 20+)

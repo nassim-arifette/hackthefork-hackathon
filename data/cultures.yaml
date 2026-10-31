@@ -1,0 +1,105 @@
+# Hypothèses propres aux autres légumineuses, pour le même moteur (pipeline/09_cultures.py).
+# Tout ce qui n'est pas ici reprend data/hypotheses.yaml : charges du blé, prix du blé rejoué,
+# fiabilité visée, transport. Étiquettes : source | suppose.
+# Relevé du 31/10/2026. Les PDF Terres Inovia n'ont pas pu être rouverts depuis l'environnement
+# de développement : leurs chiffres viennent des extraits des résultats de recherche, à relire.
+
+pois_chiche:
+  nom: Pois chiche
+  charges_eur_ha:
+    valeur: 500
+    etiquette: source
+    source: "charges opérationnelles le plus souvent de 400 à 500 €/ha, désherbage mécanique compris (guide de culture pois chiche Terres Inovia 2026) ; haut de fourchette retenu"
+    url: "https://www.terresinovia.fr/sites/default/files/2026-04/guide_culture_pois-chiche_2026_terresinovia.pdf"
+    sensibilite: [400, 500, 600]
+  aide_eur_ha:
+    valeur: 105
+    etiquette: suppose
+    source: "même aide couplée que la lentille : le pois chiche figure parmi les légumineuses à graines éligibles (liste des cultures 2023, DDT des Hautes-Pyrénées) ; montant 2026 indicatif"
+    url: "https://www.hautes-pyrenees.gouv.fr/contenu/telechargement/13616/94119/file/20230307_liste_des_cultures_aides_couplees_2023.pdf"
+  rotation_eur_ha:
+    valeur: 150
+    etiquette: source
+    source: "économie sur la culture suivante jusqu'à 150 €/ha (guide de culture pois chiche Terres Inovia 2026)"
+    url: "https://www.terresinovia.fr/sites/default/files/2026-04/guide_culture_pois-chiche_2026_terresinovia.pdf"
+  part_refusee:
+    valeur: 0.10
+    etiquette: suppose
+    source: "même hypothèse que la lentille : graines pour l'alimentation humaine, triées"
+  prix_reference: null
+
+haricot:
+  nom: Haricot sec
+  charges_eur_ha:
+    valeur: 700
+    etiquette: suppose
+    source: "aucune référence publique trouvée le 31/10 ; culture souvent irriguée, charges supposées au niveau de celles du blé"
+    sensibilite: [500, 700, 900]
+  aide_eur_ha:
+    valeur: 105
+    etiquette: suppose
+    source: "« pois et haricots secs » figurent parmi les légumineuses à graines éligibles (liste des cultures 2023, DDT des Hautes-Pyrénées) ; montant 2026 indicatif"
+    url: "https://www.hautes-pyrenees.gouv.fr/contenu/telechargement/13616/94119/file/20230307_liste_des_cultures_aides_couplees_2023.pdf"
+  rotation_eur_ha:
+    valeur: 150
+    etiquette: suppose
+    source: "même hypothèse que la lentille"
+  part_refusee:
+    valeur: 0.10
+    etiquette: suppose
+    source: "même hypothèse que la lentille : graines pour l'alimentation humaine, triées"
+  prix_reference: null
+
+pois:
+  nom: Pois protéagineux
+  charges_eur_ha:
+    valeur: 400
+    etiquette: suppose
+    source: "postes de la Chambre d'agriculture Centre-Val de Loire en 2018 (semences 60, fertilisation 60 à 80, herbicides 80 à 120, fongicides 40 €/ha), relevés pour la hausse des intrants"
+    url: "https://wiki.tripleperformance.fr/images/fr/8/86/CA_Centre_Val_de_Loire_-_Panneau_Cultures_Avenir_2018_-10_Cultures.pdf"
+    sensibilite: [300, 400, 500]
+  aide_eur_ha:
+    valeur: 105
+    etiquette: suppose
+    source: "aide couplée aux légumineuses à graines, montant indicatif 2026 ; le guide pois 2025 de Terres Inovia retient 110 €/ha"
+    url: "https://www.terresinovia.fr/sites/default/files/2025-05/guide-de-culture-pois-conventionnel-2025.pdf"
+  rotation_eur_ha:
+    valeur: 150
+    etiquette: suppose
+    source: "effet du pois sur le blé suivant : +7 q/ha et −33 kg N/ha (Réussir, citant Intercéréales et Terres Univia), soit environ 180 €/ha ; 150 retenus, comme pour la lentille"
+    url: "https://www.reussir.fr/decarbonation-il-faudrait-supprimer-600-000-ha-de-cereales-au-profit-des-legumineuses-et-du"
+  part_refusee:
+    valeur: 0.05
+    etiquette: suppose
+    source: "débouchés moins exigeants que l'alimentation directe (ingrédients protéiques, alimentation animale)"
+  prix_reference:
+    valeur: [200, 260]
+    etiquette: source
+    source: "référentiel de prix CRIT Grand Est 2025, pois protéagineux et féveroles"
+    url: "https://draaf.grand-est.agriculture.gouv.fr/IMG/pdf/crit_16_avril_2025___annexe_2___referentiel_des_prix_crit_2025.pdf"
+
+feverole:
+  nom: Féverole
+  charges_eur_ha:
+    valeur: 400
+    etiquette: suppose
+    source: "charges opérationnelles proches de celles du pois (Terres Inovia, guide de culture féverole)"
+    url: "https://www.terresinovia.fr/"
+    sensibilite: [300, 400, 500]
+  aide_eur_ha:
+    valeur: 105
+    etiquette: suppose
+    source: "aide couplée aux légumineuses à graines, montant indicatif 2026"
+  rotation_eur_ha:
+    valeur: 150
+    etiquette: suppose
+    source: "même hypothèse que pour le pois et la lentille"
+  part_refusee:
+    valeur: 0.05
+    etiquette: suppose
+    source: "débouchés moins exigeants que l'alimentation directe (export pour l'alimentation humaine, alimentation animale)"
+  prix_reference:
+    valeur: [200, 260]
+    etiquette: source
+    source: "référentiel de prix CRIT Grand Est 2025, pois protéagineux et féveroles"
+    url: "https://draaf.grand-est.agriculture.gouv.fr/IMG/pdf/crit_16_avril_2025___annexe_2___referentiel_des_prix_crit_2025.pdf"

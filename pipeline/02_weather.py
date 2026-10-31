@@ -70,10 +70,15 @@ def features(d: pd.DataFrame) -> pd.DataFrame:
 
 
 def main():
+    """Sans argument : départements de la lentille et Île-de-France (data/meteo_dept.csv, modèle
+    principal). Avec --cultures : tous les départements des légumineuses comparées
+    (data/meteo_dept_cultures.csv), sans toucher au fichier du modèle principal."""
+    import sys
+    cultures = "--cultures" in sys.argv
     panel = pd.read_csv(DATA / "panel_rendements.csv", dtype={"dep": str, "serie_groupe": str})
     u = panel[panel.utilisable & ~panel.doublon]
-    lent = set(u[u.culture == "lentille"].dep)
-    deps = sorted(lent | set(IDF_AGRI))
+    keep = ["lentille", "pois_chiche", "haricot", "pois", "feverole"] if cultures else ["lentille"]
+    deps = sorted(set(u[u.culture.isin(keep)].dep) | set(IDF_AGRI))
     cents = centroids()
     out = []
     for i, dep in enumerate(deps, 1):
@@ -84,7 +89,7 @@ def main():
         out.append(f)
         print(f"[{i}/{len(deps)}] {dep} ok", flush=True)
     df = pd.concat(out)
-    df.to_csv(DATA / "meteo_dept.csv", index=False)
+    df.to_csv(DATA / ("meteo_dept_cultures.csv" if cultures else "meteo_dept.csv"), index=False)
     print(df.groupby("annee")[["pluie_mj", "j30_jj", "gel_tardif"]].mean().round(1))
 
 

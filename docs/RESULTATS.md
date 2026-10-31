@@ -204,13 +204,36 @@ Les seuils de statut (−0,05 et −0,10 d'écart à la médiane du groupe) sont
 
 **Réflectances vérifiées.** Les métadonnées Earth Search annoncent un décalage de +1 000 sur les valeurs, et certaines images sont marquées « non corrigées ». Pourtant, sur toutes les images vérifiées, le rouge descend sous 1 000 sur la végétation (292 en médiane sur une lentille en juin), ce qui serait impossible avec ce décalage. Le NDVI est donc calculé sur les valeurs brutes. Appliquer le décalage donnait des NDVI de 1,3 à 1,5, physiquement impossibles.
 
-## 9. Ce que ça veut dire
+## 9. Le même moteur sur d'autres légumineuses
+
+`pipeline/09_cultures.py` applique le même calcul au pois chiche, au haricot sec, au pois protéagineux et à la féverole : modèle quantile M1 appris sur les séries Agreste de chaque culture et la météo de ses départements, même modèle du blé que la lentille, mêmes 20 000 années. La lentille passe par le même chemin et retrouve exactement ses chiffres (1 567 €/t, tranches 1 635 / 750 / 650, 87 % en backtest). Hypothèses propres à chaque culture : `data/cultures.yaml`.
+
+| Culture | Séries (couples) | Variabilité nationale | Rendement en Île-de-France | P\* Seine-et-Marne | Contrats tenus, prix fixe | Contrats tenus, indexé sur le blé |
+|---|---|---|---|---|---|---|
+| Lentille | 24 (294) | 0,20 | 17,5 q/ha, voisins | 1 567 €/t | 87 % | 87 % |
+| Pois chiche | 18 (200) | 0,11 | 16,6 q/ha, voisins | 1 064 €/t | 70 % | 83 % |
+| Haricot sec | 13 (156) | 0,10 | 19,1 q/ha, voisins | 1 779 €/t | 70 % | 86 % |
+| Pois protéagineux | 83 (1 161) | 0,15 | 38,7 q/ha, mesuré | 409 €/t | 65 % | 80 % |
+| Féverole | 69 (1 006) | 0,23 | 33,6 q/ha, mesuré | 462 €/t | 68 % | 82 % |
+
+Backtest 2019–2025 sur les départements producteurs : 133, 100, 71, 493 et 446 cas. Le contrat indexé fixe le plancher à m\* fois le prix du blé de la récolte, m\* calibré sur les seules années passées ; pour 2026 en Seine-et-Marne, m\* vaut 7,44 (lentille), 5,03 (pois chiche), 8,55 (haricot), 1,90 (pois) et 2,17 (féverole).
+
+**Lecture :**
+
+- **Deux familles de risque.** Pour la lentille, le risque vient du rendement : le prix fixe tient 87 % des contrats et l'indexation n'apporte rien. Pour les quatre autres cultures, moins variables, il vient surtout du prix du blé : le prix fixe cède en 2021 et 2022 (pois : 17 % puis 7 % de contrats tenus ; féverole : 37 % puis 2 %), alors que le plancher indexé remonte à 80–86 %. Les intervalles de rendement restent bien calibrés (couverture de 76 à 90 %) : c'est le prix du blé qui fait céder le contrat.
+- **Le pois chiche demande un plancher d'un tiers plus bas que la lentille** (1 064 contre 1 567 €/t), à rendement comparable, parce que son rendement varie deux fois moins.
+- **Le pois et la féverole restent loin du blé francilien** : 409 et 462 €/t pour 8 années sur 10, contre 200 à 260 €/t de référence (2,9 et 2,3 années sur 10 à la référence). C'est cohérent avec leur recul dans les assolements.
+- **Le haricot sec** est le plus cher (1 779 €/t), mais ses charges sont supposées faute de référence publique : chiffre à reprendre avec une filière.
+- Le barème par tranches, mis à l'échelle du rendement de chaque culture, coûte de 8 à 21 % de moins que le prix unique à protection égale.
+
+## 10. Ce que ça veut dire
 
 1. **Garantir 8 années sur 10 coûte plus du double du prix d'équilibre médian** (1 567 contre 715 €/t). Une moyenne sous-estime fortement le prix qu'il faut garantir : c'est le cœur du message.
 2. **À la référence historique, la lentille ne gagne qu'une année sur deux.** C'est exactement le verrou que décrit le Track 3.
 3. **Les contrats publiés sont plus bas** (Unéal : 900 €/t en 2023 ; NatUp : 900 / 700 / 600 €/t par tranche en 2023–2024). Dans notre modèle, ils protègent environ 6 années sur 10 face au blé francilien. **À protection égale, un barème par tranches coûte 18 % de moins qu'un prix unique** (22 % en backtest) : c'est la forme de contrat à proposer.
 4. **Le prix plancher est très sensible au prix du blé.** Un contrat indexé sur le prix du blé (multiplicateur médian de 3,44, de 7,44 pour 8 années sur 10, soit 1 488 €/t avec un blé à 200 €/t) déplacerait ce risque vers l'acheteur sans rendre le contrat beaucoup moins cher.
 5. **Le prix plancher est lui-même incertain** : seize années ne suffisent pas à cerner les mauvaises années. Les données de rendement des coopératives sont la première chose à obtenir en pilote.
+6. **Le moteur est générique, la forme du contrat ne l'est pas** : prix fixe ou par tranches pour la lentille, plancher indexé sur le blé pour le pois chiche, le haricot, le pois et la féverole.
 
 ## Historique
 

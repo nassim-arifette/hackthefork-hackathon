@@ -40,6 +40,19 @@ Chaque source utilisée, avec son étiquette et sa licence. À tenir à jour au 
 
 Les PDF Terres Inovia n'ont pas pu être rouverts depuis l'environnement de développement (accès refusé) : leurs chiffres viennent de la revue du 31/10, à relire avant le pitch.
 
+## Autres légumineuses (`data/cultures.yaml`)
+
+| Affirmation | Source | Étiquette |
+|---|---|---|
+| Pois chiche : charges opérationnelles le plus souvent de 400 à 500 €/ha, économie jusqu'à 150 €/ha sur la culture suivante | Terres Inovia, guide de culture pois chiche 2026 | sourcé, via les extraits de recherche |
+| Pois chiche, pois et haricots secs parmi les légumineuses à graines de l'aide couplée | DDT des Hautes-Pyrénées, liste des cultures 2023 | sourcé, liste à confirmer pour 2026 |
+| Pois protéagineux et féveroles : 200 à 260 €/t | DRAAF Grand Est, référentiel des prix CRIT 2025 | sourcé |
+| Pois : postes de charges de 2018 (semences 60, fertilisation 60 à 80, herbicides 80 à 120, fongicides 40 €/ha) | Chambre d'agriculture Centre-Val de Loire | sourcé, ancien |
+| Féverole : charges proches de celles du pois | Terres Inovia, guide de culture féverole | sourcé, via les extraits de recherche |
+| Haricot sec : aucune référence publique de charges ni de prix trouvée le 31/10 | — | supposé |
+
+Liens : https://www.terresinovia.fr/sites/default/files/2026-04/guide_culture_pois-chiche_2026_terresinovia.pdf ; https://www.hautes-pyrenees.gouv.fr/contenu/telechargement/13616/94119/file/20230307_liste_des_cultures_aides_couplees_2023.pdf ; https://draaf.grand-est.agriculture.gouv.fr/IMG/pdf/crit_16_avril_2025___annexe_2___referentiel_des_prix_crit_2025.pdf ; https://wiki.tripleperformance.fr/images/fr/8/86/CA_Centre_Val_de_Loire_-_Panneau_Cultures_Avenir_2018_-10_Cultures.pdf
+
 ## Contexte
 
 | Affirmation | Source | Étiquette |

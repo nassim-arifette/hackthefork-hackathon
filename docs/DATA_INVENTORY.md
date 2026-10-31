@@ -113,7 +113,20 @@ En comparant les séries, plusieurs départements ont des rendements de lentille
 - **Réflectances** : les métadonnées annoncent un décalage de +1 000 (base de traitement 05.11). Sur toutes les images vérifiées, y compris celles marquées `earthsearch:boa_offset_applied = false`, le rouge descend sous 1 000 sur la végétation : les valeurs sont déjà sans décalage. Appliquer le décalage donnait des NDVI de 1,3 à 1,5.
 - **Sortie** : `data/sentinel_lentilles_2025.json`, de 19 à 25 dates utiles par parcelle.
 
-## 8. Jeu synthétique du pilote (`data/pilote_300t`, ajouté le 31/10)
+## 8. Autres légumineuses dans Agreste (vérifié le 31/10/2026)
+
+Mêmes filtres que la lentille (surface ≥ 50 ha, statut 1 ou 2, séries identiques regroupées) :
+
+| Culture | Couples utilisables | Séries indépendantes | Surface 2025 | Île-de-France |
+|---|---|---|---|---|
+| Pois chiche | 200 | 18 | 27 645 ha | statut 3 |
+| Haricot sec | 156 | 13 | 7 254 ha | statut 3 |
+| Pois protéagineux | 1 161 | 83 | 97 884 ha | statuts 1 et 2 (2 527 ha en Seine-et-Marne) |
+| Féverole | 1 006 | 69 | 112 231 ha | statuts 1 et 2 (5 331 ha en Seine-et-Marne) |
+
+Météo NASA POWER récupérée pour 87 départements (`data/meteo_dept_cultures.csv`) ; `data/meteo_dept.csv`, qui sert au modèle principal, reste limité aux 43 départements de la lentille et de l'Île-de-France.
+
+## 9. Jeu synthétique du pilote (`data/pilote_300t`, ajouté le 31/10)
 
 - **Contenu** : 140 lots fictifs de la coopérative `SYN_COOP_01`, 20 fermes, 2019–2025 ; récolte brute et nette, qualité, refus, paiements et coûts par acteur ; trois barèmes paramétrés dans `contrats.json`.
 - **Statut** : **synthétique**, reproductible avec `python3 tools/generer_pilote_300t.py --verifier-reproductibilite`.

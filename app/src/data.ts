@@ -10,6 +10,7 @@ import france from './data/france.json';
 import lettre from './data/lettre.json';
 import contrats from './data/contrats.json';
 import sentinelRaw from './data/sentinel.json';
+import culturesRaw from './data/cultures.json';
 
 export type Label = 'mesure' | 'source' | 'suppose' | 'synthetique' | 'modele';
 
@@ -75,6 +76,9 @@ export const FEATURE_LABELS: Record<string, string> = {
   tmax_mj_anom: 'Température maximale',
 };
 export const MARKET = meta.prix_lentille_observes;
+
+/** Le même moteur sur d'autres légumineuses (pipeline/09_cultures.py). */
+export const CULTURES = culturesRaw.cultures;
 
 // ---------- suivi en saison (pipeline/08_sentinel.py) ----------
 export type Statut = 'conforme' | 'a_surveiller' | 'en_retard';

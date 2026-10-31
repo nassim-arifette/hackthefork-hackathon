@@ -1,4 +1,4 @@
-import { backtest, CONTRATS, HYPOTHESES, meta, pct, thresholds } from '../data';
+import { backtest, CONTRATS, CULTURES, HYPOTHESES, meta, pct, thresholds } from '../data';
 import { statusText } from './ui';
 
 const NAMES: Record<string, string> = {
@@ -120,6 +120,24 @@ export default function Method({ onClose }: { onClose: () => void }) {
                   <td className="num">{value(k, v.valeur)}<span>{statusText(v.etiquette)}</span></td>
                 </tr>
               ))}
+            </tbody>
+          </table>
+        </section>
+
+        <section>
+          <h3>Autres légumineuses : hypothèses propres</h3>
+          <p>Tout le reste reprend les hypothèses ci-dessus : charges du blé, prix du blé rejoué, fiabilité visée. Fichier <code>data/cultures.yaml</code>.</p>
+          <table className="tbl hyp">
+            <tbody>
+              {CULTURES.filter((c) => c.hypotheses).map((c) => {
+                const h = c.hypotheses as Record<string, { valeur: any; etiquette: 'source' | 'suppose'; source: string } | null>;
+                return (
+                  <tr key={c.id}>
+                    <td><b>{c.nom}</b><span>{h.charges_eur_ha!.source}</span></td>
+                    <td className="num">{h.charges_eur_ha!.valeur} €/ha<span>{statusText(h.charges_eur_ha!.etiquette)} ; aide {h.aide_eur_ha!.valeur} €/ha, rotation {h.rotation_eur_ha!.valeur} €/ha, refus {Math.round(h.part_refusee!.valeur * 100)} %</span></td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </section>

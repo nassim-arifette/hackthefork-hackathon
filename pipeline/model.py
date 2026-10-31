@@ -18,19 +18,31 @@ ALPHA_INTERVAL = 0.2  # intervalle à 80 %
 N_CALIB_YEARS = 3
 
 
-def load() -> pd.DataFrame:
-    """Panel utilisable (sans doublons) fusionné avec les anomalies météo et le prix du blé."""
-    panel = pd.read_csv(DATA / "panel_rendements.csv", dtype={"dep": str, "serie_groupe": str})
-    meteo = pd.read_csv(DATA / "meteo_dept.csv", dtype={"dep": str})
+def read_meteo(name: str = "meteo_dept.csv") -> pd.DataFrame:
+    meteo = pd.read_csv(DATA / name, dtype={"dep": str})
     prix = pd.read_csv(DATA / "prix_ble.csv")[["annee", "prix_eur_t"]]
-    meteo = meteo.merge(prix.rename(columns={"prix_eur_t": "prix_ble"}), on="annee", how="left")
-    # Anomalies par rapport à la climatologie 2010-2018, figée avant toute année test.
+    return meteo.merge(prix.rename(columns={"prix_eur_t": "prix_ble"}), on="annee", how="left")
+
+
+def anomalies(meteo: pd.DataFrame, scale: pd.Series | None = None):
+    """Anomalies par rapport à la climatologie 2010-2018 du département, figée avant toute année
+    test, divisées par leur écart-type sur cette climatologie. `scale` impose l'échelle d'un autre
+    fichier météo : celle du modèle principal, pour les autres légumineuses (09_cultures.py)."""
+    meteo = meteo.copy()
     clim = meteo[meteo.annee.isin(CLIMATO_YEARS)].groupby("dep")[WEATHER].mean()
     anom = meteo.set_index("dep")[WEATHER] - clim.reindex(meteo.dep).values
-    scale = anom[meteo.set_index("dep").annee.isin(CLIMATO_YEARS).values].std()
+    if scale is None:
+        scale = anom[meteo.set_index("dep").annee.isin(CLIMATO_YEARS).values].std()
     for w in WEATHER:
         meteo[f"{w}_anom"] = (anom[w] / scale[w]).values
     meteo["tendance"] = (meteo.annee - 2010) / 10
+    return meteo, scale
+
+
+def load() -> pd.DataFrame:
+    """Panel utilisable (sans doublons) fusionné avec les anomalies météo et le prix du blé."""
+    panel = pd.read_csv(DATA / "panel_rendements.csv", dtype={"dep": str, "serie_groupe": str})
+    meteo, _ = anomalies(read_meteo())
     u = panel[panel.utilisable & ~panel.doublon]
     return u.merge(meteo, on=["dep", "annee"], how="inner"), meteo
 
@@ -207,7 +219,8 @@ def paiement(c: dict, y: np.ndarray) -> np.ndarray:
     """Somme versée par l'acheteur (€/ha) pour y t/ha acceptées au tri."""
     if "paliers" in c:
         p1, p2, p3 = c["paliers"]
-        base = p1 * np.minimum(y, 1) + p2 * np.clip(y - 1, 0, 1) + p3 * np.maximum(y - 2, 0)
+        b1, b2 = c.get("bornes", (1.0, 2.0))  # t/ha : 1 et 2 pour la lentille
+        base = p1 * np.minimum(y, b1) + p2 * np.clip(y - b1, 0, b2 - b1) + p3 * np.maximum(y - b2, 0)
     else:
         base = c["prix"] * y
     return base + c.get("prime_t", 0.0) * y + c.get("prime_ha", 0.0)
@@ -224,12 +237,12 @@ def protection(c: dict, yL, yW, pB, h: dict) -> float:
     return float(np.mean(marge_lentille(c, yL, h) >= pB * yW - h["charges_ble"]))
 
 
-def calibrer_premier_palier(suite, yL, yW, pB, h: dict, tau: float) -> int:
-    """Plus petit prix entier de la première tonne/ha tel que le barème (p1, *suite) atteigne tau."""
+def calibrer_premier_palier(suite, yL, yW, pB, h: dict, tau: float, bornes=(1.0, 2.0)) -> int:
+    """Plus petit prix entier de la première tranche tel que le barème (p1, *suite) atteigne tau."""
     lo, hi = 0, 20000
     while hi - lo > 1:
         mid = (lo + hi) // 2
-        if protection({"paliers": (mid, *suite)}, yL, yW, pB, h) >= tau:
+        if protection({"paliers": (mid, *suite), "bornes": bornes}, yL, yW, pB, h) >= tau:
             hi = mid
         else:
             lo = mid

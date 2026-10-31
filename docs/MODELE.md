@@ -201,6 +201,10 @@ Dans le backtest, ces deux formes sont recalibrées pour chaque cas avec les sc�
 
 ---
 
+### Autres légumineuses
+
+`pipeline/09_cultures.py` réutilise ce chapitre pour le pois chiche, le haricot sec, le pois protéagineux et la féverole. Chaque culture a son modèle M1, appris sur ses séries Agreste (statuts 1–2, doublons regroupés) et sur la météo NASA POWER de ses départements (`data/meteo_dept_cultures.csv`). Les anomalies météo y sont divisées par les écarts-types du modèle principal : le modèle du blé, inchangé, reçoit les mêmes variables. Le niveau de rendement francilien est celui du département quand Agreste le publie avec un statut 1 ou 2 (pois, féverole), sinon la moyenne des départements voisins du bassin parisien (pois chiche, haricot). Les tranches sont mises à l'échelle du rendement accepté moyen : bornes à 0,7 et 1,4 fois ce rendement (1 et 2 t/ha pour la lentille), prix des deuxième et troisième tranches dans les proportions de la proposition lentille.
+
 ## 5. Backtest
 
 ### Protocole glissant, sans fuite

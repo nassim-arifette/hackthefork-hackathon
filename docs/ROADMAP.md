@@ -69,7 +69,7 @@ Dès que le parcours cœur fonctionne avec des chiffres cohérents, prendre ces 
 | 2 | ~~Suivi Sentinel de 5 à 10 parcelles~~ **fait** (8 parcelles, étape « La saison ») | 1 à 2 h | Courbes précalculées, dates et pixels valides affichés, replay clairement nommé. |
 | 3 | Le Maillon vu du ciel, zone réduite | Créneau restant avant le gel | Carte de classes et métriques sur un bloc géographique tenu à l'écart. |
 | 4 | Météo pondérée par les surfaces ; variables par stade | Seulement si le cœur et la démo sont prêts | Nouvelle version comparée à M1 avec le même protocole. |
-| 5 | Autres cultures, données coopératives, offre assureurs | Selon capacité disponible | Une preuve ciblée ou une maquette clairement identifiée. |
+| 5 | ~~Autres cultures~~ **fait** (pois chiche, haricot, pois, féverole) ; données coopératives, offre assureurs | Selon capacité disponible | Une preuve ciblée ou une maquette clairement identifiée. |
 
 Les scénarios de stress restent séparés du backtest. Toute amélioration inspirée par les années 2020–2021 devient une nouvelle exploration, avec une évaluation distincte des résultats déjà consultés.
 

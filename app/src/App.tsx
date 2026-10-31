@@ -4,7 +4,7 @@ import Method from './components/Method';
 import { BacktestReveal, MarginBars, PriceChart, SeasonChart, SecurityChart, Sensitivity, YieldsChart } from './components/charts';
 import { Figure, Source } from './components/ui';
 import {
-  backtest, bestSite, CHALLENGER, CONTRATS, D77, DEP_NAMES, dec, FEATURE_LABELS, fmt, H, held, lettre, MARKET, meta, parcels, pct, pctFine,
+  backtest, bestSite, CHALLENGER, CONTRATS, CULTURES, D77, DEP_NAMES, dec, FEATURE_LABELS, fmt, H, held, lettre, MARKET, meta, parcels, pct, pctFine,
   reliabilityAt, replay, SAISON, signedPct, siteGeo, SITE_SCENARIO, SUIVI, supplyCurve, thresholds, type ReplayYear, type Statut,
 } from './data';
 import { useTween } from './useTween';
@@ -469,6 +469,24 @@ export default function App() {
                   </tbody>
                 </table>
                 <Source k="modele">Même calcul, avec les rendements propres à chaque département producteur et les charges franciliennes partout : un classement des rendements, pas des économies locales. Le prix plancher baisse là où le blé rend moins.</Source>
+              </div>
+              <div className="block">
+                <h3>Le même moteur, quatre autres légumineuses</h3>
+                <table className="list models contracts">
+                  <thead><tr><th>Culture</th><th className="num">Plancher</th><th className="num">Prix fixe</th><th className="num">Indexé</th></tr></thead>
+                  <tbody>
+                    {CULTURES.map((c) => (
+                      <tr key={c.id} className={c.id === 'lentille' ? 'hl' : ''}>
+                        <td>{c.nom}<span>{c.n_series} séries Agreste{c.id === 'haricot' ? ', charges supposées' : ''}</span></td>
+                        <td className="num">{fmt(c.p_star['77'])}</td>
+                        <td className={`num${(c.backtest.taux_tenus ?? 0) < H.tau ? ' bad' : ''}`}>{pct(c.backtest.taux_tenus ?? 0)}</td>
+                        <td className={`num${(c.backtest.taux_tenus_indexe ?? 0) < H.tau - 0.005 ? ' bad' : ''}`}>{pct(c.backtest.taux_tenus_indexe ?? 0)}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+                <p className="body small">Pour la lentille, le risque vient du rendement : un prix fixe tient {pct(CULTURES[0].backtest.taux_tenus ?? 0)} des contrats. Pour les quatre autres, il vient surtout du prix du blé : en 2021 et 2022, un prix fixe cède, alors qu’un plancher indexé sur le blé tient {pct(Math.min(...CULTURES.slice(1).map((c) => c.backtest.taux_tenus_indexe ?? 0)))} à {pct(Math.max(...CULTURES.slice(1).map((c) => c.backtest.taux_tenus_indexe ?? 0)))} des contrats. Le moteur choisit la forme du contrat culture par culture. Le pois et la féverole restent loin du blé : il faudrait {fmt(CULTURES.find((c) => c.id === 'pois')!.p_star['77'])} et {fmt(CULTURES.find((c) => c.id === 'feverole')!.p_star['77'])} €/t, pour 200 à 260 €/t de référence.</p>
+                <Source k="modele">Prix plancher pour 8 années sur 10 en Seine-et-Marne, en €/t ; contrats tenus en backtest 2019–2025 sur les départements producteurs, recalibrés sur les seules années passées. Même modèle du blé ; séries Agreste et météo NASA POWER propres à chaque culture. Charges et aides : pois chiche d’après Terres Inovia (2026), haricot, pois et féverole supposés ; référence pois et féverole : CRIT Grand Est 2025.</Source>
               </div>
             </>
           )}

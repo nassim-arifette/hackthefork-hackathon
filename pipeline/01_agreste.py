@@ -1,4 +1,4 @@
-"""Construit le panel de rendements blé tendre d'hiver et lentille (Agreste SAA 2010-2025).
+"""Construit le panel de rendements blé tendre d'hiver, lentille et autres légumineuses (Agreste SAA 2010-2025).
 
 Sortie : data/panel_rendements.csv, une ligne par département × année × culture.
 Filtres documentés dans docs/MODELE.md §1 :
@@ -16,6 +16,11 @@ from common import AGRESTE_URL, DATA, RAW, YEARS, download
 CULTURES = {
     "01 - Blé tendre d'hiver et épeautre": "ble",
     "40 - Lentilles (y compris semences)": "lentille",
+    # Autres légumineuses, pour le même moteur (pipeline/09_cultures.py).
+    "43 - Pois chiches (y compris semences)": "pois_chiche",
+    "39 - Haricots secs (y compris semences)": "haricot",
+    "41 - Pois protéagineux": "pois",
+    "38 - Féveroles et fèves": "feverole",
 }
 SURFACE_MIN_HA = 50
 
@@ -110,7 +115,7 @@ def main():
     nat.to_csv(DATA / "rendements_nationaux.csv", index=False)
 
     u = df[df.utilisable & ~df.doublon]
-    for cult in ["ble", "lentille"]:
+    for cult in CULTURES.values():
         s = u[u.culture == cult]
         print(f"{cult}: {len(s)} départements × années utilisables, "
               f"{s.dep.nunique()} départements")

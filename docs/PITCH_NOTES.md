@@ -36,6 +36,7 @@
 | Quel impact ? | Le pilote de 300 t mobilise 210 ha ; l'ambition de 5 000 t, 3 506 ha : 13 % des importations, 1 250 t de protéines, 631 t d'azote minéral non apporté et 2 647 t CO₂e d'émissions directes évitées. |
 | Et pendant la saison ? | Prototype : on rejoue 2025 sur les 8 parcelles de lentille les plus proches du site, avec 148 images Sentinel-2. Six suivent le groupe, deux sont sous le groupe en mai : on sait où aller voir. Le NDVI ne prédit pas encore le rendement ; les données du pilote serviront à le caler. |
 | Où placer le site de collecte ? | On le déplace d'un clic : distances, parcelles et coût se recalculent. Le meilleur point gagne quelques dixièmes d'euro par tonne : avec ces coûts, le site se choisit pour la logistique, pas pour le prix. |
+| Et les autres légumineuses ? | Même moteur, cinq cultures. Pour la lentille, le risque vient du rendement : prix fixe ou par tranches. Pour le pois chiche, le haricot, le pois et la féverole, il vient du prix du blé : un prix fixe ne tient que 65 à 70 % des contrats en backtest, un plancher indexé sur le blé 80 à 86 %. Le pois et la féverole restent loin du blé : 409 et 462 €/t pour 8 années sur 10, contre 200 à 260 €/t de référence. |
 | Ça existe déjà ? | Les contrats à prix minimum, oui. Un outil qui calcule ce prix sur le risque et cible les parcelles, nous ne l'avons pas trouvé. |
 | Qui paie, combien ? | Les coopératives et les conditionneurs, par campagne. Hypothèses à tester : étude pilote à 3 000 €, puis 10 000 € par campagne et par bassin. |
 
