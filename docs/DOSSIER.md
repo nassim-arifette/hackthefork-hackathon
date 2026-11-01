@@ -566,7 +566,7 @@ Détail complet : [LIMITES.md](LIMITES.md).
 
 ## 17. Les questions probables, en une phrase
 
-Réponses complètes : [PITCH_NOTES.md](PITCH_NOTES.md).
+Réponses complètes : [PITCH.md](PITCH.md#les-questions-2-minutes).
 
 | Question | Réponse courte |
 |---|---|
@@ -639,6 +639,6 @@ Réponses complètes : [PITCH_NOTES.md](PITCH_NOTES.md).
 - Démo en ligne : https://main.d1lkeu0ybo1cz4.amplifyapp.com/ (simulateur : `#simulateur`)
 - Code et données : https://github.com/nassim-arifette/hackthefork-hackathon
 - Vidéo de la démo : `docs/video/demo-4min.mp4`
-- Pitch et démo, écran par écran : [PITCH.md](PITCH.md) ; questions : [PITCH_NOTES.md](PITCH_NOTES.md)
+- Pitch, démo et questions du jury : [PITCH.md](PITCH.md)
 - Résultats : [RESULTATS.md](RESULTATS.md) ; modèle : [MODELE.md](MODELE.md) ; limites : [LIMITES.md](LIMITES.md) ; sources : [SOURCES.md](SOURCES.md)
 - Pilote et partenaires : [PILOTE_300T.md](PILOTE_300T.md) ; contrat simulé : [CONTRAT_SIMULATION.md](CONTRAT_SIMULATION.md) ; autres cultures : [REVUE_FILIERE_CULTURES.md](REVUE_FILIERE_CULTURES.md)

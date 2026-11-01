@@ -133,8 +133,7 @@ docs/
   SOURCES.md         chaque source, son statut et sa licence
   LIMITES.md         limites connues et annoncées
   DECLARATIONS.md    ressources préexistantes (obligatoire au dépôt)
-  PITCH.md           pitch et démo de 4 minutes : texte, gestes, minutage, plan de secours
-  PITCH_NOTES.md     questions attendues et réponses
+  PITCH.md           pitch et démo de 4 minutes, plan de secours, questions du jury et réponses
   QUESTIONS.md       réponses de mentor et décisions de l'équipe
   AWS.md             Bedrock et Amplify, pas à pas
 ```
