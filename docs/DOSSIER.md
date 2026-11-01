@@ -226,7 +226,7 @@ Toutes ouvertes, téléchargées et traitées par le pipeline (`pipeline/00` à 
 |---|---|---|
 | Charges opérationnelles du blé | 700 €/ha | supposé, arrondi de 675 €/ha (Cerfrance Nord-Est Île-de-France, cité par Terres Inovia 2025) |
 | Charges opérationnelles de la lentille | 500 €/ha | supposé, arrondi de 518 €/ha (guide lentille Terres Inovia 2023) |
-| Aide couplée aux légumineuses | 105 €/ha | sourcé, montant indicatif 2026 (Telepac) ; 122 €/ha en 2025 |
+| Aide couplée aux légumineuses | 105 €/ha | sourcé, montant indicatif 2026 (Telepac) ; 122 €/ha annoncés pour 2023–2025 |
 | Bénéfice de rotation pour le blé suivant | 150 €/ha | supposé, effet précédent documenté par FiloLeg 2024 |
 | Part de la récolte refusée au tri | 10 % | supposé ; la bruche peut coûter 10 à 20 % (Réussir) |
 | Collecte | 5 €/t + 0,12 €/t/km, distance × 1,3 | supposé |
@@ -412,14 +412,56 @@ Réponse : un pilote d'une campagne, à faible coût, qui produit la preuve chez
 
 ## 10. Concurrence et alternatives
 
-Ce que l'on sait déjà, d'après les sources du dépôt :
+Recherche documentaire du 1er novembre 2026, une trentaine de pages lues ; chaque ligne renvoie à sa source (liste dans [SOURCES.md](SOURCES.md)).
 
-- **Les contrats à prix minimum** (Unéal, NatUp, Qualisol) sont une pratique, pas un outil : leur prix se fixe à l'expérience. Nous ne les concurrençons pas, nous les rendons calculables.
-- **L'assurance récolte** couvre une récolte effondrée, pas l'écart de marge face au blé : c'est un complément, et notre distribution de récolte sert aussi à la tarifer.
-- **La télédétection agricole** est un marché déjà occupé : notre différence tient au couplage avec le prix du contrat et la logistique de la filière.
-- Nous n'avons pas trouvé d'outil qui calcule ce prix sur le risque, le vérifie en backtest et cible les parcelles.
+**En bref** : personne ne relie le prix garanti, la probabilité de battre le blé et la vérification sur les années passées. Les acteurs existants fixent un prix sur les coûts ou à l'expérience, assurent une récolte ou un revenu, ou calculent des marges sans probabilité. Nous nous plaçons entre le conseil technique et l'assurance.
 
-*La carte détaillée des acteurs est en cours de vérification.*
+### 10.1 Ceux qui fixent déjà un prix de légumineuse
+
+| Acteur | Ce qu'il fait | Ce qu'il ne fait pas | Pour nous |
+|---|---|---|---|
+| **Unéal, NatUp, Qualisol** (§2.3) | contrats à prix minimum ou barème par tranches | prix fixé à l'expérience ; dans notre modèle, environ 6 années sur 10 face au blé francilien | clients |
+| **Max Havelaar France, « Origine France »** ([Réussir](https://www.reussir.fr/grandes-cultures/commerce-equitable-max-havelaar-garantit-des-prix-planchers-pour-des-bles-et-legumineuses-francais) ; [Réussir, 21/08/2026](https://www.reussir.fr/grandes-cultures/legumineuses-une-filiere-commerce-equitable-max-havelaar-se-structure-dans-le-sud-ouest)) | prix plancher par territoire, contrats de trois ans. Récolte 2025, conventionnel, ex-Poitou-Charentes : lentille 1 019 €/t, plus 51 €/t de prime collective. Calcul : coûts de production, revenu de 1,5 SMIC, surcoût des pratiques exigées. 175 ha et 6 agriculteurs pilotes en 2025 | plancher tiré de coûts moyens : ni risque de rendement, ni probabilité de battre le blé, ni backtest | **le substitut le plus proche** ; partenaire possible. Ordre de grandeur : 1 000 €/t protège 6,5 années sur 10 face au blé de Seine-et-Marne dans notre modèle |
+| **Euralis × Bonduelle** ([Euralis, 1/06/2023](https://www.euralis.fr/wp-content/uploads/2023/06/1er-anniversaire-partenariat-Bonduelle-legumes-secs-juin-2023.pdf)) | filière légumes secs depuis 2022 : environ 1 000 ha, 115 agriculteurs dont 40 en lentilles, débouché garanti par contrat de production | prix non publié | canal, pilote possible |
+| **Cavac** ([Réussir, 18/10/2018](https://www.reussir.fr/lesmarches/la-cavac-investit-dans-sa-station-de-legumes-secs)) | toutes les surfaces de légumes secs sous contrat (350 producteurs, 3 200 ha en 2018) | méthode de prix non publiée | canal, pilote possible |
+| **Hari&Co** ([Réussir, 17/05/2022](https://www.reussir.fr/lesmarches/une-filiere-et-des-plats-cuisines-pour-harico)) | achète toute la production de ses agriculteurs à un prix défini à l'avance (10 agriculteurs, 60 ha bio en 2022) | montant et méthode non publiés | canal |
+| **Sabarot**, lentille verte du Puy en AOP ([Pleinchamp, 18/07/2022](https://www.pleinchamp.com/actualite/lentille-verte-du-puy-aop-les-raisons-d-esperer-en-2022)) | contrats annuels d'environ 2 300 à 2 400 €/t | prix négocié, aucun calcul de risque publié | canal ; montre qu'un prix élevé tient avec un signe de qualité |
+
+Aucun contrat lentille public n'a été trouvé chez Terrena ni chez Vivescia.
+
+### 10.2 L'assurance et la gestion du risque
+
+| Acteur | Ce qu'il fait | Ce qu'il ne fait pas | Pour nous |
+|---|---|---|---|
+| **Assurance récolte multirisque**, réforme de 2023 ([DRAAF Grand Est, novembre 2025](https://draaf.grand-est.agriculture.gouv.fr/IMG/pdf/2511_assurancerecoltes_bro-1.pdf)) | prime subventionnée jusqu'à 70 %, franchise de 20 % ; en grandes cultures, solidarité nationale au-delà de 50 % de pertes ; régime maintenu 2026–2028 | ne couvre ni le prix ni la marge face au blé ; rien de propre aux légumineuses | complément : la récolte effondrée, dans les 2 années sur 10 |
+| **Assurance paramétrique** : AXA Climate (germination du colza, près de 80 000 ha en France en 2023), Descartes Underwriting (sécheresse, gel, chaleur) ([GrECo, 9/05/2023](https://greco.services/parametric-insurance-rapeseed-besse-and-greco-sign-an-exclusive-distribution-partnership-agreement/) ; [Descartes](https://descartesunderwriting.com/products/agriculture)) | indemnise sur un indice (météo, satellite, biomasse) | ni légumineuses, ni prix de contrat | partenaires possibles ; notre distribution de récolte sert à tarifer (231 €/ha de prime pure à 70 %) |
+| **États-Unis** : Revenue Protection de l'USDA, ouverte à la lentille ([RMA, 2023](https://www.rma.usda.gov/policy-procedure/bulletins-memos/product-management-bulletin/2023/pm-23-015-2023-crop-year-cy-dry)) | garantit le revenu de l'agriculteur, avec un prix projeté et sa volatilité | ne fixe pas de prix de contrat, ne compare pas au blé | l'analogue probabiliste le plus proche |
+| **Canada** : Contract Price Option de Saskatchewan Crop Insurance, AgriStability ([Farms.com, 2022](https://www.farms.com/news/saskatchewan-announces-2022-crop-insurance-program-176746.aspx) ; [AAC](https://agriculture.canada.ca/en/programs/agristability)) | la première assure la récolte au prix du contrat signé ; la seconde paie 80 % de la baisse de marge au-delà de 30 %, sur toute l'exploitation | ne calculent pas le prix du contrat | notre prix garanti pourrait devenir le prix assuré |
+
+### 10.3 Les outils de décision et les logiciels
+
+| Acteur | Ce qu'il fait | Ce qu'il ne fait pas | Pour nous |
+|---|---|---|---|
+| **FiLoLeG**, Chambre d'agriculture des Hauts-de-France et Agro-Transfert ([présentation](https://www.hautsdefrance.chambres-agriculture.fr/fileadmin/user_upload/Hauts-de-France/171_Inst-Hauts-de-France/2-Nos-actions/DAS5-cultures-sources-proteines-vegetales/Flyer_Projet_FILOLEG.pdf)) | marge des rotations avec légumineuses selon des scénarios de prix et de rendement | scénarios fixes : ni probabilité visée, ni backtest, ni barème | **le substitut partiel le plus proche en France** ; partenaire naturel (nous utilisons déjà sa synthèse pour l'effet précédent) |
+| **Terres Inovia** ([myVar, Réussir](https://www.reussir.fr/ladepeche/mieux-connaitre-les-varietes-de-lupin-lentille-et-pois-chiche-grace-myvar-de-terres-inovia)) | références techniques (nos charges en viennent), choix des variétés | pas de probabilité, pas de barème | source, validation, canal |
+| **Argus Media**, qui a racheté Agritel ([Réussir](https://www.reussir.fr/argus-media-soffre-agritel)) | cotations et conseil sur les marchés des grains | aucune cotation lentille trouvée | source possible pour le prix du blé |
+| **Plateformes de contrats** : Bushel, Grain Discovery (DTN), AgriDigital ([Bushel](https://www.bushelpowered.com/blog/investing-in-tech) ; [DTN](https://www.dtn.com/agriculture/grain-discovery/) ; [AgriDigital](https://agridigital.io/)) | contrats numériques, offres et règlements pour les silos et coopératives (Amérique du Nord, Australie) | ne calculent pas de prix garanti | canal de diffusion du contrat |
+| **Agronomie numérique** : Xarvio, Hiphen ([Xarvio](https://ag.xarvio.com/field-manager)) | suivi des parcelles, phénotypage | rien sur le prix | fournisseurs de données |
+
+Les logiciels de collecte des coopératives françaises gèrent les contrats et les apports ; aucun calcul de prix garanti n'y a été trouvé, sans examen détaillé.
+
+**Programmes publics** : la stratégie nationale pour les protéines végétales finance encore l'innovation variétale des légumineuses (appel à projets de 10 M€, juillet 2026, [agriculture.gouv.fr](https://agriculture.gouv.fr/ouverture-dun-appel-a-projets-en-faveur-de-linnovation-varietale-des-legumineuses)) ; Cap Protéines+ (2024–2027, 7,5 M€ ; Terres Inovia, Arvalis, Idele, Terres Univia) finance la recherche ([plaquette](https://www.terresinovia.fr/sites/default/files/document_library/20126/3146141/3332226/plaquette-cap-proteines-plus.pdf)). Ce sont des financeurs ou des partenaires, pas des concurrents. Signes de qualité : lentille verte du Puy en AOP, lentille verte du Berry en IGP et Label Rouge (INAO).
+
+### 10.4 Ce qui n'existe pas, et les risques
+
+Nous n'avons trouvé **aucun outil ni service qui calcule le prix garanti rendant une culture de diversification compétitive face au blé avec une probabilité visée, et qui le vérifie sur les années passées**. Le plus proche : Max Havelaar (un vrai plancher, calculé sur les coûts), FiLoLeG (des seuils face au blé, en scénarios fixes), les assurances revenu américaines et canadiennes (probabilistes, mais elles assurent un revenu sans concevoir de contrat).
+
+Les risques, honnêtement :
+
+- Max Havelaar a déjà une méthode de plancher acceptée par des acheteurs et pourrait y ajouter une couche de risque.
+- Terres Inovia, Arvalis et les Chambres d'agriculture ont les données et la légitimité : un prix d'intérêt probabiliste est à leur portée.
+- Un assureur peut vendre une garantie de marge indexée sur le blé.
+- Notre méthode (régression quantile, simulation) est publique et reproductible en quelques semaines. L'avantage tient à la mise en forme pour la coopérative, à la vérification sur les années passées et au premier pilote signé ; sans pilote, il reste fragile.
 
 ---
 
@@ -538,7 +580,8 @@ Réponses complètes : [PITCH_NOTES.md](PITCH_NOTES.md).
 | Comment vous mesurez la qualité ? | Backtest strict 2019–2025, 133 cas, et couverture de l'intervalle à 80 % (79 %). |
 | Qu'est-ce qui est réel ? | Toutes les données sont réelles et ouvertes ; le site de collecte et les lots du pilote sont fictifs ; les charges sont des hypothèses sourcées. |
 | Pourquoi pas 10 années sur 10 ? | 9 sur 10 coûte 2 632 €/t, 9,5 sur 10 4 397 €/t : un prix plancher n'est pas une assurance. |
-| Ça existe déjà ? | Les contrats à prix minimum, oui ; un outil qui calcule ce prix sur le risque, le vérifie en backtest et cible les parcelles, nous ne l'avons pas trouvé (§10). |
+| Ça existe déjà ? | Les contrats à prix minimum, oui : Unéal, NatUp, et Max Havelaar, dont le plancher lentille (1 019 €/t en 2025) est calculé sur les coûts. Un outil qui calcule ce prix sur le risque face au blé, le vérifie sur les années passées et cible les parcelles, nous ne l'avons pas trouvé (§10). |
+| Votre concurrent le plus proche ? | Max Havelaar Origine France pour le prix plancher, FiLoLeG pour la marge face au blé : ni l'un ni l'autre ne raisonne en probabilité ni ne se vérifie sur les années passées. |
 | Quel impact ? | Pour 5 000 t : 13 % des importations, 1 250 t de protéines, 630 t d'azote minéral en moins. |
 | Ça passe à l'échelle ? | Même moteur pour cinq légumineuses et 24 départements ; un nouveau bassin, c'est relancer le pipeline. |
 | Quelle taille de marché ? | 170 coopératives et unions du commerce de grains ; un secteur de 118 Md€. |
@@ -596,6 +639,6 @@ Réponses complètes : [PITCH_NOTES.md](PITCH_NOTES.md).
 - Démo en ligne : https://main.d1lkeu0ybo1cz4.amplifyapp.com/ (simulateur : `#simulateur`)
 - Code et données : https://github.com/nassim-arifette/hackthefork-hackathon
 - Vidéo de la démo : `docs/video/demo-4min.mp4`
-- Pitch : [PITCH.md](PITCH.md) ; pilotage de la démo : [DEMO_SCRIPT.md](DEMO_SCRIPT.md) ; questions : [PITCH_NOTES.md](PITCH_NOTES.md)
+- Pitch et démo, écran par écran : [PITCH.md](PITCH.md) ; questions : [PITCH_NOTES.md](PITCH_NOTES.md)
 - Résultats : [RESULTATS.md](RESULTATS.md) ; modèle : [MODELE.md](MODELE.md) ; limites : [LIMITES.md](LIMITES.md) ; sources : [SOURCES.md](SOURCES.md)
 - Pilote et partenaires : [PILOTE_300T.md](PILOTE_300T.md) ; contrat simulé : [CONTRAT_SIMULATION.md](CONTRAT_SIMULATION.md) ; autres cultures : [REVUE_FILIERE_CULTURES.md](REVUE_FILIERE_CULTURES.md)

@@ -72,6 +72,32 @@ Les charges centrales sont des choix de scénario ancrés sur ces références, 
 | Filière légumineuses en Beauce, avec prime filière et assurance rendement | agriculture.gouv.fr | sourcé |
 | Légumineuses : environ 4 % des terres agricoles, objectif de doublement en 2030 | guide participant Hack the Fork 2026 | sourcé |
 
+## Concurrence et alternatives (recherche du 1er novembre 2026)
+
+Utilisées dans [DOSSIER.md](DOSSIER.md) §10. Aucune n'entre dans un calcul.
+
+| Affirmation | Source | Étiquette |
+|---|---|---|
+| Max Havelaar France « Origine France » : plancher lentille conventionnelle de 1 019 €/t et prime collective de 51 €/t pour la récolte 2025 (ex-Poitou-Charentes), calculé sur les coûts de production, 1,5 SMIC et le surcoût des pratiques ; contrats de 3 ans ; 175 ha et 6 agriculteurs pilotes en 2025 | [Réussir](https://www.reussir.fr/grandes-cultures/commerce-equitable-max-havelaar-garantit-des-prix-planchers-pour-des-bles-et-legumineuses-francais) ; [Réussir, 21/08/2026](https://www.reussir.fr/grandes-cultures/legumineuses-une-filiere-commerce-equitable-max-havelaar-se-structure-dans-le-sud-ouest) | sourcé |
+| Euralis × Bonduelle : environ 1 000 ha, 115 agriculteurs dont 40 en lentilles, contrat de production (juin 2023) | [Euralis](https://www.euralis.fr/wp-content/uploads/2023/06/1er-anniversaire-partenariat-Bonduelle-legumes-secs-juin-2023.pdf) | sourcé |
+| Cavac : surfaces de légumes secs toutes contractualisées, 350 producteurs, 3 200 ha (2018) | [Réussir, 18/10/2018](https://www.reussir.fr/lesmarches/la-cavac-investit-dans-sa-station-de-legumes-secs) | sourcé |
+| Hari&Co : production achetée à un prix défini à l'avance, 10 agriculteurs, 60 ha bio (2022) | [Réussir, 17/05/2022](https://www.reussir.fr/lesmarches/une-filiere-et-des-plats-cuisines-pour-harico) | sourcé |
+| Sabarot, lentille verte du Puy (AOP) : contrats annuels d'environ 2 300 à 2 400 €/t (2022) | [Pleinchamp, 18/07/2022](https://www.pleinchamp.com/actualite/lentille-verte-du-puy-aop-les-raisons-d-esperer-en-2022) | sourcé |
+| Assurance récolte : subvention jusqu'à 70 %, franchise de 20 %, solidarité nationale au-delà de 50 % de pertes en grandes cultures, régime 2026–2028 | [DRAAF Grand Est, novembre 2025](https://draaf.grand-est.agriculture.gouv.fr/IMG/pdf/2511_assurancerecoltes_bro-1.pdf) | sourcé |
+| AXA Climate et Bessé : assurance paramétrique de la germination du colza, près de 80 000 ha en France (2023) | [GrECo, 9/05/2023](https://greco.services/parametric-insurance-rapeseed-besse-and-greco-sign-an-exclusive-distribution-partnership-agreement/) | sourcé |
+| Descartes Underwriting : assurance paramétrique agricole (sécheresse, gel, chaleur) | [Descartes](https://descartesunderwriting.com/products/agriculture) | sourcé |
+| USDA RMA : Revenue Protection ouverte à la lentille (pois secs, 2023) | [RMA PM-23-015](https://www.rma.usda.gov/policy-procedure/bulletins-memos/product-management-bulletin/2023/pm-23-015-2023-crop-year-cy-dry) | sourcé |
+| Saskatchewan Crop Insurance : Contract Price Option ouverte à toutes les cultures (2022) ; AgriStability : 80 % de la baisse de marge au-delà de 30 % | [Farms.com, 23/02/2022](https://www.farms.com/news/saskatchewan-announces-2022-crop-insurance-program-176746.aspx) ; [AAC](https://agriculture.canada.ca/en/programs/agristability) | sourcé |
+| FiLoLeG : marges des rotations avec légumineuses selon des scénarios de prix et de rendement | [Chambre d'agriculture des Hauts-de-France](https://www.hautsdefrance.chambres-agriculture.fr/fileadmin/user_upload/Hauts-de-France/171_Inst-Hauts-de-France/2-Nos-actions/DAS5-cultures-sources-proteines-vegetales/Flyer_Projet_FILOLEG.pdf) | sourcé |
+| Terres Inovia, myVar : fiches de variétés de lentille et de pois chiche | [Réussir, 17/06/2021](https://www.reussir.fr/ladepeche/mieux-connaitre-les-varietes-de-lupin-lentille-et-pois-chiche-grace-myvar-de-terres-inovia) | sourcé |
+| Argus Media a racheté Agritel | [Réussir](https://www.reussir.fr/argus-media-soffre-agritel) | sourcé |
+| Plateformes de contrats de grains : Bushel, Grain Discovery (DTN), AgriDigital | [Bushel](https://www.bushelpowered.com/blog/investing-in-tech) ; [DTN](https://www.dtn.com/agriculture/grain-discovery/) ; [AgriDigital](https://agridigital.io/) | sourcé |
+| Xarvio Field Manager : suivi des parcelles | [Xarvio](https://ag.xarvio.com/field-manager) | sourcé |
+| Appel à projets de 10 M€ pour l'innovation variétale des légumineuses (juillet 2026) | [agriculture.gouv.fr](https://agriculture.gouv.fr/ouverture-dun-appel-a-projets-en-faveur-de-linnovation-varietale-des-legumineuses) | sourcé |
+| Cap Protéines+ (2024–2027) : 7,5 M€ de subvention | [Terres Inovia, plaquette](https://www.terresinovia.fr/sites/default/files/document_library/20126/3146141/3332226/plaquette-cap-proteines-plus.pdf) | sourcé |
+| Lentille verte du Puy : AOP ; lentille verte du Berry : IGP et Label Rouge | [INAO, Puy](https://extranet.inao.gouv.fr/fichier/PNODULentilleverteduPuy2016.pdf) ; [INAO, Berry](https://www.inao.gouv.fr/fichier/DUIGPLentilleVerteDuBerry.pdf) | sourcé |
+| Aide couplée aux légumineuses à graines : montant définitif 2025 de 138,04 €/ha, selon un arrêté du 5 juin 2026 | [Le Mag Juridique](https://www.lemag-juridique.com/articles/rural-agriculture-fixation-montants-aides-couplees-pour-campagne-2025-11625.htm) | [à vérifier sur Légifrance] ; la sensibilité du modèle reste à 0 / 105 / 122 €/ha |
+
 ## Hypothèses de la version 3, conservées pour comparaison
 
 | Affirmation | Source | Étiquette |

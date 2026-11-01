@@ -1,6 +1,6 @@
 # Vidéo de secours de la démo
 
-`docs/video/demo-4min.mp4` rejoue les six écrans de la démo au minutage de [docs/DEMO_SCRIPT.md](../docs/DEMO_SCRIPT.md). Si la démo en direct plante, l'orateur lance la vidéo en plein écran et parle par-dessus. Elle est muette.
+`docs/video/demo-4min.mp4` rejoue les six écrans de la démo à leur minutage d'origine (écran 6 à 3:20, carte de France à 3:42) ; le déroulé et la conduite à tenir sont dans [docs/PITCH.md](../docs/PITCH.md). Si la démo en direct plante, l'orateur lance la vidéo en plein écran et parle par-dessus. Elle est muette.
 
 ## Relancer
 
