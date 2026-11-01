@@ -6,7 +6,7 @@
 
 Le Contrat qui Tient aide le responsable filière d'une coopérative ou d'un conditionneur de légumes secs à fixer **le prix plancher d'un contrat lentille** qui rapporte à l'agriculteur **au moins autant que le blé 8 années sur 10**. L'outil montre aussi **quelles parcelles d'Île-de-France basculent** à ce prix, et combien de tonnes la coopérative peut sécuriser.
 
-> État (samedi 31/10, soir) : pipeline de bout en bout, tests et démo sur les vraies données (Agreste, RPG 2025, NASA POWER, Eurostat). Scénario économique de la version 4, prix payé sur les tonnes acceptées au tri, comparaison des contrats. La démo suit le pitch de 4 minutes en six écrans animés (le constat, le pari, le contrat, le prix, la preuve, l'impact) ; les écrans détaillés restent en annexes pour les questions. Résultats : [docs/RESULTATS.md](docs/RESULTATS.md).
+> État (samedi 31/10, soir) : pipeline de bout en bout, tests et démo sur les vraies données (Agreste, RPG 2025, NASA POWER, Eurostat). Scénario économique de la version 4, prix payé sur les tonnes acceptées au tri, comparaison des contrats. La démo suit le pitch de 4 minutes en six écrans animés (le constat, le pari, le contrat, le prix, la preuve, l'impact) , les écrans détaillés restent en annexes pour les questions. Résultats : [docs/RESULTATS.md](docs/RESULTATS.md).
 
 ![La démo, écran « Le prix » : les parcelles les plus proches du silo basculent et les camions livrent 300 t](docs/img/ecran-4-prix.png)
 
