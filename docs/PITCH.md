@@ -70,7 +70,7 @@ Couper d'abord la phrase sur LightGBM, puis celle sur les 20 000 parcelles.
 |---|---|---|---|
 | près d'une lentille sur deux, 39 000 t importées en 2025, surtout du Canada | 46 % de la consommation apparente ; 39 371 t, dont 45 % du Canada | sourcé | Eurostat Comext ; Agreste SAA |
 | la lentille varie deux fois plus | coefficient de variation du rendement national 0,20, contre 0,09 pour le blé, 2010–2025 | mesuré | Agreste SAA |
-| en 2020, sa récolte a chuté de 38 % | rendement national 38 % sous la tendance | mesuré | Agreste SAA |
+| en 2020, sa récolte a chuté de 38 % | rendement national de 8,2 q/ha, 38 % sous la moyenne 2015–2019 | mesuré | Agreste SAA |
 | ces 20 000 parcelles | 20 762 parcelles de blé tendre d'hiver en Île-de-France | mesuré | RPG 2025 (IGN) |
 | 900 €/t, moins que le blé 4 années sur 10 | prix Unéal 2023 ; la lentille bat le blé 6 années sur 10 | sourcé (prix), modèle (fréquence) | Unéal ; 20 000 années simulées |
 | 1 567 €/t, 8 années sur 10 | prix départ ferme, Seine-et-Marne, payé sur les tonnes acceptées au tri ; 1 600 €/t à l'écran, livré au silo | modèle | 20 000 années simulées (météo NASA POWER, prix du blé 2010–2025) |

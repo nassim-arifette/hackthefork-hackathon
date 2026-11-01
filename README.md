@@ -118,6 +118,7 @@ data_raw/        téléchargements bruts (versionnés, sauf le RPG, retéléchar
 tools/           générateur reproductible du jeu synthétique du pilote
 app/             front Vite + React + deck.gl
 docs/
+  DOSSIER.md         tout le projet en un document : problème, modèle, données, business, concurrence
   PROJET.md          problème, utilisateur, différenciation, modèle économique
   RESULTATS.md       résultats chiffrés du pipeline
   CONTRAT_SIMULATION.md  barème NatUp reconstitué, contrat synthétique complet, protection calculée
