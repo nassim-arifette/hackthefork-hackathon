@@ -10,6 +10,7 @@ import {
   truckTrips, type MaillonCat, type MaillonVersion, type ReplayYear, type Statut, type TruckTrip,
 } from './data';
 import { useTween } from './useTween';
+import logoUrl from './assets/logo-64.png';
 import { parcellesPour, SIM_DEFAUTS, SIM_REFERENCE, simuler, type SimParams } from './simulateur';
 
 /** Champ numérique du simulateur ; les valeurs hors bornes sont ramenées dans les bornes pour le calcul. */
@@ -408,7 +409,7 @@ export default function App() {
   return (
     <div className="app">
       <header className="masthead">
-        <div className="wordmark">Le Contrat qui Tient<span>Hack the Fork 2026 · Track 3</span></div>
+        <div className="wordmark"><img src={logoUrl} alt="" width={30} height={30} />Le Contrat qui Tient<span>Hack the Fork 2026 · Track 3</span></div>
         <nav className="steps" aria-label="Étapes">
           {MAIN.map((s, i) => (
             <button key={s.id} className={s.id === view ? 'on' : !annex && !outil && i < mainIdx ? 'done' : ''} onClick={() => go(s.id)} aria-current={s.id === view ? 'step' : undefined}>

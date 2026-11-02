@@ -46,6 +46,7 @@ a:hover { text-decoration-color: currentColor; }
   font-family: var(--sans);
 }
 .wordmark { font-weight: 700; font-stretch: 88%; font-size: 17px; letter-spacing: -0.005em; white-space: nowrap; display: flex; align-items: baseline; gap: var(--s3); }
+.wordmark img { align-self: center; margin-right: -4px; border-radius: 6px; }
 .wordmark span { font-weight: 400; font-stretch: 100%; font-size: 12.5px; color: var(--mute); letter-spacing: 0; }
 .steps { flex: 1; display: flex; justify-content: center; gap: var(--s5); min-width: 0; height: 100%; }
 .steps button {

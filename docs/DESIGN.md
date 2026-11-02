@@ -55,6 +55,14 @@ On groupe par l'espace et l'alignement, pas avec des boîtes. Un filet fin sépa
 Chaque bloc de chiffres se termine par une ligne de source qui commence par son statut, comme un crédit de presse :
 « **Mesuré.** Eurostat Comext ; Agreste SAA 2025, provisoire. » ou « **Modèle.** Backtest glissant 2019–2025. »
 
+## Logo et mascotte
+
+Fichiers et usages : [docs/brand/](brand/README.md).
+
+- **Logo** : la lentille au chapeau de paille posée sur sa barre dorée (le prix plancher), un épi de blé derrière. Il sert d'icône, de favicon et d'avatar ; dans le bandeau de l'application, il précède le nom en 30 px.
+- **Mascotte** : la lentille fermière qui brandit le contrat scellé. Réservée au README, à l'aperçu GitHub, au deck et à l'ouverture du pitch, pas aux écrans de démonstration.
+- Ni le logo ni la mascotte ne portent de texte ; le nom est toujours composé en Archivo à côté.
+
 ## Interdits
 
 - Fond sombre avec une couleur fluo, dégradés, lueurs, flou de verre.

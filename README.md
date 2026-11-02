@@ -1,3 +1,5 @@
+<img src="docs/brand/mascotte-512.png" alt="La mascotte du Contrat qui Tient : une lentille verte en chapeau de paille qui brandit un contrat scellé" width="200" align="right" />
+
 # Le Contrat qui Tient
 
 **Hack the Fork Paris 2026 · Track 3 (souveraineté protéique, des champs français aux protéines de demain)**
