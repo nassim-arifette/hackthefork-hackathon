@@ -4,7 +4,7 @@
 
 **Hack the Fork Paris 2026 · Track 3 (souveraineté protéique, des champs français aux protéines de demain)**
 
-**Démo en ligne : https://main.d1lkeu0ybo1cz4.amplifyapp.com/** · **simulateur : https://main.d1lkeu0ybo1cz4.amplifyapp.com/#simulateur** · hors ligne : `make app`, puis ouvrir `app/dist-single/index.html`
+**Démo en ligne : https://le-contrat-qui-tient.vercel.app/** · **simulateur : https://le-contrat-qui-tient.vercel.app/#simulateur** · hors ligne : `make app`, puis ouvrir `app/dist-single/index.html`
 
 Le Contrat qui Tient aide le responsable filière d'une coopérative ou d'un conditionneur de légumes secs à fixer **le prix plancher d'un contrat lentille** qui rapporte à l'agriculteur **au moins autant que le blé 8 années sur 10**. L'outil montre aussi **quelles parcelles d'Île-de-France basculent** à ce prix, et combien de tonnes la coopérative peut sécuriser.
 
@@ -110,6 +110,15 @@ make app           # build web (app/dist) et fichier unique hors ligne (app/dist
 
 Tout est **précalculé** en Python et exporté en JSON. Le navigateur ne fait que lire, filtrer et animer : la démo tourne sans connexion.
 
+## Mise en ligne
+
+Le site est statique et hébergé sur Vercel. La configuration tient dans [app/vercel.json](app/vercel.json) : Vercel lance `npm run build` dans `app/` et publie `app/dist`. Le déploiement n'est pas lié aux pushs : il se lance à la main, depuis `app/`.
+
+```bash
+cd app
+npx vercel deploy --prod
+```
+
 ## Arborescence
 
 ```
@@ -118,8 +127,9 @@ pipeline/        scripts numérotés, du téléchargement à l'export JSON ; con
 data/            données traitées légères (versionnées) ; pilote_300t/, jeu synthétique du pilote
 data_raw/        téléchargements bruts (versionnés, sauf le RPG, retéléchargé par 04_parcels.py)
 tools/           générateur reproductible du jeu synthétique du pilote
-app/             front Vite + React + deck.gl
+app/             front Vite + React + deck.gl ; vercel.json, configuration de l'hébergement
 docs/
+  brand/             logo, mascotte et règles d'usage
   DOSSIER.md         tout le projet en un document : problème, modèle, données, business, concurrence
   PROJET.md          problème, utilisateur, différenciation, modèle économique
   RESULTATS.md       résultats chiffrés du pipeline

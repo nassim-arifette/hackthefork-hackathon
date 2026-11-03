@@ -32,3 +32,6 @@ credentials*
 
 # Builds et intermédiaires régénérables
 app/dist-single/
+
+# Vercel (identifiants locaux du projet)
+.vercel/
