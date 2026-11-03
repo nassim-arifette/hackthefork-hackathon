@@ -1,0 +1,687 @@
+{
+  "status": "exploratory_not_unseen_validation",
+  "source_commit": "fa35f7599d3d7fddf6129702d0f027037d07a675",
+  "script_sha256": "26ab4ce563aee5274abfbd84fafc451511e081dba1cfcca696dacce92fe0cd3b",
+  "python": "3.12.14",
+  "packages": {
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "scipy": "1.17.0",
+    "scikit-learn": "1.8.0",
+    "lightgbm": "4.7.0",
+    "quantile-forest": "1.4.2",
+    "catboost": "1.2.10"
+  },
+  "data_sha256": {
+    "panel_rendements.csv": "380b2e7a418dee87b0f193d6dc969ab3e336f2aea17870c7f4c6f989dd92f8d4",
+    "meteo_dept.csv": "f50803cf8e5fffe5e152967fe6e85eac5509cd948c649ebbf2899e0d036d52cb",
+    "prix_ble.csv": "2da72c05832daf2a3db1658d293f506aaa8101e13987c03215a2f4e9ca8ac676",
+    "hypotheses.yaml": "4cab9a6f616cf7a19fa160e3cbcda81142a42d1773a0ea2b2b7cfac5a277b23b"
+  },
+  "seed": 42,
+  "samples": 20000,
+  "calibration": "rolling",
+  "models": [
+    "trend",
+    "linear",
+    "lightgbm",
+    "qrf",
+    "ensemble"
+  ],
+  "elapsed_seconds": 23.615478918000008,
+  "summary": [
+    {
+      "model": "paired_history",
+      "n": 82,
+      "years": 3,
+      "held": 0.8292682926829268,
+      "held_year_mean": 0.8302469135802468,
+      "held_year_bootstrap_80": [
+        0.7592592592592592,
+        0.9012345679012346
+      ],
+      "contract_loss": 77.09264713237332,
+      "median_price": 765.7050243111833,
+      "shortfall_eur_ha": 23.11031369101094,
+      "pinball": null,
+      "coverage": null,
+      "width": null
+    },
+    {
+      "model": "ensemble",
+      "n": 82,
+      "years": 3,
+      "held": 0.8902439024390244,
+      "held_year_mean": 0.890652557319224,
+      "held_year_bootstrap_80": [
+        0.8289241622574955,
+        0.9523809523809524
+      ],
+      "contract_loss": 91.33890186759568,
+      "median_price": 950.9195058669054,
+      "shortfall_eur_ha": 6.171606102969323,
+      "pinball": 0.05853713391273325,
+      "coverage": 0.8170194003527337,
+      "width": 0.6527607284667996
+    },
+    {
+      "model": "qrf",
+      "n": 82,
+      "years": 3,
+      "held": 0.926829268292683,
+      "held_year_mean": 0.9276895943562611,
+      "held_year_bootstrap_80": [
+        0.8800705467372133,
+        0.9753086419753086
+      ],
+      "contract_loss": 91.66673069709033,
+      "median_price": 935.9064407447343,
+      "shortfall_eur_ha": 7.212584171925404,
+      "pinball": 0.05890723304485825,
+      "coverage": 0.8055555555555555,
+      "width": 0.6496355983661998
+    },
+    {
+      "model": "linear",
+      "n": 82,
+      "years": 3,
+      "held": 0.9512195121951219,
+      "held_year_mean": 0.9514991181657848,
+      "held_year_bootstrap_80": [
+        0.9268077601410935,
+        0.9761904761904763
+      ],
+      "contract_loss": 94.69886843592775,
+      "median_price": 984.3712973405543,
+      "shortfall_eur_ha": 4.395926782104913,
+      "pinball": 0.058931464453973924,
+      "coverage": 0.8293650793650794,
+      "width": 0.6729121180162575
+    },
+    {
+      "model": "lightgbm",
+      "n": 82,
+      "years": 3,
+      "held": 0.9146341463414634,
+      "held_year_mean": 0.9144620811287479,
+      "held_year_bootstrap_80": [
+        0.8527336860670194,
+        0.9761904761904763
+      ],
+      "contract_loss": 94.74807091922969,
+      "median_price": 958.0845833371294,
+      "shortfall_eur_ha": 6.322970089280569,
+      "pinball": 0.06004437118717403,
+      "coverage": 0.8165784832451499,
+      "width": 0.7094641155100514
+    },
+    {
+      "model": "trend",
+      "n": 82,
+      "years": 3,
+      "held": 0.9512195121951219,
+      "held_year_mean": 0.9514991181657848,
+      "held_year_bootstrap_80": [
+        0.9268077601410935,
+        0.9761904761904763
+      ],
+      "contract_loss": 100.79917048547311,
+      "median_price": 1012.7737197728061,
+      "shortfall_eur_ha": 4.201744358900197,
+      "pinball": 0.05631005728712161,
+      "coverage": 0.8791887125220459,
+      "width": 0.6583368719490118
+    }
+  ],
+  "audit": [
+    {
+      "year": 2016,
+      "model": "trend",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015
+      ],
+      "calibration_years": [
+        2013,
+        2014,
+        2015
+      ],
+      "n_proper": 153,
+      "n_cal": 69,
+      "n_test": 27,
+      "qhat": 0.19439558208966168,
+      "calibration_audit": [
+        {
+          "year": 2013,
+          "train_max": 2012
+        },
+        {
+          "year": 2014,
+          "train_max": 2013
+        },
+        {
+          "year": 2015,
+          "train_max": 2014
+        }
+      ]
+    },
+    {
+      "year": 2016,
+      "model": "linear",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015
+      ],
+      "calibration_years": [
+        2013,
+        2014,
+        2015
+      ],
+      "n_proper": 153,
+      "n_cal": 69,
+      "n_test": 27,
+      "qhat": 0.1824552254215671,
+      "calibration_audit": [
+        {
+          "year": 2013,
+          "train_max": 2012
+        },
+        {
+          "year": 2014,
+          "train_max": 2013
+        },
+        {
+          "year": 2015,
+          "train_max": 2014
+        }
+      ]
+    },
+    {
+      "year": 2016,
+      "model": "lightgbm",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015
+      ],
+      "calibration_years": [
+        2013,
+        2014,
+        2015
+      ],
+      "n_proper": 153,
+      "n_cal": 69,
+      "n_test": 27,
+      "qhat": 0.17238101177311693,
+      "calibration_audit": [
+        {
+          "year": 2013,
+          "train_max": 2012
+        },
+        {
+          "year": 2014,
+          "train_max": 2013
+        },
+        {
+          "year": 2015,
+          "train_max": 2014
+        }
+      ]
+    },
+    {
+      "year": 2016,
+      "model": "qrf",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015
+      ],
+      "calibration_years": [
+        2013,
+        2014,
+        2015
+      ],
+      "n_proper": 153,
+      "n_cal": 69,
+      "n_test": 27,
+      "qhat": 0.15773820047697062,
+      "calibration_audit": [
+        {
+          "year": 2013,
+          "train_max": 2012
+        },
+        {
+          "year": 2014,
+          "train_max": 2013
+        },
+        {
+          "year": 2015,
+          "train_max": 2014
+        }
+      ]
+    },
+    {
+      "year": 2016,
+      "model": "ensemble",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015
+      ],
+      "calibration_years": [
+        2013,
+        2014,
+        2015
+      ],
+      "n_proper": 153,
+      "n_cal": 69,
+      "n_test": 27,
+      "qhat": 0.14977277781521392,
+      "calibration_audit": [
+        {
+          "year": 2013,
+          "train_max": 2012
+        },
+        {
+          "year": 2014,
+          "train_max": 2013
+        },
+        {
+          "year": 2015,
+          "train_max": 2014
+        }
+      ]
+    },
+    {
+      "year": 2017,
+      "model": "trend",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016
+      ],
+      "calibration_years": [
+        2014,
+        2015,
+        2016
+      ],
+      "n_proper": 180,
+      "n_cal": 76,
+      "n_test": 27,
+      "qhat": 0.17212309888258226,
+      "calibration_audit": [
+        {
+          "year": 2014,
+          "train_max": 2013
+        },
+        {
+          "year": 2015,
+          "train_max": 2014
+        },
+        {
+          "year": 2016,
+          "train_max": 2015
+        }
+      ]
+    },
+    {
+      "year": 2017,
+      "model": "linear",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016
+      ],
+      "calibration_years": [
+        2014,
+        2015,
+        2016
+      ],
+      "n_proper": 180,
+      "n_cal": 76,
+      "n_test": 27,
+      "qhat": 0.1824552254215671,
+      "calibration_audit": [
+        {
+          "year": 2014,
+          "train_max": 2013
+        },
+        {
+          "year": 2015,
+          "train_max": 2014
+        },
+        {
+          "year": 2016,
+          "train_max": 2015
+        }
+      ]
+    },
+    {
+      "year": 2017,
+      "model": "lightgbm",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016
+      ],
+      "calibration_years": [
+        2014,
+        2015,
+        2016
+      ],
+      "n_proper": 180,
+      "n_cal": 76,
+      "n_test": 27,
+      "qhat": 0.17549058879148272,
+      "calibration_audit": [
+        {
+          "year": 2014,
+          "train_max": 2013
+        },
+        {
+          "year": 2015,
+          "train_max": 2014
+        },
+        {
+          "year": 2016,
+          "train_max": 2015
+        }
+      ]
+    },
+    {
+      "year": 2017,
+      "model": "qrf",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016
+      ],
+      "calibration_years": [
+        2014,
+        2015,
+        2016
+      ],
+      "n_proper": 180,
+      "n_cal": 76,
+      "n_test": 27,
+      "qhat": 0.15861031588141117,
+      "calibration_audit": [
+        {
+          "year": 2014,
+          "train_max": 2013
+        },
+        {
+          "year": 2015,
+          "train_max": 2014
+        },
+        {
+          "year": 2016,
+          "train_max": 2015
+        }
+      ]
+    },
+    {
+      "year": 2017,
+      "model": "ensemble",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016
+      ],
+      "calibration_years": [
+        2014,
+        2015,
+        2016
+      ],
+      "n_proper": 180,
+      "n_cal": 76,
+      "n_test": 27,
+      "qhat": 0.15962110222153592,
+      "calibration_audit": [
+        {
+          "year": 2014,
+          "train_max": 2013
+        },
+        {
+          "year": 2015,
+          "train_max": 2014
+        },
+        {
+          "year": 2016,
+          "train_max": 2015
+        }
+      ]
+    },
+    {
+      "year": 2018,
+      "model": "trend",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017
+      ],
+      "calibration_years": [
+        2015,
+        2016,
+        2017
+      ],
+      "n_proper": 202,
+      "n_cal": 80,
+      "n_test": 28,
+      "qhat": 0.09332940050729766,
+      "calibration_audit": [
+        {
+          "year": 2015,
+          "train_max": 2014
+        },
+        {
+          "year": 2016,
+          "train_max": 2015
+        },
+        {
+          "year": 2017,
+          "train_max": 2016
+        }
+      ]
+    },
+    {
+      "year": 2018,
+      "model": "linear",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017
+      ],
+      "calibration_years": [
+        2015,
+        2016,
+        2017
+      ],
+      "n_proper": 202,
+      "n_cal": 80,
+      "n_test": 28,
+      "qhat": 0.14873097743873698,
+      "calibration_audit": [
+        {
+          "year": 2015,
+          "train_max": 2014
+        },
+        {
+          "year": 2016,
+          "train_max": 2015
+        },
+        {
+          "year": 2017,
+          "train_max": 2016
+        }
+      ]
+    },
+    {
+      "year": 2018,
+      "model": "lightgbm",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017
+      ],
+      "calibration_years": [
+        2015,
+        2016,
+        2017
+      ],
+      "n_proper": 202,
+      "n_cal": 80,
+      "n_test": 28,
+      "qhat": 0.18637541861944495,
+      "calibration_audit": [
+        {
+          "year": 2015,
+          "train_max": 2014
+        },
+        {
+          "year": 2016,
+          "train_max": 2015
+        },
+        {
+          "year": 2017,
+          "train_max": 2016
+        }
+      ]
+    },
+    {
+      "year": 2018,
+      "model": "qrf",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017
+      ],
+      "calibration_years": [
+        2015,
+        2016,
+        2017
+      ],
+      "n_proper": 202,
+      "n_cal": 80,
+      "n_test": 28,
+      "qhat": 0.09559143275980175,
+      "calibration_audit": [
+        {
+          "year": 2015,
+          "train_max": 2014
+        },
+        {
+          "year": 2016,
+          "train_max": 2015
+        },
+        {
+          "year": 2017,
+          "train_max": 2016
+        }
+      ]
+    },
+    {
+      "year": 2018,
+      "model": "ensemble",
+      "proper_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017
+      ],
+      "calibration_years": [
+        2015,
+        2016,
+        2017
+      ],
+      "n_proper": 202,
+      "n_cal": 80,
+      "n_test": 28,
+      "qhat": 0.14035076224522824,
+      "calibration_audit": [
+        {
+          "year": 2015,
+          "train_max": 2014
+        },
+        {
+          "year": 2016,
+          "train_max": 2015
+        },
+        {
+          "year": 2017,
+          "train_max": 2016
+        }
+      ]
+    }
+  ],
+  "caveats": [
+    "2019-2025 already examined: research comparison, not fresh confirmatory evidence.",
+    "Dependent departments and temporal drift: no 80% population coverage guarantee.",
+    "Historical data are latest-vintage, not publication-time snapshots.",
+    "Training-only duplicate detection may miss groups with fewer than eight past matches.",
+    "Conditional yield scores use realised weather; contract prices use historical weather only.",
+    "Monte Carlo keeps independent crop residuals and three-quantile tail interpolation as controls.",
+    "No validation of transfer to unobserved Ile-de-France lentil yields."
+  ]
+}

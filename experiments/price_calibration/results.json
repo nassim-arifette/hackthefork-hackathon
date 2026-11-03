@@ -1,0 +1,442 @@
+{
+  "summary": [
+    {
+      "model": "lightgbm_price_cal",
+      "n": 192,
+      "years": 7,
+      "held": 0.7135416666666666,
+      "held_year_mean": 0.729808820079756,
+      "held_year_bootstrap_80": [
+        0.6110544217687074,
+        0.8485632183908047
+      ],
+      "contract_loss": 219.8091792096905,
+      "median_price": 1502.5583706136272,
+      "shortfall_eur_ha": 68.51420813733985,
+      "pinball": 0.09694578277459141,
+      "coverage": 0.7875257382646546,
+      "width": 1.000873176033579
+    },
+    {
+      "model": "qrf_price_cal",
+      "n": 192,
+      "years": 7,
+      "held": 0.7395833333333334,
+      "held_year_mean": 0.7517241379310345,
+      "held_year_bootstrap_80": [
+        0.6476190476190476,
+        0.8551724137931034
+      ],
+      "contract_loss": 224.22766035371563,
+      "median_price": 1596.3656026966628,
+      "shortfall_eur_ha": 56.95110156987546,
+      "pinball": 0.10089645743557453,
+      "coverage": 0.8010484270336485,
+      "width": 1.0359718933946829
+    },
+    {
+      "model": "ensemble_price_cal",
+      "n": 192,
+      "years": 7,
+      "held": 0.7395833333333334,
+      "held_year_mean": 0.7558174994135586,
+      "held_year_bootstrap_80": [
+        0.6377551020408163,
+        0.8666666666666666
+      ],
+      "contract_loss": 249.73324229462128,
+      "median_price": 1594.042464984783,
+      "shortfall_eur_ha": 64.71633273515002,
+      "pinball": 0.09720901884693944,
+      "coverage": 0.8032039252482601,
+      "width": 1.0190965127667253
+    },
+    {
+      "model": "linear_price_cal",
+      "n": 192,
+      "years": 7,
+      "held": 0.7395833333333334,
+      "held_year_mean": 0.7559699741965752,
+      "held_year_bootstrap_80": [
+        0.617687074829932,
+        0.8888106966924701
+      ],
+      "contract_loss": 320.0901460011119,
+      "median_price": 1725.8232342356412,
+      "shortfall_eur_ha": 67.23899234625756,
+      "pinball": 0.10218190164115162,
+      "coverage": 0.8018199233716475,
+      "width": 1.0641758166030497
+    },
+    {
+      "model": "trend_price_cal",
+      "n": 192,
+      "years": 7,
+      "held": 0.7291666666666666,
+      "held_year_mean": 0.7457893502228478,
+      "held_year_bootstrap_80": [
+        0.6272108843537415,
+        0.8619047619047618
+      ],
+      "contract_loss": 332.84453615865186,
+      "median_price": 1926.1662138134734,
+      "shortfall_eur_ha": 67.9950970347497,
+      "pinball": 0.10069826565265012,
+      "coverage": 0.7758796622097114,
+      "width": 0.9565308194912687
+    }
+  ],
+  "audit": [
+    {
+      "model": "ensemble",
+      "year": 2019,
+      "factor": 0.7423993443557354,
+      "calibration_years": [
+        2016,
+        2017,
+        2018
+      ]
+    },
+    {
+      "model": "ensemble",
+      "year": 2020,
+      "factor": 0.9891902714142048,
+      "calibration_years": [
+        2017,
+        2018,
+        2019
+      ]
+    },
+    {
+      "model": "ensemble",
+      "year": 2021,
+      "factor": 1.0776331227699718,
+      "calibration_years": [
+        2018,
+        2019,
+        2020
+      ]
+    },
+    {
+      "model": "ensemble",
+      "year": 2022,
+      "factor": 1.2720134754653298,
+      "calibration_years": [
+        2019,
+        2020,
+        2021
+      ]
+    },
+    {
+      "model": "ensemble",
+      "year": 2023,
+      "factor": 1.4506212955425217,
+      "calibration_years": [
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "model": "ensemble",
+      "year": 2024,
+      "factor": 1.2714303789685586,
+      "calibration_years": [
+        2021,
+        2022,
+        2023
+      ]
+    },
+    {
+      "model": "ensemble",
+      "year": 2025,
+      "factor": 0.8740035069396055,
+      "calibration_years": [
+        2022,
+        2023,
+        2024
+      ]
+    },
+    {
+      "model": "lightgbm",
+      "year": 2019,
+      "factor": 0.7199528520976394,
+      "calibration_years": [
+        2016,
+        2017,
+        2018
+      ]
+    },
+    {
+      "model": "lightgbm",
+      "year": 2020,
+      "factor": 0.9549449376922623,
+      "calibration_years": [
+        2017,
+        2018,
+        2019
+      ]
+    },
+    {
+      "model": "lightgbm",
+      "year": 2021,
+      "factor": 1.0823334994396503,
+      "calibration_years": [
+        2018,
+        2019,
+        2020
+      ]
+    },
+    {
+      "model": "lightgbm",
+      "year": 2022,
+      "factor": 1.2865162850612548,
+      "calibration_years": [
+        2019,
+        2020,
+        2021
+      ]
+    },
+    {
+      "model": "lightgbm",
+      "year": 2023,
+      "factor": 1.403574046965033,
+      "calibration_years": [
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "model": "lightgbm",
+      "year": 2024,
+      "factor": 1.2974692225321285,
+      "calibration_years": [
+        2021,
+        2022,
+        2023
+      ]
+    },
+    {
+      "model": "lightgbm",
+      "year": 2025,
+      "factor": 0.9403216937115179,
+      "calibration_years": [
+        2022,
+        2023,
+        2024
+      ]
+    },
+    {
+      "model": "linear",
+      "year": 2019,
+      "factor": 0.7327168633882161,
+      "calibration_years": [
+        2016,
+        2017,
+        2018
+      ]
+    },
+    {
+      "model": "linear",
+      "year": 2020,
+      "factor": 0.9616913890228963,
+      "calibration_years": [
+        2017,
+        2018,
+        2019
+      ]
+    },
+    {
+      "model": "linear",
+      "year": 2021,
+      "factor": 1.0550863707418197,
+      "calibration_years": [
+        2018,
+        2019,
+        2020
+      ]
+    },
+    {
+      "model": "linear",
+      "year": 2022,
+      "factor": 1.3411319140602367,
+      "calibration_years": [
+        2019,
+        2020,
+        2021
+      ]
+    },
+    {
+      "model": "linear",
+      "year": 2023,
+      "factor": 1.4126148094431137,
+      "calibration_years": [
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "model": "linear",
+      "year": 2024,
+      "factor": 1.2420568634037539,
+      "calibration_years": [
+        2021,
+        2022,
+        2023
+      ]
+    },
+    {
+      "model": "linear",
+      "year": 2025,
+      "factor": 0.745472927198712,
+      "calibration_years": [
+        2022,
+        2023,
+        2024
+      ]
+    },
+    {
+      "model": "qrf",
+      "year": 2019,
+      "factor": 0.7981326442988141,
+      "calibration_years": [
+        2016,
+        2017,
+        2018
+      ]
+    },
+    {
+      "model": "qrf",
+      "year": 2020,
+      "factor": 0.9617231351511046,
+      "calibration_years": [
+        2017,
+        2018,
+        2019
+      ]
+    },
+    {
+      "model": "qrf",
+      "year": 2021,
+      "factor": 1.1133196934083343,
+      "calibration_years": [
+        2018,
+        2019,
+        2020
+      ]
+    },
+    {
+      "model": "qrf",
+      "year": 2022,
+      "factor": 1.2161132279489821,
+      "calibration_years": [
+        2019,
+        2020,
+        2021
+      ]
+    },
+    {
+      "model": "qrf",
+      "year": 2023,
+      "factor": 1.3324732443601652,
+      "calibration_years": [
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "model": "qrf",
+      "year": 2024,
+      "factor": 1.1510362931713922,
+      "calibration_years": [
+        2021,
+        2022,
+        2023
+      ]
+    },
+    {
+      "model": "qrf",
+      "year": 2025,
+      "factor": 0.7606588345355927,
+      "calibration_years": [
+        2022,
+        2023,
+        2024
+      ]
+    },
+    {
+      "model": "trend",
+      "year": 2019,
+      "factor": 0.728989120702482,
+      "calibration_years": [
+        2016,
+        2017,
+        2018
+      ]
+    },
+    {
+      "model": "trend",
+      "year": 2020,
+      "factor": 0.9490960000163776,
+      "calibration_years": [
+        2017,
+        2018,
+        2019
+      ]
+    },
+    {
+      "model": "trend",
+      "year": 2021,
+      "factor": 1.036853777582767,
+      "calibration_years": [
+        2018,
+        2019,
+        2020
+      ]
+    },
+    {
+      "model": "trend",
+      "year": 2022,
+      "factor": 1.25619956240105,
+      "calibration_years": [
+        2019,
+        2020,
+        2021
+      ]
+    },
+    {
+      "model": "trend",
+      "year": 2023,
+      "factor": 1.4590527365905754,
+      "calibration_years": [
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "model": "trend",
+      "year": 2024,
+      "factor": 1.3093145297786166,
+      "calibration_years": [
+        2021,
+        2022,
+        2023
+      ]
+    },
+    {
+      "model": "trend",
+      "year": 2025,
+      "factor": 0.8215651454941878,
+      "calibration_years": [
+        2022,
+        2023,
+        2024
+      ]
+    }
+  ],
+  "method": "prequential_log_price_residual_q80_equal_year_weights_last_3_years"
+}

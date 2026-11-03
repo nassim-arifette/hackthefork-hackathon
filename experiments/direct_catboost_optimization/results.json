@@ -1,0 +1,698 @@
+{
+  "objective": "year_equal_pinball_0.8_of_realised_break_even_price_eur_t",
+  "features": [
+    "trend",
+    "level_lentil",
+    "level_wheat",
+    "cv_lentil",
+    "last_lentil",
+    "last_wheat",
+    "wheat_price",
+    "wheat_price_change",
+    "years_observed",
+    "baseline"
+  ],
+  "forecast_time": "before_target_year_no_realised_weather",
+  "configurations_fixed_before_run": {
+    "direct_cb_residual_d2": {
+      "target": "residual",
+      "depth": 2,
+      "iterations": 350
+    },
+    "direct_cb_price_d2": {
+      "target": "price",
+      "depth": 2,
+      "iterations": 350
+    },
+    "direct_cb_residual_d3": {
+      "target": "residual",
+      "depth": 3,
+      "iterations": 500
+    },
+    "direct_cb_price_d3": {
+      "target": "price",
+      "depth": 3,
+      "iterations": 500
+    }
+  },
+  "common_catboost_parameters": {
+    "loss_function": "Quantile:alpha=0.8",
+    "learning_rate": 0.03,
+    "l2_leaf_reg": 20,
+    "random_seed": 42,
+    "thread_count": 1,
+    "verbose": false,
+    "allow_writing_files": false
+  },
+  "training_weights": "equal total weight per historical year; normalized to mean one",
+  "selection_rule": "minimum previous three OOF years' year-equal contract_loss; stable config-order ties",
+  "warmup_years": [
+    2016,
+    2017,
+    2018
+  ],
+  "evaluation_years": [
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025
+  ],
+  "summary": [
+    {
+      "model": "qrf",
+      "n": 192,
+      "years": 7,
+      "held": 0.6302083333333334,
+      "held_year_mean": 0.6462448197669872,
+      "held_year_bootstrap_80": [
+        0.5512471655328798,
+        0.742687074829932
+      ],
+      "contract_loss": 209.48731856174783,
+      "median_price": 1158.568601976495,
+      "shortfall_eur_ha": 108.53940760482081,
+      "pinball": 0.10089645743557453,
+      "coverage": 0.8010484270336485,
+      "width": 1.0359718933946829
+    },
+    {
+      "model": "direct_cb_price_d2",
+      "n": 192,
+      "years": 7,
+      "held": 0.6770833333333334,
+      "held_year_mean": 0.6956251466103682,
+      "held_year_bootstrap_80": [
+        0.567687074829932,
+        0.8235632183908047
+      ],
+      "contract_loss": 230.74714329040896,
+      "median_price": 1324.137922072005,
+      "shortfall_eur_ha": 92.60295666322061,
+      "pinball": null,
+      "coverage": null,
+      "width": null
+    },
+    {
+      "model": "direct_cb_price_d3",
+      "n": 192,
+      "years": 7,
+      "held": 0.671875,
+      "held_year_mean": 0.6903706310110251,
+      "held_year_bootstrap_80": [
+        0.5671358198451795,
+        0.8142857142857143
+      ],
+      "contract_loss": 236.59078839206308,
+      "median_price": 1278.273034257709,
+      "shortfall_eur_ha": 98.49013819166314,
+      "pinball": null,
+      "coverage": null,
+      "width": null
+    },
+    {
+      "model": "direct_cb_residual_d3",
+      "n": 192,
+      "years": 7,
+      "held": 0.671875,
+      "held_year_mean": 0.6915611072015012,
+      "held_year_bootstrap_80": [
+        0.5623739150832747,
+        0.8255102040816327
+      ],
+      "contract_loss": 243.51904355854984,
+      "median_price": 1332.4819440753545,
+      "shortfall_eur_ha": 89.7525218283021,
+      "pinball": null,
+      "coverage": null,
+      "width": null
+    },
+    {
+      "model": "direct_cb_past_selected",
+      "n": 192,
+      "years": 7,
+      "held": 0.6666666666666666,
+      "held_year_mean": 0.6856087262491204,
+      "held_year_bootstrap_80": [
+        0.5616936429744311,
+        0.8142857142857143
+      ],
+      "contract_loss": 247.43542704266457,
+      "median_price": 1364.3913319451244,
+      "shortfall_eur_ha": 91.55659118776143,
+      "pinball": null,
+      "coverage": null,
+      "width": null
+    },
+    {
+      "model": "direct_cb_residual_d2",
+      "n": 192,
+      "years": 7,
+      "held": 0.6927083333333334,
+      "held_year_mean": 0.7112655406990382,
+      "held_year_bootstrap_80": [
+        0.5824829931972789,
+        0.8374970677926343
+      ],
+      "contract_loss": 252.59281902178827,
+      "median_price": 1393.0911305891993,
+      "shortfall_eur_ha": 86.75089318771951,
+      "pinball": null,
+      "coverage": null,
+      "width": null
+    },
+    {
+      "model": "direct_qrf",
+      "n": 192,
+      "years": 7,
+      "held": 0.78125,
+      "held_year_mean": 0.7959300961764015,
+      "held_year_bootstrap_80": [
+        0.6782312925170068,
+        0.9136288998357963
+      ],
+      "contract_loss": 280.90974878086064,
+      "median_price": 1510.6074870818015,
+      "shortfall_eur_ha": 58.65688236491082,
+      "pinball": null,
+      "coverage": null,
+      "width": null
+    },
+    {
+      "model": "direct_qrf_cal",
+      "n": 192,
+      "years": 7,
+      "held": 0.8229166666666666,
+      "held_year_mean": 0.8229709125029323,
+      "held_year_bootstrap_80": [
+        0.7420185315505512,
+        0.902404410039878
+      ],
+      "contract_loss": 316.4937525126312,
+      "median_price": 1743.5517726822654,
+      "shortfall_eur_ha": 39.08303295343861,
+      "pinball": null,
+      "coverage": null,
+      "width": null
+    }
+  ],
+  "selection": [
+    {
+      "year": 2019,
+      "chosen": "direct_cb_price_d2",
+      "validation_years": [
+        2016,
+        2017,
+        2018
+      ],
+      "scores": {
+        "direct_cb_residual_d2": 93.31767575892155,
+        "direct_cb_price_d2": 87.9636898904286,
+        "direct_cb_residual_d3": 94.07105331747032,
+        "direct_cb_price_d3": 104.85248300423613
+      },
+      "n_validation_per_candidate": 82
+    },
+    {
+      "year": 2020,
+      "chosen": "direct_cb_price_d2",
+      "validation_years": [
+        2017,
+        2018,
+        2019
+      ],
+      "scores": {
+        "direct_cb_residual_d2": 106.05309306917616,
+        "direct_cb_price_d2": 94.8721493785833,
+        "direct_cb_residual_d3": 104.45946720755086,
+        "direct_cb_price_d3": 113.026964849029
+      },
+      "n_validation_per_candidate": 83
+    },
+    {
+      "year": 2021,
+      "chosen": "direct_cb_residual_d2",
+      "validation_years": [
+        2018,
+        2019,
+        2020
+      ],
+      "scores": {
+        "direct_cb_residual_d2": 132.16367844084064,
+        "direct_cb_price_d2": 133.77226438456526,
+        "direct_cb_residual_d3": 134.78833410960522,
+        "direct_cb_price_d3": 141.41495929255566
+      },
+      "n_validation_per_candidate": 86
+    },
+    {
+      "year": 2022,
+      "chosen": "direct_cb_residual_d3",
+      "validation_years": [
+        2019,
+        2020,
+        2021
+      ],
+      "scores": {
+        "direct_cb_residual_d2": 271.20844362048496,
+        "direct_cb_price_d2": 274.9441631009594,
+        "direct_cb_residual_d3": 270.6539591112134,
+        "direct_cb_price_d3": 282.48845585731675
+      },
+      "n_validation_per_candidate": 88
+    },
+    {
+      "year": 2023,
+      "chosen": "direct_cb_residual_d2",
+      "validation_years": [
+        2020,
+        2021,
+        2022
+      ],
+      "scores": {
+        "direct_cb_residual_d2": 307.90814619959605,
+        "direct_cb_price_d2": 319.7441164734601,
+        "direct_cb_residual_d3": 315.15381061656905,
+        "direct_cb_price_d3": 340.59208861779655
+      },
+      "n_validation_per_candidate": 89
+    },
+    {
+      "year": 2024,
+      "chosen": "direct_cb_price_d2",
+      "validation_years": [
+        2021,
+        2022,
+        2023
+      ],
+      "scores": {
+        "direct_cb_residual_d2": 363.4762606328304,
+        "direct_cb_price_d2": 330.9011818413947,
+        "direct_cb_residual_d3": 358.61260727078917,
+        "direct_cb_price_d3": 342.7625972809945
+      },
+      "n_validation_per_candidate": 86
+    },
+    {
+      "year": 2025,
+      "chosen": "direct_cb_price_d2",
+      "validation_years": [
+        2022,
+        2023,
+        2024
+      ],
+      "scores": {
+        "direct_cb_residual_d2": 288.5756949677547,
+        "direct_cb_price_d2": 240.6205989835145,
+        "direct_cb_residual_d3": 269.718918295853,
+        "direct_cb_price_d3": 241.46239567939213
+      },
+      "n_validation_per_candidate": 80
+    }
+  ],
+  "audit": [
+    {
+      "year": 2016,
+      "model": "direct_cb_residual_d2",
+      "train_max": 2015,
+      "train_min": 2013,
+      "n_train": 69,
+      "n_test": 27,
+      "representatives_from_years_before": 2016
+    },
+    {
+      "year": 2016,
+      "model": "direct_cb_price_d2",
+      "train_max": 2015,
+      "train_min": 2013,
+      "n_train": 69,
+      "n_test": 27,
+      "representatives_from_years_before": 2016
+    },
+    {
+      "year": 2016,
+      "model": "direct_cb_residual_d3",
+      "train_max": 2015,
+      "train_min": 2013,
+      "n_train": 69,
+      "n_test": 27,
+      "representatives_from_years_before": 2016
+    },
+    {
+      "year": 2016,
+      "model": "direct_cb_price_d3",
+      "train_max": 2015,
+      "train_min": 2013,
+      "n_train": 69,
+      "n_test": 27,
+      "representatives_from_years_before": 2016
+    },
+    {
+      "year": 2017,
+      "model": "direct_cb_residual_d2",
+      "train_max": 2016,
+      "train_min": 2013,
+      "n_train": 96,
+      "n_test": 27,
+      "representatives_from_years_before": 2017
+    },
+    {
+      "year": 2017,
+      "model": "direct_cb_price_d2",
+      "train_max": 2016,
+      "train_min": 2013,
+      "n_train": 96,
+      "n_test": 27,
+      "representatives_from_years_before": 2017
+    },
+    {
+      "year": 2017,
+      "model": "direct_cb_residual_d3",
+      "train_max": 2016,
+      "train_min": 2013,
+      "n_train": 96,
+      "n_test": 27,
+      "representatives_from_years_before": 2017
+    },
+    {
+      "year": 2017,
+      "model": "direct_cb_price_d3",
+      "train_max": 2016,
+      "train_min": 2013,
+      "n_train": 96,
+      "n_test": 27,
+      "representatives_from_years_before": 2017
+    },
+    {
+      "year": 2018,
+      "model": "direct_cb_residual_d2",
+      "train_max": 2017,
+      "train_min": 2013,
+      "n_train": 118,
+      "n_test": 28,
+      "representatives_from_years_before": 2018
+    },
+    {
+      "year": 2018,
+      "model": "direct_cb_price_d2",
+      "train_max": 2017,
+      "train_min": 2013,
+      "n_train": 118,
+      "n_test": 28,
+      "representatives_from_years_before": 2018
+    },
+    {
+      "year": 2018,
+      "model": "direct_cb_residual_d3",
+      "train_max": 2017,
+      "train_min": 2013,
+      "n_train": 118,
+      "n_test": 28,
+      "representatives_from_years_before": 2018
+    },
+    {
+      "year": 2018,
+      "model": "direct_cb_price_d3",
+      "train_max": 2017,
+      "train_min": 2013,
+      "n_train": 118,
+      "n_test": 28,
+      "representatives_from_years_before": 2018
+    },
+    {
+      "year": 2019,
+      "model": "direct_cb_residual_d2",
+      "train_max": 2018,
+      "train_min": 2013,
+      "n_train": 146,
+      "n_test": 28,
+      "representatives_from_years_before": 2019
+    },
+    {
+      "year": 2019,
+      "model": "direct_cb_price_d2",
+      "train_max": 2018,
+      "train_min": 2013,
+      "n_train": 146,
+      "n_test": 28,
+      "representatives_from_years_before": 2019
+    },
+    {
+      "year": 2019,
+      "model": "direct_cb_residual_d3",
+      "train_max": 2018,
+      "train_min": 2013,
+      "n_train": 146,
+      "n_test": 28,
+      "representatives_from_years_before": 2019
+    },
+    {
+      "year": 2019,
+      "model": "direct_cb_price_d3",
+      "train_max": 2018,
+      "train_min": 2013,
+      "n_train": 146,
+      "n_test": 28,
+      "representatives_from_years_before": 2019
+    },
+    {
+      "year": 2020,
+      "model": "direct_cb_residual_d2",
+      "train_max": 2019,
+      "train_min": 2013,
+      "n_train": 168,
+      "n_test": 30,
+      "representatives_from_years_before": 2020
+    },
+    {
+      "year": 2020,
+      "model": "direct_cb_price_d2",
+      "train_max": 2019,
+      "train_min": 2013,
+      "n_train": 168,
+      "n_test": 30,
+      "representatives_from_years_before": 2020
+    },
+    {
+      "year": 2020,
+      "model": "direct_cb_residual_d3",
+      "train_max": 2019,
+      "train_min": 2013,
+      "n_train": 168,
+      "n_test": 30,
+      "representatives_from_years_before": 2020
+    },
+    {
+      "year": 2020,
+      "model": "direct_cb_price_d3",
+      "train_max": 2019,
+      "train_min": 2013,
+      "n_train": 168,
+      "n_test": 30,
+      "representatives_from_years_before": 2020
+    },
+    {
+      "year": 2021,
+      "model": "direct_cb_residual_d2",
+      "train_max": 2020,
+      "train_min": 2013,
+      "n_train": 198,
+      "n_test": 30,
+      "representatives_from_years_before": 2021
+    },
+    {
+      "year": 2021,
+      "model": "direct_cb_price_d2",
+      "train_max": 2020,
+      "train_min": 2013,
+      "n_train": 198,
+      "n_test": 30,
+      "representatives_from_years_before": 2021
+    },
+    {
+      "year": 2021,
+      "model": "direct_cb_residual_d3",
+      "train_max": 2020,
+      "train_min": 2013,
+      "n_train": 198,
+      "n_test": 30,
+      "representatives_from_years_before": 2021
+    },
+    {
+      "year": 2021,
+      "model": "direct_cb_price_d3",
+      "train_max": 2020,
+      "train_min": 2013,
+      "n_train": 198,
+      "n_test": 30,
+      "representatives_from_years_before": 2021
+    },
+    {
+      "year": 2022,
+      "model": "direct_cb_residual_d2",
+      "train_max": 2021,
+      "train_min": 2013,
+      "n_train": 214,
+      "n_test": 29,
+      "representatives_from_years_before": 2022
+    },
+    {
+      "year": 2022,
+      "model": "direct_cb_price_d2",
+      "train_max": 2021,
+      "train_min": 2013,
+      "n_train": 214,
+      "n_test": 29,
+      "representatives_from_years_before": 2022
+    },
+    {
+      "year": 2022,
+      "model": "direct_cb_residual_d3",
+      "train_max": 2021,
+      "train_min": 2013,
+      "n_train": 214,
+      "n_test": 29,
+      "representatives_from_years_before": 2022
+    },
+    {
+      "year": 2022,
+      "model": "direct_cb_price_d3",
+      "train_max": 2021,
+      "train_min": 2013,
+      "n_train": 214,
+      "n_test": 29,
+      "representatives_from_years_before": 2022
+    },
+    {
+      "year": 2023,
+      "model": "direct_cb_residual_d2",
+      "train_max": 2022,
+      "train_min": 2013,
+      "n_train": 218,
+      "n_test": 27,
+      "representatives_from_years_before": 2023
+    },
+    {
+      "year": 2023,
+      "model": "direct_cb_price_d2",
+      "train_max": 2022,
+      "train_min": 2013,
+      "n_train": 218,
+      "n_test": 27,
+      "representatives_from_years_before": 2023
+    },
+    {
+      "year": 2023,
+      "model": "direct_cb_residual_d3",
+      "train_max": 2022,
+      "train_min": 2013,
+      "n_train": 218,
+      "n_test": 27,
+      "representatives_from_years_before": 2023
+    },
+    {
+      "year": 2023,
+      "model": "direct_cb_price_d3",
+      "train_max": 2022,
+      "train_min": 2013,
+      "n_train": 218,
+      "n_test": 27,
+      "representatives_from_years_before": 2023
+    },
+    {
+      "year": 2024,
+      "model": "direct_cb_residual_d2",
+      "train_max": 2023,
+      "train_min": 2013,
+      "n_train": 215,
+      "n_test": 24,
+      "representatives_from_years_before": 2024
+    },
+    {
+      "year": 2024,
+      "model": "direct_cb_price_d2",
+      "train_max": 2023,
+      "train_min": 2013,
+      "n_train": 215,
+      "n_test": 24,
+      "representatives_from_years_before": 2024
+    },
+    {
+      "year": 2024,
+      "model": "direct_cb_residual_d3",
+      "train_max": 2023,
+      "train_min": 2013,
+      "n_train": 215,
+      "n_test": 24,
+      "representatives_from_years_before": 2024
+    },
+    {
+      "year": 2024,
+      "model": "direct_cb_price_d3",
+      "train_max": 2023,
+      "train_min": 2013,
+      "n_train": 215,
+      "n_test": 24,
+      "representatives_from_years_before": 2024
+    },
+    {
+      "year": 2025,
+      "model": "direct_cb_residual_d2",
+      "train_max": 2024,
+      "train_min": 2013,
+      "n_train": 227,
+      "n_test": 24,
+      "representatives_from_years_before": 2025
+    },
+    {
+      "year": 2025,
+      "model": "direct_cb_price_d2",
+      "train_max": 2024,
+      "train_min": 2013,
+      "n_train": 227,
+      "n_test": 24,
+      "representatives_from_years_before": 2025
+    },
+    {
+      "year": 2025,
+      "model": "direct_cb_residual_d3",
+      "train_max": 2024,
+      "train_min": 2013,
+      "n_train": 227,
+      "n_test": 24,
+      "representatives_from_years_before": 2025
+    },
+    {
+      "year": 2025,
+      "model": "direct_cb_price_d3",
+      "train_max": 2024,
+      "train_min": 2013,
+      "n_train": 227,
+      "n_test": 24,
+      "representatives_from_years_before": 2025
+    }
+  ],
+  "script_sha256": "831309cac130202a42ac7c61f6f43b4cca0abadf7451c8e4933b0f8856261e7e",
+  "input_sha256": {
+    "data/panel_rendements.csv": "380b2e7a418dee87b0f193d6dc969ab3e336f2aea17870c7f4c6f989dd92f8d4",
+    "data/meteo_dept.csv": "f50803cf8e5fffe5e152967fe6e85eac5509cd948c649ebbf2899e0d036d52cb",
+    "data/prix_ble.csv": "2da72c05832daf2a3db1658d293f506aaa8101e13987c03215a2f4e9ca8ac676",
+    "data/hypotheses.yaml": "4cab9a6f616cf7a19fa160e3cbcda81142a42d1773a0ea2b2b7cfac5a277b23b",
+    "/content/drive/MyDrive/HackTheFork/benchmarks/60304f3585c0c885/colab_benchmark/predictions.csv": "9253aa302cfa45b70a0afc3c2fdabb5533e81bba9584159e59410d68a8df618d",
+    "/content/drive/MyDrive/HackTheFork/benchmarks/60304f3585c0c885/colab_contract/predictions.csv": "47bc79eca77b7cf706ec07fd04df550f4c2f69190dfacfb05548af3d95b7b3b5"
+  },
+  "packages": {
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "scikit-learn": "1.8.0",
+    "catboost": "1.2.10"
+  },
+  "limitations": [
+    "Seven evaluation years; correlated departments are not independent trials.",
+    "Candidate comparisons are retrospective diagnostics; only the past-selected policy is the tuning result.",
+    "Q80 refers to the predicted break-even-price quantile; held-rate is not a guaranteed coverage.",
+    "No target-year realised weather or price enters prediction features."
+  ]
+}

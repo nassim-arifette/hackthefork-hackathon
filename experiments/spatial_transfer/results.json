@@ -1,0 +1,5843 @@
+{
+  "spec": {
+    "year_start": 2019,
+    "year_end": 2025,
+    "models": [
+      "trend",
+      "qrf"
+    ],
+    "samples": 20000,
+    "seed": 42,
+    "analogue_count": 4,
+    "distribution": "raw_3_quantiles",
+    "files": {
+      "benchmark_spatial_transfer.py": "c4d6776cf080780890c776d8acc6feca4470037907007a5ca65f82cb6f25bc16",
+      "benchmark_models.py": "7cd8a8e5cab32baff6f07e916e9d91fb7a8f05f5be5a25983e6fa373d0d78979",
+      "model.py": "6b25013b53e3d82586d9bcf6ca9959b7f1324222e954dd32544dd135afe1050d",
+      "01_agreste.py": "1a7ade006f4799d451d6ed9dcc394756f2ae212b8b0b28f7046407936a8eb196",
+      "common.py": "9a4849d0b5e2e49b2749c12e7e717f033c4cd3a734a40f40c10eed56579da4d5",
+      "predictions.csv": "9253aa302cfa45b70a0afc3c2fdabb5533e81bba9584159e59410d68a8df618d",
+      "panel_rendements.csv": "380b2e7a418dee87b0f193d6dc969ab3e336f2aea17870c7f4c6f989dd92f8d4",
+      "meteo_dept.csv": "f50803cf8e5fffe5e152967fe6e85eac5509cd948c649ebbf2899e0d036d52cb",
+      "prix_ble.csv": "2da72c05832daf2a3db1658d293f506aaa8101e13987c03215a2f4e9ca8ac676",
+      "hypotheses.yaml": "4cab9a6f616cf7a19fa160e3cbcda81142a42d1773a0ea2b2b7cfac5a277b23b"
+    },
+    "packages": {
+      "numpy": "2.3.5",
+      "pandas": "2.2.3",
+      "scikit-learn": "1.8.0",
+      "quantile-forest": "1.4.2"
+    }
+  },
+  "summary": [
+    {
+      "model": "local_history_qrf",
+      "n": 192,
+      "years": 7,
+      "held": 0.6302083333333334,
+      "held_year_mean": 0.6462448197669872,
+      "held_year_bootstrap_80": [
+        0.5512471655328798,
+        0.742687074829932
+      ],
+      "contract_loss": 209.48731856174783,
+      "median_price": 1158.568601976495,
+      "shortfall_eur_ha": 108.53940760482081,
+      "pinball": 0.10089645743557453,
+      "coverage": 0.8010484270336485,
+      "width": 1.0359718933946829
+    },
+    {
+      "model": "local_history_trend",
+      "n": 192,
+      "years": 7,
+      "held": 0.6614583333333334,
+      "held_year_mean": 0.6818952485208644,
+      "held_year_bootstrap_80": [
+        0.5514869549352308,
+        0.8150982615268328
+      ],
+      "contract_loss": 243.79332386310733,
+      "median_price": 1253.9514200889043,
+      "shortfall_eur_ha": 116.8423027761097,
+      "pinball": 0.10069826565265012,
+      "coverage": 0.7758796622097114,
+      "width": 0.9565308194912687
+    },
+    {
+      "model": "transfer_qrf",
+      "n": 192,
+      "years": 7,
+      "held": 0.4895833333333333,
+      "held_year_mean": 0.506995595172935,
+      "held_year_bootstrap_80": [
+        0.4099284541402768,
+        0.6158808350926578
+      ],
+      "contract_loss": 285.2791282048774,
+      "median_price": 1053.7767252474373,
+      "shortfall_eur_ha": 158.1589504294623,
+      "pinball": null,
+      "coverage": null,
+      "width": null
+    },
+    {
+      "model": "transfer_trend",
+      "n": 192,
+      "years": 7,
+      "held": 0.5833333333333334,
+      "held_year_mean": 0.6023412046811061,
+      "held_year_bootstrap_80": [
+        0.48678747361013375,
+        0.7192346287173874
+      ],
+      "contract_loss": 291.76653783323326,
+      "median_price": 1192.9099651600404,
+      "shortfall_eur_ha": 144.4512148913982,
+      "pinball": null,
+      "coverage": null,
+      "width": null
+    }
+  ],
+  "regional_summary": [
+    {
+      "region": "24 - Centre-Val de Loire",
+      "model": "local_history_trend",
+      "n": 42,
+      "years": 7,
+      "held": 0.7619047619047619,
+      "held_year_mean": 0.7619047619047619,
+      "held_year_bootstrap_80": [
+        0.5714285714285714,
+        0.9047619047619049
+      ],
+      "contract_loss": 165.54061789331536,
+      "median_price": 1135.258150844435,
+      "shortfall_eur_ha": 68.67314277683589,
+      "pinball": 0.13733844275079027,
+      "coverage": 0.4761904761904762,
+      "width": 0.9565308194912687
+    },
+    {
+      "region": "24 - Centre-Val de Loire",
+      "model": "local_history_qrf",
+      "n": 42,
+      "years": 7,
+      "held": 0.6904761904761905,
+      "held_year_mean": 0.6904761904761905,
+      "held_year_bootstrap_80": [
+        0.5,
+        0.8571428571428571
+      ],
+      "contract_loss": 166.19905583993503,
+      "median_price": 1033.11731035066,
+      "shortfall_eur_ha": 82.92724615612224,
+      "pinball": 0.13910539970046182,
+      "coverage": 0.5714285714285714,
+      "width": 1.0280260681978577
+    },
+    {
+      "region": "24 - Centre-Val de Loire",
+      "model": "transfer_qrf",
+      "n": 42,
+      "years": 7,
+      "held": 0.7619047619047619,
+      "held_year_mean": 0.7619047619047619,
+      "held_year_bootstrap_80": [
+        0.5714285714285714,
+        0.9047619047619049
+      ],
+      "contract_loss": 186.94637880728575,
+      "median_price": 1141.3289470664583,
+      "shortfall_eur_ha": 71.36679671503501,
+      "pinball": null,
+      "coverage": null,
+      "width": null
+    },
+    {
+      "region": "24 - Centre-Val de Loire",
+      "model": "transfer_trend",
+      "n": 42,
+      "years": 7,
+      "held": 0.7619047619047619,
+      "held_year_mean": 0.7619047619047619,
+      "held_year_bootstrap_80": [
+        0.5714285714285714,
+        0.9047619047619049
+      ],
+      "contract_loss": 206.39009136352576,
+      "median_price": 1347.7250133534003,
+      "shortfall_eur_ha": 73.22150551507825,
+      "pinball": null,
+      "coverage": null,
+      "width": null
+    },
+    {
+      "region": "27 - Bourgogne-Franche-Comt\u00e9",
+      "model": "local_history_qrf",
+      "n": 8,
+      "years": 7,
+      "held": 0.375,
+      "held_year_mean": 0.42857142857142855,
+      "held_year_bootstrap_80": [
+        0.14285714285714285,
+        0.7142857142857143
+      ],
+      "contract_loss": 582.484721375941,
+      "median_price": 1402.7386117448832,
+      "shortfall_eur_ha": 248.41901514125888,
+      "pinball": 0.10047527901780529,
+      "coverage": 0.7142857142857143,
+      "width": 1.0086488065196793
+    },
+    {
+      "region": "27 - Bourgogne-Franche-Comt\u00e9",
+      "model": "local_history_trend",
+      "n": 8,
+      "years": 7,
+      "held": 0.375,
+      "held_year_mean": 0.42857142857142855,
+      "held_year_bootstrap_80": [
+        0.14285714285714285,
+        0.7142857142857143
+      ],
+      "contract_loss": 659.472396460805,
+      "median_price": 1558.5458556251704,
+      "shortfall_eur_ha": 278.1585476438809,
+      "pinball": 0.10515829996040628,
+      "coverage": 0.5714285714285714,
+      "width": 0.9565308194912687
+    },
+    {
+      "region": "27 - Bourgogne-Franche-Comt\u00e9",
+      "model": "transfer_trend",
+      "n": 8,
+      "years": 7,
+      "held": 0.25,
+      "held_year_mean": 0.2857142857142857,
+      "held_year_bootstrap_80": [
+        0.14285714285714285,
+        0.5714285714285714
+      ],
+      "contract_loss": 858.2964906437054,
+      "median_price": 929.3687128443787,
+      "shortfall_eur_ha": 439.2302602241993,
+      "pinball": null,
+      "coverage": null,
+      "width": null
+    },
+    {
+      "region": "27 - Bourgogne-Franche-Comt\u00e9",
+      "model": "transfer_qrf",
+      "n": 8,
+      "years": 7,
+      "held": 0.125,
+      "held_year_mean": 0.14285714285714285,
+      "held_year_bootstrap_80": [
+        0.0,
+        0.2857142857142857
+      ],
+      "contract_loss": 890.9481697344914,
+      "median_price": 868.6962651820918,
+      "shortfall_eur_ha": 494.900197785053,
+      "pinball": null,
+      "coverage": null,
+      "width": null
+    },
+    {
+      "region": "44 - Grand Est",
+      "model": "transfer_qrf",
+      "n": 18,
+      "years": 7,
+      "held": 0.8333333333333334,
+      "held_year_mean": 0.8928571428571429,
+      "held_year_bootstrap_80": [
+        0.7857142857142857,
+        1.0
+      ],
+      "contract_loss": 143.22622652079718,
+      "median_price": 1584.453397635696,
+      "shortfall_eur_ha": 21.468208100663066,
+      "pinball": null,
+      "coverage": null,
+      "width": null
+    },
+    {
+      "region": "44 - Grand Est",
+      "model": "local_history_qrf",
+      "n": 18,
+      "years": 7,
+      "held": 0.3888888888888889,
+      "held_year_mean": 0.5714285714285714,
+      "held_year_bootstrap_80": [
+        0.2857142857142857,
+        0.8571428571428571
+      ],
+      "contract_loss": 174.2792388512547,
+      "median_price": 772.25548983511,
+      "shortfall_eur_ha": 182.78468237590164,
+      "pinball": 0.06944981005789772,
+      "coverage": 0.8571428571428571,
+      "width": 1.012588103286222
+    },
+    {
+      "region": "44 - Grand Est",
+      "model": "transfer_trend",
+      "n": 18,
+      "years": 7,
+      "held": 0.8333333333333334,
+      "held_year_mean": 0.8928571428571429,
+      "held_year_bootstrap_80": [
+        0.7857142857142857,
+        1.0
+      ],
+      "contract_loss": 182.71292684139394,
+      "median_price": 1540.6045911736578,
+      "shortfall_eur_ha": 37.14936931343533,
+      "pinball": null,
+      "coverage": null,
+      "width": null
+    },
+    {
+      "region": "44 - Grand Est",
+      "model": "local_history_trend",
+      "n": 18,
+      "years": 7,
+      "held": 0.3888888888888889,
+      "held_year_mean": 0.5714285714285714,
+      "held_year_bootstrap_80": [
+        0.2857142857142857,
+        0.8571428571428571
+      ],
+      "contract_loss": 224.16342624062867,
+      "median_price": 864.4730169651311,
+      "shortfall_eur_ha": 232.16924010852705,
+      "pinball": 0.0612113904248451,
+      "coverage": 1.0,
+      "width": 0.9565308194912687
+    },
+    {
+      "region": "52 - Pays de la Loire",
+      "model": "transfer_qrf",
+      "n": 24,
+      "years": 7,
+      "held": 0.5833333333333334,
+      "held_year_mean": 0.6071428571428571,
+      "held_year_bootstrap_80": [
+        0.35714285714285715,
+        0.8571428571428571
+      ],
+      "contract_loss": 185.79452167963268,
+      "median_price": 1107.414978240423,
+      "shortfall_eur_ha": 124.71259257915281,
+      "pinball": null,
+      "coverage": null,
+      "width": null
+    },
+    {
+      "region": "52 - Pays de la Loire",
+      "model": "local_history_qrf",
+      "n": 24,
+      "years": 7,
+      "held": 0.875,
+      "held_year_mean": 0.8571428571428571,
+      "held_year_bootstrap_80": [
+        0.7142857142857143,
+        1.0
+      ],
+      "contract_loss": 200.32338224734673,
+      "median_price": 1195.5869468694534,
+      "shortfall_eur_ha": 99.62925739906106,
+      "pinball": 0.11762697233976852,
+      "coverage": 0.6428571428571429,
+      "width": 1.0104485300785584
+    },
+    {
+      "region": "52 - Pays de la Loire",
+      "model": "transfer_trend",
+      "n": 24,
+      "years": 7,
+      "held": 0.75,
+      "held_year_mean": 0.75,
+      "held_year_bootstrap_80": [
+        0.5357142857142857,
+        0.8928571428571429
+      ],
+      "contract_loss": 208.85830600584995,
+      "median_price": 1325.1240742251157,
+      "shortfall_eur_ha": 107.64460802517863,
+      "pinball": null,
+      "coverage": null,
+      "width": null
+    },
+    {
+      "region": "52 - Pays de la Loire",
+      "model": "local_history_trend",
+      "n": 24,
+      "years": 7,
+      "held": 0.8333333333333334,
+      "held_year_mean": 0.8214285714285714,
+      "held_year_bootstrap_80": [
+        0.6428571428571429,
+        0.9642857142857143
+      ],
+      "contract_loss": 230.20487379748724,
+      "median_price": 1413.1935129781298,
+      "shortfall_eur_ha": 103.8002981834555,
+      "pinball": 0.11168006620255268,
+      "coverage": 0.7142857142857143,
+      "width": 0.9565308194912687
+    },
+    {
+      "region": "75 - Nouvelle Aquitaine",
+      "model": "local_history_qrf",
+      "n": 26,
+      "years": 7,
+      "held": 0.6153846153846154,
+      "held_year_mean": 0.6428571428571429,
+      "held_year_bootstrap_80": [
+        0.42857142857142855,
+        0.8571428571428571
+      ],
+      "contract_loss": 183.3275375850059,
+      "median_price": 1277.5394847811517,
+      "shortfall_eur_ha": 97.35193437816538,
+      "pinball": 0.11069468972478018,
+      "coverage": 0.8214285714285714,
+      "width": 1.0559646652720003
+    },
+    {
+      "region": "75 - Nouvelle Aquitaine",
+      "model": "transfer_qrf",
+      "n": 26,
+      "years": 7,
+      "held": 0.46153846153846156,
+      "held_year_mean": 0.5,
+      "held_year_bootstrap_80": [
+        0.2857142857142857,
+        0.7142857142857143
+      ],
+      "contract_loss": 221.96233083402885,
+      "median_price": 1075.7820264622999,
+      "shortfall_eur_ha": 163.61025431824322,
+      "pinball": null,
+      "coverage": null,
+      "width": null
+    },
+    {
+      "region": "75 - Nouvelle Aquitaine",
+      "model": "local_history_trend",
+      "n": 26,
+      "years": 7,
+      "held": 0.5769230769230769,
+      "held_year_mean": 0.6071428571428571,
+      "held_year_bootstrap_80": [
+        0.35714285714285715,
+        0.8571428571428571
+      ],
+      "contract_loss": 241.37435387150916,
+      "median_price": 1300.614175149085,
+      "shortfall_eur_ha": 124.28962409421494,
+      "pinball": 0.11844696221043997,
+      "coverage": 0.7142857142857143,
+      "width": 0.9565308194912687
+    },
+    {
+      "region": "75 - Nouvelle Aquitaine",
+      "model": "transfer_trend",
+      "n": 26,
+      "years": 7,
+      "held": 0.46153846153846156,
+      "held_year_mean": 0.5,
+      "held_year_bootstrap_80": [
+        0.2857142857142857,
+        0.7142857142857143
+      ],
+      "contract_loss": 274.1404082313217,
+      "median_price": 1091.1398546699177,
+      "shortfall_eur_ha": 192.80974148482088,
+      "pinball": null,
+      "coverage": null,
+      "width": null
+    },
+    {
+      "region": "76 - Occitanie",
+      "model": "local_history_qrf",
+      "n": 50,
+      "years": 7,
+      "held": 0.62,
+      "held_year_mean": 0.6261904761904763,
+      "held_year_bootstrap_80": [
+        0.48214285714285715,
+        0.7619047619047619
+      ],
+      "contract_loss": 206.70599949832348,
+      "median_price": 1086.0318370164332,
+      "shortfall_eur_ha": 96.09825422759619,
+      "pinball": 0.06611387426789425,
+      "coverage": 0.9821428571428571,
+      "width": 1.059886435148599
+    },
+    {
+      "region": "76 - Occitanie",
+      "model": "local_history_trend",
+      "n": 50,
+      "years": 7,
+      "held": 0.7,
+      "held_year_mean": 0.7083333333333334,
+      "held_year_bootstrap_80": [
+        0.5595238095238095,
+        0.8452380952380952
+      ],
+      "contract_loss": 227.33574863263252,
+      "median_price": 1169.4322647966515,
+      "shortfall_eur_ha": 92.98120480677021,
+      "pinball": 0.0681523700716169,
+      "coverage": 0.9642857142857143,
+      "width": 0.9565308194912687
+    },
+    {
+      "region": "76 - Occitanie",
+      "model": "transfer_trend",
+      "n": 50,
+      "years": 7,
+      "held": 0.5,
+      "held_year_mean": 0.5130952380952382,
+      "held_year_bootstrap_80": [
+        0.38095238095238093,
+        0.6380952380952382
+      ],
+      "contract_loss": 238.1675004041826,
+      "median_price": 982.6056128335831,
+      "shortfall_eur_ha": 130.33081925207296,
+      "pinball": null,
+      "coverage": null,
+      "width": null
+    },
+    {
+      "region": "76 - Occitanie",
+      "model": "transfer_qrf",
+      "n": 50,
+      "years": 7,
+      "held": 0.28,
+      "held_year_mean": 0.28928571428571426,
+      "held_year_bootstrap_80": [
+        0.19999999999999998,
+        0.37857142857142856
+      ],
+      "contract_loss": 276.24683290139467,
+      "median_price": 809.0350412700625,
+      "shortfall_eur_ha": 180.50738591770423,
+      "pinball": null,
+      "coverage": null,
+      "width": null
+    },
+    {
+      "region": "84 - Auvergne-Rh\u00f4ne-Alpes",
+      "model": "local_history_qrf",
+      "n": 24,
+      "years": 7,
+      "held": 0.5833333333333334,
+      "held_year_mean": 0.6190476190476192,
+      "held_year_bootstrap_80": [
+        0.42857142857142855,
+        0.7857142857142857
+      ],
+      "contract_loss": 267.6881089055531,
+      "median_price": 1955.6046047467928,
+      "shortfall_eur_ha": 89.04028607465389,
+      "pinball": 0.09933331291938703,
+      "coverage": 0.869047619047619,
+      "width": 1.0349346236626187
+    },
+    {
+      "region": "84 - Auvergne-Rh\u00f4ne-Alpes",
+      "model": "local_history_trend",
+      "n": 24,
+      "years": 7,
+      "held": 0.625,
+      "held_year_mean": 0.6785714285714286,
+      "held_year_bootstrap_80": [
+        0.5,
+        0.8571428571428571
+      ],
+      "contract_loss": 337.9810875748944,
+      "median_price": 2038.7215102771258,
+      "shortfall_eur_ha": 105.43044326879432,
+      "pinball": 0.10207284316693763,
+      "coverage": 0.8214285714285714,
+      "width": 0.9565308194912687
+    },
+    {
+      "region": "84 - Auvergne-Rh\u00f4ne-Alpes",
+      "model": "transfer_trend",
+      "n": 24,
+      "years": 7,
+      "held": 0.3333333333333333,
+      "held_year_mean": 0.38095238095238093,
+      "held_year_bootstrap_80": [
+        0.19047619047619047,
+        0.5714285714285714
+      ],
+      "contract_loss": 592.8761118404626,
+      "median_price": 1252.8883292542494,
+      "shortfall_eur_ha": 279.41254668627903,
+      "pinball": null,
+      "coverage": null,
+      "width": null
+    },
+    {
+      "region": "84 - Auvergne-Rh\u00f4ne-Alpes",
+      "model": "transfer_qrf",
+      "n": 24,
+      "years": 7,
+      "held": 0.25,
+      "held_year_mean": 0.2857142857142857,
+      "held_year_bootstrap_80": [
+        0.09523809523809523,
+        0.47619047619047616
+      ],
+      "contract_loss": 602.3992592529777,
+      "median_price": 1024.918789093483,
+      "shortfall_eur_ha": 297.8694628074151,
+      "pinball": null,
+      "coverage": null,
+      "width": null
+    }
+  ],
+  "audit": [
+    {
+      "year": 2019,
+      "excluded_region": "24 - Centre-Val de Loire",
+      "train_max": 2018,
+      "training_regions": [
+        "27 - Bourgogne-Franche-Comt\u00e9",
+        "44 - Grand Est",
+        "52 - Pays de la Loire",
+        "75 - Nouvelle Aquitaine",
+        "76 - Occitanie",
+        "84 - Auvergne-Rh\u00f4ne-Alpes"
+      ],
+      "n_train": 177,
+      "n_test": 6,
+      "training_departments": [
+        "08",
+        "09",
+        "10",
+        "11",
+        "12",
+        "15",
+        "16",
+        "17",
+        "30",
+        "31",
+        "32",
+        "43",
+        "51",
+        "52",
+        "58",
+        "63",
+        "79",
+        "81",
+        "82",
+        "85",
+        "86",
+        "89"
+      ],
+      "cross_region_duplicate_departments_removed": [],
+      "donors": [
+        {
+          "dep": "18",
+          "donors": [
+            "89",
+            "86",
+            "10",
+            "81"
+          ],
+          "climate_distance": [
+            0.25530554037713254,
+            0.4182087012443088,
+            0.47582427237367997,
+            0.5282308744247287
+          ],
+          "transferred_level_qha": 15.138928571428572
+        },
+        {
+          "dep": "28",
+          "donors": [
+            "79",
+            "85",
+            "17",
+            "10"
+          ],
+          "climate_distance": [
+            0.46546093288785756,
+            0.49124578176776335,
+            0.6892794939308999,
+            0.721193426544806
+          ],
+          "transferred_level_qha": 17.766111111111112
+        },
+        {
+          "dep": "36",
+          "donors": [
+            "86",
+            "79",
+            "16",
+            "81"
+          ],
+          "climate_distance": [
+            0.23925565376267752,
+            0.3519632127733579,
+            0.4206620219761078,
+            0.4701373231824549
+          ],
+          "transferred_level_qha": 13.413373015873017
+        },
+        {
+          "dep": "37",
+          "donors": [
+            "79",
+            "16",
+            "17",
+            "86"
+          ],
+          "climate_distance": [
+            0.2460154188651165,
+            0.3401473605578577,
+            0.3682116204447756,
+            0.3716395772700268
+          ],
+          "transferred_level_qha": 14.547539682539682
+        },
+        {
+          "dep": "41",
+          "donors": [
+            "79",
+            "17",
+            "86",
+            "16"
+          ],
+          "climate_distance": [
+            0.35092493221937887,
+            0.45126874361072516,
+            0.4554121362022025,
+            0.4818033975885507
+          ],
+          "transferred_level_qha": 14.547539682539682
+        },
+        {
+          "dep": "45",
+          "donors": [
+            "10",
+            "79",
+            "89",
+            "51"
+          ],
+          "climate_distance": [
+            0.33184654463714036,
+            0.41127376601821,
+            0.42119634401108846,
+            0.4272937131580334
+          ],
+          "transferred_level_qha": 19.680555555555557
+        }
+      ]
+    },
+    {
+      "year": 2019,
+      "excluded_region": "27 - Bourgogne-Franche-Comt\u00e9",
+      "train_max": 2018,
+      "training_regions": [
+        "24 - Centre-Val de Loire",
+        "44 - Grand Est",
+        "52 - Pays de la Loire",
+        "75 - Nouvelle Aquitaine",
+        "76 - Occitanie",
+        "84 - Auvergne-Rh\u00f4ne-Alpes"
+      ],
+      "n_train": 213,
+      "n_test": 2,
+      "training_departments": [
+        "08",
+        "09",
+        "10",
+        "11",
+        "12",
+        "15",
+        "16",
+        "17",
+        "18",
+        "28",
+        "30",
+        "31",
+        "32",
+        "36",
+        "37",
+        "41",
+        "43",
+        "45",
+        "51",
+        "52",
+        "63",
+        "79",
+        "81",
+        "82",
+        "85",
+        "86"
+      ],
+      "cross_region_duplicate_departments_removed": [],
+      "donors": [
+        {
+          "dep": "58",
+          "donors": [
+            "52",
+            "63",
+            "12",
+            "18"
+          ],
+          "climate_distance": [
+            0.40308266939398985,
+            0.41442019373133504,
+            0.4736515117339114,
+            0.6319435798674374
+          ],
+          "transferred_level_qha": 15.563055555555556
+        },
+        {
+          "dep": "89",
+          "donors": [
+            "18",
+            "10",
+            "45",
+            "51"
+          ],
+          "climate_distance": [
+            0.27141911022386533,
+            0.32191351080576175,
+            0.4467701498180049,
+            0.4598241775784943
+          ],
+          "transferred_level_qha": 21.17972222222222
+        }
+      ]
+    },
+    {
+      "year": 2019,
+      "excluded_region": "44 - Grand Est",
+      "train_max": 2018,
+      "training_regions": [
+        "24 - Centre-Val de Loire",
+        "27 - Bourgogne-Franche-Comt\u00e9",
+        "52 - Pays de la Loire",
+        "75 - Nouvelle Aquitaine",
+        "76 - Occitanie",
+        "84 - Auvergne-Rh\u00f4ne-Alpes"
+      ],
+      "n_train": 202,
+      "n_test": 4,
+      "training_departments": [
+        "09",
+        "11",
+        "12",
+        "15",
+        "16",
+        "17",
+        "18",
+        "28",
+        "30",
+        "31",
+        "32",
+        "36",
+        "37",
+        "41",
+        "43",
+        "45",
+        "58",
+        "63",
+        "79",
+        "81",
+        "82",
+        "85",
+        "86",
+        "89"
+      ],
+      "cross_region_duplicate_departments_removed": [],
+      "donors": [
+        {
+          "dep": "08",
+          "donors": [
+            "89",
+            "45",
+            "18",
+            "63"
+          ],
+          "climate_distance": [
+            0.5011624365096803,
+            0.5301730831143269,
+            0.7282078752408951,
+            0.7909718968062716
+          ],
+          "transferred_level_qha": 14.179722222222223
+        },
+        {
+          "dep": "10",
+          "donors": [
+            "89",
+            "45",
+            "18",
+            "36"
+          ],
+          "climate_distance": [
+            0.3193368049258087,
+            0.36339689283302307,
+            0.4978488687630863,
+            0.5270373936146217
+          ],
+          "transferred_level_qha": 16.7625
+        },
+        {
+          "dep": "51",
+          "donors": [
+            "89",
+            "45",
+            "18",
+            "41"
+          ],
+          "climate_distance": [
+            0.4577579431402714,
+            0.47038358793933055,
+            0.6816178386489059,
+            0.7293939524491656
+          ],
+          "transferred_level_qha": 16.078611111111112
+        },
+        {
+          "dep": "52",
+          "donors": [
+            "58",
+            "63",
+            "12",
+            "15"
+          ],
+          "climate_distance": [
+            0.40135185058116163,
+            0.623832152837298,
+            0.7421046222601582,
+            0.7827266219345498
+          ],
+          "transferred_level_qha": 10.284583333333334
+        }
+      ]
+    },
+    {
+      "year": 2019,
+      "excluded_region": "52 - Pays de la Loire",
+      "train_max": 2018,
+      "training_regions": [
+        "24 - Centre-Val de Loire",
+        "27 - Bourgogne-Franche-Comt\u00e9",
+        "44 - Grand Est",
+        "75 - Nouvelle Aquitaine",
+        "76 - Occitanie",
+        "84 - Auvergne-Rh\u00f4ne-Alpes"
+      ],
+      "n_train": 221,
+      "n_test": 1,
+      "training_departments": [
+        "08",
+        "09",
+        "10",
+        "11",
+        "12",
+        "15",
+        "16",
+        "17",
+        "18",
+        "28",
+        "30",
+        "31",
+        "32",
+        "36",
+        "37",
+        "41",
+        "43",
+        "45",
+        "51",
+        "52",
+        "58",
+        "63",
+        "79",
+        "81",
+        "82",
+        "86",
+        "89"
+      ],
+      "cross_region_duplicate_departments_removed": [],
+      "donors": [
+        {
+          "dep": "85",
+          "donors": [
+            "28",
+            "17",
+            "79",
+            "41"
+          ],
+          "climate_distance": [
+            0.5463075098981994,
+            0.6534127839017739,
+            0.7722597022387534,
+            0.8549839807566857
+          ],
+          "transferred_level_qha": 16.224722222222223
+        }
+      ]
+    },
+    {
+      "year": 2019,
+      "excluded_region": "75 - Nouvelle Aquitaine",
+      "train_max": 2018,
+      "training_regions": [
+        "24 - Centre-Val de Loire",
+        "27 - Bourgogne-Franche-Comt\u00e9",
+        "44 - Grand Est",
+        "52 - Pays de la Loire",
+        "76 - Occitanie",
+        "84 - Auvergne-Rh\u00f4ne-Alpes"
+      ],
+      "n_train": 196,
+      "n_test": 4,
+      "training_departments": [
+        "08",
+        "09",
+        "10",
+        "11",
+        "12",
+        "15",
+        "18",
+        "28",
+        "30",
+        "31",
+        "32",
+        "36",
+        "37",
+        "41",
+        "43",
+        "45",
+        "51",
+        "52",
+        "58",
+        "63",
+        "81",
+        "82",
+        "85",
+        "89"
+      ],
+      "cross_region_duplicate_departments_removed": [],
+      "donors": [
+        {
+          "dep": "16",
+          "donors": [
+            "37",
+            "36",
+            "41",
+            "81"
+          ],
+          "climate_distance": [
+            0.3532398248154958,
+            0.4485422782745178,
+            0.5060183454697206,
+            0.5690011652557385
+          ],
+          "transferred_level_qha": 15.519270833333334
+        },
+        {
+          "dep": "17",
+          "donors": [
+            "37",
+            "41",
+            "85",
+            "36"
+          ],
+          "climate_distance": [
+            0.38612916516214896,
+            0.4881013047973983,
+            0.6112387185468648,
+            0.6454906026406404
+          ],
+          "transferred_level_qha": 16.720659722222223
+        },
+        {
+          "dep": "79",
+          "donors": [
+            "37",
+            "41",
+            "36",
+            "45"
+          ],
+          "climate_distance": [
+            0.25405909545580085,
+            0.37135895442176253,
+            0.37342181607057046,
+            0.4483332293929755
+          ],
+          "transferred_level_qha": 17.413715277777776
+        },
+        {
+          "dep": "86",
+          "donors": [
+            "36",
+            "37",
+            "18",
+            "41"
+          ],
+          "climate_distance": [
+            0.24694500327826607,
+            0.38268266261936185,
+            0.45621630659636,
+            0.4656453217406534
+          ],
+          "transferred_level_qha": 17.610104166666666
+        }
+      ]
+    },
+    {
+      "year": 2019,
+      "excluded_region": "76 - Occitanie",
+      "train_max": 2018,
+      "training_regions": [
+        "24 - Centre-Val de Loire",
+        "27 - Bourgogne-Franche-Comt\u00e9",
+        "44 - Grand Est",
+        "52 - Pays de la Loire",
+        "75 - Nouvelle Aquitaine",
+        "84 - Auvergne-Rh\u00f4ne-Alpes"
+      ],
+      "n_train": 168,
+      "n_test": 8,
+      "training_departments": [
+        "08",
+        "10",
+        "15",
+        "16",
+        "17",
+        "18",
+        "28",
+        "36",
+        "37",
+        "41",
+        "43",
+        "45",
+        "51",
+        "52",
+        "58",
+        "63",
+        "79",
+        "85",
+        "86",
+        "89"
+      ],
+      "cross_region_duplicate_departments_removed": [],
+      "donors": [
+        {
+          "dep": "09",
+          "donors": [
+            "63",
+            "18",
+            "86",
+            "36"
+          ],
+          "climate_distance": [
+            1.0533964536267895,
+            1.2418100083534829,
+            1.3134054033888038,
+            1.3344583210737817
+          ],
+          "transferred_level_qha": 14.47920634920635
+        },
+        {
+          "dep": "11",
+          "donors": [
+            "16",
+            "17",
+            "41",
+            "37"
+          ],
+          "climate_distance": [
+            1.4684417151862068,
+            1.5940343585131274,
+            1.7570822756605762,
+            1.7645647118503796
+          ],
+          "transferred_level_qha": 15.275659722222223
+        },
+        {
+          "dep": "12",
+          "donors": [
+            "63",
+            "18",
+            "58",
+            "89"
+          ],
+          "climate_distance": [
+            0.6029420664670586,
+            0.7597167731598605,
+            0.7891689939148859,
+            0.9808871130978738
+          ],
+          "transferred_level_qha": 12.946250000000001
+        },
+        {
+          "dep": "30",
+          "donors": [
+            "16",
+            "17",
+            "37",
+            "41"
+          ],
+          "climate_distance": [
+            3.5058963532427154,
+            3.926462553615391,
+            4.0040514755468415,
+            4.021142175600465
+          ],
+          "transferred_level_qha": 15.275659722222223
+        },
+        {
+          "dep": "31",
+          "donors": [
+            "16",
+            "36",
+            "37",
+            "41"
+          ],
+          "climate_distance": [
+            1.347088655593635,
+            1.738611152540327,
+            1.8565813287774617,
+            1.8783556952993705
+          ],
+          "transferred_level_qha": 16.1409375
+        },
+        {
+          "dep": "32",
+          "donors": [
+            "16",
+            "36",
+            "86",
+            "37"
+          ],
+          "climate_distance": [
+            1.0653664361308228,
+            1.3532689798887159,
+            1.453983798630975,
+            1.5078795545868542
+          ],
+          "transferred_level_qha": 15.686532738095238
+        },
+        {
+          "dep": "81",
+          "donors": [
+            "16",
+            "36",
+            "37",
+            "86"
+          ],
+          "climate_distance": [
+            0.6021650082911556,
+            0.8042772838230163,
+            0.9551375339302501,
+            0.9660641857390102
+          ],
+          "transferred_level_qha": 15.686532738095238
+        },
+        {
+          "dep": "82",
+          "donors": [
+            "16",
+            "36",
+            "37",
+            "41"
+          ],
+          "climate_distance": [
+            0.9457866272920306,
+            1.4101584141895278,
+            1.4754551603691193,
+            1.4933523750478663
+          ],
+          "transferred_level_qha": 16.1409375
+        }
+      ]
+    },
+    {
+      "year": 2019,
+      "excluded_region": "84 - Auvergne-Rh\u00f4ne-Alpes",
+      "train_max": 2018,
+      "training_regions": [
+        "24 - Centre-Val de Loire",
+        "27 - Bourgogne-Franche-Comt\u00e9",
+        "44 - Grand Est",
+        "52 - Pays de la Loire",
+        "75 - Nouvelle Aquitaine",
+        "76 - Occitanie"
+      ],
+      "n_train": 203,
+      "n_test": 3,
+      "training_departments": [
+        "08",
+        "09",
+        "10",
+        "11",
+        "12",
+        "16",
+        "17",
+        "18",
+        "28",
+        "30",
+        "31",
+        "32",
+        "36",
+        "37",
+        "41",
+        "45",
+        "51",
+        "52",
+        "58",
+        "79",
+        "81",
+        "82",
+        "85",
+        "86",
+        "89"
+      ],
+      "cross_region_duplicate_departments_removed": [],
+      "donors": [
+        {
+          "dep": "15",
+          "donors": [
+            "52",
+            "58",
+            "12",
+            "09"
+          ],
+          "climate_distance": [
+            1.0600926727201097,
+            1.6074885656887157,
+            1.7132455641249098,
+            1.788584135157549
+          ],
+          "transferred_level_qha": 14.974464285714284
+        },
+        {
+          "dep": "43",
+          "donors": [
+            "52",
+            "51",
+            "58",
+            "08"
+          ],
+          "climate_distance": [
+            2.276402276603792,
+            2.812438327674542,
+            2.8427076929161443,
+            2.9210706329319898
+          ],
+          "transferred_level_qha": 21.98736111111111
+        },
+        {
+          "dep": "63",
+          "donors": [
+            "58",
+            "52",
+            "89",
+            "12"
+          ],
+          "climate_distance": [
+            0.5647704883331911,
+            0.6811752768084791,
+            0.7840407729713365,
+            0.7886633242306869
+          ],
+          "transferred_level_qha": 15.383194444444444
+        }
+      ]
+    },
+    {
+      "year": 2020,
+      "excluded_region": "24 - Centre-Val de Loire",
+      "train_max": 2019,
+      "training_regions": [
+        "27 - Bourgogne-Franche-Comt\u00e9",
+        "44 - Grand Est",
+        "52 - Pays de la Loire",
+        "75 - Nouvelle Aquitaine",
+        "76 - Occitanie",
+        "84 - Auvergne-Rh\u00f4ne-Alpes"
+      ],
+      "n_train": 199,
+      "n_test": 6,
+      "training_departments": [
+        "03",
+        "08",
+        "09",
+        "10",
+        "11",
+        "12",
+        "15",
+        "16",
+        "17",
+        "30",
+        "31",
+        "32",
+        "43",
+        "44",
+        "49",
+        "51",
+        "52",
+        "63",
+        "79",
+        "81",
+        "82",
+        "85",
+        "86",
+        "89"
+      ],
+      "cross_region_duplicate_departments_removed": [],
+      "donors": [
+        {
+          "dep": "18",
+          "donors": [
+            "89",
+            "86",
+            "10",
+            "81"
+          ],
+          "climate_distance": [
+            0.2579318746995923,
+            0.3513137327259813,
+            0.4177154583538794,
+            0.5143617111776542
+          ],
+          "transferred_level_qha": 14.834062500000002
+        },
+        {
+          "dep": "28",
+          "donors": [
+            "49",
+            "44",
+            "85",
+            "79"
+          ],
+          "climate_distance": [
+            0.3391886108934803,
+            0.3781755463642165,
+            0.4146156371668153,
+            0.5057925405627657
+          ],
+          "transferred_level_qha": 16.392083333333332
+        },
+        {
+          "dep": "36",
+          "donors": [
+            "86",
+            "79",
+            "16",
+            "17"
+          ],
+          "climate_distance": [
+            0.24975307206403444,
+            0.3336678054026062,
+            0.38313304972108264,
+            0.4478071603059139
+          ],
+          "transferred_level_qha": 14.1768125
+        },
+        {
+          "dep": "37",
+          "donors": [
+            "17",
+            "79",
+            "16",
+            "86"
+          ],
+          "climate_distance": [
+            0.224444517695887,
+            0.2792964120952465,
+            0.3853270822402802,
+            0.3861526746739099
+          ],
+          "transferred_level_qha": 14.176812499999999
+        },
+        {
+          "dep": "41",
+          "donors": [
+            "17",
+            "79",
+            "86",
+            "10"
+          ],
+          "climate_distance": [
+            0.2975908976844369,
+            0.3118013234503337,
+            0.44395453313108424,
+            0.4828688520345037
+          ],
+          "transferred_level_qha": 16.9673125
+        },
+        {
+          "dep": "45",
+          "donors": [
+            "10",
+            "89",
+            "79",
+            "51"
+          ],
+          "climate_distance": [
+            0.2956618785924915,
+            0.35660945781008496,
+            0.36539308722518593,
+            0.3924937048331293
+          ],
+          "transferred_level_qha": 19.212500000000002
+        }
+      ]
+    },
+    {
+      "year": 2020,
+      "excluded_region": "27 - Bourgogne-Franche-Comt\u00e9",
+      "train_max": 2019,
+      "training_regions": [
+        "24 - Centre-Val de Loire",
+        "44 - Grand Est",
+        "52 - Pays de la Loire",
+        "75 - Nouvelle Aquitaine",
+        "76 - Occitanie",
+        "84 - Auvergne-Rh\u00f4ne-Alpes"
+      ],
+      "n_train": 248,
+      "n_test": 1,
+      "training_departments": [
+        "03",
+        "08",
+        "09",
+        "10",
+        "11",
+        "12",
+        "15",
+        "16",
+        "17",
+        "18",
+        "28",
+        "30",
+        "31",
+        "32",
+        "36",
+        "37",
+        "41",
+        "43",
+        "44",
+        "45",
+        "49",
+        "51",
+        "52",
+        "63",
+        "79",
+        "81",
+        "82",
+        "85",
+        "86"
+      ],
+      "cross_region_duplicate_departments_removed": [],
+      "donors": [
+        {
+          "dep": "89",
+          "donors": [
+            "18",
+            "10",
+            "45",
+            "51"
+          ],
+          "climate_distance": [
+            0.2767191619034752,
+            0.28226818136576953,
+            0.37925185988899285,
+            0.3826214764246085
+          ],
+          "transferred_level_qha": 20.66175
+        }
+      ]
+    },
+    {
+      "year": 2020,
+      "excluded_region": "44 - Grand Est",
+      "train_max": 2019,
+      "training_regions": [
+        "24 - Centre-Val de Loire",
+        "27 - Bourgogne-Franche-Comt\u00e9",
+        "52 - Pays de la Loire",
+        "75 - Nouvelle Aquitaine",
+        "76 - Occitanie",
+        "84 - Auvergne-Rh\u00f4ne-Alpes"
+      ],
+      "n_train": 226,
+      "n_test": 4,
+      "training_departments": [
+        "03",
+        "09",
+        "11",
+        "12",
+        "15",
+        "16",
+        "17",
+        "18",
+        "28",
+        "30",
+        "31",
+        "32",
+        "36",
+        "37",
+        "41",
+        "43",
+        "44",
+        "45",
+        "49",
+        "63",
+        "79",
+        "81",
+        "82",
+        "85",
+        "86",
+        "89"
+      ],
+      "cross_region_duplicate_departments_removed": [],
+      "donors": [
+        {
+          "dep": "08",
+          "donors": [
+            "89",
+            "45",
+            "18",
+            "63"
+          ],
+          "climate_distance": [
+            0.4573745814280698,
+            0.53177467725877,
+            0.6909789579768802,
+            0.751892513485249
+          ],
+          "transferred_level_qha": 13.736749999999999
+        },
+        {
+          "dep": "10",
+          "donors": [
+            "89",
+            "45",
+            "18",
+            "36"
+          ],
+          "climate_distance": [
+            0.2775133198871307,
+            0.31968236353041873,
+            0.4370865830432006,
+            0.5198179626997277
+          ],
+          "transferred_level_qha": 16.28625
+        },
+        {
+          "dep": "51",
+          "donors": [
+            "89",
+            "45",
+            "18",
+            "41"
+          ],
+          "climate_distance": [
+            0.3776363574359788,
+            0.4263667836161075,
+            0.6012550873882845,
+            0.7165564879710437
+          ],
+          "transferred_level_qha": 15.4455
+        },
+        {
+          "dep": "52",
+          "donors": [
+            "63",
+            "12",
+            "15",
+            "03"
+          ],
+          "climate_distance": [
+            0.6557400491482207,
+            0.7952336081210921,
+            0.8194504941408733,
+            0.8247243264847129
+          ],
+          "transferred_level_qha": 9.037988095238095
+        }
+      ]
+    },
+    {
+      "year": 2020,
+      "excluded_region": "52 - Pays de la Loire",
+      "train_max": 2019,
+      "training_regions": [
+        "24 - Centre-Val de Loire",
+        "27 - Bourgogne-Franche-Comt\u00e9",
+        "44 - Grand Est",
+        "75 - Nouvelle Aquitaine",
+        "76 - Occitanie",
+        "84 - Auvergne-Rh\u00f4ne-Alpes"
+      ],
+      "n_train": 242,
+      "n_test": 3,
+      "training_departments": [
+        "03",
+        "08",
+        "09",
+        "10",
+        "11",
+        "12",
+        "15",
+        "16",
+        "17",
+        "18",
+        "28",
+        "30",
+        "31",
+        "32",
+        "36",
+        "37",
+        "41",
+        "43",
+        "45",
+        "51",
+        "52",
+        "63",
+        "79",
+        "81",
+        "82",
+        "86",
+        "89"
+      ],
+      "cross_region_duplicate_departments_removed": [],
+      "donors": [
+        {
+          "dep": "44",
+          "donors": [
+            "28",
+            "45",
+            "17",
+            "79"
+          ],
+          "climate_distance": [
+            0.42701443358046415,
+            0.7450578841661218,
+            0.7627907842935081,
+            0.7754884219823365
+          ],
+          "transferred_level_qha": 16.17325
+        },
+        {
+          "dep": "49",
+          "donors": [
+            "28",
+            "79",
+            "17",
+            "41"
+          ],
+          "climate_distance": [
+            0.36397827695201446,
+            0.49612450764062943,
+            0.5118331098889761,
+            0.5634023027224154
+          ],
+          "transferred_level_qha": 15.601999999999999
+        },
+        {
+          "dep": "85",
+          "donors": [
+            "28",
+            "17",
+            "79",
+            "45"
+          ],
+          "climate_distance": [
+            0.4596071751366115,
+            0.7270776059261189,
+            0.7393359025662094,
+            0.7784533834107142
+          ],
+          "transferred_level_qha": 16.17325
+        }
+      ]
+    },
+    {
+      "year": 2020,
+      "excluded_region": "75 - Nouvelle Aquitaine",
+      "train_max": 2019,
+      "training_regions": [
+        "24 - Centre-Val de Loire",
+        "27 - Bourgogne-Franche-Comt\u00e9",
+        "44 - Grand Est",
+        "52 - Pays de la Loire",
+        "76 - Occitanie",
+        "84 - Auvergne-Rh\u00f4ne-Alpes"
+      ],
+      "n_train": 220,
+      "n_test": 4,
+      "training_departments": [
+        "03",
+        "08",
+        "09",
+        "10",
+        "11",
+        "12",
+        "15",
+        "18",
+        "28",
+        "30",
+        "31",
+        "32",
+        "36",
+        "37",
+        "41",
+        "43",
+        "44",
+        "45",
+        "49",
+        "51",
+        "52",
+        "63",
+        "81",
+        "82",
+        "85",
+        "89"
+      ],
+      "cross_region_duplicate_departments_removed": [],
+      "donors": [
+        {
+          "dep": "16",
+          "donors": [
+            "37",
+            "36",
+            "41",
+            "81"
+          ],
+          "climate_distance": [
+            0.3966286449263632,
+            0.399529019752359,
+            0.5063000500301021,
+            0.5175225584158082
+          ],
+          "transferred_level_qha": 15.121027777777776
+        },
+        {
+          "dep": "17",
+          "donors": [
+            "37",
+            "41",
+            "36",
+            "49"
+          ],
+          "climate_distance": [
+            0.23216034880971897,
+            0.3128221504062372,
+            0.4651060859857422,
+            0.48473394566158623
+          ],
+          "transferred_level_qha": 16.765194444444443
+        },
+        {
+          "dep": "79",
+          "donors": [
+            "37",
+            "41",
+            "36",
+            "45"
+          ],
+          "climate_distance": [
+            0.28729731607998416,
+            0.32176086697222955,
+            0.3458101467107596,
+            0.38468040722735036
+          ],
+          "transferred_level_qha": 16.801027777777776
+        },
+        {
+          "dep": "86",
+          "donors": [
+            "36",
+            "18",
+            "37",
+            "41"
+          ],
+          "climate_distance": [
+            0.2567531242443621,
+            0.3697681633458357,
+            0.3952160254852993,
+            0.45257017881708284
+          ],
+          "transferred_level_qha": 17.052777777777777
+        }
+      ]
+    },
+    {
+      "year": 2020,
+      "excluded_region": "76 - Occitanie",
+      "train_max": 2019,
+      "training_regions": [
+        "24 - Centre-Val de Loire",
+        "27 - Bourgogne-Franche-Comt\u00e9",
+        "44 - Grand Est",
+        "52 - Pays de la Loire",
+        "75 - Nouvelle Aquitaine",
+        "84 - Auvergne-Rh\u00f4ne-Alpes"
+      ],
+      "n_train": 188,
+      "n_test": 8,
+      "training_departments": [
+        "03",
+        "08",
+        "10",
+        "15",
+        "16",
+        "17",
+        "18",
+        "28",
+        "36",
+        "37",
+        "41",
+        "43",
+        "44",
+        "45",
+        "49",
+        "51",
+        "52",
+        "63",
+        "79",
+        "85",
+        "86",
+        "89"
+      ],
+      "cross_region_duplicate_departments_removed": [],
+      "donors": [
+        {
+          "dep": "09",
+          "donors": [
+            "03",
+            "63",
+            "18",
+            "86"
+          ],
+          "climate_distance": [
+            0.8429835200641875,
+            1.1025000069533901,
+            1.1995981802016418,
+            1.2572180144838756
+          ],
+          "transferred_level_qha": 11.657479166666667
+        },
+        {
+          "dep": "11",
+          "donors": [
+            "16",
+            "17",
+            "37",
+            "41"
+          ],
+          "climate_distance": [
+            1.2482369040632302,
+            1.3303524649514686,
+            1.3959719025938706,
+            1.437129465906663
+          ],
+          "transferred_level_qha": 14.751777777777777
+        },
+        {
+          "dep": "12",
+          "donors": [
+            "03",
+            "63",
+            "18",
+            "89"
+          ],
+          "climate_distance": [
+            0.4673610160189675,
+            0.7219504384087627,
+            0.8623153151253699,
+            1.0636344515491156
+          ],
+          "transferred_level_qha": 11.423416666666668
+        },
+        {
+          "dep": "30",
+          "donors": [
+            "16",
+            "17",
+            "37",
+            "36"
+          ],
+          "climate_distance": [
+            3.000766817736624,
+            3.399216914232248,
+            3.420756502607543,
+            3.4839987446429133
+          ],
+          "transferred_level_qha": 15.592527777777777
+        },
+        {
+          "dep": "31",
+          "donors": [
+            "16",
+            "03",
+            "36",
+            "86"
+          ],
+          "climate_distance": [
+            1.1999609834107592,
+            1.5812563748952015,
+            1.6316168544477139,
+            1.6822966623377063
+          ],
+          "transferred_level_qha": 12.834729166666666
+        },
+        {
+          "dep": "32",
+          "donors": [
+            "16",
+            "03",
+            "36",
+            "86"
+          ],
+          "climate_distance": [
+            1.012220416602251,
+            1.2028969947238355,
+            1.359205090298213,
+            1.36595913362446
+          ],
+          "transferred_level_qha": 12.834729166666666
+        },
+        {
+          "dep": "81",
+          "donors": [
+            "16",
+            "36",
+            "86",
+            "03"
+          ],
+          "climate_distance": [
+            0.5550640212738042,
+            0.7971571142675087,
+            0.8522979655507394,
+            0.9131011963937191
+          ],
+          "transferred_level_qha": 12.834729166666666
+        },
+        {
+          "dep": "82",
+          "donors": [
+            "16",
+            "36",
+            "37",
+            "86"
+          ],
+          "climate_distance": [
+            0.8236869899774582,
+            1.3075277672238403,
+            1.3794191530128357,
+            1.4246061880303422
+          ],
+          "transferred_level_qha": 15.330840277777778
+        }
+      ]
+    },
+    {
+      "year": 2020,
+      "excluded_region": "84 - Auvergne-Rh\u00f4ne-Alpes",
+      "train_max": 2019,
+      "training_regions": [
+        "24 - Centre-Val de Loire",
+        "27 - Bourgogne-Franche-Comt\u00e9",
+        "44 - Grand Est",
+        "52 - Pays de la Loire",
+        "75 - Nouvelle Aquitaine",
+        "76 - Occitanie"
+      ],
+      "n_train": 225,
+      "n_test": 4,
+      "training_departments": [
+        "08",
+        "09",
+        "10",
+        "11",
+        "12",
+        "16",
+        "17",
+        "18",
+        "28",
+        "30",
+        "31",
+        "32",
+        "36",
+        "37",
+        "41",
+        "44",
+        "45",
+        "49",
+        "51",
+        "52",
+        "79",
+        "81",
+        "82",
+        "85",
+        "86",
+        "89"
+      ],
+      "cross_region_duplicate_departments_removed": [],
+      "donors": [
+        {
+          "dep": "03",
+          "donors": [
+            "12",
+            "18",
+            "89",
+            "09"
+          ],
+          "climate_distance": [
+            0.4547650121272185,
+            0.6258714562823289,
+            0.729701592090915,
+            0.7432511892298647
+          ],
+          "transferred_level_qha": 13.34344642857143
+        },
+        {
+          "dep": "15",
+          "donors": [
+            "52",
+            "12",
+            "09",
+            "51"
+          ],
+          "climate_distance": [
+            1.1801636692960378,
+            2.0666840944215323,
+            2.1085578797515367,
+            2.3654351886187626
+          ],
+          "transferred_level_qha": 17.76526785714286
+        },
+        {
+          "dep": "43",
+          "donors": [
+            "52",
+            "51",
+            "08",
+            "10"
+          ],
+          "climate_distance": [
+            2.5702463008899272,
+            3.276508156161824,
+            3.365607775941607,
+            3.5221308664477378
+          ],
+          "transferred_level_qha": 24.228571428571428
+        },
+        {
+          "dep": "63",
+          "donors": [
+            "52",
+            "51",
+            "08",
+            "89"
+          ],
+          "climate_distance": [
+            0.7042904598256814,
+            0.866640637810571,
+            0.9342816151409006,
+            0.9582814548753597
+          ],
+          "transferred_level_qha": 21.40357142857143
+        }
+      ]
+    },
+    {
+      "year": 2021,
+      "excluded_region": "24 - Centre-Val de Loire",
+      "train_max": 2020,
+      "training_regions": [
+        "27 - Bourgogne-Franche-Comt\u00e9",
+        "44 - Grand Est",
+        "52 - Pays de la Loire",
+        "75 - Nouvelle Aquitaine",
+        "76 - Occitanie",
+        "84 - Auvergne-Rh\u00f4ne-Alpes"
+      ],
+      "n_train": 223,
+      "n_test": 6,
+      "training_departments": [
+        "03",
+        "08",
+        "09",
+        "10",
+        "11",
+        "12",
+        "15",
+        "16",
+        "17",
+        "30",
+        "31",
+        "32",
+        "43",
+        "44",
+        "49",
+        "51",
+        "52",
+        "63",
+        "79",
+        "81",
+        "82",
+        "85",
+        "86",
+        "89"
+      ],
+      "cross_region_duplicate_departments_removed": [],
+      "donors": [
+        {
+          "dep": "18",
+          "donors": [
+            "89",
+            "86",
+            "10",
+            "03"
+          ],
+          "climate_distance": [
+            0.2510536174742767,
+            0.38123374560571177,
+            0.3949122645683274,
+            0.5405725188819427
+          ],
+          "transferred_level_qha": 13.546559343434344
+        },
+        {
+          "dep": "28",
+          "donors": [
+            "44",
+            "49",
+            "85",
+            "79"
+          ],
+          "climate_distance": [
+            0.3099469639427608,
+            0.3566927308247041,
+            0.3899387248094488,
+            0.5988192225906441
+          ],
+          "transferred_level_qha": 15.98784090909091
+        },
+        {
+          "dep": "36",
+          "donors": [
+            "86",
+            "79",
+            "17",
+            "16"
+          ],
+          "climate_distance": [
+            0.24850267063452955,
+            0.34789368556676137,
+            0.3772418654319338,
+            0.38487934567464344
+          ],
+          "transferred_level_qha": 13.684797979797981
+        },
+        {
+          "dep": "37",
+          "donors": [
+            "17",
+            "79",
+            "16",
+            "86"
+          ],
+          "climate_distance": [
+            0.15793311870726148,
+            0.2916036960957728,
+            0.3776665923797854,
+            0.384342905802811
+          ],
+          "transferred_level_qha": 13.68479797979798
+        },
+        {
+          "dep": "41",
+          "donors": [
+            "17",
+            "79",
+            "86",
+            "49"
+          ],
+          "climate_distance": [
+            0.23358659681672173,
+            0.3244796335704542,
+            0.46695176620097817,
+            0.47680013166014484
+          ],
+          "transferred_level_qha": 14.736559343434344
+        },
+        {
+          "dep": "45",
+          "donors": [
+            "10",
+            "89",
+            "51",
+            "79"
+          ],
+          "climate_distance": [
+            0.31116816804756836,
+            0.37107171996544497,
+            0.39378982140743735,
+            0.43033876794204257
+          ],
+          "transferred_level_qha": 18.454545454545453
+        }
+      ]
+    },
+    {
+      "year": 2021,
+      "excluded_region": "27 - Bourgogne-Franche-Comt\u00e9",
+      "train_max": 2020,
+      "training_regions": [
+        "24 - Centre-Val de Loire",
+        "44 - Grand Est",
+        "52 - Pays de la Loire",
+        "75 - Nouvelle Aquitaine",
+        "76 - Occitanie",
+        "84 - Auvergne-Rh\u00f4ne-Alpes"
+      ],
+      "n_train": 277,
+      "n_test": 1,
+      "training_departments": [
+        "03",
+        "08",
+        "09",
+        "10",
+        "11",
+        "12",
+        "15",
+        "16",
+        "17",
+        "18",
+        "28",
+        "30",
+        "31",
+        "32",
+        "36",
+        "37",
+        "41",
+        "43",
+        "44",
+        "45",
+        "49",
+        "51",
+        "52",
+        "63",
+        "79",
+        "81",
+        "82",
+        "85",
+        "86"
+      ],
+      "cross_region_duplicate_departments_removed": [],
+      "donors": [
+        {
+          "dep": "89",
+          "donors": [
+            "10",
+            "18",
+            "45",
+            "51"
+          ],
+          "climate_distance": [
+            0.26515109440747764,
+            0.2675703842113062,
+            0.3909408689974166,
+            0.41057392887961974
+          ],
+          "transferred_level_qha": 19.760681818181816
+        }
+      ]
+    },
+    {
+      "year": 2021,
+      "excluded_region": "44 - Grand Est",
+      "train_max": 2020,
+      "training_regions": [
+        "24 - Centre-Val de Loire",
+        "27 - Bourgogne-Franche-Comt\u00e9",
+        "52 - Pays de la Loire",
+        "75 - Nouvelle Aquitaine",
+        "76 - Occitanie",
+        "84 - Auvergne-Rh\u00f4ne-Alpes"
+      ],
+      "n_train": 252,
+      "n_test": 4,
+      "training_departments": [
+        "03",
+        "09",
+        "11",
+        "12",
+        "15",
+        "16",
+        "17",
+        "18",
+        "28",
+        "30",
+        "31",
+        "32",
+        "36",
+        "37",
+        "41",
+        "43",
+        "44",
+        "45",
+        "49",
+        "63",
+        "79",
+        "81",
+        "82",
+        "85",
+        "86",
+        "89"
+      ],
+      "cross_region_duplicate_departments_removed": [],
+      "donors": [
+        {
+          "dep": "08",
+          "donors": [
+            "89",
+            "45",
+            "18",
+            "28"
+          ],
+          "climate_distance": [
+            0.49949006313148947,
+            0.5304991449625869,
+            0.7262244251051716,
+            0.7776904660239531
+          ],
+          "transferred_level_qha": 15.00840909090909
+        },
+        {
+          "dep": "10",
+          "donors": [
+            "89",
+            "45",
+            "18",
+            "36"
+          ],
+          "climate_distance": [
+            0.26241099978977467,
+            0.33808846765237305,
+            0.4117622763919098,
+            0.5907160671854038
+          ],
+          "transferred_level_qha": 15.317045454545454
+        },
+        {
+          "dep": "51",
+          "donors": [
+            "89",
+            "45",
+            "18",
+            "28"
+          ],
+          "climate_distance": [
+            0.40664161786287034,
+            0.428659853099531,
+            0.6112500303967717,
+            0.7448966536932136
+          ],
+          "transferred_level_qha": 15.00840909090909
+        },
+        {
+          "dep": "52",
+          "donors": [
+            "63",
+            "03",
+            "12",
+            "15"
+          ],
+          "climate_distance": [
+            0.6234570306372905,
+            0.7913222076567442,
+            0.8345094657026579,
+            0.8699020031638036
+          ],
+          "transferred_level_qha": 8.582102272727273
+        }
+      ]
+    },
+    {
+      "year": 2021,
+      "excluded_region": "52 - Pays de la Loire",
+      "train_max": 2020,
+      "training_regions": [
+        "24 - Centre-Val de Loire",
+        "27 - Bourgogne-Franche-Comt\u00e9",
+        "44 - Grand Est",
+        "75 - Nouvelle Aquitaine",
+        "76 - Occitanie",
+        "84 - Auvergne-Rh\u00f4ne-Alpes"
+      ],
+      "n_train": 269,
+      "n_test": 3,
+      "training_departments": [
+        "03",
+        "08",
+        "09",
+        "10",
+        "11",
+        "12",
+        "15",
+        "16",
+        "17",
+        "18",
+        "28",
+        "30",
+        "31",
+        "32",
+        "36",
+        "37",
+        "41",
+        "43",
+        "45",
+        "51",
+        "52",
+        "63",
+        "79",
+        "81",
+        "82",
+        "86",
+        "89"
+      ],
+      "cross_region_duplicate_departments_removed": [],
+      "donors": [
+        {
+          "dep": "44",
+          "donors": [
+            "28",
+            "45",
+            "79",
+            "41"
+          ],
+          "climate_distance": [
+            0.33707356921460746,
+            0.6288992579217841,
+            0.7079875832887818,
+            0.7108521759295808
+          ],
+          "transferred_level_qha": 15.351136363636364
+        },
+        {
+          "dep": "49",
+          "donors": [
+            "28",
+            "79",
+            "41",
+            "45"
+          ],
+          "climate_distance": [
+            0.3811562283510122,
+            0.4930977899609313,
+            0.5225497394782614,
+            0.5305586215133459
+          ],
+          "transferred_level_qha": 15.351136363636364
+        },
+        {
+          "dep": "85",
+          "donors": [
+            "28",
+            "79",
+            "45",
+            "41"
+          ],
+          "climate_distance": [
+            0.421028977161786,
+            0.6637505107601825,
+            0.7010652473368582,
+            0.7192551973373928
+          ],
+          "transferred_level_qha": 15.351136363636364
+        }
+      ]
+    },
+    {
+      "year": 2021,
+      "excluded_region": "75 - Nouvelle Aquitaine",
+      "train_max": 2020,
+      "training_regions": [
+        "24 - Centre-Val de Loire",
+        "27 - Bourgogne-Franche-Comt\u00e9",
+        "44 - Grand Est",
+        "52 - Pays de la Loire",
+        "76 - Occitanie",
+        "84 - Auvergne-Rh\u00f4ne-Alpes"
+      ],
+      "n_train": 246,
+      "n_test": 4,
+      "training_departments": [
+        "03",
+        "08",
+        "09",
+        "10",
+        "11",
+        "12",
+        "15",
+        "18",
+        "28",
+        "30",
+        "31",
+        "32",
+        "36",
+        "37",
+        "41",
+        "43",
+        "44",
+        "45",
+        "49",
+        "51",
+        "52",
+        "63",
+        "81",
+        "82",
+        "85",
+        "89"
+      ],
+      "cross_region_duplicate_departments_removed": [],
+      "donors": [
+        {
+          "dep": "16",
+          "donors": [
+            "37",
+            "36",
+            "81",
+            "41"
+          ],
+          "climate_distance": [
+            0.38611930391440946,
+            0.40152385743257973,
+            0.48422455626132577,
+            0.5021333646788363
+          ],
+          "transferred_level_qha": 14.263090909090907
+        },
+        {
+          "dep": "17",
+          "donors": [
+            "37",
+            "41",
+            "36",
+            "49"
+          ],
+          "climate_distance": [
+            0.16364801269161225,
+            0.245309769937921,
+            0.3915833151785825,
+            0.5293610105005773
+          ],
+          "transferred_level_qha": 15.868943181818182
+        },
+        {
+          "dep": "79",
+          "donors": [
+            "37",
+            "41",
+            "36",
+            "49"
+          ],
+          "climate_distance": [
+            0.29993109642872207,
+            0.33258299691764304,
+            0.3608258413939505,
+            0.4414762832138588
+          ],
+          "transferred_level_qha": 15.868943181818182
+        },
+        {
+          "dep": "86",
+          "donors": [
+            "36",
+            "37",
+            "18",
+            "41"
+          ],
+          "climate_distance": [
+            0.2517616686655001,
+            0.38746757729195336,
+            0.4002737409921508,
+            0.46752544436727966
+          ],
+          "transferred_level_qha": 16.01922727272727
+        }
+      ]
+    },
+    {
+      "year": 2021,
+      "excluded_region": "76 - Occitanie",
+      "train_max": 2020,
+      "training_regions": [
+        "24 - Centre-Val de Loire",
+        "27 - Bourgogne-Franche-Comt\u00e9",
+        "44 - Grand Est",
+        "52 - Pays de la Loire",
+        "75 - Nouvelle Aquitaine",
+        "84 - Auvergne-Rh\u00f4ne-Alpes"
+      ],
+      "n_train": 210,
+      "n_test": 8,
+      "training_departments": [
+        "03",
+        "08",
+        "10",
+        "15",
+        "16",
+        "17",
+        "18",
+        "28",
+        "36",
+        "37",
+        "41",
+        "43",
+        "44",
+        "45",
+        "49",
+        "51",
+        "52",
+        "63",
+        "79",
+        "85",
+        "86",
+        "89"
+      ],
+      "cross_region_duplicate_departments_removed": [],
+      "donors": [
+        {
+          "dep": "09",
+          "donors": [
+            "03",
+            "63",
+            "86",
+            "18"
+          ],
+          "climate_distance": [
+            0.9523926935199125,
+            1.179943585249095,
+            1.3297070962937547,
+            1.3470626714683283
+          ],
+          "transferred_level_qha": 11.095877525252526
+        },
+        {
+          "dep": "11",
+          "donors": [
+            "16",
+            "17",
+            "37",
+            "41"
+          ],
+          "climate_distance": [
+            0.9724344255151471,
+            1.1780816941533394,
+            1.1802634816943838,
+            1.2488818460637037
+          ],
+          "transferred_level_qha": 14.018318181818183
+        },
+        {
+          "dep": "12",
+          "donors": [
+            "03",
+            "63",
+            "18",
+            "86"
+          ],
+          "climate_distance": [
+            0.5454709068415028,
+            0.7467600459538581,
+            0.9418026139633745,
+            1.1035751332784516
+          ],
+          "transferred_level_qha": 11.095877525252526
+        },
+        {
+          "dep": "30",
+          "donors": [
+            "16",
+            "17",
+            "37",
+            "36"
+          ],
+          "climate_distance": [
+            2.9934921690873275,
+            3.3887811402317105,
+            3.3951738330367895,
+            3.457138768976917
+          ],
+          "transferred_level_qha": 14.82809090909091
+        },
+        {
+          "dep": "31",
+          "donors": [
+            "16",
+            "03",
+            "36",
+            "86"
+          ],
+          "climate_distance": [
+            1.1861155418677833,
+            1.5377944185687704,
+            1.6099746966084165,
+            1.6203390621006253
+          ],
+          "transferred_level_qha": 12.247922979797979
+        },
+        {
+          "dep": "32",
+          "donors": [
+            "16",
+            "03",
+            "86",
+            "36"
+          ],
+          "climate_distance": [
+            1.0407136193147997,
+            1.2034127673424098,
+            1.352266083113133,
+            1.3860728917251888
+          ],
+          "transferred_level_qha": 12.24792297979798
+        },
+        {
+          "dep": "81",
+          "donors": [
+            "16",
+            "36",
+            "86",
+            "03"
+          ],
+          "climate_distance": [
+            0.532736065727354,
+            0.7777028677790698,
+            0.7826983057345529,
+            0.8887640234044206
+          ],
+          "transferred_level_qha": 12.247922979797979
+        },
+        {
+          "dep": "82",
+          "donors": [
+            "16",
+            "36",
+            "37",
+            "86"
+          ],
+          "climate_distance": [
+            0.7655985231270995,
+            1.2547374187358815,
+            1.320664037582886,
+            1.3400843630360573
+          ],
+          "transferred_level_qha": 14.56879797979798
+        }
+      ]
+    },
+    {
+      "year": 2021,
+      "excluded_region": "84 - Auvergne-Rh\u00f4ne-Alpes",
+      "train_max": 2020,
+      "training_regions": [
+        "24 - Centre-Val de Loire",
+        "27 - Bourgogne-Franche-Comt\u00e9",
+        "44 - Grand Est",
+        "52 - Pays de la Loire",
+        "75 - Nouvelle Aquitaine",
+        "76 - Occitanie"
+      ],
+      "n_train": 251,
+      "n_test": 4,
+      "training_departments": [
+        "08",
+        "09",
+        "10",
+        "11",
+        "12",
+        "16",
+        "17",
+        "18",
+        "28",
+        "30",
+        "31",
+        "32",
+        "36",
+        "37",
+        "41",
+        "44",
+        "45",
+        "49",
+        "51",
+        "52",
+        "79",
+        "81",
+        "82",
+        "85",
+        "86",
+        "89"
+      ],
+      "cross_region_duplicate_departments_removed": [],
+      "donors": [
+        {
+          "dep": "03",
+          "donors": [
+            "12",
+            "18",
+            "89",
+            "09"
+          ],
+          "climate_distance": [
+            0.5489275488154287,
+            0.64775795150099,
+            0.7415808409535142,
+            0.8651294868241828
+          ],
+          "transferred_level_qha": 12.680214646464648
+        },
+        {
+          "dep": "15",
+          "donors": [
+            "52",
+            "12",
+            "09",
+            "51"
+          ],
+          "climate_distance": [
+            1.1529661836553216,
+            1.9264427680856424,
+            1.9954155118100718,
+            2.2809388166822786
+          ],
+          "transferred_level_qha": 17.09169191919192
+        },
+        {
+          "dep": "43",
+          "donors": [
+            "52",
+            "51",
+            "08",
+            "10"
+          ],
+          "climate_distance": [
+            2.5151622897461468,
+            3.0943525778742798,
+            3.1843776592601896,
+            3.379901955626525
+          ],
+          "transferred_level_qha": 23.18276515151515
+        },
+        {
+          "dep": "63",
+          "donors": [
+            "52",
+            "51",
+            "89",
+            "10"
+          ],
+          "climate_distance": [
+            0.6528862646400925,
+            0.9669937531753265,
+            0.9940099940110072,
+            1.0317525817874746
+          ],
+          "transferred_level_qha": 20.099431818181817
+        }
+      ]
+    },
+    {
+      "year": 2022,
+      "excluded_region": "24 - Centre-Val de Loire",
+      "train_max": 2021,
+      "training_regions": [
+        "27 - Bourgogne-Franche-Comt\u00e9",
+        "44 - Grand Est",
+        "52 - Pays de la Loire",
+        "75 - Nouvelle Aquitaine",
+        "76 - Occitanie",
+        "84 - Auvergne-Rh\u00f4ne-Alpes"
+      ],
+      "n_train": 233,
+      "n_test": 6,
+      "training_departments": [
+        "03",
+        "08",
+        "09",
+        "10",
+        "11",
+        "12",
+        "15",
+        "16",
+        "17",
+        "30",
+        "31",
+        "32",
+        "43",
+        "44",
+        "49",
+        "51",
+        "53",
+        "63",
+        "71",
+        "79",
+        "81",
+        "85",
+        "86",
+        "89"
+      ],
+      "cross_region_duplicate_departments_removed": [],
+      "donors": [
+        {
+          "dep": "18",
+          "donors": [
+            "89",
+            "86",
+            "10",
+            "81"
+          ],
+          "climate_distance": [
+            0.2713060106513475,
+            0.382044821521773,
+            0.4000905265311699,
+            0.5499359653389825
+          ],
+          "transferred_level_qha": 13.628499999999999
+        },
+        {
+          "dep": "28",
+          "donors": [
+            "53",
+            "49",
+            "44",
+            "85"
+          ],
+          "climate_distance": [
+            0.26609876745088024,
+            0.4105242666256222,
+            0.43924872029550943,
+            0.4734264578312011
+          ],
+          "transferred_level_qha": 14.055291666666664
+        },
+        {
+          "dep": "36",
+          "donors": [
+            "86",
+            "79",
+            "17",
+            "16"
+          ],
+          "climate_distance": [
+            0.17200885560811743,
+            0.322581473291171,
+            0.3746321117748039,
+            0.38444453653768457
+          ],
+          "transferred_level_qha": 13.132874999999999
+        },
+        {
+          "dep": "37",
+          "donors": [
+            "17",
+            "79",
+            "86",
+            "16"
+          ],
+          "climate_distance": [
+            0.17460143600161104,
+            0.28446975168236766,
+            0.36956401898356755,
+            0.39012074381235834
+          ],
+          "transferred_level_qha": 13.132875
+        },
+        {
+          "dep": "41",
+          "donors": [
+            "17",
+            "79",
+            "86",
+            "49"
+          ],
+          "climate_distance": [
+            0.259985717501434,
+            0.2644707764358338,
+            0.3899829304614275,
+            0.4678941836727892
+          ],
+          "transferred_level_qha": 13.779791666666668
+        },
+        {
+          "dep": "45",
+          "donors": [
+            "10",
+            "79",
+            "53",
+            "89"
+          ],
+          "climate_distance": [
+            0.41082185953783906,
+            0.4116578970098609,
+            0.41796221879423057,
+            0.44965668072201276
+          ],
+          "transferred_level_qha": 15.188333333333333
+        }
+      ]
+    },
+    {
+      "year": 2022,
+      "excluded_region": "27 - Bourgogne-Franche-Comt\u00e9",
+      "train_max": 2021,
+      "training_regions": [
+        "24 - Centre-Val de Loire",
+        "44 - Grand Est",
+        "52 - Pays de la Loire",
+        "75 - Nouvelle Aquitaine",
+        "76 - Occitanie",
+        "84 - Auvergne-Rh\u00f4ne-Alpes"
+      ],
+      "n_train": 289,
+      "n_test": 1,
+      "training_departments": [
+        "03",
+        "08",
+        "09",
+        "10",
+        "11",
+        "12",
+        "15",
+        "16",
+        "17",
+        "18",
+        "28",
+        "30",
+        "31",
+        "32",
+        "36",
+        "37",
+        "41",
+        "43",
+        "44",
+        "45",
+        "49",
+        "51",
+        "53",
+        "63",
+        "79",
+        "81",
+        "85",
+        "86"
+      ],
+      "cross_region_duplicate_departments_removed": [],
+      "donors": [
+        {
+          "dep": "89",
+          "donors": [
+            "10",
+            "18",
+            "51",
+            "45"
+          ],
+          "climate_distance": [
+            0.25721345553367503,
+            0.2942808058145851,
+            0.41893917123840735,
+            0.48730600756824044
+          ],
+          "transferred_level_qha": 19.25979166666667
+        }
+      ]
+    },
+    {
+      "year": 2022,
+      "excluded_region": "44 - Grand Est",
+      "train_max": 2021,
+      "training_regions": [
+        "24 - Centre-Val de Loire",
+        "27 - Bourgogne-Franche-Comt\u00e9",
+        "52 - Pays de la Loire",
+        "75 - Nouvelle Aquitaine",
+        "76 - Occitanie",
+        "84 - Auvergne-Rh\u00f4ne-Alpes"
+      ],
+      "n_train": 273,
+      "n_test": 3,
+      "training_departments": [
+        "03",
+        "09",
+        "11",
+        "12",
+        "15",
+        "16",
+        "17",
+        "18",
+        "28",
+        "30",
+        "31",
+        "32",
+        "36",
+        "37",
+        "41",
+        "43",
+        "44",
+        "45",
+        "49",
+        "53",
+        "63",
+        "71",
+        "79",
+        "81",
+        "85",
+        "86",
+        "89"
+      ],
+      "cross_region_duplicate_departments_removed": [],
+      "donors": [
+        {
+          "dep": "08",
+          "donors": [
+            "89",
+            "45",
+            "18",
+            "28"
+          ],
+          "climate_distance": [
+            0.5111338357565697,
+            0.6561101673316502,
+            0.7663147354955258,
+            0.8623464951455903
+          ],
+          "transferred_level_qha": 15.091041666666666
+        },
+        {
+          "dep": "10",
+          "donors": [
+            "89",
+            "18",
+            "45",
+            "36"
+          ],
+          "climate_distance": [
+            0.25346605300944397,
+            0.4236654045509904,
+            0.4390706808309443,
+            0.694079882045953
+          ],
+          "transferred_level_qha": 15.394791666666666
+        },
+        {
+          "dep": "51",
+          "donors": [
+            "89",
+            "45",
+            "18",
+            "63"
+          ],
+          "climate_distance": [
+            0.4130532717350528,
+            0.5615138584372704,
+            0.65057191047194,
+            0.8147903489084054
+          ],
+          "transferred_level_qha": 12.830625
+        }
+      ]
+    },
+    {
+      "year": 2022,
+      "excluded_region": "52 - Pays de la Loire",
+      "train_max": 2021,
+      "training_regions": [
+        "24 - Centre-Val de Loire",
+        "27 - Bourgogne-Franche-Comt\u00e9",
+        "44 - Grand Est",
+        "75 - Nouvelle Aquitaine",
+        "76 - Occitanie",
+        "84 - Auvergne-Rh\u00f4ne-Alpes"
+      ],
+      "n_train": 279,
+      "n_test": 4,
+      "training_departments": [
+        "03",
+        "08",
+        "09",
+        "10",
+        "11",
+        "12",
+        "15",
+        "16",
+        "17",
+        "18",
+        "28",
+        "30",
+        "31",
+        "32",
+        "36",
+        "37",
+        "41",
+        "43",
+        "45",
+        "51",
+        "63",
+        "71",
+        "79",
+        "81",
+        "86",
+        "89"
+      ],
+      "cross_region_duplicate_departments_removed": [],
+      "donors": [
+        {
+          "dep": "44",
+          "donors": [
+            "28",
+            "45",
+            "79",
+            "41"
+          ],
+          "climate_distance": [
+            0.4827466430126889,
+            0.6729794665534455,
+            0.700438910288777,
+            0.751671614434975
+          ],
+          "transferred_level_qha": 15.530208333333334
+        },
+        {
+          "dep": "49",
+          "donors": [
+            "79",
+            "28",
+            "41",
+            "45"
+          ],
+          "climate_distance": [
+            0.4347789653408709,
+            0.43770479032558324,
+            0.5151267975047338,
+            0.5241715854670159
+          ],
+          "transferred_level_qha": 15.530208333333334
+        },
+        {
+          "dep": "53",
+          "donors": [
+            "28",
+            "45",
+            "79",
+            "41"
+          ],
+          "climate_distance": [
+            0.28551357056587123,
+            0.4509248768991576,
+            0.5297885715360687,
+            0.6610231311671487
+          ],
+          "transferred_level_qha": 15.530208333333334
+        },
+        {
+          "dep": "85",
+          "donors": [
+            "28",
+            "79",
+            "45",
+            "41"
+          ],
+          "climate_distance": [
+            0.5126416469924137,
+            0.6409952856058517,
+            0.7140723787030899,
+            0.7352349805661956
+          ],
+          "transferred_level_qha": 15.530208333333333
+        }
+      ]
+    },
+    {
+      "year": 2022,
+      "excluded_region": "75 - Nouvelle Aquitaine",
+      "train_max": 2021,
+      "training_regions": [
+        "24 - Centre-Val de Loire",
+        "27 - Bourgogne-Franche-Comt\u00e9",
+        "44 - Grand Est",
+        "52 - Pays de la Loire",
+        "76 - Occitanie",
+        "84 - Auvergne-Rh\u00f4ne-Alpes"
+      ],
+      "n_train": 258,
+      "n_test": 4,
+      "training_departments": [
+        "03",
+        "08",
+        "09",
+        "10",
+        "11",
+        "12",
+        "15",
+        "18",
+        "28",
+        "30",
+        "31",
+        "32",
+        "36",
+        "37",
+        "41",
+        "43",
+        "44",
+        "45",
+        "49",
+        "51",
+        "53",
+        "63",
+        "71",
+        "81",
+        "85",
+        "89"
+      ],
+      "cross_region_duplicate_departments_removed": [],
+      "donors": [
+        {
+          "dep": "16",
+          "donors": [
+            "37",
+            "36",
+            "81",
+            "41"
+          ],
+          "climate_distance": [
+            0.4011433805528181,
+            0.4015594817676074,
+            0.48612604414841654,
+            0.486380255550173
+          ],
+          "transferred_level_qha": 14.647632575757575
+        },
+        {
+          "dep": "17",
+          "donors": [
+            "37",
+            "41",
+            "36",
+            "49"
+          ],
+          "climate_distance": [
+            0.18473430290277462,
+            0.2742320773297009,
+            0.3921993167651211,
+            0.5410726463544457
+          ],
+          "transferred_level_qha": 15.781632575757577
+        },
+        {
+          "dep": "79",
+          "donors": [
+            "41",
+            "37",
+            "36",
+            "49"
+          ],
+          "climate_distance": [
+            0.2726736957045812,
+            0.2930765619675417,
+            0.33351156033109425,
+            0.3892949628723448
+          ],
+          "transferred_level_qha": 15.781632575757577
+        },
+        {
+          "dep": "86",
+          "donors": [
+            "36",
+            "37",
+            "41",
+            "18"
+          ],
+          "climate_distance": [
+            0.17496489644640392,
+            0.3768815205860136,
+            0.39552536903729424,
+            0.4019896220108715
+          ],
+          "transferred_level_qha": 16.486590909090907
+        }
+      ]
+    },
+    {
+      "year": 2022,
+      "excluded_region": "76 - Occitanie",
+      "train_max": 2021,
+      "training_regions": [
+        "24 - Centre-Val de Loire",
+        "27 - Bourgogne-Franche-Comt\u00e9",
+        "44 - Grand Est",
+        "52 - Pays de la Loire",
+        "75 - Nouvelle Aquitaine",
+        "84 - Auvergne-Rh\u00f4ne-Alpes"
+      ],
+      "n_train": 229,
+      "n_test": 7,
+      "training_departments": [
+        "03",
+        "08",
+        "10",
+        "15",
+        "16",
+        "17",
+        "18",
+        "28",
+        "36",
+        "37",
+        "41",
+        "43",
+        "44",
+        "45",
+        "49",
+        "51",
+        "53",
+        "63",
+        "71",
+        "79",
+        "85",
+        "86",
+        "89"
+      ],
+      "cross_region_duplicate_departments_removed": [],
+      "donors": [
+        {
+          "dep": "09",
+          "donors": [
+            "03",
+            "71",
+            "63",
+            "86"
+          ],
+          "climate_distance": [
+            0.7797734655620403,
+            0.9534469684134957,
+            1.0176720245169284,
+            1.1895035895138684
+          ],
+          "transferred_level_qha": 7.7115
+        },
+        {
+          "dep": "11",
+          "donors": [
+            "16",
+            "37",
+            "17",
+            "41"
+          ],
+          "climate_distance": [
+            1.0808783382891873,
+            1.2645153907047486,
+            1.2931151094020876,
+            1.368319448294482
+          ],
+          "transferred_level_qha": 14.069090909090908
+        },
+        {
+          "dep": "12",
+          "donors": [
+            "03",
+            "63",
+            "71",
+            "18"
+          ],
+          "climate_distance": [
+            0.43822737864315975,
+            0.579909600094089,
+            0.6027055068172238,
+            0.904013246767428
+          ],
+          "transferred_level_qha": 8.890708333333333
+        },
+        {
+          "dep": "30",
+          "donors": [
+            "16",
+            "37",
+            "17",
+            "41"
+          ],
+          "climate_distance": [
+            3.163841476637811,
+            3.5587286404388805,
+            3.5803333580989083,
+            3.6742848847704335
+          ],
+          "transferred_level_qha": 14.069090909090908
+        },
+        {
+          "dep": "31",
+          "donors": [
+            "16",
+            "36",
+            "86",
+            "03"
+          ],
+          "climate_distance": [
+            1.1448987589927637,
+            1.6071966659765726,
+            1.6259236516519442,
+            1.6425326330921983
+          ],
+          "transferred_level_qha": 11.991916666666667
+        },
+        {
+          "dep": "32",
+          "donors": [
+            "16",
+            "03",
+            "86",
+            "36"
+          ],
+          "climate_distance": [
+            0.9610812314439721,
+            1.3149354907730653,
+            1.3463835411868075,
+            1.3525884240389003
+          ],
+          "transferred_level_qha": 11.991916666666665
+        },
+        {
+          "dep": "81",
+          "donors": [
+            "16",
+            "36",
+            "86",
+            "37"
+          ],
+          "climate_distance": [
+            0.5247148620544875,
+            0.7526860499273381,
+            0.7570698484119519,
+            0.896109945371069
+          ],
+          "transferred_level_qha": 14.620507575757577
+        }
+      ]
+    },
+    {
+      "year": 2022,
+      "excluded_region": "84 - Auvergne-Rh\u00f4ne-Alpes",
+      "train_max": 2021,
+      "training_regions": [
+        "24 - Centre-Val de Loire",
+        "27 - Bourgogne-Franche-Comt\u00e9",
+        "44 - Grand Est",
+        "52 - Pays de la Loire",
+        "75 - Nouvelle Aquitaine",
+        "76 - Occitanie"
+      ],
+      "n_train": 263,
+      "n_test": 4,
+      "training_departments": [
+        "08",
+        "09",
+        "10",
+        "11",
+        "12",
+        "16",
+        "17",
+        "18",
+        "28",
+        "30",
+        "31",
+        "32",
+        "36",
+        "37",
+        "41",
+        "44",
+        "45",
+        "49",
+        "51",
+        "53",
+        "71",
+        "79",
+        "81",
+        "85",
+        "86",
+        "89"
+      ],
+      "cross_region_duplicate_departments_removed": [],
+      "donors": [
+        {
+          "dep": "03",
+          "donors": [
+            "71",
+            "12",
+            "09",
+            "18"
+          ],
+          "climate_distance": [
+            0.4153848406817061,
+            0.4386141970624699,
+            0.6625254324371688,
+            0.7267242979957799
+          ],
+          "transferred_level_qha": 10.990736111111111
+        },
+        {
+          "dep": "15",
+          "donors": [
+            "71",
+            "12",
+            "09",
+            "89"
+          ],
+          "climate_distance": [
+            1.6905435510875244,
+            1.695603537929745,
+            1.9842494662039858,
+            2.140114263261937
+          ],
+          "transferred_level_qha": 9.412194444444443
+        },
+        {
+          "dep": "43",
+          "donors": [
+            "51",
+            "08",
+            "71",
+            "89"
+          ],
+          "climate_distance": [
+            2.5344787329116407,
+            2.5906126667902187,
+            2.6036937466916337,
+            2.7561713340169995
+          ],
+          "transferred_level_qha": 14.84077380952381
+        },
+        {
+          "dep": "63",
+          "donors": [
+            "71",
+            "12",
+            "89",
+            "10"
+          ],
+          "climate_distance": [
+            0.5236678709124252,
+            0.8067866400577437,
+            0.8363828637461495,
+            0.9370460416170764
+          ],
+          "transferred_level_qha": 11.996527777777779
+        }
+      ]
+    },
+    {
+      "year": 2023,
+      "excluded_region": "24 - Centre-Val de Loire",
+      "train_max": 2022,
+      "training_regions": [
+        "27 - Bourgogne-Franche-Comt\u00e9",
+        "44 - Grand Est",
+        "52 - Pays de la Loire",
+        "75 - Nouvelle Aquitaine",
+        "76 - Occitanie",
+        "84 - Auvergne-Rh\u00f4ne-Alpes"
+      ],
+      "n_train": 225,
+      "n_test": 6,
+      "training_departments": [
+        "03",
+        "09",
+        "10",
+        "11",
+        "12",
+        "15",
+        "16",
+        "17",
+        "30",
+        "31",
+        "32",
+        "43",
+        "44",
+        "48",
+        "49",
+        "53",
+        "71",
+        "79",
+        "81",
+        "85",
+        "86",
+        "89"
+      ],
+      "cross_region_duplicate_departments_removed": [],
+      "donors": [
+        {
+          "dep": "18",
+          "donors": [
+            "89",
+            "86",
+            "10",
+            "81"
+          ],
+          "climate_distance": [
+            0.2789566093401395,
+            0.37732242996872895,
+            0.4241225760569385,
+            0.542512615094222
+          ],
+          "transferred_level_qha": 13.260611888111889
+        },
+        {
+          "dep": "28",
+          "donors": [
+            "53",
+            "49",
+            "44",
+            "85"
+          ],
+          "climate_distance": [
+            0.23057272800995693,
+            0.4173797109722696,
+            0.437622553480616,
+            0.49439262675538365
+          ],
+          "transferred_level_qha": 14.145721153846154
+        },
+        {
+          "dep": "36",
+          "donors": [
+            "86",
+            "79",
+            "17",
+            "16"
+          ],
+          "climate_distance": [
+            0.1280694493640831,
+            0.28801395104920346,
+            0.3428084056259131,
+            0.3568960061297975
+          ],
+          "transferred_level_qha": 12.630034965034964
+        },
+        {
+          "dep": "37",
+          "donors": [
+            "17",
+            "79",
+            "86",
+            "16"
+          ],
+          "climate_distance": [
+            0.14782971651249108,
+            0.262912107634301,
+            0.36941745383516467,
+            0.38742482759796537
+          ],
+          "transferred_level_qha": 12.630034965034964
+        },
+        {
+          "dep": "41",
+          "donors": [
+            "79",
+            "17",
+            "86",
+            "49"
+          ],
+          "climate_distance": [
+            0.1956503316404672,
+            0.2462092933431079,
+            0.3386856356637767,
+            0.4487657935081501
+          ],
+          "transferred_level_qha": 13.392534965034965
+        },
+        {
+          "dep": "45",
+          "donors": [
+            "79",
+            "53",
+            "10",
+            "89"
+          ],
+          "climate_distance": [
+            0.3774369064996555,
+            0.3931005533539077,
+            0.40367038244040376,
+            0.44767982942520657
+          ],
+          "transferred_level_qha": 14.89110576923077
+        }
+      ]
+    },
+    {
+      "year": 2023,
+      "excluded_region": "27 - Bourgogne-Franche-Comt\u00e9",
+      "train_max": 2022,
+      "training_regions": [
+        "24 - Centre-Val de Loire",
+        "44 - Grand Est",
+        "52 - Pays de la Loire",
+        "75 - Nouvelle Aquitaine",
+        "76 - Occitanie",
+        "84 - Auvergne-Rh\u00f4ne-Alpes"
+      ],
+      "n_train": 286,
+      "n_test": 1,
+      "training_departments": [
+        "03",
+        "09",
+        "10",
+        "11",
+        "12",
+        "15",
+        "16",
+        "17",
+        "18",
+        "28",
+        "30",
+        "31",
+        "32",
+        "36",
+        "37",
+        "41",
+        "43",
+        "44",
+        "45",
+        "48",
+        "49",
+        "53",
+        "79",
+        "81",
+        "85",
+        "86"
+      ],
+      "cross_region_duplicate_departments_removed": [],
+      "donors": [
+        {
+          "dep": "89",
+          "donors": [
+            "10",
+            "18",
+            "45",
+            "86"
+          ],
+          "climate_distance": [
+            0.25348843314297925,
+            0.3073134318988132,
+            0.4940500746715733,
+            0.6639930155392876
+          ],
+          "transferred_level_qha": 16.740804195804195
+        }
+      ]
+    },
+    {
+      "year": 2023,
+      "excluded_region": "44 - Grand Est",
+      "train_max": 2022,
+      "training_regions": [
+        "24 - Centre-Val de Loire",
+        "27 - Bourgogne-Franche-Comt\u00e9",
+        "52 - Pays de la Loire",
+        "75 - Nouvelle Aquitaine",
+        "76 - Occitanie",
+        "84 - Auvergne-Rh\u00f4ne-Alpes"
+      ],
+      "n_train": 289,
+      "n_test": 1,
+      "training_departments": [
+        "03",
+        "09",
+        "11",
+        "12",
+        "15",
+        "16",
+        "17",
+        "18",
+        "28",
+        "30",
+        "31",
+        "32",
+        "36",
+        "37",
+        "41",
+        "43",
+        "44",
+        "45",
+        "48",
+        "49",
+        "53",
+        "71",
+        "79",
+        "81",
+        "85",
+        "86",
+        "89"
+      ],
+      "cross_region_duplicate_departments_removed": [],
+      "donors": [
+        {
+          "dep": "10",
+          "donors": [
+            "89",
+            "45",
+            "18",
+            "86"
+          ],
+          "climate_distance": [
+            0.2518646691399105,
+            0.43723613363803127,
+            0.457104697485966,
+            0.7036053195097864
+          ],
+          "transferred_level_qha": 14.058111888111888
+        }
+      ]
+    },
+    {
+      "year": 2023,
+      "excluded_region": "52 - Pays de la Loire",
+      "train_max": 2022,
+      "training_regions": [
+        "24 - Centre-Val de Loire",
+        "27 - Bourgogne-Franche-Comt\u00e9",
+        "44 - Grand Est",
+        "75 - Nouvelle Aquitaine",
+        "76 - Occitanie",
+        "84 - Auvergne-Rh\u00f4ne-Alpes"
+      ],
+      "n_train": 273,
+      "n_test": 4,
+      "training_departments": [
+        "03",
+        "09",
+        "10",
+        "11",
+        "12",
+        "15",
+        "16",
+        "17",
+        "18",
+        "28",
+        "30",
+        "31",
+        "32",
+        "36",
+        "37",
+        "41",
+        "43",
+        "45",
+        "48",
+        "71",
+        "79",
+        "81",
+        "86",
+        "89"
+      ],
+      "cross_region_duplicate_departments_removed": [],
+      "donors": [
+        {
+          "dep": "44",
+          "donors": [
+            "28",
+            "79",
+            "45",
+            "41"
+          ],
+          "climate_distance": [
+            0.4865917442214907,
+            0.661169387925252,
+            0.6831555978824082,
+            0.7204002438922694
+          ],
+          "transferred_level_qha": 15.68173076923077
+        },
+        {
+          "dep": "49",
+          "donors": [
+            "79",
+            "28",
+            "41",
+            "37"
+          ],
+          "climate_distance": [
+            0.43209369724619956,
+            0.448204966308342,
+            0.5021440476531365,
+            0.5498627217556139
+          ],
+          "transferred_level_qha": 15.892916666666668
+        },
+        {
+          "dep": "53",
+          "donors": [
+            "28",
+            "45",
+            "79",
+            "41"
+          ],
+          "climate_distance": [
+            0.24760886881216246,
+            0.4295567542851165,
+            0.5191808915370295,
+            0.6384066946245389
+          ],
+          "transferred_level_qha": 15.68173076923077
+        },
+        {
+          "dep": "85",
+          "donors": [
+            "28",
+            "79",
+            "41",
+            "45"
+          ],
+          "climate_distance": [
+            0.5385042803100135,
+            0.6326934132747511,
+            0.713132394369238,
+            0.7440930293015426
+          ],
+          "transferred_level_qha": 15.681730769230768
+        }
+      ]
+    },
+    {
+      "year": 2023,
+      "excluded_region": "75 - Nouvelle Aquitaine",
+      "train_max": 2022,
+      "training_regions": [
+        "24 - Centre-Val de Loire",
+        "27 - Bourgogne-Franche-Comt\u00e9",
+        "44 - Grand Est",
+        "52 - Pays de la Loire",
+        "76 - Occitanie",
+        "84 - Auvergne-Rh\u00f4ne-Alpes"
+      ],
+      "n_train": 252,
+      "n_test": 4,
+      "training_departments": [
+        "03",
+        "09",
+        "10",
+        "11",
+        "12",
+        "15",
+        "18",
+        "28",
+        "30",
+        "31",
+        "32",
+        "36",
+        "37",
+        "41",
+        "43",
+        "44",
+        "45",
+        "48",
+        "49",
+        "53",
+        "71",
+        "81",
+        "85",
+        "89"
+      ],
+      "cross_region_duplicate_departments_removed": [],
+      "donors": [
+        {
+          "dep": "16",
+          "donors": [
+            "36",
+            "37",
+            "41",
+            "81"
+          ],
+          "climate_distance": [
+            0.37034193195010967,
+            0.3968124508438566,
+            0.4681440356706916,
+            0.46818235498604815
+          ],
+          "transferred_level_qha": 14.913685897435899
+        },
+        {
+          "dep": "17",
+          "donors": [
+            "37",
+            "41",
+            "36",
+            "49"
+          ],
+          "climate_distance": [
+            0.15517472944184693,
+            0.25905367921558975,
+            0.3582992966077324,
+            0.5434722035906303
+          ],
+          "transferred_level_qha": 16.14503205128205
+        },
+        {
+          "dep": "79",
+          "donors": [
+            "41",
+            "37",
+            "36",
+            "49"
+          ],
+          "climate_distance": [
+            0.20204673496789508,
+            0.27138221429761344,
+            0.29628134146453305,
+            0.3821332262321573
+          ],
+          "transferred_level_qha": 16.14503205128205
+        },
+        {
+          "dep": "86",
+          "donors": [
+            "36",
+            "41",
+            "37",
+            "18"
+          ],
+          "climate_distance": [
+            0.13027112438250277,
+            0.3448920875691078,
+            0.3789505483930224,
+            0.3961493946607161
+          ],
+          "transferred_level_qha": 16.880416666666665
+        }
+      ]
+    },
+    {
+      "year": 2023,
+      "excluded_region": "76 - Occitanie",
+      "train_max": 2022,
+      "training_regions": [
+        "24 - Centre-Val de Loire",
+        "27 - Bourgogne-Franche-Comt\u00e9",
+        "44 - Grand Est",
+        "52 - Pays de la Loire",
+        "75 - Nouvelle Aquitaine",
+        "84 - Auvergne-Rh\u00f4ne-Alpes"
+      ],
+      "n_train": 217,
+      "n_test": 8,
+      "training_departments": [
+        "03",
+        "10",
+        "15",
+        "16",
+        "17",
+        "18",
+        "28",
+        "36",
+        "37",
+        "41",
+        "43",
+        "44",
+        "45",
+        "49",
+        "53",
+        "71",
+        "79",
+        "85",
+        "86",
+        "89"
+      ],
+      "cross_region_duplicate_departments_removed": [],
+      "donors": [
+        {
+          "dep": "09",
+          "donors": [
+            "03",
+            "71",
+            "18",
+            "86"
+          ],
+          "climate_distance": [
+            0.7590557524300635,
+            0.8944336497937291,
+            1.1420326168751724,
+            1.1595727805213325
+          ],
+          "transferred_level_qha": 10.050195221445222
+        },
+        {
+          "dep": "11",
+          "donors": [
+            "16",
+            "37",
+            "17",
+            "41"
+          ],
+          "climate_distance": [
+            0.993919639194484,
+            1.2000118254579533,
+            1.2437438098271683,
+            1.3534248242400613
+          ],
+          "transferred_level_qha": 14.07195512820513
+        },
+        {
+          "dep": "12",
+          "donors": [
+            "03",
+            "71",
+            "18",
+            "89"
+          ],
+          "climate_distance": [
+            0.23109497379324884,
+            0.4982439918884385,
+            0.7674270569427442,
+            0.9371924590878555
+          ],
+          "transferred_level_qha": 9.63573717948718
+        },
+        {
+          "dep": "30",
+          "donors": [
+            "16",
+            "37",
+            "17",
+            "36"
+          ],
+          "climate_distance": [
+            2.9670922146451475,
+            3.377361949827973,
+            3.3920344137024676,
+            3.515929172487732
+          ],
+          "transferred_level_qha": 14.795608974358975
+        },
+        {
+          "dep": "31",
+          "donors": [
+            "16",
+            "36",
+            "86",
+            "37"
+          ],
+          "climate_distance": [
+            1.0925736728011581,
+            1.555135874036185,
+            1.5718670107536825,
+            1.636268939431785
+          ],
+          "transferred_level_qha": 14.646028554778553
+        },
+        {
+          "dep": "32",
+          "donors": [
+            "16",
+            "36",
+            "86",
+            "37"
+          ],
+          "climate_distance": [
+            0.8979020788691342,
+            1.2986793679145252,
+            1.303744654806797,
+            1.4073703115982743
+          ],
+          "transferred_level_qha": 14.646028554778553
+        },
+        {
+          "dep": "48",
+          "donors": [
+            "89",
+            "43",
+            "15",
+            "18"
+          ],
+          "climate_distance": [
+            0.9449481642139472,
+            1.0146375629559385,
+            1.018201997288585,
+            1.0856470267811702
+          ],
+          "transferred_level_qha": 10.609038461538463
+        },
+        {
+          "dep": "81",
+          "donors": [
+            "16",
+            "36",
+            "86",
+            "37"
+          ],
+          "climate_distance": [
+            0.49510354043555743,
+            0.7405185686432121,
+            0.7457511601239937,
+            0.8805812994293959
+          ],
+          "transferred_level_qha": 14.646028554778553
+        }
+      ]
+    },
+    {
+      "year": 2023,
+      "excluded_region": "84 - Auvergne-Rh\u00f4ne-Alpes",
+      "train_max": 2022,
+      "training_regions": [
+        "24 - Centre-Val de Loire",
+        "27 - Bourgogne-Franche-Comt\u00e9",
+        "44 - Grand Est",
+        "52 - Pays de la Loire",
+        "75 - Nouvelle Aquitaine",
+        "76 - Occitanie"
+      ],
+      "n_train": 270,
+      "n_test": 3,
+      "training_departments": [
+        "09",
+        "10",
+        "11",
+        "12",
+        "16",
+        "17",
+        "18",
+        "28",
+        "30",
+        "31",
+        "32",
+        "36",
+        "37",
+        "41",
+        "44",
+        "45",
+        "48",
+        "49",
+        "53",
+        "71",
+        "79",
+        "81",
+        "85",
+        "86",
+        "89"
+      ],
+      "cross_region_duplicate_departments_removed": [],
+      "donors": [
+        {
+          "dep": "03",
+          "donors": [
+            "12",
+            "71",
+            "09",
+            "18"
+          ],
+          "climate_distance": [
+            0.23650165831014452,
+            0.44889182773655567,
+            0.5037089439114217,
+            0.7751845457889665
+          ],
+          "transferred_level_qha": 10.740763403263404
+        },
+        {
+          "dep": "15",
+          "donors": [
+            "48",
+            "71",
+            "12",
+            "09"
+          ],
+          "climate_distance": [
+            1.145716524659431,
+            1.5767835560437578,
+            1.6511732947112,
+            1.8761357205838798
+          ],
+          "transferred_level_qha": 8.007878787878788
+        },
+        {
+          "dep": "43",
+          "donors": [
+            "48",
+            "71",
+            "12",
+            "89"
+          ],
+          "climate_distance": [
+            1.681097694602491,
+            2.3732802842199976,
+            2.518527147294105,
+            2.5557175841430078
+          ],
+          "transferred_level_qha": 7.944102564102564
+        }
+      ]
+    },
+    {
+      "year": 2024,
+      "excluded_region": "24 - Centre-Val de Loire",
+      "train_max": 2023,
+      "training_regions": [
+        "27 - Bourgogne-Franche-Comt\u00e9",
+        "44 - Grand Est",
+        "52 - Pays de la Loire",
+        "75 - Nouvelle Aquitaine",
+        "76 - Occitanie",
+        "84 - Auvergne-Rh\u00f4ne-Alpes"
+      ],
+      "n_train": 207,
+      "n_test": 6,
+      "training_departments": [
+        "03",
+        "09",
+        "10",
+        "11",
+        "15",
+        "17",
+        "30",
+        "32",
+        "43",
+        "44",
+        "48",
+        "49",
+        "53",
+        "71",
+        "79",
+        "81",
+        "85",
+        "86",
+        "89"
+      ],
+      "cross_region_duplicate_departments_removed": [],
+      "donors": [
+        {
+          "dep": "18",
+          "donors": [
+            "89",
+            "86",
+            "10",
+            "81"
+          ],
+          "climate_distance": [
+            0.3325623580434074,
+            0.40322892395616955,
+            0.48692451075821064,
+            0.5597791494996689
+          ],
+          "transferred_level_qha": 13.247708333333332
+        },
+        {
+          "dep": "28",
+          "donors": [
+            "53",
+            "49",
+            "44",
+            "79"
+          ],
+          "climate_distance": [
+            0.22504532680401595,
+            0.45121780894364105,
+            0.4515237726116135,
+            0.5191442031634143
+          ],
+          "transferred_level_qha": 13.937071428571429
+        },
+        {
+          "dep": "36",
+          "donors": [
+            "86",
+            "79",
+            "17",
+            "81"
+          ],
+          "climate_distance": [
+            0.12287161609103701,
+            0.2680298450167776,
+            0.33083104957281156,
+            0.5005134734392463
+          ],
+          "transferred_level_qha": 12.44110119047619
+        },
+        {
+          "dep": "37",
+          "donors": [
+            "17",
+            "79",
+            "86",
+            "49"
+          ],
+          "climate_distance": [
+            0.17985415053101694,
+            0.26244473817363484,
+            0.35123455483799,
+            0.4526160738313524
+          ],
+          "transferred_level_qha": 13.62860119047619
+        },
+        {
+          "dep": "41",
+          "donors": [
+            "79",
+            "17",
+            "86",
+            "49"
+          ],
+          "climate_distance": [
+            0.22160496082674902,
+            0.2957662680572151,
+            0.31320232443827783,
+            0.4235326691632141
+          ],
+          "transferred_level_qha": 13.62860119047619
+        },
+        {
+          "dep": "45",
+          "donors": [
+            "53",
+            "10",
+            "89",
+            "79"
+          ],
+          "climate_distance": [
+            0.3979342729349437,
+            0.42794869967281784,
+            0.4315262534685612,
+            0.4480377214972249
+          ],
+          "transferred_level_qha": 14.765999999999998
+        }
+      ]
+    },
+    {
+      "year": 2024,
+      "excluded_region": "27 - Bourgogne-Franche-Comt\u00e9",
+      "train_max": 2023,
+      "training_regions": [
+        "24 - Centre-Val de Loire",
+        "44 - Grand Est",
+        "52 - Pays de la Loire",
+        "75 - Nouvelle Aquitaine",
+        "76 - Occitanie",
+        "84 - Auvergne-Rh\u00f4ne-Alpes"
+      ],
+      "n_train": 273,
+      "n_test": 1,
+      "training_departments": [
+        "03",
+        "09",
+        "10",
+        "11",
+        "15",
+        "17",
+        "18",
+        "28",
+        "30",
+        "32",
+        "36",
+        "37",
+        "41",
+        "43",
+        "44",
+        "45",
+        "48",
+        "49",
+        "53",
+        "79",
+        "81",
+        "85",
+        "86"
+      ],
+      "cross_region_duplicate_departments_removed": [],
+      "donors": [
+        {
+          "dep": "89",
+          "donors": [
+            "10",
+            "18",
+            "45",
+            "03"
+          ],
+          "climate_distance": [
+            0.2604746265287497,
+            0.39096937134984827,
+            0.4939068693352751,
+            0.646398389618952
+          ],
+          "transferred_level_qha": 15.187321428571428
+        }
+      ]
+    },
+    {
+      "year": 2024,
+      "excluded_region": "44 - Grand Est",
+      "train_max": 2023,
+      "training_regions": [
+        "24 - Centre-Val de Loire",
+        "27 - Bourgogne-Franche-Comt\u00e9",
+        "52 - Pays de la Loire",
+        "75 - Nouvelle Aquitaine",
+        "76 - Occitanie",
+        "84 - Auvergne-Rh\u00f4ne-Alpes"
+      ],
+      "n_train": 276,
+      "n_test": 1,
+      "training_departments": [
+        "03",
+        "09",
+        "11",
+        "15",
+        "17",
+        "18",
+        "28",
+        "30",
+        "32",
+        "36",
+        "37",
+        "41",
+        "43",
+        "44",
+        "45",
+        "48",
+        "49",
+        "53",
+        "71",
+        "79",
+        "81",
+        "85",
+        "86",
+        "89"
+      ],
+      "cross_region_duplicate_departments_removed": [],
+      "donors": [
+        {
+          "dep": "10",
+          "donors": [
+            "89",
+            "45",
+            "18",
+            "03"
+          ],
+          "climate_distance": [
+            0.2558829783614022,
+            0.4835519542044495,
+            0.5456588116794929,
+            0.7861583020668282
+          ],
+          "transferred_level_qha": 12.571250000000001
+        }
+      ]
+    },
+    {
+      "year": 2024,
+      "excluded_region": "52 - Pays de la Loire",
+      "train_max": 2023,
+      "training_regions": [
+        "24 - Centre-Val de Loire",
+        "27 - Bourgogne-Franche-Comt\u00e9",
+        "44 - Grand Est",
+        "75 - Nouvelle Aquitaine",
+        "76 - Occitanie",
+        "84 - Auvergne-Rh\u00f4ne-Alpes"
+      ],
+      "n_train": 257,
+      "n_test": 4,
+      "training_departments": [
+        "03",
+        "09",
+        "10",
+        "11",
+        "15",
+        "17",
+        "18",
+        "28",
+        "30",
+        "32",
+        "36",
+        "37",
+        "41",
+        "43",
+        "45",
+        "48",
+        "71",
+        "79",
+        "81",
+        "86",
+        "89"
+      ],
+      "cross_region_duplicate_departments_removed": [],
+      "donors": [
+        {
+          "dep": "44",
+          "donors": [
+            "28",
+            "79",
+            "45",
+            "41"
+          ],
+          "climate_distance": [
+            0.5063777528210737,
+            0.6533946084953812,
+            0.6866879449309582,
+            0.701583347929812
+          ],
+          "transferred_level_qha": 16.061607142857145
+        },
+        {
+          "dep": "49",
+          "donors": [
+            "79",
+            "41",
+            "28",
+            "37"
+          ],
+          "climate_distance": [
+            0.4031891175386336,
+            0.47448887874272666,
+            0.48777307865084374,
+            0.5044422328032477
+          ],
+          "transferred_level_qha": 16.2998489010989
+        },
+        {
+          "dep": "53",
+          "donors": [
+            "28",
+            "45",
+            "79",
+            "41"
+          ],
+          "climate_distance": [
+            0.24520764110397822,
+            0.4380929405492682,
+            0.5412400023898366,
+            0.6390941034752741
+          ],
+          "transferred_level_qha": 16.061607142857145
+        },
+        {
+          "dep": "85",
+          "donors": [
+            "28",
+            "79",
+            "41",
+            "37"
+          ],
+          "climate_distance": [
+            0.5857586075523133,
+            0.5891084768564923,
+            0.6876247825265679,
+            0.702623968283609
+          ],
+          "transferred_level_qha": 16.2998489010989
+        }
+      ]
+    },
+    {
+      "year": 2024,
+      "excluded_region": "75 - Nouvelle Aquitaine",
+      "train_max": 2023,
+      "training_regions": [
+        "24 - Centre-Val de Loire",
+        "27 - Bourgogne-Franche-Comt\u00e9",
+        "44 - Grand Est",
+        "52 - Pays de la Loire",
+        "76 - Occitanie",
+        "84 - Auvergne-Rh\u00f4ne-Alpes"
+      ],
+      "n_train": 250,
+      "n_test": 3,
+      "training_departments": [
+        "03",
+        "09",
+        "10",
+        "11",
+        "15",
+        "18",
+        "28",
+        "30",
+        "32",
+        "36",
+        "37",
+        "41",
+        "43",
+        "44",
+        "45",
+        "48",
+        "49",
+        "53",
+        "71",
+        "81",
+        "85",
+        "89"
+      ],
+      "cross_region_duplicate_departments_removed": [],
+      "donors": [
+        {
+          "dep": "17",
+          "donors": [
+            "37",
+            "41",
+            "36",
+            "49"
+          ],
+          "climate_distance": [
+            0.19403086734034264,
+            0.3217568245786654,
+            0.3584432913783049,
+            0.5483955086725196
+          ],
+          "transferred_level_qha": 16.345920329670328
+        },
+        {
+          "dep": "79",
+          "donors": [
+            "41",
+            "37",
+            "36",
+            "49"
+          ],
+          "climate_distance": [
+            0.23606671175723917,
+            0.27730301599989876,
+            0.28414430207522623,
+            0.3647057074752024
+          ],
+          "transferred_level_qha": 16.345920329670328
+        },
+        {
+          "dep": "86",
+          "donors": [
+            "36",
+            "41",
+            "37",
+            "18"
+          ],
+          "climate_distance": [
+            0.12889713588499763,
+            0.32880472688166956,
+            0.3708660345507067,
+            0.4369623331289738
+          ],
+          "transferred_level_qha": 17.216813186813187
+        }
+      ]
+    },
+    {
+      "year": 2024,
+      "excluded_region": "76 - Occitanie",
+      "train_max": 2023,
+      "training_regions": [
+        "24 - Centre-Val de Loire",
+        "27 - Bourgogne-Franche-Comt\u00e9",
+        "44 - Grand Est",
+        "52 - Pays de la Loire",
+        "75 - Nouvelle Aquitaine",
+        "84 - Auvergne-Rh\u00f4ne-Alpes"
+      ],
+      "n_train": 222,
+      "n_test": 6,
+      "training_departments": [
+        "03",
+        "10",
+        "15",
+        "17",
+        "18",
+        "28",
+        "36",
+        "37",
+        "41",
+        "43",
+        "44",
+        "45",
+        "49",
+        "53",
+        "71",
+        "79",
+        "85",
+        "86",
+        "89"
+      ],
+      "cross_region_duplicate_departments_removed": [],
+      "donors": [
+        {
+          "dep": "09",
+          "donors": [
+            "03",
+            "71",
+            "86",
+            "18"
+          ],
+          "climate_distance": [
+            0.8439724003010481,
+            0.9575771580390217,
+            1.1826155664919058,
+            1.1961708449202764
+          ],
+          "transferred_level_qha": 10.202291666666667
+        },
+        {
+          "dep": "11",
+          "donors": [
+            "37",
+            "17",
+            "41",
+            "36"
+          ],
+          "climate_distance": [
+            1.2575299373718427,
+            1.3534570390356437,
+            1.416424630875253,
+            1.4317204066658695
+          ],
+          "transferred_level_qha": 16.119670329670328
+        },
+        {
+          "dep": "30",
+          "donors": [
+            "37",
+            "17",
+            "36",
+            "41"
+          ],
+          "climate_distance": [
+            3.692860862941138,
+            3.753710743030064,
+            3.8387357563568227,
+            3.8552584676072423
+          ],
+          "transferred_level_qha": 16.11967032967033
+        },
+        {
+          "dep": "32",
+          "donors": [
+            "36",
+            "86",
+            "37",
+            "17"
+          ],
+          "climate_distance": [
+            1.3582438824406944,
+            1.376200215536951,
+            1.450138252572492,
+            1.50671097541994
+          ],
+          "transferred_level_qha": 15.423628663003662
+        },
+        {
+          "dep": "48",
+          "donors": [
+            "43",
+            "89",
+            "18",
+            "15"
+          ],
+          "climate_distance": [
+            0.9981150863241743,
+            1.0032547619157526,
+            1.0919092708023213,
+            1.1022428437454819
+          ],
+          "transferred_level_qha": 10.522678571428573
+        },
+        {
+          "dep": "81",
+          "donors": [
+            "36",
+            "86",
+            "37",
+            "41"
+          ],
+          "climate_distance": [
+            0.7889154727641609,
+            0.7994327587969303,
+            0.9161298068606337,
+            0.9633267318127315
+          ],
+          "transferred_level_qha": 16.05791437728938
+        }
+      ]
+    },
+    {
+      "year": 2024,
+      "excluded_region": "84 - Auvergne-Rh\u00f4ne-Alpes",
+      "train_max": 2023,
+      "training_regions": [
+        "24 - Centre-Val de Loire",
+        "27 - Bourgogne-Franche-Comt\u00e9",
+        "44 - Grand Est",
+        "52 - Pays de la Loire",
+        "75 - Nouvelle Aquitaine",
+        "76 - Occitanie"
+      ],
+      "n_train": 255,
+      "n_test": 3,
+      "training_departments": [
+        "09",
+        "10",
+        "11",
+        "17",
+        "18",
+        "28",
+        "30",
+        "32",
+        "36",
+        "37",
+        "41",
+        "44",
+        "45",
+        "48",
+        "49",
+        "53",
+        "71",
+        "79",
+        "81",
+        "85",
+        "86",
+        "89"
+      ],
+      "cross_region_duplicate_departments_removed": [],
+      "donors": [
+        {
+          "dep": "03",
+          "donors": [
+            "71",
+            "09",
+            "89",
+            "18"
+          ],
+          "climate_distance": [
+            0.38856162818226586,
+            0.536934022440246,
+            0.7599493508212126,
+            0.7648479370657817
+          ],
+          "transferred_level_qha": 10.746547619047618
+        },
+        {
+          "dep": "15",
+          "donors": [
+            "48",
+            "71",
+            "09",
+            "89"
+          ],
+          "climate_distance": [
+            1.2222381299298035,
+            1.5634448927938183,
+            1.8395862032231052,
+            2.0637575657585754
+          ],
+          "transferred_level_qha": 7.988690476190476
+        },
+        {
+          "dep": "43",
+          "donors": [
+            "48",
+            "71",
+            "89",
+            "10"
+          ],
+          "climate_distance": [
+            1.573495909874161,
+            2.244961729825417,
+            2.424948346214218,
+            2.476877064849997
+          ],
+          "transferred_level_qha": 10.571369047619047
+        }
+      ]
+    },
+    {
+      "year": 2025,
+      "excluded_region": "24 - Centre-Val de Loire",
+      "train_max": 2024,
+      "training_regions": [
+        "27 - Bourgogne-Franche-Comt\u00e9",
+        "44 - Grand Est",
+        "52 - Pays de la Loire",
+        "75 - Nouvelle Aquitaine",
+        "76 - Occitanie",
+        "84 - Auvergne-Rh\u00f4ne-Alpes"
+      ],
+      "n_train": 213,
+      "n_test": 6,
+      "training_departments": [
+        "03",
+        "09",
+        "10",
+        "11",
+        "15",
+        "17",
+        "30",
+        "32",
+        "43",
+        "44",
+        "48",
+        "49",
+        "53",
+        "71",
+        "72",
+        "79",
+        "85",
+        "86",
+        "89"
+      ],
+      "cross_region_duplicate_departments_removed": [],
+      "donors": [
+        {
+          "dep": "18",
+          "donors": [
+            "89",
+            "10",
+            "86",
+            "09"
+          ],
+          "climate_distance": [
+            0.33014822414807055,
+            0.4622383343354083,
+            0.48208940449383336,
+            0.5871794075503713
+          ],
+          "transferred_level_qha": 13.785576923076922
+        },
+        {
+          "dep": "28",
+          "donors": [
+            "53",
+            "72",
+            "44",
+            "49"
+          ],
+          "climate_distance": [
+            0.22846907884587261,
+            0.33590681417252594,
+            0.45290083142361587,
+            0.4826750108593802
+          ],
+          "transferred_level_qha": 15.471041666666665
+        },
+        {
+          "dep": "36",
+          "donors": [
+            "86",
+            "79",
+            "17",
+            "72"
+          ],
+          "climate_distance": [
+            0.09197232268149902,
+            0.2742758512358261,
+            0.3196244135303484,
+            0.5484687403084882
+          ],
+          "transferred_level_qha": 14.809474358974358
+        },
+        {
+          "dep": "37",
+          "donors": [
+            "17",
+            "79",
+            "86",
+            "49"
+          ],
+          "climate_distance": [
+            0.1787607560509633,
+            0.2524144195545818,
+            0.3337525764927301,
+            0.428185505503844
+          ],
+          "transferred_level_qha": 14.28812019230769
+        },
+        {
+          "dep": "41",
+          "donors": [
+            "79",
+            "86",
+            "17",
+            "72"
+          ],
+          "climate_distance": [
+            0.2214038933468075,
+            0.25574498240892723,
+            0.30100467629696476,
+            0.425432107671082
+          ],
+          "transferred_level_qha": 14.809474358974358
+        },
+        {
+          "dep": "45",
+          "donors": [
+            "89",
+            "10",
+            "53",
+            "72"
+          ],
+          "climate_distance": [
+            0.3867675502399151,
+            0.3958238637452554,
+            0.45374285695824607,
+            0.4684795798323337
+          ],
+          "transferred_level_qha": 15.829166666666666
+        }
+      ]
+    },
+    {
+      "year": 2025,
+      "excluded_region": "27 - Bourgogne-Franche-Comt\u00e9",
+      "train_max": 2024,
+      "training_regions": [
+        "24 - Centre-Val de Loire",
+        "44 - Grand Est",
+        "52 - Pays de la Loire",
+        "75 - Nouvelle Aquitaine",
+        "76 - Occitanie",
+        "84 - Auvergne-Rh\u00f4ne-Alpes"
+      ],
+      "n_train": 284,
+      "n_test": 1,
+      "training_departments": [
+        "03",
+        "09",
+        "10",
+        "11",
+        "15",
+        "17",
+        "18",
+        "28",
+        "30",
+        "32",
+        "36",
+        "37",
+        "41",
+        "43",
+        "44",
+        "45",
+        "48",
+        "49",
+        "53",
+        "72",
+        "79",
+        "85",
+        "86"
+      ],
+      "cross_region_duplicate_departments_removed": [],
+      "donors": [
+        {
+          "dep": "89",
+          "donors": [
+            "10",
+            "18",
+            "45",
+            "03"
+          ],
+          "climate_distance": [
+            0.21877731079806495,
+            0.3864636718231627,
+            0.44644990522847067,
+            0.6800165117519916
+          ],
+          "transferred_level_qha": 15.5123125
+        }
+      ]
+    },
+    {
+      "year": 2025,
+      "excluded_region": "44 - Grand Est",
+      "train_max": 2024,
+      "training_regions": [
+        "24 - Centre-Val de Loire",
+        "27 - Bourgogne-Franche-Comt\u00e9",
+        "52 - Pays de la Loire",
+        "75 - Nouvelle Aquitaine",
+        "76 - Occitanie",
+        "84 - Auvergne-Rh\u00f4ne-Alpes"
+      ],
+      "n_train": 287,
+      "n_test": 1,
+      "training_departments": [
+        "03",
+        "09",
+        "11",
+        "15",
+        "17",
+        "18",
+        "28",
+        "30",
+        "32",
+        "36",
+        "37",
+        "41",
+        "43",
+        "44",
+        "45",
+        "48",
+        "49",
+        "53",
+        "71",
+        "72",
+        "79",
+        "85",
+        "86",
+        "89"
+      ],
+      "cross_region_duplicate_departments_removed": [],
+      "donors": [
+        {
+          "dep": "10",
+          "donors": [
+            "89",
+            "45",
+            "18",
+            "28"
+          ],
+          "climate_distance": [
+            0.21328291418526962,
+            0.44717479431402357,
+            0.5191059045310125,
+            0.7547389880999023
+          ],
+          "transferred_level_qha": 15.589500000000001
+        }
+      ]
+    },
+    {
+      "year": 2025,
+      "excluded_region": "52 - Pays de la Loire",
+      "train_max": 2024,
+      "training_regions": [
+        "24 - Centre-Val de Loire",
+        "27 - Bourgogne-Franche-Comt\u00e9",
+        "44 - Grand Est",
+        "75 - Nouvelle Aquitaine",
+        "76 - Occitanie",
+        "84 - Auvergne-Rh\u00f4ne-Alpes"
+      ],
+      "n_train": 262,
+      "n_test": 5,
+      "training_departments": [
+        "03",
+        "09",
+        "10",
+        "11",
+        "15",
+        "17",
+        "18",
+        "28",
+        "30",
+        "32",
+        "36",
+        "37",
+        "41",
+        "43",
+        "45",
+        "48",
+        "71",
+        "79",
+        "86",
+        "89"
+      ],
+      "cross_region_duplicate_departments_removed": [],
+      "donors": [
+        {
+          "dep": "44",
+          "donors": [
+            "28",
+            "79",
+            "41",
+            "37"
+          ],
+          "climate_distance": [
+            0.49708514144665017,
+            0.5896172971810612,
+            0.6745122973307801,
+            0.681178321549406
+          ],
+          "transferred_level_qha": 16.549285714285716
+        },
+        {
+          "dep": "49",
+          "donors": [
+            "79",
+            "37",
+            "41",
+            "28"
+          ],
+          "climate_distance": [
+            0.3880755769256684,
+            0.4692365353217132,
+            0.4863803750011983,
+            0.5127549426335807
+          ],
+          "transferred_level_qha": 16.549285714285716
+        },
+        {
+          "dep": "53",
+          "donors": [
+            "28",
+            "45",
+            "79",
+            "41"
+          ],
+          "climate_distance": [
+            0.2451549133650461,
+            0.4969751470159872,
+            0.5208064235044045,
+            0.6162346693645075
+          ],
+          "transferred_level_qha": 16.340833333333332
+        },
+        {
+          "dep": "72",
+          "donors": [
+            "28",
+            "79",
+            "41",
+            "37"
+          ],
+          "climate_distance": [
+            0.355728095026778,
+            0.36411888913972285,
+            0.46393045896577356,
+            0.5062514805682318
+          ],
+          "transferred_level_qha": 16.549285714285716
+        },
+        {
+          "dep": "85",
+          "donors": [
+            "79",
+            "28",
+            "37",
+            "41"
+          ],
+          "climate_distance": [
+            0.5443930782494976,
+            0.6126918226555195,
+            0.6486057136340446,
+            0.6802603477772623
+          ],
+          "transferred_level_qha": 16.549285714285713
+        }
+      ]
+    },
+    {
+      "year": 2025,
+      "excluded_region": "75 - Nouvelle Aquitaine",
+      "train_max": 2024,
+      "training_regions": [
+        "24 - Centre-Val de Loire",
+        "27 - Bourgogne-Franche-Comt\u00e9",
+        "44 - Grand Est",
+        "52 - Pays de la Loire",
+        "76 - Occitanie",
+        "84 - Auvergne-Rh\u00f4ne-Alpes"
+      ],
+      "n_train": 259,
+      "n_test": 3,
+      "training_departments": [
+        "03",
+        "09",
+        "10",
+        "11",
+        "15",
+        "18",
+        "28",
+        "30",
+        "32",
+        "36",
+        "37",
+        "41",
+        "43",
+        "44",
+        "45",
+        "48",
+        "49",
+        "53",
+        "71",
+        "72",
+        "85",
+        "89"
+      ],
+      "cross_region_duplicate_departments_removed": [],
+      "donors": [
+        {
+          "dep": "17",
+          "donors": [
+            "37",
+            "41",
+            "36",
+            "49"
+          ],
+          "climate_distance": [
+            0.1931244060651498,
+            0.32969051426917917,
+            0.34732657364162545,
+            0.5480891193833027
+          ],
+          "transferred_level_qha": 16.791764880952382
+        },
+        {
+          "dep": "79",
+          "donors": [
+            "41",
+            "37",
+            "36",
+            "72"
+          ],
+          "climate_distance": [
+            0.2386462292404471,
+            0.26763298105267785,
+            0.2922293117397528,
+            0.34756697515970447
+          ],
+          "transferred_level_qha": 17.313119047619047
+        },
+        {
+          "dep": "86",
+          "donors": [
+            "36",
+            "41",
+            "37",
+            "18"
+          ],
+          "climate_distance": [
+            0.0977735105163019,
+            0.2713528124683504,
+            0.3541344851974526,
+            0.5241900059102282
+          ],
+          "transferred_level_qha": 17.38845238095238
+        }
+      ]
+    },
+    {
+      "year": 2025,
+      "excluded_region": "76 - Occitanie",
+      "train_max": 2024,
+      "training_regions": [
+        "24 - Centre-Val de Loire",
+        "27 - Bourgogne-Franche-Comt\u00e9",
+        "44 - Grand Est",
+        "52 - Pays de la Loire",
+        "75 - Nouvelle Aquitaine",
+        "84 - Auvergne-Rh\u00f4ne-Alpes"
+      ],
+      "n_train": 243,
+      "n_test": 5,
+      "training_departments": [
+        "03",
+        "10",
+        "15",
+        "17",
+        "18",
+        "28",
+        "36",
+        "37",
+        "41",
+        "43",
+        "44",
+        "45",
+        "49",
+        "53",
+        "71",
+        "72",
+        "79",
+        "85",
+        "86",
+        "89"
+      ],
+      "cross_region_duplicate_departments_removed": [],
+      "donors": [
+        {
+          "dep": "09",
+          "donors": [
+            "03",
+            "71",
+            "36",
+            "86"
+          ],
+          "climate_distance": [
+            1.0087916504930463,
+            1.0923849450397376,
+            1.1894385238249103,
+            1.1934753778775475
+          ],
+          "transferred_level_qha": 10.853953525641025
+        },
+        {
+          "dep": "11",
+          "donors": [
+            "37",
+            "17",
+            "36",
+            "41"
+          ],
+          "climate_distance": [
+            1.4199451176039783,
+            1.5140596192201077,
+            1.5976709365903532,
+            1.604398337764431
+          ],
+          "transferred_level_qha": 16.41445238095238
+        },
+        {
+          "dep": "30",
+          "donors": [
+            "37",
+            "17",
+            "36",
+            "41"
+          ],
+          "climate_distance": [
+            3.9442353939244033,
+            4.0026135535659355,
+            4.091733511225021,
+            4.1272513715311065
+          ],
+          "transferred_level_qha": 16.41445238095238
+        },
+        {
+          "dep": "32",
+          "donors": [
+            "36",
+            "86",
+            "37",
+            "17"
+          ],
+          "climate_distance": [
+            1.4395848835355716,
+            1.4886722789584825,
+            1.5021074462580797,
+            1.5476576819840948
+          ],
+          "transferred_level_qha": 15.800093406593406
+        },
+        {
+          "dep": "48",
+          "donors": [
+            "89",
+            "18",
+            "43",
+            "15"
+          ],
+          "climate_distance": [
+            0.9504075614375155,
+            1.0413928399479315,
+            1.0589248978430132,
+            1.1101200409592227
+          ],
+          "transferred_level_qha": 10.697833333333334
+        }
+      ]
+    },
+    {
+      "year": 2025,
+      "excluded_region": "84 - Auvergne-Rh\u00f4ne-Alpes",
+      "train_max": 2024,
+      "training_regions": [
+        "24 - Centre-Val de Loire",
+        "27 - Bourgogne-Franche-Comt\u00e9",
+        "44 - Grand Est",
+        "52 - Pays de la Loire",
+        "75 - Nouvelle Aquitaine",
+        "76 - Occitanie"
+      ],
+      "n_train": 264,
+      "n_test": 3,
+      "training_departments": [
+        "09",
+        "10",
+        "11",
+        "17",
+        "18",
+        "28",
+        "30",
+        "32",
+        "36",
+        "37",
+        "41",
+        "44",
+        "45",
+        "48",
+        "49",
+        "53",
+        "71",
+        "72",
+        "79",
+        "85",
+        "86",
+        "89"
+      ],
+      "cross_region_duplicate_departments_removed": [],
+      "donors": [
+        {
+          "dep": "03",
+          "donors": [
+            "71",
+            "09",
+            "18",
+            "89"
+          ],
+          "climate_distance": [
+            0.33185793990630225,
+            0.5893688089247822,
+            0.7914374496640701,
+            0.819142899347577
+          ],
+          "transferred_level_qha": 10.806935897435897
+        },
+        {
+          "dep": "15",
+          "donors": [
+            "48",
+            "71",
+            "09",
+            "89"
+          ],
+          "climate_distance": [
+            1.3299102681890649,
+            1.7335880972502768,
+            2.1193217700907208,
+            2.2394590491945428
+          ],
+          "transferred_level_qha": 8.121435897435898
+        },
+        {
+          "dep": "43",
+          "donors": [
+            "48",
+            "71",
+            "89",
+            "10"
+          ],
+          "climate_distance": [
+            1.8140772163548378,
+            2.473749527434286,
+            2.6731959171975834,
+            2.699403217764764
+          ],
+          "transferred_level_qha": 10.752333333333333
+        }
+      ]
+    }
+  ],
+  "seconds": 115.26648618400031,
+  "cohort_size": 192,
+  "purpose": "Pseudo-unobserved region transfer stress test; not a validation in Ile-de-France itself.",
+  "target_lentil_usage": "No fitting rows, level, or analogue ranking. Past labels only exclude duplicated source series.",
+  "selection": "All seven observed production regions; no subgroup chosen using model scores."
+}

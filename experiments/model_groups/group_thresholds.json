@@ -1,0 +1,58 @@
+[
+  {
+    "year": 2019,
+    "cv_tercile_low": 0.13781268054690587,
+    "cv_tercile_high": 0.21104695289563086,
+    "yield_median_qha": 13.790634920634922,
+    "n_departments_for_cutoffs": 28,
+    "train_max": 2018
+  },
+  {
+    "year": 2020,
+    "cv_tercile_low": 0.13303602044381724,
+    "cv_tercile_high": 0.2063886868109166,
+    "yield_median_qha": 13.852999999999998,
+    "n_departments_for_cutoffs": 30,
+    "train_max": 2019
+  },
+  {
+    "year": 2021,
+    "cv_tercile_low": 0.1866886764554953,
+    "cv_tercile_high": 0.26486464315311675,
+    "yield_median_qha": 13.262323232323233,
+    "n_departments_for_cutoffs": 30,
+    "train_max": 2020
+  },
+  {
+    "year": 2022,
+    "cv_tercile_low": 0.2697001988725862,
+    "cv_tercile_high": 0.3356028110506181,
+    "yield_median_qha": 12.802916666666667,
+    "n_departments_for_cutoffs": 30,
+    "train_max": 2021
+  },
+  {
+    "year": 2023,
+    "cv_tercile_low": 0.29739908800745785,
+    "cv_tercile_high": 0.3326299761231461,
+    "yield_median_qha": 11.942762237762238,
+    "n_departments_for_cutoffs": 28,
+    "train_max": 2022
+  },
+  {
+    "year": 2024,
+    "cv_tercile_low": 0.29236890388983655,
+    "cv_tercile_high": 0.3331957315153129,
+    "yield_median_qha": 12.987857142857141,
+    "n_departments_for_cutoffs": 25,
+    "train_max": 2023
+  },
+  {
+    "year": 2025,
+    "cv_tercile_low": 0.29372975102020843,
+    "cv_tercile_high": 0.34287933469720333,
+    "yield_median_qha": 14.699999999999998,
+    "n_departments_for_cutoffs": 25,
+    "train_max": 2024
+  }
+]

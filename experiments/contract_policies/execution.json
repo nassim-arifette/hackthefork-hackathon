@@ -1,0 +1,27 @@
+{
+  "environment": "Google Colab existing notebook runtime",
+  "date": "2026-10-31",
+  "command": [
+    "/usr/bin/python3",
+    "-u",
+    "/content/hackthefork-benchmark/pipeline/benchmark_contract_policies.py",
+    "--input",
+    "/content/drive/MyDrive/HackTheFork/deep_audit/2026-10-31/protocol/predictions_with_warmup.csv",
+    "--panel",
+    "/content/hackthefork-benchmark/data/panel_rendements.csv",
+    "--output",
+    "/content/drive/MyDrive/HackTheFork/deep_audit/2026-10-31/policies"
+  ],
+  "pid": 18312,
+  "device": "CPU",
+  "thread_count": 1,
+  "completed": true,
+  "verified": [
+    "Colab/local metrics agree",
+    "Executed script hash agrees",
+    "All selections recomputed from downloaded OOF predictions",
+    "Every calibration and selection cutoff lies before decision year",
+    "6 unit tests passed"
+  ],
+  "archive_sha256": "8cf0e2e09854e6b15c412d7453e6c4eaacf41904df0c776508926ea03ee6e034"
+}

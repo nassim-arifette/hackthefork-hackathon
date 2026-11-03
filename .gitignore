@@ -13,6 +13,9 @@ data_raw/weather.log
 
 # Python
 .venv/
+.venv-research/
+benchmark-input.zip
+benchmark-results.zip
 __pycache__/
 *.pyc
 .ipynb_checkpoints/
@@ -35,3 +38,20 @@ app/dist-single/
 
 # Vercel (identifiants locaux du projet)
 .vercel/
+
+# Reprise des expériences : les CSV/JSON finaux sont versionnés séparément
+experiments/**/checkpoints/
+experiments/**/progress.json
+pytest-of-root/
+
+# Tables volumineuses conservées à l'identique dans results-colab.zip.
+# Restaurer avec python scripts/restore_audit_artifacts.py.
+experiments/contract_policies/predictions.csv
+experiments/contract_policies/predictions_with_warmup.csv
+experiments/contract_policies/results.json
+experiments/contract_policies_sensitivity/predictions.csv
+experiments/contract_policies_sensitivity/predictions_with_warmup.csv
+experiments/contract_policies_sensitivity/results.json
+experiments/contract_policies_expanded/predictions.csv
+experiments/contract_policies_expanded/predictions_with_warmup.csv
+experiments/contract_policies_expanded/results.json
