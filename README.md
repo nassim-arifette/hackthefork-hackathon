@@ -101,7 +101,7 @@ make sentinel      # 08_sentinel : NDVI Sentinel-2 de la saison 2025 (réseau, q
 make maillon       # 10_maillon : légumineuses repérées par Sentinel-2, RPG 2024 et 2025 (réseau au premier passage)
 make sites         # 11_sites : établissements Sirene du commerce de grains (aussi lancé par make export)
 # 09_cultures (dans make export) : le même moteur sur pois chiche, haricot, pois et féverole
-make test          # données, absence de fuite, propriétés du prix plancher et des contrats, exports
+make test          # données, absence de fuite, propriétés du prix plancher et des contrats, exports ; les tests des expériences demandent aussi requirements-research.txt, dans un environnement séparé
 
 # 2. Application (Node 20+)
 make dev           # serveur de développement
@@ -127,6 +127,7 @@ pipeline/        scripts numérotés, du téléchargement à l'export JSON ; con
 data/            données traitées légères (versionnées) ; pilote_300t/, jeu synthétique du pilote
 data_raw/        téléchargements bruts (versionnés, sauf le RPG, retéléchargé par 04_parcels.py)
 tools/           générateur reproductible du jeu synthétique du pilote
+experiments/     benchmarks de modèles et de contrats, résultats versionnés (dépendances : requirements-research.txt)
 app/             front Vite + React + deck.gl ; vercel.json, configuration de l'hébergement
 docs/
   brand/             logo, mascotte et règles d'usage
